@@ -1451,6 +1451,11 @@ function setupNavHighlight(){
   const homeLink=links.find(a=>a.getAttribute('href')==='index.html');
   const refreshActiveByScroll=()=>{
     const scrollTop=window.scrollY||document.documentElement.scrollTop||0;
+    const hardHeroZone=window.innerHeight*0.72;
+    if(homeLink&&scrollTop<=hardHeroZone){
+      setActive(homeLink);
+      return;
+    }
     if(heroSection&&homeLink){
       const heroRect=heroSection.getBoundingClientRect();
       const navMarkerY=window.innerHeight*0.32;
