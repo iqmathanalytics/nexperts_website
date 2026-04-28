@@ -1440,8 +1440,7 @@ function setupNavHighlight(){
     if(!hoverLink) queueMove(activeLink,animate);
   };
 
-  const initial=location.hash?links.find(a=>a.getAttribute('href')===location.hash):null;
-  setActive(initial||links.find(a=>a.getAttribute('href')==='index.html')||links[0],false);
+  setActive(links.find(a=>a.getAttribute('href')==='index.html')||links[0],false);
 
   const sectionLinks=links
     .map(a=>({a,id:(a.getAttribute('href')||'').replace('#','')}))
@@ -1496,6 +1495,9 @@ function setupNavHighlight(){
   window.addEventListener('pageshow',()=>{
     refreshActiveByScroll();
     if(activeLink) queueMove(activeLink,false);
+  });
+  window.addEventListener('hashchange',()=>{
+    refreshActiveByScroll();
   });
 
   links.forEach(link=>{
