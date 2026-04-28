@@ -23,6 +23,7 @@
 }
 html{scroll-behavior:smooth;background:var(--bg)}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px;line-height:1.6}
+body.preload *{scroll-behavior:auto!important}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(248,251,255,.9);border-bottom:1px solid rgba(30,64,175,.16);backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(15,23,42,.06)}
@@ -93,6 +94,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 @keyframes f1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(18px,-22px) scale(1.05)}66%{transform:translate(-12px,14px) scale(.97)}}
 @keyframes f2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-20px,16px) scale(1.04)}75%{transform:translate(14px,-10px) scale(.98)}}
 @keyframes f3{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-18px)}}
+
+/* Prevent first-load jank by delaying heavy motion */
+body.preload .hero::before,
+body.preload .hero::after,
+body.preload .hero-motion *,
+body.preload .orb,
+body.preload .hero-frame::before,
+body.preload .hero-frame-grid,
+body.preload .hero-float,
+body.preload .hero-float::before,
+body.preload .hero-robot .rb-line,
+body.preload .hero-robot .rb-soft,
+body.preload .hero-robot .rb-eye,
+body.preload .hero-core-line,
+body.preload .hero-core-node,
+body.preload .hero-pill-track i{animation:none!important}
+body.preload .hero-wave,
+body.preload .hero-scan,
+body.preload .orb{filter:none!important}
+body.preload .hero-circuit,
+body.preload .hero::after{opacity:.2!important}
+
+@media (prefers-reduced-motion: reduce){
+  .hero::before,.hero::after,.hero-motion *,.orb,.hero-frame::before,.hero-frame-grid,.hero-float,.hero-float::before,.hero-robot .rb-line,.hero-robot .rb-soft,.hero-robot .rb-eye,.hero-core-line,.hero-core-node,.hero-pill-track i{
+    animation:none!important;
+  }
+}
 .hero-shell{width:100%;max-width:1180px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,56px);align-items:center}
 .hero-copy{text-align:left}
 .hero-visual{position:relative;animation:fadeup .7s ease .12s both}
@@ -533,7 +561,7 @@ section{padding:60px 20px}
 </style>
 
 </head>
-<body>
+<body class="preload">
 
 <nav>
   <a href="index.html" class="nav-logo" aria-label="Nexperts Academy">
@@ -1420,20 +1448,27 @@ function setupNavHighlight(){
     .filter(x=>x.id && document.getElementById(x.id));
 
   const heroSection=document.querySelector('.hero.hero-split');
+  const homeLink=links.find(a=>a.getAttribute('href')==='index.html');
   const refreshActiveByScroll=()=>{
-    if(heroSection){
-      const heroBottom=heroSection.getBoundingClientRect().bottom;
-      if(heroBottom > window.innerHeight*0.45){
-        const homeLink=links.find(a=>a.getAttribute('href')==='index.html');
-        if(homeLink){setActive(homeLink);return;}
+    const scrollTop=window.scrollY||document.documentElement.scrollTop||0;
+    if(heroSection&&homeLink){
+      const heroTop=heroSection.offsetTop;
+      const heroEnd=heroTop+heroSection.offsetHeight-(window.innerHeight*0.35);
+      if(scrollTop<=Math.max(heroEnd,64)){
+        setActive(homeLink);
+        return;
       }
     }
+    if(scrollTop<=24&&homeLink){
+      setActive(homeLink);
+      return;
+    }
     if(!sectionLinks.length) return;
-    const marker=window.innerHeight*0.32;
+    const marker=scrollTop+(window.innerHeight*0.32);
     let current=sectionLinks[0];
     sectionLinks.forEach(item=>{
-      const top=document.getElementById(item.id).getBoundingClientRect().top;
-      if(top-marker<=0) current=item;
+      const section=document.getElementById(item.id);
+      if(section&&section.offsetTop<=marker) current=item;
     });
     setActive(current.a);
   };
@@ -1448,6 +1483,14 @@ function setupNavHighlight(){
     });
   },{passive:true});
   refreshActiveByScroll();
+  window.addEventListener('load',()=>{
+    refreshActiveByScroll();
+    if(activeLink) queueMove(activeLink,false);
+  });
+  window.addEventListener('pageshow',()=>{
+    refreshActiveByScroll();
+    if(activeLink) queueMove(activeLink,false);
+  });
 
   links.forEach(link=>{
     link.addEventListener('mouseenter',()=>{hoverLink=link;queueMove(link,true);});
@@ -1465,6 +1508,16 @@ function setupNavHighlight(){
   });
 }
 setupNavHighlight();
+
+function releaseInitialLoadEffects(){
+  const clear=()=>document.body.classList.remove('preload');
+  if(document.readyState==='complete'){
+    requestAnimationFrame(()=>requestAnimationFrame(clear));
+  }else{
+    window.addEventListener('load',()=>requestAnimationFrame(()=>requestAnimationFrame(clear)),{once:true});
+  }
+}
+releaseInitialLoadEffects();
 </script>
 
 </body>
