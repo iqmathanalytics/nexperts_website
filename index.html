@@ -1452,9 +1452,10 @@ function setupNavHighlight(){
   const refreshActiveByScroll=()=>{
     const scrollTop=window.scrollY||document.documentElement.scrollTop||0;
     if(heroSection&&homeLink){
-      const heroTop=heroSection.offsetTop;
-      const heroEnd=heroTop+heroSection.offsetHeight-(window.innerHeight*0.35);
-      if(scrollTop<=Math.max(heroEnd,64)){
+      const heroRect=heroSection.getBoundingClientRect();
+      const navMarkerY=window.innerHeight*0.32;
+      const heroContainsMarker=heroRect.top<=navMarkerY&&heroRect.bottom>=navMarkerY;
+      if(heroContainsMarker){
         setActive(homeLink);
         return;
       }
