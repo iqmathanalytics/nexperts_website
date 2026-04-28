@@ -1,0 +1,903 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Nexperts Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f8fbff;--bg2:#eef6ff;--bg3:#e2efff;
+  --ink:#0f1b2d;--ink2:#2a3f5f;--ink3:#4b6284;--ink4:#7e97b8;
+  --blue:#1d4ed8;--bluL:#dbeafe;--bluM:#eff6ff;
+  --brand:#1d4ed8;--brand-hover:#1e40af;--brand-soft:#93c5fd;
+  --maroon:#1e3a8a;--marM:#1e40af;--marL:#dbeafe;--marP:#eff6ff;
+  --red:#2563eb;--line:#d7e6fb;--line2:#bfd5f2;
+  --surface:#0b1f46;--surface2:#123777;
+  --green:#16a34a;--greenL:#dcfce7;
+  --amber:#d97706;--amberL:#fef3c7;
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(248,251,255,.9);border-bottom:1px solid rgba(30,64,175,.16);backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(15,23,42,.06)}
+.nav-logo{font-weight:700;font-size:1rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:6px}
+.nav-logo img{height:36px;width:auto;display:block}
+.ndot{width:8px;height:8px;border-radius:50%;background:var(--blue);display:inline-block;animation:pulse-dot 2s ease infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(29,78,216,0.35)}50%{box-shadow:0 0 0 5px rgba(29,78,216,0)}}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:14px;list-style:none;position:relative;padding:4px;border-radius:12px;background:rgba(219,234,254,.22);border:1px solid rgba(147,197,253,.35)}
+.nav-links li{position:relative;z-index:2}
+.nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink2);text-decoration:none;position:relative;padding:6px 10px;border-radius:8px;transition:color .25s ease,transform .25s ease}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:10px;width:calc(100% - 20px);height:2px;background:var(--blue);transform:scaleX(0);transform-origin:center;transition:transform .28s ease}
+.nav-links a:hover{color:var(--blue);transform:translateY(-1px)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--blue)}
+.nav-highlight{position:absolute;top:50%;left:0;height:30px;border-radius:9px;background:linear-gradient(135deg,rgba(147,197,253,.45),rgba(219,234,254,.88));border:1px solid rgba(59,130,246,.22);box-shadow:0 10px 24px rgba(37,99,235,.18);transform:translateY(-50%);z-index:1;pointer-events:none;opacity:0;transition:left .36s cubic-bezier(.22,.61,.36,1),width .36s cubic-bezier(.22,.61,.36,1),opacity .2s ease}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-ai{font-size:.76rem;font-weight:700;color:#0f2f67;text-decoration:none;display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,rgba(219,234,254,.95),rgba(191,219,254,.9));border:1px solid rgba(59,130,246,.28);box-shadow:0 8px 20px rgba(37,99,235,.14);transition:transform .25s ease,box-shadow .25s ease,color .2s ease}
+.nav-ai:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 28px rgba(37,99,235,.24);color:var(--blue)}
+.ldot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 1.8s ease infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.nav-enroll{font-size:0.8rem;font-weight:700;color:#fff;background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 45%,#3b82f6 100%);padding:10px 20px;text-decoration:none;border-radius:11px;transition:all .25s ease;border:1px solid rgba(255,255,255,.36);box-shadow:0 12px 28px rgba(37,99,235,.28)}
+.nav-enroll:hover{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 52%,#60a5fa 100%);transform:translateY(-3px);box-shadow:0 18px 34px rgba(37,99,235,.36)}
+
+.cc,.pcard,.vcard,.ncard,.trainer-card,.mcard,.lab-card,.review-card,.next-card,.who-card,.pstat,.stat,.photo-tile,.tcard2{transition:transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s ease,background .25s ease,border-color .25s ease}
+.cc:hover,.pcard:hover,.vcard:hover,.ncard:hover,.trainer-card:hover,.mcard:hover,.lab-card:hover,.review-card:hover,.next-card:hover,.who-card:hover,.pstat:hover,.stat:hover,.tcard2:hover{transform:translateY(-4px)}
+.btn-primary,.btn-ghost,.nav-enroll{will-change:transform,box-shadow}
+.hero-title em,.head em,.sec-head em{background:linear-gradient(90deg,#1d4ed8,#3b82f6,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent;animation:accentShift 5s ease-in-out infinite}
+@keyframes accentShift{0%,100%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(12deg)}}
+
+/* ── HERO ── */
+.hero{min-height:82vh;background:linear-gradient(180deg,#f8fbff 0%,#eef6ff 58%,#f8fbff 100%);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:124px 40px 84px;position:relative;overflow:hidden;max-width:100%}
+.hero::before{content:’’;position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 70% at 20% 50%,black 10%,transparent 80%);opacity:.4}
+.hero::after{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 85% 40%,rgba(30,64,175,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 15% 70%,rgba(29,78,216,.06) 0%,transparent 70%);pointer-events:none;animation:glow 9s ease-in-out infinite alternate}
+@keyframes glow{0%{opacity:.7;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;will-change:transform}
+.o1{width:320px;height:320px;background:rgba(29,78,216,.07);top:10%;right:5%;animation:f1 11s ease-in-out infinite}
+.o2{width:200px;height:200px;background:rgba(30,64,175,.06);bottom:15%;right:25%;animation:f2 14s ease-in-out infinite}
+@keyframes f1{0%,100%{transform:translate(0,0)}40%{transform:translate(-20px,18px)}70%{transform:translate(12px,-14px)}}
+@keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-20px)}}
+
+.about-hero-row{display:grid;grid-template-columns:1fr min(56vw,660px);gap:clamp(28px,4vw,64px);align-items:center;width:100%;max-width:1340px;position:relative;z-index:1}
+.about-hero-photo img{display:block;width:100%;height:clamp(340px,60vh,580px);object-fit:cover;border-radius:22px;box-shadow:0 30px 72px rgba(15,23,42,.15);border:1px solid rgba(30,64,175,.2)}
+.about-hero-row .hero-inner{max-width:none}
+.hero-inner{position:relative;z-index:1;max-width:760px}
+.hero-crumb{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:500;color:var(--ink4);margin-bottom:24px;animation:fadeup .5s ease both}
+.hero-crumb a{color:var(--ink4);text-decoration:none;transition:color .15s}
+.hero-crumb a:hover{color:var(--blue)}
+.hero-crumb span{color:var(--ink3)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,#dbeafe,#eff6ff);border:1px solid rgba(30,64,175,.24);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:24px;animation:fadeup .5s ease .05s both;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(59,130,246,.12)}
+.hero-badge::before{content:’’;width:6px;height:6px;background:var(--blue);border-radius:50%}
+.hero-badge::after{content:’’;position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shim 4s ease 2s infinite}
+@keyframes shim{0%{left:-100%}100%{left:160%}}
+.hero-title{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(2.6rem,5.5vw,5rem);line-height:1.06;letter-spacing:-.02em;color:var(--ink);margin-bottom:22px;animation:fadeup .6s ease .1s both}
+.hero-title em{font-style:italic;color:var(--blue)}
+.hero-title em.m{color:var(--marM)}
+.hero-sub{font-size:1.05rem;font-weight:300;color:var(--ink3);max-width:520px;line-height:1.75;margin-bottom:36px;animation:fadeup .6s ease .18s both}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;animation:fadeup .6s ease .26s both}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.btn-primary{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--blue),#2563eb);color:#fff;padding:12px 28px;border-radius:10px;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .2s;border:1px solid rgba(255,255,255,.35)}
+.btn-primary:hover{background:var(--brand-hover);transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,78,216,.22)}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--ink2);padding:12px 24px;border-radius:10px;font-size:.85rem;font-weight:600;text-decoration:none;border:1px solid var(--line);transition:all .2s;box-shadow:0 6px 20px rgba(15,23,42,.06)}
+.btn-ghost:hover{background:var(--bg2);color:var(--ink);border-color:var(--line2);transform:translateY(-2px);box-shadow:0 10px 26px rgba(30,64,175,.12)}
+
+/* ── UTILITY ── */
+section{padding:96px 40px}
+.sw{max-width:1160px;margin:0 auto}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;gap:8px;opacity:.95}
+.eyebrow::before{content:’’;width:16px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
+.eyebrow.m{color:var(--marM)}.eyebrow.m::before{background:var(--marM)}
+.eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}
+h2.head{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px;text-wrap:balance}
+h2.head em{font-style:italic;color:var(--blue)}
+h2.head em.m{color:var(--marM)}
+.sub{font-size:.95rem;font-weight:300;color:var(--ink3);max-width:520px;line-height:1.75;margin-bottom:48px}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+
+/* ── MISSION SPLIT ── */
+.mission-sec{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--line)}
+.mission-cell{background:var(--bg2);padding:64px 56px;position:relative;overflow:hidden;transition:background .2s}
+.mission-cell:hover{background:#fff}
+.mission-cell::before{content:’’;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),#3b82f6);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.mission-cell:nth-child(even)::before{background:linear-gradient(90deg,#1e40af,#60a5fa)}
+.mission-cell:hover::before{transform:scaleX(1)}
+.mission-icon{font-size:2rem;margin-bottom:20px;display:block}
+.mission-cell h3{font-family:‘Fraunces’,serif;font-size:1.5rem;font-weight:300;color:var(--ink);margin-bottom:12px;line-height:1.2;letter-spacing:-.01em}
+.mission-cell h3 em{font-style:italic;color:var(--blue)}
+.mission-cell:nth-child(even) h3 em{color:var(--marM)}
+.mission-cell p{font-size:.88rem;font-weight:400;color:var(--ink3);line-height:1.8}
+
+/* ── STORY TIMELINE ── */
+.story-sec{background:#fff;border-bottom:1px solid var(--line)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.story-left p{font-size:.92rem;color:var(--ink2);line-height:1.85;margin-bottom:16px}
+.story-left .pull{font-family:‘Fraunces’,serif;font-style:italic;font-weight:300;font-size:1.15rem;color:var(--maroon);border-left:2px solid var(--maroon);padding-left:18px;margin:28px 0;line-height:1.7}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:flex-start;transition:padding .2s}
+.tl-item:first-child{border-top:1px solid var(--line)}
+.tl-item:hover{padding-left:8px}
+.tl-year{font-family:‘Fraunces’,serif;font-size:1.1rem;font-weight:300;color:var(--blue);min-width:52px;letter-spacing:-.01em;flex-shrink:0;margin-top:2px}
+.tl-item:nth-child(even) .tl-year{color:var(--marM)}
+.tl-content h4{font-size:.87rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.tl-content p{font-size:.78rem;color:var(--ink3);line-height:1.65}
+
+/* ── VALUES ── */
+.values-sec{background:linear-gradient(165deg,#123777 0%,#0b1f46 100%);padding:98px 40px;border-top:1px solid rgba(147,197,253,.26)}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;margin-top:56px}
+.vcard{background:transparent;padding:40px 32px;transition:background .2s;position:relative}
+.vcard::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.vcard:nth-child(2)::before{background:var(--marM)}
+.vcard:nth-child(3)::before{background:var(--green)}
+.vcard:nth-child(4)::before{background:var(--amber)}
+.vcard:hover{background:rgba(255,255,255,.04)}
+.vcard:hover::before{transform:scaleX(1)}
+.vcard-icon{font-size:1.6rem;margin-bottom:16px;display:block}
+.vcard h3{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:10px}
+.vcard p{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.72}
+.values-eyebrow{color:rgba(255,255,255,.3)}
+.values-eyebrow::before{background:rgba(255,255,255,.2)}
+.values-head{color:#fff}
+.values-head em{color:#bfdbfe}
+
+/* ── NUMBERS ── */
+.numbers-sec{background:var(--bg2);border-bottom:1px solid var(--line)}
+.numbers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:56px}
+.ncard{background:#fff;padding:40px 32px;transition:background .2s}
+.ncard:hover{background:var(--bluM)}
+.ncard:nth-child(2):hover,.ncard:nth-child(4):hover{background:var(--marP)}
+.ncard .n{font-family:‘Fraunces’,serif;font-size:3.2rem;font-weight:300;color:var(--blue);line-height:1;letter-spacing:-.03em;margin-bottom:8px}
+.ncard:nth-child(2) .n,.ncard:nth-child(4) .n{color:var(--marM)}
+.ncard h4{font-size:.85rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.ncard p{font-size:.78rem;color:var(--ink3);line-height:1.6}
+
+/* ── TEAM SECTION ── */
+.team-sec{background:#fff;border-bottom:1px solid var(--line)}
+
+/* Founder card — full width hero */
+.founder-card{display:grid;grid-template-columns:1fr 1.6fr;gap:0;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:56px;margin-bottom:20px}
+.founder-left{background:linear-gradient(160deg,#123777 0%,#0b1f46 100%);padding:56px 48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;border:1px solid rgba(147,197,253,.18)}
+.founder-left::before{content:‘AV’;position:absolute;bottom:-20px;right:-10px;font-family:‘Fraunces’,serif;font-size:9rem;font-weight:300;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;letter-spacing:-.05em}
+.founder-avatar{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,#dbeafe,#eff6ff);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.3rem;margin-bottom:24px;border:1px solid rgba(147,197,253,.4)}
+.founder-left h3{font-family:‘Fraunces’,serif;font-size:1.8rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:6px;letter-spacing:-.01em}
+.founder-title{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:28px}
+.founder-certs{display:flex;flex-wrap:wrap;gap:5px}
+.fcert{font-size:.62rem;font-weight:600;background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.1);padding:3px 9px;border-radius:4px}
+
+.founder-right{background:#fff;padding:56px 52px}
+.founder-right .eyebrow{margin-bottom:18px}
+.founder-bio{font-size:.92rem;color:var(--ink2);line-height:1.85;margin-bottom:16px}
+.founder-pull{font-family:‘Fraunces’,serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--maroon);border-left:2px solid var(--maroon);padding-left:16px;margin:24px 0;line-height:1.7}
+.founder-domains{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
+.fdomain{font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border-radius:6px;background:var(--bluM);color:var(--blue);border:1px solid rgba(29,78,216,.14)}
+.fdomain.m{background:var(--marP);color:var(--marM);border-color:rgba(153,27,27,.15)}
+.fdomain.g{background:var(--greenL);color:var(--green);border-color:rgba(22,163,74,.15)}
+.fdomain.a{background:var(--amberL);color:var(--amber);border-color:rgba(217,119,6,.15)}
+
+/* Trainer cards grid */
+.trainers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.trainer-card{background:#fff;padding:36px 30px;transition:background .2s;position:relative;overflow:hidden}
+.trainer-card::after{content:’’;position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);transform:scaleY(0);transform-origin:bottom;transition:transform .25s ease}
+.trainer-card:nth-child(even)::after{background:var(--maroon)}
+.trainer-card:hover{background:linear-gradient(180deg,#f8fbff,var(--bg2))}
+.trainer-card:hover::after{transform:scaleY(1)}
+.tr-av{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;margin-bottom:18px;border:1px solid transparent}
+.av-b{background:var(--bluL);color:var(--blue);border-color:rgba(29,78,216,.14)}
+.av-m{background:var(--marL);color:var(--marM);border-color:rgba(30,64,175,.15)}
+.av-a{background:var(--amberL);color:var(--amber);border-color:rgba(217,119,6,.15)}
+.av-g{background:var(--greenL);color:var(--green);border-color:rgba(22,163,74,.15)}
+.trainer-card h3{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:3px}
+.tr-role{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.tr-b{color:var(--blue)}.tr-m{color:var(--marM)}.tr-a{color:var(--amber)}.tr-g{color:var(--green)}
+.tr-bio{font-size:.8rem;color:var(--ink3);line-height:1.72;margin-bottom:16px}
+.tr-certs{display:flex;flex-wrap:wrap;gap:5px}
+.tc{font-size:.6rem;font-weight:600;background:var(--bg2);color:var(--ink3);border:1px solid var(--line);padding:2px 8px;border-radius:4px}
+.tr-exp{display:flex;align-items:center;gap:6px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.tr-exp-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+.tr-exp p{font-size:.72rem;color:var(--ink4);font-weight:500}
+
+/* ── TRAINING PHILOSOPHY ── */
+.method-sec{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:56px}
+.mcard{background:#fff;padding:36px 30px;transition:background .2s}
+.mcard:hover{background:linear-gradient(180deg,#f8fbff,var(--bg2))}
+.mcard:nth-child(1):hover{background:var(--bluM)}
+.mcard:nth-child(2):hover{background:var(--marP)}
+.mcard:nth-child(3):hover{background:var(--greenL)}
+.mcard-num{font-family:‘Fraunces’,serif;font-size:3.5rem;font-weight:300;line-height:1;margin-bottom:12px;letter-spacing:-.03em;opacity:.18}
+.mcard:nth-child(1) .mcard-num{color:var(--blue)}
+.mcard:nth-child(2) .mcard-num{color:var(--maroon)}
+.mcard:nth-child(3) .mcard-num{color:var(--green)}
+.mcard h3{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.3}
+.mcard p{font-size:.81rem;color:var(--ink3);line-height:1.75}
+.mcard .mhighlight{font-weight:600;color:var(--ink2)}
+
+/* ── PARTNERS ── */
+.partners-sec{background:#fff;border-bottom:1px solid var(--line)}
+.partners-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:48px}
+.pcard{background:#fff;padding:28px 20px;text-align:center;transition:background .15s}
+.pcard:hover{background:var(--bg2)}
+.pcard .pico{font-size:1.5rem;display:block;margin-bottom:8px}
+.pcard .pname{font-size:.72rem;font-weight:600;color:var(--ink2);letter-spacing:.03em}
+.pcard .pcount{font-size:.62rem;color:var(--ink4);margin-top:3px;letter-spacing:.04em}
+
+/* ── CULTURE ── */
+.culture-sec{background:linear-gradient(170deg,#0b1f46 0%,var(--surface2) 50%,var(--surface) 100%);padding:96px 40px;border-top:1px solid rgba(29,78,216,.12)}
+.culture-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.culture-left h2{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);color:#fff;line-height:1.1;margin-bottom:16px;letter-spacing:-.02em}
+.culture-left h2 em{font-style:italic;color:#93c5fd}
+.culture-left h2 em.m{color:#bfdbfe}
+.culture-left p{font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:16px;max-width:480px}
+.culture-points{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;margin-top:32px}
+.cpoint{background:transparent;padding:20px 24px;display:flex;gap:16px;align-items:flex-start;transition:background .15s}
+.cpoint:hover{background:rgba(255,255,255,.04)}
+.cpoint-icon{font-size:1rem;flex-shrink:0;margin-top:2px}
+.cpoint h4{font-size:.86rem;font-weight:600;color:#fff;margin-bottom:3px}
+.cpoint p{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.6}
+.culture-right{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.cstat{padding:32px 28px;background:transparent;transition:background .2s}
+.cstat:hover{background:rgba(255,255,255,.04)}
+.cstat .n{font-family:‘Fraunces’,serif;font-size:2.8rem;font-weight:300;color:#fff;line-height:1;letter-spacing:-.03em;margin-bottom:6px}
+.cstat:nth-child(1) .n em{color:#fb7185;font-style:normal;font-size:1.6rem}
+.cstat:nth-child(2) .n em{color:#bfdbfe;font-style:normal;font-size:1.6rem}
+.cstat:nth-child(3) .n em{color:#86efac;font-style:normal;font-size:1.6rem}
+.cstat:nth-child(4) .n em{color:#fcd34d;font-style:normal;font-size:1.6rem}
+.cstat p{font-size:.76rem;color:rgba(255,255,255,.38);line-height:1.5}
+
+/* ── CTA ── */
+.cta-sec{background:linear-gradient(180deg,#f3f8ff,var(--bluM),#f3f8ff);border-top:1px solid rgba(29,78,216,.12);padding:96px 40px;text-align:center}
+.cta-sec h2{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:14px}
+.cta-sec h2 em{font-style:italic;color:var(--blue)}
+.cta-sec p{font-size:.95rem;color:var(--ink3);max-width:400px;margin:0 auto 40px;line-height:1.7}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ── FOOTER ── */
+footer{background:linear-gradient(180deg,#0d2347 0%,#081731 100%);padding:72px 40px 36px;border-top:1px solid rgba(29,78,216,.2)}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07)}
+.flogo{font-size:1rem;font-weight:700;color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.flogo span{color:#fb7185}
+.fbrand p{font-size:.79rem;color:rgba(255,255,255,.3);line-height:1.8;max-width:230px}
+.fcol h4{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:16px}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:9px}
+.fcol a{font-size:.81rem;color:rgba(255,255,255,.42);text-decoration:none;transition:color .15s}
+.fcol a:hover{color:rgba(255,255,255,.82)}
+.fbot{display:flex;justify-content:space-between;align-items:center}
+.fbot p{font-size:.71rem;color:rgba(255,255,255,.18)}
+.flinks{display:flex;gap:20px}
+.flinks a{font-size:.71rem;color:rgba(255,255,255,.18);text-decoration:none;transition:color .15s}
+.flinks a:hover{color:rgba(255,255,255,.45)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+nav{padding:0 16px;gap:10px}
+.nav-right{display:none}
+.nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:8px;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.hero{padding:100px 24px 64px}
+.about-hero-row{grid-template-columns:1fr;text-align:center}
+.about-hero-row .hero-inner{max-width:640px;margin:0 auto}
+.about-hero-row .hero-actions{justify-content:center}
+.about-hero-photo{order:-1;max-width:420px;margin:0 auto}
+.about-hero-photo img{height:280px}
+section{padding:72px 24px}
+.values-sec,.culture-sec,.cta-sec{padding:72px 24px}
+.mission-grid{grid-template-columns:1fr}
+.story-grid,.culture-grid{grid-template-columns:1fr;gap:48px}
+.numbers-grid,.values-grid{grid-template-columns:1fr 1fr}
+.partners-grid{grid-template-columns:repeat(3,1fr)}
+.trainers-grid{grid-template-columns:1fr 1fr}
+.method-grid{grid-template-columns:1fr 1fr}
+.founder-card{grid-template-columns:1fr}
+.culture-right{grid-template-columns:1fr 1fr}
+.footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:640px){
+.hero-title{font-size:2.4rem}
+.trainers-grid,.method-grid,.mission-grid,.culture-right{grid-template-columns:1fr}
+.numbers-grid,.values-grid{grid-template-columns:1fr 1fr}
+.partners-grid{grid-template-columns:repeat(3,1fr)}
+.footer-grid{grid-template-columns:1fr}
+footer,.cta-sec{padding:56px 20px 32px}
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Nexperts Academy">
+    <img src="image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
+  </a>
+  <ul class="nav-links">
+    <span class="nav-highlight" aria-hidden="true"></span>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#courses">Courses</a></li>
+    <li><a href="index.html#roadmap">Roadmaps</a></li>
+    <li><a href="index.html#verify">Verify</a></li>
+    <li><a href="index.html#paths">Career Paths</a></li>
+    <li><a href="Nexperts beyond.html">Beyond</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#clients">Clients</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
+    <a href="index.html#enroll" class="nav-enroll">Enroll Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="about-hero-row">
+    <div class="hero-inner">
+      <div class="hero-crumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span style="color:var(--ink)">About Us</span>
+      </div>
+      <div class="hero-badge">Founded in Malaysia · 15 Years in the Field</div>
+      <h1 class="hero-title">
+        We don't just<br>
+        train people.<br>
+        We <em>build careers.</em>
+      </h1>
+      <p class="hero-sub">Nexperts Academy was built by IT professionals who spent 15 years in the field before they spent a single day in a classroom. That order of experience is everything.</p>
+      <div class="hero-actions">
+        <a href="#team" class="btn-primary">Meet the Team →</a>
+        <a href="index.html#courses" class="btn-ghost">Browse Courses</a>
+      </div>
+    </div>
+    <div class="about-hero-photo reveal">
+      <img src="image/about-career-hero-2.jpg" alt="Modern corporate career discussion with a diverse professional team" width="740" height="840" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+
+<section class="mission-sec">
+  <div class="sw">
+    <div class="reveal">
+      <div class="eyebrow">Our Foundation</div>
+      <h2 class="head">Two things we<br>refuse to compromise on.</h2>
+    </div>
+    <div class="mission-grid reveal" style="margin-top:48px">
+      <div class="mission-cell">
+        <span class="mission-icon">🎯</span>
+        <h3>Depth before <em>delivery.</em></h3>
+        <p>Every course we offer is taught the way industry actually works — not the way a textbook describes it. Our trainers have configured the firewalls, migrated the clouds, and run the SOC operations they teach. That's not a marketing line. It's how we built every single module from scratch, anchored in real scenarios from Malaysian banks, telcos, and government agencies.</p>
+      </div>
+      <div class="mission-cell">
+        <span class="mission-icon">📋</span>
+        <h3>Certs that are<br><em class="m">actually verifiable.</em></h3>
+        <p>Every certification issued through Nexperts Academy is a vendor-issued credential — verifiable on CompTIA CertMetrics, EC-Council Aspen, AWS Certmetrics, Microsoft Learn, or Credly. Not a training certificate. Not a participation badge. A real, globally recognised, employer-searchable credential that appears on the same portal your future employer will check.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+
+<section class="story-sec">
+  <div class="sw">
+    <div class="story-grid">
+      <div class="reveal">
+        <div class="eyebrow">Our Story</div>
+        <h2 class="head">15 years in.<br><em>Then we started teaching.</em></h2>
+        <p class="story-left">Nexperts Academy didn't begin in a training centre. It began in a server room at 2am, troubleshooting a network outage for a Malaysian bank. And in a SOC operations floor during a live ransomware incident. And in a cloud migration project that went sideways for a telco, until it didn't.</p>
+        <p class="story-left">After 15 years of real enterprise work — across cybersecurity architecture, cloud infrastructure, network engineering and DevOps automation — our founder Abdul Vaheed realised something uncomfortable: most of the people he hired didn't struggle because they lacked intelligence. They struggled because their training had never taught them what actually happens in production.</p>
+        <p class="story-left">Nexperts Academy exists to fix that. We teach IT the way it works — in the real world, with real stakes, with real Malaysian enterprise context baked into every example.</p>
+        <div class="pull">"The best time to teach someone to fight a fire is before the fire. The second best time is right after one."</div>
+      </div>
+      <div class="reveal d1">
+        <div class="eyebrow m">How we got here</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2009</div>
+            <div class="tl-content">
+              <h4>Into the field</h4>
+              <p>First enterprise deployment — network infrastructure for a Malaysian financial institution. The beginning of 15 years in production IT.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2013</div>
+            <div class="tl-content">
+              <h4>Cybersecurity specialism</h4>
+              <p>Moved into cybersecurity operations and architecture. First CISSP and CEH certifications. Started managing SOC teams for regulated industries.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2016</div>
+            <div class="tl-content">
+              <h4>Cloud migration era</h4>
+              <p>Led multi-cloud migrations across AWS and Azure for Malaysian telcos and GLCs. Built and certified cloud architecture teams from the ground up.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2019</div>
+            <div class="tl-content">
+              <h4>Training begins</h4>
+              <p>Started delivering informal cert-prep coaching to teams in house. 100% pass rate on first cohort. Word spread fast.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2021</div>
+            <div class="tl-content">
+              <h4>Nexperts Academy founded</h4>
+              <p>Official launch with CompTIA and EC-Council authorizations. First corporate clients: banking and telco sectors.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-content">
+              <h4>Full vendor partnership suite</h4>
+              <p>Added AWS, Microsoft, Cisco, ISACA, ISC2, HashiCorp, PMI and PeopleCert authorizations. Expanded to 120+ courses.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2026</div>
+            <div class="tl-content">
+              <h4>Nexperts AI launched</h4>
+              <p>Sister platform dedicated to AI, Agentic systems and AI governance — built for the AI-first era. 98% pass rate sustained across all certs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+
+<section class="values-sec">
+  <div class="sw">
+    <div class="reveal">
+      <div class="eyebrow values-eyebrow">What we stand for</div>
+      <h2 class="head values-head">Four things that don't<br>change. <em>Ever.</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="vcard reveal">
+        <span class="vcard-icon">🔬</span>
+        <h3>Depth over speed</h3>
+        <p>We'd rather you take an extra two weeks and pass first attempt than rush through and resit. Every course is built for understanding — not just exam points. That's why 98% of our students pass first time.</p>
+      </div>
+      <div class="vcard reveal d1">
+        <span class="vcard-icon">🇲🇾</span>
+        <h3>Malaysian context</h3>
+        <p>Western training content uses Western examples. We use case studies from Maybank, Telekom Malaysia, Petronas and Malaysian government agencies — because that's where our students work and will work.</p>
+      </div>
+      <div class="vcard reveal d2">
+        <span class="vcard-icon">✅</span>
+        <h3>Real accountability</h3>
+        <p>If you follow our programme and don't pass, we cover your retake. No fine print. No blame-shifting. We put our track record on the line because we've built it over 15 years and we're not going to let it slip.</p>
+      </div>
+      <div class="vcard reveal d3">
+        <span class="vcard-icon">🌐</span>
+        <h3>Global recognition</h3>
+        <p>Every cert we offer is employer-searchable on vendor portals — CompTIA, EC-Council, AWS, Microsoft, Cisco and more. Your certificate travels with you. Our pass rates follow you too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+
+<section class="numbers-sec">
+  <div class="sw">
+    <div class="reveal">
+      <div class="eyebrow">By the numbers</div>
+      <h2 class="head">The record<br>speaks for <em>itself.</em></h2>
+    </div>
+    <div class="numbers-grid">
+      <div class="ncard reveal">
+        <div class="n" data-v="98" data-s="%">0%</div>
+        <h4>First-attempt pass rate</h4>
+        <p>Across all certs offered — CompTIA, EC-Council, AWS, Microsoft, Cisco and more. Industry average is ~68%.</p>
+      </div>
+      <div class="ncard reveal d1">
+        <div class="n" data-v="15" data-s=" yrs">0 yrs</div>
+        <h4>Industry experience</h4>
+        <p>Combined field experience across cybersecurity, cloud, networking and DevOps before we started teaching.</p>
+      </div>
+      <div class="ncard reveal d2">
+        <div class="n" data-v="120" data-s="+">0+</div>
+        <h4>Certifications offered</h4>
+        <p>Foundation to expert level across every major IT discipline — all globally recognised and employer-verified.</p>
+      </div>
+      <div class="ncard reveal d3">
+        <div class="n" data-v="12" data-s="+">0+</div>
+        <h4>Official vendor partnerships</h4>
+        <p>Authorized by CompTIA, EC-Council, AWS, Microsoft, Cisco, ISACA, ISC2, HashiCorp, PMI and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM — FOUNDER -->
+
+<section class="team-sec" id="team">
+  <div class="sw">
+    <div class="reveal">
+      <div class="eyebrow m">The People Behind It</div>
+      <h2 class="head">Meet the team that<br><em class="m">built Nexperts Academy.</em></h2>
+      <p class="sub">Every trainer here spent years in the field before they spent a day teaching. That's the only qualification we care about.</p>
+    </div>
+
+<!-- Founder -->
+<div class="founder-card reveal">
+  <div class="founder-left">
+    <div>
+      <div class="founder-avatar">AV</div>
+      <h3>Abdul Vaheed</h3>
+      <p class="founder-title">Founder & Lead Instructor</p>
+      <div class="founder-certs">
+        <span class="fcert">CISSP</span><span class="fcert">CEH</span><span class="fcert">CHFI</span>
+        <span class="fcert">AWS SAA</span><span class="fcert">AZ-104</span><span class="fcert">CCNP</span>
+        <span class="fcert">ITIL 4</span><span class="fcert">PMP</span>
+      </div>
+    </div>
+  </div>
+  <div class="founder-right">
+    <div class="eyebrow m">Founder's Note</div>
+    <p class="founder-bio">I spent 15 years doing the work before I started teaching it. Cybersecurity operations for Malaysian banks. Cloud migration architecture for telcos. Network infrastructure for government agencies. DevOps transformation for regulated enterprises. I've been the person on call at 2am when things go wrong — and I've learned more in those moments than in any certification programme.</p>
+    <p class="founder-bio">When I started Nexperts Academy, I made one promise: every course we offer will be taught the way the industry actually works. Not how a vendor textbook describes it. Not how a PowerPoint slide simplifies it. How it actually works when the stakes are real and the pressure is on.</p>
+    <p class="founder-bio">Our 98% first-attempt pass rate isn't a marketing number — it's what happens when you teach people to genuinely understand their subject, not just memorise answers.</p>
+    <div class="founder-pull">"I never hired for certificates alone. I hired for people who could think under pressure. Now I teach people to be both."</div>
+    <div class="founder-domains">
+      <span class="fdomain">Cybersecurity</span>
+      <span class="fdomain">Cloud Architecture</span>
+      <span class="fdomain m">Penetration Testing</span>
+      <span class="fdomain m">SOC Operations</span>
+      <span class="fdomain g">Network Engineering</span>
+      <span class="fdomain a">DevOps & IaC</span>
+    </div>
+  </div>
+</div>
+
+<!-- Trainers -->
+<div class="trainers-grid" style="margin-top:20px">
+  <div class="trainer-card reveal">
+    <div class="tr-av av-b">SR</div>
+    <h3>Senior Cloud Architect</h3>
+    <div class="tr-role tr-b">Cloud Infrastructure Lead</div>
+    <p class="tr-bio">Spent 12 years designing and managing cloud infrastructure for enterprise clients across Southeast Asia — including multi-cloud migrations, hybrid architectures and cloud cost optimisation programmes for Malaysian telcos and financial institutions. Was a cloud architect at a Big Four consulting firm before joining Nexperts.</p>
+    <p class="tr-bio">Teaches the AWS and Microsoft Azure certification tracks with a focus on real architecture decisions — not just passing exam scenarios.</p>
+    <div class="tr-certs">
+      <span class="tc">AWS SAP</span><span class="tc">AZ-305</span><span class="tc">GCP Architect</span>
+      <span class="tc">AZ-104</span><span class="tc">Terraform</span><span class="tc">DevOps Pro</span>
+    </div>
+    <div class="tr-exp"><div class="tr-exp-dot"></div><p>12 years in enterprise cloud · Former Big Four cloud consultant</p></div>
+  </div>
+
+  <div class="trainer-card reveal d1">
+    <div class="tr-av av-m">NK</div>
+    <h3>Security Operations Lead</h3>
+    <div class="tr-role tr-m">SOC · Forensics · Threat Intelligence</div>
+    <p class="tr-bio">Former SOC Lead for a major Malaysian financial institution — managed 24/7 threat monitoring, incident response and forensic investigations across a regulated environment under Bank Negara oversight. Handled real ransomware incidents, APT investigations and regulatory audit responses.</p>
+    <p class="tr-bio">Leads EC-Council certification tracks — CEH, CHFI, CSA, CTIA and CCISO — and specialises in teaching exam strategy alongside technical depth.</p>
+    <div class="tr-certs">
+      <span class="tc">CHFI</span><span class="tc">CSA</span><span class="tc">CTIA</span>
+      <span class="tc">CISM</span><span class="tc">ECIH</span><span class="tc">CEH</span>
+    </div>
+    <div class="tr-exp"><div class="tr-exp-dot"></div><p>10 years in SOC operations · Former financial sector security lead</p></div>
+  </div>
+
+  <div class="trainer-card reveal d2">
+    <div class="tr-av av-a">RH</div>
+    <h3>Network Engineering Specialist</h3>
+    <div class="tr-role tr-a">Cisco · SD-WAN · Network Automation</div>
+    <p class="tr-bio">Cisco-certified network engineer with 11 years designing and maintaining enterprise networks for Malaysian utilities, healthcare systems and government infrastructure. Holds CCIE Enterprise and has supervised network rollouts covering hundreds of sites across Peninsular Malaysia.</p>
+    <p class="tr-bio">Delivers CompTIA Network+, CCNA and CCNP tracks — known for making complex routing and switching concepts immediately applicable to real environments.</p>
+    <div class="tr-certs">
+      <span class="tc">CCIE Enterprise</span><span class="tc">CCNP</span><span class="tc">CCNA</span>
+      <span class="tc">Network+</span><span class="tc">SD-WAN</span>
+    </div>
+    <div class="tr-exp"><div class="tr-exp-dot"></div><p>11 years in enterprise networking · CCIE certified</p></div>
+  </div>
+
+  <div class="trainer-card reveal">
+    <div class="tr-av av-g">PL</div>
+    <h3>Data & BI Specialist</h3>
+    <div class="tr-role tr-g">Power BI · SQL · Data Engineering</div>
+    <p class="tr-bio">Built business intelligence solutions for Malaysian FMCG, retail and banking clients for 9 years — from raw SQL pipelines to boardroom-ready Power BI dashboards. Has personally trained over 400 data analysts across Malaysian corporates on Power BI, SQL and Excel advanced analytics.</p>
+    <p class="tr-bio">Leads PL-300, DP-203, SQL and Tableau tracks — with a strong focus on PDPA compliance and Malaysian data governance requirements.</p>
+    <div class="tr-certs">
+      <span class="tc">PL-300</span><span class="tc">DP-203</span><span class="tc">Tableau</span>
+      <span class="tc">AZ-900</span><span class="tc">PDPA Certified</span>
+    </div>
+    <div class="tr-exp"><div class="tr-exp-dot"></div><p>9 years in enterprise data & BI · 400+ analysts trained</p></div>
+  </div>
+
+  <div class="trainer-card reveal d1">
+    <div class="tr-av av-b">KM</div>
+    <h3>DevOps & Platform Engineer</h3>
+    <div class="tr-role tr-b">Kubernetes · Terraform · CI/CD</div>
+    <p class="tr-bio">Platform engineer who spent 8 years building and scaling DevOps pipelines for Malaysian tech startups and enterprise clients — from containerised microservices to full IaC-managed infrastructure across AWS and Azure. Deep experience with Kubernetes cluster operations in production at scale.</p>
+    <p class="tr-bio">Delivers CKA, Terraform Associate, Docker, CI/CD and Linux Administration tracks — teaches with live labs rather than slides wherever possible.</p>
+    <div class="tr-certs">
+      <span class="tc">CKA</span><span class="tc">CKAD</span><span class="tc">Terraform</span>
+      <span class="tc">AZ-400</span><span class="tc">AWS DevOps</span>
+    </div>
+    <div class="tr-exp"><div class="tr-exp-dot"></div><p>8 years in DevOps & platform engineering</p></div>
+  </div>
+
+  <div class="trainer-card reveal d2">
+    <div class="tr-av av-m">FA</div>
+    <h3>Governance & Risk Specialist</h3>
+    <div class="tr-role tr-m">ITIL · PMP · ISACA · Compliance</div>
+    <p class="tr-bio">Former IT governance consultant who has worked with Malaysian GLCs, banking institutions and healthcare providers on ITIL implementations, PMP project delivery and ISACA audit frameworks. Has delivered PDPA readiness programmes to over 30 Malaysian organisations since its enforcement.</p>
+    <p class="tr-bio">Leads ITIL 4, PMP, PRINCE2, CISM, CISA, CRISC and PDPA compliance training — specialises in connecting governance frameworks to real audit outcomes.</p>
+    <div class="tr-certs">
+      <span class="tc">ITIL 4 Master</span><span class="tc">PMP</span><span class="tc">CISM</span>
+      <span class="tc">CISA</span><span class="tc">CRISC</span><span class="tc">PRINCE2</span>
+    </div>
+    <div class="tr-exp"><div class="tr-exp-dot"></div><p>13 years in IT governance · PDPA compliance specialist</p></div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<!-- METHOD -->
+
+<section class="method-sec">
+  <div class="sw">
+    <div class="reveal">
+      <div class="eyebrow">How we teach</div>
+      <h2 class="head">The method behind<br>the <em>98% pass rate.</em></h2>
+      <p class="sub">Three things we do differently that most training providers don't — and why they matter.</p>
+    </div>
+    <div class="method-grid">
+      <div class="mcard reveal">
+        <div class="mcard-num">01</div>
+        <h3>We teach to the role, not the exam</h3>
+        <p>Our courses start with the job — what does a SOC analyst actually do on day one? What does a cloud architect need to make decisions under pressure? We build the course around that, then align it to the exam objectives. When you understand the role, the exam becomes a formality. That's why <span class="mhighlight">98% of our students pass first attempt</span> — not because we drill them on answers, but because they genuinely know the subject.</p>
+      </div>
+      <div class="mcard reveal d1">
+        <div class="mcard-num">02</div>
+        <h3>Malaysian industry context, not Western defaults</h3>
+        <p>Every lab scenario, case study and example in our courses is drawn from Malaysian enterprise environments — banking under Bank Negara oversight, telco infrastructure, government agencies operating under MAMPU and NACSA frameworks, and manufacturing under PDPA compliance. <span class="mhighlight">When students recognise the environment in the examples, they retain it faster.</span> Most international training content uses generic Western scenarios that don't translate.</p>
+      </div>
+      <div class="mcard reveal d2">
+        <div class="mcard-num">03</div>
+        <h3>Three mock exams before the real one</h3>
+        <p>Every student sits a minimum of three full timed mock exams before we let them book their real exam. Not practice questions — full exam simulations under exam conditions, reviewed question by question with an instructor. We track weakness patterns across cohorts and update our exam strategy coaching accordingly. <span class="mhighlight">If you're not hitting 85%+ consistently on mocks, we don't let you book yet.</span> That's how we maintain 98%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+
+<section class="partners-sec">
+  <div class="sw">
+    <div class="reveal">
+      <div class="eyebrow g">Official Authorizations</div>
+      <h2 class="head">Authorized by the<br><em>world's most trusted vendors.</em></h2>
+      <p class="sub">Every course we deliver is backed by an official vendor authorization. Your cert is globally verifiable — not just a training certificate.</p>
+    </div>
+    <div class="partners-grid reveal">
+      <div class="pcard"><span class="pico">🔴</span><div class="pname">CompTIA</div><div class="pcount">12 CERTS</div></div>
+      <div class="pcard"><span class="pico">🔒</span><div class="pname">EC-Council</div><div class="pcount">15+ CERTS</div></div>
+      <div class="pcard"><span class="pico">☁️</span><div class="pname">AWS</div><div class="pcount">9 CERTS</div></div>
+      <div class="pcard"><span class="pico">🪟</span><div class="pname">Microsoft</div><div class="pcount">12 CERTS</div></div>
+      <div class="pcard"><span class="pico">🌐</span><div class="pname">Cisco</div><div class="pcount">4 CERTS</div></div>
+      <div class="pcard"><span class="pico">🔷</span><div class="pname">Google Cloud</div><div class="pcount">5 CERTS</div></div>
+      <div class="pcard"><span class="pico">📋</span><div class="pname">ITIL / PeopleCert</div><div class="pcount">6 CERTS</div></div>
+      <div class="pcard"><span class="pico">📊</span><div class="pname">ISACA</div><div class="pcount">4 CERTS</div></div>
+      <div class="pcard"><span class="pico">🛡️</span><div class="pname">ISC2</div><div class="pcount">3 CERTS</div></div>
+      <div class="pcard"><span class="pico">⚙️</span><div class="pname">HashiCorp</div><div class="pcount">2 CERTS</div></div>
+      <div class="pcard"><span class="pico">🏗️</span><div class="pname">PMI</div><div class="pcount">3 CERTS</div></div>
+      <div class="pcard"><span class="pico">☸️</span><div class="pname">Linux Foundation</div><div class="pcount">2 CERTS</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURE -->
+
+<section class="culture-sec">
+  <div class="sw">
+    <div class="culture-grid">
+      <div class="reveal">
+        <div class="eyebrow" style="color:rgba(255,255,255,.3)"><span style="width:16px;height:2px;background:rgba(255,255,255,.2);border-radius:2px;display:block"></span>Why it works</div>
+        <h2 class="culture-left">
+          <span style="font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);color:#fff;line-height:1.1;letter-spacing:-.02em;display:block">What makes<br><em style="font-style:italic;color:#93c5fd">Nexperts different</em><br>from everyone <em class="m" style="color:#bfdbfe;font-style:italic">else.</em></span>
+        </h2>
+        <p style="font-size:.9rem;color:rgba(255,255,255,.4);line-height:1.8;margin-bottom:8px;max-width:480px;margin-top:16px">Most IT training companies are built by educators. We're built by operators. The difference shows up the moment your instructor starts answering questions that aren't in the textbook.</p>
+        <div class="culture-points" style="margin-top:28px">
+          <div class="cpoint">
+            <span class="cpoint-icon">⚡</span>
+            <div><h4>Instructors who've been on-call</h4><p>Every trainer has managed real incidents, real escalations and real client pressure — not just classroom simulations.</p></div>
+          </div>
+          <div class="cpoint">
+            <span class="cpoint-icon">🔗</span>
+            <div><h4>Connected to Malaysian industry</h4><p>Our corporate training clients include banks, telcos and government agencies — we know what they're actually hiring for.</p></div>
+          </div>
+          <div class="cpoint">
+            <span class="cpoint-icon">🎯</span>
+            <div><h4>Obsessive about pass rates</h4><p>We track every student outcome. 98% isn't a ceiling — it's a floor. We investigate every fail and improve the programme every cohort.</p></div>
+          </div>
+          <div class="cpoint">
+            <span class="cpoint-icon">📍</span>
+            <div><h4>Built for Malaysia, recognized globally</h4><p>Malaysian context. Global credentials. Everything we teach is verifiable the moment you walk out the door.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="culture-right reveal d1">
+        <div class="cstat">
+          <div class="n">98<em>%</em></div>
+          <p>First-attempt pass rate — 30 points above the industry average of ~68%</p>
+        </div>
+        <div class="cstat">
+          <div class="n">15<em> yrs</em></div>
+          <p>Average field experience across our training team before they started teaching</p>
+        </div>
+        <div class="cstat">
+          <div class="n">0<em>RM</em></div>
+          <p>Retake cost for students who follow our programme and don't pass first time</p>
+        </div>
+        <div class="cstat">
+          <div class="n">12<em>+</em></div>
+          <p>Official vendor authorizations — every cert is globally verifiable, not just a training badge</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+
+<section class="cta-sec">
+  <div class="eyebrow" style="justify-content:center;margin-bottom:18px">Start here</div>
+  <h2>Ready to train with people<br>who've <em>actually done it?</em></h2>
+  <p>Browse our full course catalog, explore a career roadmap, or talk directly to one of our instructors about what's right for you.</p>
+  <div class="cta-btns">
+    <a href="index.html#courses" class="btn-primary">Browse Courses →</a>
+    <a href="mailto:hello@nexpertsacademy.com" class="btn-ghost">Talk to an Instructor</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-grid">
+    <div class="fbrand">
+      <a href="index.html" class="flogo"><span class="ndot"></span>Nexperts <span>Academy</span></a>
+      <p>Malaysia's authorized IT training academy. 98% first-attempt pass rate. CompTIA, EC-Council, AWS, Microsoft, Cisco and 8 more official partners.</p>
+    </div>
+    <div class="fcol"><h4>Courses</h4><ul>
+      <li><a href="index.html#courses">CompTIA</a></li><li><a href="index.html#courses">EC-Council</a></li>
+      <li><a href="index.html#courses">AWS</a></li><li><a href="index.html#courses">Microsoft Azure</a></li>
+      <li><a href="index.html#courses">Cisco</a></li><li><a href="index.html#courses">ITIL · PM</a></li>
+      <li><a href="index.html#courses">DevOps</a></li><li><a href="index.html#courses">Data & BI</a></li>
+    </ul></div>
+    <div class="fcol"><h4>Academy</h4><ul>
+      <li><a href="about.html" style="color:rgba(255,255,255,.7)">About Us</a></li>
+      <li><a href="about.html#team">Meet the Team</a></li>
+      <li><a href="index.html#roadmap">Career Roadmaps</a></li>
+      <li><a href="index.html#verify">Cert Verification</a></li>
+      <li><a href="index.html#paths">Career Paths</a></li>
+      <li><a href="#" style="color:#bfdbfe">→ Nexperts AI</a></li>
+    </ul></div>
+    <div class="fcol"><h4>Contact</h4><ul>
+      <li><a href="mailto:hello@nexpertsacademy.com">hello@nexpertsacademy.com</a></li>
+      <li><a href="#">Kuala Lumpur, Malaysia</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Corporate Enquiries</a></li>
+    </ul></div>
+  </div>
+  <div class="fbot">
+    <p>© 2026 Nexperts Academy · Kuala Lumpur, Malaysia</p>
+    <div class="flinks"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Sitemap</a></div>
+  </div>
+</footer>
+
+<script>
+// Reveal
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Number counters
+const nio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target.querySelector('.n');
+    if(!el||el.dataset.done)return;
+    el.dataset.done=1;
+    const v=+el.dataset.v,s=el.dataset.s;
+    if(!v)return;
+    let st=null;
+    const run=ts=>{
+      if(!st)st=ts;
+      const p=Math.min((ts-st)/1400,1),ease=1-Math.pow(1-p,3);
+      el.textContent=Math.floor(ease*v)+s;
+      if(p<1)requestAnimationFrame(run);
+    };
+    requestAnimationFrame(run);
+    nio.unobserve(e.target);
+  });
+},{threshold:.4});
+document.querySelectorAll('.ncard,.cstat').forEach(el=>nio.observe(el));
+
+function setupNavHighlight(){
+  const navLinks=document.querySelector('.nav-links');
+  if(!navLinks) return;
+  const links=[...navLinks.querySelectorAll('a')];
+  const indicator=navLinks.querySelector('.nav-highlight');
+  if(!indicator||!links.length) return;
+  let activeLink=null;
+  let hoverLink=null;
+  let rafId=0;
+  let pendingMove=null;
+
+  const moveTo=(link,animate=true)=>{
+    if(!link||!indicator) return;
+    const navRect=navLinks.getBoundingClientRect();
+    const linkRect=link.getBoundingClientRect();
+    if(!animate){indicator.style.transition='none';}
+    indicator.style.left=(linkRect.left-navRect.left)+'px';
+    indicator.style.width=linkRect.width+'px';
+    indicator.style.opacity='1';
+    if(!animate){requestAnimationFrame(()=>indicator.style.transition='');}
+  };
+
+  const queueMove=(link,animate=true)=>{
+    pendingMove={link,animate};
+    if(rafId) return;
+    rafId=requestAnimationFrame(()=>{
+      rafId=0;
+      if(pendingMove) moveTo(pendingMove.link,pendingMove.animate);
+      pendingMove=null;
+    });
+  };
+
+  const setActive=(link,animate=true)=>{
+    if(!link) return;
+    if(activeLink===link){
+      if(!hoverLink) queueMove(link,animate);
+      return;
+    }
+    if(activeLink) activeLink.classList.remove('active');
+    activeLink=link;
+    activeLink.classList.add('active');
+    if(!hoverLink) queueMove(activeLink,animate);
+  };
+
+  setActive(links.find(a=>(a.getAttribute('href')||'').includes('about.html'))||links[0],false);
+
+  links.forEach(link=>{
+    link.addEventListener('mouseenter',()=>{hoverLink=link;queueMove(link,true);});
+    link.addEventListener('focus',()=>{hoverLink=link;queueMove(link,true);});
+    link.addEventListener('click',()=>setActive(link));
+  });
+
+  navLinks.addEventListener('mouseleave',()=>{
+    hoverLink=null;
+    if(activeLink) queueMove(activeLink,true);
+  });
+
+  window.addEventListener('resize',()=>{
+    if(activeLink) queueMove(activeLink,false);
+  });
+}
+setupNavHighlight();
+</script>
+
+</body>
+</html>
