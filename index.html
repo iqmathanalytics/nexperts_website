@@ -1447,15 +1447,18 @@ function setupNavHighlight(){
     .filter(x=>x.id && document.getElementById(x.id));
 
   const heroSection=document.querySelector('.hero.hero-split');
-  const homeLink=links.find(a=>a.getAttribute('href')==='index.html');
+  const homeLink=links.find(a=>{
+    const href=(a.getAttribute('href')||'').trim();
+    return href==='index.html'||href==='/'||href===''||a.textContent.trim().toLowerCase()==='home';
+  })||links[0];
   const refreshActiveByScroll=()=>{
     const scrollTop=window.scrollY||document.documentElement.scrollTop||0;
     const hardHeroZone=window.innerHeight*0.72;
-    if(homeLink&&scrollTop<=hardHeroZone){
+    if(scrollTop<=hardHeroZone){
       setActive(homeLink);
       return;
     }
-    if(heroSection&&homeLink){
+    if(heroSection){
       const heroRect=heroSection.getBoundingClientRect();
       const navMarkerY=window.innerHeight*0.32;
       const heroContainsMarker=heroRect.top<=navMarkerY&&heroRect.bottom>=navMarkerY;
@@ -1464,18 +1467,18 @@ function setupNavHighlight(){
         return;
       }
     }
-    if(scrollTop<=24&&homeLink){
+    if(scrollTop<=24){
       setActive(homeLink);
       return;
     }
     if(!sectionLinks.length) return;
     const marker=scrollTop+(window.innerHeight*0.32);
-    let current=sectionLinks[0];
+    let current=null;
     sectionLinks.forEach(item=>{
       const section=document.getElementById(item.id);
       if(section&&section.offsetTop<=marker) current=item;
     });
-    setActive(current.a);
+    if(current){setActive(current.a);}else{setActive(homeLink);}
   };
 
   let ticking=false;
