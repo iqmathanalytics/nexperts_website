@@ -1,0 +1,5 @@
+# Netlify redirects/rewrites
+# https://docs.netlify.com/routing/redirects/
+#
+# Friendly admin URL: /admin -> /admin/index.html
+/admin    /admin/index.html    200!

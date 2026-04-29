@@ -95,6 +95,40 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 @keyframes f2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-20px,16px) scale(1.04)}75%{transform:translate(14px,-10px) scale(.98)}}
 @keyframes f3{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-18px)}}
 
+/* ── Mouse-follow spotlight ── */
+.hero-spotlight{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.85;mix-blend-mode:screen;transition:opacity .4s ease;background:radial-gradient(circle 360px at var(--mx,50%) var(--my,40%),rgba(96,165,250,.22),rgba(59,130,246,.08) 35%,transparent 70%)}
+.hero:hover .hero-spotlight{opacity:1}
+
+/* ── Diagonal data streams sweeping across hero ── */
+.hero-streams{position:absolute;inset:-12% -8%;z-index:0;pointer-events:none;overflow:hidden;mix-blend-mode:plus-lighter;opacity:.55}
+.hero-streams i{position:absolute;left:-30%;width:160%;height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,.55) 30%,rgba(59,130,246,.85) 50%,rgba(96,165,250,.55) 70%,transparent);transform-origin:left center;transform:rotate(-12deg);animation:streamSweep 9s cubic-bezier(.32,.04,.6,1) infinite;opacity:0}
+.hero-streams i:nth-child(1){top:18%;animation-delay:0s}
+.hero-streams i:nth-child(2){top:34%;animation-delay:1.6s;background:linear-gradient(90deg,transparent,rgba(147,197,253,.7) 30%,rgba(59,130,246,.95) 50%,rgba(147,197,253,.7) 70%,transparent);height:1.4px}
+.hero-streams i:nth-child(3){top:52%;animation-delay:3.2s}
+.hero-streams i:nth-child(4){top:68%;animation-delay:4.8s;background:linear-gradient(90deg,transparent,rgba(125,211,252,.7) 30%,rgba(56,189,248,.95) 50%,rgba(125,211,252,.7) 70%,transparent)}
+.hero-streams i:nth-child(5){top:82%;animation-delay:6.4s}
+@keyframes streamSweep{0%{opacity:0;transform:rotate(-12deg) translateX(-30%) scaleX(.6)}10%{opacity:.7}50%{opacity:.95;transform:rotate(-12deg) translateX(0) scaleX(1.05)}90%{opacity:.4}100%{opacity:0;transform:rotate(-12deg) translateX(20%) scaleX(.4)}}
+
+/* ── Floating cert-badge satellites around hero-frame ── */
+.hero-sat{position:absolute;z-index:5;pointer-events:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:100px;background:linear-gradient(135deg,#fff,#f0f6ff);color:#173b7d;border:1px solid rgba(59,130,246,.32);box-shadow:0 12px 26px -10px rgba(29,78,216,.32),0 0 0 1px rgba(255,255,255,.6) inset;display:flex;align-items:center;gap:6px;backdrop-filter:blur(10px)}
+.hero-sat::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px rgba(59,130,246,.7);animation:satDot 1.6s ease-in-out infinite}
+@keyframes satDot{0%,100%{opacity:.6}50%{opacity:1;transform:scale(1.3)}}
+.hero-sat.s1{top:6%;right:38%;animation:satFloat1 11s ease-in-out infinite}
+.hero-sat.s2{top:48%;left:-6%;animation:satFloat2 13s ease-in-out infinite}
+.hero-sat.s3{bottom:6%;right:-2%;animation:satFloat3 9s ease-in-out infinite}
+.hero-sat.s4{top:22%;right:-4%;animation:satFloat4 12s ease-in-out infinite}
+@keyframes satFloat1{0%,100%{transform:translate(0,0) rotate(-2deg)}50%{transform:translate(-8px,-12px) rotate(2deg)}}
+@keyframes satFloat2{0%,100%{transform:translate(0,0) rotate(1deg)}50%{transform:translate(10px,8px) rotate(-2deg)}}
+@keyframes satFloat3{0%,100%{transform:translate(0,0) rotate(2deg)}50%{transform:translate(-6px,-10px) rotate(-1deg)}}
+@keyframes satFloat4{0%,100%{transform:translate(0,0) rotate(-1deg)}50%{transform:translate(8px,12px) rotate(2deg)}}
+
+/* ── Subtle parallax tilt on hero visual ── */
+.hero-visual{will-change:transform}
+.hero-visual.tilt-on{transition:transform .35s cubic-bezier(.22,.61,.36,1);transform:perspective(1100px) rotateY(var(--rotY,0deg)) rotateX(var(--rotX,0deg)) translateZ(0)}
+
+/* ── Stat counter animation ── */
+.hero-float strong[data-count]{display:inline-block}
+
 /* Prevent first-load jank by delaying heavy motion */
 body.preload .hero::before,
 body.preload .hero::after,
@@ -107,9 +141,15 @@ body.preload .hero-float::before,
 body.preload .hero-robot .rb-line,
 body.preload .hero-robot .rb-soft,
 body.preload .hero-robot .rb-eye,
+body.preload .hero-robot .rb-eye-glow,
 body.preload .hero-core-line,
 body.preload .hero-core-node,
-body.preload .hero-pill-track i{animation:none!important}
+body.preload .hero-pill-track i,
+body.preload .hero-streams i,
+body.preload .hero-sat,
+body.preload .hero-sat::before{animation:none!important}
+body.preload .hero-spotlight{opacity:0!important}
+body.preload .hero-streams{opacity:0!important}
 body.preload .hero-wave,
 body.preload .hero-scan,
 body.preload .orb{filter:none!important}
@@ -117,7 +157,7 @@ body.preload .hero-circuit,
 body.preload .hero::after{opacity:.2!important}
 
 @media (prefers-reduced-motion: reduce){
-  .hero::before,.hero::after,.hero-motion *,.orb,.hero-frame::before,.hero-frame-grid,.hero-float,.hero-float::before,.hero-robot .rb-line,.hero-robot .rb-soft,.hero-robot .rb-eye,.hero-core-line,.hero-core-node,.hero-pill-track i{
+  .hero::before,.hero::after,.hero-motion *,.orb,.hero-frame::before,.hero-frame-grid,.hero-float,.hero-float::before,.hero-robot .rb-line,.hero-robot .rb-soft,.hero-robot .rb-eye,.hero-robot .rb-eye-glow,.hero-core-line,.hero-core-node,.hero-pill-track i,.hero-streams i,.hero-sat,.hero-sat::before{
     animation:none!important;
   }
 }
@@ -133,9 +173,11 @@ body.preload .hero::after{opacity:.2!important}
 .hero-robot svg{width:100%;height:100%}
 .hero-robot .rb-line{stroke:#3b82f6;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-dasharray:8 6;animation:rbFlow 3.8s linear infinite}
 .hero-robot .rb-soft{stroke:#93c5fd;stroke-width:1.2;fill:none;stroke-dasharray:3 5;animation:rbFlow 4.2s linear infinite reverse}
-.hero-robot .rb-eye{fill:#60a5fa;filter:drop-shadow(0 0 6px rgba(96,165,250,.7));animation:rbBlink 3.4s ease-in-out infinite}
+.hero-robot .rb-eye{fill:#ff5722;filter:drop-shadow(0 0 6px rgba(255,87,34,.85)) drop-shadow(0 0 14px rgba(239,68,68,.55));animation:rbBlink 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.hero-robot .rb-eye-glow{fill:rgba(255,87,34,.3);filter:blur(2px);animation:rbEyePulse 2.4s ease-in-out infinite}
 @keyframes rbFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-24}}
-@keyframes rbBlink{0%,45%,100%{opacity:1}47%,49%{opacity:.2}51%,53%{opacity:1}}
+@keyframes rbBlink{0%,38%,100%{opacity:1;transform:scaleY(1);fill:#ff5722}40%,42%{opacity:.15;transform:scaleY(.1)}44%,80%{opacity:1;transform:scaleY(1);fill:#ef4444}82%,84%{opacity:.15;transform:scaleY(.1)}86%{fill:#f97316}}
+@keyframes rbEyePulse{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:.95;transform:scale(1.18)}}
 .hero-frame-core{position:absolute;inset:18% 12% 20%;border-radius:18px;background:linear-gradient(155deg,rgba(255,255,255,.52),rgba(191,219,254,.26));border:1px solid rgba(147,197,253,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}
 .hero-core-line{position:absolute;height:2px;background:linear-gradient(90deg,rgba(59,130,246,.14),rgba(59,130,246,.55),rgba(59,130,246,.14));border-radius:999px}
 .hero-core-line.l1{left:12%;right:40%;top:26%;animation:linePulse 3.2s ease-in-out infinite}
@@ -289,33 +331,73 @@ h2.head em.m{color:var(--marM)}
 .pcard p{font-size:.77rem;color:var(--ink3);line-height:1.6}
 
 /* ── COURSES ── */
-.filter-tabs{display:flex;gap:0;border-bottom:1.5px solid var(--line);margin-bottom:32px;overflow-x:auto;scrollbar-width:none}
+.filter-tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1.5px solid var(--line);margin-bottom:36px;overflow-x:auto;scrollbar-width:none;padding-bottom:0;position:relative}
 .filter-tabs::-webkit-scrollbar{display:none}
-.ftab{font-size:.73rem;font-weight:600;letter-spacing:.04em;color:var(--ink3);padding:11px 18px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:‘Plus Jakarta Sans’,sans-serif;margin-bottom:-1.5px}
-.ftab:hover{color:var(--ink)}
+.ftab{font-size:.74rem;font-weight:700;letter-spacing:.03em;color:var(--ink3);padding:12px 20px;background:transparent;border:none;border-bottom:2.5px solid transparent;cursor:pointer;white-space:nowrap;transition:color .2s ease,border-color .25s ease,background .2s ease;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:-1.5px;border-radius:8px 8px 0 0;position:relative}
+.ftab::before{content:'';position:absolute;left:50%;right:50%;top:8px;bottom:auto;height:0;background:var(--bluL);border-radius:8px;opacity:0;transition:left .25s ease,right .25s ease,opacity .2s ease,height .25s ease;z-index:-1}
+.ftab:hover{color:var(--blue)}
+.ftab:hover::before{left:6px;right:6px;height:calc(100% - 16px);opacity:.6}
 .ftab.on{color:var(--blue);border-bottom-color:var(--blue)}
-.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.cc{display:none;flex-direction:column;background:#fff;padding:26px 24px;transition:background .15s;cursor:pointer;position:relative}
-.cc::after{content:’’;position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);transform:scaleY(0);transform-origin:bottom;transition:transform .25s ease}
-.cc:hover{background:linear-gradient(180deg,#f8fbff,var(--bg2))}
-.cc:hover::after{transform:scaleY(1)}
-.cc.show{display:flex;animation:cin .3s ease both}
-@keyframes cin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.cc:nth-child(2).show{animation-delay:.04s}.cc:nth-child(3).show{animation-delay:.08s}
-.cc:nth-child(4).show{animation-delay:.12s}.cc:nth-child(5).show{animation-delay:.16s}
-.cc:nth-child(6).show{animation-delay:.20s}.cc:nth-child(7).show{animation-delay:.24s}
-.cc:nth-child(8).show{animation-delay:.28s}.cc:nth-child(9).show{animation-delay:.32s}
-.cv2{font-size:.63rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.cbadge{font-size:.57rem;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--bluL);color:var(--blue)}
-.cbadge.sk{background:var(--bg3);color:var(--ink3)}
-.cbadge.nw{background:var(--amberL);color:var(--amber)}
-.cbadge.mr{background:var(--marL);color:var(--marM)}
-.cname2{font-size:.98rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:6px;flex:1}
-.cdesc2{font-size:.77rem;color:var(--ink3);line-height:1.6;margin-bottom:14px}
-.cmeta{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--line);margin-top:auto}
-.clevel{font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4)}
-.carrow{font-size:.8rem;color:var(--ink4);transition:all .15s}
-.cc:hover .carrow{color:var(--blue);transform:translate(2px,-2px)}
+.ftab.on::before{left:6px;right:6px;height:calc(100% - 16px);opacity:1;background:linear-gradient(180deg,var(--bluL),#fff)}
+
+/* ── Brand-grouped catalog ── */
+.cg{display:flex;flex-direction:column;gap:38px;background:transparent;border:none;border-radius:0;overflow:visible}
+
+.brand-block{background:linear-gradient(180deg,#fff,var(--bg2));border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative;transition:opacity .35s ease,transform .35s ease,box-shadow .3s ease;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.brand-block::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--bk),color-mix(in srgb,var(--bk) 50%,#fff));opacity:.85;z-index:1}
+.brand-block:hover{box-shadow:0 18px 38px -22px color-mix(in srgb,var(--bk) 35%,transparent),0 4px 12px rgba(15,23,42,.04)}
+.brand-block.b-hide{display:none}
+
+.brand-head{display:flex;align-items:center;gap:18px;padding:22px 26px 18px;background:linear-gradient(180deg,var(--bk-tint),transparent);border-bottom:1px solid var(--line);position:relative}
+.brand-head::after{content:'';position:absolute;left:26px;right:26px;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--bk) 35%,var(--bk) 65%,transparent);opacity:.4}
+.bh-mark{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:.95rem;letter-spacing:.04em;color:#fff;background:linear-gradient(135deg,var(--bk),color-mix(in srgb,var(--bk) 65%,#000));box-shadow:0 8px 20px -10px var(--bk),inset 0 1px 0 rgba(255,255,255,.25);position:relative;overflow:hidden}
+.bh-mark::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.5),transparent 55%);opacity:.7}
+.bh-text{flex:1;min-width:0}
+.bh-name{font-size:1.12rem;font-weight:700;color:var(--ink);letter-spacing:-.005em;line-height:1.2}
+.bh-tag{font-size:.78rem;color:var(--ink3);margin-top:3px;line-height:1.4}
+.bh-count{flex:none;font-size:.7rem;font-weight:700;letter-spacing:.04em;color:var(--bk);background:#fff;border:1px solid color-mix(in srgb,var(--bk) 20%,var(--line));padding:6px 12px;border-radius:100px;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.bh-count span{font-size:.95rem;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+
+.brand-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.brand-grid > .cc{background:#fff;border:none;margin:0}
+
+.cc{display:none;flex-direction:column;background:#fff;padding:24px 22px 20px;transition:transform .3s cubic-bezier(.22,.61,.36,1),background .25s ease,box-shadow .3s ease;cursor:pointer;position:relative}
+.cc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bk,var(--blue));transform:scaleY(0);transform-origin:top;transition:transform .35s cubic-bezier(.22,.61,.36,1);z-index:2}
+.cc::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--bk,var(--blue)) 12%,transparent),transparent 65%);opacity:0;transition:opacity .3s ease;pointer-events:none;z-index:0}
+.cc:hover{background:#fff;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--bk,var(--blue)) 25%,var(--line))}
+.cc:hover::before{transform:scaleY(1)}
+.cc:hover::after{opacity:1}
+.cc > *{position:relative;z-index:1}
+.cc.show{display:flex;animation:cin .35s cubic-bezier(.22,.61,.36,1) both}
+@keyframes cin{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+
+.cv2{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.cbadge{font-size:.56rem;font-weight:800;padding:3px 8px;border-radius:5px;background:color-mix(in srgb,var(--bk,var(--blue)) 14%,#fff);color:var(--bk,var(--blue));letter-spacing:.06em;border:1px solid color-mix(in srgb,var(--bk,var(--blue)) 22%,transparent)}
+.cbadge.sk{background:color-mix(in srgb,var(--bk,#10b981) 14%,#fff);color:var(--bk,#10b981);border-color:color-mix(in srgb,var(--bk,#10b981) 22%,transparent)}
+.cbadge.nw{background:var(--amberL);color:var(--amber);border-color:color-mix(in srgb,var(--amber) 22%,transparent)}
+.cbadge.mr{background:var(--marL);color:var(--marM);border-color:color-mix(in srgb,var(--marM) 22%,transparent)}
+.cname2{font-size:1rem;font-weight:700;color:var(--ink);line-height:1.32;margin-bottom:7px;letter-spacing:-.005em;transition:color .2s ease}
+.cc:hover .cname2{color:var(--bk,var(--blue))}
+.cdesc2{font-size:.78rem;color:var(--ink3);line-height:1.6;margin-bottom:14px;flex:1}
+
+.c-stats{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;background:linear-gradient(180deg,var(--bg2),#fff);border:1px solid var(--line);border-radius:9px;margin-bottom:12px;font-size:.7rem;font-weight:600;color:var(--ink2);transition:background .25s ease,border-color .25s ease}
+.cc:hover .c-stats{background:linear-gradient(180deg,color-mix(in srgb,var(--bk,var(--blue)) 6%,#fff),#fff);border-color:color-mix(in srgb,var(--bk,var(--blue)) 18%,var(--line))}
+.c-rate{display:inline-flex;align-items:center;gap:4px;color:var(--ink)}
+.c-rate em{font-style:normal;color:var(--ink4);font-weight:600;margin-left:2px;font-size:.66rem}
+.c-star{color:#f59e0b;font-size:.85rem;line-height:1;transform:translateY(-1px)}
+.c-enrol{display:inline-flex;align-items:center;gap:5px;color:var(--ink3)}
+.c-people{font-size:.85rem;line-height:1;transform:translateY(-1px);filter:saturate(1)}
+
+.cmeta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid var(--line);margin-top:0}
+.clevel{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);background:var(--bg2);padding:5px 9px;border-radius:6px;transition:background .25s ease,color .25s ease}
+.cc:hover .clevel{background:color-mix(in srgb,var(--bk,var(--blue)) 12%,var(--bg2));color:var(--bk,var(--blue))}
+.c-cta{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:700;color:var(--bk,var(--blue));padding:7px 12px;border-radius:8px;background:color-mix(in srgb,var(--bk,var(--blue)) 10%,#fff);border:1px solid color-mix(in srgb,var(--bk,var(--blue)) 18%,transparent);transition:transform .25s ease,background .25s ease,box-shadow .25s ease;letter-spacing:.005em}
+.cta-arr{display:inline-block;transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+.cc:hover .c-cta{background:linear-gradient(135deg,var(--bk,var(--blue)),color-mix(in srgb,var(--bk,var(--blue)) 70%,#000));color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px color-mix(in srgb,var(--bk,var(--blue)) 60%,transparent)}
+.cc:hover .cta-arr{transform:translateX(3px)}
+
+@media(max-width:1024px){.brand-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.brand-grid{grid-template-columns:1fr}.bh-tag{display:none}.brand-head{padding:18px 20px 14px;gap:14px}.bh-mark{width:42px;height:42px;font-size:.85rem;border-radius:12px}.bh-name{font-size:1rem}.cc{padding:20px 18px 16px}.c-stats{font-size:.66rem}}
 
 /* ── ROADMAP ── */
 .roadmap-section{background:var(--bg2);border-top:1px solid var(--line)}
@@ -494,7 +576,7 @@ footer{background:linear-gradient(180deg,#0d2347 0%,#081731 100%);padding:72px 4
 .learn-show-frame{border-radius:14px;overflow:hidden;background:var(--bg2);aspect-ratio:16/10}
 .learn-show-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.04) contrast(1.03);transition:transform .5s ease,filter .4s ease}
 .learn-show-card:hover .learn-show-frame img{transform:scale(1.04);filter:saturate(1.08) contrast(1.06)}
-a.cc{display:flex;text-decoration:none;color:inherit}
+a.cc{text-decoration:none;color:inherit}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
@@ -519,7 +601,7 @@ a.cc{display:flex;text-decoration:none;color:inherit}
 .problem-grid,.about-grid,.pass-band{grid-template-columns:1fr;gap:48px}
 .stats-row{grid-template-columns:1fr 1fr}
 .stat{border-right:none;border-bottom:1px solid var(--line)}
-.cg,.trainer-grid,.paths-grid,.testi-grid,.verify-grid{grid-template-columns:1fr 1fr}
+.trainer-grid,.paths-grid,.testi-grid,.verify-grid{grid-template-columns:1fr 1fr}
 .clients-grid,.verify-steps{grid-template-columns:1fr 1fr}
 .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
 .ai-inner{flex-direction:column;gap:24px}
@@ -544,7 +626,7 @@ section{padding:72px 24px}
 .photo-mosaic{gap:16px}
 .photo-mosaic{grid-template-columns:1fr;grid-auto-rows:auto}
 .photo-tile.t1,.photo-tile.t2,.photo-tile.t3,.photo-tile.t4,.photo-tile.t5{min-height:auto;aspect-ratio:4/3}
-.cg,.trainer-grid,.paths-grid,.testi-grid,.about-stats,.verify-grid{grid-template-columns:1fr}
+.trainer-grid,.paths-grid,.testi-grid,.about-stats,.verify-grid{grid-template-columns:1fr}
 .clients-grid,.verify-steps{grid-template-columns:1fr 1fr}
 .footer-grid{grid-template-columns:1fr}
 footer,.cta-sec{padding:56px 20px 32px}
@@ -557,6 +639,47 @@ section{padding:60px 20px}
 .rm-right{padding-left:20px}
 .pass-stats{grid-template-columns:1fr}
 .stats-row{grid-template-columns:1fr 1fr}
+}
+
+/* ── ENQUIRE MODAL ── */
+.em-overlay{position:fixed;inset:0;z-index:1000;background:rgba(15,23,42,.55);backdrop-filter:blur(8px) saturate(1.1);-webkit-backdrop-filter:blur(8px) saturate(1.1);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
+.em-overlay.show{opacity:1;visibility:visible}
+.em-card{position:relative;width:100%;max-width:640px;max-height:calc(100vh - 48px);overflow-y:auto;background:#fff;border-radius:20px;border:1px solid rgba(147,197,253,.4);box-shadow:0 30px 80px -20px rgba(15,42,135,.35),0 8px 24px rgba(15,23,42,.12);transform:translateY(24px) scale(.98);transition:transform .4s cubic-bezier(.22,.61,.36,1),opacity .35s ease;opacity:0;padding:32px 32px 28px}
+.em-overlay.show .em-card{transform:translateY(0) scale(1);opacity:1}
+.em-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#1d4ed8,#3b82f6,#60a5fa);border-radius:20px 20px 0 0}
+.em-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;background:#fff;border:1px solid var(--line);color:var(--ink3);font-size:1.05rem;cursor:pointer;display:grid;place-items:center;transition:all .25s ease;z-index:2}
+.em-close:hover{background:var(--bg2);color:var(--ink);border-color:var(--line2);transform:rotate(90deg)}
+.em-head{margin-bottom:22px}
+.em-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:inline-flex;align-items:center;gap:8px}
+.em-eyebrow::before{content:'';width:14px;height:2px;background:var(--blue);border-radius:2px}
+.em-head h3{font-family:'Fraunces',serif;font-weight:300;font-size:1.6rem;color:var(--ink);letter-spacing:-.01em;margin-bottom:6px;line-height:1.15}
+.em-head h3 em{font-style:italic;color:var(--blue)}
+.em-head p{font-size:.84rem;color:var(--ink3);line-height:1.6}
+.em-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.em-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.em-field label{font-size:.7rem;font-weight:700;color:var(--ink2);letter-spacing:.04em}
+.em-field label .req{color:var(--marM)}
+.em-field input,.em-field select,.em-field textarea{font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;color:var(--ink);background:#fff;border:1.5px solid var(--line2);border-radius:10px;padding:11px 14px;outline:none;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;width:100%}
+.em-field input:hover,.em-field select:hover,.em-field textarea:hover{border-color:rgba(29,78,216,.35)}
+.em-field input:focus,.em-field select:focus,.em-field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(29,78,216,.1);background:#fdfeff}
+.em-field textarea{resize:vertical;min-height:90px;line-height:1.6}
+.em-field select{cursor:pointer;appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink3) 50%),linear-gradient(135deg,var(--ink3) 50%,transparent 50%);background-position:calc(100% - 18px) 18px,calc(100% - 13px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:36px}
+.em-note{font-size:.7rem;color:var(--ink4);margin:6px 0 14px;line-height:1.5}
+.em-submit{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center;background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 45%,#3b82f6 100%);color:#fff;padding:14px;border-radius:11px;font-size:.88rem;font-weight:700;border:1px solid rgba(255,255,255,.3);cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease;font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 12px 28px rgba(37,99,235,.28);letter-spacing:.01em}
+.em-submit:hover{background:linear-gradient(135deg,#1e40af,#1d4ed8 52%,#60a5fa);transform:translateY(-2px);box-shadow:0 18px 36px rgba(37,99,235,.36)}
+.em-submit .arr{transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+.em-submit:hover .arr{transform:translateX(4px)}
+.em-success{display:none;text-align:center;padding:24px 8px}
+.em-success .check{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:1px solid rgba(22,163,74,.4);display:grid;place-items:center;margin:0 auto 16px;font-size:1.7rem;color:#16a34a;box-shadow:0 12px 28px rgba(22,163,74,.22)}
+.em-success h4{font-family:'Fraunces',serif;font-weight:300;font-size:1.4rem;color:var(--ink);margin-bottom:6px}
+.em-success p{font-size:.85rem;color:var(--ink3);line-height:1.65}
+.em-success .em-back{margin-top:18px;display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--line);color:var(--ink2);font-weight:600;font-size:.78rem;padding:9px 18px;border-radius:9px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s ease}
+.em-success .em-back:hover{background:var(--bg2);border-color:var(--line2);color:var(--ink)}
+body.em-open{overflow:hidden}
+@media(max-width:680px){
+  .em-card{padding:26px 22px 22px;border-radius:16px}
+  .em-row{grid-template-columns:1fr;gap:0;margin-bottom:0}
+  .em-head h3{font-size:1.35rem}
 }
 </style>
 
@@ -574,19 +697,22 @@ section{padding:60px 20px}
     <li><a href="#roadmap">Roadmaps</a></li>
     <li><a href="#verify">Verify</a></li>
     <li><a href="#paths">Career Paths</a></li>
-    <li><a href="Nexperts beyond.html">Beyond</a></li>
-    <li><a href="about.html">About</a></li>
     <li><a href="#clients">Clients</a></li>
+    <li><a href="Nexperts beyond.html">Beyond</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="about.html">About</a></li>
   </ul>
   <div class="nav-right">
     <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
-    <a href="#enroll" class="nav-enroll">Enroll Now</a>
+    <a href="#enquire-modal" class="nav-enroll" onclick="openEnquireModal(event)">Enquire Now</a>
   </div>
 </nav>
 
 <!-- HERO -->
 
-<section class="hero hero-split">
+<section class="hero hero-split" id="heroSection">
+  <div class="hero-spotlight" aria-hidden="true"></div>
+  <div class="hero-streams" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <div class="hero-motion" aria-hidden="true">
     <div class="hero-circuit"></div>
     <div class="hero-wave w1"></div>
@@ -621,7 +747,11 @@ section{padding:60px 20px}
         </div>
       </div>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual" id="heroVisual">
+      <span class="hero-sat s1" aria-hidden="true">CompTIA</span>
+      <span class="hero-sat s2" aria-hidden="true">EC-Council</span>
+      <span class="hero-sat s3" aria-hidden="true">AWS · Azure</span>
+      <span class="hero-sat s4" aria-hidden="true">98% Pass</span>
       <div class="hero-frame">
         <div class="hero-frame-grid" aria-hidden="true"></div>
         <div class="hero-frame-core" aria-hidden="true">
@@ -647,6 +777,8 @@ section{padding:60px 20px}
             </defs>
             <rect x="62" y="20" width="96" height="76" rx="16" fill="url(#rbMetal)" stroke="rgba(30,64,175,.35)"/>
             <rect x="72" y="34" width="76" height="34" rx="10" fill="url(#rbDark)" opacity=".92"/>
+            <circle class="rb-eye-glow" cx="94" cy="51" r="9"/>
+            <circle class="rb-eye-glow" cx="126" cy="51" r="9"/>
             <circle class="rb-eye" cx="94" cy="51" r="5"/>
             <circle class="rb-eye" cx="126" cy="51" r="5"/>
             <rect x="96" y="66" width="28" height="4" rx="2" fill="rgba(96,165,250,.65)"/>
@@ -668,7 +800,7 @@ section{padding:60px 20px}
             <div class="hero-float-kicker">Performance Snapshot</div>
             <div class="hero-float-badge">Verified</div>
           </div>
-          <strong>98%</strong>
+          <strong data-count="98" data-suffix="%">0%</strong>
           <span>First-attempt pass rate across our cohorts — with mock exams &amp; mentor support.</span>
           <div class="hero-float-meta"><i>Mentor-led</i><i>Mock-driven</i><i>Exam-ready</i></div>
         </div>
@@ -848,112 +980,286 @@ section{padding:60px 20px}
       <h2 class="head">120+ certifications.<br><em>Every major vendor.</em></h2>
     </div>
     <div class="filter-tabs">
-      <button class="ftab on" data-f="all">All</button>
-      <button class="ftab" data-f="comptia">CompTIA</button>
-      <button class="ftab" data-f="ec">EC-Council</button>
-      <button class="ftab" data-f="aws">AWS</button>
-      <button class="ftab" data-f="ms">Microsoft</button>
-      <button class="ftab" data-f="cisco">Cisco</button>
-      <button class="ftab" data-f="gcp">Google Cloud</button>
-      <button class="ftab" data-f="itil">ITIL · PM</button>
-      <button class="ftab" data-f="devops">DevOps</button>
-      <button class="ftab" data-f="data">Data · BI</button>
-      <button class="ftab" data-f="isaca">ISACA · ISC2</button>
+      <button class="ftab on" data-cat="all">All</button>
+      <button class="ftab" data-cat="cert">Industry Certifications</button>
+      <button class="ftab" data-cat="skill">Skill-Based Programs</button>
+      <button class="ftab" data-cat="spec">Specialized &amp; Compliance</button>
     </div>
     <div class="cg">
-      <!-- CompTIA -->
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA A+</div><div class="cdesc2">IT support foundation. Hardware, OS, troubleshooting, networking basics.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Network+</div><div class="cdesc2">Networking fundamentals — protocols, infrastructure and troubleshooting.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Security+</div><div class="cdesc2">Most requested cybersecurity cert by Malaysian employers.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA CySA+</div><div class="cdesc2">Threat detection, behavioural analytics and SOC response operations.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA PenTest+</div><div class="cdesc2">Hands-on penetration testing, vulnerability assessment and reporting.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA SecurityX</div><div class="cdesc2">Expert-level security architecture for enterprise environments.</div><div class="cmeta"><span class="clevel">Expert</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Linux+</div><div class="cdesc2">Linux administration for cloud, security and operational environments.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Cloud+</div><div class="cdesc2">Vendor-neutral cloud infrastructure, security and automation cert.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Server+</div><div class="cdesc2">Server hardware, virtualisation, storage and data centre operations.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA DataSys+</div><div class="cdesc2">Database deployment, management and maintenance fundamentals.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Tech+</div><div class="cdesc2">Digital literacy and tech fundamentals for any business professional.</div><div class="cmeta"><span class="clevel">Entry</span><span class="carrow">↗</span></div></div>
-      <div class="cc show" data-f="comptia"><div class="cv2">CompTIA <span class="cbadge nw">New 2026</span></div><div class="cname2">CompTIA SecAI+</div><div class="cdesc2">Secure and govern AI in cybersecurity operations. First cert of its kind.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <!-- EC-Council -->
-      <a href="course-ceh.html" class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CEH v13 AI</div><div class="cdesc2">Certified Ethical Hacker — flagship offensive security cert, AI-integrated.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></a>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CPENT AI</div><div class="cdesc2">Certified Penetration Testing Professional — advanced real-world attack labs.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CHFI v11</div><div class="cdesc2">Computer Hacking Forensic Investigator — digital forensics and evidence.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">Certified SOC Analyst (CSA)</div><div class="cdesc2">SOC operations, threat monitoring, alert triage and incident reporting.</div><div class="cmeta"><span class="clevel">Entry–Mid</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CND v3</div><div class="cdesc2">Certified Network Defender — proactive network protection and defense.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CCISO</div><div class="cdesc2">Chief Information Security Officer — executive cybersecurity leadership.</div><div class="cmeta"><span class="clevel">Executive</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CTIA</div><div class="cdesc2">Certified Threat Intelligence Analyst — dark web intel, threat hunting.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">ECIH v3</div><div class="cdesc2">Certified Incident Handler — IR planning, detection and containment.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">ICS / SCADA Security</div><div class="cdesc2">OT and industrial control security — critical for Malaysia's energy sector.</div><div class="cmeta"><span class="clevel">Specialist</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">ECDE — DevSecOps Engineer</div><div class="cdesc2">Integrate security into DevOps pipelines — containers, CI/CD and IaC.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CCSE — Cloud Security Engineer</div><div class="cdesc2">Certified Cloud Security Engineer — multi-cloud protection strategies.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge mr">AI 2026</span></div><div class="cname2">C|OASP — Offensive AI Security</div><div class="cdesc2">Certified Offensive AI Security Professional — adversarial AI techniques.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ec"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CCT — Cybersecurity Technician</div><div class="cdesc2">Entry-level hands-on cybersecurity — the right starting point in security.</div><div class="cmeta"><span class="clevel">Entry</span><span class="carrow">↗</span></div></div>
-      <!-- AWS -->
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Cloud Practitioner</div><div class="cdesc2">Foundational cloud concepts — the right first step for any IT professional.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Solutions Architect Associate</div><div class="cdesc2">Design scalable, secure, high-availability architectures. Most hired-for AWS cert.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS SysOps Administrator</div><div class="cdesc2">Deploy, manage and operate workloads on AWS — operations focus.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Developer Associate</div><div class="cdesc2">Develop and maintain applications on AWS — code-first cloud skills.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Solutions Architect Professional</div><div class="cdesc2">Complex enterprise cloud, multi-account design and migration strategy.</div><div class="cmeta"><span class="clevel">Professional</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS DevOps Engineer Professional</div><div class="cdesc2">Automate CI/CD, monitoring and governance at enterprise scale.</div><div class="cmeta"><span class="clevel">Professional</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Security Specialty</div><div class="cdesc2">Advanced IAM, encryption, logging and cloud threat response.</div><div class="cmeta"><span class="clevel">Specialty</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Data Engineer Associate</div><div class="cdesc2">Build and manage data pipelines, lakes and analytics on AWS.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="aws"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Machine Learning Specialty</div><div class="cdesc2">ML models, SageMaker, and AI services on AWS — for data scientists.</div><div class="cmeta"><span class="clevel">Specialty</span><span class="carrow">↗</span></div></div>
-      <!-- Microsoft -->
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-900: Azure Fundamentals</div><div class="cdesc2">Core cloud and Azure concepts — starting point for Microsoft cert path.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-104: Azure Administrator</div><div class="cdesc2">Manage Azure identities, networking, storage and VMs at enterprise scale.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-204: Azure Developer</div><div class="cdesc2">Build and deploy Azure applications — compute, storage, APIs and more.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-305: Solutions Architect</div><div class="cdesc2">Design enterprise-grade Azure architecture across hybrid environments.</div><div class="cmeta"><span class="clevel">Expert</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-400: DevOps Engineer</div><div class="cdesc2">Azure Pipelines, continuous delivery and DevOps transformation at scale.</div><div class="cmeta"><span class="clevel">Expert</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">SC-900: Security Fundamentals</div><div class="cdesc2">Security, compliance and identity concepts in Microsoft cloud environments.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">SC-200: Security Operations</div><div class="cdesc2">Microsoft Sentinel, Defender — detect, investigate and respond to threats.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">SC-300: Identity & Access Admin</div><div class="cdesc2">Azure AD, identity governance, conditional access and Zero Trust.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">PL-300: Power BI Data Analyst</div><div class="cdesc2">Interactive BI dashboards and reports — most-requested data cert in MY.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">DP-203: Data Engineer</div><div class="cdesc2">Design and implement data solutions in Azure — pipelines, lakes and more.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AI-102: Azure AI Engineer</div><div class="cdesc2">Build and manage Azure AI solutions — OpenAI, Cognitive Services and more.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="ms"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">MS-102: M365 Administrator</div><div class="cdesc2">Microsoft 365 tenant administration, security and compliance management.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <!-- Cisco -->
-      <div class="cc" data-f="cisco"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCNA</div><div class="cdesc2">Routing, switching, automation and AI-driven networking. Industry standard.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="cisco"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCNP Enterprise</div><div class="cdesc2">Advanced enterprise networking — routing, switching and SD-WAN.</div><div class="cmeta"><span class="clevel">Professional</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="cisco"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCNP Security</div><div class="cdesc2">Cisco firewall, VPN, identity and threat defense solutions.</div><div class="cmeta"><span class="clevel">Professional</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="cisco"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCIE Enterprise</div><div class="cdesc2">Expert-level enterprise infrastructure — lab and written exams.</div><div class="cmeta"><span class="clevel">Expert</span><span class="carrow">↗</span></div></div>
-      <!-- GCP -->
-      <div class="cc" data-f="gcp"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Cloud Digital Leader</div><div class="cdesc2">GCP fundamentals for business and technology decision makers.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="gcp"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Associate Cloud Engineer</div><div class="cdesc2">Deploy and manage applications on GCP — compute, storage and networking.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="gcp"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Professional Cloud Architect</div><div class="cdesc2">Design enterprise-grade GCP solutions — highest value GCP cert.</div><div class="cmeta"><span class="clevel">Professional</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="gcp"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Professional Data Engineer</div><div class="cdesc2">Build and maintain data pipelines and ML models on Google Cloud.</div><div class="cmeta"><span class="clevel">Professional</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="gcp"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Professional Cloud Security Engineer</div><div class="cdesc2">Design and implement secure infrastructure on Google Cloud Platform.</div><div class="cmeta"><span class="clevel">Professional</span><span class="carrow">↗</span></div></div>
-      <!-- ITIL/PM -->
-      <div class="cc" data-f="itil"><div class="cv2">ITIL · PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Foundation</div><div class="cdesc2">Most sought-after ITSM cert by Malaysian enterprises — service management essentials.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="itil"><div class="cv2">ITIL · PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Specialist: CDS</div><div class="cdesc2">Create, Deliver and Support — advanced service design and delivery.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="itil"><div class="cv2">ITIL · PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Specialist: DSV</div><div class="cdesc2">Drive Stakeholder Value — customer journeys, demand and value creation.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="itil"><div class="cv2">ITIL · PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Strategist: DPI</div><div class="cdesc2">Direct, Plan and Improve — strategic IT management and continual improvement.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="itil"><div class="cv2">PMI <span class="cbadge">Cert</span></div><div class="cname2">PMP</div><div class="cdesc2">Project Management Professional — global gold standard. 25% average salary boost.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="itil"><div class="cv2">PMI <span class="cbadge">Cert</span></div><div class="cname2">CAPM</div><div class="cdesc2">Certified Associate in Project Management — entry-level PM certification.</div><div class="cmeta"><span class="clevel">Entry</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="itil"><div class="cv2">PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">PRINCE2 Foundation & Practitioner</div><div class="cdesc2">Widely mandated in Malaysian government and GLC project environments.</div><div class="cmeta"><span class="clevel">Foundation→Practitioner</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="itil"><div class="cv2">Scrum Alliance <span class="cbadge">Cert</span></div><div class="cname2">Certified ScrumMaster (CSM)</div><div class="cdesc2">Agile project delivery — essential for any IT or software delivery team.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <!-- DevOps -->
-      <div class="cc" data-f="devops"><div class="cv2">Linux Foundation <span class="cbadge">Cert</span></div><div class="cname2">Kubernetes Administrator (CKA)</div><div class="cdesc2">Deploy, manage and secure Kubernetes clusters in production.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="devops"><div class="cv2">Linux Foundation <span class="cbadge">Cert</span></div><div class="cname2">CKAD — Kubernetes App Developer</div><div class="cdesc2">Design, build and deploy applications on Kubernetes environments.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="devops"><div class="cv2">HashiCorp <span class="cbadge">Cert</span></div><div class="cname2">Terraform Associate</div><div class="cdesc2">Infrastructure as Code — provision and manage cloud with Terraform.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="devops"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Docker & Containers</div><div class="cdesc2">Containerisation fundamentals — build, ship and run applications anywhere.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="devops"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">CI/CD with Jenkins & GitLab</div><div class="cdesc2">Automated delivery pipelines from code commit to production.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="devops"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Python for IT & Automation</div><div class="cdesc2">Automate IT tasks — network scripts, API calls and system admin.</div><div class="cmeta"><span class="clevel">Beginner→Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="devops"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Linux Administration</div><div class="cdesc2">Server management, shell scripting and system operations on Linux.</div><div class="cmeta"><span class="clevel">Foundation→Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="devops"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Ansible Automation</div><div class="cdesc2">Automate infrastructure configuration management at scale with Ansible.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <!-- Data -->
-      <div class="cc" data-f="data"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">PL-300: Power BI Data Analyst</div><div class="cdesc2">Enterprise BI dashboards — most-requested data cert in Malaysia.</div><div class="cmeta"><span class="clevel">Associate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="data"><div class="cv2">Tableau <span class="cbadge">Cert</span></div><div class="cname2">Tableau Desktop Specialist</div><div class="cdesc2">Data visualisation and analytics used globally by enterprise BI teams.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="data"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">SQL for Data Professionals</div><div class="cdesc2">Non-negotiable foundation for every data and analytics role.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="data"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Excel Advanced Analytics</div><div class="cdesc2">PivotTables, Power Query and advanced formulas for business analysts.</div><div class="cmeta"><span class="clevel">Foundation</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="data"><div class="cv2">Malaysia-Specific <span class="cbadge mr">MY</span></div><div class="cname2">Data Governance & PDPA</div><div class="cdesc2">Personal Data Protection Act compliance — mandatory for enterprise teams in Malaysia.</div><div class="cmeta"><span class="clevel">Specialist</span><span class="carrow">↗</span></div></div>
-      <!-- ISACA/ISC2 -->
-      <div class="cc" data-f="isaca"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CISM</div><div class="cdesc2">Certified Information Security Manager — governance, risk and security leadership.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="isaca"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CISA</div><div class="cdesc2">Certified Information Systems Auditor — IT audit, control and compliance.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="isaca"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CRISC</div><div class="cdesc2">Certified in Risk and Information Systems Control — enterprise IT risk.</div><div class="cmeta"><span class="clevel">Advanced</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="isaca"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CGEIT</div><div class="cdesc2">Certified in Governance of Enterprise IT — C-suite and board-level credential.</div><div class="cmeta"><span class="clevel">Executive</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="isaca"><div class="cv2">ISC2 <span class="cbadge">Cert</span></div><div class="cname2">CISSP</div><div class="cdesc2">The gold standard of security certs. Eight domains, globally mandated for leaders.</div><div class="cmeta"><span class="clevel">Expert</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="isaca"><div class="cv2">ISC2 <span class="cbadge">Cert</span></div><div class="cname2">SSCP</div><div class="cdesc2">Systems Security Certified Practitioner — solid mid-level security credential.</div><div class="cmeta"><span class="clevel">Intermediate</span><span class="carrow">↗</span></div></div>
-      <div class="cc" data-f="isaca"><div class="cv2">ISC2 <span class="cbadge">Cert</span></div><div class="cname2">CC — Certified in Cybersecurity</div><div class="cdesc2">Free ISC2 entry-level cert — the ideal first step into the profession.</div><div class="cmeta"><span class="clevel">Entry</span><span class="carrow">↗</span></div></div>
+    <div class="brand-block" data-brand="comptia" style="--bk:#ef4444;--bk-tint:#fef2f2">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">C</div>
+        <div class="bh-text">
+          <div class="bh-name">CompTIA</div>
+          <div class="bh-tag">Vendor-neutral standard for IT and cybersecurity.</div>
+        </div>
+        <div class="bh-count"><span>12</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/comptia-a-plus.html" class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-a-plus" data-vendor="CompTIA" data-level="Foundation"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA A+</div><div class="cdesc2">IT support foundation. Hardware, OS, troubleshooting, networking basics.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(289)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 18,420+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/comptia-network-plus.html" class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-network-plus" data-vendor="CompTIA" data-level="Foundation"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Network+</div><div class="cdesc2">Networking fundamentals — protocols, infrastructure and troubleshooting.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(247)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 14,780+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/comptia-security-plus.html" class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-security-plus" data-vendor="CompTIA" data-level="Intermediate"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Security+</div><div class="cdesc2">Most requested cybersecurity cert by Malaysian employers.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(512)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 22,340+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/comptia-cysa-plus.html" class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-cysa-plus" data-vendor="CompTIA" data-level="Intermediate"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA CySA+</div><div class="cdesc2">Threat detection, behavioural analytics and SOC response operations.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(184)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 7,820+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/comptia-pentest-plus.html" class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-pentest-plus" data-vendor="CompTIA" data-level="Advanced"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA PenTest+</div><div class="cdesc2">Hands-on penetration testing, vulnerability assessment and reporting.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(162)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,640+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-securityx" data-vendor="CompTIA" data-level="Expert"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA SecurityX</div><div class="cdesc2">Expert-level security architecture for enterprise environments.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(84)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,480+ enrolled</span></div><div class="cmeta">  <span class="clevel">Expert</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-linux-plus" data-vendor="CompTIA" data-level="Intermediate"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Linux+</div><div class="cdesc2">Linux administration for cloud, security and operational environments.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(138)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,420+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-cloud-plus" data-vendor="CompTIA" data-level="Intermediate"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Cloud+</div><div class="cdesc2">Vendor-neutral cloud infrastructure, security and automation cert.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(112)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,960+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-server-plus" data-vendor="CompTIA" data-level="Intermediate"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Server+</div><div class="cdesc2">Server hardware, virtualisation, storage and data centre operations.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(98)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,180+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-datasys-plus" data-vendor="CompTIA" data-level="Foundation"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA DataSys+</div><div class="cdesc2">Database deployment, management and maintenance fundamentals.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(72)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,520+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="comptia" data-slug="comptia-tech-plus" data-vendor="CompTIA" data-level="Entry"><div class="cv2">CompTIA <span class="cbadge">Cert</span></div><div class="cname2">CompTIA Tech+</div><div class="cdesc2">Digital literacy and tech fundamentals for any business professional.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(156)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 8,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Entry</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="spec" data-brand="comptia" data-slug="comptia-secai-plus" data-vendor="CompTIA" data-level="Intermediate"><div class="cv2">CompTIA <span class="cbadge nw">New 2026</span></div><div class="cname2">CompTIA SecAI+</div><div class="cdesc2">Secure and govern AI in cybersecurity operations. First cert of its kind.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(46)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 1,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="eccouncil" style="--bk:#7c3aed;--bk-tint:#f5f3ff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">E</div>
+        <div class="bh-text">
+          <div class="bh-name">EC-Council</div>
+          <div class="bh-tag">Offensive security, ethical hacking and forensics.</div>
+        </div>
+        <div class="bh-count"><span>13</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/ceh-v13-ai.html" class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="ceh-v13-ai" data-vendor="EC-Council" data-level="Intermediate"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CEH v13 AI</div><div class="cdesc2">Certified Ethical Hacker — flagship offensive security cert, AI-integrated.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(612)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 24,180+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/cpent-ai.html" class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="cpent-ai" data-vendor="EC-Council" data-level="Advanced"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CPENT AI</div><div class="cdesc2">Certified Penetration Testing Professional — advanced real-world attack labs.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(118)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,640+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/chfi-v11.html" class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="chfi-v11" data-vendor="EC-Council" data-level="Intermediate"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CHFI v11</div><div class="cdesc2">Computer Hacking Forensic Investigator — digital forensics and evidence.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(94)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,320+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="certified-soc-analyst-csa" data-vendor="EC-Council" data-level="Entry–Mid"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">Certified SOC Analyst (CSA)</div><div class="cdesc2">SOC operations, threat monitoring, alert triage and incident reporting.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(168)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 9,620+ enrolled</span></div><div class="cmeta">  <span class="clevel">Entry–Mid</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="cnd-v3" data-vendor="EC-Council" data-level="Intermediate"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CND v3</div><div class="cdesc2">Certified Network Defender — proactive network protection and defense.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(124)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,780+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="cciso" data-vendor="EC-Council" data-level="Executive"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CCISO</div><div class="cdesc2">Chief Information Security Officer — executive cybersecurity leadership.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(42)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 1,620+ enrolled</span></div><div class="cmeta">  <span class="clevel">Executive</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="ctia" data-vendor="EC-Council" data-level="Advanced"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CTIA</div><div class="cdesc2">Certified Threat Intelligence Analyst — dark web intel, threat hunting.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(86)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,940+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="ecih-v3" data-vendor="EC-Council" data-level="Intermediate"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">ECIH v3</div><div class="cdesc2">Certified Incident Handler — IR planning, detection and containment.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(72)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,180+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="spec" data-brand="eccouncil" data-slug="ics-scada-security" data-vendor="EC-Council" data-level="Specialist"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">ICS / SCADA Security</div><div class="cdesc2">OT and industrial control security — critical for Malaysia's energy sector.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(38)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 1,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Specialist</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="ecde-devsecops-engineer" data-vendor="EC-Council" data-level="Intermediate"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">ECDE — DevSecOps Engineer</div><div class="cdesc2">Integrate security into DevOps pipelines — containers, CI/CD and IaC.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(68)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,860+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="ccse-cloud-security-engineer" data-vendor="EC-Council" data-level="Advanced"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CCSE — Cloud Security Engineer</div><div class="cdesc2">Certified Cloud Security Engineer — multi-cloud protection strategies.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(54)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,140+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="spec" data-brand="eccouncil" data-slug="c-oasp-offensive-ai-security" data-vendor="EC-Council" data-level="Advanced"><div class="cv2">EC-Council <span class="cbadge mr">AI 2026</span></div><div class="cname2">C|OASP — Offensive AI Security</div><div class="cdesc2">Certified Offensive AI Security Professional — adversarial AI techniques.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(32)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 1,080+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="eccouncil" data-slug="cct-cybersecurity-technician" data-vendor="EC-Council" data-level="Entry"><div class="cv2">EC-Council <span class="cbadge">Cert</span></div><div class="cname2">CCT — Cybersecurity Technician</div><div class="cdesc2">Entry-level hands-on cybersecurity — the right starting point in security.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(142)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 7,940+ enrolled</span></div><div class="cmeta">  <span class="clevel">Entry</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="aws" style="--bk:#ff9900;--bk-tint:#fff7ed">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">A</div>
+        <div class="bh-text">
+          <div class="bh-name">AWS</div>
+          <div class="bh-tag">The most-deployed cloud platform on Earth.</div>
+        </div>
+        <div class="bh-count"><span>9</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/aws-cloud-practitioner.html" class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-cloud-practitioner" data-vendor="AWS" data-level="Foundation"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Cloud Practitioner</div><div class="cdesc2">Foundational cloud concepts — the right first step for any IT professional.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(486)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 21,680+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/aws-solutions-architect-associate.html" class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-solutions-architect-associate" data-vendor="AWS" data-level="Associate"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Solutions Architect Associate</div><div class="cdesc2">Design scalable, secure, high-availability architectures. Most hired-for AWS cert.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(394)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 16,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-sysops-administrator" data-vendor="AWS" data-level="Associate"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS SysOps Administrator</div><div class="cdesc2">Deploy, manage and operate workloads on AWS — operations focus.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(184)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,820+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-developer-associate" data-vendor="AWS" data-level="Associate"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Developer Associate</div><div class="cdesc2">Develop and maintain applications on AWS — code-first cloud skills.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(212)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 8,460+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <a href="course_pages/aws-solutions-architect-professional.html" class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-solutions-architect-professional" data-vendor="AWS" data-level="Professional"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Solutions Architect Professional</div><div class="cdesc2">Complex enterprise cloud, multi-account design and migration strategy.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(148)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,920+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-devops-engineer-professional" data-vendor="AWS" data-level="Professional"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS DevOps Engineer Professional</div><div class="cdesc2">Automate CI/CD, monitoring and governance at enterprise scale.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(118)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,680+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-security-specialty" data-vendor="AWS" data-level="Specialty"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Security Specialty</div><div class="cdesc2">Advanced IAM, encryption, logging and cloud threat response.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(96)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,140+ enrolled</span></div><div class="cmeta">  <span class="clevel">Specialty</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-data-engineer-associate" data-vendor="AWS" data-level="Associate"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Data Engineer Associate</div><div class="cdesc2">Build and manage data pipelines, lakes and analytics on AWS.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(134)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,260+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="aws" data-slug="aws-machine-learning-specialty" data-vendor="AWS" data-level="Specialty"><div class="cv2">AWS <span class="cbadge">Cert</span></div><div class="cname2">AWS Machine Learning Specialty</div><div class="cdesc2">ML models, SageMaker, and AI services on AWS — for data scientists.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(82)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,680+ enrolled</span></div><div class="cmeta">  <span class="clevel">Specialty</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="microsoft" style="--bk:#0078d4;--bk-tint:#eff6ff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">M</div>
+        <div class="bh-text">
+          <div class="bh-name">Microsoft</div>
+          <div class="bh-tag">Azure, M365 and the Microsoft cloud stack.</div>
+        </div>
+        <div class="bh-count"><span>12</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/az-900.html" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="az-900" data-vendor="Microsoft" data-level="Foundation"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-900: Azure Fundamentals</div><div class="cdesc2">Core cloud and Azure concepts — starting point for Microsoft cert path.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(289)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 17,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/az-104.html" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="az-104" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-104: Azure Administrator</div><div class="cdesc2">Manage Azure identities, networking, storage and VMs at enterprise scale.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(221)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 10,620+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="microsoft" data-slug="az-204-azure-developer" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-204: Azure Developer</div><div class="cdesc2">Build and deploy Azure applications — compute, storage, APIs and more.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(148)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,740+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <a href="course_pages/az-305.html" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="az-305" data-vendor="Microsoft" data-level="Expert"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-305: Solutions Architect</div><div class="cdesc2">Design enterprise-grade Azure architecture across hybrid environments.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(108)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,920+ enrolled</span></div><div class="cmeta">  <span class="clevel">Expert</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="microsoft" data-slug="az-400-devops-engineer" data-vendor="Microsoft" data-level="Expert"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-400: DevOps Engineer</div><div class="cdesc2">Azure Pipelines, continuous delivery and DevOps transformation at scale.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(86)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,780+ enrolled</span></div><div class="cmeta">  <span class="clevel">Expert</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="microsoft" data-slug="sc-900-security-fundamentals" data-vendor="Microsoft" data-level="Foundation"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">SC-900: Security Fundamentals</div><div class="cdesc2">Security, compliance and identity concepts in Microsoft cloud environments.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(176)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 9,180+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <a href="course_pages/sc-200.html" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="sc-200" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">SC-200: Security Operations</div><div class="cdesc2">Microsoft Sentinel, Defender — detect, investigate and respond to threats.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(164)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="microsoft" data-slug="sc-300-identity-and-access-admin" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">SC-300: Identity & Access Admin</div><div class="cdesc2">Azure AD, identity governance, conditional access and Zero Trust.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(118)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,880+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <a href="course_pages/pl-300.html" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="pl-300" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">PL-300: Power BI Data Analyst</div><div class="cdesc2">Interactive BI dashboards and reports — most-requested data cert in MY.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(312)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 12,480+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/dp-203.html" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="dp-203" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">DP-203: Data Engineer</div><div class="cdesc2">Design and implement data solutions in Azure — pipelines, lakes and more.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(138)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,680+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="microsoft" data-slug="ai-102-azure-ai-engineer" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AI-102: Azure AI Engineer</div><div class="cdesc2">Build and manage Azure AI solutions — OpenAI, Cognitive Services and more.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(94)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,460+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="microsoft" data-slug="ms-102-m365-administrator" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">MS-102: M365 Administrator</div><div class="cdesc2">Microsoft 365 tenant administration, security and compliance management.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(112)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="cisco" style="--bk:#1ba0d7;--bk-tint:#ecfeff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">C</div>
+        <div class="bh-text">
+          <div class="bh-name">Cisco</div>
+          <div class="bh-tag">The networking standard — from CCNA to CCIE.</div>
+        </div>
+        <div class="bh-count"><span>4</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/ccna.html" class="cc show" data-cat="cert" data-brand="cisco" data-slug="ccna" data-vendor="Cisco" data-level="Associate"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCNA</div><div class="cdesc2">Routing, switching, automation and AI-driven networking. Industry standard.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(231)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 12,940+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="course_pages/ccnp-enterprise.html" class="cc show" data-cat="cert" data-brand="cisco" data-slug="ccnp-enterprise" data-vendor="Cisco" data-level="Professional"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCNP Enterprise</div><div class="cdesc2">Advanced enterprise networking — routing, switching and SD-WAN.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(107)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="cisco" data-slug="ccnp-security" data-vendor="Cisco" data-level="Professional"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCNP Security</div><div class="cdesc2">Cisco firewall, VPN, identity and threat defense solutions.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(78)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,580+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="cisco" data-slug="ccie-enterprise" data-vendor="Cisco" data-level="Expert"><div class="cv2">Cisco <span class="cbadge">Cert</span></div><div class="cname2">CCIE Enterprise</div><div class="cdesc2">Expert-level enterprise infrastructure — lab and written exams.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(42)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 1,340+ enrolled</span></div><div class="cmeta">  <span class="clevel">Expert</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="gcp" style="--bk:#4285f4;--bk-tint:#eff6ff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">GC</div>
+        <div class="bh-text">
+          <div class="bh-name">Google Cloud</div>
+          <div class="bh-tag">Data-first cloud, AI and analytics on Google Cloud.</div>
+        </div>
+        <div class="bh-count"><span>5</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <div class="cc show" data-cat="cert" data-brand="gcp" data-slug="cloud-digital-leader" data-vendor="Google Cloud" data-level="Foundation"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Cloud Digital Leader</div><div class="cdesc2">GCP fundamentals for business and technology decision makers.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(98)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="gcp" data-slug="associate-cloud-engineer" data-vendor="Google Cloud" data-level="Associate"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Associate Cloud Engineer</div><div class="cdesc2">Deploy and manage applications on GCP — compute, storage and networking.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(142)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,480+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <a href="course_pages/gcp-professional-cloud-architect.html" class="cc show" data-cat="cert" data-brand="gcp" data-slug="gcp-professional-cloud-architect" data-vendor="Google Cloud" data-level="Professional"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Professional Cloud Architect</div><div class="cdesc2">Design enterprise-grade GCP solutions — highest value GCP cert.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(76)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,940+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="gcp" data-slug="professional-data-engineer" data-vendor="Google Cloud" data-level="Professional"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Professional Data Engineer</div><div class="cdesc2">Build and maintain data pipelines and ML models on Google Cloud.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(68)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,380+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="gcp" data-slug="professional-cloud-security-engineer" data-vendor="Google Cloud" data-level="Professional"><div class="cv2">Google Cloud <span class="cbadge">Cert</span></div><div class="cname2">Professional Cloud Security Engineer</div><div class="cdesc2">Design and implement secure infrastructure on Google Cloud Platform.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(54)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 1,880+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="peoplecert" style="--bk:#ec4899;--bk-tint:#fdf2f8">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">P</div>
+        <div class="bh-text">
+          <div class="bh-name">PeopleCert</div>
+          <div class="bh-tag">ITIL service management and PRINCE2 project delivery.</div>
+        </div>
+        <div class="bh-count"><span>5</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/itil-4-foundation.html" class="cc show" data-cat="cert" data-brand="peoplecert" data-slug="itil-4-foundation" data-vendor="PeopleCert" data-level="Foundation"><div class="cv2">PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Foundation</div><div class="cdesc2">Most sought-after ITSM cert by Malaysian enterprises — service management essentials.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(418)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 16,280+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="peoplecert" data-slug="itil-4-specialist-cds" data-vendor="PeopleCert" data-level="Intermediate"><div class="cv2">PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Specialist: CDS</div><div class="cdesc2">Create, Deliver and Support — advanced service design and delivery.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(124)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,380+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="peoplecert" data-slug="itil-4-specialist-dsv" data-vendor="PeopleCert" data-level="Intermediate"><div class="cv2">PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Specialist: DSV</div><div class="cdesc2">Drive Stakeholder Value — customer journeys, demand and value creation.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(98)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="peoplecert" data-slug="itil-4-strategist-dpi" data-vendor="PeopleCert" data-level="Advanced"><div class="cv2">PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">ITIL 4 Strategist: DPI</div><div class="cdesc2">Direct, Plan and Improve — strategic IT management and continual improvement.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(76)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,480+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="peoplecert" data-slug="prince2-foundation-and-practitioner" data-vendor="PeopleCert" data-level="Foundation→Practitioner"><div class="cv2">PeopleCert <span class="cbadge">Cert</span></div><div class="cname2">PRINCE2 Foundation & Practitioner</div><div class="cdesc2">Widely mandated in Malaysian government and GLC project environments.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(164)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 7,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation→Practitioner</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="pmi" style="--bk:#1e40af;--bk-tint:#eff6ff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">P</div>
+        <div class="bh-text">
+          <div class="bh-name">PMI</div>
+          <div class="bh-tag">Project Management Institute — PMP and CAPM.</div>
+        </div>
+        <div class="bh-count"><span>2</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/pmp.html" class="cc show" data-cat="cert" data-brand="pmi" data-slug="pmp" data-vendor="PMI" data-level="Advanced"><div class="cv2">PMI <span class="cbadge">Cert</span></div><div class="cname2">PMP</div><div class="cdesc2">Project Management Professional — global gold standard. 25% average salary boost.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(184)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 8,920+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="pmi" data-slug="capm" data-vendor="PMI" data-level="Entry"><div class="cv2">PMI <span class="cbadge">Cert</span></div><div class="cname2">CAPM</div><div class="cdesc2">Certified Associate in Project Management — entry-level PM certification.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(128)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,640+ enrolled</span></div><div class="cmeta">  <span class="clevel">Entry</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="scrum" style="--bk:#f97316;--bk-tint:#fff7ed">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">SA</div>
+        <div class="bh-text">
+          <div class="bh-name">Scrum Alliance</div>
+          <div class="bh-tag">Agile delivery, Scrum and modern team practices.</div>
+        </div>
+        <div class="bh-count"><span>1</span> course</div>
+      </div>
+      <div class="brand-grid">
+      <div class="cc show" data-cat="cert" data-brand="scrum" data-slug="certified-scrummaster-csm" data-vendor="Scrum Alliance" data-level="Foundation"><div class="cv2">Scrum Alliance <span class="cbadge">Cert</span></div><div class="cname2">Certified ScrumMaster (CSM)</div><div class="cdesc2">Agile project delivery — essential for any IT or software delivery team.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(234)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 11,420+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="linuxfdn" style="--bk:#326ce5;--bk-tint:#eff6ff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">LF</div>
+        <div class="bh-text">
+          <div class="bh-name">Linux Foundation</div>
+          <div class="bh-tag">Kubernetes, cloud-native and open-source platform skills.</div>
+        </div>
+        <div class="bh-count"><span>2</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/cka.html" class="cc show" data-cat="cert" data-brand="linuxfdn" data-slug="cka" data-vendor="Linux Foundation" data-level="Intermediate"><div class="cv2">Linux Foundation <span class="cbadge">Cert</span></div><div class="cname2">Kubernetes Administrator (CKA)</div><div class="cdesc2">Deploy, manage and secure Kubernetes clusters in production.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(144)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,180+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="linuxfdn" data-slug="ckad-kubernetes-app-developer" data-vendor="Linux Foundation" data-level="Intermediate"><div class="cv2">Linux Foundation <span class="cbadge">Cert</span></div><div class="cname2">CKAD — Kubernetes App Developer</div><div class="cdesc2">Design, build and deploy applications on Kubernetes environments.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(108)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="hashicorp" style="--bk:#7b42bc;--bk-tint:#f5f3ff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">H</div>
+        <div class="bh-text">
+          <div class="bh-name">HashiCorp</div>
+          <div class="bh-tag">Infrastructure as code with Terraform and Vault.</div>
+        </div>
+        <div class="bh-count"><span>1</span> course</div>
+      </div>
+      <div class="brand-grid">
+      <div class="cc show" data-cat="cert" data-brand="hashicorp" data-slug="terraform-associate" data-vendor="HashiCorp" data-level="Associate"><div class="cv2">HashiCorp <span class="cbadge">Cert</span></div><div class="cname2">Terraform Associate</div><div class="cdesc2">Infrastructure as Code — provision and manage cloud with Terraform.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(156)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,920+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="tableau" style="--bk:#e8762d;--bk-tint:#fff7ed">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">T</div>
+        <div class="bh-text">
+          <div class="bh-name">Tableau</div>
+          <div class="bh-tag">Enterprise BI and data visualisation.</div>
+        </div>
+        <div class="bh-count"><span>1</span> course</div>
+      </div>
+      <div class="brand-grid">
+      <div class="cc show" data-cat="cert" data-brand="tableau" data-slug="tableau-desktop-specialist" data-vendor="Tableau" data-level="Foundation"><div class="cv2">Tableau <span class="cbadge">Cert</span></div><div class="cname2">Tableau Desktop Specialist</div><div class="cdesc2">Data visualisation and analytics used globally by enterprise BI teams.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(98)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,280+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="isaca" style="--bk:#a30729;--bk-tint:#fef2f2">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">I</div>
+        <div class="bh-text">
+          <div class="bh-name">ISACA</div>
+          <div class="bh-tag">Audit, risk, governance and security management.</div>
+        </div>
+        <div class="bh-count"><span>4</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/cism.html" class="cc show" data-cat="cert" data-brand="isaca" data-slug="cism" data-vendor="ISACA" data-level="Advanced"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CISM</div><div class="cdesc2">Certified Information Security Manager — governance, risk and security leadership.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(118)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="isaca" data-slug="cisa" data-vendor="ISACA" data-level="Advanced"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CISA</div><div class="cdesc2">Certified Information Systems Auditor — IT audit, control and compliance.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(94)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,260+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="isaca" data-slug="crisc" data-vendor="ISACA" data-level="Advanced"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CRISC</div><div class="cdesc2">Certified in Risk and Information Systems Control — enterprise IT risk.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(68)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="isaca" data-slug="cgeit" data-vendor="ISACA" data-level="Executive"><div class="cv2">ISACA <span class="cbadge">Cert</span></div><div class="cname2">CGEIT</div><div class="cdesc2">Certified in Governance of Enterprise IT — C-suite and board-level credential.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(38)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 1,180+ enrolled</span></div><div class="cmeta">  <span class="clevel">Executive</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="isc2" style="--bk:#082c5e;--bk-tint:#eef2ff">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">I</div>
+        <div class="bh-text">
+          <div class="bh-name">ISC2</div>
+          <div class="bh-tag">CISSP and the ISC2 cybersecurity body of knowledge.</div>
+        </div>
+        <div class="bh-count"><span>3</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <a href="course_pages/cissp.html" class="cc show" data-cat="cert" data-brand="isc2" data-slug="cissp" data-vendor="ISC2" data-level="Expert"><div class="cv2">ISC2 <span class="cbadge">Cert</span></div><div class="cname2">CISSP</div><div class="cdesc2">The gold standard of security certs. Eight domains, globally mandated for leaders.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(162)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,980+ enrolled</span></div><div class="cmeta">  <span class="clevel">Expert</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <div class="cc show" data-cat="cert" data-brand="isc2" data-slug="sscp" data-vendor="ISC2" data-level="Intermediate"><div class="cv2">ISC2 <span class="cbadge">Cert</span></div><div class="cname2">SSCP</div><div class="cdesc2">Systems Security Certified Practitioner — solid mid-level security credential.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(84)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,080+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="cert" data-brand="isc2" data-slug="cc-certified-in-cybersecurity" data-vendor="ISC2" data-level="Entry"><div class="cv2">ISC2 <span class="cbadge">Cert</span></div><div class="cname2">CC — Certified in Cybersecurity</div><div class="cdesc2">Free ISC2 entry-level cert — the ideal first step into the profession.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(212)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 9,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Entry</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="skill" style="--bk:#10b981;--bk-tint:#ecfdf5">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">S</div>
+        <div class="bh-text">
+          <div class="bh-name">Skill-Based</div>
+          <div class="bh-tag">Hands-on, role-ready skills — outcome over paperwork.</div>
+        </div>
+        <div class="bh-count"><span>7</span> courses</div>
+      </div>
+      <div class="brand-grid">
+      <div class="cc show" data-cat="skill" data-brand="skill" data-slug="docker-and-containers" data-vendor="Skill-Based" data-level="Foundation"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Docker & Containers</div><div class="cdesc2">Containerisation fundamentals — build, ship and run applications anywhere.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(196)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 9,420+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="skill" data-brand="skill" data-slug="ci-cd-with-jenkins-and-gitlab" data-vendor="Skill-Based" data-level="Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">CI/CD with Jenkins & GitLab</div><div class="cdesc2">Automated delivery pipelines from code commit to production.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(148)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="skill" data-brand="skill" data-slug="python-for-it-and-automation" data-vendor="Skill-Based" data-level="Beginner→Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Python for IT & Automation</div><div class="cdesc2">Automate IT tasks — network scripts, API calls and system admin.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(284)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 13,680+ enrolled</span></div><div class="cmeta">  <span class="clevel">Beginner→Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="skill" data-brand="skill" data-slug="linux-administration" data-vendor="Skill-Based" data-level="Foundation→Advanced"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Linux Administration</div><div class="cdesc2">Server management, shell scripting and system operations on Linux.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(212)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 10,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation→Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="skill" data-brand="skill" data-slug="ansible-automation" data-vendor="Skill-Based" data-level="Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Ansible Automation</div><div class="cdesc2">Automate infrastructure configuration management at scale with Ansible.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(118)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,640+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="skill" data-brand="skill" data-slug="sql-for-data-professionals" data-vendor="Skill-Based" data-level="Foundation"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">SQL for Data Professionals</div><div class="cdesc2">Non-negotiable foundation for every data and analytics role.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(316)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 15,280+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      <div class="cc show" data-cat="skill" data-brand="skill" data-slug="excel-advanced-analytics" data-vendor="Skill-Based" data-level="Foundation"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Excel Advanced Analytics</div><div class="cdesc2">PivotTables, Power Query and advanced formulas for business analysts.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(268)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 11,920+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
+    <div class="brand-block" data-brand="my" style="--bk:#e11d48;--bk-tint:#fff1f2">
+      <div class="brand-head">
+        <div class="bh-mark" aria-hidden="true">M</div>
+        <div class="bh-text">
+          <div class="bh-name">Malaysia-Focused</div>
+          <div class="bh-tag">PDPA, BNM RMiT and Malaysia-specific compliance.</div>
+        </div>
+        <div class="bh-count"><span>1</span> course</div>
+      </div>
+      <div class="brand-grid">
+      <div class="cc show" data-cat="spec" data-brand="my" data-slug="data-governance-and-pdpa" data-vendor="Malaysia-Focused" data-level="Specialist"><div class="cv2">Malaysia-Focused <span class="cbadge mr">MY</span></div><div class="cname2">Data Governance & PDPA</div><div class="cdesc2">Personal Data Protection Act compliance — mandatory for enterprise teams in Malaysia.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(76)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,640+ enrolled</span></div><div class="cmeta">  <span class="clevel">Specialist</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></div>
+      </div>
+    </div>
     </div>
   </div>
 </section>
@@ -1313,6 +1619,92 @@ section{padding:60px 20px}
   </div>
 </section>
 
+<!-- ENQUIRE MODAL -->
+<div class="em-overlay" id="enquireModal" role="dialog" aria-modal="true" aria-labelledby="emTitle" aria-hidden="true">
+  <div class="em-card">
+    <button class="em-close" type="button" aria-label="Close enquiry form" onclick="closeEnquireModal()">✕</button>
+    <div id="emFormWrap">
+      <div class="em-head">
+        <span class="em-eyebrow">Quick enquiry</span>
+        <h3 id="emTitle">Tell us about your <em>goal.</em></h3>
+        <p>We'll reply within 4 business hours — no spam, no auto-bot, just a real instructor.</p>
+      </div>
+      <form id="emForm" onsubmit="return submitEnquireModal(event)" novalidate>
+        <div class="em-row">
+          <div class="em-field"><label>First name <span class="req">*</span></label><input type="text" name="first" placeholder="Ahmad" required></div>
+          <div class="em-field"><label>Last name <span class="req">*</span></label><input type="text" name="last" placeholder="Raza" required></div>
+        </div>
+        <div class="em-field"><label>Email address <span class="req">*</span></label><input type="email" name="email" placeholder="ahmad@company.com.my" required></div>
+        <div class="em-row">
+          <div class="em-field"><label>Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+60 12-XXX XXXX"></div>
+          <div class="em-field">
+            <label>Preferred office</label>
+            <select name="office">
+              <option>Kuala Lumpur</option>
+              <option>New York</option>
+              <option>Online / Virtual</option>
+            </select>
+          </div>
+        </div>
+        <div class="em-field">
+          <label>Course you're interested in</label>
+          <select name="course">
+            <option>-- Select a course --</option>
+            <optgroup label="Cybersecurity">
+              <option>CEH v13 AI — Certified Ethical Hacker</option>
+              <option>CPENT AI — Advanced Pentesting</option>
+              <option>CISSP — ISC2</option>
+              <option>CompTIA Security+</option>
+              <option>CISM / CISA — ISACA</option>
+            </optgroup>
+            <optgroup label="Cloud">
+              <option>AWS Solutions Architect Associate</option>
+              <option>AZ-104 Microsoft Azure Administrator</option>
+              <option>Google Cloud Professional Cloud Architect</option>
+            </optgroup>
+            <optgroup label="Networking">
+              <option>CCNA / CCNP — Cisco</option>
+              <option>CompTIA Network+</option>
+            </optgroup>
+            <optgroup label="PM &amp; Governance">
+              <option>PMP — Project Management Professional</option>
+              <option>ITIL 4 Foundation</option>
+              <option>PRINCE2</option>
+            </optgroup>
+            <optgroup label="DevOps &amp; Data">
+              <option>CKA — Certified Kubernetes Administrator</option>
+              <option>Terraform Associate — HashiCorp</option>
+              <option>PL-300 Power BI Data Analyst</option>
+            </optgroup>
+            <option>Corporate / Group Training (multiple courses)</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+        <div class="em-field">
+          <label>Enquiry type</label>
+          <select name="type">
+            <option>Individual enrolment</option>
+            <option>Corporate / group training (5+ people)</option>
+            <option>HRD Corp claim assistance</option>
+            <option>Schedule / intake dates</option>
+            <option>Pricing &amp; payment options</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="em-field"><label>Message</label><textarea name="message" placeholder="Briefly tell us about your background, team size, preferred dates..."></textarea></div>
+        <p class="em-note">By submitting this form you agree to be contacted by Nexperts Academy regarding your enquiry. We don't share your data with third parties.</p>
+        <button type="submit" class="em-submit">Send Enquiry <span class="arr">→</span></button>
+      </form>
+    </div>
+    <div class="em-success" id="emSuccess">
+      <div class="check" aria-hidden="true">✓</div>
+      <h4>Message received</h4>
+      <p>We've received your enquiry and will reply within 4 business hours.<br>Need an instant answer? Email <a href="mailto:hello@nexpertsacademy.com" style="color:var(--blue);font-weight:600">hello@nexpertsacademy.com</a>.</p>
+      <button type="button" class="em-back" onclick="closeEnquireModal()">Back to site</button>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 
 <footer>
@@ -1321,7 +1713,7 @@ section{padding:60px 20px}
       <a href="index.html" class="flogo"><span class="ndot"></span>Nexperts <span>Academy</span></a>
       <p>Malaysia's authorized IT training academy. 98% first-attempt pass rate. CompTIA, EC-Council, AWS, Microsoft, Cisco and 8 more official partners.</p>
     </div>
-    <div class="fcol"><h4>Courses</h4><ul><li><a href="#courses">CompTIA</a></li><li><a href="course-ceh.html">EC-Council · CEH</a></li><li><a href="#courses">AWS</a></li><li><a href="#courses">Microsoft Azure</a></li><li><a href="#courses">Cisco</a></li><li><a href="#courses">Google Cloud</a></li><li><a href="#courses">ITIL · PM</a></li><li><a href="#courses">DevOps · Data</a></li></ul></div>
+    <div class="fcol"><h4>Courses</h4><ul><li><a href="#courses">CompTIA</a></li><li><a href="course_pages/ceh-v13-ai.html">EC-Council · CEH</a></li><li><a href="#courses">AWS</a></li><li><a href="#courses">Microsoft Azure</a></li><li><a href="#courses">Cisco</a></li><li><a href="#courses">Google Cloud</a></li><li><a href="#courses">ITIL · PM</a></li><li><a href="#courses">DevOps · Data</a></li></ul></div>
     <div class="fcol"><h4>Academy</h4><ul><li><a href="#roadmap">Career Roadmaps</a></li><li><a href="#paths">Career Paths</a></li><li><a href="about.html">About Us</a></li><li><a href="#verify">Cert Verification</a></li><li><a href="#enroll">Corporate Training</a></li><li><a href="mailto:hello@nexpertsacademy.com">Contact</a></li><li><a href="https://nexpertsai.com" style="color:#bfdbfe">→ Nexperts AI</a></li></ul></div>
     <div class="fcol"><h4>Contact</h4><ul><li><a href="#">hello@nexpertsacademy.com</a></li><li><a href="#">Kuala Lumpur, Malaysia</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Corporate Enquiries</a></li></ul></div>
   </div>
@@ -1341,9 +1733,16 @@ document.querySelectorAll('.ftab').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('on'));
     btn.classList.add('on');
-    const f=btn.dataset.f;
-    document.querySelectorAll('.cc').forEach(c=>{
-      f==='all'||c.dataset.f===f?c.classList.add('show'):c.classList.remove('show');
+    const f=btn.dataset.cat;
+    document.querySelectorAll('.brand-block').forEach(block=>{
+      let visible=0;
+      block.querySelectorAll('.cc').forEach(c=>{
+        const match=(f==='all'||c.dataset.cat===f);
+        if(match){c.classList.add('show');visible++;}
+        else{c.classList.remove('show');}
+      });
+      if(visible===0){block.classList.add('b-hide');}
+      else{block.classList.remove('b-hide');}
     });
   });
 });
@@ -1529,7 +1928,103 @@ function releaseInitialLoadEffects(){
   }
 }
 releaseInitialLoadEffects();
+
+/* ── Hero spotlight (mouse-follow) + parallax tilt ── */
+(function(){
+  const hero=document.getElementById('heroSection');
+  const visual=document.getElementById('heroVisual');
+  if(!hero) return;
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduce) return;
+  let raf=null,lastE=null;
+  function update(){
+    raf=null; if(!lastE) return;
+    const r=hero.getBoundingClientRect();
+    const x=((lastE.clientX-r.left)/r.width)*100;
+    const y=((lastE.clientY-r.top)/r.height)*100;
+    hero.style.setProperty('--mx',x.toFixed(2)+'%');
+    hero.style.setProperty('--my',y.toFixed(2)+'%');
+    if(visual){
+      const cx=(lastE.clientX-r.left-r.width/2)/r.width;
+      const cy=(lastE.clientY-r.top-r.height/2)/r.height;
+      visual.style.setProperty('--rotY',(cx*4).toFixed(2)+'deg');
+      visual.style.setProperty('--rotX',(-cy*3).toFixed(2)+'deg');
+    }
+  }
+  hero.addEventListener('mousemove',e=>{lastE=e; if(!raf) raf=requestAnimationFrame(update);},{passive:true});
+  hero.addEventListener('mouseleave',()=>{
+    hero.style.setProperty('--mx','50%');
+    hero.style.setProperty('--my','40%');
+    if(visual){visual.style.setProperty('--rotY','0deg'); visual.style.setProperty('--rotX','0deg');}
+  });
+  // Enable tilt after the initial fadeup animation finishes so it doesn't fight it
+  if(visual){
+    const enableTilt=()=>visual.classList.add('tilt-on');
+    if(document.readyState==='complete') setTimeout(enableTilt,1100);
+    else window.addEventListener('load',()=>setTimeout(enableTilt,1100),{once:true});
+  }
+})();
+
+/* ── Animated count-up for hero stats ── */
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const els=document.querySelectorAll('[data-count]');
+  if(!els.length) return;
+  function run(el){
+    if(el.dataset.done==='1') return;
+    el.dataset.done='1';
+    const target=parseFloat(el.dataset.count)||0;
+    const suffix=el.dataset.suffix||'';
+    if(reduce){ el.textContent=target+suffix; return; }
+    const start=performance.now(),dur=1400;
+    function tick(t){
+      const p=Math.min(1,(t-start)/dur);
+      const e=1-Math.pow(1-p,3);
+      const v=Math.round(target*e);
+      el.textContent=v+suffix;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const cio=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ run(en.target); cio.unobserve(en.target);} });
+  },{threshold:.4});
+  els.forEach(el=>cio.observe(el));
+})();
+
+/* ── Enquire modal ── */
+function openEnquireModal(e){
+  if(e) e.preventDefault();
+  const m=document.getElementById('enquireModal');
+  if(!m) return;
+  document.getElementById('emFormWrap').style.display='block';
+  document.getElementById('emSuccess').style.display='none';
+  m.classList.add('show');
+  m.setAttribute('aria-hidden','false');
+  document.body.classList.add('em-open');
+  setTimeout(()=>{const f=m.querySelector('input[name="first"]');if(f) f.focus();},120);
+}
+function closeEnquireModal(){
+  const m=document.getElementById('enquireModal');
+  if(!m) return;
+  m.classList.remove('show');
+  m.setAttribute('aria-hidden','true');
+  document.body.classList.remove('em-open');
+}
+function submitEnquireModal(e){
+  e.preventDefault();
+  document.getElementById('emFormWrap').style.display='none';
+  document.getElementById('emSuccess').style.display='block';
+  return false;
+}
+(function(){
+  const m=document.getElementById('enquireModal');
+  if(!m) return;
+  m.addEventListener('click',ev=>{ if(ev.target===m) closeEnquireModal(); });
+  document.addEventListener('keydown',ev=>{ if(ev.key==='Escape' && m.classList.contains('show')) closeEnquireModal(); });
+})();
 </script>
 
+<script src="admin/overlay.js" defer></script>
 </body>
 </html>

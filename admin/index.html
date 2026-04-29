@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin · Course Manager · Nexperts Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="ad-locked">
+
+<!-- Login gate -->
+<div class="ad-login" id="adLogin" aria-hidden="false">
+  <div class="ad-login-bg" aria-hidden="true">
+    <span class="al-orb o1"></span>
+    <span class="al-orb o2"></span>
+    <span class="al-orb o3"></span>
+  </div>
+  <div class="ad-login-card">
+    <div class="al-brand">
+      <span class="ad-dot"></span>
+      <span>Nexperts <em>Admin</em></span>
+    </div>
+    <span class="al-eyebrow">Restricted area</span>
+    <h1>Sign in to manage <em>courses.</em></h1>
+    <p class="al-sub">This panel controls the catalog and course detail pages on the public site. Access is restricted to authorised staff.</p>
+    <form id="adLoginForm" autocomplete="off" novalidate>
+      <div class="al-field">
+        <label>Username</label>
+        <input type="text" name="user" id="alUser" placeholder="admin" autocomplete="username" required spellcheck="false" autocapitalize="none">
+      </div>
+      <div class="al-field">
+        <label>Password</label>
+        <div class="al-pwd-wrap">
+          <input type="password" name="pass" id="alPass" placeholder="••••••••" autocomplete="current-password" required>
+          <button type="button" class="al-pwd-toggle" id="alPwdToggle" aria-label="Show password" tabindex="-1">👁</button>
+        </div>
+      </div>
+      <label class="al-remember">
+        <input type="checkbox" id="alRemember" checked>
+        <span>Remember me on this device for 24 hours</span>
+      </label>
+      <div class="al-error" id="alError" hidden></div>
+      <button type="submit" class="al-submit">Sign in <span class="al-arr">→</span></button>
+    </form>
+    <p class="al-foot">© 2026 Nexperts Academy · Internal admin · <a href="../index.html">Back to public site</a></p>
+  </div>
+</div>
+
+<header class="ad-nav">
+  <a href="../index.html" class="ad-logo">
+    <span class="ad-dot"></span>
+    Nexperts <span class="ad-logo-em">Admin</span>
+  </a>
+  <div class="ad-nav-mid">
+    <span class="ad-pill"><span class="ad-live"></span>Live preview synced</span>
+    <span class="ad-storage" id="adStorageStatus">Loading…</span>
+  </div>
+  <div class="ad-nav-right">
+    <button class="ad-btn ad-btn-ghost" id="adBtnExport" title="Download current overrides as JSON">⬇ Export</button>
+    <button class="ad-btn ad-btn-ghost" id="adBtnImport" title="Load overrides from a JSON file">⬆ Import</button>
+    <button class="ad-btn ad-btn-warn" id="adBtnReset" title="Restore baseline from admin-data.json">↺ Reset all</button>
+    <button class="ad-btn ad-btn-primary" id="adBtnSave">💾 Save changes</button>
+    <a class="ad-btn ad-btn-link" href="../index.html" target="_blank" rel="noopener">↗ View landing</a>
+    <button class="ad-btn ad-btn-ghost" id="adBtnLogout" title="End session">⎋ Logout</button>
+  </div>
+</header>
+
+<main class="ad-shell">
+  <section class="ad-hero">
+    <div class="ad-eyebrow">Course catalog</div>
+    <h1>Manage <em>course details &amp; ordering.</em></h1>
+    <p class="ad-sub">Edit course names, descriptions, duration, next intake and pricing — all changes preview instantly on the landing page and course detail pages. Drag any card by its handle to reorder it within its brand. Nothing is sent to a server; edits live in your browser until you reset.</p>
+    <div class="ad-quick">
+      <span class="ad-quick-i"><b id="kpiBrands">0</b><span>Brands</span></span>
+      <span class="ad-quick-i"><b id="kpiCourses">0</b><span>Courses</span></span>
+      <span class="ad-quick-i"><b id="kpiPhase1">0</b><span>With detail page</span></span>
+      <span class="ad-quick-i"><b id="kpiEdited">0</b><span>Edited</span></span>
+      <span class="ad-quick-i"><b id="kpiReordered">0</b><span>Reordered brands</span></span>
+    </div>
+    <div class="ad-tools">
+      <input type="search" id="adSearch" class="ad-search" placeholder="Search by course name, vendor or slug…">
+      <button class="ad-chip on" data-cat="all">All</button>
+      <button class="ad-chip" data-cat="cert">Industry Certifications</button>
+      <button class="ad-chip" data-cat="skill">Skill-Based Programs</button>
+      <button class="ad-chip" data-cat="spec">Specialized &amp; Compliance</button>
+      <span class="ad-tools-spacer"></span>
+      <label class="ad-toggle"><input type="checkbox" id="adShowEditedOnly"> <span>Show edited only</span></label>
+    </div>
+  </section>
+
+  <section class="ad-board" id="adBoard"></section>
+</main>
+
+<!-- Edit drawer (slides in from right) -->
+<aside class="ad-drawer" id="adDrawer" aria-hidden="true">
+  <div class="ad-drawer-shade" id="adDrawerShade"></div>
+  <div class="ad-drawer-card">
+    <header class="ad-drawer-head">
+      <div>
+        <span class="ad-drawer-eyebrow" id="adDrawerEyebrow">Course</span>
+        <h2 id="adDrawerTitle">Course name</h2>
+      </div>
+      <button class="ad-drawer-close" id="adDrawerClose" aria-label="Close">✕</button>
+    </header>
+    <div class="ad-drawer-body" id="adDrawerBody"></div>
+    <footer class="ad-drawer-foot">
+      <button class="ad-btn ad-btn-ghost" id="adDrawerRevert">Revert this card</button>
+      <button class="ad-btn ad-btn-primary" id="adDrawerApply">Apply changes</button>
+    </footer>
+  </div>
+</aside>
+
+<!-- Toast -->
+<div class="ad-toast" id="adToast" role="status" aria-live="polite"></div>
+
+<!-- Hidden file input for import -->
+<input type="file" id="adFile" accept="application/json" hidden>
+
+<script src="admin.js"></script>
+</body>
+</html>
