@@ -14,7 +14,7 @@
 
 const STORAGE_KEY = "nexperts_admin_v1";
 const SESSION_KEY = "nexperts_admin_session_v1";
-const DATA_URL = "admin-data.json";
+const DATA_URL = "/admin/admin-data.json";
 
 // Demo credentials. Note: this is a client-side gate — real
 // security should run on a server. For the current "no backend"
