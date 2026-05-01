@@ -292,9 +292,6 @@ footer{background:linear-gradient(180deg,#0d2347 0%,#081731 100%);padding:48px 4
 }
 @media(max-width:768px){
 nav{padding:0 16px;gap:10px}
-.nav-right{display:none}
-.nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:8px;scrollbar-width:none}
-.nav-links::-webkit-scrollbar{display:none}
 .course-hero{padding:40px 24px 36px}
 .tabs-bar{padding:0 24px}
 .content-sec{padding:36px 24px}
@@ -310,16 +307,17 @@ footer{padding:36px 20px 24px}
 }
 </style>
 
+  <link rel="stylesheet" href="../css/site-nav-mobile.css">
 </head>
 <body>
 
 <!-- NAV -->
 
-<nav>
+<nav class="site-nav">
   <a href="../index.html" class="nav-logo" aria-label="Nexperts Academy">
     <img src="../image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="../index.html">Home</a></li>
     <li><a href="../index.html#courses" class="active">Courses</a></li>
@@ -335,7 +333,9 @@ footer{padding:36px 20px 24px}
     <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
     <a href="../contact.html#enquire" class="nav-enroll">Enquire Now</a>
   </div>
+  <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div>
 
 <div class="page">
 <div class="main">
@@ -1121,5 +1121,6 @@ setupNavHighlight();
 </script>
 
 <script src="../admin/overlay.js" defer></script>
+  <script src="../js/site-nav-mobile.js" defer></script>
 </body>
 </html>

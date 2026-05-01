@@ -98,20 +98,18 @@ footer{background:#0d1527;padding:42px 40px 26px}
 
 @media(max-width:1024px){
 nav{padding:0 16px;gap:10px}
-.nav-right{display:none}
-.nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:8px;scrollbar-width:none}
-.nav-links::-webkit-scrollbar{display:none}
 .hero-inner,.split{grid-template-columns:1fr}
 .cards{grid-template-columns:1fr 1fr}
 section,.hero{padding:72px 24px}
 }
 @media(max-width:640px){.cards{grid-template-columns:1fr}.hero{padding:96px 20px 56px}section{padding:60px 20px}}
 </style>
+  <link rel="stylesheet" href="css/site-nav-mobile.css">
 </head>
 <body>
-<nav>
+<nav class="site-nav">
   <a href="index.html" class="nav-logo" aria-label="Nexperts Academy"><img src="image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84"></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#courses">Courses</a></li>
@@ -127,7 +125,9 @@ section,.hero{padding:72px 24px}
     <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
     <a href="contact.html#enquire" class="nav-enroll">Enquire Now</a>
   </div>
+  <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div>
 
 <section class="hero">
   <div class="hero-inner">
@@ -151,7 +151,7 @@ section,.hero{padding:72px 24px}
         <div class="hero-chip"><b>Champion Track</b><span>Ranked</span></div>
         <div class="hero-chip"><b>Corporate Pods</b><span>Sponsor</span></div>
         <div class="hero-chip"><b>Mentor Arena</b><span>1:1</span></div>
-      </div>
+        </div>
       <p>Live challenge events with corporate participation, Korean and Japanese workplace IT readiness tracks, and direct hiring enablement through a structured placement pipeline.</p>
       <div class="hero-badges">
         <span class="hero-badge-mini">CTF Flow</span>
@@ -268,5 +268,6 @@ function setupNavHighlight(){
 }
 setupNavHighlight();
 </script>
+  <script src="js/site-nav-mobile.js" defer></script>
 </body>
 </html>

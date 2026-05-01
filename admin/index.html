@@ -73,7 +73,7 @@
   <section class="ad-hero">
     <div class="ad-eyebrow">Course catalog</div>
     <h1>Manage <em>course details &amp; ordering.</em></h1>
-    <p class="ad-sub">Edit course names, descriptions, duration, next intake and pricing — all changes preview instantly on the landing page and course detail pages. Drag any card by its handle to reorder it within its brand. Nothing is sent to a server; edits live in your browser until you reset.</p>
+    <p class="ad-sub">Edit course names, descriptions, duration, next intake, pricing and full curriculum HTML on published detail pages. Add new catalog cards to any vendor block or create a new vendor. Drag cards by the handle to reorder within a brand. Nothing is sent to a server; edits live in your browser until you reset.</p>
     <div class="ad-quick">
       <span class="ad-quick-i"><b id="kpiBrands">0</b><span>Brands</span></span>
       <span class="ad-quick-i"><b id="kpiCourses">0</b><span>Courses</span></span>
@@ -82,6 +82,7 @@
       <span class="ad-quick-i"><b id="kpiReordered">0</b><span>Reordered brands</span></span>
     </div>
     <div class="ad-tools">
+      <button type="button" class="ad-btn ad-btn-primary" id="adBtnAddCourse">＋ Add course</button>
       <input type="search" id="adSearch" class="ad-search" placeholder="Search by course name, vendor or slug…">
       <button class="ad-chip on" data-cat="all">All</button>
       <button class="ad-chip" data-cat="cert">Industry Certifications</button>
@@ -113,6 +114,127 @@
     </footer>
   </div>
 </aside>
+
+<!-- Add course modal -->
+<div class="ad-modal" id="acModal" aria-hidden="true">
+  <div class="ad-modal-shade" id="acModalShade"></div>
+  <div class="ad-modal-card" role="dialog" aria-labelledby="acModalTitle">
+    <header class="ad-modal-head">
+      <div>
+        <span class="ad-drawer-eyebrow">Catalog</span>
+        <h2 id="acModalTitle">Add catalog card</h2>
+      </div>
+      <button type="button" class="ad-drawer-close" id="acModalClose" aria-label="Close">✕</button>
+    </header>
+    <div class="ad-modal-body">
+      <p class="ad-modal-lead">Only fields used on the landing-page catalog card. Publish a matching <code>course_pages</code> file separately if you add a detail link.</p>
+      <div class="ad-field">
+        <label>Catalog tab</label>
+        <select id="acCategory" class="ad-select">
+          <option value="cert">Industry Certifications</option>
+          <option value="skill">Skill-Based Programs</option>
+          <option value="spec">Specialized &amp; Compliance</option>
+        </select>
+      </div>
+      <div class="ad-field">
+        <label>Vendor section</label>
+        <div class="ad-radio-row">
+          <label class="ad-radio"><input type="radio" name="acBrandMode" value="existing" checked> Existing</label>
+          <label class="ad-radio"><input type="radio" name="acBrandMode" value="new"> New vendor</label>
+        </div>
+      </div>
+      <div class="ad-field" id="acBrandExistingWrap">
+        <label>Brand block</label>
+        <select id="acBrandExisting" class="ad-select"></select>
+      </div>
+      <div id="acBrandNewWrap" style="display:none">
+        <div class="ad-field-row">
+          <div class="ad-field">
+            <label>Vendor key <span class="ad-field-help">lowercase, e.g. acme</span></label>
+            <input type="text" id="acNewBrandKey" placeholder="acme" spellcheck="false" autocapitalize="none">
+          </div>
+          <div class="ad-field">
+            <label>Display name</label>
+            <input type="text" id="acNewBrandLabel" placeholder="Acme Training">
+          </div>
+        </div>
+        <div class="ad-field">
+          <label>Tagline</label>
+          <input type="text" id="acNewBrandTag" placeholder="Short line under the vendor title">
+        </div>
+        <div class="ad-field-row">
+          <div class="ad-field">
+            <label>Accent colour</label>
+            <input type="text" id="acNewBrandColor" placeholder="#1d4ed8">
+          </div>
+          <div class="ad-field">
+            <label>Tint background</label>
+            <input type="text" id="acNewBrandTint" placeholder="#eff6ff">
+          </div>
+        </div>
+      </div>
+      <div class="ad-field-row">
+        <div class="ad-field">
+          <label>Course name</label>
+          <input type="text" id="acName" placeholder="Course title">
+        </div>
+        <div class="ad-field">
+          <label>URL slug <span class="ad-field-help">optional; derived from name if empty</span></label>
+          <input type="text" id="acSlug" placeholder="auto" spellcheck="false" autocapitalize="none">
+        </div>
+      </div>
+      <div class="ad-field">
+        <label>Card description</label>
+        <textarea id="acDesc" rows="3" placeholder="Shown on the catalog card"></textarea>
+      </div>
+      <div class="ad-field-row">
+        <div class="ad-field">
+          <label>Vendor chip (e.g. CompTIA)</label>
+          <input type="text" id="acVendor" placeholder="Vendor">
+        </div>
+        <div class="ad-field">
+          <label>Badge text</label>
+          <input type="text" id="acBadge" placeholder="Cert" value="Cert">
+        </div>
+      </div>
+      <div class="ad-field">
+        <label>Badge style</label>
+        <select id="acBadgeVariant" class="ad-select">
+          <option value="">Default</option>
+          <option value="nw">“New” highlight (nw)</option>
+        </select>
+      </div>
+      <div class="ad-field-row">
+        <div class="ad-field">
+          <label>Level</label>
+          <input type="text" id="acLevel" placeholder="Foundation" value="Foundation">
+        </div>
+        <div class="ad-field">
+          <label>Rating</label>
+          <input type="number" id="acRating" step="0.1" min="0" max="5" value="4.8">
+        </div>
+      </div>
+      <div class="ad-field-row">
+        <div class="ad-field">
+          <label>Reviews count</label>
+          <input type="number" id="acReviews" min="0" value="0">
+        </div>
+        <div class="ad-field">
+          <label>Enrolled (number)</label>
+          <input type="number" id="acEnrolled" min="0" value="1200">
+        </div>
+      </div>
+      <div class="ad-field">
+        <label>Card link <span class="ad-field-help">href when the card is clicked — use # for enquiry-only</span></label>
+        <input type="text" id="acCardHref" value="#" placeholder="# or https://… or course_pages/slug.html">
+      </div>
+    </div>
+    <footer class="ad-modal-foot">
+      <button type="button" class="ad-btn ad-btn-ghost" id="acCancel">Cancel</button>
+      <button type="button" class="ad-btn ad-btn-primary" id="acSubmit">Add to catalog</button>
+    </footer>
+  </div>
+</div>
 
 <!-- Toast -->
 <div class="ad-toast" id="adToast" role="status" aria-live="polite"></div>

@@ -231,13 +231,14 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
   .office-card{padding:32px 24px}
 }
 </style>
+  <link rel="stylesheet" href="css/site-nav-mobile.css">
 </head>
 <body>
-<nav>
+<nav class="site-nav">
   <a href="index.html" class="nav-logo" aria-label="Nexperts Academy">
     <img src="image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="sitePrimaryNav">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#courses">Courses</a></li>
     <li><a href="index.html#roadmap">Roadmaps</a></li>
@@ -252,7 +253,9 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
     <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
     <a href="#enquire" class="nav-enroll">Enquire Now</a>
   </div>
+  <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -286,85 +289,85 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
           <span class="office-pill">Headquarters</span>
         </div>
         <div class="office-country">Malaysia · Headquarters</div>
-        <div class="office-city">Kuala Lumpur</div>
+        <div class="office-city">Petaling Jaya, Selangor</div>
         <p class="office-sub">Our main training campus — on-site classes, corporate workshops and walk-in consultations.</p>
         <div class="office-details">
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">📍</span>
             <div>
               <div class="odet-label">Address</div>
-              <div class="odet-val">Level [X], [Building Name]<br>[Street Name], [Area]<br>Kuala Lumpur, 50000, Malaysia</div>
+              <div class="odet-val">NEXPERTS ACADEMY SDN BHD<br>Unit 313, Block E, Phileo Damansara 1<br>Jalan 16/11 off Jalan Damansara, 46350<br>Petaling Jaya, Selangor, Malaysia</div>
             </div>
           </div>
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">📞</span>
             <div>
               <div class="odet-label">Phone</div>
-              <div class="odet-val"><a href="tel:+60312345678">+60 3-XXXX XXXX</a></div>
+              <div class="odet-val"><a href="tel:+601112216870">+60 1112216870</a></div>
             </div>
           </div>
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">✉️</span>
             <div>
               <div class="odet-label">Email</div>
-              <div class="odet-val"><a href="mailto:hello@nexpertsacademy.com">hello@nexpertsacademy.com</a></div>
+              <div class="odet-val"><a href="mailto:enquiry@nexpertsacademy.com">enquiry@nexpertsacademy.com</a></div>
             </div>
           </div>
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">🚇</span>
             <div>
               <div class="odet-label">Nearest LRT / MRT</div>
-              <div class="odet-val">[Station Name] — [X] min walk</div>
+              <div class="odet-val">Semantan MRT (Kajang Line) — about 8 min walk · Pusat Bandar Damansara MRT — about 12 min walk</div>
             </div>
           </div>
         </div>
         <div class="office-hours"><span class="hours-dot"></span>Mon–Fri, 9:00 AM – 6:00 PM MYT · Classes weekdays &amp; selected weekends</div>
         <div class="map-embed">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127477.56088137682!2d101.61564!3d3.1390!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc362abd08e7d3%3A0x726939a32fd9b0d!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur!5e0!3m2!1sen!2smy!4v1609459200000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Nexperts Academy KL Office"></iframe>
+          <iframe src="https://www.google.com/maps?q=Phileo+Damansara+1%2C+Jalan+16%2F11%2C+46350+Petaling+Jaya%2C+Selangor&amp;output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Nexperts Academy — Phileo Damansara 1, Petaling Jaya"></iframe>
         </div>
       </div>
       <!-- NY -->
       <div class="office-card office-ny">
         <div class="office-flag-row">
           <span class="office-flag" aria-hidden="true">🇺🇸</span>
-          <span class="office-pill">Regional Office</span>
+          <span class="office-pill">United States</span>
         </div>
-        <div class="office-country">United States · Regional Office</div>
-        <div class="office-city">New York</div>
-        <p class="office-sub">Our North American base — on-site training, corporate delivery, and international cohort scheduling.</p>
+        <div class="office-country">United States</div>
+        <div class="office-city">Albany, New York</div>
+        <p class="office-sub">NEXPERTS EDUTECH LLC — North American registrations, corporate delivery coordination, and international cohort scheduling.</p>
         <div class="office-details">
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">📍</span>
             <div>
               <div class="odet-label">Address</div>
-              <div class="odet-val">[Suite / Floor], [Building Name]<br>[Street Address]<br>New York, NY XXXXX, USA</div>
+              <div class="odet-val">NEXPERTS EDUTECH LLC<br>54 State Street, Ste 804 #13408<br>Albany, New York 12207<br>United States</div>
             </div>
           </div>
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">📞</span>
             <div>
               <div class="odet-label">Phone</div>
-              <div class="odet-val"><a href="tel:+12125551234">+1 (212) XXX-XXXX</a></div>
+              <div class="odet-val"><a href="tel:+601112216870">+60 1112216870</a> (WhatsApp — same HQ number)</div>
             </div>
           </div>
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">✉️</span>
             <div>
               <div class="odet-label">Email</div>
-              <div class="odet-val"><a href="mailto:newyork@nexpertsacademy.com">newyork@nexpertsacademy.com</a></div>
+              <div class="odet-val"><a href="mailto:enquiry@nexpertsacademy.com">enquiry@nexpertsacademy.com</a></div>
             </div>
           </div>
           <div class="odet">
             <span class="odet-icon" aria-hidden="true">🚇</span>
             <div>
-              <div class="odet-label">Nearest Subway</div>
-              <div class="odet-val">[Station] — [Line] — [X] min walk</div>
+              <div class="odet-label">Transit</div>
+              <div class="odet-val">CDTA bus &amp; downtown Albany — visits by appointment</div>
             </div>
           </div>
         </div>
-        <div class="office-hours"><span class="hours-dot"></span>Mon–Fri, 9:00 AM – 6:00 PM EST · Classes weekdays &amp; selected Saturdays</div>
+        <div class="office-hours"><span class="hours-dot"></span>Mon–Fri, 9:00 AM – 6:00 PM EST · By appointment</div>
         <div class="map-embed">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.11976397304903!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1609459200000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Nexperts Academy New York Office"></iframe>
+          <iframe src="https://www.google.com/maps?q=54+State+Street%2C+Albany%2C+NY+12207&amp;output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Nexperts Edutech LLC — Albany, New York"></iframe>
         </div>
       </div>
     </div>
@@ -380,29 +383,24 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
         <h2 class="head">Ask us anything.<br><em>We respond fast.</em></h2>
         <p>Course eligibility, group discounts, HRD Corp applications, custom corporate programmes, or just figuring out which cert to take first — our team answers every enquiry personally.</p>
         <div class="contact-methods">
-          <a href="mailto:hello@nexpertsacademy.com" class="cm">
+          <a href="mailto:enquiry@nexpertsacademy.com" class="cm">
             <span class="cm-icon" aria-hidden="true">✉️</span>
-            <div class="cm-text"><div class="cm-label">General Enquiries</div><div class="cm-val">hello@nexpertsacademy.com</div></div>
+            <div class="cm-text"><div class="cm-label">General Enquiries</div><div class="cm-val">enquiry@nexpertsacademy.com</div></div>
             <span class="cm-arrow" aria-hidden="true">→</span>
           </a>
-          <a href="mailto:corporate@nexpertsacademy.com" class="cm">
+          <a href="mailto:info@nexpertsai.com" class="cm">
             <span class="cm-icon" aria-hidden="true">🏢</span>
-            <div class="cm-text"><div class="cm-label">Corporate Training</div><div class="cm-val">corporate@nexpertsacademy.com</div></div>
+            <div class="cm-text"><div class="cm-label">Corporate Training</div><div class="cm-val">info@nexpertsai.com</div></div>
             <span class="cm-arrow" aria-hidden="true">→</span>
           </a>
-          <a href="mailto:newyork@nexpertsacademy.com" class="cm">
-            <span class="cm-icon" aria-hidden="true">🗽</span>
-            <div class="cm-text"><div class="cm-label">New York Office</div><div class="cm-val">newyork@nexpertsacademy.com</div></div>
-            <span class="cm-arrow" aria-hidden="true">→</span>
-          </a>
-          <a href="https://wa.me/60XXXXXXXXX" class="cm" target="_blank" rel="noopener">
+          <a href="https://wa.me/601112216870" class="cm" target="_blank" rel="noopener">
             <span class="cm-icon" aria-hidden="true">💬</span>
-            <div class="cm-text"><div class="cm-label">WhatsApp (Malaysia)</div><div class="cm-val">+60 XX-XXXX XXXX</div></div>
+            <div class="cm-text"><div class="cm-label">WhatsApp</div><div class="cm-val">+60 1112216870</div></div>
             <span class="cm-arrow" aria-hidden="true">→</span>
           </a>
-          <a href="https://linkedin.com/company/nexpertsacademy" class="cm" target="_blank" rel="noopener">
+          <a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" class="cm" target="_blank" rel="noopener">
             <span class="cm-icon" aria-hidden="true">🔗</span>
-            <div class="cm-text"><div class="cm-label">LinkedIn</div><div class="cm-val">linkedin.com/company/nexpertsacademy</div></div>
+            <div class="cm-text"><div class="cm-label">LinkedIn</div><div class="cm-val">NEXPERTS ACADEMY SDN BHD</div></div>
             <span class="cm-arrow" aria-hidden="true">→</span>
           </a>
         </div>
@@ -421,8 +419,8 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
             <div class="form-field">
               <label>Preferred office</label>
               <select name="office">
-                <option>Kuala Lumpur</option>
-                <option>New York</option>
+                <option>Malaysia — Petaling Jaya (HQ)</option>
+                <option>United States — Albany, NY</option>
                 <option>Online / Virtual</option>
               </select>
             </div>
@@ -475,7 +473,8 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
           </div>
           <div class="form-field"><label>Message</label><textarea name="message" placeholder="Tell us about your background, team size, preferred dates, or any questions you have..."></textarea></div>
           <p class="form-note">By submitting this form you agree to be contacted by Nexperts Academy regarding your enquiry. We don't share your data with third parties.</p>
-          <button type="submit" class="submit-btn">Send Enquiry <span class="arr">→</span></button>
+          <p id="enquiryErr" style="display:none;margin-top:10px;font-size:.86rem;color:#b91c1c;font-weight:600" role="alert"></p>
+          <button type="submit" id="enquirySubmitBtn" class="submit-btn">Send Enquiry <span class="arr">→</span></button>
         </form>
         <div class="form-success" id="formSuccess">
           <div class="check" aria-hidden="true">✓</div>
@@ -583,7 +582,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
         <a href="course_pages/cism.html" class="sch-enroll-btn">Enquire →</a>
       </div>
     </div>
-    <p style="font-size:.78rem;color:var(--ink4);margin-top:16px">Can't find your preferred date? <a href="mailto:hello@nexpertsacademy.com" style="color:var(--blue);text-decoration:none;font-weight:600">Email us</a> — we schedule additional batches based on demand, including private corporate cohorts.</p>
+    <p style="font-size:.78rem;color:var(--ink4);margin-top:16px">Can't find your preferred date? <a href="mailto:enquiry@nexpertsacademy.com" style="color:var(--blue);text-decoration:none;font-weight:600">Email us</a> — we schedule additional batches based on demand, including private corporate cohorts.</p>
   </div>
 </section>
 
@@ -640,11 +639,11 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
       <li><a href="https://nexpertsai.com" style="color:#bfdbfe">→ Nexperts AI</a></li>
     </ul></div>
     <div class="fcol"><h4>Offices</h4><ul>
-      <li><a href="#">Kuala Lumpur, Malaysia</a></li>
-      <li><a href="#">New York, USA</a></li>
-      <li><a href="mailto:hello@nexpertsacademy.com">hello@nexpertsacademy.com</a></li>
+      <li><a href="contact.html#enquire">Petaling Jaya, Selangor (HQ)</a></li>
+      <li><a href="contact.html#enquire">Albany, New York (US)</a></li>
+      <li><a href="mailto:enquiry@nexpertsacademy.com">enquiry@nexpertsacademy.com</a></li>
       <li><a href="mailto:hrdcorp@nexpertsacademy.com">HRD Corp Enquiries</a></li>
-      <li><a href="https://linkedin.com/company/nexpertsacademy">LinkedIn</a></li>
+      <li><a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" target="_blank" rel="noopener">LinkedIn</a></li>
     </ul></div>
   </div>
   <div class="fbot">
@@ -653,6 +652,8 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
   </div>
 </footer>
 
+<script src="js/enquiry-config.js"></script>
+<script src="js/enquiry-submit.js"></script>
 <script>
 // Schedule filter
 document.querySelectorAll('.sf').forEach(btn => {
@@ -668,12 +669,31 @@ document.querySelectorAll('.sf').forEach(btn => {
   });
 });
 
-// Form submit (simulation — does not save)
-function submitEnquiry(e) {
+// Form submit → Google Apps Script (Sheet + emails). Configure js/enquiry-config.js
+async function submitEnquiry(e) {
   e.preventDefault();
-  document.getElementById('enquiryForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-  document.getElementById('formSuccess').scrollIntoView({behavior:'smooth', block:'center'});
+  const form = document.getElementById('enquiryForm');
+  const errEl = document.getElementById('enquiryErr');
+  const btn = document.getElementById('enquirySubmitBtn');
+  if (!form || !window.NexpertsEnquiry) {
+    if (errEl) { errEl.textContent = 'Enquiry script failed to load. Refresh the page.'; errEl.style.display = 'block'; }
+    return false;
+  }
+  if (errEl) { errEl.style.display = 'none'; errEl.textContent = ''; }
+  if (btn) { btn.disabled = true; }
+  try {
+    await window.NexpertsEnquiry.submit(form, { source: 'contact_page' });
+    form.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (x) {
+    if (errEl) {
+      errEl.textContent = (x && x.message) ? x.message : 'Could not send your enquiry. Please try again or email enquiry@nexpertsacademy.com.';
+      errEl.style.display = 'block';
+    }
+  } finally {
+    if (btn) { btn.disabled = false; }
+  }
   return false;
 }
 
@@ -681,5 +701,6 @@ function submitEnquiry(e) {
 const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }), { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+  <script src="js/site-nav-mobile.js" defer></script>
 </body>
 </html>

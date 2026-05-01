@@ -282,9 +282,6 @@ footer{background:linear-gradient(180deg,#0d2347 0%,#081731 100%);padding:72px 4
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
 nav{padding:0 16px;gap:10px}
-.nav-right{display:none}
-.nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:8px;scrollbar-width:none}
-.nav-links::-webkit-scrollbar{display:none}
 .hero{padding:100px 24px 64px}
 .about-hero-row{grid-template-columns:1fr;text-align:center}
 .about-hero-row .hero-inner{max-width:640px;margin:0 auto}
@@ -313,16 +310,17 @@ footer,.cta-sec{padding:56px 20px 32px}
 }
 </style>
 
+  <link rel="stylesheet" href="css/site-nav-mobile.css">
 </head>
 <body>
 
 <!-- NAV -->
 
-<nav>
+<nav class="site-nav">
   <a href="index.html" class="nav-logo" aria-label="Nexperts Academy">
     <img src="image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#courses">Courses</a></li>
@@ -338,7 +336,9 @@ footer,.cta-sec{padding:56px 20px 32px}
     <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
     <a href="contact.html#enquire" class="nav-enroll">Enquire Now</a>
   </div>
+  <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div>
 
 <!-- HERO -->
 
@@ -765,7 +765,7 @@ footer,.cta-sec{padding:56px 20px 32px}
   <p>Browse our full course catalog, explore a career roadmap, or talk directly to one of our instructors about what's right for you.</p>
   <div class="cta-btns">
     <a href="index.html#courses" class="btn-primary">Browse Courses →</a>
-    <a href="mailto:hello@nexpertsacademy.com" class="btn-ghost">Talk to an Instructor</a>
+    <a href="mailto:enquiry@nexpertsacademy.com" class="btn-ghost">Talk to an Instructor</a>
   </div>
 </section>
 
@@ -792,10 +792,10 @@ footer,.cta-sec{padding:56px 20px 32px}
       <li><a href="#" style="color:#bfdbfe">→ Nexperts AI</a></li>
     </ul></div>
     <div class="fcol"><h4>Contact</h4><ul>
-      <li><a href="mailto:hello@nexpertsacademy.com">hello@nexpertsacademy.com</a></li>
-      <li><a href="#">Kuala Lumpur, Malaysia</a></li>
-      <li><a href="#">LinkedIn</a></li>
-      <li><a href="#">Corporate Enquiries</a></li>
+      <li><a href="mailto:enquiry@nexpertsacademy.com">enquiry@nexpertsacademy.com</a></li>
+      <li><a href="contact.html#enquire">Petaling Jaya (HQ) · Albany, NY (US)</a></li>
+      <li><a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="mailto:info@nexpertsai.com">Corporate training</a></li>
     </ul></div>
   </div>
   <div class="fbot">
@@ -895,5 +895,6 @@ function setupNavHighlight(){
 setupNavHighlight();
 </script>
 
+  <script src="js/site-nav-mobile.js" defer></script>
 </body>
 </html>

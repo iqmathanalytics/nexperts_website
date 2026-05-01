@@ -43,6 +43,81 @@ P1 = {
     "Kubernetes Administrator (CKA)": "cka",
     "CISM": "cism",
     "CISSP": "cissp",
+    # Phase 2A
+    "AZ-204: Azure Developer": "az-204",
+    "AZ-400: DevOps Engineer": "az-400",
+    "SC-900: Security Fundamentals": "sc-900",
+    "SC-300: Identity & Access Admin": "sc-300",
+    "AI-102: Azure AI Engineer": "ai-102",
+    "MS-102: M365 Administrator": "ms-102",
+    "AWS Developer Associate": "aws-developer-associate",
+    "AWS SysOps Administrator": "aws-sysops-administrator",
+    # Phase 2B
+    "CompTIA SecAI+": "comptia-secai-plus",
+    "CompTIA SecurityX": "comptia-securityx",
+    "CompTIA Linux+": "comptia-linux-plus",
+    "Certified SOC Analyst (CSA)": "certified-soc-analyst-csa",
+    "CCISO": "cciso",
+    "CTIA": "ctia",
+    "CC \u2014 Certified in Cybersecurity": "cc-certified-in-cybersecurity",
+    "SSCP": "sscp",
+    # Phase 2C
+    "AWS DevOps Engineer Professional": "aws-devops-engineer-professional",
+    "AWS Security Specialty": "aws-security-specialty",
+    "AWS Data Engineer Associate": "aws-data-engineer-associate",
+    "AWS Machine Learning Specialty": "aws-machine-learning-specialty",
+    "CKAD \u2014 Kubernetes App Developer": "ckad-kubernetes-app-developer",
+    "Terraform Associate": "terraform-associate",
+    "Cloud Digital Leader": "gcp-cloud-digital-leader",
+    "Associate Cloud Engineer": "gcp-associate-cloud-engineer",
+    # Phase 2D
+    "AZ-500: Azure Security Engineer": "az-500",
+    "AZ-700: Azure Network Engineer": "az-700",
+    "AZ-140: Azure Virtual Desktop": "az-140",
+    "MD-102: M365 Endpoint Administrator": "md-102",
+    "MS-700: Managing Microsoft Teams": "ms-700",
+    "CCNP Security": "ccnp-security",
+    "CCNP Collaboration": "ccnp-collaboration",
+    "DevNet Associate": "devnet-associate",
+    # Phase 2E
+    "AI-900: Azure AI Fundamentals": "ai-900",
+    "DP-100: Azure Data Scientist": "dp-100",
+    "DP-300: Azure Database Admin": "dp-300",
+    "PL-100: Power Platform App Maker": "pl-100",
+    "PL-200: Power Platform Functional": "pl-200",
+    "PL-400: Power Platform Developer": "pl-400",
+    "PL-600: Power Platform Architect": "pl-600",
+    "Tableau Desktop Specialist": "tableau-desktop-specialist",
+    # Phase 2F
+    "PRINCE2 Foundation & Practitioner": "prince2-foundation-practitioner",
+    "CAPM": "capm",
+    "Certified ScrumMaster (CSM)": "certified-scrum-master-csm",
+    "ITIL 4 Specialist: CDS": "itil-4-specialist-cds",
+    "ITIL 4 Specialist: DSV": "itil-4-specialist-dsv",
+    "ITIL 4 Strategist: DPI": "itil-4-strategist-dpi",
+    "AgilePM Foundation & Practitioner": "agilepm-foundation-practitioner",
+    "ISO 27001 Lead Implementer": "iso-27001-lead-implementer",
+    # Phase 2G
+    "CRISC": "crisc",
+    "CGEIT": "cgeit",
+    "CDPSE": "cdpse",
+    "CCSP": "ccsp",
+    "HCISPP": "hcispp",
+    "CSSLP": "csslp",
+    "OSCP": "oscp",
+    "OSWE": "oswe",
+    # Phase 3: popular missing-page courses
+    "CISA": "cisa",
+    "SQL for Data Professionals": "sql-for-data-professionals",
+    "Python for IT & Automation": "python-for-it-automation",
+    "Excel Advanced Analytics": "excel-advanced-analytics",
+    "Linux Administration": "linux-administration",
+    "Docker & Containers": "docker-containers",
+    "CompTIA Tech+": "comptia-tech-plus",
+    "CCT \u2014 Cybersecurity Technician": "cct-cybersecurity-technician",
+    "CI/CD with Jenkins & GitLab": "cicd-jenkins-gitlab",
+    "CND v3": "cnd-v3",
+    "CompTIA Cloud+": "comptia-cloud-plus",
 }
 
 # -----------------------------------------------------------------------------
@@ -64,8 +139,8 @@ BRANDS = [
     ("tableau",   "Tableau",          "Tableau",          "Enterprise BI and data visualisation.",                     "#e8762d", "#fff7ed"),
     ("isaca",     "ISACA",            "ISACA",            "Audit, risk, governance and security management.",          "#a30729", "#fef2f2"),
     ("isc2",      "ISC2",             "ISC2",             "CISSP and the ISC2 cybersecurity body of knowledge.",       "#082c5e", "#eef2ff"),
+    ("offsec",    "Offensive Security","OffSec",          "Hands-on penetration testing and offensive cybersecurity.", "#0ea5e9", "#f0f9ff"),
     ("skill",     "Skill-Based",      "Skills",           "Hands-on, role-ready skills \u2014 outcome over paperwork.","#10b981", "#ecfdf5"),
-    ("my",        "Malaysia-Focused", "MY",               "PDPA, BNM RMiT and Malaysia-specific compliance.",          "#e11d48", "#fff1f2"),
 ]
 
 # -----------------------------------------------------------------------------
@@ -85,8 +160,6 @@ CARDS = [
     ("comptia","cert","CompTIA","Cert","CompTIA SecurityX",          "Expert-level security architecture for enterprise environments.","Expert",                 4.7,84, 2480),
     ("comptia","cert","CompTIA","Cert","CompTIA Linux+",             "Linux administration for cloud, security and operational environments.","Intermediate",    4.8,138,6420),
     ("comptia","cert","CompTIA","Cert","CompTIA Cloud+",             "Vendor-neutral cloud infrastructure, security and automation cert.","Intermediate",        4.7,112,4960),
-    ("comptia","cert","CompTIA","Cert","CompTIA Server+",            "Server hardware, virtualisation, storage and data centre operations.","Intermediate",      4.7,98, 4180),
-    ("comptia","cert","CompTIA","Cert","CompTIA DataSys+",           "Database deployment, management and maintenance fundamentals.","Foundation",              4.7,72, 3520),
     ("comptia","cert","CompTIA","Cert","CompTIA Tech+",              "Digital literacy and tech fundamentals for any business professional.","Entry",            4.8,156,8240),
     ("comptia","spec","CompTIA","New 2026","CompTIA SecAI+",         "Secure and govern AI in cybersecurity operations. First cert of its kind.","Intermediate", 4.9,46, 1840),
 
@@ -98,11 +171,6 @@ CARDS = [
     ("eccouncil","cert","EC-Council","Cert","CND v3",                "Certified Network Defender \u2014 proactive network protection and defense.","Intermediate",   4.7,124,5780),
     ("eccouncil","cert","EC-Council","Cert","CCISO",                 "Chief Information Security Officer \u2014 executive cybersecurity leadership.","Executive",   4.9,42, 1620),
     ("eccouncil","cert","EC-Council","Cert","CTIA",                  "Certified Threat Intelligence Analyst \u2014 dark web intel, threat hunting.","Advanced",      4.8,86, 2940),
-    ("eccouncil","cert","EC-Council","Cert","ECIH v3",               "Certified Incident Handler \u2014 IR planning, detection and containment.","Intermediate",     4.7,72, 3180),
-    ("eccouncil","spec","EC-Council","Cert","ICS / SCADA Security",  "OT and industrial control security \u2014 critical for Malaysia's energy sector.","Specialist",4.9,38, 1240),
-    ("eccouncil","cert","EC-Council","Cert","ECDE \u2014 DevSecOps Engineer","Integrate security into DevOps pipelines \u2014 containers, CI/CD and IaC.","Intermediate",4.8,68,2860),
-    ("eccouncil","cert","EC-Council","Cert","CCSE \u2014 Cloud Security Engineer","Certified Cloud Security Engineer \u2014 multi-cloud protection strategies.","Advanced", 4.8,54,2140),
-    ("eccouncil","spec","EC-Council","AI 2026","C|OASP \u2014 Offensive AI Security","Certified Offensive AI Security Professional \u2014 adversarial AI techniques.","Advanced",4.9,32,1080),
     ("eccouncil","cert","EC-Council","Cert","CCT \u2014 Cybersecurity Technician","Entry-level hands-on cybersecurity \u2014 the right starting point in security.","Entry",4.8,142,7940),
 
     # ---- AWS ----
@@ -129,19 +197,30 @@ CARDS = [
     ("microsoft","cert","Microsoft","Cert","DP-203: Data Engineer",      "Design and implement data solutions in Azure \u2014 pipelines, lakes and more.","Associate",       4.9,138,5680),
     ("microsoft","cert","Microsoft","Cert","AI-102: Azure AI Engineer",  "Build and manage Azure AI solutions \u2014 OpenAI, Cognitive Services and more.","Associate",      4.8,94, 3460),
     ("microsoft","cert","Microsoft","Cert","MS-102: M365 Administrator", "Microsoft 365 tenant administration, security and compliance management.","Associate",            4.7,112,5240),
+    ("microsoft","cert","Microsoft","Cert","AZ-500: Azure Security Engineer","Implement security controls, threat protection and identity in Azure.","Associate",            4.8,116,4280),
+    ("microsoft","cert","Microsoft","Cert","AZ-700: Azure Network Engineer", "Design, implement and manage Azure networking, hybrid and ExpressRoute.","Associate",          4.8,82, 2640),
+    ("microsoft","cert","Microsoft","Cert","AZ-140: Azure Virtual Desktop", "Plan, deliver and manage Azure Virtual Desktop for the modern workspace.","Specialty",          4.7,68, 2180),
+    ("microsoft","cert","Microsoft","Cert","MD-102: M365 Endpoint Administrator","Intune, Autopilot and Windows endpoint management at enterprise scale.","Associate",       4.8,124,5840),
+    ("microsoft","cert","Microsoft","Cert","MS-700: Managing Microsoft Teams","Plan, configure and manage Microsoft Teams \u2014 voice, meetings and governance.","Associate",4.7,98, 4360),
+    ("microsoft","cert","Microsoft","Cert","AI-900: Azure AI Fundamentals", "Foundational AI and machine learning concepts on Azure \u2014 the AI runway cert.","Foundation",                4.9,212,11420),
+    ("microsoft","cert","Microsoft","Cert","DP-100: Azure Data Scientist",  "Train, evaluate and deploy ML models on Azure ML at production grade.","Associate",                       4.8,86, 3120),
+    ("microsoft","cert","Microsoft","Cert","DP-300: Azure Database Admin",  "Administer SQL Server and Azure SQL at scale \u2014 HA, security, performance.","Associate",              4.8,108,4640),
+    ("microsoft","cert","Microsoft","Cert","PL-100: Power Platform App Maker","Citizen-developer apps on Power Platform \u2014 Apps, Power Automate, Dataverse.","Foundation",        4.8,168,7920),
+    ("microsoft","cert","Microsoft","Cert","PL-200: Power Platform Functional","Configure model-driven apps, Power Automate flows and Dataverse for business solutions.","Associate", 4.7,98, 3840),
+    ("microsoft","cert","Microsoft","Cert","PL-400: Power Platform Developer","Pro-code Power Platform \u2014 plugins, custom connectors, code components and ALM.","Associate",          4.8,76, 2640),
+    ("microsoft","cert","Microsoft","Cert","PL-600: Power Platform Architect","Design end-to-end Power Platform solutions across data, security, integrations and governance.","Expert",4.9,52, 1820),
 
     # ---- Cisco ----
     ("cisco","cert","Cisco","Cert","CCNA",            "Routing, switching, automation and AI-driven networking. Industry standard.","Associate",   4.9,231,12940),
     ("cisco","cert","Cisco","Cert","CCNP Enterprise", "Advanced enterprise networking \u2014 routing, switching and SD-WAN.","Professional",       4.9,107,3840),
     ("cisco","cert","Cisco","Cert","CCNP Security",   "Cisco firewall, VPN, identity and threat defense solutions.","Professional",                 4.8,78, 2580),
-    ("cisco","cert","Cisco","Cert","CCIE Enterprise", "Expert-level enterprise infrastructure \u2014 lab and written exams.","Expert",              4.9,42, 1340),
+    ("cisco","cert","Cisco","Cert","CCNP Collaboration","Cisco voice, video, contact-centre and collaboration deployment at depth.","Professional", 4.7,52, 1620),
+    ("cisco","cert","Cisco","Cert","DevNet Associate", "Cisco network programmability \u2014 APIs, automation and infrastructure as code.","Associate",4.8,86, 3240),
 
     # ---- Google Cloud ----
     ("gcp","cert","Google Cloud","Cert","Cloud Digital Leader",                "GCP fundamentals for business and technology decision makers.","Foundation",     4.7,98, 5240),
     ("gcp","cert","Google Cloud","Cert","Associate Cloud Engineer",            "Deploy and manage applications on GCP \u2014 compute, storage and networking.","Associate",4.8,142,6480),
     ("gcp","cert","Google Cloud","Cert","Professional Cloud Architect",        "Design enterprise-grade GCP solutions \u2014 highest value GCP cert.","Professional",   4.9,76, 2940),
-    ("gcp","cert","Google Cloud","Cert","Professional Data Engineer",          "Build and maintain data pipelines and ML models on Google Cloud.","Professional",      4.8,68, 2380),
-    ("gcp","cert","Google Cloud","Cert","Professional Cloud Security Engineer","Design and implement secure infrastructure on Google Cloud Platform.","Professional",  4.8,54, 1880),
 
     # ---- PeopleCert (ITIL + PRINCE2) ----
     ("peoplecert","cert","PeopleCert","Cert","ITIL 4 Foundation",            "Most sought-after ITSM cert by Malaysian enterprises \u2014 service management essentials.","Foundation",4.9,418,16280),
@@ -149,6 +228,8 @@ CARDS = [
     ("peoplecert","cert","PeopleCert","Cert","ITIL 4 Specialist: DSV",       "Drive Stakeholder Value \u2014 customer journeys, demand and value creation.","Intermediate",4.8,98,3240),
     ("peoplecert","cert","PeopleCert","Cert","ITIL 4 Strategist: DPI",       "Direct, Plan and Improve \u2014 strategic IT management and continual improvement.","Advanced",4.8,76,2480),
     ("peoplecert","cert","PeopleCert","Cert","PRINCE2 Foundation & Practitioner","Widely mandated in Malaysian government and GLC project environments.","Foundation\u2192Practitioner",4.8,164,7240),
+    ("peoplecert","cert","PeopleCert","Cert","AgilePM Foundation & Practitioner","Agile project management at scale \u2014 PeopleCert / APMG framework.","Foundation\u2192Practitioner",4.8,98,3920),
+    ("peoplecert","cert","PeopleCert","Cert","ISO 27001 Lead Implementer","Implement an ISO 27001 ISMS at depth \u2014 governance, risk and audit-ready controls.","Advanced",4.9,76,2640),
 
     # ---- PMI ----
     ("pmi","cert","PMI","Cert","PMP",  "Project Management Professional \u2014 global gold standard. 25% average salary boost.","Advanced",4.9,184,8920),
@@ -172,23 +253,27 @@ CARDS = [
     ("isaca","cert","ISACA","Cert","CISA",  "Certified Information Systems Auditor \u2014 IT audit, control and compliance.","Advanced",        4.8,94, 3260),
     ("isaca","cert","ISACA","Cert","CRISC", "Certified in Risk and Information Systems Control \u2014 enterprise IT risk.","Advanced",         4.8,68, 2240),
     ("isaca","cert","ISACA","Cert","CGEIT", "Certified in Governance of Enterprise IT \u2014 C-suite and board-level credential.","Executive", 4.9,38, 1180),
+    ("isaca","cert","ISACA","Cert","CDPSE", "Certified Data Privacy Solutions Engineer \u2014 privacy by design and PDPA depth.","Advanced",   4.8,52, 1640),
 
     # ---- ISC2 ----
     ("isc2","cert","ISC2","Cert","CISSP",                       "The gold standard of security certs. Eight domains, globally mandated for leaders.","Expert",4.9,162,4980),
     ("isc2","cert","ISC2","Cert","SSCP",                        "Systems Security Certified Practitioner \u2014 solid mid-level security credential.","Intermediate",4.8,84,3080),
     ("isc2","cert","ISC2","Cert","CC \u2014 Certified in Cybersecurity","Free ISC2 entry-level cert \u2014 the ideal first step into the profession.","Entry",4.9,212,9840),
+    ("isc2","cert","ISC2","Cert","CCSP",                        "Certified Cloud Security Professional \u2014 the senior cloud-security cert from ISC2.","Advanced",4.8,72,2840),
+    ("isc2","cert","ISC2","Cert","HCISPP",                      "Healthcare Information Security and Privacy Practitioner \u2014 HIPAA / PDPA aligned.","Intermediate",4.7,46,1480),
+    ("isc2","cert","ISC2","Cert","CSSLP",                       "Certified Secure Software Lifecycle Professional \u2014 secure SDLC and AppSec at depth.","Advanced",4.8,58,1860),
+
+    # ---- Offensive Security ----
+    ("offsec","cert","Offensive Security","Cert","OSCP",        "Offensive Security Certified Professional \u2014 the gold-standard pentest cert. PEN-200.","Advanced",4.9,128,4280),
+    ("offsec","cert","Offensive Security","Cert","OSWE",        "Offensive Security Web Expert \u2014 advanced web-application exploitation. WEB-300.","Expert",4.9,42,1240),
 
     # ---- Skill-Based ----
     ("skill","skill","Skill-Based","Skills","Docker & Containers",     "Containerisation fundamentals \u2014 build, ship and run applications anywhere.","Foundation",     4.8,196,9420),
     ("skill","skill","Skill-Based","Skills","CI/CD with Jenkins & GitLab","Automated delivery pipelines from code commit to production.","Intermediate",                 4.8,148,6240),
     ("skill","skill","Skill-Based","Skills","Python for IT & Automation","Automate IT tasks \u2014 network scripts, API calls and system admin.","Beginner\u2192Intermediate",4.9,284,13680),
     ("skill","skill","Skill-Based","Skills","Linux Administration",    "Server management, shell scripting and system operations on Linux.","Foundation\u2192Advanced",      4.8,212,10840),
-    ("skill","skill","Skill-Based","Skills","Ansible Automation",      "Automate infrastructure configuration management at scale with Ansible.","Intermediate",            4.7,118,4640),
     ("skill","skill","Skill-Based","Skills","SQL for Data Professionals","Non-negotiable foundation for every data and analytics role.","Foundation",                     4.9,316,15280),
     ("skill","skill","Skill-Based","Skills","Excel Advanced Analytics","PivotTables, Power Query and advanced formulas for business analysts.","Foundation",              4.8,268,11920),
-
-    # ---- Malaysia-Focused ----
-    ("my","spec","Malaysia-Focused","MY","Data Governance & PDPA","Personal Data Protection Act compliance \u2014 mandatory for enterprise teams in Malaysia.","Specialist",4.9,76,2640),
 ]
 
 

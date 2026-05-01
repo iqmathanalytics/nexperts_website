@@ -1,30 +1,31 @@
 /* Admin · Course Manager
  * --------------------------------------------------------------
- *  Storage model:
- *    localStorage["nexperts_admin_v1"] = {
- *      version: 1,
- *      courses: { [slug]: { name, description, duration, next_intake,
- *                           price, price_original } },
- *      card_order: { [brand]: [slug, slug, ...] },     // optional override
- *      brand_order: [brand, brand, ...]                // optional override
+ *  Storage model (localStorage["nexperts_admin_v1"]):
+ *    {
+ *      version: 2,
+ *      courses: { [slug]: { …, curriculum_struct?: { intro, modules:[{title,topics[]}] },
+ *                           curriculum_html? (legacy) } },
+ *      card_order: { [brand]: [slug, ...] },
+ *      brand_order: [brand, ...] | null,
+ *      custom_brands: { [key]: { key, label, tagline, color, color_tint } },
+ *      custom_courses: [ { slug, brand, category, vendor, badge, badge_variant,
+ *                          name, description, level, rating, reviews, enrolled,
+ *                          card_href } ]
  *    }
- *
- *  Public site reads the same storage via overlay.js to apply edits.
+ *  Public site reads the same storage via overlay.js.
  * -------------------------------------------------------------- */
 
 const STORAGE_KEY = "nexperts_admin_v1";
 const SESSION_KEY = "nexperts_admin_session_v1";
 const DATA_URL = "/admin/admin-data.json";
 
-// Demo credentials. Note: this is a client-side gate — real
-// security should run on a server. For the current "no backend"
-// stage these creds are good enough to deter casual access.
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "admin123";
-const SESSION_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
 
 const FIELDS_CATALOG = ["name", "description"];
 const FIELDS_DETAIL = ["duration", "next_intake", "price", "price_original"];
+
 const FIELD_LABELS = {
   name: "Course name",
   description: "Description",
@@ -42,35 +43,309 @@ const FIELD_PLACEHOLDERS = {
   price_original: "e.g. RM 4,500",
 };
 
-let baseline = null;          // { brand_meta, brand_order, card_order, courses[] }
-let courseBySlug = {};        // slug -> course object (baseline)
-let overrides = {};           // mutable working copy in memory
+let baseline = null;
+let courseBySlug = {};
+let overrides = {};
 let activeSlug = null;
 let activeFilter = "all";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const escapeHTML = (s = "") =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-   .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
-// ---------------------------------------------------------------
-// Storage helpers
-// ---------------------------------------------------------------
+function normalizeCurriculumStruct(raw) {
+  if (!raw || typeof raw !== "object")
+    return { eyebrow: "", headline_main: "", headline_em: "", intro: "", modules: [] };
+  const eyebrow = String(raw.eyebrow || "").trim();
+  const headline_main = String(raw.headline_main != null ? raw.headline_main : raw.headline || "").trim();
+  const headline_em = String(raw.headline_em || "").trim();
+  const intro = String(raw.intro || "").trim();
+  const modules = (Array.isArray(raw.modules) ? raw.modules : [])
+    .map(mod => ({
+      title: String(mod && mod.title != null ? mod.title : "").trim(),
+      topics: (Array.isArray(mod && mod.topics) ? mod.topics : [])
+        .map(t => String(t != null ? t : "").trim())
+        .filter(Boolean),
+    }))
+    .filter(mod => mod.title || mod.topics.length);
+  return { eyebrow, headline_main, headline_em, intro, modules };
+}
+
+function curriculumStructIsEmpty(s) {
+  const n = normalizeCurriculumStruct(s);
+  return (
+    !n.eyebrow &&
+    !n.headline_main &&
+    !n.headline_em &&
+    !n.intro &&
+    !n.modules.length
+  );
+}
+
+function curriculumEditorNeedsFetch(struct) {
+  return curriculumStructIsEmpty(struct);
+}
+
+function splitH2ForStruct(h2) {
+  if (!h2) return { headline_main: "", headline_em: "" };
+  const em = h2.querySelector("em");
+  if (em) {
+    const clone = h2.cloneNode(true);
+    clone.querySelectorAll("em").forEach(e => e.remove());
+    return {
+      headline_main: clone.textContent.replace(/\s+/g, " ").trim(),
+      headline_em: em.textContent.replace(/\s+/g, " ").trim(),
+    };
+  }
+  return { headline_main: h2.textContent.replace(/\s+/g, " ").trim(), headline_em: "" };
+}
+
+async function fetchCurriculumFromDetailHtml(slug) {
+  const url = `../course_pages/${encodeURIComponent(slug)}.html`;
+  try {
+    const res = await fetch(url, { cache: "no-cache" });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const sec = doc.querySelector("#sec-curriculum");
+    if (!sec) return null;
+
+    const eyebrowEl = sec.querySelector(":scope > .eyebrow");
+    const h2 = sec.querySelector(":scope > h2.sec-head");
+    const hParts = splitH2ForStruct(h2);
+    const modulesEl = sec.querySelector(":scope > .modules");
+    let intro = "";
+    if (modulesEl && modulesEl.previousElementSibling) {
+      const prev = modulesEl.previousElementSibling;
+      if (prev.tagName === "P" && prev.classList.contains("body-text")) {
+        intro = prev.textContent.replace(/\s+/g, " ").trim();
+      }
+    }
+
+    const eyebrow = eyebrowEl?.textContent?.replace(/\s+/g, " ").trim() || "";
+    const modules = [];
+    if (modulesEl) {
+      modulesEl.querySelectorAll(":scope > button.module").forEach(btn => {
+        const h4 = btn.querySelector(".module-header h4, h4");
+        const title = h4?.textContent?.replace(/\s+/g, " ").trim() || "";
+        const topics = [...btn.querySelectorAll(".module-topics .topic, .topic")]
+          .map(t => t.textContent.replace(/\s+/g, " ").trim())
+          .filter(Boolean);
+        modules.push({ title, topics });
+      });
+    }
+
+    return {
+      eyebrow,
+      headline_main: hParts.headline_main,
+      headline_em: hParts.headline_em,
+      intro,
+      modules,
+    };
+  } catch (e) {
+    console.warn("admin: could not fetch curriculum HTML", slug, e);
+    return null;
+  }
+}
+
+function fillCurriculumEditorForm(struct) {
+  const s = normalizeCurriculumStruct(struct);
+  const eb = $("#adCvEyebrow");
+  const hm = $("#adCvHeadMain");
+  const he = $("#adCvHeadEm");
+  const intro = $("#adCvIntro");
+  const modsRoot = $("#adCvMods");
+  if (eb) eb.value = s.eyebrow;
+  if (hm) hm.value = s.headline_main;
+  if (he) he.value = s.headline_em;
+  if (intro) intro.value = s.intro;
+  if (modsRoot) {
+    const mods = s.modules.length ? s.modules : [{ title: "", topics: [""] }];
+    modsRoot.innerHTML = mods.map((m, i) => renderCurriculumModuleHTML(m, i)).join("");
+    renumberCurriculumModules();
+  }
+  $("#adCvLoading")?.remove();
+  $("#adCvFetchErr")?.remove();
+}
+
+function renderCurriculumModuleHTML(mod, index) {
+  const title = escapeHTML(mod.title || "");
+  const topics = mod.topics && mod.topics.length ? mod.topics : [""];
+  const topicsHtml = topics
+    .map(
+      t =>
+        `<div class="ad-cv-topic-row"><input type="text" class="ad-cv-topic-input" value="${escapeHTML(t)}" placeholder="Topic"><button type="button" class="ad-cv-topic-del" data-cv="topic-del" aria-label="Remove">×</button></div>`
+    )
+    .join("");
+  return `<div class="ad-cv-mod" data-cv-mod>
+    <div class="ad-cv-mod-toolbar">
+      <span class="ad-cv-mod-label">Module <span class="ad-cv-mod-ix">${index + 1}</span></span>
+      <button type="button" class="ad-btn ad-btn-link ad-cv-tmini" data-cv="mod-up">Up</button>
+      <button type="button" class="ad-btn ad-btn-link ad-cv-tmini" data-cv="mod-down">Down</button>
+      <button type="button" class="ad-btn ad-btn-link ad-cv-tmini" data-cv="mod-del">Remove</button>
+    </div>
+    <div class="ad-field ad-cv-mod-title-wrap">
+      <label>Module title</label>
+      <input type="text" class="ad-cv-mod-title" value="${title}" placeholder="e.g. Mobile Devices, Networking">
+    </div>
+    <div class="ad-cv-topics">${topicsHtml}</div>
+    <button type="button" class="ad-btn ad-btn-ghost ad-cv-add-topic" data-cv="topic-add">＋ Topic</button>
+  </div>`;
+}
+
+function renderCurriculumEditorHTML(struct, slug, hasLegacyHtml, showLoadingFetch) {
+  const s = normalizeCurriculumStruct(struct);
+  const modules = s.modules.length ? s.modules : [{ title: "", topics: [""] }];
+  const modsHtml = modules.map((m, i) => renderCurriculumModuleHTML(m, i)).join("");
+  const legacy = hasLegacyHtml
+    ? `<div class="ad-cv-legacy">A legacy HTML curriculum override exists. Saving here replaces it with this structured curriculum.</div>`
+    : "";
+  const loading = showLoadingFetch
+    ? `<div id="adCvLoading" class="ad-cv-loading">Loading curriculum from <code>course_pages/${escapeHTML(slug)}.html</code>…</div>`
+    : "";
+  return `<div class="ad-section" id="adCvSection">
+    <h4>Curriculum <span class="ad-section-tag">Detail page · #sec-curriculum</span></h4>
+    <p class="ad-curriculum-note">These fields mirror the public course page. When no override is saved yet, we load the current HTML automatically (requires the site to be served over HTTP, not file://).</p>
+    ${loading}
+    <p id="adCvFetchErr" class="ad-cv-fetch-err" hidden></p>
+    ${legacy}
+    <div class="ad-field-row">
+      <div class="ad-field">
+        <label>Section eyebrow</label>
+        <input type="text" id="adCvEyebrow" value="${escapeHTML(s.eyebrow)}" placeholder="e.g. Course Curriculum">
+      </div>
+    </div>
+    <div class="ad-field">
+      <label>Heading — main line <span class="ad-field-help">before italic part</span></label>
+      <input type="text" id="adCvHeadMain" value="${escapeHTML(s.headline_main)}" placeholder="e.g. Two exams.">
+    </div>
+    <div class="ad-field">
+      <label>Heading — emphasis <span class="ad-field-help">optional · renders inside &lt;em&gt;</span></label>
+      <input type="text" id="adCvHeadEm" value="${escapeHTML(s.headline_em)}" placeholder="e.g. One foundation.">
+    </div>
+    <div class="ad-field">
+      <label>Introduction paragraph</label>
+      <textarea id="adCvIntro" rows="4" placeholder="Opening paragraph under the heading">${escapeHTML(s.intro)}</textarea>
+    </div>
+    <div class="ad-cv-mods-head"><span>Modules</span><button type="button" class="ad-btn ad-btn-ghost" data-cv="add-mod">＋ Add module</button></div>
+    <div id="adCvMods">${modsHtml}</div>
+  </div>`;
+}
+
+function collectCurriculumStructFromDrawer() {
+  const eyebrow = ($("#adCvEyebrow")?.value || "").trim();
+  const headline_main = ($("#adCvHeadMain")?.value || "").trim();
+  const headline_em = ($("#adCvHeadEm")?.value || "").trim();
+  const intro = ($("#adCvIntro")?.value || "").trim();
+  const mods = [];
+  $$("#adCvMods [data-cv-mod]").forEach(wrap => {
+    const title = (wrap.querySelector(".ad-cv-mod-title")?.value || "").trim();
+    const topics = $$(".ad-cv-topic-input", wrap)
+      .map(inp => (inp.value || "").trim())
+      .filter(Boolean);
+    if (title || topics.length) mods.push({ title, topics });
+  });
+  return { eyebrow, headline_main, headline_em, intro, modules: mods };
+}
+
+function renumberCurriculumModules() {
+  $$("#adCvMods .ad-cv-mod-ix").forEach((el, i) => {
+    el.textContent = String(i + 1);
+  });
+}
+
+let curriculumClickHandler = null;
+
+function bindCurriculumEditor() {
+  const body = $("#adDrawerBody");
+  if (!body || !$("#adCvMods")) return;
+  curriculumClickHandler = e => {
+    const btn = e.target.closest("[data-cv]");
+    if (!btn) return;
+    const act = btn.dataset.cv;
+    const mod = btn.closest("[data-cv-mod]");
+    const modsRoot = $("#adCvMods");
+    if (act === "add-mod") {
+      e.preventDefault();
+      if (!modsRoot) return;
+      const n = modsRoot.querySelectorAll("[data-cv-mod]").length;
+      modsRoot.insertAdjacentHTML("beforeend", renderCurriculumModuleHTML({ title: "", topics: [""] }, n));
+      renumberCurriculumModules();
+      return;
+    }
+    if (act === "topic-add" && mod) {
+      mod.querySelector(".ad-cv-topics").insertAdjacentHTML(
+        "beforeend",
+        `<div class="ad-cv-topic-row"><input type="text" class="ad-cv-topic-input" value="" placeholder="Topic"><button type="button" class="ad-cv-topic-del" data-cv="topic-del" aria-label="Remove">×</button></div>`
+      );
+      return;
+    }
+    if (act === "topic-del") {
+      const row = btn.closest(".ad-cv-topic-row");
+      const topicsWrap = row?.parentElement;
+      if (row && topicsWrap && topicsWrap.querySelectorAll(".ad-cv-topic-row").length > 1) row.remove();
+      return;
+    }
+    if (act === "mod-del" && mod && modsRoot) {
+      if (modsRoot.querySelectorAll("[data-cv-mod]").length > 1) mod.remove();
+      renumberCurriculumModules();
+      return;
+    }
+    if (act === "mod-up" && mod && mod.previousElementSibling) {
+      mod.parentNode.insertBefore(mod, mod.previousElementSibling);
+      renumberCurriculumModules();
+      return;
+    }
+    if (act === "mod-down" && mod && mod.nextElementSibling) {
+      mod.parentNode.insertBefore(mod.nextElementSibling, mod);
+      renumberCurriculumModules();
+    }
+  };
+  body.addEventListener("click", curriculumClickHandler);
+}
+
+function unbindCurriculumEditor() {
+  const body = $("#adDrawerBody");
+  if (body && curriculumClickHandler) {
+    body.removeEventListener("click", curriculumClickHandler);
+    curriculumClickHandler = null;
+  }
+}
+
+function defaultOverrides() {
+  return {
+    version: 2,
+    courses: {},
+    card_order: {},
+    brand_order: null,
+    custom_brands: {},
+    custom_courses: [],
+  };
+}
+
 function loadOverrides() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { version: 1, courses: {}, card_order: {}, brand_order: null };
+    if (!raw) return defaultOverrides();
     const obj = JSON.parse(raw);
+    if (!obj || typeof obj !== "object") return defaultOverrides();
     return {
-      version: 1,
+      version: 2,
       courses: obj.courses || {},
       card_order: obj.card_order || {},
       brand_order: obj.brand_order || null,
+      custom_brands: obj.custom_brands || {},
+      custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
     };
   } catch (e) {
     console.warn("admin: failed to parse storage, starting fresh", e);
-    return { version: 1, courses: {}, card_order: {}, brand_order: null };
+    return defaultOverrides();
   }
 }
 
@@ -85,39 +360,127 @@ function saveOverrides(showToast = true) {
   }
 }
 
+function rebuildCourseIndex() {
+  courseBySlug = Object.fromEntries(
+    baseline.courses.map(c => [c.slug, { ...c, is_custom: false }])
+  );
+  (overrides.custom_courses || []).forEach(c => {
+    if (!c.slug) return;
+    const href = (c.card_href || c.detail_href || "#").trim() || "#";
+    courseBySlug[c.slug] = {
+      vendor: c.vendor || "",
+      badge: c.badge || "Cert",
+      badge_variant: c.badge_variant || "",
+      name: c.name || "",
+      description: c.description || "",
+      level: c.level || "Foundation",
+      rating: Number(c.rating) || 4.8,
+      reviews: Number(c.reviews) || 0,
+      enrolled: Number(c.enrolled) || 1000,
+      has_detail_page: !!c.has_detail_page,
+      slug: c.slug,
+      brand: c.brand || "",
+      category: c.category || "cert",
+      card_href: href,
+      detail_href: href,
+      duration: c.duration || "",
+      next_intake: c.next_intake || "",
+      price: c.price || "",
+      price_original: c.price_original || "",
+      curriculum_html: c.curriculum_html || "",
+      curriculum_struct: c.curriculum_struct,
+      is_custom: true,
+    };
+  });
+  for (const slug in overrides.courses) {
+    const ov = overrides.courses[slug];
+    if (!ov || !courseBySlug[slug]) continue;
+    courseBySlug[slug] = { ...courseBySlug[slug], ...ov };
+  }
+}
+
+function getBrandMeta(brandKey) {
+  return baseline.brand_meta[brandKey] || (overrides.custom_brands || {})[brandKey] || null;
+}
+
+function getMergedBrandOrder() {
+  const base = baseline.brand_order.slice();
+  const order =
+    overrides.brand_order && overrides.brand_order.length ? overrides.brand_order.slice() : base.slice();
+  const seen = new Set(order);
+  (overrides.custom_courses || []).forEach(c => {
+    if (c.brand && !seen.has(c.brand)) {
+      order.push(c.brand);
+      seen.add(c.brand);
+    }
+  });
+  Object.keys(overrides.custom_brands || {}).forEach(k => {
+    if (!seen.has(k)) {
+      order.push(k);
+      seen.add(k);
+    }
+  });
+  return order;
+}
+
+function slugsForBrand(brandKey) {
+  const co = overrides.card_order[brandKey];
+  if (co && co.length) return co.slice();
+  const bc = baseline.card_order[brandKey];
+  if (bc && bc.length) return bc.slice();
+  return (overrides.custom_courses || []).filter(c => c.brand === brandKey).map(c => c.slug);
+}
+
 function updateStorageStatus() {
   const total = countEditedCourses();
   const reordered = countReorderedBrands();
   $("#kpiEdited").textContent = total;
   $("#kpiReordered").textContent = reordered;
   const status = $("#adStorageStatus");
-  if (!total && !reordered) {
+  const customN = (overrides.custom_courses || []).length;
+  if (!total && !reordered && !customN) {
     status.textContent = "No overrides — using baseline";
     status.style.color = "var(--ink4)";
   } else {
-    status.textContent = `${total} field edit${total === 1 ? "" : "s"} · ${reordered} brand${reordered === 1 ? "" : "s"} reordered`;
+    status.textContent = `${total} field edit${total === 1 ? "" : "s"} · ${reordered} brand${reordered === 1 ? "" : "s"} reordered${customN ? ` · ${customN} custom course${customN === 1 ? "" : "s"}` : ""}`;
     status.style.color = "var(--blue)";
   }
 }
 
-function countEditedCourses() {
-  return Object.values(overrides.courses).filter(o => Object.keys(o).length > 0).length;
+function hasOverrides(slug) {
+  return !!(overrides.courses[slug] && Object.keys(overrides.courses[slug]).length);
 }
+
+function isShownAsEdited(slug) {
+  return hasOverrides(slug) || !!courseBySlug[slug]?.is_custom;
+}
+
+function countEditedCourses() {
+  const s = new Set();
+  for (const slug in overrides.courses) {
+    if (hasOverrides(slug)) s.add(slug);
+  }
+  (overrides.custom_courses || []).forEach(c => {
+    if (c.slug) s.add(c.slug);
+  });
+  return s.size;
+}
+
 function countReorderedBrands() {
   if (!overrides.card_order) return 0;
   let n = 0;
   for (const k in overrides.card_order) {
     const a = overrides.card_order[k];
     const b = baseline.card_order[k];
-    if (!b) continue;
+    if (!b) {
+      if (a && a.length) n++;
+      continue;
+    }
     if (a.length !== b.length || a.some((x, i) => x !== b[i])) n++;
   }
   return n;
 }
 
-// ---------------------------------------------------------------
-// Resolved course (baseline + override)
-// ---------------------------------------------------------------
 function resolveCourse(slug) {
   const base = courseBySlug[slug];
   if (!base) return null;
@@ -125,13 +488,6 @@ function resolveCourse(slug) {
   return { ...base, ...ov };
 }
 
-function isEdited(slug) {
-  return !!(overrides.courses[slug] && Object.keys(overrides.courses[slug]).length);
-}
-
-// ---------------------------------------------------------------
-// Bootstrap
-// ---------------------------------------------------------------
 async function init() {
   try {
     const res = await fetch(DATA_URL, { cache: "no-cache" });
@@ -148,12 +504,14 @@ async function init() {
     return;
   }
 
-  courseBySlug = Object.fromEntries(baseline.courses.map(c => [c.slug, c]));
   overrides = loadOverrides();
+  rebuildCourseIndex();
   pruneStaleOverrides();
+  rebuildCourseIndex();
 
   $("#kpiBrands").textContent = baseline.brand_order.length;
-  $("#kpiCourses").textContent = baseline.courses.length;
+  const customCount = (overrides.custom_courses || []).length;
+  $("#kpiCourses").textContent = String(baseline.courses.length + customCount);
   $("#kpiPhase1").textContent = baseline.courses.filter(c => c.has_detail_page).length;
 
   renderBoard();
@@ -162,28 +520,24 @@ async function init() {
 }
 
 function pruneStaleOverrides() {
-  // drop entries whose slug no longer exists
+  const valid = new Set(Object.keys(courseBySlug));
   for (const slug in overrides.courses) {
-    if (!courseBySlug[slug]) delete overrides.courses[slug];
+    if (!valid.has(slug)) delete overrides.courses[slug];
   }
   for (const brand in overrides.card_order) {
-    overrides.card_order[brand] = overrides.card_order[brand]
-      .filter(s => courseBySlug[s]);
+    overrides.card_order[brand] = (overrides.card_order[brand] || []).filter(s => valid.has(s));
   }
+  overrides.custom_courses = (overrides.custom_courses || []).filter(c => c && c.slug && c.brand);
 }
 
-// ---------------------------------------------------------------
-// Render
-// ---------------------------------------------------------------
 function renderBoard() {
   const board = $("#adBoard");
   board.innerHTML = "";
-  const brandOrder = overrides.brand_order || baseline.brand_order;
 
-  brandOrder.forEach(brandKey => {
-    const meta = baseline.brand_meta[brandKey];
+  getMergedBrandOrder().forEach(brandKey => {
+    const meta = getBrandMeta(brandKey);
     if (!meta) return;
-    const slugs = (overrides.card_order[brandKey] || baseline.card_order[brandKey] || []).slice();
+    const slugs = slugsForBrand(brandKey);
     if (!slugs.length) return;
     board.appendChild(renderBrandBlock(meta, slugs));
   });
@@ -198,7 +552,12 @@ function renderBrandBlock(meta, slugs) {
   block.style.setProperty("--bk", meta.color);
   block.style.setProperty("--bk-tint", meta.color_tint);
 
-  const initials = meta.label.split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+  const initials = meta.label
+    .split(/\s+/)
+    .slice(0, 2)
+    .map(w => w[0])
+    .join("")
+    .toUpperCase();
 
   block.innerHTML = `
     <header class="bblock-head">
@@ -228,13 +587,16 @@ function renderCard(slug, meta) {
   card.dataset.searchKey = `${c.name} ${c.vendor} ${c.slug}`.toLowerCase();
   card.draggable = false;
 
-  const editedBadge = isEdited(slug) ? `<span class="acc-edited">Edited</span>` : "";
+  const editedBadge = hasOverrides(slug) ? `<span class="acc-edited">Edited</span>` : "";
+  const customBadge = c.is_custom ? `<span class="acc-edited" style="background:var(--amberL);color:#92400e">Custom</span>` : "";
   const detailBits = c.has_detail_page
     ? [
         ["Duration", c.duration],
         ["Intake", c.next_intake],
         ["Price", c.price],
-      ].map(([k, v]) => `<i class="${v ? "has-val" : ""}">${escapeHTML(k)}: ${escapeHTML(v || "—")}</i>`).join("")
+      ]
+        .map(([k, v]) => `<i class="${v ? "has-val" : ""}">${escapeHTML(k)}: ${escapeHTML(v || "—")}</i>`)
+        .join("")
     : `<i class="no-detail">Catalog-only · no detail page</i>`;
 
   card.innerHTML = `
@@ -242,7 +604,7 @@ function renderCard(slug, meta) {
       <div class="acc-handle" title="Drag to reorder" draggable="true">⋮⋮</div>
       <div class="acc-vendor">
         ${escapeHTML(c.vendor)} · ${escapeHTML(c.badge)}
-        ${editedBadge}
+        ${editedBadge}${customBadge}
       </div>
     </div>
     <div class="acc-name">${escapeHTML(c.name)}</div>
@@ -250,7 +612,7 @@ function renderCard(slug, meta) {
     <div class="acc-meta">${detailBits}</div>
     <div class="acc-actions">
       <button class="acc-edit" data-slug="${slug}">✎ Edit course</button>
-      <button class="acc-revert" data-slug="${slug}" ${isEdited(slug) ? "" : "disabled style='opacity:.4;cursor:not-allowed'"}>Revert</button>
+      <button class="acc-revert" data-slug="${slug}" ${hasOverrides(slug) ? "" : "disabled style='opacity:.4;cursor:not-allowed'"}>Revert</button>
     </div>
   `;
   return card;
@@ -260,15 +622,13 @@ function refreshCardInPlace(slug) {
   const old = $(`.acc[data-slug="${CSS.escape(slug)}"]`);
   if (!old) return;
   const block = old.closest(".bblock");
-  const meta = baseline.brand_meta[block.dataset.brand];
+  const meta = getBrandMeta(block.dataset.brand);
+  if (!meta) return;
   const fresh = renderCard(slug, meta);
   old.replaceWith(fresh);
   applyFilter();
 }
 
-// ---------------------------------------------------------------
-// Filter / search
-// ---------------------------------------------------------------
 function applyFilter() {
   const q = ($("#adSearch").value || "").trim().toLowerCase();
   const onlyEdited = $("#adShowEditedOnly").checked;
@@ -280,7 +640,7 @@ function applyFilter() {
       const slug = card.dataset.slug;
       const matchCat = cat === "all" || card.dataset.cat === cat;
       const matchSearch = !q || card.dataset.searchKey.includes(q);
-      const matchEdited = !onlyEdited || isEdited(slug);
+      const matchEdited = !onlyEdited || isShownAsEdited(slug);
       const ok = matchCat && matchSearch && matchEdited;
       card.style.display = ok ? "" : "none";
       if (ok) visible++;
@@ -289,9 +649,6 @@ function applyFilter() {
   });
 }
 
-// ---------------------------------------------------------------
-// Drag & drop (within the same brand grid only)
-// ---------------------------------------------------------------
 let dragSrc = null;
 
 function onDragStart(e) {
@@ -302,15 +659,16 @@ function onDragStart(e) {
   dragSrc = card;
   card.classList.add("dragging");
   e.dataTransfer.effectAllowed = "move";
-  // Some browsers require non-empty data
-  try { e.dataTransfer.setData("text/plain", card.dataset.slug); } catch (_) {}
+  try {
+    e.dataTransfer.setData("text/plain", card.dataset.slug);
+  } catch (_) {}
 }
 
 function onDragOver(e) {
   if (!dragSrc) return;
   const card = e.target.closest(".acc");
   if (!card || card === dragSrc) return;
-  if (card.dataset.brand !== dragSrc.dataset.brand) return; // same brand only
+  if (card.dataset.brand !== dragSrc.dataset.brand) return;
   e.preventDefault();
   e.dataTransfer.dropEffect = "move";
   $$(".acc.drop-target").forEach(el => el !== card && el.classList.remove("drop-target"));
@@ -325,16 +683,21 @@ function onDragLeave(e) {
 function onDrop(e) {
   if (!dragSrc) return;
   const target = e.target.closest(".acc");
-  if (!target || target === dragSrc) { cleanupDrag(); return; }
-  if (target.dataset.brand !== dragSrc.dataset.brand) { cleanupDrag(); return; }
+  if (!target || target === dragSrc) {
+    cleanupDrag();
+    return;
+  }
+  if (target.dataset.brand !== dragSrc.dataset.brand) {
+    cleanupDrag();
+    return;
+  }
   e.preventDefault();
 
   const grid = target.parentNode;
   const rect = target.getBoundingClientRect();
-  const before = (e.clientY - rect.top) < rect.height / 2;
+  const before = e.clientY - rect.top < rect.height / 2;
   grid.insertBefore(dragSrc, before ? target : target.nextSibling);
 
-  // Persist new order for this brand
   const brand = dragSrc.dataset.brand;
   const newOrder = $$(".acc", grid).map(c => c.dataset.slug);
   overrides.card_order[brand] = newOrder;
@@ -350,10 +713,7 @@ function cleanupDrag() {
   dragSrc = null;
 }
 
-// ---------------------------------------------------------------
-// Drawer (edit form)
-// ---------------------------------------------------------------
-function openDrawer(slug) {
+async function openDrawer(slug) {
   activeSlug = slug;
   const c = resolveCourse(slug);
   if (!c) return;
@@ -364,52 +724,83 @@ function openDrawer(slug) {
   const body = $("#adDrawerBody");
   let html = "";
 
-  // Catalog fields (always shown)
   html += `<div class="ad-section"><h4>Catalog card <span class="ad-section-tag">Visible on landing page</span></h4>`;
-  FIELDS_CATALOG.forEach(f => { html += renderField(f, c[f] || ""); });
+  FIELDS_CATALOG.forEach(f => {
+    html += renderField(f, c[f] || "");
+  });
   html += `</div>`;
 
-  // Detail fields (Phase 1 only get a useful preview surface)
   html += `<div class="ad-section"><h4>Course detail page <span class="ad-section-tag">${c.has_detail_page ? `course_pages/${c.slug}.html` : "Not yet published"}</span></h4>`;
   if (!c.has_detail_page) {
-    html += `<div class="ad-no-detail">This course doesn't have a detail page yet — these fields will be ready when the page is added in a future phase.</div>`;
+    html += `<div class="ad-no-detail">This course doesn't have a detail page yet — duration, intake and pricing will apply when a page exists.</div>`;
   }
-  FIELDS_DETAIL.forEach(f => { html += renderField(f, c[f] || ""); });
+  FIELDS_DETAIL.forEach(f => {
+    html += renderField(f, c[f] || "");
+  });
   html += `</div>`;
 
-  body.innerHTML = html;
+  let initStruct = normalizeCurriculumStruct(c.curriculum_struct);
+  const hasLegacy = !!(c.curriculum_html && String(c.curriculum_html).trim());
+  const needFetch = c.has_detail_page && curriculumEditorNeedsFetch(initStruct) && !hasLegacy;
 
-  // Live "edited" preview as you type
+  if (c.has_detail_page) {
+    html += renderCurriculumEditorHTML(initStruct, slug, hasLegacy, needFetch);
+  }
+
+  body.innerHTML = html;
   body.addEventListener("input", onDrawerInput);
+  bindCurriculumEditor();
 
   $("#adDrawer").classList.add("show");
   $("#adDrawer").setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 
   setTimeout(() => body.querySelector("input,textarea")?.focus(), 200);
+
+  if (needFetch) {
+    const fetched = await fetchCurriculumFromDetailHtml(slug);
+    if (activeSlug !== slug) return;
+    if (fetched) {
+      fillCurriculumEditorForm(fetched);
+    } else {
+      const err = $("#adCvFetchErr");
+      if (err) {
+        err.hidden = false;
+        err.textContent =
+          "Could not load the detail page (open admin via your local server, e.g. http://localhost:8765/admin/). You can still enter curriculum below.";
+      }
+      $("#adCvLoading")?.remove();
+    }
+  }
 }
 
 function renderField(f, val) {
   const label = FIELD_LABELS[f];
   const placeholder = FIELD_PLACEHOLDERS[f];
-  const baseVal = courseBySlug[activeSlug]?.[f] || "";
+  const baseVal = courseBySlug[activeSlug]?.[f] ?? "";
   const changed = val !== baseVal;
-  const input = (f === "description")
-    ? `<textarea data-field="${f}" placeholder="${escapeHTML(placeholder)}">${escapeHTML(val)}</textarea>`
-    : `<input type="text" data-field="${f}" value="${escapeHTML(val)}" placeholder="${escapeHTML(placeholder)}">`;
   const help = changed ? `<span class="ad-field-help" style="color:var(--blue)">● modified from baseline</span>` : "";
+
+  const input =
+    f === "description"
+      ? `<textarea data-field="${f}" placeholder="${escapeHTML(placeholder)}">${escapeHTML(val)}</textarea>`
+      : `<input type="text" data-field="${f}" value="${escapeHTML(val)}" placeholder="${escapeHTML(placeholder)}">`;
   return `<div class="ad-field"><label>${escapeHTML(label)} ${help}</label>${input}</div>`;
 }
 
 function onDrawerInput(e) {
   const f = e.target.dataset.field;
   if (!f) return;
-  const baseVal = courseBySlug[activeSlug]?.[f] || "";
+  const baseVal = courseBySlug[activeSlug]?.[f] ?? "";
   const changed = e.target.value !== baseVal;
-  const help = e.target.closest(".ad-field").querySelector(".ad-field-help");
+  const wrap = e.target.closest(".ad-field");
+  if (!wrap) return;
+  let help = wrap.querySelector(".ad-field-help");
   if (changed && !help) {
-    e.target.closest(".ad-field").querySelector("label")
-      .insertAdjacentHTML("beforeend", ` <span class="ad-field-help" style="color:var(--blue)">● modified from baseline</span>`);
+    wrap.querySelector("label")?.insertAdjacentHTML(
+      "beforeend",
+      ` <span class="ad-field-help" style="color:var(--blue)">● modified from baseline</span>`
+    );
   } else if (!changed && help) {
     help.remove();
   }
@@ -419,6 +810,7 @@ function closeDrawer() {
   $("#adDrawer").classList.remove("show");
   $("#adDrawer").setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+  unbindCurriculumEditor();
   $("#adDrawerBody").removeEventListener("input", onDrawerInput);
   activeSlug = null;
 }
@@ -426,39 +818,51 @@ function closeDrawer() {
 function applyDrawer() {
   if (!activeSlug) return;
   const slug = activeSlug;
-  const updates = {};
+  const merged = { ...(overrides.courses[slug] || {}) };
+
   $$("#adDrawerBody [data-field]").forEach(el => {
     const f = el.dataset.field;
     const v = el.value.trim();
-    const baseVal = courseBySlug[slug]?.[f] || "";
-    if (v !== baseVal) updates[f] = v;
+    const baseVal = courseBySlug[slug]?.[f] ?? "";
+    if (v === baseVal) delete merged[f];
+    else merged[f] = v;
   });
 
-  if (Object.keys(updates).length) {
-    overrides.courses[slug] = updates;
-  } else {
-    delete overrides.courses[slug];
+  if ($("#adCvMods")) {
+    const norm = normalizeCurriculumStruct(collectCurriculumStructFromDrawer());
+    const baseNorm = normalizeCurriculumStruct(courseBySlug[slug]?.curriculum_struct);
+    if (JSON.stringify(norm) !== JSON.stringify(baseNorm)) {
+      if (curriculumStructIsEmpty(norm)) delete merged.curriculum_struct;
+      else {
+        merged.curriculum_struct = norm;
+        delete merged.curriculum_html;
+      }
+    }
   }
+
+  if (Object.keys(merged).length) overrides.courses[slug] = merged;
+  else delete overrides.courses[slug];
+
   saveOverrides();
+  rebuildCourseIndex();
   refreshCardInPlace(slug);
   closeDrawer();
 }
 
 function revertCard(slug) {
-  if (!isEdited(slug)) return;
-  if (!confirm(`Revert "${courseBySlug[slug].name}" to baseline?`)) return;
+  if (!hasOverrides(slug)) return;
+  if (!confirm(`Revert "${courseBySlug[slug].name}" field overrides to baseline?`)) return;
   delete overrides.courses[slug];
-  saveOverrides();
+  saveOverrides(false);
+  rebuildCourseIndex();
   refreshCardInPlace(slug);
 }
 
-// ---------------------------------------------------------------
-// Reset / Export / Import
-// ---------------------------------------------------------------
 function resetAll() {
-  if (!confirm("Reset ALL course edits and order changes back to the shipped baseline?")) return;
-  overrides = { version: 1, courses: {}, card_order: {}, brand_order: null };
+  if (!confirm("Reset ALL course edits, custom courses, custom brands and order changes?")) return;
+  overrides = defaultOverrides();
   saveOverrides(false);
+  rebuildCourseIndex();
   renderBoard();
   toast("Restored to baseline", "success");
 }
@@ -484,14 +888,20 @@ function importJSON(file) {
       const obj = JSON.parse(reader.result);
       if (!obj || typeof obj !== "object") throw new Error("not an object");
       overrides = {
-        version: 1,
+        version: 2,
         courses: obj.courses || {},
         card_order: obj.card_order || {},
         brand_order: obj.brand_order || null,
+        custom_brands: obj.custom_brands || {},
+        custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
       };
+      rebuildCourseIndex();
       pruneStaleOverrides();
+      rebuildCourseIndex();
       saveOverrides(false);
       renderBoard();
+      const customCount = (overrides.custom_courses || []).length;
+      $("#kpiCourses").textContent = String(baseline.courses.length + customCount);
       toast("Imported overrides · saved", "success");
     } catch (e) {
       toast("Invalid JSON file", "error");
@@ -501,43 +911,175 @@ function importJSON(file) {
   reader.readAsText(file);
 }
 
-// ---------------------------------------------------------------
-// Toast
-// ---------------------------------------------------------------
+function slugify(s) {
+  const t = String(s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  return t || "course";
+}
+
+function uniqueSlug(base) {
+  let s = base;
+  let i = 2;
+  while (courseBySlug[s]) {
+    s = `${base}-${i++}`;
+  }
+  return s;
+}
+
+function populateAcBrandSelect() {
+  const sel = $("#acBrandExisting");
+  if (!sel) return;
+  sel.innerHTML = "";
+  getMergedBrandOrder().forEach(key => {
+    const m = getBrandMeta(key);
+    if (!m) return;
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = m.label;
+    sel.appendChild(opt);
+  });
+}
+
+function openAddModal() {
+  populateAcBrandSelect();
+  $("#acModal")?.classList.add("show");
+  $("#acModal")?.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => $("#acName")?.focus(), 100);
+}
+
+function closeAddModal() {
+  $("#acModal")?.classList.remove("show");
+  $("#acModal")?.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function submitAddCourse() {
+  const name = ($("#acName").value || "").trim();
+  if (!name) {
+    toast("Course name is required", "error");
+    return;
+  }
+
+  const category = ($("#acCategory").value || "cert").trim();
+  const vendor = ($("#acVendor").value || "").trim() || "Vendor";
+  const badge = ($("#acBadge").value || "Cert").trim();
+  const badgeVariant = ($("#acBadgeVariant").value || "").trim();
+  const description = ($("#acDesc").value || "").trim();
+  const level = ($("#acLevel").value || "").trim() || "Foundation";
+  const rating = Number($("#acRating").value) || 4.8;
+  const reviews = Number($("#acReviews").value) || 0;
+  const enrolled = Number($("#acEnrolled").value) || 1000;
+  const cardHref = ($("#acCardHref").value || "").trim() || "#";
+
+  const mode =
+    (document.querySelector('input[name="acBrandMode"]:checked') || {}).value || "existing";
+  let brandKey;
+
+  if (mode === "new") {
+    brandKey = slugify($("#acNewBrandKey").value || $("#acNewBrandLabel").value);
+    if (!brandKey || brandKey.length < 2) {
+      toast("New vendor key is invalid (use letters, numbers, hyphens)", "error");
+      return;
+    }
+    if (baseline.brand_meta[brandKey]) {
+      toast("That vendor key already exists — pick another or use Existing vendor", "error");
+      return;
+    }
+    const label = ($("#acNewBrandLabel").value || "").trim() || brandKey;
+    const tagline = ($("#acNewBrandTag").value || "").trim();
+    const color = ($("#acNewBrandColor").value || "").trim() || "#1d4ed8";
+    const tint = ($("#acNewBrandTint").value || "").trim() || "#eff6ff";
+    overrides.custom_brands[brandKey] = {
+      key: brandKey,
+      label,
+      tagline,
+      color,
+      color_tint: tint,
+    };
+  } else {
+    brandKey = ($("#acBrandExisting").value || "").trim();
+    if (!brandKey) {
+      toast("Select a vendor section", "error");
+      return;
+    }
+  }
+
+  const baseSlug = slugify($("#acSlug").value || name);
+  const slug = uniqueSlug(baseSlug);
+
+  const row = {
+    slug,
+    brand: brandKey,
+    category,
+    vendor,
+    badge,
+    badge_variant: badgeVariant,
+    name,
+    description,
+    level,
+    rating,
+    reviews,
+    enrolled,
+    has_detail_page: false,
+    card_href: cardHref,
+  };
+
+  overrides.custom_courses = overrides.custom_courses || [];
+  overrides.custom_courses.push(row);
+
+  const prevOrder =
+    overrides.card_order[brandKey] || baseline.card_order[brandKey] || [];
+  overrides.card_order[brandKey] = prevOrder.includes(slug) ? prevOrder : [...prevOrder, slug];
+
+  rebuildCourseIndex();
+  saveOverrides(false);
+  renderBoard();
+  $("#kpiCourses").textContent = String(baseline.courses.length + (overrides.custom_courses || []).length);
+  updateStorageStatus();
+  toast("Custom course added", "success");
+  closeAddModal();
+}
+
 let toastTimer = null;
 function toast(msg, kind = "") {
   const el = $("#adToast");
   el.textContent = msg;
   el.className = "ad-toast show " + kind;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { el.classList.remove("show"); }, 2400);
+  toastTimer = setTimeout(() => {
+    el.classList.remove("show");
+  }, 2400);
 }
 
-// ---------------------------------------------------------------
-// UI binding
-// ---------------------------------------------------------------
 function bindUI() {
-  // Filter chips
-  $$(".ad-chip").forEach(b => b.addEventListener("click", () => {
-    $$(".ad-chip").forEach(x => x.classList.remove("on"));
-    b.classList.add("on");
-    activeFilter = b.dataset.cat;
-    applyFilter();
-  }));
+  $$(".ad-chip").forEach(b =>
+    b.addEventListener("click", () => {
+      $$(".ad-chip").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      activeFilter = b.dataset.cat;
+      applyFilter();
+    })
+  );
 
-  // Search & toggle
   $("#adSearch").addEventListener("input", () => applyFilter());
   $("#adShowEditedOnly").addEventListener("change", () => applyFilter());
 
-  // Card actions (delegated)
   document.addEventListener("click", e => {
     const editBtn = e.target.closest(".acc-edit");
-    if (editBtn) { openDrawer(editBtn.dataset.slug); return; }
+    if (editBtn) {
+      void openDrawer(editBtn.dataset.slug);
+      return;
+    }
     const revertBtn = e.target.closest(".acc-revert");
-    if (revertBtn && !revertBtn.disabled) { revertCard(revertBtn.dataset.slug); return; }
+    if (revertBtn && !revertBtn.disabled) {
+      revertCard(revertBtn.dataset.slug);
+      return;
+    }
   });
 
-  // Drawer
   $("#adDrawerClose").addEventListener("click", closeDrawer);
   $("#adDrawerShade").addEventListener("click", closeDrawer);
   $("#adDrawerApply").addEventListener("click", applyDrawer);
@@ -547,13 +1089,14 @@ function bindUI() {
     closeDrawer();
   });
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && $("#adDrawer").classList.contains("show")) closeDrawer();
+    if (e.key === "Escape") {
+      if ($("#acModal")?.classList.contains("show")) closeAddModal();
+      if ($("#adDrawer").classList.contains("show")) closeDrawer();
+    }
   });
 
-  // Save (manually persists; auto-save also runs on changes)
   $("#adBtnSave").addEventListener("click", () => saveOverrides());
 
-  // Reset / Export / Import
   $("#adBtnReset").addEventListener("click", resetAll);
   $("#adBtnExport").addEventListener("click", exportJSON);
   $("#adBtnImport").addEventListener("click", () => $("#adFile").click());
@@ -563,7 +1106,21 @@ function bindUI() {
     e.target.value = "";
   });
 
-  // Drag & drop on board
+  $("#adBtnAddCourse")?.addEventListener("click", openAddModal);
+  $("#acModalClose")?.addEventListener("click", closeAddModal);
+  $("#acModalShade")?.addEventListener("click", closeAddModal);
+  $("#acCancel")?.addEventListener("click", closeAddModal);
+  $("#acSubmit")?.addEventListener("click", submitAddCourse);
+
+  $$('input[name="acBrandMode"]').forEach(r => {
+    r.addEventListener("change", () => {
+      const mode =
+        (document.querySelector('input[name="acBrandMode"]:checked') || {}).value || "existing";
+      $("#acBrandExistingWrap").style.display = mode === "existing" ? "" : "none";
+      $("#acBrandNewWrap").style.display = mode === "new" ? "" : "none";
+    });
+  });
+
   const board = $("#adBoard");
   board.addEventListener("dragstart", onDragStart);
   board.addEventListener("dragover", onDragOver);
@@ -572,9 +1129,6 @@ function bindUI() {
   board.addEventListener("dragend", cleanupDrag);
 }
 
-// ---------------------------------------------------------------
-// Auth gate
-// ---------------------------------------------------------------
 function readSession() {
   try {
     const raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
@@ -616,9 +1170,8 @@ function flashError(msg) {
   const err = $("#alError");
   err.hidden = false;
   err.textContent = msg;
-  // re-trigger shake animation
   err.style.animation = "none";
-  err.offsetHeight; // reflow
+  err.offsetHeight;
   err.style.animation = "";
 }
 
@@ -664,7 +1217,6 @@ async function bootApp() {
   });
 }
 
-// Boot: gate first.
 bindLogin();
 if (readSession()) {
   hideLogin();

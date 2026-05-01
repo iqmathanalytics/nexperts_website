@@ -1,0 +1,1003 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CDPSE — ISACA | Nexperts Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f8fbff;--bg2:#eef6ff;--bg3:#e2efff;
+  --ink:#0f1b2d;--ink2:#2a3f5f;--ink3:#4b6284;--ink4:#7e97b8;
+  --blue:#1d4ed8;--bluL:#dbeafe;--bluM:#eff6ff;
+  --brand:#1d4ed8;--brand-hover:#1e40af;--brand-soft:#93c5fd;
+  --maroon:#1e3a8a;--marM:#1e40af;--marL:#dbeafe;--marP:#eff6ff;
+  --line:#d7e6fb;--line2:#bfd5f2;
+  --surface:#0b1f46;--surface2:#123777;
+  --green:#16a34a;--greenL:#dcfce7;
+  --amber:#d97706;--amberL:#fef3c7;
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(248,251,255,.9);border-bottom:1px solid rgba(30,64,175,.16);backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(15,23,42,.06)}
+.nav-logo{font-weight:700;font-size:1rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:6px}
+.nav-logo img{height:36px;width:auto;display:block}
+.ndot{width:8px;height:8px;border-radius:50%;background:var(--blue);display:inline-block;animation:pdot 2s ease infinite}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(29,78,216,.35)}50%{box-shadow:0 0 0 5px rgba(29,78,216,0)}}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;align-items:center;gap:14px;list-style:none;position:relative;padding:4px;border-radius:12px;background:rgba(219,234,254,.22);border:1px solid rgba(147,197,253,.35)}
+.nav-links li{position:relative;z-index:2}
+.nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink2);text-decoration:none;position:relative;padding:6px 10px;border-radius:8px;transition:color .25s ease,transform .25s ease}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:10px;width:calc(100% - 20px);height:2px;background:var(--blue);transform:scaleX(0);transform-origin:center;transition:transform .28s ease}
+.nav-links a:hover{color:var(--blue);transform:translateY(-1px)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--blue)}
+.nav-highlight{position:absolute;top:50%;left:0;height:30px;border-radius:9px;background:linear-gradient(135deg,rgba(147,197,253,.45),rgba(219,234,254,.88));border:1px solid rgba(59,130,246,.22);box-shadow:0 10px 24px rgba(37,99,235,.18);transform:translateY(-50%);z-index:1;pointer-events:none;opacity:0;transition:left .36s cubic-bezier(.22,.61,.36,1),width .36s cubic-bezier(.22,.61,.36,1),opacity .2s ease}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-ai{font-size:.76rem;font-weight:700;color:#0f2f67;text-decoration:none;display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,rgba(219,234,254,.95),rgba(191,219,254,.9));border:1px solid rgba(59,130,246,.28);box-shadow:0 8px 20px rgba(37,99,235,.14);transition:transform .25s ease,box-shadow .25s ease,color .2s ease}
+.nav-ai:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 28px rgba(37,99,235,.24);color:var(--blue)}
+.ldot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 1.8s ease infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.nav-enroll{font-size:0.8rem;font-weight:700;color:#fff;background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 45%,#3b82f6 100%);padding:10px 20px;text-decoration:none;border-radius:11px;transition:all .25s ease;border:1px solid rgba(255,255,255,.36);box-shadow:0 12px 28px rgba(37,99,235,.28)}
+.nav-enroll:hover{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 52%,#60a5fa 100%);transform:translateY(-3px);box-shadow:0 18px 34px rgba(37,99,235,.36)}
+
+.cc,.pcard,.vcard,.ncard,.trainer-card,.mcard,.lab-card,.review-card,.next-card,.who-card,.pstat,.stat,.photo-tile,.tcard2{transition:transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s ease,background .25s ease,border-color .25s ease}
+.cc:hover,.pcard:hover,.vcard:hover,.ncard:hover,.trainer-card:hover,.mcard:hover,.lab-card:hover,.review-card:hover,.next-card:hover,.who-card:hover,.pstat:hover,.stat:hover,.tcard2:hover{transform:translateY(-4px)}
+.btn-primary,.btn-ghost,.nav-enroll{will-change:transform,box-shadow}
+.hero-title em,.head em,.sec-head em,.course-title em{background:linear-gradient(90deg,#1d4ed8,#3b82f6,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent;animation:accentShift 5s ease-in-out infinite}
+@keyframes accentShift{0%,100%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(12deg)}}
+
+/* ── PAGE LAYOUT ── */
+.page{display:grid;grid-template-columns:1fr 340px;gap:0;min-height:100vh;padding-top:62px}
+.main{min-width:0}
+.sidebar{position:sticky;top:62px;height:calc(100vh - 62px);overflow-y:auto;border-left:1px solid var(--line);background:var(--bg2)}
+
+/* ── HERO ── */
+.course-hero{background:linear-gradient(155deg,#143d82 0%,#0b2a60 42%,#081731 100%);padding:60px 56px 50px;position:relative;overflow:hidden;border-bottom:1px solid rgba(147,197,253,.26)}
+.course-hero-layout{display:grid;grid-template-columns:1fr min(280px,32vw);gap:40px;align-items:end}
+.course-hero-shot{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(2,6,23,.35);border:1px solid rgba(191,219,254,.35)}
+.course-hero-shot img{display:block;width:100%;height:220px;object-fit:cover}
+.course-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 90% 50%,rgba(29,78,216,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(30,64,175,.1) 0%,transparent 70%);pointer-events:none;animation:hglow 8s ease-in-out infinite alternate}
+@keyframes hglow{0%{opacity:.7}100%{opacity:1}}
+.course-hero::after{content:‘CDPSE’;position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:‘Fraunces’,serif;font-size:10rem;font-weight:300;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;letter-spacing:-.05em}
+.hero-inner{position:relative;z-index:1}
+.crumb{display:flex;align-items:center;gap:8px;font-size:.72rem;color:rgba(255,255,255,.3);margin-bottom:20px}
+.crumb a{color:rgba(255,255,255,.3);text-decoration:none;transition:color .15s}
+.crumb a:hover{color:rgba(255,255,255,.7)}
+.crumb span{opacity:.4}
+.course-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.cbadge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.cb-vendor{background:rgba(29,78,216,.2);color:#93c5fd;border:1px solid rgba(29,78,216,.28)}
+.cb-level{background:rgba(30,64,175,.2);color:#bfdbfe;border:1px solid rgba(30,64,175,.24)}
+.cb-new{background:rgba(217,119,6,.2);color:#fcd34d;border:1px solid rgba(217,119,6,.3)}
+.cb-hot{background:rgba(22,163,74,.15);color:#86efac;border:1px solid rgba(22,163,74,.25)}
+.course-title{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:14px}
+.course-title em{font-style:italic;color:#bfdbfe}
+.course-subtitle{font-size:.95rem;color:rgba(255,255,255,.5);font-weight:300;max-width:580px;line-height:1.7;margin-bottom:28px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap}
+.hmeta{display:flex;align-items:center;gap:7px;font-size:.78rem;color:rgba(255,255,255,.45)}
+.hmeta-icon{font-size:.9rem}
+.hmeta strong{color:rgba(255,255,255,.8);font-weight:600}
+
+/* ── QUICK WINS ── */
+.quick-wins{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--marL);border-bottom:1px solid var(--line)}
+.qw{background:#fff;padding:22px 24px;display:flex;align-items:flex-start;gap:12px;transition:background .15s}
+.qw:hover{background:var(--marP)}
+.qw-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+.qw h4{font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:2px;line-height:1.3}
+.qw p{font-size:.72rem;color:var(--ink3);line-height:1.5}
+
+/* ── TABS ── */
+.tabs-bar{display:flex;gap:0;border-bottom:1.5px solid var(--line);padding:0 56px;background:rgba(248,251,255,.92);position:sticky;top:62px;z-index:10;overflow-x:auto;scrollbar-width:none;backdrop-filter:blur(10px)}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab{font-size:.78rem;font-weight:600;color:var(--ink3);padding:14px 18px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:‘Plus Jakarta Sans’,sans-serif;margin-bottom:-1.5px}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--blue);border-bottom-color:var(--blue);background:linear-gradient(180deg,transparent,#dbeafe)}
+
+/* ── CONTENT SECTIONS ── */
+.content-sec{padding:48px 56px;border-bottom:1px solid var(--line)}
+.content-sec:last-child{border-bottom:none}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:’’;width:14px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
+.eyebrow.m{color:var(--marM)}.eyebrow.m::before{background:var(--marM)}
+.eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}
+h2.sec-head{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.6rem,2.5vw,2.2rem);line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px}
+h2.sec-head em{font-style:italic;color:var(--blue)}
+h2.sec-head em.m{color:var(--marM)}
+.body-text{font-size:.9rem;color:var(--ink2);line-height:1.85;margin-bottom:14px}
+.pull-text{font-family:‘Fraunces’,serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--maroon);border-left:2px solid var(--maroon);padding-left:16px;margin:24px 0;line-height:1.7}
+
+/* ── WHO IS THIS FOR ── */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:28px}
+.who-card{background:#fff;padding:22px 20px;display:flex;gap:13px;align-items:flex-start;transition:background .15s}
+.who-card:hover{background:var(--bluM)}
+.who-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.who-card h4{font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:3px}
+.who-card p{font-size:.76rem;color:var(--ink3);line-height:1.6}
+
+/* ── WHAT YOU LEARN ── */
+.modules{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:28px}
+.module{background:#fff;border:none;padding:0;cursor:pointer;text-align:left;width:100%;font-family:‘Plus Jakarta Sans’,sans-serif;transition:background .15s}
+.module:hover{background:linear-gradient(180deg,#f8fbff,var(--bg2))}
+.module-header{display:flex;align-items:center;gap:16px;padding:18px 22px}
+.module-num{font-family:‘Fraunces’,serif;font-size:.95rem;font-weight:300;color:var(--blue);min-width:28px;flex-shrink:0}
+.module-header h4{font-size:.87rem;font-weight:600;color:var(--ink);flex:1}
+.module-count{font-size:.68rem;color:var(--ink4);letter-spacing:.05em;margin-right:12px}
+.module-arrow{color:var(--ink4);font-size:.8rem;transition:transform .2s;flex-shrink:0}
+.module.open .module-arrow{transform:rotate(90deg);color:var(--blue)}
+.module-body{display:none;padding:0 22px 18px 22px;border-top:1px solid var(--line)}
+.module.open .module-body{display:block}
+.module-topics{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-top:12px}
+.topic{display:flex;align-items:flex-start;gap:7px;font-size:.77rem;color:var(--ink3);line-height:1.5}
+.topic::before{content:‘→’;color:var(--blue);font-size:.65rem;flex-shrink:0;margin-top:2px;font-weight:700}
+
+/* ── LABS ── */
+.labs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:28px}
+.lab-card{background:#fff;padding:24px 20px;transition:background .15s;position:relative;overflow:hidden}
+.lab-card::after{content:’’;position:absolute;left:0;bottom:0;top:0;width:3px;background:var(--blue);transform:scaleY(0);transform-origin:bottom;transition:transform .25s ease}
+.lab-card:nth-child(even)::after{background:var(--maroon)}
+.lab-card:hover{background:linear-gradient(180deg,#f8fbff,var(--bg2))}
+.lab-card:hover::after{transform:scaleY(1)}
+.lab-num{font-family:‘Fraunces’,serif;font-size:1.6rem;font-weight:300;color:var(--blue);line-height:1;margin-bottom:10px;opacity:.3}
+.lab-card:nth-child(even) .lab-num{color:var(--maroon)}
+.lab-card h4{font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3}
+.lab-card p{font-size:.76rem;color:var(--ink3);line-height:1.6}
+.lab-tag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-top:10px}
+.lt-attack{background:var(--marL);color:var(--marM)}
+.lt-defend{background:var(--bluL);color:var(--blue)}
+.lt-forensic{background:var(--amberL);color:var(--amber)}
+.lt-recon{background:var(--greenL);color:var(--green)}
+
+/* ── EXAM INFO ── */
+.exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
+.exam-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:24px 22px}
+.exam-card h4{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:14px}
+.exam-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:.83rem}
+.exam-row:last-child{border-bottom:none}
+.exam-row span{color:var(--ink3)}
+.exam-row strong{color:var(--ink);font-weight:600}
+.pass-highlight{background:var(--greenL);color:var(--green);padding:2px 8px;border-radius:4px;font-size:.75rem;font-weight:700}
+.fail-note{background:var(--marL);color:var(--marM);padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:600}
+
+/* ── PASS RATE ── */
+.pass-band{background:linear-gradient(160deg,#123777 0%,#0b1f46 100%);padding:44px 56px;display:flex;align-items:center;gap:48px;border-top:1px solid rgba(147,197,253,.26)}
+.pass-ring-wrap{flex-shrink:0}
+.pring{width:120px;height:120px;position:relative}
+.pring svg{width:120px;height:120px;transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:10}
+.ring-fill{fill:none;stroke:var(--blue);stroke-width:10;stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:327;transition:stroke-dashoffset 2s ease .3s}
+.pring.go .ring-fill{stroke-dashoffset:7}
+.pct-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.pct-n{font-family:‘Fraunces’,serif;font-size:1.8rem;font-weight:300;color:#fff;line-height:1;letter-spacing:-.03em}
+.pct-n em{color:var(--blue);font-style:normal;font-size:1rem}
+.pct-l{font-size:.58rem;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.pass-right h3{font-family:‘Fraunces’,serif;font-weight:300;font-size:1.4rem;color:#fff;line-height:1.2;margin-bottom:10px;letter-spacing:-.01em}
+.pass-right h3 em{font-style:italic;color:#bfdbfe}
+.pass-right p{font-size:.82rem;color:rgba(255,255,255,.42);line-height:1.7;max-width:480px;margin-bottom:18px}
+.pass-pills{display:flex;gap:8px;flex-wrap:wrap}
+.ppill{font-size:.68rem;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid}
+.pp-b{background:rgba(29,78,216,.14);color:#93c5fd;border-color:rgba(29,78,216,.22)}
+.pp-m{background:rgba(30,64,175,.15);color:#bfdbfe;border-color:rgba(30,64,175,.22)}
+.pp-g{background:rgba(22,163,74,.15);color:#86efac;border-color:rgba(22,163,74,.25)}
+
+/* ── ROADMAP NEXT ── */
+.next-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:28px}
+.next-card{background:#fff;padding:24px 20px;transition:background .2s;position:relative}
+.next-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.nc-prev::before{background:var(--ink3)}
+.nc-this::before{background:var(--blue)}
+.nc-next::before{background:var(--maroon)}
+.next-card:hover{background:var(--bg2)}
+.next-card:hover::before{transform:scaleX(1)}
+.nc-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.nc-prev .nc-label{color:var(--ink4)}
+.nc-this .nc-label{color:var(--blue)}
+.nc-next .nc-label{color:var(--marM)}
+.nc-name{font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.nc-sub{font-size:.74rem;color:var(--ink3);line-height:1.5}
+.nc-link{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;text-decoration:none;margin-top:12px;transition:gap .15s}
+.nc-prev .nc-link{color:var(--ink3)}
+.nc-this .nc-link{color:var(--blue)}
+.nc-next .nc-link{color:var(--marM)}
+.nc-link:hover{gap:8px}
+
+/* ── REVIEWS ── */
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:28px}
+.review-card{background:#fff;padding:24px 22px}
+.review-stars{display:flex;gap:2px;margin-bottom:12px}
+.star{color:var(--amber);font-size:.8rem}
+.review-text{font-family:‘Fraunces’,serif;font-style:italic;font-weight:300;font-size:.92rem;color:var(--ink2);line-height:1.8;margin-bottom:16px}
+.review-author{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--line)}
+.rav{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0}
+.rav-b{background:var(--bluL);color:var(--blue)}
+.rav-m{background:var(--marL);color:var(--marM)}
+.rav-g{background:var(--greenL);color:var(--green)}
+.rav-a{background:var(--amberL);color:var(--amber)}
+.rname{font-size:.78rem;font-weight:600;color:var(--ink);margin-bottom:1px}
+.rrole{font-size:.67rem;color:var(--ink4)}
+.review-pass{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;color:var(--green);background:var(--greenL);border:1px solid rgba(22,163,74,.2);padding:2px 8px;border-radius:100px;margin-top:6px}
+
+/* ── SIDEBAR ── */
+.sidebar-inner{padding:32px 28px;display:flex;flex-direction:column;gap:0}
+
+.enroll-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 24px;margin-bottom:16px;box-shadow:0 18px 40px rgba(15,23,42,.08)}
+.price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.price{font-family:‘Fraunces’,serif;font-size:2rem;font-weight:300;color:var(--ink);letter-spacing:-.02em}
+.price-orig{font-size:1rem;color:var(--ink4);text-decoration:line-through}
+.price-save{font-size:.72rem;font-weight:700;color:var(--green);background:var(--greenL);padding:2px 8px;border-radius:4px}
+.price-note{font-size:.72rem;color:var(--ink3);margin-bottom:20px}
+.enroll-btn{display:block;width:100%;text-align:center;background:linear-gradient(135deg,var(--blue),#2563eb);color:#fff;padding:14px;border-radius:10px;font-size:.88rem;font-weight:700;text-decoration:none;transition:all .2s;margin-bottom:10px;letter-spacing:.01em;border:1px solid rgba(255,255,255,.35)}
+.enroll-btn:hover{background:var(--brand-hover);transform:translateY(-1px);box-shadow:0 6px 20px rgba(29,78,216,.22)}
+.corp-btn{display:block;width:100%;text-align:center;background:var(--bg2);color:var(--ink2);padding:12px;border-radius:8px;font-size:.82rem;font-weight:600;text-decoration:none;border:1px solid var(--line);transition:all .15s;margin-bottom:20px}
+.corp-btn:hover{background:var(--bg3);color:var(--ink);border-color:var(--line2)}
+.guarantee{display:flex;align-items:flex-start;gap:10px;padding:14px;background:#eff6ff;border:1px solid #dbeafe;border-radius:10px;margin-bottom:20px}
+.guarantee-icon{font-size:1.1rem;flex-shrink:0}
+.guarantee h5{font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:2px}
+.guarantee p{font-size:.72rem;color:var(--ink2);opacity:.85;line-height:1.5}
+.sidebar-meta{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.smeta-row{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--line);font-size:.8rem}
+.smeta-row:last-child{border-bottom:none}
+.smeta-row span{color:var(--ink3)}
+.smeta-row strong{color:var(--ink);font-weight:600;text-align:right;font-size:.8rem}
+.smeta-badge{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--bluL);color:var(--blue)}
+
+.sidebar-includes{margin-bottom:16px}
+.sidebar-includes h4{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:12px}
+.include-item{display:flex;align-items:center;gap:9px;font-size:.8rem;color:var(--ink2);margin-bottom:9px}
+.include-item::before{content:‘✓’;color:var(--green);font-weight:700;font-size:.75rem;flex-shrink:0;width:16px}
+
+.verify-strip{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:16px}
+.verify-strip h4{font-size:.72rem;font-weight:700;color:var(--ink4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.verify-row{display:flex;align-items:center;gap:8px;font-size:.75rem;color:var(--ink3);margin-bottom:7px}
+.verify-row:last-child{margin-bottom:0}
+.verify-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+.share-strip{display:flex;gap:8px}
+.share-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--ink3);border:1px solid var(--line);border-radius:8px;padding:9px;text-decoration:none;transition:all .15s;background:#fff}
+.share-btn:hover{color:var(--ink);border-color:var(--line2);background:var(--bg2)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+
+/* ── FOOTER ── */
+footer{background:linear-gradient(180deg,#0d2347 0%,#081731 100%);padding:48px 40px 32px;border-top:1px solid rgba(29,78,216,.2)}
+.fbot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.fbot p{font-size:.72rem;color:rgba(255,255,255,.2)}
+.flinks{display:flex;gap:20px}
+.flinks a{font-size:.72rem;color:rgba(255,255,255,.2);text-decoration:none;transition:color .15s}
+.flinks a:hover{color:rgba(255,255,255,.5)}
+.flogo{font-size:.95rem;font-weight:700;color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px}
+.flogo span{color:#fb7185}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+.page{grid-template-columns:1fr}
+.sidebar{position:static;height:auto;border-left:none;border-top:1px solid var(--line)}
+.sidebar-inner{padding:28px}
+.enroll-card{position:static}
+.course-hero-layout{grid-template-columns:1fr}
+.course-hero-shot{max-width:360px;margin-top:24px}
+.course-hero-shot img{height:200px}
+.labs-grid{grid-template-columns:1fr 1fr}
+.next-grid{grid-template-columns:1fr}
+.quick-wins{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+nav{padding:0 16px;gap:10px}
+.course-hero{padding:40px 24px 36px}
+.tabs-bar{padding:0 24px}
+.content-sec{padding:36px 24px}
+.pass-band{padding:32px 24px;flex-direction:column;gap:24px;text-align:center}
+.pass-ring-wrap{display:flex;justify-content:center}
+.who-grid{grid-template-columns:1fr}
+.module-topics{grid-template-columns:1fr}
+.labs-grid{grid-template-columns:1fr}
+.exam-grid{grid-template-columns:1fr}
+.reviews-grid{grid-template-columns:1fr}
+.quick-wins{grid-template-columns:1fr 1fr}
+footer{padding:36px 20px 24px}
+}
+</style>
+
+  <link rel="stylesheet" href="../css/site-nav-mobile.css">
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav class="site-nav">
+  <a href="../index.html" class="nav-logo" aria-label="Nexperts Academy">
+    <img src="../image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
+  </a>
+  <ul class="nav-links" id="sitePrimaryNav">
+    <span class="nav-highlight" aria-hidden="true"></span>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#courses" class="active">Courses</a></li>
+    <li><a href="../index.html#roadmap">Roadmaps</a></li>
+    <li><a href="../index.html#verify">Verify</a></li>
+    <li><a href="../index.html#paths">Career Paths</a></li>
+    <li><a href="../index.html#clients">Clients</a></li>
+    <li><a href="../Nexperts beyond.html">Beyond</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+    <li><a href="../about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
+    <a href="../contact.html#enquire" class="nav-enroll">Enquire Now</a>
+  </div>
+  <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
+</nav>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div>
+
+<div class="page">
+<div class="main">
+
+  <!-- COURSE HERO -->
+
+  <div class="course-hero">
+    <div class="course-hero-layout hero-inner">
+      <div>
+        <div class="crumb">
+          <a href="../index.html">Home</a><span>/</span>
+          <a href="../index.html#courses">Courses</a><span>/</span>
+          <a href="#">ISACA</a><span>/</span>
+          <span style="color:rgba(255,255,255,.6)">CDPSE</span>
+        </div>
+        <div class="course-badges">
+          <span class="cbadge cb-vendor">ISACA Authorised</span>
+          <span class="cbadge cb-level">Advanced · Privacy</span>
+          <span class="cbadge cb-new">2026 ECO</span>
+          <span class="cbadge cb-hot">PDPA 2024 Aligned</span>
+        </div>
+        <h1 class="course-title">CDPSE<br><em>Data Privacy Solutions Engineer</em></h1>
+        <p class="course-subtitle">ISACA's privacy-engineering credential. The cert most often booked by Data Protection Officers, privacy engineers and security architects implementing PDPA, GDPR and the new MY PDPA 2024 amendments.</p>
+        <div class="hero-meta">
+          <div class="hmeta"><span class="hmeta-icon">⏱</span><span>Duration: <strong>4 days / 32 hrs</strong></span></div>
+          <div class="hmeta"><span class="hmeta-icon">💻</span><span>Format: <strong>Instructor-Led + Privacy Sims</strong></span></div>
+          <div class="hmeta"><span class="hmeta-icon">🌐</span><span>Delivery: <strong>On-site · Virtual · Hybrid</strong></span></div>
+          <div class="hmeta"><span class="hmeta-icon">✅</span><span>Pass rate: <strong style="color:#86efac">91%</strong></span></div>
+          <div class="hmeta"><span class="hmeta-icon">📅</span><span>Next intake: <strong>3 Jun 2026</strong></span></div>
+        </div>
+      </div>
+      <div class="course-hero-shot reveal">
+        <img src="../image/people-taking-part-high-protocol-event.jpg" alt="CDPSE training session at Nexperts Academy" width="400" height="300" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK WINS -->
+
+  <div class="quick-wins">
+    <div class="qw reveal">
+      <span class="qw-icon">🔐</span>
+      <div><h4>Privacy by design</h4><p>Build privacy into systems from sprint zero</p></div>
+    </div>
+    <div class="qw reveal d1">
+      <span class="qw-icon">📋</span>
+      <div><h4>PDPA + GDPR</h4><p>MY PDPA 2024, GDPR, Singapore PDPA, Thailand PDPA mapped</p></div>
+    </div>
+    <div class="qw reveal d2">
+      <span class="qw-icon">📊</span>
+      <div><h4>Data lifecycle</h4><p>Discovery, classification, minimisation, retention, deletion</p></div>
+    </div>
+    <div class="qw reveal d3">
+      <span class="qw-icon">🔍</span>
+      <div><h4>Privacy controls</h4><p>De-identification, pseudonymisation, encryption, consent, DSAR</p></div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+
+  <div class="tabs-bar" id="tabBar">
+    <button class="tab on" data-t="overview">Overview</button>
+    <button class="tab" data-t="curriculum">Curriculum</button>
+    <button class="tab" data-t="labs">Labs</button>
+    <button class="tab" data-t="exam">Exam Info</button>
+    <button class="tab" data-t="passrate">Pass Rate</button>
+    <button class="tab" data-t="roadmap">Next Steps</button>
+    <button class="tab" data-t="reviews">Reviews</button>
+  </div>
+
+  <!-- OVERVIEW -->
+
+  <div id="sec-overview" class="content-sec">
+    <div class="eyebrow">What this course is</div>
+    <h2 class="sec-head">Where privacy stops<br><em>being a legal team's problem.</em></h2>
+    <p class="body-text">CDPSE is ISACA's privacy-engineering credential. It is the cert most often booked by Data Protection Officers (DPO), privacy engineers, security architects and product engineers implementing privacy controls in systems, data warehouses and customer-facing platforms.</p>
+    <p class="body-text">At Nexperts, CDPSE is delivered as a 4-day intensive that walks the three exam domains in real-world MY scenarios — e-commerce, banking, healthcare and SaaS. By day 4 you've designed privacy controls for a customer-data platform, run a DSAR (Data Subject Access Request) workflow, and defended a privacy-impact assessment.</p>
+    <div class="pull-text">MY's PDPA 2024 amendments — with mandatory data-breach notification, the new DPO requirement and direct-controller liability — made CDPSE a near-mandatory cert for privacy-engineering roles in regulated industries.</div>
+    <p class="body-text">The 2024+ CDPSE update aligned with the MY PDPA 2024 amendments, the EU AI Act privacy provisions, and the post-Schrems-II cross-border-transfer landscape. We map every control conversation to PDPA 2024, GDPR and the BNM RMiT data-protection chapter.</p>
+
+<div style="margin-top:36px">
+  <div class="eyebrow m">Who should take this course</div>
+  <div class="who-grid">
+    <div class="who-card">
+      <span class="who-icon">🔐</span>
+      <div><h4>Data Protection Officers</h4><p>Owning PDPA / GDPR compliance in MY enterprises. CDPSE is the engineering credential.</p></div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">👨‍💻</span>
+      <div><h4>Privacy engineers</h4><p>Implementing privacy controls in code. CDPSE is the recognised credential.</p></div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">📚</span>
+      <div><h4>Security architects</h4><p>Designing systems that touch personal data. CDPSE adds the privacy lens.</p></div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">🏛</span>
+      <div><h4>Compliance leads</h4><p>Mapping PDPA 2024 into engineering requirements.</p></div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">📈</span>
+      <div><h4>Data governance leads</h4><p>Owning data classification, retention and deletion at the enterprise level.</p></div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">💼</span>
+      <div><h4>Product managers</h4><p>Building features that touch personal data. CDPSE builds privacy literacy.</p></div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:36px">
+  <div class="eyebrow g">Prerequisites</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
+    <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> 3 years of technical experience in 2 of the 3 CDPSE domains</div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> Domains: privacy governance, privacy architecture, data lifecycle</div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> Comfortable reading data-flow diagrams and consent flows</div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> ISACA membership recommended (50% exam-fee saving)</div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink4);font-style:italic"><span>→</span> Don't yet have 3 years experience? You can sit the exam first; ISACA grants the cert when experience is verified within 5 years.</div>
+  </div>
+</div>
+  </div>
+
+  <!-- CURRICULUM -->
+
+  <div id="sec-curriculum" class="content-sec" style="display:none">
+    <div class="eyebrow">Course Curriculum</div>
+    <h2 class="sec-head">Three domains. <em>Privacy by design.</em></h2>
+    <p class="body-text">CDPSE covers three exam domains: Privacy Governance (34%), Privacy Architecture (36%), and Data Lifecycle (30%). We deliver in design-time order with MY-context case studies.</p>
+
+<div class="modules">
+  <button class="module open" onclick="toggleModule(this)">
+    <div class="module-header">
+      <span class="module-num">01</span>
+      <h4>Privacy Governance</h4>
+      <span class="module-count">6 topics</span>
+      <span class="module-arrow">›</span>
+    </div>
+    <div class="module-body">
+      <div class="module-topics">
+        <div class="topic">Privacy programme governance and roles</div>
+        <div class="topic">Privacy frameworks (NIST Privacy, ISO 27701, GAPP)</div>
+        <div class="topic">MY PDPA 2024 amendments — DPO, breach notification, controller liability</div>
+        <div class="topic">GDPR, PDPA SG, Thailand PDPA, post-Schrems-II</div>
+        <div class="topic">Privacy programme management and metrics</div>
+        <div class="topic">Workshop: PDPA 2024 gap-analysis for a Klang Valley e-commerce</div>
+      </div>
+    </div>
+  </button>
+  <button class="module" onclick="toggleModule(this)">
+    <div class="module-header">
+      <span class="module-num">02</span>
+      <h4>Privacy Architecture</h4>
+      <span class="module-count">6 topics</span>
+      <span class="module-arrow">›</span>
+    </div>
+    <div class="module-body">
+      <div class="module-topics">
+        <div class="topic">Privacy by design and privacy by default</div>
+        <div class="topic">Privacy-enhancing technologies (PET) — differential privacy, federated learning</div>
+        <div class="topic">De-identification, pseudonymisation, anonymisation</div>
+        <div class="topic">Encryption (at rest, in transit, in use)</div>
+        <div class="topic">Identity management, consent management</div>
+        <div class="topic">Workshop: Design privacy controls for a customer-data platform</div>
+      </div>
+    </div>
+  </button>
+  <button class="module" onclick="toggleModule(this)">
+    <div class="module-header">
+      <span class="module-num">03</span>
+      <h4>Data Lifecycle</h4>
+      <span class="module-count">6 topics</span>
+      <span class="module-arrow">›</span>
+    </div>
+    <div class="module-body">
+      <div class="module-topics">
+        <div class="topic">Data discovery and classification</div>
+        <div class="topic">Data minimisation and retention</div>
+        <div class="topic">Data sharing, cross-border transfer, third-party</div>
+        <div class="topic">DSAR (Data Subject Access Request) workflow</div>
+        <div class="topic">Right to erasure, portability, rectification</div>
+        <div class="topic">Workshop: Run a DSAR for a multi-system customer record</div>
+      </div>
+    </div>
+  </button>
+</div>
+  </div>
+
+  <!-- LABS -->
+
+  <div id="sec-labs" class="content-sec" style="display:none">
+    <div class="eyebrow">Privacy Sims</div>
+    <h2 class="sec-head">8 sprints. <em class="m">Real MY privacy scenarios.</em></h2>
+    <p class="body-text">CDPSE is delivered as case-study workshops with hands-on tooling for de-identification, consent management and DSAR. By day 4 you've worked through MY-context scenarios across e-commerce, banking, healthcare and SaaS.</p>
+    <div class="labs-grid">
+      <div class="lab-card reveal">
+        <div class="lab-num">01</div>
+        <h4>PDPA Gap</h4>
+        <p>PDPA 2024 gap-analysis for a Klang Valley e-commerce.</p>
+        <span class="lab-tag lt-recon">Governance</span>
+      </div>
+      <div class="lab-card reveal d1">
+        <div class="lab-num">02</div>
+        <h4>Data Map</h4>
+        <p>Build a data inventory and flow map for a customer-data platform.</p>
+        <span class="lab-tag lt-recon">Architecture</span>
+      </div>
+      <div class="lab-card reveal d2">
+        <div class="lab-num">03</div>
+        <h4>De-Identification</h4>
+        <p>Design pseudonymisation for an analytics dataset.</p>
+        <span class="lab-tag lt-defend">Architecture</span>
+      </div>
+      <div class="lab-card reveal">
+        <div class="lab-num">04</div>
+        <h4>Consent</h4>
+        <p>Design a granular consent flow that meets PDPA + GDPR.</p>
+        <span class="lab-tag lt-defend">Lifecycle</span>
+      </div>
+      <div class="lab-card reveal d1">
+        <div class="lab-num">05</div>
+        <h4>DSAR</h4>
+        <p>Run a DSAR across 4 source systems with deadlines.</p>
+        <span class="lab-tag lt-recon">Lifecycle</span>
+      </div>
+      <div class="lab-card reveal d2">
+        <div class="lab-num">06</div>
+        <h4>Cross-Border</h4>
+        <p>Design BNM-aligned cross-border transfer with SCCs.</p>
+        <span class="lab-tag lt-defend">Architecture</span>
+      </div>
+      <div class="lab-card reveal">
+        <div class="lab-num">07</div>
+        <h4>Breach Sim</h4>
+        <p>Run a 72-hour breach-notification simulation.</p>
+        <span class="lab-tag lt-attack">Governance</span>
+      </div>
+      <div class="lab-card reveal d1">
+        <div class="lab-num">08</div>
+        <h4>DPIA</h4>
+        <p>Build a Data Protection Impact Assessment for AI scoring.</p>
+        <span class="lab-tag lt-recon">Governance</span>
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--ink3);margin-top:20px;font-style:italic">+ 8 micro-tasks across NIST Privacy, ISO 27701 and PDPA 2024.</p>
+  </div>
+
+  <!-- EXAM INFO -->
+
+  <div id="sec-exam" class="content-sec" style="display:none">
+    <div class="eyebrow">Exam Information</div>
+    <h2 class="sec-head">One exam.<br><em>CDPSE.</em></h2>
+    <p class="body-text">CDPSE has one exam. 120 questions, 3.5 hours, scaled scoring. You need 450 / 800 to pass. The exam is heavy on architecture and lifecycle judgement.</p>
+    <div class="exam-grid">
+      <div class="exam-card">
+        <h4>CDPSE Exam</h4>
+        <div class="exam-row"><span>Questions</span><strong>120 multiple choice</strong></div>
+        <div class="exam-row"><span>Duration</span><strong>3.5 hours</strong></div>
+        <div class="exam-row"><span>Passing score</span><strong><span class="pass-highlight">450 / 800 (56%)</span></strong></div>
+        <div class="exam-row"><span>Format</span><strong>PSI / online proctored</strong></div>
+        <div class="exam-row"><span>Validity</span><strong>3 years (CPE-renewable)</strong></div>
+        <div class="exam-row"><span>Industry avg pass rate</span><strong><span class="fail-note">~63% first attempt</span></strong></div>
+        <div class="exam-row"><span>Nexperts pass rate</span><strong><span class="pass-highlight">91% first attempt</span></strong></div>
+      </div>
+    </div>
+
+<div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--line);border-radius:10px">
+  <div class="eyebrow g" style="margin-bottom:16px">Our 4-Mock Programme</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden">
+    <div style="background:#fff;padding:18px 16px">
+      <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:300;color:var(--blue);opacity:.4;margin-bottom:8px">01</div>
+      <h4 style="font-size:.83rem;font-weight:600;color:var(--ink);margin-bottom:5px">Diagnostic</h4>
+      <p style="font-size:.75rem;color:var(--ink3);line-height:1.6">End of day 1. Sets the baseline. Average 49%.</p>
+    </div>
+    <div style="background:#fff;padding:18px 16px">
+      <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:300;color:var(--blue);opacity:.4;margin-bottom:8px">02</div>
+      <h4 style="font-size:.83rem;font-weight:600;color:var(--ink);margin-bottom:5px">Domain Drill</h4>
+      <p style="font-size:.75rem;color:var(--ink3);line-height:1.6">End of day 3. By-domain mock. Highlights weak areas.</p>
+    </div>
+    <div style="background:#fff;padding:18px 16px">
+      <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:300;color:var(--blue);opacity:.4;margin-bottom:8px">03</div>
+      <h4 style="font-size:.83rem;font-weight:600;color:var(--ink);margin-bottom:5px">Full Mock</h4>
+      <p style="font-size:.75rem;color:var(--ink3);line-height:1.6">End of day 4. Full timed simulation. 70%+ before booking.</p>
+    </div>
+    <div style="background:#fff;padding:18px 16px">
+      <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:300;color:var(--blue);opacity:.4;margin-bottom:8px">04</div>
+      <h4 style="font-size:.83rem;font-weight:600;color:var(--ink);margin-bottom:5px">Clearance</h4>
+      <p style="font-size:.75rem;color:var(--ink3);line-height:1.6">Week after class. Final clearance. 75%+ before booking.</p>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- PASS RATE -->
+
+  <div id="sec-passrate" class="content-sec" style="display:none;padding:0">
+    <div class="pass-band" id="passRingEl">
+      <div class="pass-ring-wrap">
+        <div class="pring" id="pring" data-target="91">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="pct-center">
+            <div class="pct-n" id="pctNum">0<em>%</em></div>
+            <div class="pct-l">Pass Rate</div>
+          </div>
+        </div>
+      </div>
+      <div class="pass-right">
+        <h3>91% of our CDPSE<br>candidates pass <em>on first attempt.</em></h3>
+        <p>The ISACA global first-attempt rate for CDPSE sits around 63%. We hit 91% by drilling privacy-engineering on MY PDPA 2024 scenarios and gating booking on a clearance mock.</p>
+        <div class="pass-pills">
+          <span class="ppill pp-b">PDPA 2024 mapped</span>
+          <span class="ppill pp-m">Privacy-engineering drill</span>
+          <span class="ppill pp-g">91% first attempt</span>
+          <span class="ppill pp-b">Free retake voucher</span>
+          <span class="ppill pp-m">ISACA aligned</span>
+        </div>
+      </div>
+    </div>
+    <div class="content-sec" style="border-top:1px solid var(--line)">
+      <div class="eyebrow m">Why our pass rate is 91%</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px">
+        <div style="padding:20px;background:var(--bg2);border-radius:10px;border:1px solid var(--line)">
+          <h4 style="font-size:.85rem;font-weight:600;color:var(--ink);margin-bottom:8px">Industry average: ~63%</h4>
+          <p style="font-size:.78rem;color:var(--ink3);line-height:1.65">Most candidates can recite GDPR articles but cannot design a PET (privacy-enhancing technology) under timer. CDPSE questions demand engineering judgement.</p>
+        </div>
+        <div style="padding:20px;background:var(--marP);border-radius:10px;border:1px solid var(--marL)">
+          <h4 style="font-size:.85rem;font-weight:600;color:var(--marM);margin-bottom:8px">Nexperts: 91%</h4>
+          <p style="font-size:.78rem;color:var(--marM);opacity:.8;line-height:1.65">We work privacy-design exercises for 60% of class time. We drill the architecture domain. We gate booking on a clearance mock. By exam day, privacy-by-design thinking is reflex.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROADMAP / NEXT STEPS -->
+
+  <div id="sec-roadmap" class="content-sec" style="display:none">
+    <div class="eyebrow">Your Privacy Path</div>
+    <h2 class="sec-head">CDPSE pairs with<br><em>CISM and CCSP.</em></h2>
+    <p class="body-text">CDPSE stacks naturally with CISM (security-management lens), CCSP (cloud-security lens) for SaaS workloads, or CISSP (breadth across all 8 security domains).</p>
+    <div class="next-grid">
+      <div class="next-card nc-prev">
+        <div class="nc-label">Before this</div>
+        <div class="nc-name">ISO 27001 LI or CISA</div>
+        <p class="nc-sub">Compliance / audit foundation.</p>
+        <a href="#" class="nc-link">View ISO 27001 LI →</a>
+      </div>
+      <div class="next-card nc-this">
+        <div class="nc-label">You are here</div>
+        <div class="nc-name">CDPSE</div>
+        <p class="nc-sub">ISACA privacy-engineering cert. PDPA 2024 ready.</p>
+        <a href="#" class="nc-link" style="color:var(--blue)">Currently viewing →</a>
+      </div>
+      <div class="next-card nc-next">
+        <div class="nc-label">Recommended next</div>
+        <div class="nc-name">CISM, CCSP or CISSP</div>
+        <p class="nc-sub">Security-management, cloud-security or breadth.</p>
+        <a href="#" class="nc-link">View CISM →</a>
+      </div>
+    </div>
+
+<div style="margin-top:32px;padding:24px;background:var(--ink);border-radius:12px;position:relative;overflow:hidden">
+  <div style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);font-family:'Fraunces',serif;font-size:8rem;font-weight:300;color:rgba(255,255,255,.03);pointer-events:none">Path</div>
+  <div style="position:relative;z-index:1">
+    <div class="eyebrow" style="color:rgba(255,255,255,.3)"><span style="width:14px;height:2px;background:rgba(255,255,255,.2);border-radius:2px;display:block"></span>Full Data Protection Officer career path</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:.75rem;font-weight:600;color:rgba(255,255,255,.4);padding:5px 12px;border:1px solid rgba(255,255,255,.12);border-radius:6px">ISO 27001 LI</span>
+        <span style="color:rgba(255,255,255,.2);font-size:.9rem">→</span>
+        <span style="font-size:.75rem;font-weight:700;color:#93c5fd;padding:5px 12px;border:1px solid rgba(29,78,216,.35);border-radius:6px;background:rgba(29,78,216,.14)">CDPSE ← You</span>
+        <span style="color:rgba(255,255,255,.2);font-size:.9rem">→</span>
+        <span style="font-size:.75rem;font-weight:600;color:#bfdbfe;padding:5px 12px;border:1px solid rgba(30,64,175,.4);border-radius:6px;background:rgba(30,64,175,.15)">CISM</span>
+        <span style="color:rgba(255,255,255,.2);font-size:.9rem">→</span>
+        <span style="font-size:.75rem;font-weight:600;color:#bfdbfe;padding:5px 12px;border:1px solid rgba(30,64,175,.4);border-radius:6px;background:rgba(30,64,175,.15)">CCSP</span>
+        <span style="color:rgba(255,255,255,.2);font-size:.9rem">→</span>
+        <span style="font-size:.75rem;font-weight:600;color:#bfdbfe;padding:5px 12px;border:1px solid rgba(30,64,175,.4);border-radius:6px;background:rgba(30,64,175,.15)">CISSP</span>
+      </div>
+    </div>
+    <p style="font-size:.75rem;color:rgba(255,255,255,.3);margin-top:14px">Expected salary range after CDPSE + 3 years experience: <strong style="color:#86efac">RM 10,500 – RM 17,500/month</strong> for DPO and privacy-engineering roles in MY enterprises and regulated industries.</p>
+  </div>
+</div>
+  </div>
+
+  <!-- REVIEWS -->
+
+  <div id="sec-reviews" class="content-sec" style="display:none">
+    <div class="eyebrow">Student Reviews</div>
+    <h2 class="sec-head">What our CDPSE<br><em>graduates say.</em></h2>
+    <div style="display:flex;align-items:center;gap:24px;margin-top:4px;margin-bottom:32px;padding:20px;background:var(--bg2);border:1px solid var(--line);border-radius:10px">
+    <div style="text-align:center;flex-shrink:0">
+      <div style="font-family:'Fraunces',serif;font-size:3rem;font-weight:300;color:var(--ink);letter-spacing:-.03em;line-height:1">4.8</div>
+      <div style="display:flex;gap:2px;justify-content:center;margin:4px 0">
+        <span style="color:var(--amber)">★★★★★</span>
+      </div>
+      <div style="font-size:.7rem;color:var(--ink4)">52 reviews</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:.72rem;color:var(--ink3);min-width:16px">5★</span><div style="flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden"><div style="width:43%;height:100%;background:var(--amber);border-radius:3px"></div></div><span style="font-size:.72rem;color:var(--ink4)">43%</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:.72rem;color:var(--ink3);min-width:16px">4★</span><div style="flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden"><div style="width:7%;height:100%;background:var(--amber);opacity:.6;border-radius:3px"></div></div><span style="font-size:.72rem;color:var(--ink4)">7%</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:.72rem;color:var(--ink3);min-width:16px">3★</span><div style="flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden"><div style="width:1%;height:100%;background:var(--amber);opacity:.4;border-radius:3px"></div></div><span style="font-size:.72rem;color:var(--ink4)">1%</span></div>
+    </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="review-text">"With PDPA 2024 effective, my company needed a DPO with engineering credibility. CDPSE was perfect — covered both governance and architecture, and the MY-context modules made it instantly applicable."</p>
+        <div class="review-author">
+          <div class="rav rav-b">ZH</div>
+          <div>
+            <div class="rname">Zarith Hassan</div>
+            <div class="rrole">DPO · AirAsia MOVE</div>
+            <div class="review-pass">✓ Passed first attempt (642/800)</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="review-text">"I came in as a security architect, left as a privacy engineer. The PET (privacy-enhancing tech) labs were the highlight — differential privacy and federated learning are now in our SaaS roadmap."</p>
+        <div class="review-author">
+          <div class="rav rav-m">RD</div>
+          <div>
+            <div class="rname">Rahul Dasgupta</div>
+            <div class="rrole">Privacy Engineer · Grab MY</div>
+            <div class="review-pass">✓ Passed first attempt (594/800)</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="review-text">"Toughest of the ISACA depth certs for me — it sits between policy and engineering. Nexperts threaded that needle. Cleared on first sitting."</p>
+        <div class="review-author">
+          <div class="rav rav-g">SK</div>
+          <div>
+            <div class="rname">Suria Kumari</div>
+            <div class="rrole">Senior Compliance · Allianz MY</div>
+            <div class="review-pass">✓ Passed first attempt (572/800)</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="review-text">"DSAR drill was the single most useful exercise of my prep. Real-world DSAR is a nightmare across legacy systems — the lab forced us to architect for it."</p>
+        <div class="review-author">
+          <div class="rav rav-a">BS</div>
+          <div>
+            <div class="rname">Brandon Soh</div>
+            <div class="rrole">Lead Data Engineer · BoostMY</div>
+            <div class="review-pass">✓ Passed first attempt (688/800)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+  <div class="sidebar-inner">
+
+<div class="enroll-card" id="enroll">
+  <div class="price-row">
+    <span class="price">RM 4,600</span>
+    <span class="price-orig">RM 5,000</span>
+    <span class="price-save">Save 8%</span>
+  </div>
+  <p class="price-note">Per person · Includes ISACA exam voucher, official review manual</p>
+  <a href="mailto:hello@nexpertsacademy.com?subject=CDPSE Enrolment" class="enroll-btn">Enroll Now →</a>
+  <a href="mailto:hello@nexpertsacademy.com?subject=CDPSE Group Training" class="corp-btn">Corporate / Group Pricing</a>
+  <div class="guarantee">
+    <span class="guarantee-icon">🛡️</span>
+    <div>
+      <h5>91% Pass Guarantee</h5>
+      <p>Follow our programme, hit our clearance mock, and don't pass? We cover one retake voucher. No fine print.</p>
+    </div>
+  </div>
+  <div class="sidebar-meta">
+    <div class="smeta-row"><span>Duration</span><strong>4 days / 32 hrs</strong></div>
+    <div class="smeta-row"><span>Next intake</span><strong>3 Jun 2026</strong></div>
+    <div class="smeta-row"><span>Format</span><strong>On-site · Hybrid · Virtual</strong></div>
+    <div class="smeta-row"><span>Level</span><strong>Advanced · Privacy</strong></div>
+    <div class="smeta-row"><span>Language</span><strong>English · BM available</strong></div>
+    <div class="smeta-row"><span>Cert body</span><strong>ISACA</strong></div>
+    <div class="smeta-row"><span>Exam</span><strong><span class="smeta-badge">Voucher included</span></strong></div>
+  </div>
+</div>
+
+<div class="sidebar-includes">
+  <h4>What's included</h4>
+  <div class="include-item">ISACA CDPSE exam voucher (first attempt)</div>
+  <div class="include-item">ISACA CDPSE Review Manual (latest edition)</div>
+  <div class="include-item">ISACA CDPSE Question, Answer & Explanation database</div>
+  <div class="include-item">4 timed mock exams (~480 questions)</div>
+  <div class="include-item">PDPA 2024 + GDPR + ISO 27701 mapping pack</div>
+  <div class="include-item">Privacy-engineering reference templates (DSAR, DPIA, ROPA)</div>
+  <div class="include-item">Post-course instructor access (45 days)</div>
+  <div class="include-item">Free single retake voucher on fail (clearance-mock gated)</div>
+  <div class="include-item">ISACA digital badge via Credly</div>
+</div>
+
+<div class="verify-strip">
+  <h4>Cert Verification</h4>
+  <div class="verify-row"><span class="verify-dot"></span>Verifiable on ISACA member portal</div>
+  <div class="verify-row"><span class="verify-dot"></span>Digital badge via Credly / ISACA</div>
+  <div class="verify-row"><span class="verify-dot"></span>PDPA 2024 ready credential</div>
+  <div class="verify-row"><span class="verify-dot"></span>LinkedIn certificate integration</div>
+</div>
+
+<div class="share-strip">
+  <a href="#" class="share-btn">📤 Share</a>
+  <a href="#" class="share-btn">💾 Save</a>
+  <a href="mailto:hello@nexpertsacademy.com" class="share-btn">✉️ Enquire</a>
+</div>
+  </div>
+</aside>
+</div><!-- /page -->
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="fbot">
+    <a href="../index.html" class="flogo"><span class="ndot"></span>Nexperts <span>Academy</span></a>
+    <p>© 2026 Nexperts Academy · Kuala Lumpur, Malaysia · 98% First-Attempt Pass Rate</p>
+    <div class="flinks">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#courses">All Courses</a>
+      <a href="../about.html">About</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Tab switching
+const tabs = document.querySelectorAll('.tab');
+const secs = document.querySelectorAll('.content-sec, .pass-band + .content-sec');
+
+function showSection(id) {
+  // hide all content sections under main
+  document.querySelectorAll('.main > div[id^="sec-"], .main .pass-band').forEach(el => {
+    el.style.display = 'none';
+  });
+  if (id === 'passrate') {
+    document.querySelector('.pass-band').style.display = 'flex';
+    document.getElementById('sec-passrate').style.display = 'block';
+  } else {
+    const el = document.getElementById('sec-' + id);
+    if (el) el.style.display = 'block';
+  }
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    showSection(tab.dataset.t);
+  });
+});
+
+// Module accordion
+function toggleModule(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// Pass rate ring
+const passObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting || e.target.dataset.done) return;
+    e.target.dataset.done = 1;
+    const ring = document.getElementById('pring');
+    ring.classList.add('go');
+    const target = parseInt(ring.dataset.target || '98', 10);
+    const el = document.getElementById('pctNum');
+    let st = null;
+    const run = ts => {
+      if (!st) st = ts;
+      const p = Math.min((ts - st) / 2000, 1), ease = 1 - Math.pow(1 - p, 3);
+      el.innerHTML = Math.floor(ease * target) + '<em>%</em>';
+      if (p < 1) requestAnimationFrame(run);
+    };
+    requestAnimationFrame(run);
+  });
+}, { threshold: 0.4 });
+const pb = document.querySelector('.pass-band');
+if (pb) passObs.observe(pb);
+
+// Reveal
+const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }), { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Init — show overview, hide pass band
+document.querySelector('.pass-band').style.display = 'none';
+
+function setupNavHighlight(){
+  const navLinks=document.querySelector('.nav-links');
+  if(!navLinks) return;
+  const links=[...navLinks.querySelectorAll('a')];
+  const indicator=navLinks.querySelector('.nav-highlight');
+  if(!indicator||!links.length) return;
+  let activeLink=null;
+  let hoverLink=null;
+  let rafId=0;
+  let pendingMove=null;
+
+  const moveTo=(link,animate=true)=>{
+    if(!link||!indicator) return;
+    const navRect=navLinks.getBoundingClientRect();
+    const linkRect=link.getBoundingClientRect();
+    if(!animate){indicator.style.transition='none';}
+    indicator.style.left=(linkRect.left-navRect.left)+'px';
+    indicator.style.width=linkRect.width+'px';
+    indicator.style.opacity='1';
+    if(!animate){requestAnimationFrame(()=>indicator.style.transition='');}
+  };
+
+  const queueMove=(link,animate=true)=>{
+    pendingMove={link,animate};
+    if(rafId) return;
+    rafId=requestAnimationFrame(()=>{
+      rafId=0;
+      if(pendingMove) moveTo(pendingMove.link,pendingMove.animate);
+      pendingMove=null;
+    });
+  };
+
+  const setActive=(link,animate=true)=>{
+    if(!link) return;
+    if(activeLink===link){
+      if(!hoverLink) queueMove(link,animate);
+      return;
+    }
+    if(activeLink) activeLink.classList.remove('active');
+    activeLink=link;
+    activeLink.classList.add('active');
+    if(!hoverLink) queueMove(activeLink,animate);
+  };
+
+  setActive(links.find(a=>(a.getAttribute('href')||'').includes('#courses'))||links[0],false);
+
+  links.forEach(link=>{
+    link.addEventListener('mouseenter',()=>{hoverLink=link;queueMove(link,true);});
+    link.addEventListener('focus',()=>{hoverLink=link;queueMove(link,true);});
+    link.addEventListener('click',()=>setActive(link));
+  });
+
+  navLinks.addEventListener('mouseleave',()=>{
+    hoverLink=null;
+    if(activeLink) queueMove(activeLink,true);
+  });
+
+  window.addEventListener('resize',()=>{
+    if(activeLink) queueMove(activeLink,false);
+  });
+}
+setupNavHighlight();
+</script>
+
+<script src="../admin/overlay.js" defer></script>
+  <script src="../js/site-nav-mobile.js" defer></script>
+</body>
+</html>
