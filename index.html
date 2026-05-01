@@ -482,12 +482,12 @@ h2.head em.m{color:var(--marM)}
 .tcerts{display:flex;flex-wrap:wrap;gap:4px}
 .ctag{font-size:.6rem;font-weight:600;background:var(--bg2);color:var(--ink3);border:1px solid var(--line);padding:2px 7px;border-radius:4px}
 .clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:48px}
-.cclient{background:#fff;padding:28px 22px;transition:background .15s}
+.cclient{background:#fff;padding:28px 22px;transition:background .15s;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
 .cclient:hover{background:var(--bg2)}
-.cinit{font-family:‘Fraunces’,serif;font-size:2rem;font-weight:300;color:var(--blue);line-height:1;margin-bottom:8px;letter-spacing:-.02em}
-.cclient:nth-child(even) .cinit{color:var(--marM)}
-.cname3{font-size:.83rem;font-weight:600;color:var(--ink);margin-bottom:3px}
-.csect{font-size:.68rem;font-weight:500;color:var(--ink4);letter-spacing:.04em}
+.clogo-wrap{width:100%;min-height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:2px}
+.clogo{max-height:48px;max-width:min(200px,100%);width:auto;height:auto;object-fit:contain;object-position:center}
+.cname3{font-size:.83rem;font-weight:600;color:var(--ink);margin-bottom:0;line-height:1.35}
+.csect{font-size:.68rem;font-weight:500;color:var(--ink4);letter-spacing:.04em;line-height:1.4}
 
 /* ── TESTIMONIALS ── */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:48px}
@@ -1551,14 +1551,14 @@ body.em-open{overflow:hidden}
       <h2 class="head">Trusted by <em>Malaysia's</em><br>leading organisations.</h2>
     </div>
     <div class="clients-grid reveal">
-      <div class="cclient"><div class="cinit">M</div><div class="cname3">Maybank Group</div><div class="csect">Banking & Finance</div></div>
-      <div class="cclient"><div class="cinit">T</div><div class="cname3">Telekom Malaysia</div><div class="csect">Telecommunications</div></div>
-      <div class="cclient"><div class="cinit">P</div><div class="cname3">Petronas</div><div class="csect">Energy & Utilities</div></div>
-      <div class="cclient"><div class="cinit">C</div><div class="cname3">CIMB Group</div><div class="csect">Banking & Finance</div></div>
-      <div class="cclient"><div class="cinit">M</div><div class="cname3">MDEC</div><div class="csect">Government & Digital Economy</div></div>
-      <div class="cclient"><div class="cinit">D</div><div class="cname3">DHL Malaysia</div><div class="csect">Logistics</div></div>
-      <div class="cclient"><div class="cinit">T</div><div class="cname3">TNB</div><div class="csect">Energy & Infrastructure</div></div>
-      <div class="cclient"><div class="cinit">A</div><div class="cname3">AirAsia</div><div class="csect">Aviation & Technology</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/maybank.png" alt="Maybank" width="200" height="80" loading="lazy"></div><div class="cname3">Maybank Group</div><div class="csect">Banking & Finance</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/telekom_malaysia.png" alt="Telekom Malaysia" width="200" height="80" loading="lazy"></div><div class="cname3">Telekom Malaysia</div><div class="csect">Telecommunications</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/petronas.png" alt="Petronas" width="200" height="80" loading="lazy"></div><div class="cname3">Petronas</div><div class="csect">Energy & Utilities</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/cimb_group.png" alt="CIMB" width="200" height="80" loading="lazy"></div><div class="cname3">CIMB Group</div><div class="csect">Banking & Finance</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/mdec.png" alt="MDEC" width="200" height="80" loading="lazy"></div><div class="cname3">MDEC</div><div class="csect">Government & Digital Economy</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/dhl.png" alt="DHL" width="200" height="80" loading="lazy"></div><div class="cname3">DHL Malaysia</div><div class="csect">Logistics</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/tnb_malaysia.png" alt="TNB" width="200" height="80" loading="lazy"></div><div class="cname3">TNB</div><div class="csect">Energy & Infrastructure</div></div>
+      <div class="cclient"><div class="clogo-wrap"><img class="clogo" src="image/client-logos/airasia.png" alt="AirAsia" width="200" height="80" loading="lazy"></div><div class="cname3">AirAsia</div><div class="csect">Aviation & Technology</div></div>
     </div>
   </div>
 </section>
