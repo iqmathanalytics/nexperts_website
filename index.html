@@ -1600,7 +1600,7 @@ body.em-open{overflow:hidden}
   <p>Browse 120+ courses, explore a roadmap, or talk to an advisor about the right path for your team.</p>
   <div class="cta-btns">
     <a href="#courses" class="btn-white">Browse Courses →</a>
-    <a href="mailto:enquiry@nexpertsacademy.com" class="btn-ghost2">Talk to an Advisor</a>
+    <a href="mailto:contact@iqmath.in" class="btn-ghost2 nexperts-team-inbox">Talk to an Advisor</a>
   </div>
 </section>
 
@@ -1685,7 +1685,7 @@ body.em-open{overflow:hidden}
     <div class="em-success" id="emSuccess">
       <div class="check" aria-hidden="true">✓</div>
       <h4>Message received</h4>
-      <p>We've received your enquiry and will reply within 4 business hours.<br>Need an instant answer? Email <a href="mailto:enquiry@nexpertsacademy.com" style="color:var(--blue);font-weight:600">enquiry@nexpertsacademy.com</a>.</p>
+      <p>We've received your enquiry and will reply within 4 business hours.<br>Need an instant answer? Email <a class="nexperts-team-inbox" href="mailto:contact@iqmath.in" style="color:var(--blue);font-weight:600"><span class="nexperts-team-inbox-label">contact@iqmath.in</span></a>.</p>
       <button type="button" class="em-back" onclick="closeEnquireModal()">Back to site</button>
     </div>
   </div>
@@ -1701,7 +1701,7 @@ body.em-open{overflow:hidden}
     </div>
     <div class="fcol"><h4>Courses</h4><ul><li><a href="#courses">CompTIA</a></li><li><a href="course_pages/ceh-v13-ai.html">EC-Council · CEH</a></li><li><a href="#courses">AWS</a></li><li><a href="#courses">Microsoft Azure</a></li><li><a href="#courses">Cisco</a></li><li><a href="#courses">Google Cloud</a></li><li><a href="#courses">ITIL · PM</a></li><li><a href="#courses">DevOps · Data</a></li></ul></div>
     <div class="fcol"><h4>Academy</h4><ul><li><a href="#roadmap">Career Roadmaps</a></li><li><a href="#paths">Career Paths</a></li><li><a href="about.html">About Us</a></li><li><a href="#verify">Cert Verification</a></li><li><a href="#enroll">Corporate Training</a></li><li><a href="contact.html">Contact</a></li><li><a href="https://nexpertsai.com" style="color:#bfdbfe">→ Nexperts AI</a></li></ul></div>
-    <div class="fcol"><h4>Contact</h4><ul><li><a href="mailto:enquiry@nexpertsacademy.com">enquiry@nexpertsacademy.com</a></li><li><a href="contact.html#enquire">Petaling Jaya (HQ) · Albany, NY (US)</a></li><li><a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:info@nexpertsai.com">Corporate training</a></li></ul></div>
+    <div class="fcol"><h4>Contact</h4><ul><li><a class="nexperts-team-inbox" href="mailto:contact@iqmath.in"><span class="nexperts-team-inbox-label">contact@iqmath.in</span></a></li><li><a href="contact.html#enquire">Petaling Jaya (HQ) · Albany, NY (US)</a></li><li><a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:info@nexpertsai.com">Corporate training</a></li></ul></div>
   </div>
   <div class="fbot">
     <p>© 2026 Nexperts Academy · Kuala Lumpur, Malaysia · 98% First-Attempt Pass Rate</p>
@@ -2020,7 +2020,7 @@ async function submitEnquireModal(e){
     document.getElementById('emSuccess').style.display='block';
   }catch(x){
     if(errEl){
-      errEl.textContent=(x&&x.message)?x.message:'Could not send your enquiry. Please try again or email enquiry@nexpertsacademy.com.';
+      errEl.textContent=(x&&x.message)?x.message:('Could not send your enquiry. Please try again or email '+((window.NexpertsEnquiry&&window.NexpertsEnquiry.getTeamInbox&&window.NexpertsEnquiry.getTeamInbox())||'the address on our Contact page')+'.');
       errEl.style.display='block';
     }
   }finally{

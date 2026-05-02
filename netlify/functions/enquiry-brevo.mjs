@@ -30,10 +30,53 @@ function dash(v) {
   return s ? s : "—";
 }
 
+const INTERNAL_INBOX_ENV_KEYS = [
+  "BREVO_INTERNAL_TO",
+  "BREVO_ENQUIRY_TO",
+  "NEXPERTS_ENQUIRY_EMAIL",
+  "ENQUIRY_EMAIL",
+];
+
+const FALLBACK_INTERNAL_INBOX = "enquiry@nexpertsacademy.com";
+
+/** First non-empty env among common names (avoids typos / wrong var on Netlify). */
+function resolveInternalInboxRaw(env) {
+  const e = env || process.env || {};
+  for (const k of INTERNAL_INBOX_ENV_KEYS) {
+    const v = String(e[k] || "").trim();
+    if (v) return v;
+  }
+  return "";
+}
+
+function isLikelyEmail(s) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s || "").trim());
+}
+
+/** Brevo `to` list: supports comma/semicolon-separated addresses in env. */
+function internalRecipientsList(env) {
+  const raw = resolveInternalInboxRaw(env);
+  if (!raw) {
+    return [{ email: FALLBACK_INTERNAL_INBOX, name: "Nexperts Enquiries" }];
+  }
+  const parts = raw
+    .split(/[,;]+/)
+    .map((x) => x.trim())
+    .filter(isLikelyEmail);
+  if (!parts.length) {
+    return [{ email: FALLBACK_INTERNAL_INBOX, name: "Nexperts Enquiries" }];
+  }
+  return parts.map((email) => ({ email, name: "Nexperts Enquiries" }));
+}
+
+function primaryInternalInbox(env) {
+  return internalRecipientsList(env)[0].email;
+}
+
 function getCtx(data, env) {
   const site = String(env.NEXPERTS_PUBLIC_SITE_URL || "https://www.nexpertsacademy.com").replace(/\/$/, "");
   const sheet = String(env.NEXPERTS_LEADS_SHEET_URL || DEFAULT_SHEET_URL).trim();
-  const internal = String(env.BREVO_INTERNAL_TO || "enquiry@nexpertsacademy.com");
+  const internal = primaryInternalInbox(env);
   const first = String(data.first || "").trim();
   const last = String(data.last || "").trim();
   const fullName = `${first} ${last}`.trim() || "there";
@@ -253,7 +296,8 @@ export async function handler(event) {
   const apiKey = process.env.BREVO_API_KEY || "";
   const senderEmail = process.env.BREVO_SENDER_EMAIL || "";
   const senderName = process.env.BREVO_SENDER_NAME || "Nexperts Academy";
-  const internalTo = process.env.BREVO_INTERNAL_TO || "enquiry@nexpertsacademy.com";
+  const internalRecipients = internalRecipientsList(process.env);
+  const internalTo = internalRecipients[0].email;
   const expectedSecret = String(process.env.BREVO_ENQUIRY_SECRET || "").trim();
 
   if (!apiKey || !senderEmail) {
@@ -336,7 +380,7 @@ export async function handler(event) {
 
     await brevoSend(apiKey, {
       sender: { name: senderName, email: senderEmail },
-      to: [{ email: internalTo, name: "Nexperts Enquiries" }],
+      to: internalRecipients,
       replyTo: { email, name: studentName },
       subject: internalSubject,
       textContent: internalText,

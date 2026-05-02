@@ -56,7 +56,7 @@ In **Site configuration → Environment variables**, add:
 | `BREVO_API_KEY` | Yes | Your Brevo API key (never put this in the frontend). |
 | `BREVO_SENDER_EMAIL` | Yes | Verified sender email in Brevo. |
 | `BREVO_SENDER_NAME` | No | Display name (default: `Nexperts Academy`). |
-| `BREVO_INTERNAL_TO` | No | Inbox for lead notifications (default: `enquiry@nexpertsacademy.com`). |
+| `BREVO_INTERNAL_TO` | No | Inbox for lead notifications (reply-to on student mail + internal `to`). Same value as `teamInbox` in `js/enquiry-config.js`. **Aliases:** `BREVO_ENQUIRY_TO`, `NEXPERTS_ENQUIRY_EMAIL`, `ENQUIRY_EMAIL` (first non-empty wins). **Multiple:** comma- or semicolon-separated list. |
 | `BREVO_ENQUIRY_SECRET` | Recommended | Same string as `secret` in `js/enquiry-config.js` to block random POSTs. |
 | `BREVO_ALLOWED_ORIGINS` | No | CORS `Access-Control-Allow-Origin` (default `*`). Set to your site origin if you lock it down. |
 | `NEXPERTS_PUBLIC_SITE_URL` | No | Base URL for CTA links in emails (default `https://www.nexpertsacademy.com`). |

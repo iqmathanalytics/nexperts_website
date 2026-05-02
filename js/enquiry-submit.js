@@ -6,6 +6,24 @@
 (function (global) {
   "use strict";
 
+  function looksLikeEmail(s) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s || "").trim());
+  }
+
+  /** Public inbox for mailto + error hints — keep in sync with BREVO_INTERNAL_TO on Netlify. */
+  function getTeamInbox() {
+    const c = global.NEXPERTS_ENQUIRY_CONFIG || {};
+    const e = String(c.teamInbox || "").trim();
+    return looksLikeEmail(e) ? e : "";
+  }
+
+  function enquiryFallbackHint() {
+    const m = getTeamInbox();
+    return m
+      ? `Could not send your enquiry. Please try again or email ${m}.`
+      : "Could not send your enquiry. Please try again or use the address on our Contact page.";
+  }
+
   function getConfig() {
     const c = global.NEXPERTS_ENQUIRY_CONFIG || {};
     return {
@@ -97,9 +115,7 @@
       data = null;
     }
     if (!res.ok) {
-      let msg =
-        (data && (data.hint || data.detail || data.error)) ||
-        "Could not send your enquiry. Please try again or email enquiry@nexpertsacademy.com.";
+      let msg = (data && (data.hint || data.detail || data.error)) || enquiryFallbackHint();
       if (data && data.error === "forbidden") {
         msg =
           data.hint ||
@@ -145,8 +161,31 @@
     await postToAppsScript(cfg.webAppUrl, payload);
   }
 
+  function hydrateTeamInboxInDom() {
+    const email = getTeamInbox();
+    if (!email || !global.document) return;
+    try {
+      global.document.querySelectorAll("a.nexperts-team-inbox").forEach((a) => {
+        a.setAttribute("href", "mailto:" + email);
+        const lab = a.querySelector(".nexperts-team-inbox-label");
+        if (lab) lab.textContent = email;
+      });
+    } catch (_) {
+      /* ignore */
+    }
+  }
+
+  if (global.document) {
+    if (global.document.readyState === "loading") {
+      global.document.addEventListener("DOMContentLoaded", hydrateTeamInboxInDom);
+    } else {
+      hydrateTeamInboxInDom();
+    }
+  }
+
   global.NexpertsEnquiry = {
     submit: submitNexpertsEnquiry,
     buildPayload,
+    getTeamInbox,
   };
 })(window);
