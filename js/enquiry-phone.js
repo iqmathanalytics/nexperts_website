@@ -1,9 +1,11 @@
 /**
  * Fills country-code <select name="phoneCountry"> on enquiry forms.
- * Loaded after DOM (see contact.html / index.html script order).
+ * Desktop: full country names. Mobile & tablet (max-width: 1024px): dial code only.
  */
 (function (global) {
   "use strict";
+
+  var COMPACT_MQ = "(max-width: 1024px)";
 
   var OPTIONS = [
     ["+60", "Malaysia (+60)"],
@@ -34,16 +36,27 @@
     ["+84", "Vietnam (+84)"],
   ];
 
-  function fillCountrySelects() {
+  function useCompactLabels() {
+    try {
+      return global.matchMedia(COMPACT_MQ).matches;
+    } catch (_) {
+      return global.innerWidth <= 1024;
+    }
+  }
+
+  function syncPhoneCountrySelects() {
     var doc = global.document;
     if (!doc || !doc.querySelectorAll) return;
+
+    var compact = useCompactLabels();
+
     doc.querySelectorAll('select[name="phoneCountry"]').forEach(function (sel) {
       var prev = String(sel.value || "").trim();
       sel.textContent = "";
       OPTIONS.forEach(function (pair) {
         var o = doc.createElement("option");
         o.value = pair[0];
-        o.textContent = pair[1];
+        o.textContent = compact ? pair[0] : pair[1];
         sel.appendChild(o);
       });
       var hasPrev = OPTIONS.some(function (p) {
@@ -53,11 +66,37 @@
     });
   }
 
+  function bindViewport() {
+    try {
+      var mq = global.matchMedia(COMPACT_MQ);
+      if (mq.addEventListener) {
+        mq.addEventListener("change", syncPhoneCountrySelects);
+      } else if (mq.addListener) {
+        mq.addListener(syncPhoneCountrySelects);
+      }
+    } catch (_) {
+      /* ignore */
+    }
+    var t;
+    global.addEventListener(
+      "resize",
+      function () {
+        clearTimeout(t);
+        t = setTimeout(syncPhoneCountrySelects, 120);
+      },
+      { passive: true }
+    );
+  }
+
   if (global.document) {
     if (global.document.readyState === "loading") {
-      global.document.addEventListener("DOMContentLoaded", fillCountrySelects);
+      global.document.addEventListener("DOMContentLoaded", function () {
+        syncPhoneCountrySelects();
+        bindViewport();
+      });
     } else {
-      fillCountrySelects();
+      syncPhoneCountrySelects();
+      bindViewport();
     }
   }
 })(window);
