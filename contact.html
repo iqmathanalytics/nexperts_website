@@ -233,6 +233,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
 </style>
   <link rel="stylesheet" href="css/site-nav-mobile.css">
   <link rel="stylesheet" href="css/enquiry-phone.css">
+  <link rel="stylesheet" href="css/enquiry-loading.css">
 </head>
 <body>
 <nav class="site-nav">
@@ -683,13 +684,11 @@ async function submitEnquiry(e) {
   e.preventDefault();
   const form = document.getElementById('enquiryForm');
   const errEl = document.getElementById('enquiryErr');
-  const btn = document.getElementById('enquirySubmitBtn');
   if (!form || !window.NexpertsEnquiry) {
     if (errEl) { errEl.textContent = 'Enquiry script failed to load. Refresh the page.'; errEl.style.display = 'block'; }
     return false;
   }
   if (errEl) { errEl.style.display = 'none'; errEl.textContent = ''; }
-  if (btn) { btn.disabled = true; }
   try {
     await window.NexpertsEnquiry.submit(form, { source: 'contact_page' });
     form.style.display = 'none';
@@ -700,8 +699,6 @@ async function submitEnquiry(e) {
       errEl.textContent = (x && x.message) ? x.message : ('Could not send your enquiry. Please try again or email ' + ((window.NexpertsEnquiry && window.NexpertsEnquiry.getTeamInbox && window.NexpertsEnquiry.getTeamInbox()) || 'the address on our Contact page') + '.');
       errEl.style.display = 'block';
     }
-  } finally {
-    if (btn) { btn.disabled = false; }
   }
   return false;
 }

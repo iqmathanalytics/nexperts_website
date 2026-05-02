@@ -667,6 +667,7 @@ body.em-open{overflow:hidden}
 
   <link rel="stylesheet" href="css/site-nav-mobile.css">
   <link rel="stylesheet" href="css/enquiry-phone.css">
+  <link rel="stylesheet" href="css/enquiry-loading.css">
 </head>
 <body class="preload">
 
@@ -2015,13 +2016,11 @@ async function submitEnquireModal(e){
   e.preventDefault();
   const form=document.getElementById('emForm');
   const errEl=document.getElementById('emErr');
-  const btn=document.getElementById('emSubmit');
   if(!form||!window.NexpertsEnquiry){
     if(errEl){ errEl.textContent='Enquiry script failed to load. Refresh the page.'; errEl.style.display='block'; }
     return false;
   }
   if(errEl){ errEl.style.display='none'; errEl.textContent=''; }
-  if(btn) btn.disabled=true;
   try{
     await window.NexpertsEnquiry.submit(form,{source:'landing_modal'});
     document.getElementById('emFormWrap').style.display='none';
@@ -2031,8 +2030,6 @@ async function submitEnquireModal(e){
       errEl.textContent=(x&&x.message)?x.message:('Could not send your enquiry. Please try again or email '+((window.NexpertsEnquiry&&window.NexpertsEnquiry.getTeamInbox&&window.NexpertsEnquiry.getTeamInbox())||'the address on our Contact page')+'.');
       errEl.style.display='block';
     }
-  }finally{
-    if(btn) btn.disabled=false;
   }
   return false;
 }

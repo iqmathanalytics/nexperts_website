@@ -1,10 +1,42 @@
 /**
- * Shared enquiry submitter — contact.html + index modal.
- * Providers: Google Apps Script (legacy) or Brevo via Netlify Function.
+ * Shared enquiry submitter — contact.html + index modal + any page that loads this script.
+ * Providers: Google Apps Script (direct) or Brevo via Netlify Function.
  * Configure js/enquiry-config.js (provider, endpoints, secret).
+ *
+ * Local development: on localhost / 127.0.0.1 / ::1 / file (empty host), the effective provider
+ * becomes `apps_script` so forms hit Google directly (no `/.netlify/functions/`). Production hostnames
+ * keep `provider` from config. To test Brevo + Netlify locally, run `npm run dev` and open any page with
+ * `?enquiry=brevo`, or set `localProvider: "brevo"` on `NEXPERTS_ENQUIRY_CONFIG`.
  */
 (function (global) {
   "use strict";
+
+  function isLocalDevelopmentHost() {
+    const h = String(global.location && global.location.hostname ? global.location.hostname : "")
+      .toLowerCase();
+    if (!h || h === "localhost" || h === "127.0.0.1" || h === "[::1]" || h === "0.0.0.0") {
+      return true;
+    }
+    if (h.endsWith(".local") || h.endsWith(".localhost")) return true;
+    return false;
+  }
+
+  /** User wants Netlify + Brevo on a local machine (e.g. netlify dev). */
+  function explicitLocalBrevo_(c) {
+    try {
+      if (String((c && c.localProvider) || "").toLowerCase().trim() === "brevo") {
+        return true;
+      }
+      const q = new URLSearchParams(global.location.search || "");
+      return String(q.get("enquiry") || "").toLowerCase() === "brevo";
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function forceAppsScriptOnLocal_(c) {
+    return isLocalDevelopmentHost() && !explicitLocalBrevo_(c);
+  }
 
   function looksLikeEmail(s) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s || "").trim());
@@ -26,8 +58,12 @@
 
   function getConfig() {
     const c = global.NEXPERTS_ENQUIRY_CONFIG || {};
+    let provider = String(c.provider || "apps_script").toLowerCase().trim();
+    if (forceAppsScriptOnLocal_(c)) {
+      provider = "apps_script";
+    }
     return {
-      provider: String(c.provider || "apps_script").toLowerCase().trim(),
+      provider,
       webAppUrl: String(c.webAppUrl || "").trim(),
       brevoEndpoint: String(c.brevoEndpoint || "/.netlify/functions/enquiry-brevo").trim(),
       secret: String(c.secret || "").trim(),
@@ -145,6 +181,25 @@
     }
   }
 
+  function setFormSending(form, on) {
+    if (!form) return;
+    const btn = form.querySelector('button[type="submit"]');
+    if (!btn) return;
+    btn.classList.toggle("nexperts-enquiry-sending", on);
+    btn.disabled = on;
+    btn.setAttribute("aria-busy", on ? "true" : "false");
+    if (on) {
+      if (!btn.dataset.nexpertsSubmitHtml) {
+        btn.dataset.nexpertsSubmitHtml = btn.innerHTML;
+      }
+      btn.innerHTML =
+        '<span class="nexperts-enquiry-submit-inner"><span class="nexperts-enquiry-spinner" aria-hidden="true"></span><span class="nexperts-enquiry-send-label">Sending…</span></span>';
+    } else if (btn.dataset.nexpertsSubmitHtml) {
+      btn.innerHTML = btn.dataset.nexpertsSubmitHtml;
+      delete btn.dataset.nexpertsSubmitHtml;
+    }
+  }
+
   /**
    * @param {HTMLFormElement} form
    * @param {{ source: string }} meta
@@ -157,19 +212,24 @@
       throw new Error("Please fill in your name and email.");
     }
 
-    const useBrevo = cfg.provider === "brevo";
+    setFormSending(form, true);
+    try {
+      const useBrevo = cfg.provider === "brevo";
 
-    if (useBrevo) {
-      await postToBrevo(cfg.brevoEndpoint, payload);
-      return;
-    }
+      if (useBrevo) {
+        await postToBrevo(cfg.brevoEndpoint, payload);
+        return;
+      }
 
-    if (!cfg.webAppUrl || !/^https:\/\/script\.google\.com\//.test(cfg.webAppUrl)) {
-      throw new Error(
-        "Enquiry endpoint is not configured. Use provider \"brevo\" with Netlify, or set webAppUrl in js/enquiry-config.js for Apps Script."
-      );
+      if (!cfg.webAppUrl || !/^https:\/\/script\.google\.com\//.test(cfg.webAppUrl)) {
+        throw new Error(
+          "Enquiry endpoint is not configured. Use provider \"brevo\" with Netlify, or set webAppUrl in js/enquiry-config.js for Apps Script."
+        );
+      }
+      await postToAppsScript(cfg.webAppUrl, payload);
+    } finally {
+      setFormSending(form, false);
     }
-    await postToAppsScript(cfg.webAppUrl, payload);
   }
 
   function hydrateTeamInboxInDom() {
@@ -198,5 +258,7 @@
     submit: submitNexpertsEnquiry,
     buildPayload,
     getTeamInbox,
+    /** Resolved provider/endpoints after local-dev rules — useful in DevTools. */
+    getEffectiveConfig: getConfig,
   };
 })(window);

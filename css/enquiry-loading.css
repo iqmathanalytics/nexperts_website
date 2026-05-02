@@ -1,0 +1,40 @@
+/* Enquiry submit: loading state (contact + index modal) */
+button[type="submit"].nexperts-enquiry-sending {
+  pointer-events: none;
+  opacity: 0.94;
+}
+
+.nexperts-enquiry-submit-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nexperts-enquiry-spinner {
+  width: 1.05em;
+  height: 1.05em;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: nexperts-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes nexperts-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Gradient submit buttons — spinner ring */
+.submit-btn.nexperts-enquiry-sending .nexperts-enquiry-spinner,
+.em-submit.nexperts-enquiry-sending .nexperts-enquiry-spinner {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+}
+
+.nexperts-enquiry-send-label {
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
