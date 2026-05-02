@@ -1,3 +1,5 @@
+node_modules/
+
 # Python build artifacts
 __pycache__/
 *.pyc
@@ -13,3 +15,9 @@ Thumbs.db
 # Logs / temp
 *.log
 .tmp/
+
+# Local secrets (Netlify CLI loads this for `netlify dev`)
+.env
+
+# Local Netlify folder
+.netlify

@@ -1,64 +1,91 @@
-# Website enquiries → Google Sheet + email (Apps Script)
+# Website enquiries → Google Sheet (Apps Script)
 
-This folder contains the **Google Apps Script** code that powers the enquiry forms on the static site (`contact.html` and the landing-page “Enquire Now” modal).
+This folder contains **Google Apps Script** bound to your **Google Sheet**. The current `EnquiryWebhook.gs` **only appends a row** for each POST — it does **not** send email. Use **Brevo + Netlify** (below) for student and team emails.
 
-## What it does
+## What the Apps Script does
 
-1. **Appends one row** to a Google Sheet for every submission.
-2. Sends **two emails** via `MailApp`:
-   - **To the student** (the address they typed): short acknowledgement.
-   - **To `enquiry@nexpertsacademy.com`**: full enquiry details (student’s address is set as **Reply-To** so you can hit “Reply”).
-
-Emails are sent **from the Google account that owns the script** (the account you choose under *Execute as* when you deploy). If you create the Sheet + Script while signed in as **`info@nexpertsai.com`**, that is the mailbox Apps Script uses — this matches your plan.
-
-> **Google Workspace note:** “Send mail as” aliases are a mailbox setting. If `info@nexpertsai.com` is the primary user authorising the script, you are in the normal case. If you need a different *display* name only, you can adjust the deployment account or use the Gmail API with a send-as alias (advanced).
+1. Accepts `POST` with the same JSON payload as the website (`first`, `last`, `email`, …).
+2. Optionally checks `ENQUIRY_SECRET` (must match `secret` in `js/enquiry-config.js` if set).
+3. **Appends one row** to the **`Enquiries`** sheet.
 
 ## One-time setup
 
-1. Sign in to Google as **`info@nexpertsai.com`**.
-2. **Sheets → Blank** (this workbook will hold enquiry rows).
-3. **Extensions → Apps Script** → delete any boilerplate → paste **`EnquiryWebhook.gs`**.
-4. In the script editor, select **`setupSheetHeaders`** → **Run** → approve permissions.
-5. *(Recommended)* **Project Settings → Script properties** → add:
-   - `ENQUIRY_SECRET` = a long random string (same value you paste into `js/enquiry-config.js` as `secret`).
-6. **Deploy → New deployment**
-   - Type: **Web app**
-   - **Execute as:** *Me (info@nexpertsai.com)*
-   - **Who has access:** *Anyone* (required so anonymous visitors on your public website can POST)
-7. Copy the **Web App URL** (starts with `https://script.google.com/macros/...`).
-8. In the website repo, edit **`js/enquiry-config.js`**:
-   - `webAppUrl`: paste that URL
-   - `secret`: same as `ENQUIRY_SECRET` (or leave both empty to skip verification — not recommended in production)
+1. Open the **Google Sheet** that should store leads (or create a new one).
+2. **Extensions → Apps Script** → paste **`EnquiryWebhook.gs`** (project must stay **bound** to that spreadsheet).
+3. Run **`setupSheetHeaders`** once → **Run** → approve permissions (creates/clears the `Enquiries` tab and headers).
+4. *(Recommended)* **Project Settings → Script properties** → add:
+   - `ENQUIRY_SECRET` = a long random string (same value as `secret` in `js/enquiry-config.js` if the site POSTs to this web app).
+5. **Deploy → New deployment** → **Web app**
+   - **Execute as:** *Me*
+   - **Who has access:** *Anyone*
+6. Copy the **Web App URL** into `js/enquiry-config.js` → `webAppUrl` **only if** you set `provider: "apps_script"` to log rows via Google (see note below).
 
-## Testing
+## Testing the sheet
 
-- Submit the form on `http://localhost:8000/contact.html` after configuring `webAppUrl`.
-- Check the Sheet tab **`Enquiries`** for a new row.
-- Check **inbox + spam** on both the student address and `enquiry@nexpertsacademy.com`.
-
-## “Sent” in Gmail but nothing in Inbox?
-
-If rows appear in the Sheet and messages show under **Sent** in `info@nexpertsai.com`, Apps Script **did send** the mail. When recipients still see nothing, it is almost always **delivery after Google’s hand-off** (spam, quarantine, or group rules).
-
-### Checklist (do in order)
-
-1. **Spam / Promotions / Updates** (Gmail) on **both** the student mailbox and every inbox that receives `enquiry@nexpertsacademy.com` (group members see mail in **their** spam too).
-2. Gmail search: `in:anywhere subject:(Website enquiry)` or the student subject `We received your enquiry`.
-3. **`enquiry@nexpertsacademy.com` is a Google Group?** In Google Groups: allow **external** senders if the script sends from `info@nexpertsai.com` (another domain). Check **moderated messages** / **rejected** queue for the group.
-4. **Google Workspace** for `nexpertsacademy.com`: Admin console → **Reporting** → **Email log search** (or **Security** → **Quarantine**) for blocked messages to that user/group.
-5. **Cross-domain reputation**: Mail is **From** `info@nexpertsai.com`. Receiving servers for `@nexpertsacademy.com` may score that path stricter. Ensure **SPF/DKIM** (and DMARC if used) are valid for the **sending** domain; consider an **inbound gateway** or sending from a mailbox on the same domain if your host recommends it.
-6. **Debug copy**: In Apps Script → **Project settings** → **Script properties**, add `OPTIONAL_BCC` = your personal Gmail (not the same as `to`). Redeploy the web app, submit once — you should get **BCC copies** of both messages in that inbox. If BCC arrives but `enquiry@…` does not, the problem is **routing to that address**, not the script.
-7. In the script editor, run **`testEmailDelivery`** once (select function → Run). That sends a simple test **to your own** `info@…` inbox. If that lands in Inbox, MailApp is fine; focus on the `enquiry@…` path and spam policies.
-
-### Script updates in `EnquiryWebhook.gs`
-
-- Sends **multipart** mail (`body` + `htmlBody`) and sets sender **display name** `Nexperts Academy`.
-- Optional **`OPTIONAL_BCC`** script property for a debug inbox.
-- Manual test function **`testEmailDelivery`**.
-
-After changing `.gs`, use **Deploy → Manage deployments → Edit** (same version) or **New version** so the live Web App picks up changes.
+- In the script editor, run **`testAppendSampleRow`** once, then open the **`Enquiries`** tab — you should see a sample row.
+- Or POST from the site with `provider: "apps_script"` and a valid `webAppUrl`, then confirm a new row appears.
 
 ## Security (practical)
 
-- **Always set `ENQUIRY_SECRET`** once you go live; it is not encryption, but it stops casual script spam.
-- Apps Script quotas apply (emails/day, execution time). For very high volume, move to a paid backend.
+- **Set `ENQUIRY_SECRET`** in production; same value as `secret` in `js/enquiry-config.js` when using this web app.
+- Apps Script has execution time and URL fetch quotas; sheet-only usage is light.
+
+### Using Brevo for email and Apps Script for the sheet
+
+The website **`js/enquiry-submit.js`** currently sends to **one** `provider` (`brevo` **or** `apps_script`). To **both** email via Brevo and log to Sheets, either: extend the Netlify function to `UrlFetchApp`-equivalent server-side POST to the Apps Script URL after a successful Brevo send, or add a second client call (ask if you want that implemented).
+
+---
+
+## Alternative: Brevo (transactional email via Netlify)
+
+If **Google / Apps Script mail is not reaching inboxes** (spam, Workspace routing, or group rules), use **Brevo** instead. The browser calls a **Netlify serverless function**, which sends two emails through Brevo’s API (same content as this script: student acknowledgement + internal lead to `enquiry@nexpertsacademy.com`).
+
+### What you need to provide
+
+1. **Brevo account** — [brevo.com](https://www.brevo.com/) (free tier includes transactional sends).
+2. **Brevo SMTP API key** — Dashboard → SMTP & API → API keys → create a key with permission to send transactional emails.
+3. **A verified sender in Brevo** — Domains & senders → add and verify the domain (or verify a single sender email). You will send **from** this address (e.g. `noreply@yourdomain.com` or a verified mailbox).
+4. **Netlify** — Site must be deployed on Netlify (same site that serves `/.netlify/functions/enquiry-brevo`).
+
+### Netlify environment variables
+
+In **Site configuration → Environment variables**, add:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `BREVO_API_KEY` | Yes | Your Brevo API key (never put this in the frontend). |
+| `BREVO_SENDER_EMAIL` | Yes | Verified sender email in Brevo. |
+| `BREVO_SENDER_NAME` | No | Display name (default: `Nexperts Academy`). |
+| `BREVO_INTERNAL_TO` | No | Inbox for lead notifications (default: `enquiry@nexpertsacademy.com`). |
+| `BREVO_ENQUIRY_SECRET` | Recommended | Same string as `secret` in `js/enquiry-config.js` to block random POSTs. |
+| `BREVO_ALLOWED_ORIGINS` | No | CORS `Access-Control-Allow-Origin` (default `*`). Set to your site origin if you lock it down. |
+| `NEXPERTS_PUBLIC_SITE_URL` | No | Base URL for CTA links in emails (default `https://www.nexpertsacademy.com`). |
+| `NEXPERTS_LEADS_SHEET_URL` | No | Google Sheet link shown on the internal lead email (defaults to your shared Enquiries sheet). |
+
+Redeploy the site after changing env vars.
+
+### Frontend config (`js/enquiry-config.js`)
+
+```js
+window.NEXPERTS_ENQUIRY_CONFIG = {
+  provider: "brevo",
+  brevoEndpoint: "/.netlify/functions/enquiry-brevo",
+  secret: "same-as-BREVO_ENQUIRY_SECRET",
+  webAppUrl: "", // not used when provider is brevo
+};
+```
+
+For local testing with `netlify dev`, the function URL is the same path on `http://localhost:8888` (or whatever port Netlify prints).
+
+### Local machine (`netlify dev`)
+
+1. Copy `.env.example` → `.env` and fill `BREVO_API_KEY`, `BREVO_SENDER_EMAIL` (must be **verified** in Brevo for your domain, e.g. `noreply@nexpertsai.com`), and optionally `BREVO_INTERNAL_TO` (default `enquiry@nexpertsacademy.com`). The file `.env` is **gitignored** — do not commit it.
+2. In `js/enquiry-config.js` set `provider: "brevo"`.
+3. From the repo root: `npm install` then `npm run dev` (or `npx netlify dev` if you prefer not to install deps).
+4. Open the URL Netlify prints (often `http://localhost:8888`) and submit **contact.html** or the home “Enquire” modal. Watch the terminal for function logs if something fails.
+
+### Files involved
+
+- `netlify/functions/enquiry-brevo.mjs` — handler that calls `https://api.brevo.com/v3/smtp/email` twice.
+- `netlify.toml` — sets `functions` directory and `publish = "."` (adjust if your publish directory differs).
+- `js/enquiry-submit.js` — chooses Apps Script vs Brevo from `provider`.

@@ -1,0 +1,10 @@
+{
+  "name": "nexperts-website",
+  "private": true,
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "devDependencies": {
+    "netlify-cli": "^18.0.0"
+  }
+}

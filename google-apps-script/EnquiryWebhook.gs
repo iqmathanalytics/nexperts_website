@@ -1,48 +1,22 @@
 /**
  * Nexperts Academy — Enquiry Webhook (Google Apps Script)
  *
- * SETUP (once):
- * 1. Create a new Google Sheet while signed in as info@nexpertsai.com
- * 2. Extensions → Apps Script → paste this entire file
- * 3. Project Settings → Script properties → Add:
- *      ENQUIRY_SECRET = (optional) same value as js/enquiry-config.js secret
- * 4. Run setupSheetHeaders() once from the editor (select function → Run)
- * 5. Deploy → New deployment → Type: Web app
- *      - Execute as: Me (info@nexpertsai.com)
- *      - Who has access: Anyone
- * 6. Copy the Web App URL into js/enquiry-config.js → webAppUrl
+ * This deployment only SAVES each enquiry as a new row in the bound Google Sheet.
+ * Email (student + team) is handled separately — e.g. Brevo via Netlify (`enquiry-brevo.mjs`).
  *
- * EMAIL BEHAVIOUR:
- * - MailApp sends as the account that OWNS and AUTHORISES this script.
- *   If you create the script as info@nexpertsai.com, mail typically sends
- *   from that mailbox (Workspace / Gmail "Send mail as" may apply).
- * - Two messages per enquiry:
- *     A) Student: acknowledgement
- *     B) enquiry@nexpertsacademy.com: full lead details
+ * SETUP (once):
+ * 1. Create or open the Google Sheet that should store leads.
+ * 2. Extensions → Apps Script → paste this entire file (bound to that spreadsheet).
+ * 3. Project Settings → Script properties → Add (recommended):
+ *      ENQUIRY_SECRET = same value as `secret` in js/enquiry-config.js (if you POST here from the site).
+ * 4. Run setupSheetHeaders() once from the editor (select function → Run) to create the "Enquiries" tab + headers.
+ * 5. Deploy → New deployment → Type: Web app
+ *      - Execute as: Me
+ *      - Who has access: Anyone (required for anonymous website POSTs)
+ * 6. Copy the Web App URL into js/enquiry-config.js → webAppUrl (only if you use provider "apps_script" for logging).
  */
 
 var SHEET_NAME = "Enquiries";
-var INTERNAL_NOTIFY = "enquiry@nexpertsacademy.com";
-var REPLY_TO = INTERNAL_NOTIFY;
-
-/** Optional: Script property OPTIONAL_BCC = your personal Gmail for debugging (copy of both emails). */
-function _bccDebug_() {
-  var v = PropertiesService.getScriptProperties().getProperty("OPTIONAL_BCC");
-  return v ? String(v).trim() : "";
-}
-
-/** Plain text → minimal HTML (helps some spam filters accept multipart/alternative). */
-function _htmlBody_(plain) {
-  var esc = String(plain || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-  return (
-    "<!doctype html><html><head><meta charset=\"utf-8\"></head><body><pre style=\"font-family:system-ui,sans-serif;white-space:pre-wrap\">" +
-    esc +
-    "</pre></body></html>"
-  );
-}
 
 function doPost(e) {
   try {
@@ -63,19 +37,23 @@ function doPost(e) {
       return jsonOut({ ok: false, error: "forbidden" });
     }
 
+    var first = String(data.first || "").trim();
+    var last = String(data.last || "").trim();
+    var email = String(data.email || "").trim();
+    if (!first || !last || !email) {
+      return jsonOut({ ok: false, error: "missing_name_or_email" });
+    }
+
     var row = buildRow_(data);
     appendRow_(row);
 
-    sendStudentAck_(data);
-    sendInternalNotify_(data);
-
-    return jsonOut({ ok: true });
+    return jsonOut({ ok: true, saved: true });
   } catch (err) {
     return jsonOut({ ok: false, error: String(err && err.message ? err.message : err) });
   }
 }
 
-/** One-time: creates sheet tab + header row */
+/** One-time: creates "Enquiries" tab + header row (clears that tab if it already exists). */
 function setupSheetHeaders() {
   var sh = getSheet_();
   sh.clear();
@@ -129,141 +107,25 @@ function appendRow_(row) {
   sh.appendRow(row);
 }
 
-function sendStudentAck_(data) {
-  var to = String(data.email || "").trim();
-  if (!to) return;
-  var name = (String(data.first || "").trim() + " " + String(data.last || "").trim()).trim();
-  var subject = "We received your enquiry — Nexperts Academy";
-  var body =
-    "Hi " +
-    (name || "there") +
-    ",\n\n" +
-    "Thanks for contacting Nexperts Academy. Our team will reply within 4 business hours (KL time).\n\n" +
-    "If your question is urgent, you can also email us directly at " +
-    INTERNAL_NOTIFY +
-    ".\n\n" +
-    "— Nexperts Academy\n";
-
-  var opts = {
-    to: to,
-    subject: subject,
-    body: body,
-    htmlBody: _htmlBody_(body),
-    replyTo: REPLY_TO,
-    name: "Nexperts Academy",
-  };
-  var bcc = _bccDebug_();
-  if (bcc) opts.bcc = bcc;
-  MailApp.sendEmail(opts);
-}
-
-function sendInternalNotify_(data) {
-  var subject =
-    "[Website enquiry] " +
-    String(data.first || "").trim() +
-    " " +
-    String(data.last || "").trim() +
-    " — " +
-    String(data.course || "Course not selected").slice(0, 80);
-
-  var body =
-    "New enquiry from the website\n" +
-    "============================\n\n" +
-    "Submitted: " +
-    (data.submittedAt || "") +
-    "\n" +
-    "Source: " +
-    (data.source || "") +
-    "\n" +
-    "Page: " +
-    (data.pageUrl || "") +
-    "\n\n" +
-    "Name: " +
-    (data.first || "") +
-    " " +
-    (data.last || "") +
-    "\n" +
-    "Email: " +
-    (data.email || "") +
-    "\n" +
-    "Phone: " +
-    (data.phone || "") +
-    "\n" +
-    "Office: " +
-    (data.office || "") +
-    "\n" +
-    "Course: " +
-    (data.course || "") +
-    "\n" +
-    "Type: " +
-    (data.type || "") +
-    "\n\n" +
-    "Message:\n" +
-    (data.message || "") +
-    "\n\n" +
-    "User-Agent:\n" +
-    (data.userAgent || "") +
-    "\n";
-
-  var stu = String(data.email || "").trim();
-  var opts2 = {
-    to: INTERNAL_NOTIFY,
-    subject: subject,
-    body: body,
-    htmlBody: _htmlBody_(body),
-    replyTo: stu || REPLY_TO,
-    name: "Nexperts Academy",
-  };
-  var bcc2 = _bccDebug_();
-  if (bcc2) opts2.bcc = bcc2;
-  MailApp.sendEmail(opts2);
-}
-
 /**
- * Run this manually from the Apps Script editor (▶ Run) to test delivery.
- * Check BOTH inboxes + Spam. If this arrives but webhook mail does not,
- * the issue is specific to the webhook payload or throttling — not Gmail.
+ * Optional: run manually to verify a row is written (no website required).
+ * Check the "Enquiries" tab after Run.
  */
-function testEmailDelivery() {
-  MailApp.sendEmail({
-    to: Session.getActiveUser().getEmail(),
-    subject: "[Test] Nexperts enquiry mail path",
-    body:
-      "If you see this in Inbox, MailApp delivery works.\n\n" +
-      "Next: search Spam for subject containing [Website enquiry]\n" +
-      "and ask your Workspace admin to check Admin > Reporting > Email log search.\n",
-    htmlBody:
-      "<p>If you see this in <strong>Inbox</strong>, MailApp delivery works.</p>" +
-      "<p>Next: check <strong>Spam</strong> for subjects containing <code>[Website enquiry]</code>.</p>",
-    name: "Nexperts Academy",
-  });
-}
-
-/** Change this if you want to test another inbox. */
-var TEST_EXTERNAL_TO = "harijo560@gmail.com";
-
-/**
- * Run manually: select function testEmailToExternalGmail → Run → Authorise.
- * Sends one message to TEST_EXTERNAL_TO (same style as live enquiry mail).
- * If it lands in Spam, improve SPF/DKIM/DMARC for the SENDING domain and
- * avoid “From” / brand domain mismatch where possible.
- */
-function testEmailToExternalGmail() {
-  var plain =
-    "This is a manual deliverability test from your Nexperts Academy Apps Script project.\n\n" +
-    "If you see this in Spam, open the message → Report not spam (helps Gmail learn).\n\n" +
-    "Sending account: " +
-    Session.getActiveUser().getEmail() +
-    "\n";
-
-  MailApp.sendEmail({
-    to: TEST_EXTERNAL_TO,
-    subject: "[Nexperts test] External Gmail deliverability",
-    body: plain,
-    htmlBody: _htmlBody_(plain),
-    replyTo: REPLY_TO,
-    name: "Nexperts Academy",
-  });
+function testAppendSampleRow() {
+  appendRow_([
+    new Date().toISOString(),
+    "manual_test",
+    "https://example.com/test",
+    "Test",
+    "User",
+    "test@example.com",
+    "+60 000",
+    "Malaysia — Petaling Jaya (HQ)",
+    "CEH — sample",
+    "Individual enrolment",
+    "Hello from Apps Script testAppendSampleRow()",
+    "AppsScriptEditor/1.0",
+  ]);
 }
 
 function jsonOut(obj) {
