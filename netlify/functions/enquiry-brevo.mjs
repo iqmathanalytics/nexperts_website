@@ -313,45 +313,48 @@ function parseJsonSafe(text) {
 }
 
 /**
- * Google Web Apps often return 302 → script.googleusercontent.com.
- * fetch(..., redirect:"follow") may follow with GET and drop the POST body.
- * We re-POST manually on each redirect hop.
+ * Sheet POST must use the secret Google Apps Script expects (Script properties ENQUIRY_SECRET).
+ * Prefer server env so Netlify can match Google even if the browser payload is stale.
  */
-async function fetchAppsScriptPost(initialUrl, bodyString, contentType) {
-  let url = String(initialUrl || "").trim();
-  const maxHops = 8;
-  for (let hop = 0; hop < maxHops; hop++) {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": contentType,
-        Accept: "application/json, text/plain, */*",
-      },
-      body: bodyString,
-      redirect: "manual",
-    });
-    if (res.status >= 301 && res.status <= 308) {
-      const loc = res.headers.get("location");
-      await res.text().catch(() => {});
-      if (!loc) {
-        throw new Error(`apps_script_redirect_${res.status}_no_location`);
-      }
-      url = new URL(loc, url).href;
-      continue;
-    }
-    const text = await res.text();
-    return { res, text, finalUrl: url };
-  }
-  throw new Error("apps_script_too_many_redirects");
+function buildPayloadForSheet(data, env) {
+  const e = env || process.env || {};
+  const out = { ...data };
+  const s = String(e.APPS_SCRIPT_ENQUIRY_SECRET || e.BREVO_ENQUIRY_SECRET || "").trim();
+  if (s) out.secret = s;
+  return out;
+}
+
+/**
+ * Web app returns 302 to googleusercontent.com — Node fetch with redirect:"follow"
+ * keeps POST and returns JSON (manual POST to the Location URL returns 405).
+ */
+async function fetchAppsScriptOnce(url, bodyString, contentType) {
+  const u = normalizeAppsScriptUrl(url);
+  if (!u) throw new Error("apps_script_bad_url");
+  const res = await fetch(u, {
+    method: "POST",
+    headers: {
+      "Content-Type": contentType,
+      Accept: "application/json, text/plain, */*",
+    },
+    body: bodyString,
+    redirect: "follow",
+  });
+  const text = await res.text();
+  return { res, text };
 }
 
 function describeAppsScriptFailure(res, json, text) {
   const t = String(text || "").trim();
   const looksHtml = t.startsWith("<") || t.includes("<!DOCTYPE");
   const err = (json && json.error) || (looksHtml ? "non_json_html" : null) || res.statusText || `http_${res.status}`;
-  const hint = looksHtml
+  let hint = looksHtml
     ? " (Apps Script returned HTML — redeploy Web app as Execute as Me / Anyone, or wrong URL)"
     : "";
+  if (json && json.error === "forbidden") {
+    hint +=
+      " | Set Apps Script Project Settings → Script properties ENQUIRY_SECRET to the same value as BREVO_ENQUIRY_SECRET / secret in enquiry-config.js, or remove ENQUIRY_SECRET.";
+  }
   return `${String(err).slice(0, 120)}${hint} · ${t.slice(0, 100)}`;
 }
 
@@ -363,11 +366,12 @@ async function forwardEnquiryToAppsScript(webAppUrl, data) {
   const base = normalizeAppsScriptUrl(webAppUrl);
   if (!base) return { skipped: true };
 
-  const jsonStr = JSON.stringify(data);
+  const sheetPayload = buildPayloadForSheet(data, process.env);
+  const jsonStr = JSON.stringify(sheetPayload);
   const formBody = new URLSearchParams();
   formBody.set("payload", jsonStr);
 
-  let r = await fetchAppsScriptPost(
+  let r = await fetchAppsScriptOnce(
     base,
     formBody.toString(),
     "application/x-www-form-urlencoded;charset=UTF-8",
@@ -379,11 +383,7 @@ async function forwardEnquiryToAppsScript(webAppUrl, data) {
 
   const firstErr = describeAppsScriptFailure(r.res, parsed, r.text);
 
-  let r2 = await fetchAppsScriptPost(
-    r.finalUrl || base,
-    jsonStr,
-    "application/json;charset=UTF-8",
-  );
+  let r2 = await fetchAppsScriptOnce(base, jsonStr, "application/json;charset=UTF-8");
   let p2 = parseJsonSafe(r2.text);
   if (r2.res.ok && p2 && p2.ok === true) {
     return { skipped: false, ok: true };
@@ -526,13 +526,19 @@ export async function handler(event) {
     }
   }
 
+  const bodyOut = {
+    ok: true,
+    sheetLogged,
+    ...(sheetError ? { sheetError } : {}),
+  };
+  if (!appsScriptUrl) {
+    bodyOut.sheetHint =
+      "APPS_SCRIPT_ENQUIRY_URL is not set — add it to .env (netlify dev) or Netlify site env (same URL as webAppUrl in js/enquiry-config.js), then restart dev server / redeploy.";
+  }
+
   return {
     statusCode: 200,
     headers: h,
-    body: JSON.stringify({
-      ok: true,
-      sheetLogged,
-      ...(sheetError ? { sheetError } : {}),
-    }),
+    body: JSON.stringify(bodyOut),
   };
 }

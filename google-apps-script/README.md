@@ -27,12 +27,12 @@ This folder contains **Google Apps Script** bound to your **Google Sheet**. The 
 
 ## Security (practical)
 
-- **Set `ENQUIRY_SECRET`** in production; same value as `secret` in `js/enquiry-config.js` when using this web app.
+- **Set `ENQUIRY_SECRET`** in production to the **same string** as `secret` in `js/enquiry-config.js` and as `BREVO_ENQUIRY_SECRET` on Netlify (the Netlify function overwrites `secret` on the sheet payload from those env vars when set). If you see **`forbidden`** from the web app, this property is missing or wrong — either fix it to match or **remove** the `ENQUIRY_SECRET` property entirely to disable the check.
 - Apps Script has execution time and URL fetch quotas; sheet-only usage is light.
 
 ### Using Brevo for email and Apps Script for the sheet
 
-With **`provider: "brevo"`** in `js/enquiry-config.js`, the Netlify function **`enquiry-brevo`** sends email via Brevo, then **optionally POSTs the same JSON payload** to your Apps Script web app so **`EnquiryWebhook.gs`** can append a row. Set **`APPS_SCRIPT_ENQUIRY_URL`** on Netlify to your deployed **Web app URL** (same value as `webAppUrl` in `js/enquiry-config.js`). The function **re-POSTs on each HTTP redirect** (Google often returns 302 to `googleusercontent.com`; a naive redirect would drop the POST body and the sheet would never update). If `ENQUIRY_SECRET` is set in Script properties, it must match **`secret`** in the config (the function forwards the browser payload, including `secret`). **Redeploy** the Apps Script **Web app** after changing `EnquiryWebhook.gs`, and redeploy Netlify after env changes. A successful API response may include **`sheetLogged: true`**; if the sheet step fails after mail is sent, you may see **`sheetError`** in the JSON (emails were still delivered).
+With **`provider: "brevo"`** in `js/enquiry-config.js`, the Netlify function **`enquiry-brevo`** sends email via Brevo, then **optionally POSTs** to your Apps Script web app so **`EnquiryWebhook.gs`** can append a row. Set **`APPS_SCRIPT_ENQUIRY_URL`** in **`.env`** for `netlify dev` and on **Netlify** for production (same URL as `webAppUrl` in `js/enquiry-config.js`). The function uses **`redirect: follow`** (Node keeps the POST through Google’s 302 to `googleusercontent.com`). The payload **`secret`** sent to Apps Script is taken from **`APPS_SCRIPT_ENQUIRY_SECRET`** or **`BREVO_ENQUIRY_SECRET`** when set, so it matches **Script properties → `ENQUIRY_SECRET`**. **Redeploy** the Apps Script **Web app** after changing `EnquiryWebhook.gs`. A successful API response may include **`sheetLogged: true`**; if the sheet step fails, check **`sheetError`** / **`sheetHint`** in the JSON. Restart **`netlify dev`** after editing `.env`.
 
 ---
 
@@ -62,6 +62,7 @@ In **Site configuration → Environment variables**, add:
 | `NEXPERTS_PUBLIC_SITE_URL` | No | Base URL for CTA links in emails (default `https://www.nexpertsacademy.com`). |
 | `NEXPERTS_LEADS_SHEET_URL` | No | Google Sheet link shown on the internal lead email (defaults to your shared Enquiries sheet). |
 | `APPS_SCRIPT_ENQUIRY_URL` | No | Google Apps Script **web app** URL (`…/macros/s/…/exec`). When set, each successful Brevo enquiry is forwarded to the script for **sheet logging**. Aliases: `NEXPERTS_APPS_SCRIPT_WEBAPP_URL`, `GOOGLE_APPS_SCRIPT_ENQUIRY_URL`. |
+| `APPS_SCRIPT_ENQUIRY_SECRET` | No | If set, overrides `secret` on the payload sent **only** to Apps Script (use when `ENQUIRY_SECRET` in Script properties must differ from the browser). Otherwise `BREVO_ENQUIRY_SECRET` or the client `secret` is used. |
 
 Redeploy the site after changing env vars.
 
