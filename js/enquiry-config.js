@@ -33,5 +33,5 @@ window.NEXPERTS_ENQUIRY_CONFIG = {
   secret: "JsdQGNFXr0iEiVr1HfKo8fQ-Wi3Plcn8oN8gOgeA_EM",
 
   /** General enquiries — must match BREVO_INTERNAL_TO (or aliases) on Netlify. */
-  teamInbox: "eneeyannirmaran@gmail.com",
+  teamInbox: "enquiry@nexpertsacademy.com",
 };
