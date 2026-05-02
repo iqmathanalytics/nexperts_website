@@ -17,7 +17,7 @@ window.NEXPERTS_ENQUIRY_CONFIG = {
 
   /** Apps Script (only when provider is "apps_script") */
   webAppUrl:
-    "https://script.google.com/macros/s/AKfycbyKfumS-VFf4N8DZRpPkDHACoeV3tHimUneMBHfj1zrgX3Q952XwTt6gTI4Kjb6nUJu5A/exec",
+    "https://script.google.com/macros/s/AKfycbwvuzLnN1ApSXpnT-In_2c2SEv0obCYfIxaxqdsg-VnnYQ6WT5dE4rBkJZNTYYIKaZoGQ/exec",
 
   /** Brevo / Netlify function (when provider is "brevo"). Relative = same host as the page. */
   brevoEndpoint: "/.netlify/functions/enquiry-brevo",
