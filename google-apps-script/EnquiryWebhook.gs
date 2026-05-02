@@ -13,7 +13,7 @@
  * 5. Deploy → New deployment → Type: Web app
  *      - Execute as: Me
  *      - Who has access: Anyone (required for anonymous website POSTs)
- * 6. Copy the Web App URL into js/enquiry-config.js → webAppUrl (only if you use provider "apps_script" for logging).
+ * 6. Copy the Web App URL into js/enquiry-config.js → webAppUrl, and into Netlify env APPS_SCRIPT_ENQUIRY_URL (same URL) so the Brevo Netlify function can forward leads to this script for sheet rows.
  */
 
 var SHEET_NAME = "Enquiries";
@@ -33,7 +33,10 @@ function doPost(e) {
     var data = JSON.parse(raw);
     var props = PropertiesService.getScriptProperties();
     var expected = props.getProperty("ENQUIRY_SECRET");
-    if (expected && String(data.secret || "") !== String(expected)) {
+    if (
+      expected &&
+      String(data.secret || "").trim() !== String(expected).trim()
+    ) {
       return jsonOut({ ok: false, error: "forbidden" });
     }
 

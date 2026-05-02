@@ -7,6 +7,7 @@
  *    Deploy site on Netlify, set environment variables (see google-apps-script/README.md),
  *    set provider: "brevo" below, use the same optional `secret` as BREVO_ENQUIRY_SECRET,
  *    and set `teamInbox` to the same address as BREVO_INTERNAL_TO (for mailto links + error text).
+ *    Sheet rows: set APPS_SCRIPT_ENQUIRY_URL on Netlify (same URL as webAppUrl below) so the Brevo function can forward each lead to Apps Script after mail sends.
  *
  * 2) apps_script — Legacy: Google Apps Script Web App + Sheet (see /google-apps-script/).
  */
@@ -24,6 +25,6 @@ window.NEXPERTS_ENQUIRY_CONFIG = {
   /** Same value as BREVO_ENQUIRY_SECRET on Netlify (and local .env for netlify dev). */
   secret: "JsdQGNFXr0iEiVr1HfKo8fQ-Wi3Plcn8oN8gOgeA_EM",
 
-  /** General enquiries — must match BREVO_INTERNAL_TO (or BREVO_ENQUIRY_TO / NEXPERTS_ENQUIRY_EMAIL) on Netlify. */
-  teamInbox: "eneeyannirmaran@gmail.com",
+  /** General enquiries — must match BREVO_INTERNAL_TO (or aliases) on Netlify. */
+  teamInbox: "enquiry@nexpertsacademy.com",
 };

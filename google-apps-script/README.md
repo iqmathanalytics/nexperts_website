@@ -32,7 +32,7 @@ This folder contains **Google Apps Script** bound to your **Google Sheet**. The 
 
 ### Using Brevo for email and Apps Script for the sheet
 
-The website **`js/enquiry-submit.js`** currently sends to **one** `provider` (`brevo` **or** `apps_script`). To **both** email via Brevo and log to Sheets, either: extend the Netlify function to `UrlFetchApp`-equivalent server-side POST to the Apps Script URL after a successful Brevo send, or add a second client call (ask if you want that implemented).
+With **`provider: "brevo"`** in `js/enquiry-config.js`, the Netlify function **`enquiry-brevo`** sends email via Brevo, then **optionally POSTs the same JSON payload** to your Apps Script web app so **`EnquiryWebhook.gs`** can append a row. Set **`APPS_SCRIPT_ENQUIRY_URL`** on Netlify to your deployed **Web app URL** (same value as `webAppUrl` in `js/enquiry-config.js`). If `ENQUIRY_SECRET` is set in Script properties, it must match **`secret`** in the config (the function forwards the browser payload, including `secret`). Redeploy Netlify after adding the variable. A successful API response may include **`sheetLogged: true`**; if the sheet step fails after mail is sent, you may see **`sheetError`** in the JSON (emails were still delivered).
 
 ---
 
@@ -61,6 +61,7 @@ In **Site configuration → Environment variables**, add:
 | `BREVO_ALLOWED_ORIGINS` | No | CORS `Access-Control-Allow-Origin` (default `*`). Set to your site origin if you lock it down. |
 | `NEXPERTS_PUBLIC_SITE_URL` | No | Base URL for CTA links in emails (default `https://www.nexpertsacademy.com`). |
 | `NEXPERTS_LEADS_SHEET_URL` | No | Google Sheet link shown on the internal lead email (defaults to your shared Enquiries sheet). |
+| `APPS_SCRIPT_ENQUIRY_URL` | No | Google Apps Script **web app** URL (`…/macros/s/…/exec`). When set, each successful Brevo enquiry is forwarded to the script for **sheet logging**. Aliases: `NEXPERTS_APPS_SCRIPT_WEBAPP_URL`, `GOOGLE_APPS_SCRIPT_ENQUIRY_URL`. |
 
 Redeploy the site after changing env vars.
 
@@ -71,7 +72,8 @@ window.NEXPERTS_ENQUIRY_CONFIG = {
   provider: "brevo",
   brevoEndpoint: "/.netlify/functions/enquiry-brevo",
   secret: "same-as-BREVO_ENQUIRY_SECRET",
-  webAppUrl: "", // not used when provider is brevo
+  teamInbox: "same-as-BREVO_INTERNAL_TO",
+  webAppUrl: "https://script.google.com/macros/s/…/exec", // copy to APPS_SCRIPT_ENQUIRY_URL on Netlify for sheet logging
 };
 ```
 
@@ -79,7 +81,7 @@ For local testing with `netlify dev`, the function URL is the same path on `http
 
 ### Local machine (`netlify dev`)
 
-1. Copy `.env.example` → `.env` and fill `BREVO_API_KEY`, `BREVO_SENDER_EMAIL` (must be **verified** in Brevo for your domain, e.g. `noreply@nexpertsai.com`), and optionally `BREVO_INTERNAL_TO` (default `enquiry@nexpertsacademy.com`). The file `.env` is **gitignored** — do not commit it.
+1. Copy `.env.example` → `.env` and fill `BREVO_API_KEY`, `BREVO_SENDER_EMAIL` (must be **verified** in Brevo for your domain, e.g. `noreply@nexpertsai.com`), optionally `BREVO_INTERNAL_TO`, and optionally **`APPS_SCRIPT_ENQUIRY_URL`** (same as `webAppUrl` in `enquiry-config.js`) to test sheet logging locally. The file `.env` is **gitignored** — do not commit it.
 2. In `js/enquiry-config.js` set `provider: "brevo"`.
 3. From the repo root: `npm install` then `npm run dev` (or `npx netlify dev` if you prefer not to install deps).
 4. Open the URL Netlify prints (often `http://localhost:8888`) and submit **contact.html** or the home “Enquire” modal. Watch the terminal for function logs if something fails.

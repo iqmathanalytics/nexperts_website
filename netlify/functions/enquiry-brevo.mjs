@@ -278,6 +278,54 @@ async function brevoSend(apiKey, body) {
   return json;
 }
 
+const APPS_SCRIPT_URL_ENV_KEYS = [
+  "APPS_SCRIPT_ENQUIRY_URL",
+  "NEXPERTS_APPS_SCRIPT_WEBAPP_URL",
+  "GOOGLE_APPS_SCRIPT_ENQUIRY_URL",
+];
+
+function resolveAppsScriptEnquiryUrl(env) {
+  const e = env || process.env || {};
+  for (const k of APPS_SCRIPT_URL_ENV_KEYS) {
+    const v = String(e[k] || "").trim();
+    if (v && /^https:\/\/script\.google\.com\/macros\//i.test(v)) return v;
+  }
+  return "";
+}
+
+/**
+ * Append row in bound Sheet (same contract as browser → Apps Script).
+ * Uses x-www-form-urlencoded payload= so doPost receives e.parameter.payload.
+ */
+async function forwardEnquiryToAppsScript(webAppUrl, data) {
+  const url = String(webAppUrl || "").trim();
+  if (!url) return { skipped: true };
+
+  const body = new URLSearchParams();
+  body.set("payload", JSON.stringify(data));
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+    body: body.toString(),
+    redirect: "follow",
+  });
+
+  const text = await res.text();
+  let json = null;
+  try {
+    json = text ? JSON.parse(text) : null;
+  } catch {
+    json = null;
+  }
+
+  if (!res.ok || !json || json.ok !== true) {
+    const err = (json && json.error) || res.statusText || "apps_script_error";
+    throw new Error(String(err).slice(0, 160) + (text.length > 80 ? ` · ${text.slice(0, 80)}` : ""));
+  }
+  return { skipped: false, ok: true };
+}
+
 export async function handler(event) {
   const h = corsHeaders();
 
@@ -398,9 +446,25 @@ export async function handler(event) {
     };
   }
 
+  const appsScriptUrl = resolveAppsScriptEnquiryUrl(process.env);
+  let sheetLogged = false;
+  let sheetError = null;
+  if (appsScriptUrl) {
+    try {
+      await forwardEnquiryToAppsScript(appsScriptUrl, data);
+      sheetLogged = true;
+    } catch (e) {
+      sheetError = String(e.message || e).slice(0, 220);
+    }
+  }
+
   return {
     statusCode: 200,
     headers: h,
-    body: JSON.stringify({ ok: true }),
+    body: JSON.stringify({
+      ok: true,
+      sheetLogged,
+      ...(sheetError ? { sheetError } : {}),
+    }),
   };
 }
