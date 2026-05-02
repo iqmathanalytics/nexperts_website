@@ -97,13 +97,24 @@
       data = null;
     }
     if (!res.ok) {
-      const msg =
-        (data && (data.detail || data.error || data.hint)) ||
+      let msg =
+        (data && (data.hint || data.detail || data.error)) ||
         "Could not send your enquiry. Please try again or email enquiry@nexpertsacademy.com.";
+      if (data && data.error === "forbidden") {
+        msg =
+          data.hint ||
+          "Secret mismatch: set js/enquiry-config.js secret to match Netlify BREVO_ENQUIRY_SECRET, or clear BREVO_ENQUIRY_SECRET on Netlify.";
+      }
       throw new Error(String(msg));
     }
     if (data && data.ok === false) {
-      throw new Error(String(data.error || "Enquiry rejected."));
+      let msg2 = data.hint || data.error || "Enquiry rejected.";
+      if (data.error === "forbidden") {
+        msg2 =
+          data.hint ||
+          "Secret mismatch between the website and Netlify. Check enquiry-config.js and BREVO_ENQUIRY_SECRET.";
+      }
+      throw new Error(String(msg2));
     }
   }
 

@@ -20,6 +20,6 @@ window.NEXPERTS_ENQUIRY_CONFIG = {
   /** Brevo / Netlify function (when provider is "brevo"). Relative = same host as the page. */
   brevoEndpoint: "/.netlify/functions/enquiry-brevo",
 
-  /** Optional: set the same value as BREVO_ENQUIRY_SECRET on Netlify (and ENQUIRY_SECRET in Apps Script if used). */
-  secret: "",
+  /** Same value as BREVO_ENQUIRY_SECRET on Netlify (and local .env for netlify dev). */
+  secret: "JsdQGNFXr0iEiVr1HfKo8fQ-Wi3Plcn8oN8gOgeA_EM",
 };

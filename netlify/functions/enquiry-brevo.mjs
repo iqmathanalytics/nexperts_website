@@ -254,7 +254,7 @@ export async function handler(event) {
   const senderEmail = process.env.BREVO_SENDER_EMAIL || "";
   const senderName = process.env.BREVO_SENDER_NAME || "Nexperts Academy";
   const internalTo = process.env.BREVO_INTERNAL_TO || "enquiry@nexpertsacademy.com";
-  const expectedSecret = process.env.BREVO_ENQUIRY_SECRET || "";
+  const expectedSecret = String(process.env.BREVO_ENQUIRY_SECRET || "").trim();
 
   if (!apiKey || !senderEmail) {
     return {
@@ -288,11 +288,19 @@ export async function handler(event) {
     };
   }
 
-  if (expectedSecret && String(data.secret || "") !== String(expectedSecret)) {
+  if (
+    expectedSecret &&
+    String(data.secret || "").trim() !== expectedSecret
+  ) {
     return {
       statusCode: 403,
       headers: h,
-      body: JSON.stringify({ ok: false, error: "forbidden" }),
+      body: JSON.stringify({
+        ok: false,
+        error: "forbidden",
+        hint:
+          "BREVO_ENQUIRY_SECRET is set on Netlify but the form did not send the same secret. Either remove BREVO_ENQUIRY_SECRET in Netlify, or set the same value as secret in js/enquiry-config.js and redeploy the site.",
+      }),
     };
   }
 
