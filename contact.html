@@ -232,6 +232,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
 }
 </style>
   <link rel="stylesheet" href="css/site-nav-mobile.css">
+  <link rel="stylesheet" href="css/enquiry-phone.css">
 </head>
 <body>
 <nav class="site-nav">
@@ -415,7 +416,13 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
           </div>
           <div class="form-field"><label>Email address <span class="req">*</span></label><input type="email" name="email" placeholder="ahmad@company.com.my" required></div>
           <div class="form-row">
-            <div class="form-field"><label>Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+60 12-XXX XXXX"></div>
+            <div class="form-field">
+              <label>Phone / WhatsApp</label>
+              <div class="enquiry-phone-row">
+                <select name="phoneCountry" class="enquiry-phone-cc" aria-label="Country calling code"></select>
+                <input type="tel" name="phone" class="enquiry-phone-num" placeholder="12-345 6789" autocomplete="tel-national" inputmode="tel">
+              </div>
+            </div>
             <div class="form-field">
               <label>Preferred office</label>
               <select name="office">
@@ -653,6 +660,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
 </footer>
 
 <script src="js/enquiry-config.js"></script>
+<script src="js/enquiry-phone.js"></script>
 <script src="js/enquiry-submit.js"></script>
 <script>
 // Schedule filter

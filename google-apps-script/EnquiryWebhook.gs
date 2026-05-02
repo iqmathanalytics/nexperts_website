@@ -76,20 +76,30 @@ function setupSheetHeaders() {
   ]);
 }
 
+/**
+ * Force plain text in Sheets so leading +, =, -, @ are not parsed as formulas.
+ */
+function asSheetPlain_(v) {
+  var s = String(v == null ? "" : v);
+  if (s === "") return "";
+  if (/^[=+\-@]/.test(s)) return "'" + s;
+  return s;
+}
+
 function buildRow_(data) {
   return [
-    data.submittedAt || new Date().toISOString(),
-    data.source || "",
-    data.pageUrl || "",
-    data.first || "",
-    data.last || "",
-    data.email || "",
-    data.phone || "",
-    data.office || "",
-    data.course || "",
-    data.type || "",
-    data.message || "",
-    data.userAgent || "",
+    asSheetPlain_(data.submittedAt || new Date().toISOString()),
+    asSheetPlain_(data.source || ""),
+    asSheetPlain_(data.pageUrl || ""),
+    asSheetPlain_(data.first || ""),
+    asSheetPlain_(data.last || ""),
+    asSheetPlain_(data.email || ""),
+    asSheetPlain_(data.phone || ""),
+    asSheetPlain_(data.office || ""),
+    asSheetPlain_(data.course || ""),
+    asSheetPlain_(data.type || ""),
+    asSheetPlain_(data.message || ""),
+    asSheetPlain_(data.userAgent || ""),
   ];
 }
 
@@ -108,6 +118,11 @@ function appendRow_(row) {
     setupSheetHeaders();
   }
   sh.appendRow(row);
+  var r = sh.getLastRow();
+  var n = row.length;
+  if (r > 0 && n > 0) {
+    sh.getRange(r, 1, r, n).setNumberFormat("@");
+  }
 }
 
 /**

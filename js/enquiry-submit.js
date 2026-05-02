@@ -44,6 +44,17 @@
     return "";
   }
 
+  /** Full E.164-style phone when country select is present; else legacy single field. */
+  function combineInternationalPhone(form) {
+    const ccEl = form.elements.namedItem("phoneCountry");
+    if (!ccEl) return fieldValue(form, "phone");
+    const cc = String(fieldValue(form, "phoneCountry") || "+60").trim() || "+60";
+    let num = String(fieldValue(form, "phone") || "").trim();
+    if (!num) return "";
+    if (/^\+/.test(num)) return num.replace(/\s+/g, " ").trim();
+    return (cc + " " + num).replace(/\s+/g, " ").trim();
+  }
+
   /**
    * @param {HTMLFormElement} form
    * @param {{ source: string }} meta
@@ -53,7 +64,7 @@
       first: fieldValue(form, "first"),
       last: fieldValue(form, "last"),
       email: fieldValue(form, "email"),
-      phone: fieldValue(form, "phone"),
+      phone: combineInternationalPhone(form),
       office: fieldValue(form, "office"),
       course: fieldValue(form, "course"),
       type: fieldValue(form, "type"),

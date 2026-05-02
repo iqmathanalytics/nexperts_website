@@ -1,0 +1,67 @@
+/* Shared: enquiry phone = country code + national number (contact + index modal) */
+.enquiry-phone-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.enquiry-phone-cc {
+  flex: 0 1 11.5rem;
+  min-width: min(100%, 10rem);
+  width: auto;
+  max-width: 100%;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.86rem;
+  color: var(--ink, #0f1b2d);
+  background: #fff;
+  border: 1.5px solid var(--line2, #d1d5db);
+  border-radius: 10px;
+  padding: 11px 14px;
+  padding-right: 36px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink3, #4b6284) 50%),
+    linear-gradient(135deg, var(--ink3, #4b6284) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 18px, calc(100% - 13px) 18px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.enquiry-phone-cc:hover {
+  border-color: rgba(29, 78, 216, 0.35);
+}
+
+.enquiry-phone-cc:focus {
+  border-color: var(--blue, #1d4ed8);
+  box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
+  background-color: #fdfeff;
+}
+
+.enquiry-phone-num {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+/* Modal uses same tokens as index */
+.em-field .enquiry-phone-cc {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 560px) {
+  .enquiry-phone-row {
+    flex-direction: column;
+  }
+
+  .enquiry-phone-cc,
+  .enquiry-phone-num {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: none;
+  }
+}

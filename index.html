@@ -666,6 +666,7 @@ body.em-open{overflow:hidden}
 </style>
 
   <link rel="stylesheet" href="css/site-nav-mobile.css">
+  <link rel="stylesheet" href="css/enquiry-phone.css">
 </head>
 <body class="preload">
 
@@ -1621,7 +1622,13 @@ body.em-open{overflow:hidden}
         </div>
         <div class="em-field"><label>Email address <span class="req">*</span></label><input type="email" name="email" placeholder="ahmad@company.com.my" required></div>
         <div class="em-row">
-          <div class="em-field"><label>Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+60 12-XXX XXXX"></div>
+          <div class="em-field">
+            <label>Phone / WhatsApp</label>
+            <div class="enquiry-phone-row">
+              <select name="phoneCountry" class="enquiry-phone-cc" aria-label="Country calling code"></select>
+              <input type="tel" name="phone" class="enquiry-phone-num" placeholder="12-345 6789" autocomplete="tel-national" inputmode="tel">
+            </div>
+          </div>
           <div class="em-field">
             <label>Preferred office</label>
             <select name="office">
@@ -1710,6 +1717,7 @@ body.em-open{overflow:hidden}
 </footer>
 
 <script src="js/enquiry-config.js"></script>
+<script src="js/enquiry-phone.js"></script>
 <script src="js/enquiry-submit.js"></script>
 <script>
 // Scroll reveal

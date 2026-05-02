@@ -6,7 +6,7 @@ This folder contains **Google Apps Script** bound to your **Google Sheet**. The 
 
 1. Accepts `POST` with the same JSON payload as the website (`first`, `last`, `email`, …).
 2. Optionally checks `ENQUIRY_SECRET` (must match `secret` in `js/enquiry-config.js` if set).
-3. **Appends one row** to the **`Enquiries`** sheet.
+3. **Appends one row** to the **`Enquiries`** sheet (cells use **text** number format `@`, and values that start with `+`, `=`, `-`, or `@` are prefixed so Sheets does not treat them as formulas).
 
 ## One-time setup
 
