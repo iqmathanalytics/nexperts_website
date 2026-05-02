@@ -25,5 +25,5 @@ window.NEXPERTS_ENQUIRY_CONFIG = {
   secret: "JsdQGNFXr0iEiVr1HfKo8fQ-Wi3Plcn8oN8gOgeA_EM",
 
   /** General enquiries — must match BREVO_INTERNAL_TO (or BREVO_ENQUIRY_TO / NEXPERTS_ENQUIRY_EMAIL) on Netlify. */
-  teamInbox: "contact@iqmath.in",
+  teamInbox: "eneeyannirmaran@gmail.com",
 };
