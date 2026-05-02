@@ -288,42 +288,110 @@ function resolveAppsScriptEnquiryUrl(env) {
   const e = env || process.env || {};
   for (const k of APPS_SCRIPT_URL_ENV_KEYS) {
     const v = String(e[k] || "").trim();
-    if (v && /^https:\/\/script\.google\.com\/macros\//i.test(v)) return v;
+    if (v && /^https:\/\/script\.google\.com\/macros\//i.test(v)) return normalizeAppsScriptUrl(v);
   }
   return "";
 }
 
+/** Strip query/hash so POST targets the web app endpoint cleanly. */
+function normalizeAppsScriptUrl(raw) {
+  let u = String(raw || "").trim();
+  if (!u) return "";
+  const h = u.indexOf("#");
+  if (h >= 0) u = u.slice(0, h);
+  const q = u.indexOf("?");
+  if (q >= 0) u = u.slice(0, q);
+  return u;
+}
+
+function parseJsonSafe(text) {
+  try {
+    return text ? JSON.parse(text) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Google Web Apps often return 302 → script.googleusercontent.com.
+ * fetch(..., redirect:"follow") may follow with GET and drop the POST body.
+ * We re-POST manually on each redirect hop.
+ */
+async function fetchAppsScriptPost(initialUrl, bodyString, contentType) {
+  let url = String(initialUrl || "").trim();
+  const maxHops = 8;
+  for (let hop = 0; hop < maxHops; hop++) {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": contentType,
+        Accept: "application/json, text/plain, */*",
+      },
+      body: bodyString,
+      redirect: "manual",
+    });
+    if (res.status >= 301 && res.status <= 308) {
+      const loc = res.headers.get("location");
+      await res.text().catch(() => {});
+      if (!loc) {
+        throw new Error(`apps_script_redirect_${res.status}_no_location`);
+      }
+      url = new URL(loc, url).href;
+      continue;
+    }
+    const text = await res.text();
+    return { res, text, finalUrl: url };
+  }
+  throw new Error("apps_script_too_many_redirects");
+}
+
+function describeAppsScriptFailure(res, json, text) {
+  const t = String(text || "").trim();
+  const looksHtml = t.startsWith("<") || t.includes("<!DOCTYPE");
+  const err = (json && json.error) || (looksHtml ? "non_json_html" : null) || res.statusText || `http_${res.status}`;
+  const hint = looksHtml
+    ? " (Apps Script returned HTML — redeploy Web app as Execute as Me / Anyone, or wrong URL)"
+    : "";
+  return `${String(err).slice(0, 120)}${hint} · ${t.slice(0, 100)}`;
+}
+
 /**
  * Append row in bound Sheet (same contract as browser → Apps Script).
- * Uses x-www-form-urlencoded payload= so doPost receives e.parameter.payload.
+ * Tries x-www-form-urlencoded payload=, then JSON body on the resolved URL.
  */
 async function forwardEnquiryToAppsScript(webAppUrl, data) {
-  const url = String(webAppUrl || "").trim();
-  if (!url) return { skipped: true };
+  const base = normalizeAppsScriptUrl(webAppUrl);
+  if (!base) return { skipped: true };
 
-  const body = new URLSearchParams();
-  body.set("payload", JSON.stringify(data));
+  const jsonStr = JSON.stringify(data);
+  const formBody = new URLSearchParams();
+  formBody.set("payload", jsonStr);
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-    body: body.toString(),
-    redirect: "follow",
-  });
-
-  const text = await res.text();
-  let json = null;
-  try {
-    json = text ? JSON.parse(text) : null;
-  } catch {
-    json = null;
+  let r = await fetchAppsScriptPost(
+    base,
+    formBody.toString(),
+    "application/x-www-form-urlencoded;charset=UTF-8",
+  );
+  let parsed = parseJsonSafe(r.text);
+  if (r.res.ok && parsed && parsed.ok === true) {
+    return { skipped: false, ok: true };
   }
 
-  if (!res.ok || !json || json.ok !== true) {
-    const err = (json && json.error) || res.statusText || "apps_script_error";
-    throw new Error(String(err).slice(0, 160) + (text.length > 80 ? ` · ${text.slice(0, 80)}` : ""));
+  const firstErr = describeAppsScriptFailure(r.res, parsed, r.text);
+
+  let r2 = await fetchAppsScriptPost(
+    r.finalUrl || base,
+    jsonStr,
+    "application/json;charset=UTF-8",
+  );
+  let p2 = parseJsonSafe(r2.text);
+  if (r2.res.ok && p2 && p2.ok === true) {
+    return { skipped: false, ok: true };
   }
-  return { skipped: false, ok: true };
+
+  throw new Error(
+    `${describeAppsScriptFailure(r2.res, p2, r2.text)} | form_try: ${firstErr}`.slice(0, 380),
+  );
 }
 
 export async function handler(event) {

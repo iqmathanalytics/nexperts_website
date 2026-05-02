@@ -18,13 +18,41 @@
 
 var SHEET_NAME = "Enquiries";
 
+/** When Netlify/server POSTs x-www-form-urlencoded, e.parameter.payload is sometimes empty — parse body. */
+function extractPayloadFromWwwForm_(contents) {
+  if (!contents) return "";
+  var pairs = String(contents).split("&");
+  for (var i = 0; i < pairs.length; i++) {
+    var eq = pairs[i].indexOf("=");
+    if (eq <= 0) continue;
+    var key = decodeURIComponent(
+      pairs[i].substring(0, eq).replace(/\+/g, " ")
+    );
+    if (key !== "payload") continue;
+    return decodeURIComponent(
+      pairs[i].substring(eq + 1).replace(/\+/g, " ")
+    );
+  }
+  return "";
+}
+
 function doPost(e) {
   try {
     var raw = "";
     if (e && e.parameter && e.parameter.payload) {
       raw = e.parameter.payload;
-    } else if (e && e.postData && e.postData.contents) {
-      raw = e.postData.contents;
+    }
+    if (!raw && e && e.postData && e.postData.contents) {
+      var contents = e.postData.contents;
+      var ct = String((e.postData && e.postData.type) || "").toLowerCase();
+      if (ct.indexOf("application/x-www-form-urlencoded") >= 0) {
+        raw = extractPayloadFromWwwForm_(contents);
+      } else if (ct.indexOf("application/json") >= 0) {
+        raw = contents;
+      } else {
+        raw = extractPayloadFromWwwForm_(contents);
+        if (!raw) raw = contents;
+      }
     }
     if (!raw) {
       return jsonOut({ ok: false, error: "empty_payload" });
