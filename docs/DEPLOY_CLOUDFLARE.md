@@ -47,7 +47,14 @@ The build runs Python scripts (`scripts/build_contact_course_select.py`, `script
 
 ## 4. Redirects
 
-The site ships a root **`_redirects`** file (same idea as Netlify). Cloudflare Pages serves it from the **published output** when placed at the site root. After deploy, spot-check a few legacy paths from that file.
+The site ships a root **`_redirects`** file. Cloudflare Pages parses it from the build output (same filename as Netlify, but not identical behaviour):
+
+- **Relative paths only** for rules in this file; **no** full URLs on the source side like Netlify allows for apex redirects.
+- **Status codes** must be bare `301`, `302`, etc. Netlify’s **`301!` (forced)** syntax is **invalid** on Pages (drop the `!`).
+- **Domain-level redirects** (different hostname / `https://…/* …`) are **not supported** in `_redirects` — use **Rules → Redirect Rules** (or **Bulk Redirects**) on your Cloudflare **zone** for apex → `www`, HTTP → HTTPS, etc., plus **SSL/TLS → Always Use HTTPS**.
+- **Limits:** up to **2,000 static** and **100 dynamic** redirects (splats / placeholders count as dynamic). A few bad splat lines can exhaust the dynamic budget and cause Pages to **skip the rest of the file**; fix deploy log warnings so every legacy path rule applies.
+
+After deploy, confirm the build log shows **no** “Skipping remaining … lines” and spot-check sample legacy URLs.
 
 ## 5. Enquiry endpoint (Brevo)
 

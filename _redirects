@@ -1,8 +1,8 @@
-# Canonical host: non-www and plain HTTP → https://www (301)
-https://nexpertsacademy.com/* https://www.nexpertsacademy.com/:splat 301!
-http://nexpertsacademy.com/* https://www.nexpertsacademy.com/:splat 301!
-http://www.nexpertsacademy.com/* https://www.nexpertsacademy.com/:splat 301!
-
+# Host / scheme canonicalization (apex, HTTP → HTTPS, www) is NOT supported in Cloudflare
+# Pages `_redirects` (domain-level rules + splats use the "dynamic" quota). Configure instead:
+# Cloudflare Dashboard → your zone → Rules → Redirect Rules (or Single Redirects), and enable
+# Always Use HTTPS. Netlify: Site settings → Domain management + HTTPS.
+#
 # Legacy site URLs → final page (single 301; no /course-* hop)
 /ccna /course_pages/ccna.html 301
 /ceh /course_pages/ceh-v13-ai.html 301
