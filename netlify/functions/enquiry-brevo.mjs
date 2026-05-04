@@ -83,6 +83,28 @@ function getCtx(data, env) {
   return { site, sheet, internal, first, last, fullName };
 }
 
+/** Public course page URL for the "View curriculum" button in the student email. */
+function resolveCurriculumPageUrl(data, site) {
+  const base = String(site || "").replace(/\/$/, "");
+  const rel = String((data && data.curriculumPage) || "").trim();
+  if (rel && /^course_pages\/[a-z0-9._-]+\.html$/i.test(rel)) {
+    return `${base}/${rel}`;
+  }
+  const pageUrl = String((data && data.pageUrl) || "").trim();
+  if (pageUrl) {
+    try {
+      const u = new URL(pageUrl);
+      const p = u.pathname || "";
+      if (/\/course_pages\/[^/]+\.html$/i.test(p)) {
+        return `${base}${p.startsWith("/") ? p : "/" + p}`;
+      }
+    } catch (_) {
+      /* ignore */
+    }
+  }
+  return "";
+}
+
 /** Table row: label | value (email-safe layout) */
 function trRow(label, value) {
   const v = escapeHtml(dash(value));
@@ -125,6 +147,7 @@ function emailWrapper(inner, footerLines) {
 
 function buildStudentEmailHtml(data, ctx) {
   const { site, internal, fullName } = ctx;
+  const curriculumUrl = resolveCurriculumPageUrl(data, site);
   const inner = `
 <tr><td style="background:linear-gradient(135deg,#1e40af 0%,#2563eb 55%,#3b82f6 100%);padding:28px 28px 24px;">
   <p style="margin:0 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:#ffffff;line-height:1.25;">Thank you, ${escapeHtml(fullName)}</p>
@@ -143,6 +166,15 @@ function buildStudentEmailHtml(data, ctx) {
     ${trRow("Submitted", data.submittedAt)}
   </table>
 </td></tr>
+${
+  curriculumUrl
+    ? `<tr><td style="padding:0 24px 18px;">
+  <p style="margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1d4ed8;">Your course</p>
+  ${ctaButton(curriculumUrl, "View curriculum")}
+  <p style="margin:10px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#64748b;line-height:1.55;">Full programme outline, schedule options, and pricing for the course you enquired about.</p>
+</td></tr>`
+    : ""
+}
 <tr><td style="padding:8px 24px 20px;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;">
     <tr><td style="padding:18px 20px;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1e3a8a;line-height:1.6;">
@@ -213,9 +245,14 @@ function buildInternalEmailHtml(data, ctx) {
 
 function buildStudentEmailText(data, ctx) {
   const { internal, fullName, site } = ctx;
+  const curriculumUrl = resolveCurriculumPageUrl(data, site);
+  const curriculumLine = curriculumUrl
+    ? `View curriculum (course page): ${curriculumUrl}\n`
+    : "";
   return (
     `Hi ${fullName},\n\n` +
     `Thank you for contacting Nexperts Academy. We will reply within 4 business hours (KL time).\n\n` +
+    curriculumLine +
     `WHAT YOU SENT\n` +
     `-------------\n` +
     `Name: ${dash(`${data.first || ""} ${data.last || ""}`.trim())}\n` +

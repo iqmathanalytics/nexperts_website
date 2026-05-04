@@ -2,7 +2,9 @@
   "name": "nexperts-website",
   "private": true,
   "scripts": {
-    "dev": "netlify dev"
+    "dev": "netlify dev",
+    "build": "python scripts/build_contact_course_select.py && python scripts/inject_ga4.py",
+    "build:catalog-dropdowns": "python scripts/build_contact_course_select.py"
   },
   "devDependencies": {
     "netlify-cli": "^18.0.0"

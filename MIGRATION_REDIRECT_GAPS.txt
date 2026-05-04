@@ -1,0 +1,33 @@
+Legacy URLs with no dedicated HTML page now use a single 301 to a fallback
+(/index.html#courses, /contact.html, or /course_pages/dp-100.html for azure-dp900).
+Replace those rules when you add real pages.
+Courses still without a matching course_pages/*.html file (same as before):
+  ecih, cisco-spcor, cisco-dccor, sdwan, java-programming, full-stack, digital marketing,
+  excel-basic (basic-only page), salesforce, servicenow (x2), etc.
+
+See comments in _redirects next to those legacy paths.
+
+
+Course vanity paths without a matching HTML:
+/course-ecih, 
+/course-dp-900, 
+/course-cisco-spcor, 
+/course-cisco-dccor, 
+/course-sdwan, 
+/course-java-programming, 
+/course-full-stack, 
+/course-digital-marketing, 
+/course-excel-basic, 
+/course-salesforce-admin, 
+/course-servicenow-admin, 
+/course-servicenow-platform
+
+
+Non-course URLs:
+/workshops, 
+/workshop-cybersecurity-bootcamp, 
+/workshop-power-bi, 
+/workshop-netflix-data-analysis, 
+/yayasan-peneraju, 
+/catalyst-for-change, 
+/privacy-policy

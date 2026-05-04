@@ -118,6 +118,19 @@ P1 = {
     "CI/CD with Jenkins & GitLab": "cicd-jenkins-gitlab",
     "CND v3": "cnd-v3",
     "CompTIA Cloud+": "comptia-cloud-plus",
+    # Phase 4A & 4B
+    "E|CIH": "ecih",
+    "DP-900: Azure Data Fundamentals": "dp-900",
+    "CCNP SPCOR": "cisco-spcor",
+    "CCNP DCCOR": "cisco-dccor",
+    "Cisco SD-WAN ENSDWI": "sdwan",
+    "Certified Java Programming": "java-programming",
+    "Full Stack Web Development": "full-stack-web-development",
+    "Digital Marketing Certification": "digital-marketing",
+    "Microsoft Excel 2019 Basic": "excel-basic",
+    "Salesforce Admin & Automation": "salesforce-admin",
+    "ServiceNow Administration Fundamentals": "servicenow-admin",
+    "ServiceNow Platform Implementation": "servicenow-platform",
 }
 
 # -----------------------------------------------------------------------------
@@ -172,6 +185,7 @@ CARDS = [
     ("eccouncil","cert","EC-Council","Cert","CCISO",                 "Chief Information Security Officer \u2014 executive cybersecurity leadership.","Executive",   4.9,42, 1620),
     ("eccouncil","cert","EC-Council","Cert","CTIA",                  "Certified Threat Intelligence Analyst \u2014 dark web intel, threat hunting.","Advanced",      4.8,86, 2940),
     ("eccouncil","cert","EC-Council","Cert","CCT \u2014 Cybersecurity Technician","Entry-level hands-on cybersecurity \u2014 the right starting point in security.","Entry",4.8,142,7940),
+    ("eccouncil","cert","EC-Council","Cert","E|CIH","Certified Incident Handler \u2014 structured IR, playbooks and EC-Council exam readiness.","Intermediate",4.8,156,6820),
 
     # ---- AWS ----
     ("aws","cert","AWS","Cert","AWS Cloud Practitioner",                "Foundational cloud concepts \u2014 the right first step for any IT professional.","Foundation",     4.9,486,21680),
@@ -186,6 +200,7 @@ CARDS = [
 
     # ---- Microsoft ----
     ("microsoft","cert","Microsoft","Cert","AZ-900: Azure Fundamentals", "Core cloud and Azure concepts \u2014 starting point for Microsoft cert path.","Foundation",         4.9,289,17840),
+    ("microsoft","cert","Microsoft","Cert","DP-900: Azure Data Fundamentals","Relational and analytics data concepts on Azure \u2014 foundation for every data role.","Foundation",4.9,178,11240),
     ("microsoft","cert","Microsoft","Cert","AZ-104: Azure Administrator","Manage Azure identities, networking, storage and VMs at enterprise scale.","Associate",          4.8,221,10620),
     ("microsoft","cert","Microsoft","Cert","AZ-204: Azure Developer",    "Build and deploy Azure applications \u2014 compute, storage, APIs and more.","Associate",          4.7,148,6740),
     ("microsoft","cert","Microsoft","Cert","AZ-305: Solutions Architect","Design enterprise-grade Azure architecture across hybrid environments.","Expert",                 4.9,108,3920),
@@ -216,6 +231,9 @@ CARDS = [
     ("cisco","cert","Cisco","Cert","CCNP Security",   "Cisco firewall, VPN, identity and threat defense solutions.","Professional",                 4.8,78, 2580),
     ("cisco","cert","Cisco","Cert","CCNP Collaboration","Cisco voice, video, contact-centre and collaboration deployment at depth.","Professional", 4.7,52, 1620),
     ("cisco","cert","Cisco","Cert","DevNet Associate", "Cisco network programmability \u2014 APIs, automation and infrastructure as code.","Associate",4.8,86, 3240),
+    ("cisco","cert","Cisco","Cert","CCNP SPCOR","Service provider core networking \u2014 MPLS, segment routing and WAN-scale routing.","Professional",4.8,92, 3180),
+    ("cisco","cert","Cisco","Cert","CCNP DCCOR","Data center core \u2014 NX-OS, ACI foundations and modern DC operations.","Professional",4.8,78, 2840),
+    ("cisco","cert","Cisco","Cert","Cisco SD-WAN ENSDWI","Design, deploy and operate Cisco SD-WAN with policy-driven enterprise WANs.","Professional",4.8,104,4120),
 
     # ---- Google Cloud ----
     ("gcp","cert","Google Cloud","Cert","Cloud Digital Leader",                "GCP fundamentals for business and technology decision makers.","Foundation",     4.7,98, 5240),
@@ -274,6 +292,13 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","Linux Administration",    "Server management, shell scripting and system operations on Linux.","Foundation\u2192Advanced",      4.8,212,10840),
     ("skill","skill","Skill-Based","Skills","SQL for Data Professionals","Non-negotiable foundation for every data and analytics role.","Foundation",                     4.9,316,15280),
     ("skill","skill","Skill-Based","Skills","Excel Advanced Analytics","PivotTables, Power Query and advanced formulas for business analysts.","Foundation",              4.8,268,11920),
+    ("skill","skill","Skill-Based","Skills","Microsoft Excel 2019 Basic","Spreadsheet essentials \u2014 navigation, formulas, charts and workplace productivity.","Foundation",4.9,260,12880),
+    ("skill","skill","Skill-Based","Skills","Certified Java Programming","Enterprise Java foundations through JDBC and Spring Boot introduction \u2014 portfolio-ready.","Beginner\u2192Intermediate",4.8,142,7180),
+    ("skill","skill","Skill-Based","Skills","Full Stack Web Development","React, Node and SQL in one portfolio sprint \u2014 modern web stack for junior roles.","Beginner\u2192Intermediate",4.8,188,8640),
+    ("skill","skill","Skill-Based","Skills","Digital Marketing Certification","SEO, paid media, analytics and campaign storytelling with Malaysian market examples.","Foundation\u2192Practitioner",4.8,124,5920),
+    ("skill","skill","Skill-Based","Skills","Salesforce Admin & Automation","Lightning admin, security model, Flow automation and release hygiene on Salesforce.","Associate\u2192Advanced",4.8,96, 4980),
+    ("skill","skill","Skill-Based","Skills","ServiceNow Administration Fundamentals","Core Now Platform admin \u2014 users, ACLs, workflows and safe instance operations.","Fundamentals",4.8,84, 4360),
+    ("skill","skill","Skill-Based","Skills","ServiceNow Platform Implementation","Lead greenfield programmes \u2014 CMDB, integrations and steering-ready artefacts.","Professional",4.7,58, 2140),
 ]
 
 

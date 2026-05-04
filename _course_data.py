@@ -78,3 +78,11 @@ COURSES.extend(_B_P2G)
 # (CISA, SQL, Python, Excel, Linux, Docker, CompTIA Tech+, CCT, CI/CD, CND v3, CompTIA Cloud+)
 from _course_batch_phase3 import BATCH as _B_P3
 COURSES.extend(_B_P3)
+
+# Phase 4A: ECIH, DP-900, Cisco SPCOR/DCCOR/SD-WAN, Java programming
+from _course_batch_phase4a import BATCH as _B_P4A
+COURSES.extend(_B_P4A)
+
+# Phase 4B: Full-stack, marketing, Excel basics, Salesforce, ServiceNow
+from _course_batch_phase4b import BATCH as _B_P4B
+COURSES.extend(_B_P4B)

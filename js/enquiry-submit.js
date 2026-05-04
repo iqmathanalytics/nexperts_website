@@ -56,16 +56,29 @@
       : "Could not send your enquiry. Please try again or use the address on our Contact page.";
   }
 
+  /** Cloudflare Pages uses `/api/enquiry-brevo`; Netlify uses `/.netlify/functions/enquiry-brevo`. */
+  function defaultBrevoEndpoint_() {
+    try {
+      const h = String(global.location && global.location.hostname ? global.location.hostname : "")
+        .toLowerCase();
+      if (h.endsWith(".netlify.app")) return "/.netlify/functions/enquiry-brevo";
+    } catch (_) {
+      /* ignore */
+    }
+    return "/api/enquiry-brevo";
+  }
+
   function getConfig() {
     const c = global.NEXPERTS_ENQUIRY_CONFIG || {};
     let provider = String(c.provider || "apps_script").toLowerCase().trim();
     if (forceAppsScriptOnLocal_(c)) {
       provider = "apps_script";
     }
+    const explicitEndpoint = String(c.brevoEndpoint || "").trim();
     return {
       provider,
       webAppUrl: String(c.webAppUrl || "").trim(),
-      brevoEndpoint: String(c.brevoEndpoint || "/.netlify/functions/enquiry-brevo").trim(),
+      brevoEndpoint: explicitEndpoint || defaultBrevoEndpoint_(),
       secret: String(c.secret || "").trim(),
     };
   }
@@ -92,6 +105,37 @@
   }
 
   /**
+   * Relative path to the course detail page (e.g. course_pages/ceh-v13-ai.html) for email "View curriculum".
+   * Prefer the course dropdown (data-curriculum on <option>); else use current URL if already on a course page.
+   */
+  function curriculumPageFromForm_(form) {
+    let fromSelect = "";
+    try {
+      const courseEl = form && form.elements ? form.elements.namedItem("course") : null;
+      if (courseEl && courseEl.options && courseEl.selectedIndex >= 0) {
+        const opt = courseEl.options[courseEl.selectedIndex];
+        if (opt) {
+          fromSelect = String(
+            opt.getAttribute("data-curriculum") || opt.dataset.curriculum || ""
+          ).trim();
+        }
+      }
+    } catch (_) {
+      /* ignore */
+    }
+    let fromPath = "";
+    try {
+      const p = new URL(global.location.href).pathname || "";
+      if (/\/course_pages\/[^/]+\.html$/i.test(p)) {
+        fromPath = p.replace(/^\//, "");
+      }
+    } catch (_) {
+      /* ignore */
+    }
+    return fromSelect || fromPath;
+  }
+
+  /**
    * @param {HTMLFormElement} form
    * @param {{ source: string }} meta
    */
@@ -109,6 +153,7 @@
       pageUrl: global.location.href,
       userAgent: global.navigator.userAgent || "",
       submittedAt: new Date().toISOString(),
+      curriculumPage: curriculumPageFromForm_(form),
     };
     const cfg = getConfig();
     if (cfg.secret) payload.secret = cfg.secret;

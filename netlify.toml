@@ -2,6 +2,8 @@
 
 [build]
   publish = "."
+  # Sync enquiry course dropdowns on contact.html + index.html from _build_catalog CARDS/P1, then GA4 inject.
+  command = "python3 scripts/build_contact_course_select.py && python3 scripts/inject_ga4.py"
 
 [functions]
   directory = "netlify/functions"

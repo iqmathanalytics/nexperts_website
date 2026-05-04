@@ -6,6 +6,7 @@ unique HTML page under course_pages/<slug>.html.
 """
 from pathlib import Path
 import re
+from urllib.parse import quote
 
 ROOT = Path(__file__).parent
 TEMPLATE_PATH = ROOT / "course_pages" / "ceh-v13-ai.html"
@@ -219,6 +220,20 @@ def render_verify(items):
     return "\n  ".join(f'<div class="verify-row"><span class="verify-dot"></span>{x}</div>' for x in items)
 
 
+def contact_link_query(c, intent=None):
+    """Query string for contact.html pre-fill (?course=slug&title=…&intent=corporate)."""
+    slug = c["slug"]
+    title = c["title"]
+    q = f"course={quote(str(slug), safe='')}&title={quote(str(title), safe='')}"
+    if intent == "corporate":
+        q += "&intent=corporate"
+    return q
+
+
+def contact_href(c, intent=None):
+    return f"../contact.html?{contact_link_query(c, intent)}#enquire"
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # PAGE BUILDER
 # ──────────────────────────────────────────────────────────────────────────────
@@ -354,18 +369,31 @@ def build_page(c):
         html, count=1, flags=re.DOTALL,
     )
 
+    # Nav "Enquire Now" → contact form with this course pre-selected (template may ship any prior contact href)
+    html = re.sub(
+        r'(<a )href="\.\./contact\.html[^"]*"( class="nav-enroll">Enquire Now</a>)',
+        rf'\1href="{contact_href(c)}"\2',
+        html,
+        count=1,
+    )
+
     return html
 
 
 def build_overview(c):
     h_lead, h_em = c["overview_head"]
-    pull = c["overview_quote"]
+    pull = c.get("overview_quote")
+    pull_html = (
+        f'    <div class="pull-text">{pull}</div>\n'
+        if pull
+        else ""
+    )
     return (
         f'    <div class="eyebrow">{c["overview_eyebrow"]}</div>\n'
         f'    <h2 class="sec-head">{h_lead}<br><em>{h_em}</em></h2>\n'
         f'    <p class="body-text">{c["overview_p1"]}</p>\n'
         f'    <p class="body-text">{c["overview_p2"]}</p>\n'
-        f'    <div class="pull-text">{pull}</div>\n'
+        f'{pull_html}'
         f'    <p class="body-text">{c["overview_p3"]}</p>\n\n'
         f'<div style="margin-top:36px">\n'
         f'  <div class="eyebrow m">Who should take this course</div>\n'
@@ -512,6 +540,8 @@ def build_sidebar(c):
     meta = render_sidebar_meta(c["sidebar_meta"])
     inc = render_includes(c["whats_included"])
     ver = render_verify(c["verify_items"])
+    href_enroll = contact_href(c)
+    href_corp = contact_href(c, intent="corporate")
     return (
         f'<div class="enroll-card" id="enroll">\n'
         f'  <div class="price-row">\n'
@@ -520,8 +550,8 @@ def build_sidebar(c):
         f'    <span class="price-save">{c["price_save"]}</span>\n'
         f'  </div>\n'
         f'  <p class="price-note">{c["price_note"]}</p>\n'
-        f'  <a href="mailto:hello@nexpertsacademy.com?subject={c["title"]} Enrolment" class="enroll-btn">Enroll Now →</a>\n'
-        f'  <a href="mailto:hello@nexpertsacademy.com?subject={c["title"]} Group Training" class="corp-btn">Corporate / Group Pricing</a>\n'
+        f'  <a href="{href_enroll}" class="enroll-btn">Enroll Now →</a>\n'
+        f'  <a href="{href_corp}" class="corp-btn">Corporate / Group Pricing</a>\n'
         f'  <div class="guarantee">\n'
         f'    <span class="guarantee-icon">🛡️</span>\n'
         f'    <div>\n'
@@ -542,9 +572,9 @@ def build_sidebar(c):
         f'  {ver}\n'
         f'</div>\n\n'
         f'<div class="share-strip">\n'
-        f'  <a href="#" class="share-btn">📤 Share</a>\n'
-        f'  <a href="#" class="share-btn">💾 Save</a>\n'
-        f'  <a href="mailto:hello@nexpertsacademy.com" class="share-btn">✉️ Enquire</a>\n'
+        f'  <button type="button" class="share-btn nx-share-copy" aria-haspopup="dialog">📤 Share</button>\n'
+        f'  <button type="button" class="share-btn nx-share-copy" aria-haspopup="dialog">💾 Save</button>\n'
+        f'  <a href="{href_enroll}" class="share-btn">✉️ Enquire</a>\n'
         f'</div>'
     )
 

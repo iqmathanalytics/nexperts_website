@@ -4,10 +4,10 @@
  * Choose ONE provider:
  *
  * 1) brevo — Recommended if Google mail is blocked or unreliable.
- *    Deploy site on Netlify, set environment variables (see google-apps-script/README.md),
+ *    Deploy on Netlify or Cloudflare Pages, set environment variables (see google-apps-script/README.md),
  *    set provider: "brevo" below, use the same optional `secret` as BREVO_ENQUIRY_SECRET,
  *    and set `teamInbox` to the same address as BREVO_INTERNAL_TO (for mailto links + error text).
- *    Sheet rows: set APPS_SCRIPT_ENQUIRY_URL on Netlify (same URL as webAppUrl below) so the Brevo function can forward each lead to Apps Script after mail sends.
+ *    Sheet rows: set APPS_SCRIPT_ENQUIRY_URL in hosting env (same URL as webAppUrl below) so the Brevo function can forward each lead to Apps Script after mail sends.
  *
  * 2) apps_script — Google Apps Script Web App + Sheet (see /google-apps-script/).
  *
@@ -26,8 +26,12 @@ window.NEXPERTS_ENQUIRY_CONFIG = {
   webAppUrl:
     "https://script.google.com/macros/s/AKfycbyNSKTV_CkeClhp0_dNkDRmWZR67iAvzvZe4e_uSjNV1djhswzm1W6SE1_D1Ky2d47ULQ/exec",
 
-  /** Brevo / Netlify function (when provider is "brevo"). Relative = same host as the page. */
-  brevoEndpoint: "/.netlify/functions/enquiry-brevo",
+  /**
+   * Optional. When omitted, `enquiry-submit.js` uses `/api/enquiry-brevo` (Cloudflare Pages) or
+   * `/.netlify/functions/enquiry-brevo` on `*.netlify.app`. On Netlify with a **custom domain**,
+   * set `brevoEndpoint: "/.netlify/functions/enquiry-brevo"` here.
+   */
+  // brevoEndpoint: "/.netlify/functions/enquiry-brevo",
 
   /** Same value as BREVO_ENQUIRY_SECRET on Netlify (and local .env for netlify dev). */
   secret: "JsdQGNFXr0iEiVr1HfKo8fQ-Wi3Plcn8oN8gOgeA_EM",

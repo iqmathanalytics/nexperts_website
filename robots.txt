@@ -1,0 +1,11 @@
+# Nexperts Academy — https://www.nexpertsacademy.com
+# Aligns with static deploy (Netlify / Cloudflare Pages): public HTML allowed; admin excluded.
+# Legacy URLs are handled by _redirects (301), not listed here.
+
+User-agent: *
+Allow: /
+
+# Admin UI — not for search indexing
+Disallow: /admin/
+
+Sitemap: https://www.nexpertsacademy.com/sitemap.xml

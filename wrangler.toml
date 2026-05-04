@@ -1,0 +1,5 @@
+# Optional metadata for Wrangler CLI (Pages dashboard can build without this file).
+# https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "nexperts-website"
+compatibility_date = "2024-11-01"
