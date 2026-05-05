@@ -241,31 +241,8 @@ def main() -> None:
     lines: list[str] = [
         _REDIRECTS_PREAMBLE.rstrip("\n"),
         "",
-        "# Public course URLs (pretty path); serve courses/{slug}.html (200)",
+        "# --- Trailing slash removal (301; non-trailing slash is canonical) ---",
     ]
-    for slug in slugs:
-        lines.append(f"/courses/{slug} /courses/{slug}.html 200")
-        lines.append(f"/courses/{slug}/ /courses/{slug}.html 200")
-
-    lines.extend(
-        [
-            "/about/ /about.html 200",
-            "/contact-us/ /contact.html 200",
-            "/privacy-policy/ /privacy-policy.html 200",
-        ]
-    )
-
-    lines.extend(
-        [
-            "",
-            "# Static site pages (pretty path); serve root *.html (200)",
-            "/about /about.html 200",
-            "/contact-us /contact.html 200",
-            "/privacy-policy /privacy-policy.html 200",
-            "",
-            "# --- Trailing slash removal (301; non-trailing slash is canonical) ---",
-        ]
-    )
     for s, d in trail_sorted:
         lines.append(f"{s} {d} 301")
 
