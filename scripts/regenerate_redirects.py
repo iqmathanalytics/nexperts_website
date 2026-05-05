@@ -124,9 +124,10 @@ def skip_regenerated_rule_line(norm: str) -> bool:
     pretty_301 = {
         "/index.html / 301",
         "/about.html /about 301",
-        "/contact.html /contact-us 301",
+        "/contact.html /contact 301",
+        "/contact-us /contact 301",
+        "/contact-us/ /contact 301",
         "/privacy-policy.html /privacy-policy 301",
-        "/contact /contact-us 301",
     }
     if norm in pretty_301:
         return True
@@ -261,7 +262,9 @@ def main() -> None:
             "# Filename & legacy paths → pretty canonical URLs (301)",
             "/index.html / 301",
             "/about.html /about 301",
-            "/contact.html /contact-us 301",
+            "/contact.html /contact 301",
+            "/contact-us /contact 301",
+            "/contact-us/ /contact 301",
             "/privacy-policy.html /privacy-policy 301",
             "",
             "# Explicit 404 for unknown paths (no homepage fallback):",
