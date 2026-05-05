@@ -183,16 +183,10 @@ def sort_rules_longest_src_first(rules: list[tuple[str, str]]) -> list[tuple[str
 def trailing_slash_rules(
     all_301: list[tuple[str, str]], slugs: list[str]
 ) -> list[tuple[str, str]]:
-    # Cloudflare Pages may treat /path and /path/ equivalently for matching,
-    # which can produce redirect loops when aggressive trailing-slash rules are
-    # emitted for pretty course URLs. Keep trailing-slash canonicalization only
-    # for a few static pages.
-    out = [
-        ("/about/", "/about"),
-        ("/contact-us/", "/contact-us"),
-        ("/privacy-policy/", "/privacy-policy"),
-    ]
-    return sort_rules_longest_src_first(out)
+    # On Cloudflare Pages, slash normalization can vary by route and may cause
+    # loops if we emit slash-removal 301s. Keep this empty and serve both forms
+    # with explicit 200 rewrites instead.
+    return []
 
 
 def review_suffix(path: str) -> str:
@@ -251,6 +245,15 @@ def main() -> None:
     ]
     for slug in slugs:
         lines.append(f"/courses/{slug} /courses/{slug}.html 200")
+        lines.append(f"/courses/{slug}/ /courses/{slug}.html 200")
+
+    lines.extend(
+        [
+            "/about/ /about.html 200",
+            "/contact-us/ /contact.html 200",
+            "/privacy-policy/ /privacy-policy.html 200",
+        ]
+    )
 
     lines.extend(
         [
