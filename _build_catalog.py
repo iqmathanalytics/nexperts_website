@@ -109,7 +109,8 @@ P1 = {
     # Phase 3: popular missing-page courses
     "CISA": "cisa",
     "SQL for Data Professionals": "sql-for-data-professionals",
-    "Python for IT & Automation": "python-for-it-automation",
+    "Python Bootcamp Certification Training": "python-bootcamp",
+    "Data Science with Python Certification": "data-science-with-python",
     "Excel Advanced Analytics": "excel-advanced-analytics",
     "Linux Administration": "linux-administration",
     "Docker & Containers": "docker-containers",
@@ -288,7 +289,8 @@ CARDS = [
     # ---- Skill-Based ----
     ("skill","skill","Skill-Based","Skills","Docker & Containers",     "Containerisation fundamentals \u2014 build, ship and run applications anywhere.","Foundation",     4.8,196,9420),
     ("skill","skill","Skill-Based","Skills","CI/CD with Jenkins & GitLab","Automated delivery pipelines from code commit to production.","Intermediate",                 4.8,148,6240),
-    ("skill","skill","Skill-Based","Skills","Python for IT & Automation","Automate IT tasks \u2014 network scripts, API calls and system admin.","Beginner\u2192Intermediate",4.9,284,13680),
+    ("skill","skill","Skill-Based","Skills","Python Bootcamp Certification Training","Completely project-based Python Bootcamp Certification Training Course.","Beginner\u2192Intermediate",4.9,284,13680),
+    ("skill","skill","Skill-Based","Skills","Data Science with Python Certification","Live Online | Project-Based | Career-Focused","Beginner\u2192Intermediate",4.9,198,8920),
     ("skill","skill","Skill-Based","Skills","Linux Administration",    "Server management, shell scripting and system operations on Linux.","Foundation\u2192Advanced",      4.8,212,10840),
     ("skill","skill","Skill-Based","Skills","SQL for Data Professionals","Non-negotiable foundation for every data and analytics role.","Foundation",                     4.9,316,15280),
     ("skill","skill","Skill-Based","Skills","Excel Advanced Analytics","PivotTables, Power Query and advanced formulas for business analysts.","Foundation",              4.8,268,11920),
@@ -361,7 +363,7 @@ def card_html(c):
                     f'data-slug="{slug}" data-vendor="{vendor}" '
                     f'data-level="{level}"')
     if name in P1:
-        return (f'      <a href="course_pages/{slug}.html" '
+        return (f'      <a href="/courses/{slug}" '
                 f'class="cc show" {common_attrs}>{inner}</a>')
     return f'      <div class="cc show" {common_attrs}>{inner}</div>'
 

@@ -7,6 +7,9 @@
 <title>Admin · Course Manager · Nexperts Academy</title>
 <!-- nexperts-seo-meta:v1 -->
 <meta name="robots" content="noindex, nofollow">
+<link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
+<link rel="shortcut icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png" type="image/png">
 <meta name="description" content="Internal catalogue tools for Nexperts Academy — not intended for public search results.">
 <link rel="canonical" href="https://www.nexpertsacademy.com/admin/">
 <meta property="og:title" content="Admin · Course Manager · Nexperts Academy">
@@ -14,6 +17,8 @@
 <meta property="og:url" content="https://www.nexpertsacademy.com/admin/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://www.nexpertsacademy.com/image/nexperts-logo.png">
+<meta property="og:image:width" content="260">
+<meta property="og:image:height" content="84">
 <!-- /nexperts-seo-meta:v1 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,12 +62,12 @@
       <div class="al-error" id="alError" hidden></div>
       <button type="submit" class="al-submit">Sign in <span class="al-arr">→</span></button>
     </form>
-    <p class="al-foot">© 2026 Nexperts Academy · Internal admin · <a href="../index.html">Back to public site</a></p>
+    <p class="al-foot">© 2026 Nexperts Academy · Internal admin · <a href="/">Back to public site</a></p>
   </div>
 </div>
 
 <header class="ad-nav">
-  <a href="../index.html" class="ad-logo">
+  <a href="/" class="ad-logo">
     <span class="ad-dot"></span>
     Nexperts <span class="ad-logo-em">Admin</span>
   </a>
@@ -75,7 +80,7 @@
     <button class="ad-btn ad-btn-ghost" id="adBtnImport" title="Load overrides from a JSON file">⬆ Import</button>
     <button class="ad-btn ad-btn-warn" id="adBtnReset" title="Restore baseline from admin-data.json">↺ Reset all</button>
     <button class="ad-btn ad-btn-primary" id="adBtnSave">💾 Save changes</button>
-    <a class="ad-btn ad-btn-link" href="../index.html" target="_blank" rel="noopener">↗ View landing</a>
+    <a class="ad-btn ad-btn-link" href="/" target="_blank" rel="noopener">↗ View landing</a>
     <button class="ad-btn ad-btn-ghost" id="adBtnLogout" title="End session">⎋ Logout</button>
   </div>
 </header>
@@ -138,7 +143,7 @@
       <button type="button" class="ad-drawer-close" id="acModalClose" aria-label="Close">✕</button>
     </header>
     <div class="ad-modal-body">
-      <p class="ad-modal-lead">Only fields used on the landing-page catalog card. Publish a matching <code>course_pages</code> file separately if you add a detail link.</p>
+      <p class="ad-modal-lead">Only fields used on the landing-page catalog card. Publish a matching <code>courses</code> file separately if you add a detail link.</p>
       <div class="ad-field">
         <label>Catalog tab</label>
         <select id="acCategory" class="ad-select">
@@ -237,7 +242,7 @@
       </div>
       <div class="ad-field">
         <label>Card link <span class="ad-field-help">href when the card is clicked — use # for enquiry-only</span></label>
-        <input type="text" id="acCardHref" value="#" placeholder="# or https://… or course_pages/slug.html">
+        <input type="text" id="acCardHref" value="#" placeholder="# or https://… or /courses/slug">
       </div>
     </div>
     <footer class="ad-modal-foot">
