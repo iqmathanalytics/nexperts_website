@@ -183,42 +183,15 @@ def sort_rules_longest_src_first(rules: list[tuple[str, str]]) -> list[tuple[str
 def trailing_slash_rules(
     all_301: list[tuple[str, str]], slugs: list[str]
 ) -> list[tuple[str, str]]:
-    rmap = dict(all_301)
-    seen: set[str] = set()
-    out: list[tuple[str, str]] = []
-
-    def final(dest: str) -> str:
-        visited: set[str] = set()
-        while dest in rmap:
-            if dest in visited:
-                break
-            visited.add(dest)
-            dest = rmap[dest]
-        return dest
-
-    for slug in slugs:
-        s = f"/courses/{slug}/"
-        d = f"/courses/{slug}"
-        if s not in seen:
-            out.append((s, d))
-            seen.add(s)
-    for path in ("/about/", "/contact-us/", "/privacy-policy/"):
-        if path not in seen:
-            out.append((path, path.rstrip("/")))
-            seen.add(path)
-    for src, dst in all_301:
-        if src.endswith("/") or src in ("/", ""):
-            continue
-        # Skip `*.html/` variants — paths like /courses/foo.html/ are noise; edge
-        # rarely serves them and they clutter _redirects. Pretty + directory URLs keep
-        # their trailing-slash 301s above.
-        if src.lower().endswith(".html"):
-            continue
-        ts = src + "/"
-        if ts in seen:
-            continue
-        out.append((ts, final(dst)))
-        seen.add(ts)
+    # Cloudflare Pages may treat /path and /path/ equivalently for matching,
+    # which can produce redirect loops when aggressive trailing-slash rules are
+    # emitted for pretty course URLs. Keep trailing-slash canonicalization only
+    # for a few static pages.
+    out = [
+        ("/about/", "/about"),
+        ("/contact-us/", "/contact-us"),
+        ("/privacy-policy/", "/privacy-policy"),
+    ]
     return sort_rules_longest_src_first(out)
 
 
