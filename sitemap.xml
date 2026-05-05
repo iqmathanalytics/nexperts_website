@@ -8,17 +8,17 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/about.html</loc>
+    <loc>https://www.nexpertsacademy.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/contact.html</loc>
+    <loc>https://www.nexpertsacademy.com/contact-us</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/privacy-policy.html</loc>
+    <loc>https://www.nexpertsacademy.com/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -27,522 +27,522 @@
 
   <!-- Course pages (92 files) -->
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/agilepm-foundation-practitioner.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/agilepm-foundation-practitioner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ai-102.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ai-102</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ai-900.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ai-900</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-cloud-practitioner.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-cloud-practitioner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-data-engineer-associate.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-data-engineer-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-developer-associate.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-developer-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-devops-engineer-professional.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-machine-learning-specialty.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-machine-learning-specialty</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-security-specialty.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-security-specialty</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-solutions-architect-associate.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-solutions-architect-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-solutions-architect-professional.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-solutions-architect-professional</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/aws-sysops-administrator.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/aws-sysops-administrator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-104.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-104</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-140.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-140</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-204.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-204</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-305.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-305</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-400.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-400</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-500.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-500</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-700.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-700</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/az-900.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/az-900</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/capm.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/capm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cc-certified-in-cybersecurity.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cc-certified-in-cybersecurity</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cciso.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cciso</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ccna.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ccna</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ccnp-collaboration.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ccnp-collaboration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ccnp-enterprise.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ccnp-enterprise</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ccnp-security.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ccnp-security</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ccsp.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ccsp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cct-cybersecurity-technician.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cct-cybersecurity-technician</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cdpse.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cdpse</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ceh-v13-ai.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ceh-v13-ai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/certified-scrum-master-csm.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/certified-scrum-master-csm</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/certified-soc-analyst-csa.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/certified-soc-analyst-csa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cgeit.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cgeit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/chfi-v11.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/chfi-v11</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cicd-jenkins-gitlab.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cicd-jenkins-gitlab</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cisa.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cisa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cisco-dccor.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cisco-dccor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cisco-spcor.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cisco-spcor</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cism.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cism</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cissp.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cissp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cka.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cka</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ckad-kubernetes-app-developer.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ckad-kubernetes-app-developer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cnd-v3.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cnd-v3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-a-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-a-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-cloud-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-cloud-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-cysa-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-cysa-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-linux-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-linux-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-network-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-network-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-pentest-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-pentest-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-secai-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-secai-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-security-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-security-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-securityx.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-securityx</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/comptia-tech-plus.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/comptia-tech-plus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/cpent-ai.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/cpent-ai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/crisc.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/crisc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/csslp.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/csslp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ctia.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ctia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/devnet-associate.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/devnet-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/digital-marketing.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/digital-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/docker-containers.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/docker-containers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/dp-100.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/dp-100</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/dp-203.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/dp-203</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/dp-300.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/dp-300</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/dp-900.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/dp-900</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ecih.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ecih</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/excel-advanced-analytics.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/excel-advanced-analytics</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/excel-basic.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/excel-basic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/full-stack-web-development.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/full-stack-web-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/gcp-associate-cloud-engineer.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/gcp-associate-cloud-engineer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/gcp-cloud-digital-leader.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/gcp-cloud-digital-leader</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/gcp-professional-cloud-architect.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/gcp-professional-cloud-architect</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/hcispp.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/hcispp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/iso-27001-lead-implementer.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/iso-27001-lead-implementer</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/itil-4-foundation.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/itil-4-foundation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/itil-4-specialist-cds.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/itil-4-specialist-cds</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/itil-4-specialist-dsv.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/itil-4-specialist-dsv</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/itil-4-strategist-dpi.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/itil-4-strategist-dpi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/java-programming.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/java-programming</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/linux-administration.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/linux-administration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/md-102.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/md-102</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ms-102.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ms-102</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/ms-700.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/ms-700</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/oscp.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/oscp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/oswe.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/oswe</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/pl-100.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/pl-100</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/pl-200.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/pl-200</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/pl-300.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/pl-300</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/pl-400.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/pl-400</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/pl-600.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/pl-600</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/pmp.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/pmp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/prince2-foundation-practitioner.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/prince2-foundation-practitioner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/python-for-it-automation.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/python-for-it-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/salesforce-admin.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/salesforce-admin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/sc-200.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/sc-200</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/sc-300.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/sc-300</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/sc-900.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/sc-900</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/sdwan.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/sdwan</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/servicenow-admin.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/servicenow-admin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/servicenow-platform.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/servicenow-platform</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/sql-for-data-professionals.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/sql-for-data-professionals</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/sscp.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/sscp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/tableau-desktop-specialist.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/tableau-desktop-specialist</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/course_pages/terraform-associate.html</loc>
+    <loc>https://www.nexpertsacademy.com/courses/terraform-associate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

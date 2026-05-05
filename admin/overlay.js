@@ -2,7 +2,7 @@
  *
  * Loaded by:
  *   - index.html   (catalog cards: name + description + order + custom cards/brands)
- *   - course_pages/*.html (sidebar + optional curriculum HTML override)
+ *   - courses/*.html (sidebar + optional curriculum HTML override)
  *
  * Storage key: nexperts_admin_v1   (written by /admin/)
  *
@@ -217,7 +217,7 @@
     const m = mergedCourseFields(state, c.slug);
     const link = String(m.card_href || m.detail_href || "").trim();
     const href =
-      link || (m.has_detail_page ? "course_pages/" + c.slug + ".html" : "#");
+      link || (m.has_detail_page ? "/courses/" + c.slug : "#");
     const vendor = m.vendor || c.vendor || "";
     const badge = m.badge || c.badge || "Cert";
     const badgeVariant = m.badge_variant || c.badge_variant || "";
@@ -504,7 +504,8 @@
 
   function applyDetailOverrides(state) {
     const path = (location.pathname || "").toLowerCase();
-    const m = path.match(/\/course_pages\/([^/]+)\.html?$/);
+    let m = path.match(/\/courses\/([^/]+)\.html?$/);
+    if (!m) m = path.match(/\/courses\/([^/]+)\/?$/);
     if (!m) return;
     const slug = decodeURIComponent(m[1]);
     const isCustom = !!(state.custom_courses || []).find(c => c.slug === slug);

@@ -31,7 +31,7 @@ name_to_slug = catalog.name_to_slug
 OUT = ROOT / "admin" / "admin-data.json"
 OUT.parent.mkdir(exist_ok=True)
 
-PAGES = ROOT / "course_pages"
+PAGES = ROOT / "courses"
 
 # --------------------------------------------------------------------------
 # Detail-page parsers

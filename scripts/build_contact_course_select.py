@@ -60,7 +60,7 @@ def build_inner_html(mod, *, base_indent: str) -> str:
         brand_key = row[0]
         name = row[4]
         slug = P1.get(name) or name_to_slug(name)
-        path = f"course_pages/{slug}.html"
+        path = f"/courses/{slug}"
 
         if brand_key != current_brand:
             if current_brand is not None:

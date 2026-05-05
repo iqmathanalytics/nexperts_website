@@ -1,6 +1,6 @@
 /**
  * Course detail pages: copy page URL (Share / Save) via a small modal; uses <link rel="canonical"> when present.
- * Also mirrors enquiry links into sessionStorage so contact.html still pre-fills after redirects that drop ?query.
+ * Also mirrors enquiry links into sessionStorage so /contact-us still pre-fills after redirects that drop ?query.
  */
 (function () {
   "use strict";
@@ -12,13 +12,19 @@
   document.addEventListener(
     "click",
     function (e) {
-      var a = e.target && e.target.closest ? e.target.closest('a[href*="contact.html"]') : null;
+      var a = e.target && e.target.closest
+        ? e.target.closest(
+            'a[href*="/contact-us"],a[href*="contact.html"],a[href*="/contact"]'
+          )
+        : null;
       if (!a || !a.href) return;
       try {
         var abs = new URL(a.href, window.location.href);
         var pn = (abs.pathname || "").replace(/\/$/, "");
         var isContact =
           pn.indexOf("contact.html") !== -1 ||
+          pn === "/contact-us" ||
+          pn.endsWith("/contact-us") ||
           pn === "/contact" ||
           pn.endsWith("/contact");
         if (!isContact) return;

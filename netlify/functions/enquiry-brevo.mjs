@@ -87,15 +87,24 @@ function getCtx(data, env) {
 function resolveCurriculumPageUrl(data, site) {
   const base = String(site || "").replace(/\/$/, "");
   const rel = String((data && data.curriculumPage) || "").trim();
-  if (rel && /^course_pages\/[a-z0-9._-]+\.html$/i.test(rel)) {
+  if (rel && /^courses\/[a-z0-9._-]+\.html$/i.test(rel)) {
     return `${base}/${rel}`;
+  }
+  if (rel && /^courses\/[a-z0-9._-]+$/i.test(rel)) {
+    return `${base}/${rel}`;
+  }
+  if (rel && /^\/courses\/[a-z0-9._-]+$/i.test(rel)) {
+    return `${base}${rel}`;
   }
   const pageUrl = String((data && data.pageUrl) || "").trim();
   if (pageUrl) {
     try {
       const u = new URL(pageUrl);
       const p = u.pathname || "";
-      if (/\/course_pages\/[^/]+\.html$/i.test(p)) {
+      if (/\/courses\/[^/]+\.html$/i.test(p)) {
+        return `${base}${p.startsWith("/") ? p : "/" + p}`;
+      }
+      if (/\/courses\/[^/]+$/i.test(p)) {
         return `${base}${p.startsWith("/") ? p : "/" + p}`;
       }
     } catch (_) {

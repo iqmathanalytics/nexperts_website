@@ -104,10 +104,10 @@ def main() -> int:
     ok = 0
     fail = 0
 
-    for path in sorted((ROOT / "course_pages").glob("*.html")):
+    for path in sorted((ROOT / "courses").glob("*.html")):
         if process_file(path, mid or None):
             ok += 1
-            print(f"OK course_pages/{path.name}")
+            print(f"OK courses/{path.name}")
         else:
             fail += 1
 

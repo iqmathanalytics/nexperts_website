@@ -105,7 +105,7 @@
   }
 
   /**
-   * Relative path to the course detail page (e.g. course_pages/ceh-v13-ai.html) for email "View curriculum".
+   * Relative path to the course detail page (e.g. courses/ceh-v13-ai or courses/*.html) for email "View curriculum".
    * Prefer the course dropdown (data-curriculum on <option>); else use current URL if already on a course page.
    */
   function curriculumPageFromForm_(form) {
@@ -126,7 +126,9 @@
     let fromPath = "";
     try {
       const p = new URL(global.location.href).pathname || "";
-      if (/\/course_pages\/[^/]+\.html$/i.test(p)) {
+      if (/\/courses\/[^/]+\.html$/i.test(p)) {
+        fromPath = p.replace(/^\//, "");
+      } else if (/\/courses\/[^/]+$/i.test(p)) {
         fromPath = p.replace(/^\//, "");
       }
     } catch (_) {

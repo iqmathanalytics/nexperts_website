@@ -107,7 +107,7 @@ function splitH2ForStruct(h2) {
 }
 
 async function fetchCurriculumFromDetailHtml(slug) {
-  const url = `../course_pages/${encodeURIComponent(slug)}.html`;
+  const url = `../courses/${encodeURIComponent(slug)}.html`;
   try {
     const res = await fetch(url, { cache: "no-cache" });
     if (!res.ok) return null;
@@ -207,7 +207,7 @@ function renderCurriculumEditorHTML(struct, slug, hasLegacyHtml, showLoadingFetc
     ? `<div class="ad-cv-legacy">A legacy HTML curriculum override exists. Saving here replaces it with this structured curriculum.</div>`
     : "";
   const loading = showLoadingFetch
-    ? `<div id="adCvLoading" class="ad-cv-loading">Loading curriculum from <code>course_pages/${escapeHTML(slug)}.html</code>…</div>`
+    ? `<div id="adCvLoading" class="ad-cv-loading">Loading curriculum from <code>courses/${escapeHTML(slug)}.html</code>…</div>`
     : "";
   return `<div class="ad-section" id="adCvSection">
     <h4>Curriculum <span class="ad-section-tag">Detail page · #sec-curriculum</span></h4>
@@ -730,7 +730,7 @@ async function openDrawer(slug) {
   });
   html += `</div>`;
 
-  html += `<div class="ad-section"><h4>Course detail page <span class="ad-section-tag">${c.has_detail_page ? `course_pages/${c.slug}.html` : "Not yet published"}</span></h4>`;
+  html += `<div class="ad-section"><h4>Course detail page <span class="ad-section-tag">${c.has_detail_page ? `courses/${c.slug}.html` : "Not yet published"}</span></h4>`;
   if (!c.has_detail_page) {
     html += `<div class="ad-no-detail">This course doesn't have a detail page yet — duration, intake and pricing will apply when a page exists.</div>`;
   }

@@ -1,15 +1,15 @@
 """Generate Phase-1 course detail pages from the CEH template.
 
-Reads course_pages/ceh-v13-ai.html as the structural template, then for each
+Reads courses/ceh-v13-ai.html as the structural template, then for each
 course in COURSES below applies surgical text substitutions to produce a
-unique HTML page under course_pages/<slug>.html.
+unique HTML page under courses/<slug>.html.
 """
 from pathlib import Path
 import re
 from urllib.parse import quote
 
 ROOT = Path(__file__).parent
-TEMPLATE_PATH = ROOT / "course_pages" / "ceh-v13-ai.html"
+TEMPLATE_PATH = ROOT / "courses" / "ceh-v13-ai.html"
 TEMPLATE = TEMPLATE_PATH.read_text(encoding="utf-8")
 
 
@@ -231,7 +231,7 @@ def contact_link_query(c, intent=None):
 
 
 def contact_href(c, intent=None):
-    return f"../contact.html?{contact_link_query(c, intent)}#enquire"
+    return f"/contact-us?{contact_link_query(c, intent)}#enquire"
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -250,13 +250,13 @@ def build_page(c):
 
     # ── Crumb (vendor + leaf)
     crumb_block = (
-        f'          <a href="../index.html">Home</a><span>/</span>\n'
-        f'          <a href="../index.html#courses">Courses</a><span>/</span>\n'
+        f'          <a href="/">Home</a><span>/</span>\n'
+        f'          <a href="/#courses">Courses</a><span>/</span>\n'
         f'          <a href="#">{c["crumb_vendor"]}</a><span>/</span>\n'
         f'          <span style="color:rgba(255,255,255,.6)">{c["title"]}</span>'
     )
     html = re.sub(
-        r'          <a href="\.\./index\.html">Home</a><span>/</span>.*?<span style="color:rgba\(255,255,255,\.6\)">CEH v13 AI</span>',
+        r'          <a href="(?:\.\./index\.html|/)">Home</a><span>/</span>.*?<span style="color:rgba\(255,255,255,\.6\)">CEH v13 AI</span>',
         crumb_block, html, count=1, flags=re.DOTALL,
     )
 
@@ -590,7 +590,7 @@ from _course_data import COURSES  # noqa: E402
 # ──────────────────────────────────────────────────────────────────────────────
 
 def main():
-    out_dir = ROOT / "course_pages"
+    out_dir = ROOT / "courses"
     for c in COURSES:
         slug = c["slug"]
         page = build_page(c)

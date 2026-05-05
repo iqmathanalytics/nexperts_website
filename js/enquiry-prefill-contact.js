@@ -40,7 +40,9 @@
   }
 
   function selectCourse(sel, slug, titleDecoded, curriculumExact) {
-    var pathFromSlug = slug ? "course_pages/" + String(slug).replace(/^\/+/, "") + ".html" : "";
+    var pathFromSlug = slug
+      ? "/courses/" + String(slug).replace(/^\/+/, "").replace(/\.html$/i, "")
+      : "";
 
     if (curriculumExact) {
       var byExact = sel.querySelector('option[data-curriculum="' + curriculumExact + '"]');

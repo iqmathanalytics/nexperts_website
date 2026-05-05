@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "netlify dev",
+    "dev:static": "python scripts/local_dev_server.py",
     "build": "python scripts/build_contact_course_select.py && python scripts/inject_ga4.py",
     "build:catalog-dropdowns": "python scripts/build_contact_course_select.py"
   },

@@ -47,7 +47,7 @@ The build runs Python scripts (`scripts/build_contact_course_select.py`, `script
 
 ## 4. Redirects
 
-The site ships a root **`_redirects`** file. Cloudflare Pages parses it from the build output (same filename as Netlify, but not identical behaviour):
+Canonical public course URLs use **`/courses/{slug}`** (pretty path). The **`_redirects`** file maps each slug to `courses/{slug}.html` with a **200** rewrite, adds **301** chains from legacy Wix paths and old `/course_pages/*.html` links to `/courses/*`, and handles static pages. Cloudflare Pages parses **`_redirects`** from the build output (same filename as Netlify, but not identical behaviour):
 
 - **Relative paths only** for rules in this file; **no** full URLs on the source side like Netlify allows for apex redirects.
 - **Status codes** must be bare `301`, `302`, etc. Netlify’s **`301!` (forced)** syntax is **invalid** on Pages (drop the `!`).
