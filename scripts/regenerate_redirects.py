@@ -14,6 +14,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from site_paths import canonical_path_for_slug
+
 ROOT = Path(__file__).resolve().parents[1]
 REDIRECTS = ROOT / "_redirects"
 
@@ -55,8 +57,16 @@ _SKIP_SECTION_COMMENTS = frozenset(
 )
 
 LEGACY_REQUESTED_MAP: dict[str, str] = {
-    "/ccna": "/courses/ccna",
-    "/ceh": "/courses/ceh-v13-ai",
+    "/courses/ccna": "/ccna",
+    "/courses/ccna.html": "/ccna",
+    "/courses/python-bootcamp": "/python-bootcamp",
+    "/courses/python-bootcamp.html": "/python-bootcamp",
+    "/courses/data-science-with-python": "/data-science-with-python",
+    "/courses/data-science-with-python.html": "/data-science-with-python",
+    "/courses/ceh-v13-ai": "/ceh",
+    "/courses/ceh-v13-ai.html": "/ceh",
+    "/courses/ceh": "/ceh",
+    "/courses/ceh.html": "/ceh",
     "/cissp": "/courses/cissp",
     "/ecih": "/courses/ecih",
     "/aws-certified-solutions-architect": "/courses/aws-solutions-architect-associate",
@@ -70,9 +80,8 @@ LEGACY_REQUESTED_MAP: dict[str, str] = {
     "/azure-ai900": "/courses/ai-900",
     "/microsoft-power-bi": "/courses/pl-300",
     "/artificial-intelligence-machine-learning": "/courses/ai-102",
-    "/data-science-with-python": "/courses/data-science-with-python",
+    "/data-science-with-python-associate": "/courses/sql-for-data-professionals",
     "/data-analytics-associate-with-python": "/courses/sql-for-data-professionals",
-    "/python-bootcamp": "/courses/python-bootcamp",
     "/ccnp-encor": "/courses/ccnp-enterprise",
     "/cisco-scor": "/courses/ccnp-security",
     "/cisco-spcor": "/courses/cisco-spcor",
@@ -230,6 +239,8 @@ def main() -> None:
             continue
         m = re.match(r"^/courses/([\w.-]+)$", dst)
         if m and m.group(1) in slug_set:
+            legacy_rules.append((src, dst))
+        elif not m and dst == canonical_path_for_slug(dst.lstrip("/")):
             legacy_rules.append((src, dst))
 
     flat_sorted = sort_rules_longest_src_first(legacy_rules)

@@ -18,6 +18,8 @@ import sys
 ROOT = Path(__file__).parent
 CATALOG = ROOT / "_build_catalog.py"
 
+from scripts.site_paths import detail_html_path
+
 spec = importlib.util.spec_from_file_location("_build_catalog", CATALOG)
 catalog = importlib.util.module_from_spec(spec)
 sys.modules["_build_catalog"] = catalog
@@ -30,8 +32,6 @@ name_to_slug = catalog.name_to_slug
 
 OUT = ROOT / "admin" / "admin-data.json"
 OUT.parent.mkdir(exist_ok=True)
-
-PAGES = ROOT / "courses"
 
 # --------------------------------------------------------------------------
 # Detail-page parsers
@@ -51,7 +51,7 @@ INTAKE_RX = re.compile(
 
 def detail_for(slug: str) -> dict:
     """Return {duration, next_intake, price, price_original, price_save} or {}."""
-    path = PAGES / f"{slug}.html"
+    path = detail_html_path(ROOT, slug)
     if not path.exists():
         return {}
     h = path.read_text(encoding="utf-8")

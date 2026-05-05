@@ -11,6 +11,8 @@ import re
 import sys
 from pathlib import Path
 
+from site_paths import canonical_path_for_slug
+
 ROOT = Path(__file__).resolve().parent.parent
 CONTACT = ROOT / "contact.html"
 INDEX = ROOT / "index.html"
@@ -60,7 +62,7 @@ def build_inner_html(mod, *, base_indent: str) -> str:
         brand_key = row[0]
         name = row[4]
         slug = P1.get(name) or name_to_slug(name)
-        path = f"/courses/{slug}"
+        path = canonical_path_for_slug(slug)
 
         if brand_key != current_brand:
             if current_brand is not None:

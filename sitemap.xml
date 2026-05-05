@@ -142,7 +142,7 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/courses/ccna</loc>
+    <loc>https://www.nexpertsacademy.com/ccna</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -177,7 +177,7 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/courses/ceh-v13-ai</loc>
+    <loc>https://www.nexpertsacademy.com/ceh</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

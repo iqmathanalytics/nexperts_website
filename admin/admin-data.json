@@ -147,7 +147,7 @@
       "comptia-secai-plus"
     ],
     "eccouncil": [
-      "ceh-v13-ai",
+      "ceh",
       "cpent-ai",
       "chfi-v11",
       "certified-soc-analyst-csa",
@@ -464,7 +464,7 @@
       "price_save": "Save 10%"
     },
     {
-      "slug": "ceh-v13-ai",
+      "slug": "ceh",
       "brand": "eccouncil",
       "category": "cert",
       "vendor": "EC-Council",

@@ -11,6 +11,11 @@ Output:
 from pathlib import Path
 import re
 
+try:
+    from scripts.site_paths import canonical_path_for_slug
+except ModuleNotFoundError:
+    from site_paths import canonical_path_for_slug
+
 ROOT = Path(__file__).parent
 INDEX = ROOT / "index.html"
 
@@ -23,7 +28,7 @@ P1 = {
     "CompTIA Security+": "comptia-security-plus",
     "CompTIA CySA+": "comptia-cysa-plus",
     "CompTIA PenTest+": "comptia-pentest-plus",
-    "CEH v13 AI": "ceh-v13-ai",
+    "CEH v13 AI": "ceh",
     "CHFI v11": "chfi-v11",
     "CPENT AI": "cpent-ai",
     "AWS Cloud Practitioner": "aws-cloud-practitioner",
@@ -363,7 +368,7 @@ def card_html(c):
                     f'data-slug="{slug}" data-vendor="{vendor}" '
                     f'data-level="{level}"')
     if name in P1:
-        return (f'      <a href="/courses/{slug}" '
+        return (f'      <a href="{canonical_path_for_slug(slug)}" '
                 f'class="cc show" {common_attrs}>{inner}</a>')
     return f'      <div class="cc show" {common_attrs}>{inner}</div>'
 

@@ -2,7 +2,7 @@
 """
 Inject canonical, meta description, Open Graph, Twitter, and legacy verification tags.
 Uses seo_tags_output.txt + _redirects for course URLs that existed on the old site.
-Canonical course URLs: /courses/{slug}
+Canonical course URLs are /courses/{slug}, except selected legacy pages that stay at root.
 
 Run from repo root: python scripts/inject_seo_meta.py
 """
@@ -20,6 +20,7 @@ from seo_legacy import (  # noqa: E402
     legacy_by_slug,
     parse_seo_export,
 )
+from site_paths import ROOT_CANONICAL_FILES, canonical_path_for_slug
 
 SITE = "https://www.nexpertsacademy.com"
 OG_IMAGE = f"{SITE}/image/nexperts-logo.png"
@@ -172,7 +173,7 @@ def build_course_seo_block(
     legacy: LegacySeo | None,
     home: LegacySeo | None,
 ) -> str:
-    canon = f"{SITE}/courses/{slug}"
+    canon = f"{SITE}{canonical_path_for_slug(slug)}"
     gsv, fd, fb_meta, fb_admins = pick_verifications(legacy, home)
 
     if legacy:
@@ -357,13 +358,27 @@ def build_simple_root_block(canonical_url: str, description: str, og_title: str)
     )
 
 
-def process_courses(by_slug: dict[str, LegacySeo], home: LegacySeo | None):
+def process_courses(
+    by_slug: dict[str, LegacySeo],
+    home: LegacySeo | None,
+    seo_pages: dict[str, LegacySeo],
+):
+    course_paths: list[tuple[Path, str]] = []
+    for slug, fname in ROOT_CANONICAL_FILES.items():
+        path = ROOT / fname
+        if path.exists():
+            course_paths.append((path, slug))
     folder = ROOT / "courses"
     for path in sorted(folder.glob("*.html")):
         slug = path.stem
+        if slug in ROOT_CANONICAL_FILES or path.name == "ceh-v13-ai.html":
+            continue
+        course_paths.append((path, slug))
+
+    for path, slug in course_paths:
         html = path.read_text(encoding="utf-8")
         html = remove_existing_block(html)
-        legacy = by_slug.get(slug)
+        legacy = by_slug.get(slug) or seo_pages.get(canonical_path_for_slug(slug))
         if legacy and legacy.title:
             html = replace_title_tag(html, legacy.title)
         title_inner = extract_title(html)
@@ -378,7 +393,8 @@ def process_courses(by_slug: dict[str, LegacySeo], home: LegacySeo | None):
             continue
         path.write_text(html, encoding="utf-8", newline="\n")
         tag = "legacy" if legacy else "generated"
-        print(f"OK courses/{path.name} ({tag})")
+        rel = path.relative_to(ROOT).as_posix()
+        print(f"OK {rel} ({tag})")
 
 
 def process_root_pages(home: LegacySeo | None, seo_pages: dict[str, LegacySeo]):
@@ -434,7 +450,7 @@ def process_root_pages(home: LegacySeo | None, seo_pages: dict[str, LegacySeo]):
         ),
         (
             "contact.html",
-            "/contact-us",
+            "/contact",
             "Contact Nexperts Academy for course enquiries, corporate training & HRD Corp in Kuala Lumpur (HQ) and Albany NY. Fast replies within 4 business hours.",
         ),
         (
@@ -521,7 +537,7 @@ def main():
     by_slug, home_fb = legacy_by_slug(ROOT)
     home = seo_pages.get("/") or home_fb
     print(f"Legacy SEO entries mapped to slugs: {len(by_slug)}")
-    process_courses(by_slug, home)
+    process_courses(by_slug, home, seo_pages)
     process_root_pages(home, seo_pages)
     process_admin_and_beyond()
 
