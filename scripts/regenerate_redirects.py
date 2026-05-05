@@ -258,24 +258,14 @@ def main() -> None:
     lines.extend(
         [
             "",
-            "# Legacy /course_pages/{slug}.html → canonical /courses/{slug} (301)",
-        ]
-    )
-    for slug in slugs:
-        lines.append(f"/course_pages/{slug}.html /courses/{slug} 301")
-        lines.append(f"/course_pages/{slug} /courses/{slug} 301")
-
-    lines.extend(
-        [
-            "",
             "# Filename & legacy paths → pretty canonical URLs (301)",
             "/index.html / 301",
             "/about.html /about 301",
             "/contact.html /contact-us 301",
             "/privacy-policy.html /privacy-policy 301",
             "",
-            "# Optional explicit 404:",
-            "# /* /404.html 404",
+            "# Explicit 404 for unknown paths (no homepage fallback):",
+            "/* /404.html 404",
         ]
     )
 
