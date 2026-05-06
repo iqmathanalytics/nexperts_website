@@ -137,6 +137,8 @@ def skip_regenerated_rule_line(norm: str) -> bool:
         "/contact-us /contact 301",
         "/contact-us/ /contact 301",
         "/privacy-policy.html /privacy-policy 301",
+        "/course /#courses 301",
+        "/course/ /#courses 301",
     }
     if norm in pretty_301:
         return True
@@ -277,6 +279,10 @@ def main() -> None:
             "/contact-us /contact 301",
             "/contact-us/ /contact 301",
             "/privacy-policy.html /privacy-policy 301",
+            "",
+            "# Legacy singular /course → homepage courses section",
+            "/course /#courses 301",
+            "/course/ /#courses 301",
             "",
             "# Explicit 404 for unknown paths (no homepage fallback):",
             "/* /404.html 404",

@@ -73,5 +73,9 @@
 /contact-us/ /contact 301
 /privacy-policy.html /privacy-policy 301
 
+# Legacy singular /course → homepage courses section
+/course /#courses 301
+/course/ /#courses 301
+
 # Explicit 404 for unknown paths (no homepage fallback):
 /* /404.html 404

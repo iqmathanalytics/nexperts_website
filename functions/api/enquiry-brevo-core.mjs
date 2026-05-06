@@ -5,6 +5,9 @@
 
 const BREVO_URL = "https://api.brevo.com/v3/smtp/email";
 
+/** All public links inside Brevo HTML/text emails use this host (never preview / Netlify). */
+const PRODUCTION_PUBLIC_SITE = "https://www.nexpertsacademy.com";
+
 const DEFAULT_SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1vuZbvwAkuwIFU1F-CLjz8xMOKRXpJp0vqKCGbiZt0PE/edit?usp=sharing";
 
@@ -74,19 +77,41 @@ function primaryInternalInbox(env) {
   return internalRecipientsList(env)[0].email;
 }
 
+function getEmailSiteBase(env) {
+  const e = env || process.env || {};
+  const override = String(e.NEXPERTS_EMAIL_SITE_URL || "").trim().replace(/\/$/, "");
+  if (override && /^https:\/\//i.test(override)) return override;
+  return PRODUCTION_PUBLIC_SITE;
+}
+
 function getCtx(data, env) {
-  const site = String(env.NEXPERTS_PUBLIC_SITE_URL || "https://www.nexpertsacademy.com").replace(/\/$/, "");
-  const sheet = String(env.NEXPERTS_LEADS_SHEET_URL || DEFAULT_SHEET_URL).trim();
-  const internal = primaryInternalInbox(env);
+  const e = env || process.env || {};
+  const site = String(e.NEXPERTS_PUBLIC_SITE_URL || PRODUCTION_PUBLIC_SITE).replace(/\/$/, "");
+  const emailSite = getEmailSiteBase(e);
+  const sheet = String(e.NEXPERTS_LEADS_SHEET_URL || DEFAULT_SHEET_URL).trim();
+  const internal = primaryInternalInbox(e);
   const first = String(data.first || "").trim();
   const last = String(data.last || "").trim();
   const fullName = `${first} ${last}`.trim() || "there";
-  return { site, sheet, internal, first, last, fullName };
+  return { site, emailSite, sheet, internal, first, last, fullName };
 }
 
+const RESERVED_ROOT_SLUGS = new Set([
+  "courses",
+  "about",
+  "contact",
+  "contact-us",
+  "privacy-policy",
+  "api",
+  "admin",
+  "index",
+  "404",
+  "functions",
+]);
+
 /** Public course page URL for the "View curriculum" button in the student email. */
-function resolveCurriculumPageUrl(data, site) {
-  const base = String(site || "").replace(/\/$/, "");
+function resolveCurriculumPageUrl(data, emailSite) {
+  const base = String(emailSite || "").replace(/\/$/, "");
   const rel = String((data && data.curriculumPage) || "").trim();
   if (rel && /^courses\/[a-z0-9._-]+\.html$/i.test(rel)) {
     return `${base}/${rel}`;
@@ -96,6 +121,15 @@ function resolveCurriculumPageUrl(data, site) {
   }
   if (rel && /^\/courses\/[a-z0-9._-]+$/i.test(rel)) {
     return `${base}${rel}`;
+  }
+  if (rel && /^\/[a-z0-9._-]+$/i.test(rel)) {
+    const slug = rel.slice(1);
+    if (slug && !RESERVED_ROOT_SLUGS.has(slug.toLowerCase())) {
+      return `${base}${rel}`;
+    }
+  }
+  if (rel && /^[a-z0-9._-]+$/i.test(rel) && !RESERVED_ROOT_SLUGS.has(rel.toLowerCase())) {
+    return `${base}/${rel}`;
   }
   const pageUrl = String((data && data.pageUrl) || "").trim();
   if (pageUrl) {
@@ -107,6 +141,20 @@ function resolveCurriculumPageUrl(data, site) {
       }
       if (/\/courses\/[^/]+$/i.test(p)) {
         return `${base}${p.startsWith("/") ? p : "/" + p}`;
+      }
+      if (/^\/[a-z0-9._-]+\.html$/i.test(p) && !/^\/courses\//i.test(p)) {
+        const stem = p.replace(/\.html$/i, "");
+        const slug = stem.replace(/^\//, "");
+        if (slug && !RESERVED_ROOT_SLUGS.has(slug.toLowerCase())) {
+          return `${base}${stem}`;
+        }
+      }
+      if (/^\/[a-z0-9._-]+\/?$/i.test(p) && p !== "/") {
+        const clean = p.replace(/\/$/, "");
+        const slug = clean.slice(1);
+        if (slug && !RESERVED_ROOT_SLUGS.has(slug.toLowerCase())) {
+          return `${base}${clean}`;
+        }
       }
     } catch (_) {
       /* ignore */
@@ -156,8 +204,8 @@ function emailWrapper(inner, footerLines) {
 }
 
 function buildStudentEmailHtml(data, ctx) {
-  const { site, internal, fullName } = ctx;
-  const curriculumUrl = resolveCurriculumPageUrl(data, site);
+  const { emailSite, internal, fullName } = ctx;
+  const curriculumUrl = resolveCurriculumPageUrl(data, emailSite);
   const inner = `
 <tr><td style="background:linear-gradient(135deg,#1e40af 0%,#2563eb 55%,#3b82f6 100%);padding:28px 28px 24px;">
   <p style="margin:0 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:400;color:#ffffff;line-height:1.25;">Thank you, ${escapeHtml(fullName)}</p>
@@ -197,19 +245,19 @@ ${
 </td></tr>
 <tr><td style="padding:4px 24px 28px;">
   <p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748b;">Explore more</p>
-  ${ctaButton(`${site}/index.html#courses`, "Browse certification courses")}
-  ${ctaButton(`${site}/contact.html`, "Contact & offices", "#0f172a")}
+  ${ctaButton(`${emailSite}/#courses`, "Browse certification courses")}
+  ${ctaButton(`${emailSite}/contact`, "Contact & offices", "#0f172a")}
   <p style="margin:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#475569;">
     <a href="https://nexpertsai.com" target="_blank" rel="noopener" style="color:#1d4ed8;font-weight:700;text-decoration:none;">Nexperts AI →</a>
     <span style="color:#94a3b8;"> &nbsp;·&nbsp; </span>
-    <a href="${escapeHtml(site)}/index.html#roadmap" target="_blank" rel="noopener" style="color:#1d4ed8;font-weight:600;text-decoration:none;">Career roadmaps</a>
+    <a href="${escapeHtml(emailSite)}/#roadmap" target="_blank" rel="noopener" style="color:#1d4ed8;font-weight:600;text-decoration:none;">Career roadmaps</a>
   </p>
 </td></tr>`;
   return emailWrapper(inner);
 }
 
 function buildInternalEmailHtml(data, ctx) {
-  const { site, sheet, fullName } = ctx;
+  const { emailSite, sheet, fullName } = ctx;
   const inner = `
 <tr><td style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);padding:24px 26px;">
   <p style="margin:0 0 4px;font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;">New website lead</p>
@@ -245,7 +293,7 @@ function buildInternalEmailHtml(data, ctx) {
   </p>
 </td></tr>
 <tr><td style="padding:8px 24px 26px;">
-  <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#94a3b8;">Quick links: <a href="${escapeHtml(site)}/admin/" style="color:#64748b;">Admin</a> · <a href="${escapeHtml(site)}/contact.html" style="color:#64748b;">Contact page</a></p>
+  <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#94a3b8;">Quick links: <a href="${escapeHtml(emailSite)}/admin/" style="color:#64748b;">Admin</a> · <a href="${escapeHtml(emailSite)}/contact" style="color:#64748b;">Contact page</a></p>
 </td></tr>`;
   return emailWrapper(inner, [
     "Internal lead notification · Nexperts Academy",
@@ -254,8 +302,8 @@ function buildInternalEmailHtml(data, ctx) {
 }
 
 function buildStudentEmailText(data, ctx) {
-  const { internal, fullName, site } = ctx;
-  const curriculumUrl = resolveCurriculumPageUrl(data, site);
+  const { internal, fullName, emailSite } = ctx;
+  const curriculumUrl = resolveCurriculumPageUrl(data, emailSite);
   const curriculumLine = curriculumUrl
     ? `View curriculum (course page): ${curriculumUrl}\n`
     : "";
@@ -274,8 +322,8 @@ function buildStudentEmailText(data, ctx) {
     `Message:\n${dash(data.message)}\n` +
     `Submitted: ${dash(data.submittedAt)}\n\n` +
     `Urgent? Email us: ${internal}\n\n` +
-    `Explore: ${site}/index.html#courses\n` +
-    `Contact: ${site}/contact.html\n` +
+    `Explore: ${emailSite}/#courses\n` +
+    `Contact: ${emailSite}/contact\n` +
     `Nexperts AI: https://nexpertsai.com\n\n` +
     `— Nexperts Academy\n`
   );

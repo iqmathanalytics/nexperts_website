@@ -34,7 +34,8 @@ This site is static HTML at the repository root, with a **Pages Function** at `/
 | `BREVO_ALLOWED_ORIGINS` | CORS origin(s); use `*` or your site origin |
 | `APPS_SCRIPT_ENQUIRY_URL` | Optional; same Google Apps Script web app URL as in `enquiry-config.js` for sheet logging |
 | `APPS_SCRIPT_ENQUIRY_SECRET` | Optional; aligns with Apps Script if used |
-| `NEXPERTS_PUBLIC_SITE_URL` | Optional; public site URL for email links |
+| `NEXPERTS_PUBLIC_SITE_URL` | Optional; reserved for other server logic (enquiry **email buttons** always use `https://www.nexpertsacademy.com` unless overridden below) |
+| `NEXPERTS_EMAIL_SITE_URL` | Optional; override base URL for **all public links inside Brevo emails** (defaults to `https://www.nexpertsacademy.com` so preview/Netlify hosts never appear in student or lead mail) |
 | `NEXPERTS_LEADS_SHEET_URL` | Optional; sheet URL shown in internal emails |
 
 Mark secrets **Encrypted** in the dashboard.

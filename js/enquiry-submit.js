@@ -130,6 +130,17 @@
         fromPath = p.replace(/^\//, "");
       } else if (/\/courses\/[^/]+$/i.test(p)) {
         fromPath = p.replace(/^\//, "");
+      } else if (/\/[a-z0-9._-]+\.html$/i.test(p) && !/^\/courses\//i.test(p)) {
+        fromPath = p.replace(/^\//, "").replace(/\.html$/i, "");
+      } else if (/\/[a-z0-9._-]+\/?$/i.test(p) && p !== "/") {
+        const one = p.replace(/\/$/, "");
+        if (
+          !/^\/(courses|about|contact|contact-us|privacy-policy|api|admin)\b/i.test(
+            one,
+          )
+        ) {
+          fromPath = one.slice(1);
+        }
       }
     } catch (_) {
       /* ignore */
