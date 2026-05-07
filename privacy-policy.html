@@ -13,22 +13,6 @@
 </script>
 <!-- /nexperts-ga4:v1 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <title>Privacy Policy | Nexperts Academy Sdn Bhd</title>
 <!-- nexperts-seo-meta:v1 -->
 <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
@@ -127,7 +111,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
 @media(max-width:1024px){
   nav{padding:0 16px}
   .nav-right{display:none}
-  .nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;white-space:nowrap;gap:8px;scrollbar-width:none}
+  .nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;white-space:normal;max-width:360px;line-height:1.12;text-wrap:balance;display:flex;flex-direction:column;align-items:center;gap:2px;gap:8px;scrollbar-width:none}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
   footer{padding:48px 24px 28px}
 }
@@ -157,7 +141,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
     <li><a href="/about">About</a></li>
   </ul>
   <div class="nav-right">
-    <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
+    <div class="nav-ai-wrap"><span class="nav-ai-mobile-hint"><span class="nav-ai-mobile-up">&uarr;</span><span class="nav-ai-mobile-text">Click here</span></span><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
     <a href="/contact-us#enquire" class="nav-enroll">Enquire Now</a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>

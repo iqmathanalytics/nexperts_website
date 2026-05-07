@@ -15,24 +15,6 @@
 </script>
 <!-- /nexperts-ga4:v1 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <title>AZ-204 — Microsoft | Nexperts Academy</title>
 <!-- nexperts-seo-meta:v1 -->
 <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
@@ -95,10 +77,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .nav-links a.active{color:var(--blue)}
 .nav-highlight{position:absolute;top:50%;left:0;height:30px;border-radius:9px;background:linear-gradient(135deg,rgba(147,197,253,.45),rgba(219,234,254,.88));border:1px solid rgba(59,130,246,.22);box-shadow:0 10px 24px rgba(37,99,235,.18);transform:translateY(-50%);z-index:1;pointer-events:none;opacity:0;transition:left .36s cubic-bezier(.22,.61,.36,1),width .36s cubic-bezier(.22,.61,.36,1),opacity .2s ease}
 .nav-right{display:flex;align-items:center;gap:14px}
-.nav-ai{font-size:.76rem;font-weight:700;color:#0f2f67;text-decoration:none;display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,rgba(219,234,254,.95),rgba(191,219,254,.9));border:1px solid rgba(59,130,246,.28);box-shadow:0 8px 20px rgba(37,99,235,.14);transition:transform .25s ease,box-shadow .25s ease,color .2s ease}
-.nav-ai:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 28px rgba(37,99,235,.24);color:var(--blue)}
-.ldot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 1.8s ease infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.nav-ai-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px}.nav-ai-mobile-hint{display:none;position:absolute;left:-10px;top:50%;transform:translate(-100%,-50%);font-size:.64rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;background:linear-gradient(90deg,#7a121c,#f7c85b,#7a121c);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:heroAiTextFlow 3s linear infinite,navAiMobileNudge 1.2s ease-in-out infinite;text-shadow:0 2px 10px rgba(0,0,0,.12)}.nav-ai-mobile-arrow{display:inline-block;transform:translateY(-1px);animation:navAiMobileArrow 1.2s ease-in-out infinite;color:#f6cf6f}
+.nav-ai{font-size:.78rem;font-weight:800;letter-spacing:.02em;color:#fff6d2;text-decoration:none;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:linear-gradient(135deg,#5b080f 0%,#8e1a22 26%,#d7a840 54%,#fff0b1 74%,#b7791f 100%);background-size:220% 220%;border:1px solid rgba(255,224,137,.55);box-shadow:0 10px 24px rgba(110,16,24,.36),inset 0 1px 0 rgba(255,255,255,.32);position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,color .2s ease;animation:navAiShift 6s ease-in-out infinite}
+.nav-ai::before{content:'';position:absolute;inset:-150% -40%;background:linear-gradient(120deg,transparent 22%,rgba(255,245,189,.45) 46%,transparent 68%);transform:translateX(-85%) rotate(9deg);animation:navAiSheen 3.6s ease-in-out infinite;pointer-events:none}
+.nav-ai:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 16px 30px rgba(110,16,24,.45),0 0 26px rgba(255,213,107,.34);color:#fff9de}
+.nav-ai .ldot{width:8px;height:8px;background:radial-gradient(circle at 35% 35%,#ffe8a3 0%,#f9b946 30%,#c0202a 65%,#6f1019 100%);border-radius:50%;box-shadow:0 0 0 0 rgba(192,32,42,.46),0 0 14px rgba(249,185,70,.45);animation:navAiPulse 1.45s ease infinite}
+.nav-ai-label{position:relative;z-index:1;text-shadow:0 1px 3px rgba(75,10,14,.45)}.hero-ai-overlay{position:fixed;left:50%;top:92px;right:auto;transform:translateX(-50%);z-index:220;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;max-width:380px}@media (max-width:980px){.hero-ai-overlay{top:88px;max-width:280px}}@media (max-width:560px){.hero-ai-overlay{display:none}.nav-ai-wrap{display:inline-flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px}.nav-ai{order:1}.nav-ai-mobile-hint{display:flex;flex-direction:column;align-items:center;position:fixed;left:0;top:0;transform:translateX(-50%);white-space:nowrap;z-index:221;pointer-events:none;animation:none}.nav-ai-mobile-up{font-size:1.05rem;line-height:1;color:#f6cf6f;text-shadow:0 0 14px rgba(246,207,111,.45),0 0 22px rgba(160,24,36,.25);animation:navAiMobileUp 1.05s ease-in-out infinite}.nav-ai-mobile-text{font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(90deg,#7a121c,#f7c85b,#7a121c);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:heroAiTextFlow 3s linear infinite,navAiMobileNudge2 1.05s ease-in-out infinite}}.hero-ai-overlay .hero-ai-arrow{font-size:1.5rem;line-height:1;color:#f6cf6f;text-shadow:0 0 14px rgba(246,207,111,.5),0 0 24px rgba(160,24,36,.35);animation:heroAiArrowLift 1.15s ease-in-out infinite}.hero-ai-overlay .hero-ai-text{font-size:clamp(.86rem,1.2vw,1.05rem);font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(90deg,#7a121c,#f7c85b,#7a121c);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 8px rgba(0,0,0,.15);animation:heroAiTextFlow 3s linear infinite,heroAiTextFloat 1.6s ease-in-out infinite;white-space:normal;max-width:360px;line-height:1.12;text-wrap:balance;display:flex;flex-direction:column;align-items:center;gap:2px}@keyframes heroAiTextFlow{0%{background-position:0% 50%}100%{background-position:230% 50%}}@keyframes heroAiTextFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}@keyframes heroAiArrowLift{0%,100%{transform:translateY(2px)}50%{transform:translateY(-5px)}}@keyframes navAiMobileNudge{0%,100%{transform:translate(-100%,-50%) translateY(0)}50%{transform:translate(-100%,-50%) translateY(2px)}}@keyframes navAiMobileArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}@keyframes navAiMobileUp{0%,100%{transform:translateY(2px)}50%{transform:translateY(-4px)}}@keyframes navAiMobileNudge2{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+
+@keyframes navAiShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes navAiSheen{0%,58%,100%{transform:translateX(-85%) rotate(9deg)}72%{transform:translateX(135%) rotate(9deg)}}
+@keyframes navAiPulse{0%,100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(192,32,42,.52),0 0 14px rgba(249,185,70,.38)}50%{transform:scale(1.18);box-shadow:0 0 0 8px rgba(192,32,42,0),0 0 18px rgba(255,224,137,.5)}}
+
+
 .nav-enroll{font-size:0.8rem;font-weight:700;color:#fff;background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 45%,#3b82f6 100%);padding:10px 20px;text-decoration:none;border-radius:11px;transition:all .25s ease;border:1px solid rgba(255,255,255,.36);box-shadow:0 12px 28px rgba(37,99,235,.28)}
 .nav-enroll:hover{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 52%,#60a5fa 100%);transform:translateY(-3px);box-shadow:0 18px 34px rgba(37,99,235,.36)}
 
@@ -151,7 +141,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 /* ── TABS ── */
 .tabs-bar{display:flex;gap:0;border-bottom:1.5px solid var(--line);padding:0 56px;background:rgba(248,251,255,.92);position:sticky;top:62px;z-index:10;overflow-x:auto;scrollbar-width:none;backdrop-filter:blur(10px)}
 .tabs-bar::-webkit-scrollbar{display:none}
-.tab{font-size:.78rem;font-weight:600;color:var(--ink3);padding:14px 18px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:‘Plus Jakarta Sans’,sans-serif;margin-bottom:-1.5px}
+.tab{font-size:.78rem;font-weight:600;color:var(--ink3);padding:14px 18px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:normal;max-width:360px;line-height:1.12;text-wrap:balance;display:flex;flex-direction:column;align-items:center;gap:2px;transition:all .15s;font-family:‘Plus Jakarta Sans’,sans-serif;margin-bottom:-1.5px}
 .tab:hover{color:var(--ink)}
 .tab.on{color:var(--blue);border-bottom-color:var(--blue);background:linear-gradient(180deg,transparent,#dbeafe)}
 
@@ -398,7 +388,7 @@ footer{padding:36px 20px 24px}
     <li><a href="/about">About</a></li>
   </ul>
   <div class="nav-right">
-    <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
+    <div class="nav-ai-wrap"><span class="nav-ai-mobile-hint"><span class="nav-ai-mobile-up">&uarr;</span><span class="nav-ai-mobile-text">Click here</span></span><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
     <a href="/contact-us?course=az-204&title=AZ-204#enquire" class="nav-enroll">Enquire Now</a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
@@ -411,6 +401,7 @@ footer{padding:36px 20px 24px}
   <!-- COURSE HERO -->
 
   <div class="course-hero">
+    <div class="hero-ai-overlay" aria-hidden="true"><span class="hero-ai-arrow">&uarr;</span><span class="hero-ai-text"><span class="hero-ai-line1">Click Nexperts AI</span><span class="hero-ai-line2">to unlock your advantage</span></span></div>
     <div class="course-hero-layout hero-inner">
       <div>
         <div class="crumb">

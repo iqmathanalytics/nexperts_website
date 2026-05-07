@@ -1,0 +1,301 @@
+
+Change the H1 course title to this: “Python Bootcamp Certification Training”, add a subtitle: “Completely project-based Python Bootcamp Certification Training Course.”
+
+Next, the below contents should be added exactly, kindly modify the page content accordingly:
+
+The versatility of python programming has tremendously changed over the years, it being the go-to programming language to learn or adapt in current times for its vast application in various fields such as automation, data science , machine learning and artificial intelligence. Also it is the most recommended language to learn for those with zero knowledge in programming , at the very least it invokes the programming thinking skills that is crucial for anyone to explore in coding. At Nexperts Academy we give student their life changing experience by teaching them valuable course such as Python Course and one of the best Python Training Malaysia. We are known by the term as Python Institute given by the alumni.
+
+This Python Certification Bootcamp course is perfect for professionals and even beginners who are new to Python as it covers the fundamentals of Python to intermediate programming knowledge. 
+ 
+You will start of by understanding fundamental terms and definitions (e.g. compilation vs. interpretation), Python's logic and structure (e.g. keywords, instructions, indentation), literals, variables, and numeral systems, operators and data types, I/O operations, control flow mechanisms (conditional blocks and loops), data collections (lists, tuples, dictionaries, strings), functions (decomposition, built-in and user-defined functions, organizing interaction between functions and their environment, generators, recursion), exceptions (exception handling, hierarchies), as well as the essentials of Python programming language syntax, semantics, and the runtime environment. 
+
+Moving forward, the training will slowly move towards Object-Oriented Programming (“OOP”) approach to Python, where it covers more advanced aspects of programming, including the essentials of OOP, the essentials of modules and packages, the exception handling mechanism in OOP, advanced operations on strings, list comprehensions, lambdas, generators, closures, and file processing.
+
+By the end of this training , you will be ready to prepared for examination that is globally recognised known as the Certified Associate in Python Programming
+
+
+Prerequisites
+There are no prerequisites required for this Python Bootcamp. It is however recommended that participants have the fundamentals of programming languages with data structures and how algorithms work.
+
+
+
+What You Will Learn
+Ability to install python and get exposure of the python environment
+
+Acquire the fundamental understanding of Python in by learning basic syntax, variables, types and so on.
+
+Move on to learning about data structures create and manipulate Python lists, tuples, etc.
+
+Start writing complex decision-making codes by learning control structures that includes if, for, while, break and cleaning the code while doing so.
+
+Writing and importing the Python and Python modules to be used  in other directories.
+
+Learn how to use Python for various purposes such as website development, application development, GUI applications, system administration, game development, and more.
+
+
+
+Skills You Will Acquire
+Understand Python Script and various functionality of python
+
+Install Anaconda or Jupiter Notebook and Python  distribution
+
+Ability to execute data structures. Execute modules
+
+Learn Various object-oriented features
+
+Ability to create built-in data types
+
+Master  iterators, list comprehensions, decorators, context managers, and generators
+
+Ability to identify and use right libraries depending on the objective
+
+Familiarity with the usage of dictionaries and use values, functions, and items
+
+
+
+
+Reasons to Choose
+Python Bootcamp is a famous programming language training program given by qualified educators all around the world.
+
+Learn the fundamentals of the Python programming language and how it is used to create dynamic web pages and applications.
+
+Earn more than non-certified coding professionals and advance your career with Python Certification Training.
+
+Expert Python Language trainers and exclusive resources from Koenig to support you in your Python certification journey
+
+Join other beginners and skilled coders from across the world to learn why Python is more popular than any other programming language.
+
+
+
+Objectives
+Python's flexible function and memory model
+
+Various object-oriented features How to create built-in data types
+
+Gain knowledge of literators, list comprehensions, decorators, context managers, and generators
+
+How to create and use libraries and packages
+
+How to use dictionaries and functions, values and items
+
+Graphical application development in examining GUI, event-driven programming, and more
+
+Describe basic networking concepts and interpret simple network topology
+
+Describe how programmes interact with the network and the tools used to troubleshoot problems
+
+
+Who Should Enroll
+IT professionals
+
+Software Developers
+
+Programmers
+
+Application Developers
+
+Data Scientists
+
+Professionals who want to make their careers in Python certification journey
+
+Individuals who have intentions on learning Python
+
+
+Key Features
+Hands-on training 1
+
+Capstone Project
+
+Training with experienced Instructors
+
+Begin your preparation by having a look at our Python Fundamentals tutorial video.
+
+Lifetime Access of recorded sessions
+
+
+
+Inquiry Process
+The inquiry process comprises three simple steps.
+
+Submit Inquiry- Tell us a bit about yourself and the questions you want to enquire about. Use our CHAT feature or submit an enquiry form. You can also WhatsApp us on +601112216870 (Mr Vaheed)
+
+Reviewing–Your questions will be processed and answered within a day or two 
+
+Response–Answers will typically be sent through email. However, you may tell us the option you prefer us to contact you in
+
+
+
+Training Mode
+Physical Classroom Training (Malaysia)
+
+On-site Company Training (Malaysia)
+
+Online Training via Microsoft Teams/ZOOM. (Malaysia and International)
+
+
+
+
+Highlights
+40 Hours Live Instructor-Led Online Training
+
+Test concepts with MCQ and Assessments
+
+20+ hours of hands-on practice
+
+3 Industry projects guided by trainer to sharpen skills
+
+Latest Exam questions , Server access to practice exam questions, Obtain certification from Python Institue as a Certified Python Programmer
+
+
+
+
+Next for curriculum:
+Course Outline
+
+Module 1: Getting Started with Python
+Introduction to Python: An overview of Python and its advantages
+
+Installing Python: A detailed guide for Windows, Linux, and other operating systems
+
+Exploring Python IDLE: How to navigate the Integrated Development and Learning Environment
+
+Interactive vs. Scripting Modes: Clarifying the differences and when to use each
+
+
+Module 2: Core Python Concepts
+Working with Strings: Understanding quotes, escape characters, concatenation, and repetition
+
+Mathematical Operations: How to perform calculations using Python’s operators
+
+Understanding Variables: What they are, how to use them, and best practices
+
+User Input: How to gather data with the input() function
+
+String Methods and Conversion: Techniques for manipulating and converting data
+
+
+Module 3: Control Flow and Logic
+Conditional Statements: Making decisions with if, else, and elif
+
+Loops: How to implement while loops and avoid infinite loops
+
+Logical Operators: Combining Conditions for Advanced Logic
+
+Pseudocode: Planning your program and turning ideas into code
+
+
+Module 4: Iteration and Sequences
+For Loops: Iterating Through Sequences and Collections
+
+String Manipulation: Working with length, indexing, slicing, and sequence functions
+
+Random Module: Generating random values and their uses
+
+Introduction to Tuples: Understanding tuples, including indexing, slicing, and operations
+
+
+Module 5: Working with Lists
+List Fundamentals: How to create, access, and modify lists
+
+Advanced List Operations: Techniques for indexing, slicing, concatenation, and deletion
+
+List Methods: Utilizing Functions such as append(), sort(), reverse(), and Others
+
+Nested Lists and Shared References: Exploring complex list structures
+
+
+Module 6: Working with Dictionaries in Python
+Introduction to Dictionaries
+
+Creating and Accessing Dictionaries: Basics of how to create and retrieve dictionaries
+
+Modifying Dictionaries
+
+Adding, Updating, and Deleting Entries: Strategies for managing key-value pairs effectively
+
+Dictionary Operations
+
+Using Built-In Functions: Utilizing methods such as get(), keys(), values(), and items() for efficient data management
+
+
+Module 7: Mastering Functions
+Defining and Using Functions: An introduction to creating functions
+
+Parameters and Return Values: Managing inputs and outputs effectively
+
+Advanced Function Features: Exploring default arguments, global variables, and variable scope
+
+Function References: Learning how functions interact with variables
+
+
+Module 8: File Handling and Exceptions
+File Operations: Techniques for reading from and writing to text files
+
+Complex Data Storage: Utilizing pickle and shelve for sophisticated data management
+
+Exception Handling: Dealing with errors using try, except, and handling multiple exceptions
+
+
+Module 9: Object-Oriented Programming (OOP)
+Introduction to OOP: Understanding the concepts and advantages of object-oriented design
+
+Defining Classes and Creating Objects: An Introduction to Class Structures, Methods, and Object Instantiation
+
+Attributes and Methods: Utilizing instance and class attributes, along with static methods
+
+Encapsulation and Inheritance: Managing access, creating subclasses, and overriding methods
+
+Polymorphism: Grasping and implementing polymorphism in Python
+
+
+Module 10: Python Modules and Packages
+Using Modules: How to import and utilize external Python modules
+
+Creating Your Own Modules: Guidelines for writing and organizing custom modules
+
+Module Importing Techniques: Various methods to import and use modules in your code
+
+
+Module 11: GUI Development with Tkinter
+Introduction to GUI: Key concepts and principles of graphical user interfaces
+
+Event-Driven Programming: A look at events and event handlers
+
+Tkinter Basics: An overview of Tkinter for building GUI applications
+
+Designing User Interfaces: Creating Windows, Frames, Labels, Buttons, and Other UI Elements
+
+Advanced Widgets: Exploring text, entry widgets, and layout managers
+
+Widget Binding: Managing user interactions through event bindings
+
+
+Exam:
+Salary Prospects of Python Certified Professionals
+Exam Details
+Due to Python’s versatility especially in the area of Machine Learning, Big Data, and various other analytics-based solutions for enterprises, many professionals are acquiring or polishing existing skills to acquire this most in demand programming language we have now ie Python. Here is the Salaries an average Certified Python Programmer makes:​
+
+United States - USD 88,000 to USD 112,000
+United Kingdom - Pounds 33,000 to 80,000
+Malaysia - RM3500 - RM7500 (Glassdoor)
+Australia - AUD 74,000 to 128,000 
+UAE - AED 100,000 to 267,000
+Singapore - SGD 72,000 to 123,000
+
+
+Frequently asked questions
+
+What is the pre-requisites to take this course ?
+You should have a basic programming language to take this Bootcamp and the course is on a fast-track basis and results-oriented
+
+Do I need to be from the IT field to learn Python?
+The beauty of Python is that anyone can learn it as it is one of the easier programming languages to learn
+
+Will I receive a certificate upon finishing this course?
+Yes, you will get a personalized digital certificate downloadable as a PDF. You will need to complete over 85% of the curriculum lessons
+
+Can I become a Python Developer right away after completing this course?
+If you have prior programming background in other languages, your journey to becoming a full-stack python programmer is faster. However, to become a full-fledged python programmer takes time. Understanding concepts and doing as many projects to add to your portfolio would certainly make you a python programmer eventually.
+
+Which is the best Python training company in Malaysia?
+Nexperts Academy is the best in Malaysia. Our google rating is evidence of our strength in this field.

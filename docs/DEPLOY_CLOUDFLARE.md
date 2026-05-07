@@ -29,7 +29,7 @@ This site is static HTML at the repository root, with a **Pages Function** at `/
 | `BREVO_API_KEY` | Brevo API key |
 | `BREVO_SENDER_EMAIL` | Verified sender address |
 | `BREVO_SENDER_NAME` | Display name (optional) |
-| `BREVO_INTERNAL_TO` or `BREVO_ENQUIRY_TO` | Internal enquiry inbox (comma-separated allowed) |
+| `BREVO_INTERNAL_TO` or `BREVO_ENQUIRY_TO` | Internal enquiry inbox (comma-separated allowed; default fallback is `vaheed.2000@gmail.com`) |
 | `BREVO_ENQUIRY_SECRET` | Must match `secret` in `js/enquiry-config.js` if you use server-side verification |
 | `BREVO_ALLOWED_ORIGINS` | CORS origin(s); use `*` or your site origin |
 | `APPS_SCRIPT_ENQUIRY_URL` | Optional; same Google Apps Script web app URL as in `enquiry-config.js` for sheet logging |

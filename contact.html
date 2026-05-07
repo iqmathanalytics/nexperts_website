@@ -13,24 +13,6 @@
 </script>
 <!-- /nexperts-ga4:v1 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <title>Contact Us | Nexperts Academy Sdn Bhd</title>
 <!-- nexperts-seo-meta:v1 -->
 <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
@@ -198,7 +180,7 @@ h2.head em.m{color:var(--marM)}
 .sch-course{font-size:.86rem;font-weight:700;color:var(--ink);letter-spacing:-.005em}
 .sch-cert{font-size:.7rem;color:var(--ink3);margin-top:2px}
 .sch-date-val{font-size:.82rem;font-weight:600;color:var(--ink2)}
-.loc-badge{display:inline-flex;align-items:center;gap:5px;font-size:.66rem;font-weight:800;padding:4px 10px;border-radius:100px;white-space:nowrap;letter-spacing:.04em}
+.loc-badge{display:inline-flex;align-items:center;gap:5px;font-size:.66rem;font-weight:800;padding:4px 10px;border-radius:100px;white-space:normal;max-width:360px;line-height:1.12;text-wrap:balance;display:flex;flex-direction:column;align-items:center;gap:2px;letter-spacing:.04em}
 .loc-kl{background:var(--bluL);color:var(--blue)}
 .loc-ny{background:var(--marL);color:var(--marM)}
 .loc-ol{background:var(--greenL);color:var(--green)}
@@ -249,7 +231,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
 @media(max-width:1024px){
   nav{padding:0 16px;gap:10px}
   .nav-right{display:none}
-  .nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:8px;scrollbar-width:none}
+  .nav-links{display:flex;flex:1;min-width:0;overflow-x:auto;overflow-y:hidden;white-space:normal;max-width:360px;line-height:1.12;text-wrap:balance;display:flex;flex-direction:column;align-items:center;gap:2px;gap:8px;scrollbar-width:none}
   .nav-links::-webkit-scrollbar{display:none}
   .offices-grid{grid-template-columns:1fr;gap:20px}
   .form-grid{grid-template-columns:1fr;gap:36px}
@@ -289,7 +271,7 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
     <li><a href="/about">About</a></li>
   </ul>
   <div class="nav-right">
-    <a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span>Nexperts AI</a>
+    <div class="nav-ai-wrap"><span class="nav-ai-mobile-hint"><span class="nav-ai-mobile-up">&uarr;</span><span class="nav-ai-mobile-text">Click here</span></span><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
     <a href="#enquire" class="nav-enroll">Enquire Now</a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>

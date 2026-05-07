@@ -1,0 +1,375 @@
+
+Change the H1 course title to this: “Data Science with Python Certification”, add a subtitle: “Live Online | Project-Based | Career-Focused”
+
+Next, the below contents should be added exactly, kindly modify the page content accordingly:
+
+Get ready to exploit large datasets for insightful analysis and data-based prediction. In this training, you will master the technique of how Python is deployed for Data Science, working with Pandas library for Data Science, data cleaning, data visualization, Machine Learning, advanced numeric analysis, and many more. In addition, you'll experience building real-world-like projects that could help your resume stand out amongst your peers. Our Data Science with Python training course is an entire circle course that covers all aspects of data analysis processes and data science. Data Science Course Malaysia is a program offered by the Nexperts Academy that aims to provide students with knowledge and skills in data science and analytics. The program is designed to equip students with the necessary skills to work in various industries where data analysis is critical. Students enrolled in this program will receive training in both theoretical and practical aspects of data science and analytics.
+
+
+What You Will Learn
+How to wrangle data, or Data wrangling
+
+Learning to explore data or Data exploration
+
+Visualising data
+
+Learning how to scrap data from various sources or datasets
+
+Fundamentals of Python programming
+
+Data Science libraries
+
+
+
+Course Benefits
+We aim is to provide everyone with vital hands-on experience so that you are well-prepared for job interviews alongside an exhibition of their positions.
+
+Learn from pioneers in Data Science, both in research and industry.
+
+Learn the tricks of the trade from seasoned Python Developer practitioners.
+
+Work on hands-on projects that develop your ability to solve real-world problems.
+
+Practice your skills on our hands-on projects that simulate real-world problems
+
+How to wrangle data
+
+Learning to explore data
+
+Visualizing data
+
+Learning how data is scrapped from various datasets or sources
+
+Fundamentals of Python programming
+
+
+
+Key Features
+10 hours of python fundamentals self paced learning tutorial video
+
+4 hours of self paced learning on statistical essentials
+
+4 hours SQL fundamentals self paced learning tutorial video
+
+Comprehensive Blended Learning program flexible access to online classes instructions carried out through industry experienced trainers
+
+Interactive Quizzes 15+ in-demand technologies and skills
+
+Get hands-on experience with four industry-related projects
+
+24x7 learner assistance and support
+
+
+
+
+Highlights
+40 Hours of Live, Interactive, Trainer-Led Training
+
+Assignments  and Quizzes
+
+10 Hours Self Paced learning with Python with trainer support
+
+10 hours of SQL self paced learning
+
+10 hours power bi self paced learning
+
+5 hours excel self paced learning
+
+10 hours of Tableau self  paced learning
+
+5 hours of statistical essentials self paced learning
+
+2 projects , including Credit Card Fraud Detection analysis and Bank Churn Prediction using popular classification algorithms
+
+1 capstone project ; building model for prediction analysis
+
+Science, data cleaning, data visualization, Machine Learning, advanced numeric analysis, etc.
+
+
+
+Who Should Enroll
+Software Professionals
+
+IT Professionals
+
+Analytics professionals
+
+Data Scientist
+
+Data Analyst
+
+Fresh Graduates
+
+Anyone with a genuine interest in Data Science
+
+
+
+Inquiry Process
+The inquiry process comprises three simple steps.
+
+Submit Inquiry- Tell us a bit about yourself and the questions you want to enquire about. Use our CHAT feature or submit an enquiry form. You can also WhatsApp us on +601112216870 (Mr Vaheed)
+
+Reviewing–Your questions will be processed and answered within a day or two 
+
+Response–Answers will typically be sent through email. However, you may tell us the option you prefer us to contact you in
+
+
+
+Skill You Will Acquire
+Ability to use data with operators and functions
+
+Ability to access, index, and slice strings and other data
+
+Using various data structures in different contexts
+
+Implement decision making and flow control
+
+Understand the functionality of functions and modules
+
+Extracting relevant data
+
+Utilise Pandas and DataFrames to organise & data filteration
+
+Ability to produce statistical inferences using Pandas and NumPy
+
+Ability to utilise NumPy for numerical and mathematical computations
+
+Expose to various analytics techniques with Pandas
+
+Data Visualization with matplotlib and seaborn
+
+
+
+Training Mode
+Physical Classroom Training (Malaysia)
+
+On-site Company Training (Malaysia)
+
+Online Training via Microsoft Teams/ZOOM. (Malaysia and International)
+
+
+Curriculum:
+Course Outline
+
+Module 1: Foundations of Data Science and Key Libraries
+Introduction to Data Science 
+
+Overview of Data Science Applications
+
+Basics of Data Analysis and Visualization
+
+NumPy Fundamentals
+
+Getting Started with NumPy
+
+Creating and Indexing Arrays
+
+Array Slicing and Data Types
+
+Managing Array Shape and Reshaping
+
+Iterating, Joining, and Splitting Arrays
+
+Searching, Sorting, and Filtering Arrays
+
+Random Number Generation and Built-in Methods
+
+
+Module 2: Advanced Data Handling with Pandas
+Introduction to Pandas
+
+Overview of the Pandas Library
+
+Working with Series and DataFrames
+
+Importing Data: CSV, JSON, Excel
+
+Techniques for Data Analysis and Manipulation
+
+
+Module 3: Data Cleaning and Wrangling
+Data Preparation with Pandas
+
+Techniques for Cleaning DataFrames
+
+Removing and Handling Columns and Rows
+
+Addressing Missing Values
+
+Enhancing Data Readability and Index Management
+
+
+Module 4: Data Visualization with Matplotlib
+Creating Visualizations with Matplotlib
+
+Introduction to Matplotlib and Pyplot
+
+Customizing Chart Properties and Styles
+
+Building Various Plots: Box Plots, Heatmaps, Scatter Plots, Line Charts, Pie Charts, Bar Charts
+
+Visualizing Time Series and Geographical Data
+
+
+Module 5: Enhanced Visualization with Seaborn
+Exploring Seaborn for Statistical Graphics
+
+Overview of the Seaborn Library
+
+Creating Visuals: Line Plots, Dist Plots, Lmplot, Histograms, Bar Plots, Count Plots, Point Plots, Violin Plots, Heatmaps
+
+
+Module 6: Statistical Fundamentals
+Understanding Statistics
+
+Basic Statistical Concepts
+
+Types of Statistics: Descriptive and Inferential
+
+Measures of Central Tendency: Mean, Median, Mode
+
+Measures of Dispersion: Variance, Standard Deviation, Range
+
+
+Module 7: Exploratory Data Analysis (EDA)
+Performing EDA
+
+Introduction to EDA and Its Importance
+
+Calculating Descriptive Statistics: Mean, Median, Mode, Quartiles
+
+Grouping Data for Better Visualization
+
+Techniques for Understanding Data Distribution and Relationships
+
+
+Capstone Project 1: Credit Card Fraud Detection
+Project Overview
+
+Application of Exploratory Data Analysis (EDA) in Fraud Detection
+
+Developing Risk Analytics for Fraud Prevention
+
+
+Module 8: Introduction to Machine Learning
+Basics of Machine Learning
+
+Overview and Types of Machine Learning
+
+
+Module 9: Supervised Learning – Regression
+Regression Techniques
+
+Fundamentals of Linear Regression
+
+Implementing Linear Regression with Scikit-Learn
+
+
+Capstone Project 2: Predicting Student Grades
+Project Overview
+
+Using Simple Linear Regression to Predict Academic Performance
+
+Introduction to Polynomial Regression
+
+
+Capstone Project 3: Predicting Startup Profits
+Project Overview
+
+Applying Multiple Linear Regression to Forecast Profits for Startups
+
+
+Module 10: Supervised Learning – Classification
+Classification Techniques
+
+Overview of Logistic Regression
+
+
+Capstone Project 4: Diabetes Prediction in Healthcare
+Project Overview
+
+Using Logistic Regression to Predict Diabetes Risk Based on Medical Data
+
+
+Module 11: Unsupervised Learning
+Exploring Unsupervised Learning
+
+Types and Applications of Unsupervised Learning
+
+Introduction to Clustering Algorithms
+
+Understanding K-Means Clustering and Apriori Algorithms
+
+
+Capstone Project 5: Market Basket Analysis
+Project Overview
+
+Implementing the Apriori Algorithm to Analyze Product Relationships
+
+Practical Applications in Product Recommendation Systems
+
+
+Module 12: Applying Machine Learning Algorithms
+Application and Evaluation of Algorithms
+
+Comprehensive Overview of Machine Learning Algorithms
+
+Implementing and Evaluating Various Algorithms
+
+
+Capstone Project 6: Customer Churn Prediction
+Project Overview
+
+Analyzing Customer Retention and Churn Rates
+
+Applying Classification Algorithms to Predict Customer Churn
+
+Comparing and Optimizing Models for Performance
+
+
+
+
+Frequently asked questions
+
+What is Nexperts Academy’s Certified Data Analytics Associate with Python course about ?
+This course is designed by industry experts preparing you to be certified as a Data Analytics Associate by a globally recognised accreditation body, Python Institute and also transforms you into an expert Data Analytics professional. You will be mastering all data analysis process and acquiring new skills such Tableau, Python, Excel, Machine Learning, Python Libraries , Power BI. 
+
+
+Why should I enroll for hybrid Certified Data Analytics Associate with Python course?
+Our course doesnt only give the students the necessary skills and knowledge on data analytics but also prepares you to become a renowned data scientist. Over and above that, Nexperts Academy has trained over 1000 fresh graduates in the year 2021 and 2022 and many of them have acquired good jobs as data analyst , digital marketers , junior programmers. We have also trained many corporates primarily from the banking and finance industry training their existing auditors , accountants, risk managers customised data analytics course , making our curriculum a solid and well structured syllabus incorporating latest industry best practices.
+
+
+Are the Data Analytics Training Course Instructor Led or Self Paced?
+It is combination of Live instructor led training that will held on a back to back basis and at the beginning of the training. You will then upon guidance of the trainer, you will be going through the self paced tutorials and would submit all assignments and projects respectively to the trainer.
+
+
+How long will it take me to be a certified Data Analyst ?
+Even upon taking the 40’hours live instructor led training , you can start preparing for the certification.
+
+
+What are the topics that I should study orderly in this hybrid Certified Data Analytics Associate with Python course?
+You will start with the 40 hours of Data Science topics and then move towards data visualisation and analysis with Excel, Tablaue , Power Bi and SQL self paced learning tutorial.
+
+
+What kind of certification will I receive upon joining Nexperts Academy’s training?
+You will receive certificate of completion and upon through preparation of the exam and passing of the exam, you will receive Certified Data Analyst Associate with Python certification.
+
+
+Why should I consider beginning my career as a Data Analyst?
+It is job role that is highly in demand but less in manpower. Not only the salary is higher but because there are less data analysts supply in the market it makes the salary demand much higher . On top of that, this job position can be acquired by any degree or diploma holders or working professionals in any field for as long as you have the problem solving and critical thinking skills.
+
+
+What is programming knowledge necessary for this Data Analyst Certification Training?
+Absolutely not . You will learn python programming basics during the training itself.
+
+
+Is this Data Analyst Course recommended for beginners?
+Yes
+
+What are the prerequisites for Certified Data Analytics Associate with Python Course?
+There isnt any prerequisites for this course. Beginners with zero knowledge are welcome to join this training
+
+
+What is the average salary of a Data Analyst in Malaysia?
+As per Glassdoor 2025 survey the basic salary of a data analyst starts from RM4,000 per month
+

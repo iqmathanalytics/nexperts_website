@@ -40,7 +40,7 @@ const INTERNAL_INBOX_ENV_KEYS = [
   "ENQUIRY_EMAIL",
 ];
 
-const FALLBACK_INTERNAL_INBOX = "enquiry@nexpertsacademy.com";
+const FALLBACK_INTERNAL_INBOX = "vaheed.2000@gmail.com";
 
 /** First non-empty env among common names (avoids typos / wrong var on Netlify). */
 function resolveInternalInboxRaw(env) {

@@ -1,0 +1,566 @@
+
+Change the H1 course title to this: “Certified Ethical Hacker V13”, add a subtitle: “Completely project-based Certified Ethical Hacker V13 Course.”
+
+Next, the below contents should be added exactly, kindly modify the page content accordingly:
+
+The Certified Ethical Hacker (CEH) Course offered by Nexperts Academy is a comprehensive cyber network security course designed to equip professionals with the skills and knowledge necessary to identify and prevent potential security threats. This certified ethical hacker CEH training course covers a wide range of topics, including network security, system security, cryptography, and ethical hacking methodologies, ensuring a well-rounded foundation in cyber security.
+
+Participants will gain practical hands-on experience through the use of EC-Council's iLabs platform, as well as engaging with real-world examples of cyber-attacks and countermeasures. The course is available both in the classroom and online, allowing participants to choose the mode of learning that suits them best. Whether you're looking for cyber security courses online or in-person training, Nexperts Academy provides flexible learning options to meet your needs.
+
+Upon completion of the course, participants will receive a certificate of completion from Nexperts Academy and will be eligible to take the CEH certification Malaysia exam issued by EC-Council. In the event that a participant does not pass the exam on their first attempt, Nexperts Academy offers a free exam retake and provides access to an exam preparation guide to help participants prepare.
+
+Overall, the CEH course offered by Nexperts Academy is a highly practical and engaging program that is designed to equip professionals with the knowledge and skills necessary to protect their organizations against cyber-attacks. Whether you wish to study for cyber security at your own pace or pursue a career through our online master's in cyber security, this course is the ideal first step.
+
+
+
+
+
+Course Outcomes
+Upon completion of the CEHv13 course, learners will have acquired the following skills and knowledge:
+
+Understanding of ethical hacking concepts, methodologies, and tools
+
+Knowledge of common hacking techniques and how to counter them
+
+Ability to perform network scanning and vulnerability analysis
+
+Ability to identify and address security weaknesses in web servers and applications
+
+Knowledge of mobile platform, wireless, cloud computing, and IoT/OT hacking techniques
+
+Understanding of cryptography concepts and tools
+
+Hands-on experience in using ethical hacking tools to address security vulnerabilities
+
+Preparation for the CEHv13 certification exam
+
+Training Deliverables
+Comprehensive course materials, including presentation slides, handouts, and reference guides
+
+Access to online training materials, including video lectures, quizzes, and practice exercises
+
+Hands-on lab exercises to practice applying the course concepts in a real-world environment
+
+Access to EC Council hacking lab -Hands-on practice in simulated environments, including virtual machines and hacking labs
+
+Classroom and online training options to accommodate different learning styles and preferences
+
+Expert instructors with extensive industry experience and knowledge of the latest cybersecurity trends and best practices
+
+A dedicated support team to answer questions and provide assistance throughout the course
+
+Exam preparation guide to help students prepare for the certification exam
+
+Practice exam to simulate the certification exam experience and assess readiness
+
+Free exam retake if the student fails the exam on their first attempt (terms and conditions apply)
+
+Certificate of completion issued by Nexperts Academy to showcase the student's achievement and demonstrate their knowledge and skills to employers
+
+
+
+Highlights
+Throughout the course, learners will use a range of tools, including: ​
+
+Nmap
+
+Nessus
+
+Metasploit
+
+Wireshark
+
+Aircrack-ng
+
+Cain and Abel
+
+John the Ripper
+
+Sqlmap
+
+Burp Suite
+
+Social-Engineer
+
+Toolkit
+
+Maltego
+
+Hydra
+
+Nikto
+
+Netcat
+
+Target Audience
+Information Security Analyst 1
+
+Security Analyst L1
+
+Cyber Defense Analyst
+
+Vulnerability Assessment Analyst
+
+Network Security Engineer
+
+SOC Security Analyst
+
+Security Analyst
+
+Cybersecurity Analyst level 1, level 2, & level 3
+
+Mid-Level Information Security Auditor
+
+Cybersecurity Auditor
+
+IT Security Administrator
+
+Cybersecurity Consultant
+
+Senior SOC Analyst
+
+Warning Analyst
+
+Infosec Security Administrator
+
+Solution Architect Network Engineer
+
+Information Security Manager
+
+Senior Security Consultant
+
+Security Administrator
+
+
+
+
+
+Skills You Will Gain
+The CEHv13 course will provide learners with a range of skills, including: ​
+
+An understanding of information security laws, standards, and controls
+
+The ability to perform footprinting and reconnaissance on computer systems and networks
+
+The ability to scan networks and identify vulnerabilities
+
+The ability to enumerate computer systems and networks
+
+The ability to perform vulnerability analysis and assessment
+
+The ability to hack into computer systems and networks
+
+An understanding of malware threats and the ability to counter them
+
+The ability to perform network sniffing and social engineering attacks
+
+An understanding of denial-of-service attacks and the ability to counter them
+
+The ability to perform session hijacking and evade IDS, firewalls, and honeypots
+
+The ability to hack web servers and applications
+
+An understanding of SQL injection and the ability to counter it
+
+The ability to hack wireless networks and mobile platforms
+
+An understanding of IoT and OT hacking
+
+An understanding of cloud computing and cryptography
+
+
+
+
+Objectives
+Objectives for the Certified Ethical Hacker v13 (CEH v13) course: ​
+
+Understand the principles and practices of ethical hacking and information security
+
+Develop expertise in various hacking methodologies and frameworks, and learn how to apply them effectively
+
+Master different hacking concepts and ethical hacking concepts, and use them for securing computer networks and systems
+
+Learn about the different information security controls, laws, and standards that apply to ethical hacking and cybersecurity
+
+Gain knowledge of footprinting and reconnaissance techniques, and use them to collect information about potential targets
+
+Learn about network scanning, host discovery, port and service discovery, and OS fingerprinting techniques, and use them to detect vulnerabilities in computer networks
+
+Master the art of enumeration, and learn how to gather information about system resources and user accounts in computer networks
+
+Develop expertise in vulnerability assessment and analysis, and learn how to identify vulnerabilities and assess their impact on computer networks and systems
+
+Understand the various malware threats, APT concepts, Trojan concepts, and fileless malware concepts, and learn how to counter them effectively
+
+Gain knowledge of sniffing techniques, MAC attacks, DHCP attacks, ARP poisoning, and spoofing attacks, and learn how to use them to analyze network traffic and detect security breaches
+
+Develop expertise in social engineering techniques, and learn how to use them to manipulate individuals and groups to gain unauthorized access to computer networks and systems
+
+Learn about denial-of-service attacks, botnets, DDoS attack techniques, and DDoS case studies, and develop skills in countermeasures and defense mechanisms
+
+Gain knowledge of session hijacking concepts, application-level session hijacking, and network-level session hijacking, and learn how to use them to take control of user sessions
+
+Develop expertise in evading IDS, firewalls, and honeypots, and learn how to use IDS/Firewall evasion tools and countermeasures to bypass security mechanisms
+
+Learn about web server and web application hacking, SQL injection concepts and methodology, wireless network hacking, mobile platform hacking, IoT and OT hacking, and cloud computing security concepts
+
+Develop skills in cryptography concepts, encryption algorithms, email encryption, disk encryption, and cryptography attack countermeasures.
+
+
+
+
+
+Who Should Enroll
+CCNA training may be used for a variety of job roles, including but not limited to:
+
+IT Technicians
+
+Network Engineers/Network Administrators
+
+Technical Support Engineers/TAC support engineers
+
+
+
+
+Inquiry Process
+The inquiry process comprises three simple steps.
+
+Submit Inquiry- Tell us a bit about yourself and the questions you want to enquire about. Use our CHAT feature or submit an enquiry form. You can also WhatsApp us on +601112216870 (Mr Vaheed)
+
+Reviewing–Your questions will be processed and answered within a day or two 
+
+Response–Answers will typically be sent through email. However, you may tell us the option you prefer us to contact you in
+
+
+
+
+Training Mode
+Physical Classroom Training (Malaysia)
+
+On-site Company Training (Malaysia)
+
+Online Training via Microsoft Teams/ZOOM. (Malaysia and International)
+
+
+
+
+
+Course Outline
+
+Module 1: Foundations of Ethical Hacking
+Introduction to Information Security
+
+Hacking Methodologies and Frameworks
+
+Fundamental Concepts of Hacking
+
+Ethical Hacking Principles
+
+Information Security Controls
+
+Information Security Laws and Regulatory Compliance
+
+
+Module 2: Footprinting and Reconnaissance Techniques
+What is Footprinting?
+
+Using Search Engines for Footprinting
+
+Footprinting through Web Services
+
+Investigating Social Networking Sites for Footprinting
+
+Website Footprinting Techniques
+
+Email Footprinting
+
+Whois Lookup for Footprinting
+
+DNS Footprinting
+
+Network Footprinting Approaches
+
+Social Engineering in Footprinting
+
+Footprinting Tools
+
+Strategies to Mitigate Footprinting
+
+
+Module 3: Network Scanning
+Understanding Network Scanning
+
+Tools for Network Scanning
+
+Methods for Host Discovery
+
+Port and Service Detection Techniques
+
+OS Discovery Methods (Banner Grabbing/OS Fingerprinting)
+
+Scanning Past IDS and Firewalls
+
+Countermeasures Against Network Scanning
+
+
+Module 4: Enumeration Techniques
+Basics of Enumeration
+
+Techniques for NetBIOS Enumeration
+
+NMP Enumeration Approaches
+
+LDAP Enumeration Techniques
+
+NTP and NFS Enumeration
+
+SMTP and DNS Enumeration Methods
+
+Various Enumeration Strategies
+
+Countermeasures for Enumeration
+
+
+Module 5: Analyzing Vulnerabilities
+Understanding Vulnerability Assessment
+
+Types and Classifications of Vulnerabilities
+
+Tools for Conducting Vulnerability Assessments
+
+Creating Vulnerability Assessment Reports
+
+
+Module 6: System Hacking
+Techniques for Gaining Access
+
+Privilege Escalation Methods
+
+Maintaining Access
+
+Techniques for Log Clearing
+
+
+Module 7: Malware Threats and Analysis
+Introduction to Malware
+
+Understanding Advanced Persistent Threats (APT)
+
+Insights into Trojan Horses
+
+Worm Creation Techniques
+
+Understanding Fileless Malware
+
+Approaches to Malware Analysis
+
+Strategies for Countering Malware Threats
+
+Anti-Malware Software Solutions
+
+
+Module 8: Network Sniffing
+Principles of Network Sniffing
+
+MAC Address Attacks
+
+Techniques for DHCP Spoofing
+
+Methods of ARP Poisoning
+
+Types of Spoofing Attacks
+
+DNS Poisoning Techniques
+
+Sniffing Tools
+
+
+Module 9: Social Engineering
+Key Principles of Social Engineering
+
+Various Techniques in Social Engineering
+
+Insider Threats Overview
+
+Social Media Impersonation
+
+Risks of Identity Theft
+
+Strategies to Counter Social Engineering
+
+
+Module 10: Denial-of-Service Attacks
+Overview of DoS and DDoS Attacks
+
+Insights into Botnets
+
+Techniques for Performing DoS and DDoS Attacks
+
+DDoS Attack Case Studies
+
+Defensive Measures Against DoS and DDoS Attacks
+
+
+Module 11: Session Hijacking
+Understanding Session Hijacking
+
+Application-Level Session Hijacking Explained
+
+Network-Level Session Hijacking Overview
+
+Tools Used for Session Hijacking
+
+Strategies to Mitigate Session Hijacking
+
+
+Module 12: Avoiding IDS, Firewalls, and Honeypots
+Overview of IDS, IPS, Firewalls, and Honeypots
+
+Solutions for Managing IDS, IPS, Firewalls, and Honeypots
+
+Techniques for Evading IDS Systems
+
+Methods for Bypassing Firewalls
+
+ 
+
+
+Module 13: Compromising Web Servers
+Basics of Web Servers
+
+Common Attacks on Web Servers
+
+Strategies for Attacking Web Servers
+
+Defensive Measures Against Web Server Attacks
+
+
+Module 14: Exploiting Web Applications
+Fundamentals of Web Applications
+
+Threats Facing Web Applications
+
+Strategies for Hacking Web Applications
+
+Exploring Web APIs, Webhooks, and Web Shells
+
+Best Practices for Web Application Security
+
+
+Module 15: SQL Injection Techniques
+Introduction to SQL Injection
+
+Different Types of SQL Injection
+
+Strategies for Executing SQL Injection
+
+Tools for SQL Injection Attacks
+
+Defensive Measures Against SQL Injection
+
+
+Module 16: Hacking Wireless Networks
+Overview of Wireless Technologies
+
+Wireless Encryption Techniques
+
+Threats to Wireless Networks
+
+Methods for Hacking Wireless Networks
+
+Tools for Wireless Hacking
+
+Techniques for Bluetooth Hacking
+
+Countermeasures Against Wireless Attacks
+
+Security Tools for Protecting Wireless Networks
+
+
+Module 17: Mobile Platform Hacking
+Attack Vectors Targeting Mobile Platforms
+
+Hacking Techniques for Android Operating Systems
+
+Hacking the iOS Operating System
+
+Managing Mobile Devices
+
+Guidelines and Tools for Mobile Security
+
+
+Module 18: Hacking IoT and OT Systems
+Introduction to IoT Hacking
+
+Types of Attacks on IoT Systems
+
+Approaches to IoT Hacking
+
+Overview of OT Systems
+
+Types of Attacks on OT Systems
+
+Approaches to OT Hacking
+
+
+Module 19: Security in Cloud Computing
+Fundamentals of Cloud Computing
+
+Understanding Containerization Technology
+
+Manipulating Cloud Services
+
+Best Practices for Cloud Security
+
+
+Module 20: Techniques in Cryptography
+Basics of Cryptography
+
+Overview of Encryption Algorithms
+
+Cryptography Tools
+
+Email and Disk Encryption Methods
+
+Techniques in Cryptanalysis
+
+Strategies Against Cryptographic Attacks.
+
+
+
+
+
+Testimonials
+❝ Everyone including the trainer were very friendly and helpful during the course. It was such a fun course to learn in a span of 5 days even though there's still a lot more to learn but at last it was fun and was worth it. ❞ - Sofery
+
+❝ I had a fantastic experience at Nexperts Academy. Sir Vaheed is an excellent trainer, simplifying complex topics brilliantly. The staff is incredibly kind and professional. Highly recommended for quality training! ❞ - HAFIZAH KADIR
+
+❝ It's a great learning from Mr. Arpan regards on Digital Marketing, with mostly practical practices and case studies on the 5 full days course, comprehensive coverage from Google analytical, social media marketing to email marketing ❞ - Hsuenkuan Yong
+
+❝ A very good training experience with Nexperts Academy. Mr. Yash Sharma provided very clear step-by-step instructions and information about VUE.js. Recommended to anyone to learn VUE.js or other popular programming languages! ❞ - Mundus Fulgeo
+
+
+
+
+
+
+Frequently asked questions
+
+Do I need programming skills to do CEH v13?
+Basic scripting / command-line helps, but it’s not strictly required. The course will guide you through tools with GUI & CLI. 
+
+
+What version of exam should I prepare for?
+The courseware is updated to v13; exam content follows CEH exam blueprint (312-50) with the latest updates. 
+
+
+Is the practical exam mandatory?
+No. The practical exam is optional (for CEH Master track), but highly recommended to demonstrate real skills.
+
+
+How long does certification last?
+Valid for 3 years; recertification via continuing education credits or re-examination.
+
+
+Do you offer hands-on labs and CTF challenges?
+Yes. The course includes extensive lab access, cyber range environment, and regular Capture The Flag challenges.
