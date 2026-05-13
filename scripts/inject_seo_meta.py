@@ -244,6 +244,7 @@ def build_legacy_static_page_block(
     home_fb: LegacySeo | None,
     *,
     include_keywords_fallback: str = "",
+    extra_before_description: tuple[str, ...] = (),
 ) -> str:
     """
     Full legacy-style meta block. `canon` is full URL (e.g. SITE or SITE + '/about').
@@ -272,6 +273,7 @@ def build_legacy_static_page_block(
     post_g = gsv[2:] if len(gsv) > 2 else []
     lines: list[str] = []
     lines.extend(favicon_tags())
+    lines.extend(extra_before_description)
     for tok in pre_g:
         lines.append(
             f'<meta name="google-site-verification" content="{esc_attr(tok)}">'
@@ -316,8 +318,13 @@ def build_legacy_static_page_block(
 
 
 def build_home_seo_block(home: LegacySeo | None, title_inner: str) -> str:
-    # Match legacy export: homepage canonical / og:url without trailing slash
-    canon = SITE
+    canon = f"{SITE}/"
+    home_extra = (
+        '<meta name="robots" content="index, follow">',
+        '<meta name="language" content="English">',
+        '<meta name="author" content="Nexperts Academy">',
+        '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
+    )
     fb_kw = (
         "ccna, cisco, azure, python, data science, networking,web development,frontend,"
         "ccnp,sql,Networking Course Malaysia,Computer Networking Course,It Training"
@@ -329,6 +336,7 @@ def build_home_seo_block(home: LegacySeo | None, title_inner: str) -> str:
             title_inner,
             None,
             include_keywords_fallback=fb_kw,
+            extra_before_description=home_extra,
         )
     return build_legacy_static_page_block(
         home,
@@ -336,6 +344,7 @@ def build_home_seo_block(home: LegacySeo | None, title_inner: str) -> str:
         title_inner,
         home,
         include_keywords_fallback=fb_kw if not (home.keywords or "").strip() else "",
+        extra_before_description=home_extra,
     )
 
 

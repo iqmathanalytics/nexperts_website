@@ -1,10 +1,10 @@
 https://www.nexpertsacademy.com/
-<title>Nexperts Academy | IT Training CCNA Cisco Training Microsoft Azure | Petaling Jaya</title>
+<title>Nexperts Academy | IT Training in Malaysia</title>
 <meta name="google-site-verification" content="UvgO3yZ44-OOWP--yxxEN68NKub7ED2ybQPu27ANrcA">
 <meta name="google-site-verification" content="uxxAaewS0CIt19QbNohIUjIsUoZJ-H58Q-77k32_t2o">
-<meta name="description" content="At Nexperts Academy, we focus on providing quality IT training by interacting and understanding the student's existing capabilities and enrolling them into the right level of course. IT Training CCNA Cisco | Training Microsoft Azure | Best CEH Courses">
-<meta property="og:title" content="Nexperts Academy | IT Training CCNA Cisco Training Microsoft Azure | Petaling Jaya">
-<meta property="og:description" content="At Nexperts Academy, we focus on providing quality IT training by interacting and understanding the student's existing capabilities and enrolling them into the right level of course. IT Training CCNA Cisco | Training Microsoft Azure | Best CEH Courses">
+<meta name="description" content="Nexperts Academy offers IT certification training in Malaysia for AWS, Cisco, CEH, Azure, Data Science, and Cybersecurity courses.">
+<meta property="og:title" content="Nexperts Academy | IT Training in Malaysia">
+<meta property="og:description" content="Nexperts Academy offers IT certification training in Malaysia for AWS, Cisco, CEH, Azure, Data Science, and Cybersecurity courses.">
 <meta property="og:image" content="https://static.wixstatic.com/media/db4df0_d262a6f677a7429aa36f037dcaf201ff%7Emv2.png/v1/fit/w_2500,h_1330,al_c/db4df0_d262a6f677a7429aa36f037dcaf201ff%7Emv2.png">
 <meta property="og:image:width" content="2500">
 <meta property="og:image:height" content="1330">
@@ -17,10 +17,10 @@ https://www.nexpertsacademy.com/
 <meta name="fb_admins_meta_tag" content="Nexpertsacademy">
 <meta property="fb:admins" content="Nexpertsacademy">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Nexperts Academy | IT Training CCNA Cisco Training Microsoft Azure | Petaling Jaya">
-<meta name="twitter:description" content="At Nexperts Academy, we focus on providing quality IT training by interacting and understanding the student's existing capabilities and enrolling them into the right level of course. IT Training CCNA Cisco | Training Microsoft Azure | Best CEH Courses">
+<meta name="twitter:title" content="Nexperts Academy | IT Training in Malaysia">
+<meta name="twitter:description" content="Nexperts Academy offers IT certification training in Malaysia for AWS, Cisco, CEH, Azure, Data Science, and Cybersecurity courses.">
 <meta name="twitter:image" content="https://static.wixstatic.com/media/db4df0_d262a6f677a7429aa36f037dcaf201ff%7Emv2.png/v1/fit/w_2500,h_1330,al_c/db4df0_d262a6f677a7429aa36f037dcaf201ff%7Emv2.png">
-<link rel="canonical" href="https://www.nexpertsacademy.com">
+<link rel="canonical" href="https://www.nexpertsacademy.com/">
 
 
 https://www.nexpertsacademy.com/ccna
