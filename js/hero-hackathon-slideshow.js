@@ -1,6 +1,6 @@
 /**
  * Hero hackathon carousel — automatic advance every 2s, pause on hover / hidden tab.
- * Images live under /image/hackathon/ (see HACKATHON_FILES).
+ * Images live under /image/hackathon/ (see FILES).
  */
 (function () {
   "use strict";
@@ -35,14 +35,10 @@
   function init() {
     var root = document.getElementById("heroHackathon");
     var track = document.getElementById("heroHackathonTrack");
-    var dotsWrap = document.getElementById("heroHackathonDots");
     var bar = document.getElementById("heroHackathonProgressBar");
-    var btnPrev = document.getElementById("heroHackathonPrev");
-    var btnNext = document.getElementById("heroHackathonNext");
-    if (!root || !track || !dotsWrap || !bar) return;
+    if (!root || !track || !bar) return;
 
     var slides = [];
-    var dots = [];
     var idx = 0;
     var timer = null;
     var paused = false;
@@ -61,18 +57,6 @@
       fig.appendChild(img);
       track.appendChild(fig);
       slides.push(fig);
-
-      var dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "hero-h-dot" + (i === 0 ? " is-active" : "");
-      dot.setAttribute("role", "tab");
-      dot.setAttribute("aria-selected", i === 0 ? "true" : "false");
-      dot.setAttribute("aria-label", "Show hackathon photo " + (i + 1));
-      dot.addEventListener("click", function () {
-        goTo(i, true);
-      });
-      dotsWrap.appendChild(dot);
-      dots.push(dot);
     });
 
     function setActive(i) {
@@ -80,11 +64,6 @@
         var on = j === i;
         el.classList.toggle("is-active", on);
         el.setAttribute("aria-hidden", on ? "false" : "true");
-      });
-      dots.forEach(function (d, j) {
-        var on = j === i;
-        d.classList.toggle("is-active", on);
-        d.setAttribute("aria-selected", on ? "true" : "false");
       });
       idx = i;
     }
@@ -108,10 +87,6 @@
 
     function next() {
       goTo(idx + 1, false);
-    }
-
-    function prev() {
-      goTo(idx - 1, false);
     }
 
     function clearTimer() {
@@ -138,13 +113,6 @@
         schedule();
       }
     }
-
-    if (btnNext) btnNext.addEventListener("click", function () {
-      goTo(idx + 1, true);
-    });
-    if (btnPrev) btnPrev.addEventListener("click", function () {
-      goTo(idx - 1, true);
-    });
 
     root.addEventListener("mouseenter", function () {
       paused = true;
