@@ -83,7 +83,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .nav-ai::before{content:'';position:absolute;inset:-150% -40%;background:linear-gradient(120deg,transparent 22%,rgba(255,245,189,.45) 46%,transparent 68%);transform:translateX(-85%) rotate(9deg);animation:navAiSheen 3.6s ease-in-out infinite;pointer-events:none}
 .nav-ai:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 16px 30px rgba(110,16,24,.45),0 0 26px rgba(255,213,107,.34);color:#fff9de}
 .nav-ai .ldot{width:8px;height:8px;background:radial-gradient(circle at 35% 35%,#ffe8a3 0%,#f9b946 30%,#c0202a 65%,#6f1019 100%);border-radius:50%;box-shadow:0 0 0 0 rgba(192,32,42,.46),0 0 14px rgba(249,185,70,.45);animation:navAiPulse 1.45s ease infinite}
-.nav-ai-label{position:relative;z-index:1;text-shadow:0 1px 3px rgba(75,10,14,.45)}.hero-ai-overlay{position:fixed;left:50%;top:92px;right:auto;transform:translateX(-50%);z-index:220;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;max-width:380px}@media (max-width:980px){.hero-ai-overlay{top:88px;max-width:280px}}@media (max-width:560px){.hero-ai-overlay{display:none}.nav-ai-wrap{display:inline-flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px}.nav-ai{order:1}.nav-ai-mobile-hint{display:flex;flex-direction:column;align-items:center;position:fixed;left:0;top:0;transform:translateX(-50%);white-space:nowrap;z-index:221;pointer-events:none;animation:none}.nav-ai-mobile-up{font-size:1.05rem;line-height:1;color:#f6cf6f;text-shadow:0 0 14px rgba(246,207,111,.45),0 0 22px rgba(160,24,36,.25);animation:navAiMobileUp 1.05s ease-in-out infinite}.nav-ai-mobile-text{font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(90deg,#7a121c,#f7c85b,#7a121c);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:heroAiTextFlow 3s linear infinite,navAiMobileNudge2 1.05s ease-in-out infinite}}.hero-ai-overlay .hero-ai-arrow{font-size:1.5rem;line-height:1;color:#f6cf6f;text-shadow:0 0 14px rgba(246,207,111,.5),0 0 24px rgba(160,24,36,.35);animation:heroAiArrowLift 1.15s ease-in-out infinite}.hero-ai-overlay .hero-ai-text{font-size:clamp(.86rem,1.2vw,1.05rem);font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(90deg,#7a121c,#f7c85b,#7a121c);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 8px rgba(0,0,0,.15);animation:heroAiTextFlow 3s linear infinite,heroAiTextFloat 1.6s ease-in-out infinite;white-space:normal;max-width:360px;line-height:1.12;text-wrap:balance;display:flex;flex-direction:column;align-items:center;gap:2px}@keyframes heroAiTextFlow{0%{background-position:0% 50%}100%{background-position:230% 50%}}@keyframes heroAiTextFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}@keyframes heroAiArrowLift{0%,100%{transform:translateY(2px)}50%{transform:translateY(-5px)}}@keyframes navAiMobileNudge{0%,100%{transform:translate(-100%,-50%) translateY(0)}50%{transform:translate(-100%,-50%) translateY(2px)}}@keyframes navAiMobileArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}@keyframes navAiMobileUp{0%,100%{transform:translateY(2px)}50%{transform:translateY(-4px)}}@keyframes navAiMobileNudge2{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+.nav-ai-label{position:relative;z-index:1;text-shadow:0 1px 3px rgba(75,10,14,.45)}.hero-ai-overlay{position:fixed;left:0;top:0;z-index:220;pointer-events:none;display:inline-flex;flex-direction:row;align-items:center;justify-content:flex-end;text-align:right;white-space:nowrap;transform:none}@media (max-width:980px){.hero-ai-overlay{top:88px}}@media (max-width:560px){.hero-ai-overlay{display:none}.nav-ai-wrap{display:inline-flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px}.nav-ai{order:1}.nav-ai-mobile-hint{display:flex;flex-direction:column;align-items:center;position:fixed;left:0;top:0;transform:translateX(-50%);white-space:nowrap;z-index:221;pointer-events:none;animation:none}.nav-ai-mobile-up{font-size:1.05rem;line-height:1;color:#f6cf6f;text-shadow:0 0 14px rgba(246,207,111,.45),0 0 22px rgba(160,24,36,.25);animation:navAiMobileUp 1.05s ease-in-out infinite}.nav-ai-mobile-text{font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(90deg,#7a121c,#f7c85b,#7a121c);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:heroAiTextFlow 3s linear infinite,navAiMobileNudge2 1.05s ease-in-out infinite}}.hero-ai-overlay .hero-ai-text{font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(90deg,#7a121c,#f7c85b,#7a121c);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 1px 6px rgba(0,0,0,.12);animation:heroAiTextFlow 3s linear infinite,heroAiTextFloat 1.6s ease-in-out infinite;white-space:nowrap;line-height:1;display:inline-block}@keyframes heroAiTextFlow{0%{background-position:0% 50%}100%{background-position:230% 50%}}@keyframes heroAiTextFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}@keyframes navAiMobileNudge{0%,100%{transform:translate(-100%,-50%) translateY(0)}50%{transform:translate(-100%,-50%) translateY(2px)}}@keyframes navAiMobileArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}@keyframes navAiMobileUp{0%,100%{transform:translateY(2px)}50%{transform:translateY(-4px)}}@keyframes navAiMobileNudge2{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
 
 @keyframes navAiShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes navAiSheen{0%,58%,100%{transform:translateX(-85%) rotate(9deg)}72%{transform:translateX(135%) rotate(9deg)}}
@@ -190,11 +190,12 @@ body.preload .hero::after{opacity:.2!important}
   .hero::before,.hero::after,.hero-motion *,.orb,.hero-frame::before,.hero-frame-grid,.hero-float,.hero-float::before,.hero-robot .rb-line,.hero-robot .rb-soft,.hero-robot .rb-eye,.hero-robot .rb-eye-glow,.hero-core-line,.hero-core-node,.hero-pill-track i,.hero-streams i{
     animation:none!important;
   }
+  .hero-h-tagline em{animation:none!important;color:var(--blue)!important;-webkit-text-fill-color:currentColor!important;background:none!important;background-clip:border-box!important}
 }
 .hero-shell{width:100%;max-width:1180px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,56px);align-items:center}
 .hero-copy{text-align:left}
-.hero-visual{position:relative;animation:fadeup .7s ease .12s both}
-.hero-frame{position:relative;min-height:clamp(300px,48vh,520px);border-radius:28px;overflow:hidden;background:linear-gradient(140deg,rgba(191,219,254,.9),rgba(255,255,255,.64));border:1px solid rgba(147,197,253,.6);box-shadow:0 28px 70px rgba(15,23,42,.12),0 0 0 1px rgba(255,255,255,.72) inset}
+.hero-visual{position:relative;display:flex;flex-direction:column;gap:clamp(12px,2vw,20px);align-items:stretch;animation:fadeup .7s ease .12s both}
+.hero-frame{position:relative;flex:1 1 auto;min-height:clamp(300px,48vh,520px);border-radius:28px;overflow:hidden;background:linear-gradient(140deg,rgba(191,219,254,.9),rgba(255,255,255,.64));border:1px solid rgba(147,197,253,.6);box-shadow:0 28px 70px rgba(15,23,42,.12),0 0 0 1px rgba(255,255,255,.72) inset}
 .hero-frame::before{content:'';position:absolute;inset:-50% -30%;background:conic-gradient(from 140deg,rgba(59,130,246,.35),rgba(147,197,253,.15),rgba(30,64,175,.35),rgba(191,219,254,.24),rgba(59,130,246,.35));animation:spinAura 9s linear infinite;filter:blur(10px)}
 .hero-frame::after{content:'';position:absolute;inset:12%;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.58),rgba(219,234,254,.18));border:1px solid rgba(191,219,254,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.46)}
 @keyframes spinAura{from{transform:rotate(0)}to{transform:rotate(360deg)}}
@@ -229,6 +230,51 @@ body.preload .hero::after{opacity:.2!important}
 .hero-pill-track i:nth-child(3){animation-delay:1.2s}
 @keyframes gridPulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.7;transform:scale(1.01)}}
 @keyframes pillPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* ── Hero hackathon — split banner: copy column + wider slideshow (no text over photos) ── */
+.hero-hackathon-banner{position:relative;z-index:2;width:100%;border-radius:24px;overflow:hidden;border:1px solid rgba(147,197,253,.55);box-shadow:0 22px 56px rgba(15,23,42,.12),0 0 0 1px rgba(255,255,255,.55) inset,0 1px 0 rgba(255,255,255,.65) inset;background:rgba(248,251,255,.65);backdrop-filter:blur(14px) saturate(1.12);-webkit-backdrop-filter:blur(14px) saturate(1.12);animation:fadeup .72s ease .12s both}
+.hero-hackathon-banner:focus{outline:none}
+.hero-hackathon-banner:focus-visible{outline:2px solid rgba(59,130,246,.9);outline-offset:3px}
+.hero-hackathon-layout{display:grid;grid-template-columns:minmax(200px,34%) minmax(0,1fr);align-items:stretch;height:clamp(136px,14.5vw,188px);min-height:clamp(136px,14.5vw,188px);max-height:clamp(136px,14.5vw,188px);width:100%}
+.hero-hackathon-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:8px 11px 8px 13px;background:linear-gradient(165deg,#fbfcff 0%,#eef6ff 52%,#e6f0fc 100%);border-right:1px solid rgba(147,197,253,.55);box-shadow:inset -8px 0 18px rgba(255,255,255,.75);pointer-events:auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
+.hero-hackathon-copy::-webkit-scrollbar{display:none;width:0;height:0}
+.hero-h-tagline{margin:0;font-family:'Fraunces',serif;font-weight:400;font-size:clamp(.82rem,1.18vw,1.12rem);line-height:1.16;letter-spacing:-.02em;color:var(--ink)}
+.hero-h-tagline em{font-style:italic;background:linear-gradient(105deg,#1e40af,#2563eb,#3b82f6,#1d4ed8);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:heroHShimmer 5.5s ease-in-out infinite}
+@keyframes heroHShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-h-sub{margin:0;font-size:.64rem;font-weight:500;line-height:1.36;color:var(--ink3);max-width:100%}
+.hero-hackathon-media{position:relative;min-width:0;min-height:100%;background:linear-gradient(180deg,#f8fbff,#e8f1fc 55%,#dbeafe);border-left:1px solid rgba(255,255,255,.65)}
+.hero-hackathon-viewport{position:absolute;inset:0;isolation:isolate}
+.hero-hackathon-track{position:absolute;inset:0;background:linear-gradient(180deg,rgba(248,251,255,.9),rgba(219,234,254,.95))}
+.hero-h-slide{position:absolute;inset:0;display:block;padding:0 0 48px;opacity:0;transition:opacity .7s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.hero-h-slide.is-active{opacity:1;z-index:1;pointer-events:auto}
+.hero-h-slide img{position:absolute;left:0;right:0;top:0;bottom:48px;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.hero-h-slide.is-active img{transition:opacity .3s ease}
+.hero-hackathon-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(0deg,rgba(15,23,42,.55) 0%,rgba(15,23,42,.08) 42%,transparent 62%)}
+.hero-hackathon-chrome{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:12px 16px 14px;background:linear-gradient(0deg,rgba(15,23,42,.72),rgba(15,23,42,0));pointer-events:none}
+.hero-hackathon-controls{display:flex;align-items:center;gap:8px;pointer-events:auto}
+.hero-hackathon-nav{display:flex;gap:5px}
+.hero-h-btn{width:34px;height:34px;border-radius:11px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.22);color:#fff;font-size:1.05rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s ease,transform .2s ease,border-color .2s ease,box-shadow .2s ease;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(15,23,42,.2)}
+.hero-h-btn:hover{background:rgba(255,255,255,.38);border-color:rgba(255,255,255,.75);transform:translateY(-2px);box-shadow:0 8px 22px rgba(29,78,216,.25)}
+.hero-h-btn:focus-visible{outline:2px solid #93c5fd;outline-offset:2px}
+.hero-hackathon-dots{display:flex;gap:5px;align-items:center;padding:2px 0;max-width:min(240px,55%);overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.hero-hackathon-dots::-webkit-scrollbar{display:none;height:0;width:0}
+.hero-h-dot{width:7px;height:7px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.4);cursor:pointer;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+.hero-h-dot:hover{background:rgba(255,255,255,.68);transform:scale(1.18)}
+.hero-h-dot.is-active{background:#fff;box-shadow:0 0 0 3px rgba(59,130,246,.5),0 2px 10px rgba(29,78,216,.35);transform:scale(1.14)}
+.hero-hackathon-progress{position:absolute;left:0;right:0;top:0;z-index:5;height:3px;background:rgba(15,23,42,.12);overflow:hidden}
+.hero-hackathon-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#1d4ed8,#3b82f6,#93c5fd,#e0f2fe);transform-origin:left center}
+.hero-hackathon-progress span.is-anim{width:100%;transition:width 2s linear}
+
+@media (min-width:1025px){
+  .hero-split .hero-visual>.hero-hackathon-banner{--h-h-expand:clamp(48px,7.5vw,132px);width:calc(100% + var(--h-h-expand));margin-left:calc(var(--h-h-expand)*-.5);margin-right:calc(var(--h-h-expand)*-.5);max-width:min(calc(100% + var(--h-h-expand)),calc(100vw - 20px))}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-h-slide,.hero-h-slide img,.hero-hackathon-progress span{transition:none!important}
+  .hero-h-slide.is-active img{transform:none!important}
+  .hero-h-tagline em{animation:none!important;color:var(--blue)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+}
+
 .hero-float{position:absolute;z-index:4;left:14px;top:96px;width:318px;max-width:calc(100% - 30px);background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(239,246,255,.92));backdrop-filter:blur(14px);padding:16px 18px;border-radius:16px;border:1px solid rgba(30,64,175,.2);box-shadow:0 22px 40px rgba(15,23,42,.16);animation:floatPulse 5s ease-in-out infinite;overflow:hidden}
 .hero-float::before{content:'';position:absolute;inset:-120% -35%;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.75) 45%,transparent 68%);animation:floatShine 5.6s ease-in-out infinite}
 .hero-float-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
@@ -620,6 +666,12 @@ a.cc{text-decoration:none;color:inherit}
 .hero-split .hero-title{max-width:none}
 .hero-split .hero-sub{max-width:520px;margin-left:auto;margin-right:auto}
 .hero-split .hero-actions,.hero-split .hero-chips,.hero-split .chips{justify-content:center}
+.hero-hackathon-banner{width:100%;max-width:none;margin:0}
+.hero-hackathon-layout{grid-template-columns:1fr;height:auto;min-height:0;max-height:none}
+.hero-hackathon-copy{border-right:none;border-bottom:1px solid rgba(147,197,253,.55);padding:18px 20px 16px;text-align:center;align-items:center;box-shadow:none;overflow:visible}
+.hero-h-tagline,.hero-h-sub{max-width:42ch;margin-left:auto;margin-right:auto}
+.hero-hackathon-media{min-height:min(38vw,216px);border-left:none;border-top:1px solid rgba(255,255,255,.5)}
+.hero-hackathon-scrim{background:linear-gradient(0deg,rgba(15,23,42,.55) 0%,transparent 50%)}
 .hero-float{position:relative;left:auto;top:auto;width:100%;max-width:320px;margin:14px auto 0}
 .hero-kpi{position:relative;right:auto;top:auto;width:auto;margin:16px 16px 0}
 .hero-pill-track{position:relative;left:auto;right:auto;bottom:auto;padding:0 16px 16px;flex-wrap:wrap}
@@ -743,7 +795,7 @@ body.em-open{overflow:hidden}
 <!-- HERO -->
 
 <section class="hero hero-split" id="heroSection">
-  <div class="hero-ai-overlay" aria-hidden="true"><span class="hero-ai-arrow">&uarr;</span><span class="hero-ai-text"><span class="hero-ai-line1">Click Nexperts AI</span><span class="hero-ai-line2">to unlock your advantage</span></span></div>
+  <div class="hero-ai-overlay" aria-hidden="true"><span class="hero-ai-text">Click here →</span></div>
   <div class="hero-spotlight" aria-hidden="true"></div>
   <div class="hero-streams" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <div class="hero-motion" aria-hidden="true">
@@ -781,6 +833,30 @@ body.em-open{overflow:hidden}
       </div>
     </div>
     <div class="hero-visual" id="heroVisual">
+      <div class="hero-hackathon hero-hackathon-banner" id="heroHackathon" tabindex="0" aria-roledescription="carousel" aria-label="Hackathon highlights from Nexperts Academy" role="region">
+        <div class="hero-hackathon-layout">
+          <div class="hero-hackathon-copy">
+            <p class="hero-h-tagline">An intensive weekend of <em>guided labs</em> and enterprise-style project work.</p>
+            <p class="hero-h-sub">Structured cohorts, mentor-led labs, and scenarios aligned with Malaysian enterprise IT—focused on workplace-ready skills.</p>
+          </div>
+          <div class="hero-hackathon-media">
+            <div class="hero-hackathon-viewport">
+              <div class="hero-hackathon-track" id="heroHackathonTrack" aria-live="polite"></div>
+              <div class="hero-hackathon-scrim" aria-hidden="true"></div>
+              <div class="hero-hackathon-progress" aria-hidden="true"><span id="heroHackathonProgressBar"></span></div>
+              <div class="hero-hackathon-chrome">
+                <div class="hero-hackathon-controls">
+                  <div class="hero-hackathon-nav" role="group" aria-label="Slide controls">
+                    <button type="button" class="hero-h-btn" id="heroHackathonPrev" aria-label="Previous hackathon photo">‹</button>
+                    <button type="button" class="hero-h-btn" id="heroHackathonNext" aria-label="Next hackathon photo">›</button>
+                  </div>
+                  <div class="hero-hackathon-dots" id="heroHackathonDots" role="tablist" aria-label="Choose slide"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="hero-frame">
         <div class="hero-frame-grid" aria-hidden="true"></div>
         <div class="hero-frame-core" aria-hidden="true">
@@ -2215,5 +2291,6 @@ async function submitEnquireModal(e){
 
 <script src="admin/overlay.js" defer></script>
   <script src="js/site-nav-mobile.js" defer></script>
+  <script src="js/hero-hackathon-slideshow.js" defer></script>
 </body>
 </html>

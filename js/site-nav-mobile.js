@@ -22,20 +22,21 @@
     var btn = document.getElementById('siteNavMenuBtn');
     if (!nav || !btn) return;
 
-    // Keep the "Nexperts AI" overlay precisely centered under the nav button.
+    // Small "Click here →" hint: sit to the left of the Nexperts AI button, vertically centred (desktop).
     function positionAiOverlay() {
       var aiBtn = document.querySelector('nav.site-nav .nav-right .nav-ai');
       var overlay = document.querySelector('.hero-ai-overlay');
       if (!aiBtn || !overlay) return;
 
-      var navRect = nav.getBoundingClientRect();
       var btnRect = aiBtn.getBoundingClientRect();
-      var centerX = btnRect.left + btnRect.width / 2;
+      var gap = 8;
+      var anchorLeft = btnRect.left - gap;
+      var centerY = btnRect.top + btnRect.height / 2;
 
-      overlay.style.left = Math.round(centerX) + 'px';
+      overlay.style.left = Math.round(anchorLeft) + 'px';
       overlay.style.right = 'auto';
-      overlay.style.transform = 'translateX(-50%)';
-      overlay.style.top = Math.round(navRect.bottom + 18) + 'px';
+      overlay.style.transform = 'translate(-100%, -50%)';
+      overlay.style.top = Math.round(centerY) + 'px';
     }
 
     // Mobile-only: keep the small "Click here" hint centered under the same button.
