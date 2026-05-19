@@ -77,5 +77,8 @@
 /course /#courses 301
 /course/ /#courses 301
 
+# Netlify Functions (keep before catch-all 404)
+/.netlify/functions/* /.netlify/functions/:splat 200
+
 # Explicit 404 for unknown paths (no homepage fallback):
 /* /404.html 404

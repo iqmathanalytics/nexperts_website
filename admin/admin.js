@@ -913,6 +913,14 @@ async function publishLive() {
       } catch (e) {
         /* ignore */
       }
+      if (res.status === 405) {
+        throw new Error(
+          "Publish endpoint rejected the request (405). Wait for the latest Netlify deploy, then try again."
+        );
+      }
+      if (res.status === 401) {
+        throw new Error("Unauthorized — check ADMIN_USER and ADMIN_PASS on Netlify match your admin login.");
+      }
       throw new Error(msg || res.statusText || "Publish failed");
     }
     toast("Published live — all visitors will see your updates shortly", "success");
