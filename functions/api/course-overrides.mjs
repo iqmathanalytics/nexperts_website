@@ -2,7 +2,7 @@
  * Cloudflare Pages Function — GET/POST/OPTIONS `/api/course-overrides`.
  * Requires KV binding: COURSE_OVERRIDES (see docs/DEPLOY_CLOUDFLARE.md).
  */
-import { BLOB_KEY, handler } from "./course-overrides-core.mjs";
+import { KV_KEY, handler } from "./course-overrides-core.mjs";
 
 function applyCfEnv(env) {
   const prev =
@@ -35,12 +35,12 @@ function kvStorage(env) {
   if (!kv) return {};
   return {
     async getPublished() {
-      const raw = await kv.get(BLOB_KEY);
+      const raw = await kv.get(KV_KEY);
       if (!raw) return null;
       return JSON.parse(raw);
     },
     async setPublished(data) {
-      await kv.put(BLOB_KEY, JSON.stringify(data));
+      await kv.put(KV_KEY, JSON.stringify(data));
     },
   };
 }

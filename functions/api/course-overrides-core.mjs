@@ -3,7 +3,7 @@
  * Storage is injected: KV on Cloudflare, Blobs on Netlify.
  */
 
-const BLOB_KEY = "published";
+export const KV_KEY = "published";
 const EMPTY = {
   version: 2,
   courses: {},
@@ -177,4 +177,3 @@ export async function handler(event, storage = {}) {
   };
 }
 
-export { BLOB_KEY as STORAGE_KEY };
