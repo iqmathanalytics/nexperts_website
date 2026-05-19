@@ -37,8 +37,22 @@ This site is static HTML at the repository root, with a **Pages Function** at `/
 | `NEXPERTS_PUBLIC_SITE_URL` | Optional; reserved for other server logic (enquiry **email buttons** always use `https://www.nexpertsacademy.com` unless overridden below) |
 | `NEXPERTS_EMAIL_SITE_URL` | Optional; override base URL for **all public links inside Brevo emails** (defaults to `https://www.nexpertsacademy.com` so preview/Netlify hosts never appear in student or lead mail) |
 | `NEXPERTS_LEADS_SHEET_URL` | Optional; sheet URL shown in internal emails |
+| `ADMIN_USER` | Admin login username (for **Publish live** on `/admin/`) |
+| `ADMIN_PASS` | Admin login password (encrypted) |
 
 Mark secrets **Encrypted** in the dashboard.
+
+### KV for admin course publish (required for **Publish live**)
+
+Admin **Publish live** stores overrides in **Cloudflare KV**, not Netlify Blobs.
+
+1. **Workers & Pages** → your account → **KV** → **Create namespace** (e.g. `nexperts-course-overrides`).
+2. Open your **Pages** project → **Settings** → **Functions** → **KV namespace bindings** → **Add**.
+3. Set **Variable name** to exactly: `COURSE_OVERRIDES`
+4. Select the namespace you created → **Save**.
+5. **Redeploy** the project (new bindings apply on the next deployment).
+
+Without this binding, **Publish live** returns **503** with a setup hint. You can still **Export** JSON, commit `data/course-overrides.json`, and redeploy (build bakes HTML + overlay reads the static file).
 
 6. Save and deploy. The first build runs after you confirm.
 
@@ -81,7 +95,19 @@ npx wrangler pages dev . -- npm run build
 
 Or build first, then run `wrangler pages dev` against the built tree per Wrangler docs.
 
-## 8. Keeping Brevo logic in sync
+## 8. Admin course publish (`/api/course-overrides`)
+
+- **Cloudflare Pages:** `functions/api/course-overrides.mjs` → **`/api/course-overrides`**
+- **Netlify** (if used): `netlify/functions/course-overrides.mjs` → `/.netlify/functions/course-overrides`
+
+The public site (`admin/overlay.js`) calls **`/api/course-overrides`** on your domain (not Netlify paths).
+
+After **Publish live** in `/admin/`:
+
+1. Data is saved to KV (`COURSE_OVERRIDES`).
+2. All visitors load overrides via the API + `data/course-overrides.json` fallback.
+
+## 9. Keeping Brevo logic in sync
 
 Server-side Brevo logic exists in two places so each platform can bundle it:
 
@@ -89,3 +115,5 @@ Server-side Brevo logic exists in two places so each platform can bundle it:
 - `functions/api/enquiry-brevo-core.mjs` (Cloudflare Pages)
 
 When you change email templates or Brevo behaviour, update **both** files (or extract a shared module later).
+
+Course overrides shared logic: `functions/api/course-overrides-core.mjs` (used by Cloudflare; Netlify function is a separate copy with Blobs).

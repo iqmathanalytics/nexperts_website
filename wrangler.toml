@@ -3,3 +3,9 @@
 
 name = "nexperts-website"
 compatibility_date = "2024-11-01"
+
+# Optional: for `wrangler pages dev` — create KV in dashboard, paste namespace id below.
+# Pages Git deploys: bind COURSE_OVERRIDES in the Pages project UI (Settings → Functions).
+# [[kv_namespaces]]
+# binding = "COURSE_OVERRIDES"
+# id = "YOUR_KV_NAMESPACE_ID"

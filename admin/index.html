@@ -72,7 +72,7 @@
     Nexperts <span class="ad-logo-em">Admin</span>
   </a>
   <div class="ad-nav-mid">
-    <span class="ad-pill"><span class="ad-live"></span>Browser preview · use Publish for live site</span>
+    <span class="ad-pill"><span class="ad-live"></span>Browser preview · Publish live → Cloudflare KV</span>
     <span class="ad-storage" id="adStorageStatus">Loading…</span>
   </div>
   <div class="ad-nav-right">
@@ -90,7 +90,7 @@
   <section class="ad-hero">
     <div class="ad-eyebrow">Course catalog</div>
     <h1>Manage <em>course details &amp; ordering.</em></h1>
-    <p class="ad-sub">Edit course names, descriptions, duration, next intake, pricing and curriculum on detail pages. <strong>Save draft</strong> stores edits in this browser for preview. Click <strong>Publish live</strong> so every visitor sees changes on the course pages (requires Netlify). Export JSON to commit <code>data/course-overrides.json</code> as a backup.</p>
+    <p class="ad-sub">Edit course names, descriptions, duration, next intake, pricing and curriculum on detail pages. <strong>Save draft</strong> stores edits in this browser for preview. Click <strong>Publish live</strong> for all visitors (Cloudflare: bind <code>COURSE_OVERRIDES</code> KV — see deploy docs). Export JSON to commit <code>data/course-overrides.json</code> as a backup.</p>
     <div class="ad-quick">
       <span class="ad-quick-i"><b id="kpiBrands">0</b><span>Brands</span></span>
       <span class="ad-quick-i"><b id="kpiCourses">0</b><span>Courses</span></span>

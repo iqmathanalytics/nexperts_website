@@ -1,14 +1,23 @@
 /* Admin overlay — applies published overrides + local draft edits to the public site.
  *
- * Published: GET /.netlify/functions/course-overrides (Netlify Blobs) or /data/course-overrides.json
+ * Published: GET /api/course-overrides (Cloudflare KV) or /.netlify/functions/… on netlify.app
  * Draft:    localStorage nexperts_admin_v1 (same browser, merged on top for preview)
  */
 (function () {
   "use strict";
 
   const STORAGE_KEY = "nexperts_admin_v1";
-  const PUBLISHED_URL = "/.netlify/functions/course-overrides";
-  const PUBLISHED_FALLBACK = "/data/course-overrides.json";
+  function publishedUrls() {
+    try {
+      const h = (location.hostname || "").toLowerCase();
+      if (h.endsWith(".netlify.app")) {
+        return ["/.netlify/functions/course-overrides", "/data/course-overrides.json"];
+      }
+    } catch (e) {
+      /* ignore */
+    }
+    return ["/api/course-overrides", "/data/course-overrides.json"];
+  }
 
   /** Root detail pages (not under /courses/) — mirrors scripts/site_paths.py */
   const ROOT_SLUGS = new Set([
@@ -51,8 +60,7 @@
   }
 
   async function loadPublished() {
-    const urls = [PUBLISHED_URL, PUBLISHED_FALLBACK];
-    for (const url of urls) {
+    for (const url of publishedUrls()) {
       try {
         const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) continue;

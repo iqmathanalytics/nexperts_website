@@ -880,6 +880,16 @@ function detailPageLabel(c) {
   return p || `courses/${c.slug}.html`;
 }
 
+function courseOverridesPublishUrl() {
+  try {
+    const h = (location.hostname || "").toLowerCase();
+    if (h.endsWith(".netlify.app")) return "/.netlify/functions/course-overrides";
+  } catch (e) {
+    /* ignore */
+  }
+  return "/api/course-overrides";
+}
+
 async function publishLive() {
   const edited = Object.keys(overrides.courses || {}).length;
   const custom = (overrides.custom_courses || []).length;
@@ -896,7 +906,7 @@ async function publishLive() {
   }
 
   try {
-    const res = await fetch("/.netlify/functions/course-overrides", {
+    const res = await fetch(courseOverridesPublishUrl(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -913,9 +923,14 @@ async function publishLive() {
       } catch (e) {
         /* ignore */
       }
+      if (res.status === 503) {
+        throw new Error(
+          "Publish storage not configured. On Cloudflare Pages, bind KV namespace COURSE_OVERRIDES (see docs/DEPLOY_CLOUDFLARE.md), then redeploy."
+        );
+      }
       if (res.status === 405) {
         throw new Error(
-          "Publish endpoint rejected the request (405). Wait for the latest Netlify deploy, then try again."
+          "Publish endpoint rejected the request (405). Wait for the latest deploy, then try again."
         );
       }
       if (res.status === 401) {
