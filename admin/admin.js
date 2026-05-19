@@ -890,6 +890,31 @@ function courseOverridesPublishUrl() {
   return "/api/course-overrides";
 }
 
+function isLocalAdminHost() {
+  const h = (location.hostname || "").toLowerCase();
+  return !h || h === "localhost" || h === "127.0.0.1" || h === "[::1]";
+}
+
+function publishAuthHeader() {
+  const s = readSession();
+  if (s && s.user && s.pass) {
+    return "Basic " + btoa(s.user + ":" + s.pass);
+  }
+  return "Basic " + btoa(ADMIN_USER + ":" + ADMIN_PASS);
+}
+
+async function verifyPublishCredentials(user, pass) {
+  const res = await fetch(courseOverridesPublishUrl(), {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Basic " + btoa(user + ":" + pass),
+    },
+    body: JSON.stringify({ _verify: true }),
+  });
+  return res.ok;
+}
+
 async function publishLive() {
   const edited = Object.keys(overrides.courses || {}).length;
   const custom = (overrides.custom_courses || []).length;
@@ -910,7 +935,7 @@ async function publishLive() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(ADMIN_USER + ":" + ADMIN_PASS),
+        Authorization: publishAuthHeader(),
       },
       body: JSON.stringify(overrides),
     });
@@ -934,7 +959,9 @@ async function publishLive() {
         );
       }
       if (res.status === 401) {
-        throw new Error("Unauthorized — check ADMIN_USER and ADMIN_PASS on Netlify match your admin login.");
+        throw new Error(
+          "Unauthorized — log out, then sign in with the same username/password as Cloudflare ADMIN_USER and ADMIN_PASS."
+        );
       }
       throw new Error(msg || res.statusText || "Publish failed");
     }
@@ -1217,7 +1244,7 @@ function readSession() {
     const raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
     if (!raw) return null;
     const obj = JSON.parse(raw);
-    if (!obj || obj.user !== ADMIN_USER) return null;
+    if (!obj || !obj.user) return null;
     if (obj.expiresAt && Date.now() > obj.expiresAt) return null;
     return obj;
   } catch (e) {
@@ -1225,9 +1252,10 @@ function readSession() {
   }
 }
 
-function writeSession(remember) {
+function writeSession(remember, user, pass) {
   const obj = {
-    user: ADMIN_USER,
+    user: user || ADMIN_USER,
+    pass: pass || "",
     issuedAt: Date.now(),
     expiresAt: remember ? Date.now() + SESSION_TTL_MS : null,
   };
@@ -1261,19 +1289,40 @@ function flashError(msg) {
 function bindLogin() {
   const form = $("#adLoginForm");
   if (!form) return;
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     const u = ($("#alUser").value || "").trim();
     const p = $("#alPass").value || "";
     const remember = $("#alRemember").checked;
-    if (u === ADMIN_USER && p === ADMIN_PASS) {
-      writeSession(remember);
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = true;
+
+    let ok = false;
+    if (isLocalAdminHost()) {
+      ok = u === ADMIN_USER && p === ADMIN_PASS;
+    } else {
+      try {
+        ok = await verifyPublishCredentials(u, p);
+      } catch (err) {
+        console.warn("admin: server login check failed", err);
+        ok = false;
+      }
+    }
+
+    if (btn) btn.disabled = false;
+
+    if (ok) {
+      writeSession(remember, u, p);
       hideLogin();
       $("#alError").hidden = true;
       $("#alPass").value = "";
       bootApp();
     } else {
-      flashError("Incorrect username or password.");
+      flashError(
+        isLocalAdminHost()
+          ? "Incorrect username or password."
+          : "Incorrect username or password. Use the same values as ADMIN_USER and ADMIN_PASS in Cloudflare Pages."
+      );
       $("#alPass").select();
     }
   });

@@ -129,6 +129,23 @@ export async function handler(event, storage = {}) {
         body: JSON.stringify({ error: "Unauthorized" }),
       };
     }
+    let parsed = {};
+    try {
+      parsed = JSON.parse(event.body || "{}");
+    } catch {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: "Invalid JSON body" }),
+      };
+    }
+    if (parsed && parsed._verify === true) {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ ok: true, verify: true }),
+      };
+    }
     if (!storage.setPublished) {
       return {
         statusCode: 503,
@@ -140,16 +157,7 @@ export async function handler(event, storage = {}) {
         }),
       };
     }
-    let body;
-    try {
-      body = normalizePayload(JSON.parse(event.body || "{}"));
-    } catch {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: "Invalid JSON body" }),
-      };
-    }
+    const body = normalizePayload(parsed);
     try {
       await storage.setPublished(body);
       return {

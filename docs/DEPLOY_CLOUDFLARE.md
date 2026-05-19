@@ -37,8 +37,8 @@ This site is static HTML at the repository root, with a **Pages Function** at `/
 | `NEXPERTS_PUBLIC_SITE_URL` | Optional; reserved for other server logic (enquiry **email buttons** always use `https://www.nexpertsacademy.com` unless overridden below) |
 | `NEXPERTS_EMAIL_SITE_URL` | Optional; override base URL for **all public links inside Brevo emails** (defaults to `https://www.nexpertsacademy.com` so preview/Netlify hosts never appear in student or lead mail) |
 | `NEXPERTS_LEADS_SHEET_URL` | Optional; sheet URL shown in internal emails |
-| `ADMIN_USER` | Admin login username (for **Publish live** on `/admin/`) |
-| `ADMIN_PASS` | Admin login password (encrypted) |
+| `ADMIN_USER` | **Same username** you use to sign in at `/admin/` (Publish live checks this) |
+| `ADMIN_PASS` | **Same password** you use to sign in at `/admin/` (encrypted) |
 
 Mark secrets **Encrypted** in the dashboard.
 
