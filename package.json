@@ -4,8 +4,12 @@
   "scripts": {
     "dev": "netlify dev",
     "dev:static": "python scripts/local_dev_server.py",
-    "build": "python scripts/build_contact_course_select.py && python scripts/inject_ga4.py",
-    "build:catalog-dropdowns": "python scripts/build_contact_course_select.py"
+    "build": "python scripts/build_contact_course_select.py && python scripts/publish_admin_overrides.py && python scripts/inject_ga4.py",
+    "build:catalog-dropdowns": "python scripts/build_contact_course_select.py",
+    "publish:overrides": "python scripts/publish_admin_overrides.py"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
   },
   "devDependencies": {
     "netlify-cli": "^18.0.0"

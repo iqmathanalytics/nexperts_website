@@ -12,7 +12,7 @@
  *                          name, description, level, rating, reviews, enrolled,
  *                          card_href } ]
  *    }
- *  Public site reads the same storage via overlay.js.
+ *  Public site: overlay.js loads published overrides (Netlify) + local draft.
  * -------------------------------------------------------------- */
 
 const STORAGE_KEY = "nexperts_admin_v1";
@@ -353,7 +353,7 @@ function saveOverrides(showToast = true) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
     updateStorageStatus();
-    if (showToast) toast("Saved · changes will appear on landing & course pages", "success");
+    if (showToast) toast("Draft saved in this browser · click Publish live for all visitors", "success");
   } catch (e) {
     toast("Could not save (storage quota?). Try Export & Import.", "error");
     console.error(e);
@@ -730,7 +730,7 @@ async function openDrawer(slug) {
   });
   html += `</div>`;
 
-  html += `<div class="ad-section"><h4>Course detail page <span class="ad-section-tag">${c.has_detail_page ? `courses/${c.slug}.html` : "Not yet published"}</span></h4>`;
+  html += `<div class="ad-section"><h4>Course detail page <span class="ad-section-tag">${detailPageLabel(c)}</span></h4>`;
   if (!c.has_detail_page) {
     html += `<div class="ad-no-detail">This course doesn't have a detail page yet — duration, intake and pricing will apply when a page exists.</div>`;
   }
@@ -867,13 +867,72 @@ function resetAll() {
   toast("Restored to baseline", "success");
 }
 
+const ROOT_DETAIL_HTML = {
+  ceh: "ceh.html",
+  "python-bootcamp": "python-bootcamp.html",
+  ccna: "ccna.html",
+  "data-science-with-python": "data-science-with-python.html",
+};
+
+function detailPageLabel(c) {
+  if (!c || !c.has_detail_page) return "Not yet published";
+  const p = ROOT_DETAIL_HTML[c.slug];
+  return p || `courses/${c.slug}.html`;
+}
+
+async function publishLive() {
+  const edited = Object.keys(overrides.courses || {}).length;
+  const custom = (overrides.custom_courses || []).length;
+  if (!edited && !custom) {
+    toast("No edits to publish — save a draft first", "error");
+    return;
+  }
+  if (
+    !confirm(
+      "Publish all saved edits to the live website for every visitor?\n\nThis updates the public course pages immediately."
+    )
+  ) {
+    return;
+  }
+
+  try {
+    const res = await fetch("/.netlify/functions/course-overrides", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(ADMIN_USER + ":" + ADMIN_PASS),
+      },
+      body: JSON.stringify(overrides),
+    });
+    const text = await res.text();
+    if (!res.ok) {
+      let msg = text;
+      try {
+        const j = JSON.parse(text);
+        if (j && j.error) msg = j.error;
+      } catch (e) {
+        /* ignore */
+      }
+      throw new Error(msg || res.statusText || "Publish failed");
+    }
+    toast("Published live — all visitors will see your updates shortly", "success");
+  } catch (e) {
+    console.error("publishLive", e);
+    toast(
+      (e.message || "Publish failed") +
+        " · Try Export, save as data/course-overrides.json, commit & deploy.",
+      "error"
+    );
+  }
+}
+
 function exportJSON() {
   const data = JSON.stringify(overrides, null, 2);
   const blob = new Blob([data], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `nexperts-admin-${new Date().toISOString().slice(0, 10)}.json`;
+  a.download = `course-overrides-${new Date().toISOString().slice(0, 10)}.json`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -1096,6 +1155,7 @@ function bindUI() {
   });
 
   $("#adBtnSave").addEventListener("click", () => saveOverrides());
+  $("#adBtnPublish").addEventListener("click", () => publishLive());
 
   $("#adBtnReset").addEventListener("click", resetAll);
   $("#adBtnExport").addEventListener("click", exportJSON);

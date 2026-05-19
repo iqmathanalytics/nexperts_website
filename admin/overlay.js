@@ -1,34 +1,129 @@
-/* Admin overlay — applies localStorage edits to the public site.
+/* Admin overlay — applies published overrides + local draft edits to the public site.
  *
- * Loaded by:
- *   - index.html   (catalog cards: name + description + order + custom cards/brands)
- *   - courses/*.html (sidebar + optional curriculum HTML override)
- *
- * Storage key: nexperts_admin_v1   (written by /admin/)
- *
- * Safe to run when storage is empty — silently no-ops.
+ * Published: GET /.netlify/functions/course-overrides (Netlify Blobs) or /data/course-overrides.json
+ * Draft:    localStorage nexperts_admin_v1 (same browser, merged on top for preview)
  */
 (function () {
   "use strict";
 
   const STORAGE_KEY = "nexperts_admin_v1";
+  const PUBLISHED_URL = "/.netlify/functions/course-overrides";
+  const PUBLISHED_FALLBACK = "/data/course-overrides.json";
 
-  function load() {
+  /** Root detail pages (not under /courses/) — mirrors scripts/site_paths.py */
+  const ROOT_SLUGS = new Set([
+    "ccna",
+    "python-bootcamp",
+    "data-science-with-python",
+    "ceh",
+  ]);
+  const SLUG_ALIASES = { "ceh-v13-ai": "ceh" };
+
+  function emptyState() {
+    return {
+      courses: {},
+      card_order: {},
+      brand_order: null,
+      custom_brands: {},
+      custom_courses: [],
+    };
+  }
+
+  function normalizeState(obj) {
+    if (!obj || typeof obj !== "object") return null;
+    return {
+      courses: obj.courses || {},
+      card_order: obj.card_order || {},
+      brand_order: obj.brand_order || null,
+      custom_brands: obj.custom_brands || {},
+      custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
+    };
+  }
+
+  function loadLocal() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return null;
-      const obj = JSON.parse(raw);
-      if (!obj || typeof obj !== "object") return null;
-      return {
-        courses: obj.courses || {},
-        card_order: obj.card_order || {},
-        brand_order: obj.brand_order || null,
-        custom_brands: obj.custom_brands || {},
-        custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
-      };
+      return normalizeState(JSON.parse(raw));
     } catch (e) {
       return null;
     }
+  }
+
+  async function loadPublished() {
+    const urls = [PUBLISHED_URL, PUBLISHED_FALLBACK];
+    for (const url of urls) {
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) continue;
+        const state = normalizeState(await res.json());
+        if (!state) continue;
+        const has =
+          Object.keys(state.courses).length > 0 ||
+          state.custom_courses.length > 0 ||
+          Object.keys(state.custom_brands).length > 0 ||
+          (state.brand_order && state.brand_order.length > 0) ||
+          Object.keys(state.card_order).length > 0;
+        if (has) return state;
+      } catch (e) {
+        /* try next */
+      }
+    }
+    return null;
+  }
+
+  function mergeState(published, local) {
+    if (!published && !local) return null;
+    const base = published || emptyState();
+    if (!local) return base;
+
+    const courses = { ...base.courses };
+    Object.keys(local.courses || {}).forEach(slug => {
+      courses[slug] = { ...(courses[slug] || {}), ...(local.courses[slug] || {}) };
+    });
+
+    const card_order = { ...base.card_order };
+    Object.keys(local.card_order || {}).forEach(brand => {
+      card_order[brand] = local.card_order[brand];
+    });
+
+    const custom_brands = { ...base.custom_brands, ...(local.custom_brands || {}) };
+
+    const customBySlug = {};
+    (base.custom_courses || []).forEach(c => {
+      if (c && c.slug) customBySlug[c.slug] = c;
+    });
+    (local.custom_courses || []).forEach(c => {
+      if (c && c.slug) customBySlug[c.slug] = { ...(customBySlug[c.slug] || {}), ...c };
+    });
+
+    return {
+      courses,
+      card_order,
+      brand_order:
+        local.brand_order && local.brand_order.length ? local.brand_order : base.brand_order,
+      custom_brands,
+      custom_courses: Object.values(customBySlug),
+    };
+  }
+
+  function canonicalSlug(slug) {
+    return SLUG_ALIASES[slug] || slug;
+  }
+
+  function detailHref(slug) {
+    const s = canonicalSlug(slug);
+    if (ROOT_SLUGS.has(s)) return "/" + s;
+    return "/courses/" + s;
+  }
+
+  function slugFromPath(path) {
+    const p = (path || "").toLowerCase();
+    let m = p.match(/\/courses\/([^/]+?)(?:\.html)?\/?$/);
+    if (m) return canonicalSlug(decodeURIComponent(m[1]));
+    m = p.match(/\/(ccna|python-bootcamp|data-science-with-python|ceh)(?:\.html)?\/?$/);
+    if (m) return m[1];
+    return null;
   }
 
   function mergedBrandOrder(state) {
@@ -217,7 +312,7 @@
     const m = mergedCourseFields(state, c.slug);
     const link = String(m.card_href || m.detail_href || "").trim();
     const href =
-      link || (m.has_detail_page ? "/courses/" + c.slug : "#");
+      link || (m.has_detail_page || c.has_detail_page ? detailHref(c.slug) : "#");
     const vendor = m.vendor || c.vendor || "";
     const badge = m.badge || c.badge || "Cert";
     const badgeVariant = m.badge_variant || c.badge_variant || "";
@@ -503,11 +598,8 @@
   }
 
   function applyDetailOverrides(state) {
-    const path = (location.pathname || "").toLowerCase();
-    let m = path.match(/\/courses\/([^/]+)\.html?$/);
-    if (!m) m = path.match(/\/courses\/([^/]+)\/?$/);
-    if (!m) return;
-    const slug = decodeURIComponent(m[1]);
+    const slug = slugFromPath(location.pathname || "");
+    if (!slug) return;
     const isCustom = !!(state.custom_courses || []).find(c => c.slug === slug);
     const hasCourseOv = !!(state.courses[slug] && Object.keys(state.courses[slug]).length);
     const ov = mergedCourseFields(state, slug);
@@ -557,8 +649,12 @@
     setText(saveEl, label);
   }
 
-  function run() {
-    const state = load();
+  async function run() {
+    const [published, local] = await Promise.all([
+      loadPublished(),
+      Promise.resolve(loadLocal()),
+    ]);
+    const state = mergeState(published, local);
     if (!state) return;
     const onLanding = !!document.querySelector("#courses .cg");
     if (onLanding) {
@@ -570,12 +666,14 @@
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", run, { once: true });
+    document.addEventListener("DOMContentLoaded", () => {
+      run().catch(() => {});
+    }, { once: true });
   } else {
-    run();
+    run().catch(() => {});
   }
 
   window.addEventListener("storage", e => {
-    if (e.key === STORAGE_KEY) run();
+    if (e.key === STORAGE_KEY) run().catch(() => {});
   });
 })();

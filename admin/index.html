@@ -72,14 +72,15 @@
     Nexperts <span class="ad-logo-em">Admin</span>
   </a>
   <div class="ad-nav-mid">
-    <span class="ad-pill"><span class="ad-live"></span>Live preview synced</span>
+    <span class="ad-pill"><span class="ad-live"></span>Browser preview · use Publish for live site</span>
     <span class="ad-storage" id="adStorageStatus">Loading…</span>
   </div>
   <div class="ad-nav-right">
-    <button class="ad-btn ad-btn-ghost" id="adBtnExport" title="Download current overrides as JSON">⬇ Export</button>
+    <button class="ad-btn ad-btn-primary" id="adBtnPublish" title="Push saved edits to the live website for all visitors">🚀 Publish live</button>
+    <button class="ad-btn ad-btn-ghost" id="adBtnExport" title="Download overrides JSON (backup or commit to data/course-overrides.json)">⬇ Export</button>
     <button class="ad-btn ad-btn-ghost" id="adBtnImport" title="Load overrides from a JSON file">⬆ Import</button>
     <button class="ad-btn ad-btn-warn" id="adBtnReset" title="Restore baseline from admin-data.json">↺ Reset all</button>
-    <button class="ad-btn ad-btn-primary" id="adBtnSave">💾 Save changes</button>
+    <button class="ad-btn ad-btn-ghost" id="adBtnSave">💾 Save draft</button>
     <a class="ad-btn ad-btn-link" href="/" target="_blank" rel="noopener">↗ View landing</a>
     <button class="ad-btn ad-btn-ghost" id="adBtnLogout" title="End session">⎋ Logout</button>
   </div>
@@ -89,7 +90,7 @@
   <section class="ad-hero">
     <div class="ad-eyebrow">Course catalog</div>
     <h1>Manage <em>course details &amp; ordering.</em></h1>
-    <p class="ad-sub">Edit course names, descriptions, duration, next intake, pricing and full curriculum HTML on published detail pages. Add new catalog cards to any vendor block or create a new vendor. Drag cards by the handle to reorder within a brand. Nothing is sent to a server; edits live in your browser until you reset.</p>
+    <p class="ad-sub">Edit course names, descriptions, duration, next intake, pricing and curriculum on detail pages. <strong>Save draft</strong> stores edits in this browser for preview. Click <strong>Publish live</strong> so every visitor sees changes on the course pages (requires Netlify). Export JSON to commit <code>data/course-overrides.json</code> as a backup.</p>
     <div class="ad-quick">
       <span class="ad-quick-i"><b id="kpiBrands">0</b><span>Brands</span></span>
       <span class="ad-quick-i"><b id="kpiCourses">0</b><span>Courses</span></span>
