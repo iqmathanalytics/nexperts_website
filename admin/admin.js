@@ -20,7 +20,7 @@ const SESSION_KEY = "nexperts_admin_session_v1";
 const DATA_URL = "/admin/admin-data.json";
 
 const ADMIN_USER = "admin";
-const ADMIN_PASS = "admin123";
+const ADMIN_PASS = "123";
 const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
 
 const FIELDS_CATALOG = ["name", "description"];
@@ -908,11 +908,17 @@ async function verifyPublishCredentials(user, pass) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Basic " + btoa(user + ":" + pass),
+      Authorization: "Basic " + btoa(String(user) + ":" + String(pass)),
     },
     body: JSON.stringify({ _verify: true }),
   });
-  return res.ok;
+  if (res.ok) return true;
+  if (res.status === 401) {
+    console.warn(
+      "admin: login rejected (401). Cloudflare ADMIN_USER / ADMIN_PASS must match what you type here (Production env, then redeploy)."
+    );
+  }
+  return false;
 }
 
 async function publishLive() {

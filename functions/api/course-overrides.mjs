@@ -12,8 +12,21 @@ function applyCfEnv(env) {
     typeof globalThis.process.env === "object"
       ? { ...globalThis.process.env }
       : {};
+  const vars = {};
+  if (env && typeof env === "object") {
+    for (const [k, v] of Object.entries(env)) {
+      if (
+        v != null &&
+        (typeof v === "string" ||
+          typeof v === "number" ||
+          typeof v === "boolean")
+      ) {
+        vars[k] = typeof v === "string" ? v : String(v);
+      }
+    }
+  }
   globalThis.process = globalThis.process || {};
-  globalThis.process.env = { ...prev, ...env };
+  globalThis.process.env = { ...prev, ...vars };
 }
 
 function headersToObject(headers) {
@@ -54,7 +67,7 @@ async function handleRequest(context) {
     headers: headersToObject(request.headers),
     body,
   };
-  const result = await handler(event, kvStorage(env));
+  const result = await handler(event, kvStorage(env), env);
   return new Response(result.body ?? "", {
     status: result.statusCode,
     headers: result.headers,

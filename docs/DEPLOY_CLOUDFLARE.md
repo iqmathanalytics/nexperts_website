@@ -37,10 +37,10 @@ This site is static HTML at the repository root, with a **Pages Function** at `/
 | `NEXPERTS_PUBLIC_SITE_URL` | Optional; reserved for other server logic (enquiry **email buttons** always use `https://www.nexpertsacademy.com` unless overridden below) |
 | `NEXPERTS_EMAIL_SITE_URL` | Optional; override base URL for **all public links inside Brevo emails** (defaults to `https://www.nexpertsacademy.com` so preview/Netlify hosts never appear in student or lead mail) |
 | `NEXPERTS_LEADS_SHEET_URL` | Optional; sheet URL shown in internal emails |
-| `ADMIN_USER` | **Same username** you use to sign in at `/admin/` (Publish live checks this) |
-| `ADMIN_PASS` | **Same password** you use to sign in at `/admin/` (encrypted) |
+| `ADMIN_USER` | **Same username** you use to sign in at `/admin/` (e.g. `admin`) — set for **Production** (and Preview if you use preview URLs) |
+| `ADMIN_PASS` | **Same password** you use to sign in at `/admin/` (e.g. `123`) — mark **Encrypted** |
 
-Mark secrets **Encrypted** in the dashboard.
+Mark secrets **Encrypted** in the dashboard. After changing these values, **redeploy** so Functions see the new credentials. If they are missing, the API falls back to `admin` / `123`.
 
 ### KV for admin course publish (required for **Publish live**)
 
