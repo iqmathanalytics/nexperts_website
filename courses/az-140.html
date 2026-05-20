@@ -15,6 +15,12 @@
 </script>
 <!-- /nexperts-ga4:v1 -->
 
+
+
+
+
+
+
 <title>AZ-140: Azure Virtual Desktop — Microsoft | Nexperts Academy</title>
 <!-- nexperts-seo-meta:v1 -->
 <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
@@ -366,6 +372,10 @@ footer{padding:36px 20px 24px}
 </style>
 
   <link rel="stylesheet" href="../css/site-nav-mobile.css">
+<link rel="stylesheet" href="../css/site-nav.css">
+<link rel="stylesheet" href="../css/nav-addons.css">
+<script src="../js/nav-highlight.js" defer></script>
+<script src="../js/nav-addons.js" defer></script>
 </head>
 <body>
 
@@ -388,7 +398,7 @@ footer{padding:36px 20px 24px}
     <li><a href="/about">About</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-ai-wrap"><span class="nav-ai-mobile-hint"><span class="nav-ai-mobile-up">&uarr;</span><span class="nav-ai-mobile-text">Click here</span></span><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
+    <div class="nav-ai-wrap"><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
     <a href="/contact-us?course=az-140&title=AZ-140%3A%20Azure%20Virtual%20Desktop#enquire" class="nav-enroll">Enquire Now</a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
@@ -1039,68 +1049,6 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 // Init — show overview, hide pass band
 document.querySelector('.pass-band').style.display = 'none';
 
-function setupNavHighlight(){
-  const navLinks=document.querySelector('.nav-links');
-  if(!navLinks) return;
-  const links=[...navLinks.querySelectorAll('a')];
-  const indicator=navLinks.querySelector('.nav-highlight');
-  if(!indicator||!links.length) return;
-  let activeLink=null;
-  let hoverLink=null;
-  let rafId=0;
-  let pendingMove=null;
-
-  const moveTo=(link,animate=true)=>{
-    if(!link||!indicator) return;
-    const navRect=navLinks.getBoundingClientRect();
-    const linkRect=link.getBoundingClientRect();
-    if(!animate){indicator.style.transition='none';}
-    indicator.style.left=(linkRect.left-navRect.left)+'px';
-    indicator.style.width=linkRect.width+'px';
-    indicator.style.opacity='1';
-    if(!animate){requestAnimationFrame(()=>indicator.style.transition='');}
-  };
-
-  const queueMove=(link,animate=true)=>{
-    pendingMove={link,animate};
-    if(rafId) return;
-    rafId=requestAnimationFrame(()=>{
-      rafId=0;
-      if(pendingMove) moveTo(pendingMove.link,pendingMove.animate);
-      pendingMove=null;
-    });
-  };
-
-  const setActive=(link,animate=true)=>{
-    if(!link) return;
-    if(activeLink===link){
-      if(!hoverLink) queueMove(link,animate);
-      return;
-    }
-    if(activeLink) activeLink.classList.remove('active');
-    activeLink=link;
-    activeLink.classList.add('active');
-    if(!hoverLink) queueMove(activeLink,animate);
-  };
-
-  setActive(links.find(a=>(a.getAttribute('href')||'').includes('#courses'))||links[0],false);
-
-  links.forEach(link=>{
-    link.addEventListener('mouseenter',()=>{hoverLink=link;queueMove(link,true);});
-    link.addEventListener('focus',()=>{hoverLink=link;queueMove(link,true);});
-    link.addEventListener('click',()=>setActive(link));
-  });
-
-  navLinks.addEventListener('mouseleave',()=>{
-    hoverLink=null;
-    if(activeLink) queueMove(activeLink,true);
-  });
-
-  window.addEventListener('resize',()=>{
-    if(activeLink) queueMove(activeLink,false);
-  });
-}
-setupNavHighlight();
 </script>
 
 <div id="nx-copy-modal" hidden aria-hidden="true">

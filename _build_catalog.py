@@ -137,6 +137,13 @@ P1 = {
     "Salesforce Admin & Automation": "salesforce-admin",
     "ServiceNow Administration Fundamentals": "servicenow-admin",
     "ServiceNow Platform Implementation": "servicenow-platform",
+    # Legacy Wix bootcamps & skills (detail under /courses/{slug})
+    "AI & Machine Learning Bootcamp": "ai-ml-bootcamp",
+    "Cyber Security Bootcamp": "cyber-security-bootcamp",
+    "Android Development": "android-development",
+    "Django Web Development": "django",
+    "iOS Development": "ios-development",
+    "Netflix Data Analysis Workshop": "netflix-data-analysis",
 }
 
 # -----------------------------------------------------------------------------
@@ -306,6 +313,12 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","Salesforce Admin & Automation","Lightning admin, security model, Flow automation and release hygiene on Salesforce.","Associate\u2192Advanced",4.8,96, 4980),
     ("skill","skill","Skill-Based","Skills","ServiceNow Administration Fundamentals","Core Now Platform admin \u2014 users, ACLs, workflows and safe instance operations.","Fundamentals",4.8,84, 4360),
     ("skill","skill","Skill-Based","Skills","ServiceNow Platform Implementation","Lead greenfield programmes \u2014 CMDB, integrations and steering-ready artefacts.","Professional",4.7,58, 2140),
+    ("skill","skill","Skill-Based","Skills","AI & Machine Learning Bootcamp","Python, scikit-learn, model evaluation and capstone \u2014 MY-context ML literacy in five days.","Intermediate",4.8,118,6420),
+    ("skill","skill","Skill-Based","Skills","Cyber Security Bootcamp","Blue-team, ethical hacking labs and IR tabletop \u2014 security champions for Malaysian enterprises.","Foundation\u2192Intermediate",4.9,132,7180),
+    ("skill","skill","Skill-Based","Skills","Android Development","Kotlin, Jetpack Compose, MVVM and Play Store readiness with portfolio coaching.","Beginner\u2192Intermediate",4.7,86, 4280),
+    ("skill","skill","Skill-Based","Skills","Django Web Development","Models, DRF APIs, auth and deploy \u2014 production-shaped Python web apps.","Intermediate",4.8,82, 3840),
+    ("skill","skill","Skill-Based","Skills","iOS Development","Swift, SwiftUI, TestFlight and MVVM \u2014 ship an iPhone portfolio app.","Beginner\u2192Intermediate",4.7,74, 3620),
+    ("skill","skill","Skill-Based","Workshop","Netflix Data Analysis Workshop","pandas + visualization storytelling on a streaming dataset \u2014 two-day workshop.","Beginner+",4.9,62, 2840),
 ]
 
 

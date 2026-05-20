@@ -81,6 +81,8 @@ Canonical public course URLs use **`/courses/{slug}`** (pretty path). The **`_re
 
 After deploy, confirm the build log shows **no** “Skipping remaining … lines” and spot-check sample legacy URLs.
 
+**Custom 404:** In the Pages project → **Settings** → set the **404 page** to `/404.html`. Do **not** use `/* /404.html 404` in `_redirects` — Cloudflare Pages only allows status codes `200`, `301`, `302`, `303`, `307`, and `308` in that file (Netlify allows `404`). An invalid catch-all rule can cause the deploy log to warn and may affect how subsequent rules are applied.
+
 ## 5. Enquiry endpoint (Brevo)
 
 - **Cloudflare Pages** (including custom domains): the browser uses **`/api/enquiry-brevo`** by default (see `js/enquiry-submit.js`).

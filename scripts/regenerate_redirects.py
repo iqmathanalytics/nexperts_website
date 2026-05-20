@@ -103,6 +103,22 @@ LEGACY_REQUESTED_MAP: dict[str, str] = {
     "/salesforce-admin-and-automation": "/courses/salesforce-admin",
     "/servicenow-administration": "/courses/servicenow-admin",
     "/servicenow-platform": "/courses/servicenow-platform",
+    "/sql": "/courses/sql-for-data-professionals",
+    "/enarsi": "/courses/ccnp-enterprise",
+    "/ccnp-enarsi-sdwan": "/courses/ccnp-enterprise",
+    "/microsoft-excel-2019-basic": "/courses/excel-basic",
+    "/microsoft-excel-2019-advanced": "/courses/excel-advanced-analytics",
+    "/microsoft-excel-2019-intermediate": "/courses/excel-advanced-analytics",
+    "/javascript-front-end": "/courses/full-stack-web-development",
+    "/machine-learning-with-python": "/courses/dp-100",
+    "/ethical-hacking-workshop": "/ceh",
+    "/power-bi-workshop": "/courses/pl-300",
+    "/ai-ml-bootcamp": "/courses/ai-ml-bootcamp",
+    "/cyber-security-bootcamp": "/courses/cyber-security-bootcamp",
+    "/android-development": "/courses/android-development",
+    "/django": "/courses/django",
+    "/ios-development": "/courses/ios-development",
+    "/netflix-data-analysis": "/courses/netflix-data-analysis",
 }
 
 
@@ -284,8 +300,8 @@ def main() -> None:
             "/course /#courses 301",
             "/course/ /#courses 301",
             "",
-            "# Explicit 404 for unknown paths (no homepage fallback):",
-            "/* /404.html 404",
+            "# Unknown paths: set Custom 404 document to /404.html in Cloudflare Pages (Dashboard).",
+            "# Cloudflare Pages does not support status 404 in _redirects (unlike Netlify).",
         ]
     )
 

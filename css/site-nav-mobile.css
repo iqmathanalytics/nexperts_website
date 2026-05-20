@@ -1,13 +1,13 @@
 /**
- * Mobile & tablet only (max-width: 1024px).
- * Desktop (min-width: 1025px) is unchanged: menu button and backdrop hidden.
+ * Drawer nav: tablets/phones (max-width 1024px) at normal zoom.
+ * Desktop at 100% keeps the full bar; 125%+ zoom uses .site-nav-drawer-force (JS).
  */
 
 @media (min-width: 1025px) {
-  nav.site-nav .nav-menu-btn {
+  html:not(.site-nav-drawer-force) nav.site-nav .nav-menu-btn {
     display: none !important;
   }
-  .nav-drawer-backdrop {
+  html:not(.site-nav-drawer-force) .nav-drawer-backdrop {
     display: none !important;
     pointer-events: none !important;
   }
@@ -183,6 +183,10 @@
     border-bottom: none;
   }
 
+  nav.site-nav .nav-links li.nav-addons-wrap {
+    border-bottom: 1px solid rgba(215, 230, 251, 0.9);
+  }
+
   nav.site-nav .nav-links a {
     display: block;
     padding: 14px 18px;
@@ -266,6 +270,143 @@
 
   .hero-meta {
     max-width: 100%;
+  }
+}
+
+/* Desktop at 125%+ browser zoom only (class set by site-nav-mobile.js) */
+@media (min-width: 1025px) {
+  html.site-nav-drawer-force nav.site-nav .nav-menu-btn {
+    display: flex !important;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    margin-left: 2px;
+    padding: 0;
+    border: 1px solid rgba(191, 213, 242, 0.95);
+    background: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+  }
+
+  html.site-nav-drawer-force nav.site-nav.site-nav-open .nav-menu-btn .nav-menu-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  html.site-nav-drawer-force nav.site-nav.site-nav-open .nav-menu-btn .nav-menu-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  html.site-nav-drawer-force nav.site-nav.site-nav-open .nav-menu-btn .nav-menu-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  html.site-nav-drawer-force .nav-drawer-backdrop {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    top: 62px;
+    z-index: 215;
+    background: rgba(15, 23, 42, 0.38);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  html.site-nav-drawer-force nav.site-nav.site-nav-open + .nav-drawer-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  html.site-nav-drawer-force body.site-nav-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-links .nav-highlight {
+    display: none !important;
+  }
+
+  html.site-nav-drawer-force nav.site-nav {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    justify-content: flex-start;
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-logo {
+    flex-shrink: 0;
+    margin-right: auto;
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-logo img {
+    height: 32px;
+    max-width: min(150px, 44vw);
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-right {
+    display: flex !important;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-links {
+    position: fixed;
+    top: 62px;
+    right: max(12px, env(safe-area-inset-right));
+    left: auto;
+    width: min(360px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    flex: none !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px 0;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(147, 197, 253, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+    z-index: 230;
+    max-height: min(75vh, 520px);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.98);
+    transform-origin: top right;
+    pointer-events: none;
+  }
+
+  html.site-nav-drawer-force nav.site-nav.site-nav-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-links li {
+    width: 100%;
+    border-bottom: 1px solid rgba(215, 230, 251, 0.9);
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-links a {
+    display: block;
+    padding: 14px 18px;
+    border-radius: 0;
+    font-size: 0.9rem;
+  }
+
+  html.site-nav-drawer-force nav.site-nav .nav-links a::after {
+    display: none !important;
   }
 }
 

@@ -9,7 +9,12 @@ import re
 from urllib.parse import quote
 
 ROOT = Path(__file__).parent
-TEMPLATE_PATH = ROOT / "courses" / "ceh-v13-ai.html"
+_TEMPLATE_CANDIDATES = (
+    ROOT / "courses" / "ceh-v13-ai.html",
+    ROOT / "ceh.html",
+    ROOT / "courses" / "dp-100.html",
+)
+TEMPLATE_PATH = next((p for p in _TEMPLATE_CANDIDATES if p.is_file()), _TEMPLATE_CANDIDATES[-1])
 TEMPLATE = TEMPLATE_PATH.read_text(encoding="utf-8")
 
 

@@ -1,0 +1,330 @@
+/* Explore dropdown (desktop hover + keyboard; mobile in drawer) */
+
+.nav-addons-wrap {
+  position: relative;
+  z-index: 12;
+}
+
+/* Desktop only: invisible bridge so the pointer can reach the panel */
+@media (min-width: 1025px) {
+  .nav-addons-wrap::after {
+    content: "";
+    position: absolute;
+    left: -8px;
+    right: -8px;
+    top: 100%;
+    height: 18px;
+    z-index: 48;
+    pointer-events: auto;
+  }
+}
+
+/* Match other nav items — no separate “button” chrome */
+.nav-addons-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink2, #2a3f5f);
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  line-height: 1.2;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.nav-addons-trigger::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: 2px;
+  background: var(--blue, #1d4ed8);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.28s ease;
+}
+
+.nav-addons-trigger:hover,
+.nav-addons-wrap.is-open .nav-addons-trigger {
+  color: var(--blue, #1d4ed8);
+  transform: translateY(-1px);
+}
+
+.nav-addons-trigger:hover::after,
+.nav-addons-wrap.is-open .nav-addons-trigger::after,
+.nav-addons-trigger.active::after {
+  transform: scaleX(1);
+}
+
+.nav-addons-trigger.active {
+  color: var(--blue, #1d4ed8);
+}
+
+.nav-addons-caret {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+
+.nav-addons-wrap.is-open .nav-addons-caret {
+  transform: rotate(180deg);
+}
+
+.nav-addons-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: min(92vw, 520px);
+  padding: 16px;
+  background: #fff;
+  border: 1px solid var(--line, #d7e6fb);
+  border-radius: 14px;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.nav-addons-wrap.is-open .nav-addons-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (min-width: 1025px) {
+  .nav-addons-wrap:hover .nav-addons-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+.nav-addons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 20px;
+}
+
+.nav-addons-col-title {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink4, #7e97b8);
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line, #d7e6fb);
+}
+
+.nav-addons-panel a {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink2, #2a3f5f);
+  text-decoration: none;
+  padding: 6px 4px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav-addons-panel a::after {
+  display: none !important;
+}
+
+.nav-addons-panel a:hover,
+.nav-addons-panel a.active {
+  color: var(--blue, #1d4ed8);
+  background: rgba(219, 234, 254, 0.45);
+  transform: none;
+}
+
+/* Mobile / tablet drawer accordion (desktop rules above are unchanged) */
+@media (max-width: 1024px) {
+  .nav-addons-wrap {
+    position: relative;
+    z-index: auto;
+  }
+
+  .nav-addons-panel {
+    position: static;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 10px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: rgba(248, 251, 255, 0.98);
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    display: none;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .nav-addons-wrap.is-open .nav-addons-panel {
+    display: block;
+  }
+
+  .nav-addons-wrap:hover .nav-addons-panel {
+    display: none;
+  }
+
+  .nav-addons-wrap.is-open:hover .nav-addons-panel,
+  .nav-addons-wrap.is-open .nav-addons-panel {
+    display: block;
+  }
+
+  .nav-addons-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--ink2, #2a3f5f);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    line-height: 1.35;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+    transform: none !important;
+  }
+
+  .nav-addons-trigger::after {
+    display: none !important;
+  }
+
+  .nav-addons-trigger:hover,
+  .nav-addons-wrap.is-open .nav-addons-trigger {
+    color: var(--blue, #1d4ed8);
+    background: rgba(239, 246, 255, 0.95);
+    transform: none !important;
+  }
+
+  .nav-addons-caret {
+    flex-shrink: 0;
+    margin-left: 10px;
+    font-size: 0.72rem;
+    opacity: 0.85;
+  }
+
+  .nav-addons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 10px 0;
+  }
+
+  .nav-addons-col {
+    padding: 6px 0 2px;
+  }
+
+  .nav-addons-col + .nav-addons-col {
+    border-top: 1px solid rgba(215, 230, 251, 0.85);
+    margin-top: 6px;
+    padding-top: 10px;
+  }
+
+  .nav-addons-col-title {
+    padding: 0 8px 6px;
+    margin: 0 0 2px;
+    font-size: 0.62rem;
+  }
+
+  .nav-addons-panel a {
+    display: block;
+    padding: 11px 10px 11px 12px;
+    margin: 2px 0;
+    font-size: 0.84rem;
+    border-radius: 8px;
+    transform: none !important;
+  }
+
+  .nav-addons-panel a:hover,
+  .nav-addons-panel a.active {
+    background: rgba(219, 234, 254, 0.55);
+    color: var(--blue, #1d4ed8);
+  }
+}
+
+@media (max-width: 1024px) and (max-height: 700px) {
+  .nav-addons-wrap.is-open .nav-addons-panel {
+    max-height: 42vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Explore accordion when drawer is forced at 125%+ zoom on desktop */
+@media (min-width: 1025px) {
+  html.site-nav-drawer-force .nav-addons-wrap::after {
+    display: none;
+  }
+
+  html.site-nav-drawer-force .nav-addons-panel {
+    position: static;
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 0 0 10px;
+    border: none;
+    box-shadow: none;
+    background: rgba(248, 251, 255, 0.98);
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  html.site-nav-drawer-force .nav-addons-wrap.is-open .nav-addons-panel {
+    display: block;
+  }
+
+  html.site-nav-drawer-force .nav-addons-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+    transform: none !important;
+  }
+
+  html.site-nav-drawer-force .nav-addons-trigger::after {
+    display: none !important;
+  }
+
+  html.site-nav-drawer-force .nav-addons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 10px 0;
+  }
+}

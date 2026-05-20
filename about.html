@@ -15,6 +15,12 @@
 </script>
 <!-- /nexperts-ga4:v1 -->
 
+
+
+
+
+
+
 <title>About Us | Nexperts Academy Sdn Bhd</title>
 <!-- nexperts-seo-meta:v1 -->
 <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
@@ -356,6 +362,10 @@ footer,.cta-sec{padding:56px 20px 32px}
 </style>
 
   <link rel="stylesheet" href="css/site-nav-mobile.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<link rel="stylesheet" href="css/nav-addons.css">
+<script src="js/nav-highlight.js" defer></script>
+<script src="js/nav-addons.js" defer></script>
 </head>
 <body>
 
@@ -373,12 +383,40 @@ footer,.cta-sec{padding:56px 20px 32px}
     <li><a href="/#verify">Verify</a></li>
     <li><a href="/#paths">Career Paths</a></li>
     <li><a href="/#clients">Clients</a></li>
-    <li><a href="Nexperts beyond.html">Beyond</a></li>
+    <li><a href="/Nexperts beyond.html">Beyond</a></li>
+    <li class="nav-addons-wrap">
+      <button type="button" class="nav-addons-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navAddonsPanel">
+        Explore <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel" id="navAddonsPanel" role="menu" hidden>
+        <div class="nav-addons-grid">
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Workshops &amp; Events</p>
+        <a href="/workshops" role="menuitem">Workshops</a>
+        <a href="/upcoming-events" role="menuitem">Upcoming Events</a>
+        <a href="/past-events" role="menuitem">Past Events</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Blog</p>
+        <a href="/blog" role="menuitem">Blog Home</a>
+        <a href="/post/unlocking-the-power-of-data-science-applications-and-challenges" role="menuitem">Data Science Insights</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Community</p>
+        <a href="/catalyst-for-change" role="menuitem">Catalyst for Change</a>
+        <a href="/empowering-community-throught-technology" role="menuitem">Empowering Community</a>
+        <a href="/chinese-new-year" role="menuitem">Chinese New Year Event</a>
+        <a href="/tan-boon-heong-event" role="menuitem">Tan Boon Heong Event</a>
+        <a href="/nexpert-x-universiti-teknologi-mara" role="menuitem">Nexperts × UiTM</a>
+      </div>
+        </div>
+      </div>
+    </li>
     <li><a href="/contact-us">Contact</a></li>
     <li><a href="/about" class="active">About</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-ai-wrap"><span class="nav-ai-mobile-hint"><span class="nav-ai-mobile-up">&uarr;</span><span class="nav-ai-mobile-text">Click here</span></span><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
+    <div class="nav-ai-wrap"><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
     <a href="/contact-us#enquire" class="nav-enroll">Enquire Now</a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
@@ -876,68 +914,6 @@ const nio=new IntersectionObserver(entries=>{
 },{threshold:.4});
 document.querySelectorAll('.ncard,.cstat').forEach(el=>nio.observe(el));
 
-function setupNavHighlight(){
-  const navLinks=document.querySelector('.nav-links');
-  if(!navLinks) return;
-  const links=[...navLinks.querySelectorAll('a')];
-  const indicator=navLinks.querySelector('.nav-highlight');
-  if(!indicator||!links.length) return;
-  let activeLink=null;
-  let hoverLink=null;
-  let rafId=0;
-  let pendingMove=null;
-
-  const moveTo=(link,animate=true)=>{
-    if(!link||!indicator) return;
-    const navRect=navLinks.getBoundingClientRect();
-    const linkRect=link.getBoundingClientRect();
-    if(!animate){indicator.style.transition='none';}
-    indicator.style.left=(linkRect.left-navRect.left)+'px';
-    indicator.style.width=linkRect.width+'px';
-    indicator.style.opacity='1';
-    if(!animate){requestAnimationFrame(()=>indicator.style.transition='');}
-  };
-
-  const queueMove=(link,animate=true)=>{
-    pendingMove={link,animate};
-    if(rafId) return;
-    rafId=requestAnimationFrame(()=>{
-      rafId=0;
-      if(pendingMove) moveTo(pendingMove.link,pendingMove.animate);
-      pendingMove=null;
-    });
-  };
-
-  const setActive=(link,animate=true)=>{
-    if(!link) return;
-    if(activeLink===link){
-      if(!hoverLink) queueMove(link,animate);
-      return;
-    }
-    if(activeLink) activeLink.classList.remove('active');
-    activeLink=link;
-    activeLink.classList.add('active');
-    if(!hoverLink) queueMove(activeLink,animate);
-  };
-
-  setActive(links.find(a=>(a.getAttribute('href')||'')==='/about')||links[0],false);
-
-  links.forEach(link=>{
-    link.addEventListener('mouseenter',()=>{hoverLink=link;queueMove(link,true);});
-    link.addEventListener('focus',()=>{hoverLink=link;queueMove(link,true);});
-    link.addEventListener('click',()=>setActive(link));
-  });
-
-  navLinks.addEventListener('mouseleave',()=>{
-    hoverLink=null;
-    if(activeLink) queueMove(activeLink,true);
-  });
-
-  window.addEventListener('resize',()=>{
-    if(activeLink) queueMove(activeLink,false);
-  });
-}
-setupNavHighlight();
 </script>
 
   <script src="js/enquiry-config.js" defer></script>

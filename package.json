@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "netlify dev",
     "dev:static": "python scripts/local_dev_server.py",
-    "build": "python scripts/build_contact_course_select.py && python scripts/publish_admin_overrides.py && python scripts/inject_ga4.py",
+    "build": "python scripts/build_contact_course_select.py && python scripts/publish_admin_overrides.py && python scripts/build_legacy_seo_pages.py && python _build_catalog.py && python _build_admin_data.py && python scripts/inject_addons_nav.py && python scripts/inject_ga4.py",
     "build:catalog-dropdowns": "python scripts/build_contact_course_select.py",
     "publish:overrides": "python scripts/publish_admin_overrides.py"
   },

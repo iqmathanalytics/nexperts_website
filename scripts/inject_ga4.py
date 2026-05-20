@@ -111,21 +111,24 @@ def main() -> int:
         else:
             fail += 1
 
-    for fname in (
-        "index.html",
-        "about.html",
-        "contact.html",
-        "privacy-policy.html",
-        "Nexperts beyond.html",
-    ):
-        path = ROOT / fname
-        if not path.is_file():
+    root_skip = frozenset({"404.html"})
+    for path in sorted(ROOT.glob("*.html")):
+        if path.name in root_skip:
             continue
         if process_file(path, mid or None):
             ok += 1
-            print(f"OK {fname}")
+            print(f"OK {path.name}")
         else:
             fail += 1
+
+    post_dir = ROOT / "post"
+    if post_dir.is_dir():
+        for path in sorted(post_dir.glob("*.html")):
+            if process_file(path, mid or None):
+                ok += 1
+                print(f"OK post/{path.name}")
+            else:
+                fail += 1
 
     if not mid:
         print(

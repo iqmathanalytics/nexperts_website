@@ -13,6 +13,12 @@
 </script>
 <!-- /nexperts-ga4:v1 -->
 
+
+
+
+
+
+
 <title>Contact Us | Nexperts Academy Sdn Bhd</title>
 <!-- nexperts-seo-meta:v1 -->
 <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
@@ -36,28 +42,6 @@
 :root{--bg:#fff;--bg2:#f5f8ff;--bg3:#e8efff;--ink:#0d1117;--ink2:#3d4451;--ink3:#7a8194;--ink4:#b0b6c3;--blue:#1d4ed8;--bluL:#dbeafe;--bluM:#eff6ff;--maroon:#7f1d1d;--marM:#991b1b;--marL:#fee2e2;--marP:#fff5f5;--line:#e5e7eb;--line2:#d1d5db;--green:#16a34a;--greenL:#dcfce7;--amber:#d97706;--amberL:#fef3c7;--brand-hover:#1e40af}
 html{scroll-behavior:smooth}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px;line-height:1.6}
-
-/* ── NAV (matches site) ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid rgba(147,197,253,.32);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 12px 28px -22px rgba(15,42,135,.18)}
-.nav-logo{font-weight:700;font-size:1rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:6px}
-.nav-logo img{height:30px;width:auto;display:block}
-.ndot{width:9px;height:9px;border-radius:50%;background:var(--blue);animation:pdot 2s ease infinite;box-shadow:0 0 0 0 rgba(29,78,216,.45)}
-@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(29,78,216,.42)}50%{box-shadow:0 0 0 6px rgba(29,78,216,0)}}
-.nav-logo span{color:var(--blue)}
-.nav-links{display:flex;align-items:center;gap:14px;list-style:none;position:relative;padding:4px;border-radius:12px;background:rgba(219,234,254,.22);border:1px solid rgba(147,197,253,.35)}
-.nav-links li{position:relative;z-index:2}
-.nav-links a{font-size:0.8rem;font-weight:600;color:var(--ink2);text-decoration:none;position:relative;padding:6px 10px;border-radius:8px;transition:color .25s ease,transform .25s ease}
-.nav-links a::after{content:'';position:absolute;bottom:2px;left:10px;width:calc(100% - 20px);height:2px;background:var(--blue);transform:scaleX(0);transform-origin:center;transition:transform .28s ease}
-.nav-links a:hover{color:var(--blue);transform:translateY(-1px)}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
-.nav-links a.active{color:var(--blue)}
-.nav-right{display:flex;align-items:center;gap:14px}
-.ldot{width:5px;height:5px;background:var(--marM);border-radius:50%;animation:blink 1.8s ease infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.nav-ai{font-size:.76rem;font-weight:700;color:#0f2f67;text-decoration:none;display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,rgba(219,234,254,.95),rgba(191,219,254,.9));border:1px solid rgba(59,130,246,.28);box-shadow:0 8px 20px rgba(37,99,235,.14);transition:transform .25s ease,box-shadow .25s ease,color .2s ease}
-.nav-ai:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 28px rgba(37,99,235,.24);color:var(--blue)}
-.nav-enroll{font-size:0.8rem;font-weight:700;color:#fff;background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 45%,#3b82f6 100%);padding:10px 20px;text-decoration:none;border-radius:11px;transition:all .25s ease;border:1px solid rgba(255,255,255,.36);box-shadow:0 12px 28px rgba(37,99,235,.28)}
-.nav-enroll:hover{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 52%,#60a5fa 100%);transform:translateY(-3px);box-shadow:0 18px 34px rgba(37,99,235,.36)}
 
 /* ── HERO ── */
 .hero{padding:128px 40px 84px;background:linear-gradient(180deg,#f4f9ff 0%,#eaf3ff 55%,#f4f9ff 100%);position:relative;overflow:hidden}
@@ -251,6 +235,10 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
 }
 </style>
   <link rel="stylesheet" href="css/site-nav-mobile.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<link rel="stylesheet" href="css/nav-addons.css">
+<script src="js/nav-highlight.js" defer></script>
+<script src="js/nav-addons.js" defer></script>
   <link rel="stylesheet" href="css/enquiry-phone.css">
   <link rel="stylesheet" href="css/enquiry-loading.css">
 </head>
@@ -260,19 +248,48 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
     <img src="/image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
   </a>
   <ul class="nav-links" id="sitePrimaryNav">
+    <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="/">Home</a></li>
     <li><a href="/#courses">Courses</a></li>
     <li><a href="/#roadmap">Roadmaps</a></li>
     <li><a href="/#verify">Verify</a></li>
     <li><a href="/#paths">Career Paths</a></li>
     <li><a href="/#clients">Clients</a></li>
-    <li><a href="Nexperts beyond.html">Beyond</a></li>
+    <li><a href="/Nexperts beyond.html">Beyond</a></li>
+    <li class="nav-addons-wrap">
+      <button type="button" class="nav-addons-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navAddonsPanel">
+        Explore <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel" id="navAddonsPanel" role="menu" hidden>
+        <div class="nav-addons-grid">
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Workshops &amp; Events</p>
+        <a href="/workshops" role="menuitem">Workshops</a>
+        <a href="/upcoming-events" role="menuitem">Upcoming Events</a>
+        <a href="/past-events" role="menuitem">Past Events</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Blog</p>
+        <a href="/blog" role="menuitem">Blog Home</a>
+        <a href="/post/unlocking-the-power-of-data-science-applications-and-challenges" role="menuitem">Data Science Insights</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Community</p>
+        <a href="/catalyst-for-change" role="menuitem">Catalyst for Change</a>
+        <a href="/empowering-community-throught-technology" role="menuitem">Empowering Community</a>
+        <a href="/chinese-new-year" role="menuitem">Chinese New Year Event</a>
+        <a href="/tan-boon-heong-event" role="menuitem">Tan Boon Heong Event</a>
+        <a href="/nexpert-x-universiti-teknologi-mara" role="menuitem">Nexperts × UiTM</a>
+      </div>
+        </div>
+      </div>
+    </li>
     <li><a href="/contact-us" class="active">Contact</a></li>
     <li><a href="/about">About</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-ai-wrap"><span class="nav-ai-mobile-hint"><span class="nav-ai-mobile-up">&uarr;</span><span class="nav-ai-mobile-text">Click here</span></span><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
-    <a href="#enquire" class="nav-enroll">Enquire Now</a>
+    <div class="nav-ai-wrap"><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
+    <a href="/contact-us#enquire" class="nav-enroll">Enquire Now</a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
@@ -593,6 +610,12 @@ footer::before{content:'';position:absolute;top:-180px;left:50%;transform:transl
                 <option data-curriculum="/courses/salesforce-admin">Salesforce Admin &amp; Automation</option>
                 <option data-curriculum="/courses/servicenow-admin">ServiceNow Administration Fundamentals</option>
                 <option data-curriculum="/courses/servicenow-platform">ServiceNow Platform Implementation</option>
+                <option data-curriculum="/courses/ai-ml-bootcamp">AI &amp; Machine Learning Bootcamp</option>
+                <option data-curriculum="/courses/cyber-security-bootcamp">Cyber Security Bootcamp</option>
+                <option data-curriculum="/courses/android-development">Android Development</option>
+                <option data-curriculum="/courses/django">Django Web Development</option>
+                <option data-curriculum="/courses/ios-development">iOS Development</option>
+                <option data-curriculum="/courses/netflix-data-analysis">Netflix Data Analysis Workshop</option>
               </optgroup>
               <option>Corporate / Group Training (multiple courses)</option>
               <option>Not sure — need advice</option>

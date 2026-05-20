@@ -65,6 +65,26 @@
 /sdwan /courses/sdwan 301
 /ecih /courses/ecih 301
 
+
+# Legacy Wix URLs → canonical courses (301)
+/ccnp-enarsi-sdwan /courses/ccnp-enterprise 301
+/enarsi /courses/ccnp-enterprise 301
+/ethical-hacking-workshop /ceh 301
+/javascript-front-end /courses/full-stack-web-development 301
+/machine-learning-with-python /courses/dp-100 301
+/microsoft-excel-2019-advanced /courses/excel-advanced-analytics 301
+/microsoft-excel-2019-basic /courses/excel-basic 301
+/microsoft-excel-2019-intermediate /courses/excel-advanced-analytics 301
+/power-bi-workshop /courses/pl-300 301
+/sql /courses/sql-for-data-professionals 301
+
+# Legacy Wix URLs → canonical courses (301)
+/ai-ml-bootcamp /courses/ai-ml-bootcamp 301
+/android-development /courses/android-development 301
+/cyber-security-bootcamp /courses/cyber-security-bootcamp 301
+/django /courses/django 301
+/ios-development /courses/ios-development 301
+/netflix-data-analysis /courses/netflix-data-analysis 301
 # Filename & legacy paths → pretty canonical URLs (301)
 /index.html / 301
 /about.html /about 301
@@ -77,8 +97,8 @@
 /course /#courses 301
 /course/ /#courses 301
 
-# Netlify Functions (keep before catch-all 404)
+# Netlify Functions
 /.netlify/functions/* /.netlify/functions/:splat 200
 
-# Explicit 404 for unknown paths (no homepage fallback):
-/* /404.html 404
+# Unknown paths: set Custom 404 document to /404.html in Cloudflare Pages (Dashboard).
+# Cloudflare Pages does not support status 404 in _redirects (unlike Netlify).

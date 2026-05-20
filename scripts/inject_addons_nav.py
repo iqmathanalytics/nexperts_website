@@ -1,0 +1,239 @@
+# -*- coding: utf-8 -*-
+"""Inject Add-ons nav dropdown and shared header on public HTML pages."""
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from site_nav import (  # noqa: E402
+    COURSE_NAV_ASSET_TAGS,
+    NAV_ASSET_TAGS,
+    NAV_ASSET_TAGS_REL,
+    addons_dropdown_li,
+    render_site_nav,
+)
+
+NAV_RE = re.compile(
+    r"<nav class=\"site-nav\">.*?</nav>\s*<div class=\"nav-drawer-backdrop\"[^>]*>",
+    re.DOTALL | re.IGNORECASE,
+)
+
+CONTACT_LI_RE = re.compile(
+    r"(\s*<li><a href=\"(?:\.\./)?contact-us\"[^>]*>Contact</a></li>)",
+    re.IGNORECASE,
+)
+
+STATIC_PAGES = [
+    "workshops.html",
+    "upcoming-events.html",
+    "past-events.html",
+    "blog.html",
+    "catalyst-for-change.html",
+    "empowering-community-throught-technology.html",
+    "chinese-new-year.html",
+    "tan-boon-heong-event.html",
+    "nexpert-x-universiti-teknologi-mara.html",
+    "post/unlocking-the-power-of-data-science-applications-and-challenges.html",
+]
+
+ROOT_PAGES_HOME = ["index.html"]
+ROOT_PAGES_INNER = [
+    "about.html",
+    "contact.html",
+    "privacy-policy.html",
+    "ceh.html",
+    "ccna.html",
+    "python-bootcamp.html",
+    "data-science-with-python.html",
+    "404.html",
+    "Nexperts beyond.html",
+]
+
+
+def path_from_file(rel: str) -> str:
+    if rel == "index.html":
+        return "/"
+    if rel == "contact.html":
+        return "/contact-us"
+    if rel == "Nexperts beyond.html":
+        return "/Nexperts beyond.html"
+    if rel.startswith("post/"):
+        return "/" + rel.replace(".html", "")
+    return "/" + rel.replace(".html", "")
+
+
+def ensure_nav_assets(html: str, *, course: bool = False) -> str:
+    tags = COURSE_NAV_ASSET_TAGS if course else NAV_ASSET_TAGS
+    if course:
+        html = html.replace('href="/css/nav-addons.css"', 'href="../css/nav-addons.css"')
+        html = html.replace('src="/js/nav-highlight.js"', 'src="../js/nav-highlight.js"')
+        html = html.replace('src="/js/nav-addons.js"', 'src="../js/nav-addons.js"')
+    if "nav-addons.css" in html:
+        if "site-nav.css" not in html:
+            if course:
+                ins = '<link rel="stylesheet" href="../css/site-nav.css">\n'
+                html = html.replace(
+                    '<link rel="stylesheet" href="../css/nav-addons.css">',
+                    ins + '<link rel="stylesheet" href="../css/nav-addons.css">',
+                    1,
+                )
+            elif 'href="/css/nav-addons.css"' in html:
+                ins = '<link rel="stylesheet" href="/css/site-nav.css">\n'
+                html = html.replace(
+                    '<link rel="stylesheet" href="/css/nav-addons.css">',
+                    ins + '<link rel="stylesheet" href="/css/nav-addons.css">',
+                    1,
+                )
+            elif 'href="css/nav-addons.css"' in html:
+                ins = '<link rel="stylesheet" href="css/site-nav.css">\n'
+                html = html.replace(
+                    '<link rel="stylesheet" href="css/nav-addons.css">',
+                    ins + '<link rel="stylesheet" href="css/nav-addons.css">',
+                    1,
+                )
+        if "nav-highlight.js" not in html:
+            if course:
+                ins = '<script src="../js/nav-highlight.js" defer></script>\n'
+                html = html.replace(
+                    '<script src="../js/nav-addons.js" defer></script>',
+                    ins + '<script src="../js/nav-addons.js" defer></script>',
+                    1,
+                )
+            elif 'src="/js/nav-addons.js"' in html:
+                ins = '<script src="/js/nav-highlight.js" defer></script>\n'
+                html = html.replace(
+                    '<script src="/js/nav-addons.js" defer></script>',
+                    ins + '<script src="/js/nav-addons.js" defer></script>',
+                    1,
+                )
+            elif 'src="js/nav-addons.js"' in html:
+                ins = '<script src="js/nav-highlight.js" defer></script>\n'
+                html = html.replace(
+                    '<script src="js/nav-addons.js" defer></script>',
+                    ins + '<script src="js/nav-addons.js" defer></script>',
+                    1,
+                )
+        return html
+    if course:
+        anchor = '<link rel="stylesheet" href="../css/site-nav-mobile.css">'
+        rep = anchor + "\n" + tags
+    else:
+        anchor = '<link rel="stylesheet" href="/css/site-nav-mobile.css">'
+        if anchor not in html:
+            anchor = '<link rel="stylesheet" href="css/site-nav-mobile.css">'
+            rep = anchor + "\n" + NAV_ASSET_TAGS_REL
+        else:
+            rep = anchor + "\n" + tags
+    if anchor in html:
+        return html.replace(anchor, rep, 1)
+    return html.replace("</head>", tags + "\n</head>", 1)
+
+
+def inject_addons_before_contact(html: str, current_path: str) -> str:
+    block = addons_dropdown_li(current_path)
+    if "nav-addons-wrap" in html:
+        return html
+    m = CONTACT_LI_RE.search(html)
+    if not m:
+        return html
+    return html[: m.start(1)] + "\n" + block + m.group(1) + html[m.end(1) :]
+
+
+def replace_full_nav(
+    html: str,
+    *,
+    variant: str,
+    current_path: str,
+    enroll_href: str,
+    enroll_onclick: str = "",
+    logo_prefix: str = "",
+) -> str:
+    nav = render_site_nav(
+        variant=variant,
+        current_path=current_path,
+        enroll_href=enroll_href,
+        enroll_onclick=enroll_onclick,
+        logo_prefix=logo_prefix,
+    )
+    if NAV_RE.search(html):
+        return NAV_RE.sub(nav, html, count=1)
+    return html
+
+
+def patch_file(path: Path, mode: str, current_path: str) -> bool:
+    html = path.read_text(encoding="utf-8")
+    orig = html
+    course = path.parts[-2] == "courses" if "courses" in path.parts else False
+
+    if mode == "home":
+        html = replace_full_nav(
+            html,
+            variant="home",
+            current_path=current_path,
+            enroll_href="#enquire-modal",
+            enroll_onclick="openEnquireModal(event)",
+        )
+    elif mode == "inner":
+        html = replace_full_nav(
+            html,
+            variant="inner",
+            current_path=current_path,
+            enroll_href="/contact-us#enquire",
+        )
+    elif mode == "course":
+        enroll_m = re.search(r'(<a href="[^"]*" class="nav-enroll")', html)
+        enroll_href = "/contact-us#enquire"
+        if enroll_m:
+            eh = re.search(r'href="([^"]+)" class="nav-enroll"', html)
+            if eh:
+                enroll_href = eh.group(1)
+        html = inject_addons_before_contact(html, current_path)
+    elif mode == "static":
+        html = replace_full_nav(
+            html,
+            variant="inner",
+            current_path=current_path,
+            enroll_href="/contact-us#enquire",
+        )
+
+    html = ensure_nav_assets(html, course=course)
+    if html != orig:
+        path.write_text(html, encoding="utf-8", newline="\n")
+        return True
+    return False
+
+
+def main() -> None:
+    changed = 0
+    for name in ROOT_PAGES_HOME:
+        p = ROOT / name
+        if p.is_file() and patch_file(p, "home", path_from_file(name)):
+            print(f"  nav home: {name}")
+            changed += 1
+
+    for name in ROOT_PAGES_INNER:
+        p = ROOT / name
+        if p.is_file() and patch_file(p, "inner", path_from_file(name)):
+            print(f"  nav inner: {name}")
+            changed += 1
+
+    for p in sorted((ROOT / "courses").glob("*.html")):
+        if patch_file(p, "course", f"/courses/{p.stem}"):
+            print(f"  nav course: courses/{p.name}")
+            changed += 1
+
+    for rel in STATIC_PAGES:
+        p = ROOT / rel
+        if p.is_file() and patch_file(p, "static", path_from_file(rel)):
+            print(f"  nav static: {rel}")
+            changed += 1
+
+    print(f"Done. Updated {changed} files.")
+
+
+if __name__ == "__main__":
+    main()

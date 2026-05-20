@@ -15,6 +15,12 @@
 </script>
 <!-- /nexperts-ga4:v1 -->
 
+
+
+
+
+
+
 <title>Nexperts Academy | IT Training in Malaysia</title>
 <!-- nexperts-seo-meta:v1 -->
 <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png">
@@ -876,24 +882,56 @@ body.em-open{overflow:hidden}
 </style>
 
   <link rel="stylesheet" href="css/site-nav-mobile.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<link rel="stylesheet" href="css/nav-addons.css">
+<script src="js/nav-highlight.js" defer></script>
+<script src="js/nav-addons.js" defer></script>
   <link rel="stylesheet" href="css/enquiry-phone.css">
   <link rel="stylesheet" href="css/enquiry-loading.css">
 </head>
 <body class="preload">
 
-<nav class="site-nav">
+<nav class="site-nav site-nav--home">
   <a href="/" class="nav-logo" aria-label="Nexperts Academy">
     <img src="/image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
   </a>
   <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
-    <li><a href="/">Home</a></li>
+    <li><a href="/" class="active">Home</a></li>
     <li><a href="#courses">Courses</a></li>
     <li><a href="#roadmap">Roadmaps</a></li>
     <li><a href="#verify">Verify</a></li>
     <li><a href="#paths">Career Paths</a></li>
     <li><a href="#clients">Clients</a></li>
     <li><a href="Nexperts beyond.html">Beyond</a></li>
+    <li class="nav-addons-wrap">
+      <button type="button" class="nav-addons-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navAddonsPanel">
+        Explore <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel" id="navAddonsPanel" role="menu" hidden>
+        <div class="nav-addons-grid">
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Workshops &amp; Events</p>
+        <a href="/workshops" role="menuitem">Workshops</a>
+        <a href="/upcoming-events" role="menuitem">Upcoming Events</a>
+        <a href="/past-events" role="menuitem">Past Events</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Blog</p>
+        <a href="/blog" role="menuitem">Blog Home</a>
+        <a href="/post/unlocking-the-power-of-data-science-applications-and-challenges" role="menuitem">Data Science Insights</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Community</p>
+        <a href="/catalyst-for-change" role="menuitem">Catalyst for Change</a>
+        <a href="/empowering-community-throught-technology" role="menuitem">Empowering Community</a>
+        <a href="/chinese-new-year" role="menuitem">Chinese New Year Event</a>
+        <a href="/tan-boon-heong-event" role="menuitem">Tan Boon Heong Event</a>
+        <a href="/nexpert-x-universiti-teknologi-mara" role="menuitem">Nexperts × UiTM</a>
+      </div>
+        </div>
+      </div>
+    </li>
     <li><a href="/contact-us">Contact</a></li>
     <li><a href="/about">About</a></li>
   </ul>
@@ -924,9 +962,8 @@ body.em-open{overflow:hidden}
   <div class="hero-shell">
     <div class="hero-copy">
       <div class="hero-inner">
-        <div class="hero-badge">CompTIA · EC-Council · AWS · Microsoft Authorized Partner</div>
-        <h1 class="hero-title">Your next cert starts with trainers who’ve <em>actually done the work.</em></h1>
-        <p class="hero-sub">120+ official IT certifications, small cohorts, and a 98% first-attempt pass rate — built for students and teams across Malaysia.</p>
+        <h1 class="hero-title">Best IT Certification Training in Malaysia for <em>Cloud, Cybersecurity &amp; Networking</em></h1>
+        <p class="hero-sub">Nexperts Academy provides professional IT certification courses in Malaysia including Cisco CCNA, CEH, AWS, Microsoft Azure, Power BI, Python, DevOps, Data Analytics, and Cybersecurity training with hands-on labs and expert-led coaching.</p>
         <div class="hero-actions">
           <a href="#courses" class="btn-primary">Explore courses →</a>
           <a href="#students-showcase" class="btn-ghost">See the experience</a>
@@ -1473,7 +1510,7 @@ body.em-open{overflow:hidden}
           <div class="bh-name">Skill-Based</div>
           <div class="bh-tag">Hands-on, role-ready skills — outcome over paperwork.</div>
         </div>
-        <div class="bh-count"><span>14</span> courses</div>
+        <div class="bh-count"><span>20</span> courses</div>
       </div>
       <div class="brand-grid">
       <a href="/courses/docker-containers" class="cc show" data-cat="skill" data-brand="skill" data-slug="docker-containers" data-vendor="Skill-Based" data-level="Foundation"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Docker & Containers</div><div class="cdesc2">Containerisation fundamentals — build, ship and run applications anywhere.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(196)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 9,420+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
@@ -1490,6 +1527,12 @@ body.em-open{overflow:hidden}
       <a href="/courses/salesforce-admin" class="cc show" data-cat="skill" data-brand="skill" data-slug="salesforce-admin" data-vendor="Skill-Based" data-level="Associate→Advanced"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Salesforce Admin & Automation</div><div class="cdesc2">Lightning admin, security model, Flow automation and release hygiene on Salesforce.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(96)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,980+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate→Advanced</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       <a href="/courses/servicenow-admin" class="cc show" data-cat="skill" data-brand="skill" data-slug="servicenow-admin" data-vendor="Skill-Based" data-level="Fundamentals"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">ServiceNow Administration Fundamentals</div><div class="cdesc2">Core Now Platform admin — users, ACLs, workflows and safe instance operations.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(84)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,360+ enrolled</span></div><div class="cmeta">  <span class="clevel">Fundamentals</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       <a href="/courses/servicenow-platform" class="cc show" data-cat="skill" data-brand="skill" data-slug="servicenow-platform" data-vendor="Skill-Based" data-level="Professional"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">ServiceNow Platform Implementation</div><div class="cdesc2">Lead greenfield programmes — CMDB, integrations and steering-ready artefacts.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(58)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,140+ enrolled</span></div><div class="cmeta">  <span class="clevel">Professional</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="/courses/ai-ml-bootcamp" class="cc show" data-cat="skill" data-brand="skill" data-slug="ai-ml-bootcamp" data-vendor="Skill-Based" data-level="Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">AI & Machine Learning Bootcamp</div><div class="cdesc2">Python, scikit-learn, model evaluation and capstone — MY-context ML literacy in five days.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(118)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 6,420+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="/courses/cyber-security-bootcamp" class="cc show" data-cat="skill" data-brand="skill" data-slug="cyber-security-bootcamp" data-vendor="Skill-Based" data-level="Foundation→Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Cyber Security Bootcamp</div><div class="cdesc2">Blue-team, ethical hacking labs and IR tabletop — security champions for Malaysian enterprises.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(132)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 7,180+ enrolled</span></div><div class="cmeta">  <span class="clevel">Foundation→Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="/courses/android-development" class="cc show" data-cat="skill" data-brand="skill" data-slug="android-development" data-vendor="Skill-Based" data-level="Beginner→Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Android Development</div><div class="cdesc2">Kotlin, Jetpack Compose, MVVM and Play Store readiness with portfolio coaching.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(86)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,280+ enrolled</span></div><div class="cmeta">  <span class="clevel">Beginner→Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="/courses/django" class="cc show" data-cat="skill" data-brand="skill" data-slug="django" data-vendor="Skill-Based" data-level="Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">Django Web Development</div><div class="cdesc2">Models, DRF APIs, auth and deploy — production-shaped Python web apps.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(82)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="/courses/ios-development" class="cc show" data-cat="skill" data-brand="skill" data-slug="ios-development" data-vendor="Skill-Based" data-level="Beginner→Intermediate"><div class="cv2">Skill-Based <span class="cbadge sk">Skills</span></div><div class="cname2">iOS Development</div><div class="cdesc2">Swift, SwiftUI, TestFlight and MVVM — ship an iPhone portfolio app.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(74)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,620+ enrolled</span></div><div class="cmeta">  <span class="clevel">Beginner→Intermediate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="/courses/netflix-data-analysis" class="cc show" data-cat="skill" data-brand="skill" data-slug="netflix-data-analysis" data-vendor="Skill-Based" data-level="Beginner+"><div class="cv2">Skill-Based <span class="cbadge">Workshop</span></div><div class="cname2">Netflix Data Analysis Workshop</div><div class="cdesc2">pandas + visualization storytelling on a streaming dataset — two-day workshop.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(62)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,840+ enrolled</span></div><div class="cmeta">  <span class="clevel">Beginner+</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       </div>
     </div>
     </div>
@@ -2019,6 +2062,12 @@ body.em-open{overflow:hidden}
               <option data-curriculum="/courses/salesforce-admin">Salesforce Admin &amp; Automation</option>
               <option data-curriculum="/courses/servicenow-admin">ServiceNow Administration Fundamentals</option>
               <option data-curriculum="/courses/servicenow-platform">ServiceNow Platform Implementation</option>
+              <option data-curriculum="/courses/ai-ml-bootcamp">AI &amp; Machine Learning Bootcamp</option>
+              <option data-curriculum="/courses/cyber-security-bootcamp">Cyber Security Bootcamp</option>
+              <option data-curriculum="/courses/android-development">Android Development</option>
+              <option data-curriculum="/courses/django">Django Web Development</option>
+              <option data-curriculum="/courses/ios-development">iOS Development</option>
+              <option data-curriculum="/courses/netflix-data-analysis">Netflix Data Analysis Workshop</option>
             </optgroup>
             <option>Corporate / Group Training (multiple courses)</option>
             <option>Not sure — need advice</option>
@@ -2144,129 +2193,6 @@ const passObs=new IntersectionObserver(entries=>{
 },{threshold:.4});
 document.querySelectorAll('.pass-band').forEach(el=>passObs.observe(el));
 
-function setupNavHighlight(){
-  const navLinks=document.querySelector('.nav-links');
-  if(!navLinks) return;
-  const links=[...navLinks.querySelectorAll('a')];
-  const indicator=navLinks.querySelector('.nav-highlight');
-  if(!indicator||!links.length) return;
-  let activeLink=null;
-  let hoverLink=null;
-  let rafId=0;
-  let pendingMove=null;
-
-  const moveTo=(link,animate=true)=>{
-    if(!link||!indicator) return;
-    const navRect=navLinks.getBoundingClientRect();
-    const linkRect=link.getBoundingClientRect();
-    if(!animate){indicator.style.transition='none';}
-    indicator.style.left=(linkRect.left-navRect.left)+'px';
-    indicator.style.width=linkRect.width+'px';
-    indicator.style.opacity='1';
-    if(!animate){requestAnimationFrame(()=>indicator.style.transition='');}
-  };
-
-  const queueMove=(link,animate=true)=>{
-    pendingMove={link,animate};
-    if(rafId) return;
-    rafId=requestAnimationFrame(()=>{
-      rafId=0;
-      if(pendingMove) moveTo(pendingMove.link,pendingMove.animate);
-      pendingMove=null;
-    });
-  };
-
-  const setActive=(link,animate=true)=>{
-    if(!link) return;
-    if(activeLink===link){
-      if(!hoverLink) queueMove(link,animate);
-      return;
-    }
-    if(activeLink) activeLink.classList.remove('active');
-    activeLink=link;
-    activeLink.classList.add('active');
-    if(!hoverLink) queueMove(activeLink,animate);
-  };
-
-  setActive(links.find(a=>a.getAttribute('href')==='/')||links[0],false);
-
-  const sectionLinks=links
-    .map(a=>({a,id:(a.getAttribute('href')||'').replace('#','')}))
-    .filter(x=>x.id && document.getElementById(x.id));
-
-  const heroSection=document.querySelector('.hero.hero-split');
-  const homeLink=links.find(a=>{
-    const href=(a.getAttribute('href')||'').trim();
-    return href==='/'||href===''||a.textContent.trim().toLowerCase()==='home';
-  })||links[0];
-  const refreshActiveByScroll=()=>{
-    const scrollTop=window.scrollY||document.documentElement.scrollTop||0;
-    const hardHeroZone=window.innerHeight*0.72;
-    if(scrollTop<=hardHeroZone){
-      setActive(homeLink);
-      return;
-    }
-    if(heroSection){
-      const heroRect=heroSection.getBoundingClientRect();
-      const navMarkerY=window.innerHeight*0.32;
-      const heroContainsMarker=heroRect.top<=navMarkerY&&heroRect.bottom>=navMarkerY;
-      if(heroContainsMarker){
-        setActive(homeLink);
-        return;
-      }
-    }
-    if(scrollTop<=24){
-      setActive(homeLink);
-      return;
-    }
-    if(!sectionLinks.length) return;
-    const marker=scrollTop+(window.innerHeight*0.32);
-    let current=null;
-    sectionLinks.forEach(item=>{
-      const section=document.getElementById(item.id);
-      if(section&&section.offsetTop<=marker) current=item;
-    });
-    if(current){setActive(current.a);}else{setActive(homeLink);}
-  };
-
-  let ticking=false;
-  window.addEventListener('scroll',()=>{
-    if(ticking) return;
-    ticking=true;
-    requestAnimationFrame(()=>{
-      refreshActiveByScroll();
-      ticking=false;
-    });
-  },{passive:true});
-  refreshActiveByScroll();
-  window.addEventListener('load',()=>{
-    refreshActiveByScroll();
-    if(activeLink) queueMove(activeLink,false);
-  });
-  window.addEventListener('pageshow',()=>{
-    refreshActiveByScroll();
-    if(activeLink) queueMove(activeLink,false);
-  });
-  window.addEventListener('hashchange',()=>{
-    refreshActiveByScroll();
-  });
-
-  links.forEach(link=>{
-    link.addEventListener('mouseenter',()=>{hoverLink=link;queueMove(link,true);});
-    link.addEventListener('focus',()=>{hoverLink=link;queueMove(link,true);});
-    link.addEventListener('click',()=>setActive(link));
-  });
-
-  navLinks.addEventListener('mouseleave',()=>{
-    hoverLink=null;
-    if(activeLink) queueMove(activeLink,true);
-  });
-
-  window.addEventListener('resize',()=>{
-    if(activeLink) queueMove(activeLink,false);
-  });
-}
-setupNavHighlight();
 
 function releaseInitialLoadEffects(){
   const clear=()=>document.body.classList.remove('preload');

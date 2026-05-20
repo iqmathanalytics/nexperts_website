@@ -86,3 +86,7 @@ COURSES.extend(_B_P4A)
 # Phase 4B: Full-stack, marketing, Excel basics, Salesforce, ServiceNow
 from _course_batch_phase4b import BATCH as _B_P4B
 COURSES.extend(_B_P4B)
+
+# Legacy Wix SEO URLs (also published at root — see scripts/build_legacy_seo_pages.py)
+from _course_batch_legacy_wix import BATCH as _B_LEGACY_WIX
+COURSES.extend(_B_LEGACY_WIX)

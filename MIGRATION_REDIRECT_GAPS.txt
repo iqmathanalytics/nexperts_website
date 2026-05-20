@@ -1,33 +1,29 @@
-Legacy URLs with no dedicated HTML page now use a single 301 to a fallback
-(/index.html#courses, /contact.html, or /courses/dp-100.html for azure-dp900).
-Replace those rules when you add real pages.
-Courses still without a matching courses/*.html file (same as before):
-  ecih, cisco-spcor, cisco-dccor, sdwan, java-programming, full-stack, digital marketing,
-  excel-basic (basic-only page), salesforce, servicenow (x2), etc.
+Legacy Wix SEO URLs (May 2026)
+================================
 
-See comments in _redirects next to those legacy paths.
+301 REDIRECTS (legacy path → canonical):
+  /sql → /courses/sql-for-data-professionals
+  /enarsi → /courses/ccnp-enterprise
+  /ccnp-enarsi-sdwan → /courses/ccnp-enterprise
+  /microsoft-excel-2019-basic → /courses/excel-basic
+  /microsoft-excel-2019-advanced → /courses/excel-advanced-analytics
+  /microsoft-excel-2019-intermediate → /courses/excel-advanced-analytics
+  /javascript-front-end → /courses/full-stack-web-development
+  /machine-learning-with-python → /courses/dp-100
+  /ethical-hacking-workshop → /ceh
+  /power-bi-workshop → /courses/pl-300
+  /ai-ml-bootcamp → /courses/ai-ml-bootcamp
+  /cyber-security-bootcamp → /courses/cyber-security-bootcamp
+  /android-development → /courses/android-development
+  /django → /courses/django
+  /ios-development → /courses/ios-development
+  /netflix-data-analysis → /courses/netflix-data-analysis
 
+CONTENT PAGES (200 at legacy path):
+  /workshops, /upcoming-events, /past-events, /blog,
+  /post/unlocking-the-power-of-data-science-applications-and-challenges,
+  /catalyst-for-change, /empowering-community-throught-technology,
+  /chinese-new-year, /tan-boon-heong-event,
+  /nexpert-x-universiti-teknologi-mara
 
-Course vanity paths without a matching HTML:
-/course-ecih, 
-/course-dp-900, 
-/course-cisco-spcor, 
-/course-cisco-dccor, 
-/course-sdwan, 
-/course-java-programming, 
-/course-full-stack, 
-/course-digital-marketing, 
-/course-excel-basic, 
-/course-salesforce-admin, 
-/course-servicenow-admin, 
-/course-servicenow-platform
-
-
-Non-course URLs:
-/workshops, 
-/workshop-cybersecurity-bootcamp, 
-/workshop-power-bi, 
-/workshop-netflix-data-analysis, 
-/yayasan-peneraju, 
-/catalyst-for-change, 
-/privacy-policy
+Regenerate: python scripts/build_legacy_seo_pages.py
