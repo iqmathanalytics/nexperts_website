@@ -632,12 +632,30 @@
   }
 
   function replaceMetaRow(label, value) {
+    const target = label.trim().toLowerCase();
+
     document.querySelectorAll(".smeta-row").forEach(row => {
       const lbl = row.querySelector("span");
-      if (lbl && lbl.textContent.trim().toLowerCase() === label.toLowerCase()) {
+      if (lbl && lbl.textContent.trim().toLowerCase() === target) {
         const strong = row.querySelector("strong");
         if (strong) setText(strong, value);
       }
+    });
+
+    const heroPrefix =
+      target === "duration"
+        ? "Duration:"
+        : target === "next intake"
+          ? "Next intake:"
+          : null;
+    if (!heroPrefix) return;
+
+    document.querySelectorAll(".hero-meta .hmeta").forEach(hmeta => {
+      hmeta.querySelectorAll("span:not(.hmeta-icon)").forEach(span => {
+        if (!(span.textContent || "").includes(heroPrefix)) return;
+        const strong = span.querySelector("strong");
+        if (strong) setText(strong, value);
+      });
     });
   }
 

@@ -32,6 +32,14 @@ META_ROW_RX = re.compile(
     r'(<(?:motion\.)?div class="smeta-row"><span>([^<]+)</span><strong>)\s*([^<]*?)\s*(</strong></(?:motion\.)?div>)',
     re.IGNORECASE,
 )
+HERO_DURATION_RX = re.compile(
+    r"(<span>Duration:\s*<strong>)\s*([^<]*?)\s*(</strong>)",
+    re.IGNORECASE,
+)
+HERO_INTAKE_RX = re.compile(
+    r"(<span>Next intake:\s*<strong>)\s*([^<]*?)\s*(</strong>)",
+    re.IGNORECASE,
+)
 
 
 def parse_currency(s: str) -> float | None:
@@ -93,8 +101,18 @@ def apply_detail_html(html: str, ov: dict) -> str:
             )
     if ov.get("duration"):
         html = sub_meta(html, "Duration", str(ov["duration"]))
+        html = HERO_DURATION_RX.sub(
+            lambda m: m.group(1) + html_module.escape(str(ov["duration"]).strip()) + m.group(3),
+            html,
+            count=1,
+        )
     if ov.get("next_intake"):
         html = sub_meta(html, "Next intake", str(ov["next_intake"]))
+        html = HERO_INTAKE_RX.sub(
+            lambda m: m.group(1) + html_module.escape(str(ov["next_intake"]).strip()) + m.group(3),
+            html,
+            count=1,
+        )
     return html
 
 
