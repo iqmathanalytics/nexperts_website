@@ -27,10 +27,14 @@ def render_badges(badges):
 
 
 def render_meta(meta):
-    return "\n          ".join(
-        f'<div class="hmeta"><span class="hmeta-icon">{icon}</span><span>{label}: <strong{f" style=\"color:{color}\"" if color else ""}>{val}</strong></span></div>'
-        for icon, label, val, color in meta
-    )
+    parts = []
+    for icon, label, val, color in meta:
+        style_attr = f' style="color:{color}"' if color else ""
+        parts.append(
+            f'<div class="hmeta"><span class="hmeta-icon">{icon}</span>'
+            f"<span>{label}: <strong{style_attr}>{val}</strong></span></div>"
+        )
+    return "\n          ".join(parts)
 
 
 def render_quick_wins(qw):
