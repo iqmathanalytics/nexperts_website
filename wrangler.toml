@@ -1,12 +1,13 @@
-# Optional metadata for Wrangler CLI (Pages dashboard can build without this file).
-# https://developers.cloudflare.com/workers/wrangler/configuration/
+# Cloudflare Pages — bindings are defined here (not in the dashboard when this file is used).
+# https://developers.cloudflare.com/pages/functions/wrangler-configuration/
 
 name = "nexperts-website"
 compatibility_date = "2024-11-01"
 pages_build_output_dir = "."
 
-# Optional: for `wrangler pages dev` — create KV in dashboard, paste namespace id below.
-# Pages Git deploys: bind COURSE_OVERRIDES in the Pages project UI (Settings → Functions).
-# [[kv_namespaces]]
-# binding = "COURSE_OVERRIDES"
-# id = "YOUR_KV_NAMESPACE_ID"
+# Admin "Publish live" — uncomment and set id after creating a KV namespace (see docs/DEPLOY_CLOUDFLARE.md).
+# Dashboard → Workers & Pages → KV → Create namespace → copy Namespace ID.
+#
+[[kv_namespaces]]
+binding = "COURSE_OVERRIDES"
+id = "94881d4bc10948e5840a0eb98ae70050"

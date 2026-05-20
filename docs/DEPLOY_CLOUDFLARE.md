@@ -46,13 +46,23 @@ Mark secrets **Encrypted** in the dashboard. After changing these values, **rede
 
 Admin **Publish live** stores overrides in **Cloudflare KV**, not Netlify Blobs.
 
-1. **Workers & Pages** → your account → **KV** → **Create namespace** (e.g. `nexperts-course-overrides`).
-2. Open your **Pages** project → **Settings** → **Functions** → **KV namespace bindings** → **Add**.
-3. Set **Variable name** to exactly: `COURSE_OVERRIDES`
-4. Select the namespace you created → **Save**.
-5. **Redeploy** the project (new bindings apply on the next deployment).
+This repo’s **`wrangler.toml`** includes `pages_build_output_dir`, so Cloudflare treats that file as the **source of truth** for bindings. You will see *“Bindings for this project are being managed through wrangler.toml”* in the dashboard — that is expected; configure KV in the file, not under Settings → Functions.
 
-Without this binding, **Publish live** returns **503** with a setup hint. You can still **Export** JSON, commit `data/course-overrides.json`, and redeploy (build bakes HTML + overlay reads the static file).
+1. **Workers & Pages** → **KV** → **Create namespace** (e.g. `nexperts-course-overrides`).
+2. Open the namespace and copy its **Namespace ID** (a long hex string).
+3. In this repo, edit **`wrangler.toml`** — set `id` under `[[kv_namespaces]]` (binding name must stay **`COURSE_OVERRIDES`**):
+
+```toml
+[[kv_namespaces]]
+binding = "COURSE_OVERRIDES"
+id = "paste-your-namespace-id-here"
+```
+
+4. Commit, push, and wait for the Pages deploy to finish.
+
+Optional (CLI, with Wrangler logged in): `npx wrangler kv namespace create nexperts-course-overrides` — use the printed `id` in `wrangler.toml`.
+
+Without a valid KV `id`, **Publish live** returns **503**. You can still **Export** JSON, commit `data/course-overrides.json`, and redeploy (build bakes HTML + overlay reads the static file).
 
 6. Save and deploy. The first build runs after you confirm.
 
