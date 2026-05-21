@@ -86,30 +86,18 @@
 /ios-development /courses/ios-development 301
 /netflix-data-analysis /courses/netflix-data-analysis 301
 # Filename & legacy paths → pretty canonical URLs (301)
-# Do NOT 301 .html → extensionless for pages that also have a 200 rewrite below (causes ERR_TOO_MANY_REDIRECTS on Cloudflare).
+# Cloudflare Pages resolves /about → about.html automatically (clean URLs). Do NOT add
+# matching 200 rewrites here — they cause ERR_TOO_MANY_REDIRECTS (see commit 9204aa4).
 /index.html / 301
+/about.html /about 301
+/contact.html /contact 301
 /contact-us /contact 301
 /contact-us/ /contact 301
+/privacy-policy.html /privacy-policy 301
 
 # Legacy singular /course → homepage courses section
 /course /#courses 301
 /course/ /#courses 301
-
-# Extensionless static pages (200 rewrite — works on Cloudflare Pages & local dev server)
-/about /about.html 200
-/contact /contact.html 200
-/workshops /workshops.html 200
-/upcoming-events /upcoming-events.html 200
-/past-events /past-events.html 200
-/blog /blog.html 200
-/catalyst-for-change /catalyst-for-change.html 200
-/empowering-community-throught-technology /empowering-community-throught-technology.html 200
-/chinese-new-year /chinese-new-year.html 200
-/tan-boon-heong-event /tan-boon-heong-event.html 200
-/nexpert-x-universiti-teknologi-mara /nexpert-x-universiti-teknologi-mara.html 200
-/privacy-policy /privacy-policy.html 200
-/ccna /ccna.html 200
-/ceh /ceh.html 200
 
 # Netlify Functions
 /.netlify/functions/* /.netlify/functions/:splat 200
