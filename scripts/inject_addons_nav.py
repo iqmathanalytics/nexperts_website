@@ -18,7 +18,7 @@ from site_nav import (  # noqa: E402
 )
 
 NAV_RE = re.compile(
-    r"<nav class=\"site-nav\">.*?</nav>\s*<div class=\"nav-drawer-backdrop\"[^>]*>",
+    r"<nav class=\"site-nav(?:\s+site-nav--home)?\">.*?</nav>\s*<div class=\"nav-drawer-backdrop\"[^>]*>",
     re.DOTALL | re.IGNORECASE,
 )
 
@@ -115,6 +115,28 @@ def ensure_nav_assets(html: str, *, course: bool = False) -> str:
                 html = html.replace(
                     '<script src="js/nav-addons.js" defer></script>',
                     ins + '<script src="js/nav-addons.js" defer></script>',
+                    1,
+                )
+        if "courses-catalog.js" not in html:
+            if course and 'src="../js/nav-addons.js"' in html:
+                html = html.replace(
+                    '<script src="../js/nav-addons.js" defer></script>',
+                    '<script src="../js/nav-addons.js" defer></script>\n'
+                    '<script src="../js/courses-catalog.js" defer></script>',
+                    1,
+                )
+            elif 'src="/js/nav-addons.js"' in html:
+                html = html.replace(
+                    '<script src="/js/nav-addons.js" defer></script>',
+                    '<script src="/js/nav-addons.js" defer></script>\n'
+                    '<script src="/js/courses-catalog.js" defer></script>',
+                    1,
+                )
+            elif 'src="js/nav-addons.js"' in html:
+                html = html.replace(
+                    '<script src="js/nav-addons.js" defer></script>',
+                    '<script src="js/nav-addons.js" defer></script>\n'
+                    '<script src="js/courses-catalog.js" defer></script>',
                     1,
                 )
         return html

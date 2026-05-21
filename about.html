@@ -366,6 +366,7 @@ footer,.cta-sec{padding:56px 20px 32px}
 <link rel="stylesheet" href="css/nav-addons.css">
 <script src="js/nav-highlight.js" defer></script>
 <script src="js/nav-addons.js" defer></script>
+<script src="js/courses-catalog.js" defer></script>
 </head>
 <body>
 
@@ -378,7 +379,56 @@ footer,.cta-sec{padding:56px 20px 32px}
   <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="/">Home</a></li>
-    <li><a href="/#courses">Courses</a></li>
+    <li class="nav-addons-wrap nav-courses-wrap">
+      <button type="button" class="nav-addons-trigger nav-courses-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navCoursesPanel">
+        Courses <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel nav-courses-panel" id="navCoursesPanel" role="menu" hidden>
+        <div class="nav-courses-stack">
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Industry Certifications</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="cert">90 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="eccouncil">EC-Council<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="aws">AWS<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="microsoft">Microsoft<span class="nav-courses-count">25</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="cisco">Cisco<span class="nav-courses-count">8</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="gcp">Google Cloud<span class="nav-courses-count">3</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="peoplecert">PeopleCert<span class="nav-courses-count">7</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="pmi">PMI<span class="nav-courses-count">2</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="scrum">Scrum Alliance<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="linuxfdn">Linux Foundation<span class="nav-courses-count">2</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="hashicorp">HashiCorp<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="tableau">Tableau<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isaca">ISACA<span class="nav-courses-count">5</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isc2">ISC2<span class="nav-courses-count">6</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="offsec">Offensive Security<span class="nav-courses-count">2</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Skill-Based Programs</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="skill">20 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="skill" data-nav-brand="skill">Skill-Based<span class="nav-courses-count">20</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Specialized &amp; Compliance</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="spec">1 course</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="spec" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">1</span></a>
+        </div>
+      </div>
+        </div>
+      </div>
+    </li>
     <li><a href="/#roadmap">Roadmaps</a></li>
     <li><a href="/#verify">Verify</a></li>
     <li><a href="/#paths">Career Paths</a></li>
@@ -421,7 +471,7 @@ footer,.cta-sec{padding:56px 20px 32px}
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
-<div class="nav-drawer-backdrop" aria-hidden="true"></div>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div></div></div></div></div></div></div>
 
 <!-- HERO -->
 
@@ -443,7 +493,7 @@ footer,.cta-sec{padding:56px 20px 32px}
       </div>
     </div>
     <div class="about-hero-photo reveal">
-      <img src="/image/about-career-hero-2.jpg" alt="Modern corporate career discussion with a diverse professional team" width="740" height="840" loading="lazy">
+      <img src="/image/students/8.jpeg" alt="Nexperts Academy students in a professional training session" width="740" height="840" loading="lazy">
     </div>
   </div>
 </section>

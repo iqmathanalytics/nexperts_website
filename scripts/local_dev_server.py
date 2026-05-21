@@ -58,6 +58,20 @@ def _under_root(path: Path) -> bool:
         return False
 
 
+def resolve_public_file(path: str) -> Path | None:
+    """Map URL path to a file under site root (supports extensionless pretty URLs)."""
+    rel = path.lstrip("/")
+    if not rel:
+        rel = "index.html"
+    candidates = [rel, f"{rel}.html", f"{rel}/index.html"]
+    for candidate in candidates:
+        file_path = (ROOT / candidate).resolve()
+        if not _under_root(file_path) or not file_path.is_file():
+            continue
+        return file_path
+    return None
+
+
 class Handler(BaseHTTPRequestHandler):
     rules: list[tuple[str, str, int]] = []
 
@@ -86,9 +100,9 @@ class Handler(BaseHTTPRequestHandler):
                 self.end_headers()
                 return
             if code == 200:
-                rel = dst.lstrip("/")
-                file_path = (ROOT / rel).resolve()
-                if not _under_root(file_path) or not file_path.is_file():
+                dst_path = norm_path(dst.split("?", 1)[0].split("#", 1)[0])
+                file_path = resolve_public_file(dst_path)
+                if not file_path:
                     self.send_error(404)
                     return
                 ctype = mimetypes.guess_type(str(file_path))[0] or "application/octet-stream"
@@ -101,17 +115,8 @@ class Handler(BaseHTTPRequestHandler):
                     self.wfile.write(file_path.read_bytes())
                 return
 
-        rel = path.lstrip("/")
-        if not rel:
-            rel = "index.html"
-        file_path = (ROOT / rel).resolve()
-        if not _under_root(file_path):
-            self.send_error(403)
-            return
-        if file_path.is_dir():
-            idx = file_path / "index.html"
-            file_path = idx if idx.is_file() else None
-        if not file_path or not file_path.is_file():
+        file_path = resolve_public_file(path)
+        if not file_path:
             self.send_error(404)
             return
         ctype = mimetypes.guess_type(str(file_path))[0] or "application/octet-stream"

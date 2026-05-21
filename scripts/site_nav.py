@@ -67,6 +67,85 @@ def _esc(s: str) -> str:
     return html_lib.escape(s, quote=True)
 
 
+def _count_label(n: int) -> str:
+    return f"{n} course" if n == 1 else f"{n} courses"
+
+
+COURSE_CATALOG_SECTIONS: list[tuple[str, str]] = [
+    ("cert", "Industry Certifications"),
+    ("skill", "Skill-Based Programs"),
+    ("spec", "Specialized & Compliance"),
+]
+
+
+def _catalog_menu_data() -> tuple[dict[str, dict[str, int]], dict[str, str]]:
+    import sys
+    from collections import defaultdict
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from _build_catalog import BRANDS, CARDS  # noqa: WPS433
+
+    brand_labels = {key: label for key, label, *_ in BRANDS}
+    counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    for brand_key, cat, *_rest in CARDS:
+        counts[cat][brand_key] += 1
+    return counts, brand_labels
+
+
+def courses_dropdown_li(*, variant: str, current_path: str = "") -> str:
+    counts, brand_labels = _catalog_menu_data()
+    courses_href = "#courses" if variant == "home" else "/#courses"
+    cols: list[str] = []
+    import sys
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from _build_catalog import BRANDS  # noqa: WPS433
+
+    sections: list[str] = []
+    for cat_key, title in COURSE_CATALOG_SECTIONS:
+        section_counts = counts.get(cat_key, {})
+        total = sum(section_counts.values())
+        vendors: list[str] = []
+        for brand_key, brand_label, *_rest in BRANDS:
+            n = section_counts.get(brand_key, 0)
+            if n <= 0:
+                continue
+            vendors.append(
+                f'          <a href="{_esc(courses_href)}" class="nav-courses-vendor" role="menuitem" '
+                f'data-nav-cat="{_esc(cat_key)}" data-nav-brand="{_esc(brand_key)}">'
+                f'{_esc(brand_label)}<span class="nav-courses-count">{n}</span></a>'
+            )
+        sections.append(
+            f'      <div class="nav-courses-section">\n'
+            f'        <div class="nav-courses-section-head">\n'
+            f'          <p class="nav-courses-section-title">{_esc(title)}</p>\n'
+            f'          <a href="{_esc(courses_href)}" class="nav-courses-section-link" role="menuitem" '
+            f'data-nav-cat="{_esc(cat_key)}">{_count_label(total)}</a>\n'
+            f'        </div>\n'
+            f'        <div class="nav-courses-vendors">\n'
+            + "\n".join(vendors)
+            + "\n        </div>\n"
+            f"      </div>"
+        )
+    stack = "\n".join(sections)
+    return f"""    <li class="nav-addons-wrap nav-courses-wrap">
+      <button type="button" class="nav-addons-trigger nav-courses-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navCoursesPanel">
+        Courses <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel nav-courses-panel" id="navCoursesPanel" role="menu" hidden>
+        <div class="nav-courses-stack">
+{stack}
+        </div>
+      </div>
+    </li>"""
+
+
 def addons_dropdown_li(current_path: str = "") -> str:
     path = current_path.rstrip("/") or "/"
     cols: list[str] = []
@@ -99,8 +178,19 @@ def _nav_links(variant: str, current_path: str) -> str:
     path = current_path.rstrip("/") or "/"
     parts: list[str] = ['    <span class="nav-highlight" aria-hidden="true"></span>']
     for label, href, forced in links:
+        if label == "Courses":
+            parts.append(courses_dropdown_li(variant=variant, current_path=path))
+            continue
         if label == "Contact":
             parts.append(addons_dropdown_li(path))
+            cls = forced
+            if not cls:
+                norm = href.rstrip("/")
+                if path == norm or (norm != "/" and path == norm):
+                    cls = "active"
+            ac = f' class="{cls}"' if cls else ""
+            parts.append(f'    <li><a href="{_esc(href)}"{ac}>{_esc(label)}</a></li>')
+            continue
         cls = forced
         if not cls:
             norm = href.rstrip("/")
@@ -156,23 +246,26 @@ def render_site_nav(
 <div class="nav-drawer-backdrop" aria-hidden="true"></div>"""
 
 
+_NAV_SCRIPTS = (
+    '<script src="{prefix}/js/nav-highlight.js" defer></script>\n'
+    '<script src="{prefix}/js/nav-addons.js" defer></script>\n'
+    '<script src="{prefix}/js/courses-catalog.js" defer></script>'
+)
+
 NAV_ASSET_TAGS = (
     '<link rel="stylesheet" href="/css/site-nav.css">\n'
     '<link rel="stylesheet" href="/css/nav-addons.css">\n'
-    '<script src="/js/nav-highlight.js" defer></script>\n'
-    '<script src="/js/nav-addons.js" defer></script>'
+    + _NAV_SCRIPTS.format(prefix="")
 )
 
 NAV_ASSET_TAGS_REL = (
     '<link rel="stylesheet" href="css/site-nav.css">\n'
     '<link rel="stylesheet" href="css/nav-addons.css">\n'
-    '<script src="js/nav-highlight.js" defer></script>\n'
-    '<script src="js/nav-addons.js" defer></script>'
+    + _NAV_SCRIPTS.format(prefix="")
 )
 
 COURSE_NAV_ASSET_TAGS = (
     '<link rel="stylesheet" href="../css/site-nav.css">\n'
     '<link rel="stylesheet" href="../css/nav-addons.css">\n'
-    '<script src="../js/nav-highlight.js" defer></script>\n'
-    '<script src="../js/nav-addons.js" defer></script>'
+    + _NAV_SCRIPTS.format(prefix="..")
 )

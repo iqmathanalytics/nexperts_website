@@ -1,0 +1,139 @@
+/* Nexperts — branded social link buttons (hero, footer, contact) */
+.nx-social{display:flex;flex-direction:column;gap:14px}
+.nx-social-label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4, rgba(255,255,255,.45))}
+.nx-social-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.nx-social-btn{
+  --soc:#3b82f6;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 16px 10px 12px;
+  border-radius:12px;
+  text-decoration:none;
+  color:#fff;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.02em;
+  border:1px solid rgba(255,255,255,.22);
+  background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 8px 24px rgba(0,0,0,.12);
+  transition:transform .25s cubic-bezier(.22,.61,.36,1),box-shadow .35s ease,border-color .25s ease;
+  overflow:hidden;
+  isolation:isolate;
+}
+.nx-social-btn::before{
+  content:'';
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle at 50% 50%,var(--soc),transparent 62%);
+  opacity:.35;
+  transition:opacity .35s ease,transform .4s ease;
+  z-index:-1;
+  animation:nxSocPulse 3.5s ease-in-out infinite;
+}
+.nx-social-btn::after{
+  content:'';
+  position:absolute;
+  top:0;left:-120%;
+  width:55%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);
+  transition:left .55s ease;
+  pointer-events:none;
+}
+.nx-social-btn:hover{
+  transform:translateY(-3px) scale(1.02);
+  border-color:rgba(255,255,255,.45);
+  box-shadow:0 0 28px color-mix(in srgb, var(--soc) 55%, transparent),0 14px 32px rgba(0,0,0,.18);
+}
+.nx-social-btn:hover::before{opacity:.65;transform:scale(1.08)}
+.nx-social-btn:hover::after{left:130%}
+.nx-social-btn:focus-visible{outline:2px solid var(--soc);outline-offset:3px}
+
+.nx-social-icon{
+  display:flex;align-items:center;justify-content:center;
+  width:32px;height:32px;flex-shrink:0;
+  border-radius:9px;
+  background:rgba(0,0,0,.2);
+  box-shadow:0 0 16px color-mix(in srgb, var(--soc) 70%, transparent);
+}
+.nx-social-icon svg{width:18px;height:18px;display:block}
+.nx-social-name{white-space:nowrap}
+
+.nx-social-fb{--soc:#1877f2}
+.nx-social-fb .nx-social-icon svg{color:#1877f2}
+.nx-social-ig{--soc:#e1306c;background:linear-gradient(145deg,rgba(225,48,108,.12),rgba(131,58,180,.1))}
+.nx-social-ig .nx-social-icon svg{color:#e1306c}
+.nx-social-li{--soc:#0a66c2}
+.nx-social-li .nx-social-icon svg{color:#0a66c2}
+.nx-social-yt{--soc:#ff0000}
+.nx-social-yt .nx-social-icon svg{color:#ff0000}
+.nx-social-wa{--soc:#25d366}
+.nx-social-wa .nx-social-icon svg{color:#25d366}
+.hero-social .nx-social-btn:hover .nx-social-icon svg,
+.footer-social .nx-social-btn:hover .nx-social-icon svg,
+.contact-social .nx-social-btn:hover .nx-social-icon svg{color:#fff}
+
+@keyframes nxSocPulse{
+  0%,100%{opacity:.28;transform:scale(1)}
+  50%{opacity:.48;transform:scale(1.05)}
+}
+
+/* Hero — on dark/light hero area */
+.hero-social{margin-top:28px;width:100%;animation:fadeup .6s ease .4s both}
+.hero-split .hero-social .nx-social{align-items:flex-start}
+.hero-split .hero-social .nx-social-row{justify-content:flex-start}
+.hero-social .nx-social-label{color:rgba(61,68,81,.75)}
+.hero-social .nx-social-btn{
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(239,246,255,.85));
+  color:var(--ink2,#1e293b);
+  border-color:rgba(147,197,253,.55);
+  box-shadow:0 4px 20px rgba(29,78,216,.1),0 0 0 1px rgba(255,255,255,.8) inset;
+}
+.hero-social .nx-social-btn:hover{color:#fff}
+.hero-social .nx-social-fb:hover{background:linear-gradient(135deg,#1877f2,#0d65d9)}
+.hero-social .nx-social-ig:hover{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.hero-social .nx-social-li:hover{background:linear-gradient(135deg,#0a66c2,#004182)}
+.hero-social .nx-social-yt:hover{background:linear-gradient(135deg,#ff0000,#cc0000)}
+.hero-social .nx-social-wa:hover{background:linear-gradient(135deg,#25d366,#128c7e)}
+.hero-social .nx-social-icon{background:rgba(15,23,42,.06)}
+.hero-social .nx-social-btn:hover .nx-social-icon{background:rgba(0,0,0,.15)}
+
+/* Footer — compact icon row */
+.footer-social{margin-top:20px}
+.footer-social .nx-social-label{color:rgba(255,255,255,.28);margin-bottom:2px}
+.footer-social .nx-social-btn{padding:0;width:44px;height:44px;justify-content:center;border-radius:11px}
+.footer-social .nx-social-name{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.footer-social .nx-social-icon{width:100%;height:100%;border-radius:10px;background:transparent;box-shadow:none}
+.footer-social .nx-social-icon svg{width:20px;height:20px}
+
+/* Contact — card strip */
+.contact-social{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.contact-social .nx-social-label{color:var(--ink4)}
+.contact-social .nx-social-row{gap:8px}
+.contact-social .nx-social-btn{
+  padding:8px 14px 8px 10px;
+  font-size:.74rem;
+  background:#fff;
+  color:var(--ink2);
+  border-color:var(--line);
+  box-shadow:0 6px 18px rgba(15,23,42,.06);
+}
+.contact-social .nx-social-btn:hover{color:#fff}
+.contact-social .nx-social-fb:hover{background:linear-gradient(135deg,#1877f2,#0d65d9)}
+.contact-social .nx-social-ig:hover{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.contact-social .nx-social-li:hover{background:linear-gradient(135deg,#0a66c2,#004182)}
+.contact-social .nx-social-yt:hover{background:linear-gradient(135deg,#ff0000,#cc0000)}
+.contact-social .nx-social-wa:hover{background:linear-gradient(135deg,#25d366,#128c7e)}
+.contact-social .nx-social-icon{width:28px;height:28px;background:var(--bg2)}
+
+@media(max-width:680px){
+  .hero-social .nx-social-btn{padding:8px 12px 8px 10px;font-size:.72rem}
+  .hero-social .nx-social-name{display:none}
+  .hero-social .nx-social-btn{gap:0;justify-content:center;width:44px;height:44px;padding:0}
+}

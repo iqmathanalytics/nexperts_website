@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="/css/nav-addons.css">
 <script src="/js/nav-highlight.js" defer></script>
 <script src="/js/nav-addons.js" defer></script>
+<script src="/js/courses-catalog.js" defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#f8fbff;--ink:#0f1b2d;--ink2:#2a3f5f;--ink3:#4b6284;--ink4:#7e97b8;--blue:#1d4ed8;--line:#d7e6fb;--line2:#bfd5f2}
@@ -51,7 +52,56 @@ footer a{color:rgba(255,255,255,.65);text-decoration:none}
   <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="/">Home</a></li>
-    <li><a href="/#courses">Courses</a></li>
+    <li class="nav-addons-wrap nav-courses-wrap">
+      <button type="button" class="nav-addons-trigger nav-courses-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navCoursesPanel">
+        Courses <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel nav-courses-panel" id="navCoursesPanel" role="menu" hidden>
+        <div class="nav-courses-stack">
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Industry Certifications</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="cert">90 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="eccouncil">EC-Council<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="aws">AWS<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="microsoft">Microsoft<span class="nav-courses-count">25</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="cisco">Cisco<span class="nav-courses-count">8</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="gcp">Google Cloud<span class="nav-courses-count">3</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="peoplecert">PeopleCert<span class="nav-courses-count">7</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="pmi">PMI<span class="nav-courses-count">2</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="scrum">Scrum Alliance<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="linuxfdn">Linux Foundation<span class="nav-courses-count">2</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="hashicorp">HashiCorp<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="tableau">Tableau<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isaca">ISACA<span class="nav-courses-count">5</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isc2">ISC2<span class="nav-courses-count">6</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="offsec">Offensive Security<span class="nav-courses-count">2</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Skill-Based Programs</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="skill">20 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="skill" data-nav-brand="skill">Skill-Based<span class="nav-courses-count">20</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Specialized &amp; Compliance</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="spec">1 course</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="spec" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">1</span></a>
+        </div>
+      </div>
+        </div>
+      </div>
+    </li>
     <li><a href="/#roadmap">Roadmaps</a></li>
     <li><a href="/#verify">Verify</a></li>
     <li><a href="/#paths">Career Paths</a></li>
@@ -94,7 +144,7 @@ footer a{color:rgba(255,255,255,.65);text-decoration:none}
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
-<div class="nav-drawer-backdrop" aria-hidden="true"></div>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div></div></div></div></div></div>
 <section class="hero">
   <p style="font-size:.72rem;color:var(--ink3);margin-bottom:14px"><a href="/" style="color:inherit;text-decoration:none">Home</a> / Nexperts × Universiti Teknologi MARA</p>
   <h1>Nexperts × Universiti Teknologi MARA<br><em>Partnership</em></h1>

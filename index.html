@@ -73,9 +73,10 @@
     "addressCountry": "MY"
   },
   "sameAs": [
+    "https://www.facebook.com/Nexpertsacademy",
     "https://www.linkedin.com/company/nexperts-academy-sdn-bhd/",
     "https://www.instagram.com/nexperts/",
-    "https://www.youtube.com/@nexpertsacademy2877"
+    "https://www.youtube.com/channel/UC9yAHm3DmVqrVf4fJFKWEQA"
   ],
   "datePublished": "2026-05-11",
   "dateModified": "2026-05-11"
@@ -161,9 +162,10 @@
     }
   ],
   "sameAs": [
+    "https://www.facebook.com/Nexpertsacademy",
     "https://www.linkedin.com/company/nexperts-academy-sdn-bhd/",
     "https://www.instagram.com/nexperts/",
-    "https://www.youtube.com/@nexpertsacademy2877"
+    "https://www.youtube.com/channel/UC9yAHm3DmVqrVf4fJFKWEQA"
   ],
   "areaServed": "Malaysia",
   "currenciesAccepted": "MYR",
@@ -535,6 +537,18 @@ h2.head em.m{color:var(--marM)}
 .ftab.on{color:var(--blue);border-bottom-color:var(--blue)}
 .ftab.on::before{left:6px;right:6px;height:calc(100% - 16px);opacity:1;background:linear-gradient(180deg,var(--bluL),#fff)}
 
+.catalog-search-wrap{margin:-8px 0 28px}
+.catalog-search{position:relative;display:flex;align-items:center;gap:12px;padding:14px 18px 14px 48px;background:linear-gradient(180deg,#fff,var(--bg2));border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.06),inset 0 1px 0 rgba(255,255,255,.9);transition:border-color .25s ease,box-shadow .25s ease}
+.catalog-search:focus-within{border-color:rgba(29,78,216,.45);box-shadow:0 14px 36px rgba(29,78,216,.12),inset 0 1px 0 rgba(255,255,255,.95)}
+.catalog-search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--ink4);pointer-events:none}
+.catalog-search-icon svg{display:block;width:18px;height:18px}
+.catalog-search input{flex:1;border:none;background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:.92rem;font-weight:500;color:var(--ink);outline:none;min-width:0}
+.catalog-search input::placeholder{color:var(--ink4);font-weight:400}
+.catalog-search-clear svg{display:block}
+.catalog-search-clear{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;padding:0;border:none;border-radius:8px;background:var(--bluL);color:var(--blue);cursor:pointer;transition:background .2s ease,color .2s ease}
+.catalog-search-clear:hover{background:var(--blue);color:#fff}
+.catalog-search-meta{min-height:1.2em;margin:10px 2px 0;font-size:.74rem;color:var(--ink3);letter-spacing:.01em}
+
 /* ── Brand-grouped catalog ── */
 .cg{display:flex;flex-direction:column;gap:38px;background:transparent;border:none;border-radius:0;overflow:visible}
 
@@ -884,8 +898,10 @@ body.em-open{overflow:hidden}
   <link rel="stylesheet" href="css/site-nav-mobile.css">
 <link rel="stylesheet" href="css/site-nav.css">
 <link rel="stylesheet" href="css/nav-addons.css">
+<link rel="stylesheet" href="css/social-links.css">
 <script src="js/nav-highlight.js" defer></script>
 <script src="js/nav-addons.js" defer></script>
+<script src="js/courses-catalog.js" defer></script>
   <link rel="stylesheet" href="css/enquiry-phone.css">
   <link rel="stylesheet" href="css/enquiry-loading.css">
 </head>
@@ -898,7 +914,56 @@ body.em-open{overflow:hidden}
   <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="/" class="active">Home</a></li>
-    <li><a href="#courses">Courses</a></li>
+    <li class="nav-addons-wrap nav-courses-wrap">
+      <button type="button" class="nav-addons-trigger nav-courses-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navCoursesPanel">
+        Courses <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel nav-courses-panel" id="navCoursesPanel" role="menu" hidden>
+        <div class="nav-courses-stack">
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Industry Certifications</p>
+          <a href="#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="cert">90 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">9</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="eccouncil">EC-Council<span class="nav-courses-count">9</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="aws">AWS<span class="nav-courses-count">9</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="microsoft">Microsoft<span class="nav-courses-count">25</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="cisco">Cisco<span class="nav-courses-count">8</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="gcp">Google Cloud<span class="nav-courses-count">3</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="peoplecert">PeopleCert<span class="nav-courses-count">7</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="pmi">PMI<span class="nav-courses-count">2</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="scrum">Scrum Alliance<span class="nav-courses-count">1</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="linuxfdn">Linux Foundation<span class="nav-courses-count">2</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="hashicorp">HashiCorp<span class="nav-courses-count">1</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="tableau">Tableau<span class="nav-courses-count">1</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isaca">ISACA<span class="nav-courses-count">5</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isc2">ISC2<span class="nav-courses-count">6</span></a>
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="offsec">Offensive Security<span class="nav-courses-count">2</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Skill-Based Programs</p>
+          <a href="#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="skill">20 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="skill" data-nav-brand="skill">Skill-Based<span class="nav-courses-count">20</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Specialized &amp; Compliance</p>
+          <a href="#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="spec">1 course</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="spec" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">1</span></a>
+        </div>
+      </div>
+        </div>
+      </div>
+    </li>
     <li><a href="#roadmap">Roadmaps</a></li>
     <li><a href="#verify">Verify</a></li>
     <li><a href="#paths">Career Paths</a></li>
@@ -941,7 +1006,7 @@ body.em-open{overflow:hidden}
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
-<div class="nav-drawer-backdrop" aria-hidden="true"></div>
+<div class="nav-drawer-backdrop" aria-hidden="true"></div></div></div></div></div>
 
 <!-- HERO -->
 
@@ -978,6 +1043,18 @@ body.em-open{overflow:hidden}
             <span class="chip">CompTIA</span><span class="chip">EC-Council</span><span class="chip">AWS</span>
             <span class="chip">Microsoft</span><span class="chip">Cisco</span><span class="chip">ITIL</span>
             <span class="chip">ISACA</span><span class="chip">ISC2</span><span class="chip">HashiCorp</span><span class="chip">PMI</span>
+          </div>
+        </div>
+        <div class="hero-social">
+          <div class="nx-social" role="navigation" aria-label="Social media">
+            <span class="nx-social-label">Connect with us</span>
+            <div class="nx-social-row">
+              <a href="https://www.facebook.com/Nexpertsacademy" class="nx-social-btn nx-social-fb" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on Facebook"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span><span class="nx-social-name">Facebook</span></a>
+              <a href="https://www.instagram.com/nexperts?igshid=YmMyMTA2M2Y%3D" class="nx-social-btn nx-social-ig" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on Instagram"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span><span class="nx-social-name">Instagram</span></a>
+              <a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" class="nx-social-btn nx-social-li" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on LinkedIn"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span><span class="nx-social-name">LinkedIn</span></a>
+              <a href="https://www.youtube.com/channel/UC9yAHm3DmVqrVf4fJFKWEQA" class="nx-social-btn nx-social-yt" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on YouTube"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span class="nx-social-name">YouTube</span></a>
+              <a href="https://wa.me/601112216870" class="nx-social-btn nx-social-wa" target="_blank" rel="noopener noreferrer" aria-label="Chat with Nexperts Academy on WhatsApp"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><span class="nx-social-name">WhatsApp</span></a>
+            </div>
           </div>
         </div>
       </div>
@@ -1123,35 +1200,35 @@ body.em-open{overflow:hidden}
     </div>
     <div class="photo-mosaic">
       <article class="photo-tile t1 reveal">
-        <img src="/image/gallery-study-leave.jpg" alt="Students walking together after study sessions" width="1200" height="800" loading="lazy">
+        <img src="/image/students/6.jpeg" alt="Collaborative cohort learning during IT certification training" width="1200" height="800" loading="lazy">
         <div class="photo-cap">
           <span>Supportive cohorts</span>
           <p>Ask questions without judgement — our trainers want you to pass as much as you do.</p>
         </div>
       </article>
       <article class="photo-tile t2 reveal d1">
-        <img src="/image/gallery-happy-asian-teamwork.jpg" alt="Happy students collaborating during teamwork sessions" width="1200" height="800" loading="lazy">
+        <img src="/image/students/3.jpeg" alt="Hands-on classroom instruction at Nexperts Academy" width="1200" height="800" loading="lazy">
         <div class="photo-cap">
           <span>Career clarity</span>
           <p>From Security+ to CEH to cloud — we map the path to your goal.</p>
         </div>
       </article>
       <article class="photo-tile t3 reveal d2">
-        <img src="/image/experience-live-classroom.jpg" alt="International students listening to classroom instruction" width="1200" height="800" loading="lazy">
+        <img src="/image/students/2.jpeg" alt="Students collaborating during certification training" width="1200" height="800" loading="lazy">
         <div class="photo-cap">
           <span>Hands-on prep</span>
           <p>Practice on real tools and scenarios — not just slides — so you’re exam- and job-ready.</p>
         </div>
       </article>
       <article class="photo-tile t4 reveal d1">
-        <img src="/image/experience-cohort-learning.jpg" alt="Multinational cohort working together in a collaborative office setting" width="1200" height="800" loading="lazy">
+        <img src="/image/students/7.jpeg" alt="Students building momentum through structured certification prep" width="1200" height="800" loading="lazy">
         <div class="photo-cap">
           <span>Collaborative projects</span>
           <p>Peer learning and guided activities turn concepts into practical confidence.</p>
         </div>
       </article>
       <article class="photo-tile t5 reveal d2">
-        <img src="/image/gallery-study-leave.jpg" alt="Study group moving between sessions with shared momentum" width="1200" height="800" loading="lazy">
+        <img src="/image/students/1.jpeg" alt="Nexperts Academy students in a supportive training environment" width="1200" height="800" loading="lazy">
         <div class="photo-cap">
           <span>Momentum culture</span>
           <p>Structured pace, accountability, and support to keep you moving toward certification.</p>
@@ -1183,13 +1260,13 @@ body.em-open{overflow:hidden}
       <div class="learn-show-card">
         <div class="learn-show-label">Live classroom energy</div>
         <div class="learn-show-frame">
-          <img src="/image/experience-live-classroom.jpg" alt="Instructor leading a professional live IT certification classroom session" width="1200" height="800" loading="lazy">
+          <img src="/image/students/4.jpeg" alt="Instructor leading a professional live IT certification classroom session" width="1200" height="800" loading="lazy">
         </div>
       </div>
       <div class="learn-show-card">
         <div class="learn-show-label">Hands-on &amp; cohort learning</div>
         <div class="learn-show-frame">
-          <img src="/image/experience-cohort-learning.jpg" alt="Hands-on cohort learning environment with focused certification students" width="1200" height="800" loading="lazy">
+          <img src="/image/students/5.jpeg" alt="Hands-on cohort learning environment with focused certification students" width="1200" height="800" loading="lazy">
         </div>
       </div>
     </div>
@@ -1230,6 +1307,14 @@ body.em-open{overflow:hidden}
       <button class="ftab" data-cat="cert">Industry Certifications</button>
       <button class="ftab" data-cat="skill">Skill-Based Programs</button>
       <button class="ftab" data-cat="spec">Specialized &amp; Compliance</button>
+    </div>
+    <div class="catalog-search-wrap">
+      <label class="catalog-search" for="catalogSearch">
+        <span class="catalog-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
+        <input type="text" id="catalogSearch" name="catalogSearch" role="searchbox" placeholder="Search by course, vendor, or keyword…" autocomplete="off" enterkeyhint="search" aria-label="Search courses">
+        <button type="button" class="catalog-search-clear" hidden aria-label="Clear search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </label>
+      <p class="catalog-search-meta" id="catalogSearchMeta" aria-live="polite"></p>
     </div>
     <div class="cg">
     <div class="brand-block" data-brand="comptia" style="--bk:#ef4444;--bk-tint:#fef2f2">
@@ -2107,6 +2192,18 @@ body.em-open{overflow:hidden}
     <div class="fbrand">
       <a href="/" class="flogo"><span class="ndot"></span>Nexperts <span>Academy</span></a>
       <p>Malaysia's authorized IT training academy. 98% first-attempt pass rate. CompTIA, EC-Council, AWS, Microsoft, Cisco and 8 more official partners.</p>
+      <div class="footer-social">
+        <div class="nx-social" role="navigation" aria-label="Social media">
+          <span class="nx-social-label">Follow us</span>
+          <div class="nx-social-row">
+            <a href="https://www.facebook.com/Nexpertsacademy" class="nx-social-btn nx-social-fb" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span><span class="nx-social-name">Facebook</span></a>
+            <a href="https://www.instagram.com/nexperts?igshid=YmMyMTA2M2Y%3D" class="nx-social-btn nx-social-ig" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span><span class="nx-social-name">Instagram</span></a>
+            <a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" class="nx-social-btn nx-social-li" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span><span class="nx-social-name">LinkedIn</span></a>
+            <a href="https://www.youtube.com/channel/UC9yAHm3DmVqrVf4fJFKWEQA" class="nx-social-btn nx-social-yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span class="nx-social-name">YouTube</span></a>
+            <a href="https://wa.me/601112216870" class="nx-social-btn nx-social-wa" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><span class="nx-social-name">WhatsApp</span></a>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="fcol"><h4>Courses</h4><ul><li><a href="#courses">CompTIA</a></li><li><a href="/ceh">EC-Council · CEH</a></li><li><a href="#courses">AWS</a></li><li><a href="#courses">Microsoft Azure</a></li><li><a href="#courses">Cisco</a></li><li><a href="#courses">Google Cloud</a></li><li><a href="#courses">ITIL · PM</a></li><li><a href="#courses">DevOps · Data</a></li></ul></div>
     <div class="fcol"><h4>Academy</h4><ul><li><a href="#roadmap">Career Roadmaps</a></li><li><a href="#paths">Career Paths</a></li><li><a href="/about">About Us</a></li><li><a href="#verify">Cert Verification</a></li><li><a href="#enroll">Corporate Training</a></li><li><a href="/contact-us">Contact</a></li><li><a href="https://nexpertsai.com" style="color:#bfdbfe">→ Nexperts AI</a></li></ul></div>

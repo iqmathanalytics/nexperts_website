@@ -7,8 +7,9 @@
     var targets = Array.prototype.slice.call(
       navLinks.querySelectorAll(":scope > li > a")
     );
-    var addonsBtn = navLinks.querySelector(".nav-addons-trigger");
-    if (addonsBtn) targets.push(addonsBtn);
+    navLinks.querySelectorAll(".nav-addons-trigger").forEach(function (btn) {
+      targets.push(btn);
+    });
     return targets;
   }
 
