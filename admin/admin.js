@@ -329,24 +329,88 @@ function defaultOverrides() {
   };
 }
 
+function normalizeOverrideState(obj) {
+  if (!obj || typeof obj !== "object") return defaultOverrides();
+  return {
+    version: 2,
+    courses: obj.courses || {},
+    card_order: obj.card_order || {},
+    brand_order: obj.brand_order || null,
+    custom_brands: obj.custom_brands || {},
+    custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
+  };
+}
+
 function loadOverrides() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultOverrides();
-    const obj = JSON.parse(raw);
-    if (!obj || typeof obj !== "object") return defaultOverrides();
-    return {
-      version: 2,
-      courses: obj.courses || {},
-      card_order: obj.card_order || {},
-      brand_order: obj.brand_order || null,
-      custom_brands: obj.custom_brands || {},
-      custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
-    };
+    return normalizeOverrideState(JSON.parse(raw));
   } catch (e) {
     console.warn("admin: failed to parse storage, starting fresh", e);
     return defaultOverrides();
   }
+}
+
+function publishedOverridesUrls() {
+  try {
+    const h = (location.hostname || "").toLowerCase();
+    if (h.endsWith(".netlify.app")) {
+      return ["/.netlify/functions/course-overrides", "/data/course-overrides.json"];
+    }
+  } catch (e) {
+    /* ignore */
+  }
+  return ["/api/course-overrides", "/data/course-overrides.json"];
+}
+
+function publishedStateHasData(state) {
+  if (!state) return false;
+  return (
+    Object.keys(state.courses || {}).length > 0 ||
+    (state.custom_courses || []).length > 0 ||
+    Object.keys(state.custom_brands || {}).length > 0 ||
+    (state.brand_order && state.brand_order.length > 0) ||
+    Object.keys(state.card_order || {}).length > 0
+  );
+}
+
+async function fetchPublishedOverrides() {
+  for (const url of publishedOverridesUrls()) {
+    try {
+      const res = await fetch(url, { cache: "no-store", credentials: "same-origin" });
+      if (!res.ok) continue;
+      const state = normalizeOverrideState(await res.json());
+      if (publishedStateHasData(state)) return state;
+    } catch (e) {
+      /* try next */
+    }
+  }
+  return null;
+}
+
+function mergePublishedWithLocal(published, local) {
+  const pub = normalizeOverrideState(published);
+  const draft = normalizeOverrideState(local);
+  const courses = { ...pub.courses };
+  for (const slug of Object.keys(draft.courses)) {
+    courses[slug] = { ...(courses[slug] || {}), ...draft.courses[slug] };
+  }
+  const card_order = { ...pub.card_order, ...draft.card_order };
+  const custom_brands = { ...pub.custom_brands, ...draft.custom_brands };
+  const customBySlug = Object.fromEntries(
+    [...(pub.custom_courses || []), ...(draft.custom_courses || [])]
+      .filter(c => c && c.slug)
+      .map(c => [c.slug, c])
+  );
+  return {
+    version: 2,
+    courses,
+    card_order,
+    brand_order: draft.brand_order || pub.brand_order,
+    custom_brands,
+    custom_courses: Object.values(customBySlug),
+  };
 }
 
 function saveOverrides(showToast = true) {
@@ -442,7 +506,8 @@ function updateStorageStatus() {
     status.textContent = "No overrides — using baseline";
     status.style.color = "var(--ink4)";
   } else {
-    status.textContent = `${total} field edit${total === 1 ? "" : "s"} · ${reordered} brand${reordered === 1 ? "" : "s"} reordered${customN ? ` · ${customN} custom course${customN === 1 ? "" : "s"}` : ""}`;
+    const liveNote = publishedStateHasData(overrides) ? " · includes live published edits" : "";
+    status.textContent = `${total} field edit${total === 1 ? "" : "s"} · ${reordered} brand${reordered === 1 ? "" : "s"} reordered${customN ? ` · ${customN} custom course${customN === 1 ? "" : "s"}` : ""}${liveNote}`;
     status.style.color = "var(--blue)";
   }
 }
@@ -504,7 +569,9 @@ async function init() {
     return;
   }
 
-  overrides = loadOverrides();
+  const localDraft = loadOverrides();
+  const published = await fetchPublishedOverrides();
+  overrides = published ? mergePublishedWithLocal(published, localDraft) : localDraft;
   rebuildCourseIndex();
   pruneStaleOverrides();
   rebuildCourseIndex();
@@ -972,6 +1039,16 @@ async function publishLive() {
       throw new Error(msg || res.statusText || "Publish failed");
     }
     toast("Published live — all visitors will see your updates shortly", "success");
+    const refreshed = await fetchPublishedOverrides();
+    if (refreshed) {
+      overrides = mergePublishedWithLocal(refreshed, loadOverrides());
+      rebuildCourseIndex();
+      pruneStaleOverrides();
+      rebuildCourseIndex();
+      renderBoard();
+      saveOverrides(false);
+      updateStorageStatus();
+    }
   } catch (e) {
     console.error("publishLive", e);
     toast(

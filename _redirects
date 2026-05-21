@@ -86,12 +86,10 @@
 /ios-development /courses/ios-development 301
 /netflix-data-analysis /courses/netflix-data-analysis 301
 # Filename & legacy paths → pretty canonical URLs (301)
+# Do NOT 301 .html → extensionless for pages that also have a 200 rewrite below (causes ERR_TOO_MANY_REDIRECTS on Cloudflare).
 /index.html / 301
-/about.html /about 301
-/contact.html /contact 301
-/contact-us /contact.html 301
-/contact-us/ /contact.html 301
-/privacy-policy.html /privacy-policy 301
+/contact-us /contact 301
+/contact-us/ /contact 301
 
 # Legacy singular /course → homepage courses section
 /course /#courses 301

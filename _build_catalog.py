@@ -432,37 +432,45 @@ def build_catalog():
         + "\n".join(blocks)
         + '\n    </div>'
     )
-    return tabs + "\n" + grid
+    return tabs, grid
+
+
+def _replace_courses_section(html: str, new_tabs: str, new_grid: str) -> str:
+    """Update filter-tabs and .cg only — preserve catalog-search-wrap between them."""
+    sec_pat = re.compile(r'(<section id="courses">)(.*?)(</section>)', re.DOTALL)
+    sec_m = sec_pat.search(html)
+    if not sec_m:
+        raise SystemExit('Could not locate <section id="courses"> in index.html')
+
+    sec_body = sec_m.group(2)
+
+    tabs_pat = re.compile(r'    <div class="filter-tabs">.*?</div>', re.DOTALL)
+    if not tabs_pat.search(sec_body):
+        raise SystemExit("Could not locate filter-tabs in courses section")
+    sec_body = tabs_pat.sub(new_tabs, sec_body, count=1)
+
+    cg_start = sec_body.find('    <div class="cg">')
+    if cg_start < 0:
+        raise SystemExit("Could not locate .cg grid in courses section")
+
+    # Closing `    </div>` of .cg is immediately before `  </div>` (closes .sw)
+    before_sw_close = sec_body.rfind("\n  </div>")
+    if before_sw_close < 0:
+        raise SystemExit("Could not locate .sw wrapper close in courses section")
+    cg_close = sec_body.rfind("    </div>", 0, before_sw_close)
+    if cg_close < 0 or cg_close < cg_start:
+        raise SystemExit("Could not locate .cg closing tag")
+
+    sec_body = sec_body[:cg_start] + new_grid + sec_body[cg_close + len("    </div>") :]
+
+    new_sec = sec_m.group(1) + sec_body + sec_m.group(3)
+    return html[: sec_m.start()] + new_sec + html[sec_m.end() :]
 
 
 def main():
     html = INDEX.read_text(encoding="utf-8")
-
-    new_block = build_catalog()
-
-    # Replace the existing block: from the old `<div class="filter-tabs">` to
-    # the closing `</div>` of the `<div class="cg">` grid, inclusive.
-    pattern = re.compile(
-        r'    <div class="filter-tabs">.*?    </div>\s*\n  </div>\s*\n</section>',
-        re.DOTALL,
-    )
-
-    match = pattern.search(html)
-    if not match:
-        # Fallback: try simpler pattern
-        pattern = re.compile(
-            r'    <div class="filter-tabs">.*?    </div>',
-            re.DOTALL,
-        )
-        match = pattern.search(html)
-        if not match:
-            raise SystemExit("Could not locate catalog block in index.html")
-        html = html[:match.start()] + new_block + html[match.end():]
-    else:
-        # Replace tabs + cg block, leaving </div></section> wrapper intact.
-        replacement = new_block + "\n  </div>\n</section>"
-        html = html[:match.start()] + replacement + html[match.end():]
-
+    new_tabs, new_grid = build_catalog()
+    html = _replace_courses_section(html, new_tabs, new_grid)
     INDEX.write_text(html, encoding="utf-8")
     total_cards = sum(1 for _ in CARDS)
     total_brands = sum(1 for bm in BRANDS if any(c[0] == bm[0] for c in CARDS))
