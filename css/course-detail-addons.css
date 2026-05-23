@@ -1,0 +1,149 @@
+/**
+ * Course detail page add-ons: mobile pricing order + related courses UI.
+ * Desktop layout is unchanged.
+ */
+
+/* ── Mobile: pricing card above overview (below tabs) ── */
+@media (max-width: 1100px) {
+  .page:has(.enroll-card) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page:has(.enroll-card) .main,
+  .page:has(.enroll-card) .sidebar,
+  .page:has(.enroll-card) .sidebar-inner {
+    display: contents;
+  }
+
+  .page:has(.enroll-card) .course-hero {
+    order: 1;
+  }
+
+  .page:has(.enroll-card) .quick-wins {
+    order: 2;
+  }
+
+  .page:has(.enroll-card) .tabs-bar {
+    order: 3;
+  }
+
+  .page:has(.enroll-card) .enroll-card {
+    order: 4;
+    position: static;
+    margin: 0 24px 4px;
+    border: 1px solid var(--line, #e2e8f0);
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+    background: var(--bg2, #fff);
+  }
+
+  .page:has(.enroll-card) .content-sec {
+    order: 5;
+  }
+
+  .page:has(.enroll-card) .sidebar-includes,
+  .page:has(.enroll-card) .verify-strip,
+  .page:has(.enroll-card) .share-strip {
+    order: 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .page:has(.enroll-card) .enroll-card {
+    margin: 0 24px 4px;
+  }
+}
+
+/* ── Related courses (overview tab footer) ── */
+.related-courses {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line, #e2e8f0);
+}
+
+.related-courses-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.related-courses-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink4, #94a3b8);
+}
+
+.related-courses-vendor {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--related-accent, #1d4ed8);
+}
+
+.related-courses-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.5) transparent;
+}
+
+.related-courses-track::-webkit-scrollbar {
+  height: 5px;
+}
+
+.related-courses-track::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+  border-radius: 999px;
+}
+
+.related-course-btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--related-border, rgba(29, 78, 216, 0.22));
+  background: var(--related-bg, rgba(29, 78, 216, 0.06));
+  color: var(--related-accent, #1d4ed8);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.related-course-btn:hover {
+  background: var(--related-accent, #1d4ed8);
+  border-color: var(--related-accent, #1d4ed8);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+}
+
+.related-course-btn:focus-visible {
+  outline: 2px solid var(--related-accent, #1d4ed8);
+  outline-offset: 2px;
+}
+
+.related-course-btn-arrow {
+  font-size: 0.95em;
+  opacity: 0.85;
+  transition: transform 0.15s ease;
+}
+
+.related-course-btn:hover .related-course-btn-arrow {
+  transform: translateX(2px);
+}

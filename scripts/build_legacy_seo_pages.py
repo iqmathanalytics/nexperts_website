@@ -33,6 +33,8 @@ REDIRECT_301: dict[str, str] = {
     "/machine-learning-with-python": "/courses/dp-100",
     "/ethical-hacking-workshop": "/ceh",
     "/power-bi-workshop": "/courses/pl-300",
+    "/post/unlocking-the-power-of-data-science-applications-and-challenges": "/blog/unlocking-the-power-of-data-science-applications-and-challenges",
+    "/post/unlocking-the-power-of-data-science-applications-and-challenges.html": "/blog/unlocking-the-power-of-data-science-applications-and-challenges",
 }
 for _c in LEGACY_COURSES:
     REDIRECT_301[f"/{_c['slug']}"] = f"/courses/{_c['slug']}"
@@ -138,7 +140,8 @@ STATIC_PAGES: list[dict] = [
             ("Contributors", "Articles are written by certified instructors with active delivery schedules — not generic content farms."),
         ],
         "cards": [
-            ("Unlocking Data Science", "Applications, challenges and realistic adoption paths for Malaysian enterprises.", "/post/unlocking-the-power-of-data-science-applications-and-challenges"),
+            ("Unlocking Data Science", "Applications, challenges and realistic adoption paths for Malaysian enterprises.", "/blog/unlocking-the-power-of-data-science-applications-and-challenges"),
+            ("CCNA Certification Guide", "Complete beginner roadmap for Cisco CCNA in 2026 — exam, study plan and careers.", "/blog/ccna-certification-guide-complete-beginner-roadmap-2026"),
             ("Browse courses", "Full certification catalogue.", "/#courses"),
             ("Workshops", "Short-format hands-on sessions.", "/workshops"),
             ("Contact editorial", "Suggest a topic or partnership.", "/contact-us"),
@@ -233,8 +236,8 @@ STATIC_PAGES: list[dict] = [
 ]
 
 BLOG_POST = {
-    "path": "/post/unlocking-the-power-of-data-science-applications-and-challenges",
-    "file": "post/unlocking-the-power-of-data-science-applications-and-challenges.html",
+    "path": "/blog/unlocking-the-power-of-data-science-applications-and-challenges",
+    "file": "blog/unlocking-the-power-of-data-science-applications-and-challenges.html",
     "title": "Unlocking the Power of Data Science",
     "title_em": "Applications & challenges",
     "description": "Unlocking the power of data science — applications and challenges for Malaysian enterprises adopting analytics and machine learning.",

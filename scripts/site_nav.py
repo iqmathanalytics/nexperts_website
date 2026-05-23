@@ -22,7 +22,11 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
             ("Blog Home", "/blog"),
             (
                 "Data Science Insights",
-                "/post/unlocking-the-power-of-data-science-applications-and-challenges",
+                "/blog/unlocking-the-power-of-data-science-applications-and-challenges",
+            ),
+            (
+                "CCNA Certification Guide",
+                "/blog/ccna-certification-guide-complete-beginner-roadmap-2026",
             ),
         ],
     ),
@@ -62,9 +66,30 @@ HOME_LINKS: list[tuple[str, str, str]] = [
     ("About", "/about", ""),
 ]
 
+COURSE_ROOT_PATHS = frozenset(
+    {
+        "/ceh",
+        "/ccna",
+        "/python-bootcamp",
+        "/data-science-with-python",
+    }
+)
+
 
 def _esc(s: str) -> str:
-    return html_lib.escape(s, quote=True)
+    return html_lib.escape(s, quote=False)
+
+
+def is_course_path(path: str) -> bool:
+    norm = path.rstrip("/") or "/"
+    return norm.startswith("/courses/") or norm in COURSE_ROOT_PATHS
+
+
+def _nav_sep() -> str:
+    return '    <li class="nav-sep" aria-hidden="true"><span></span></li>'
+
+
+NAV_SEP_AFTER = frozenset({"Beyond"})
 
 
 def _count_label(n: int) -> str:
@@ -134,11 +159,18 @@ def courses_dropdown_li(*, variant: str, current_path: str = "") -> str:
             f"      </div>"
         )
     stack = "\n".join(sections)
+    trigger_active = " active" if is_course_path(current_path) else ""
     return f"""    <li class="nav-addons-wrap nav-courses-wrap">
-      <button type="button" class="nav-addons-trigger nav-courses-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navCoursesPanel">
-        Courses <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      <button type="button" class="nav-addons-trigger nav-courses-trigger nav-addons-trigger--mega{trigger_active}" aria-expanded="false" aria-haspopup="true" aria-controls="navCoursesPanel">
+        <span class="nav-trigger-label">Courses</span>
+        <span class="nav-trigger-glyph nav-trigger-glyph--grid" aria-hidden="true"></span>
+        <span class="nav-addons-caret" aria-hidden="true">▾</span>
       </button>
-      <div class="nav-addons-panel nav-courses-panel" id="navCoursesPanel" role="menu" hidden>
+      <div class="nav-addons-panel nav-courses-panel nav-panel--courses" id="navCoursesPanel" role="menu" hidden>
+        <div class="nav-panel-head nav-panel-head--courses">
+          <p class="nav-panel-eyebrow">Certification catalog</p>
+          <p class="nav-panel-title">Browse 110+ courses</p>
+        </div>
         <div class="nav-courses-stack">
 {stack}
         </div>
@@ -146,7 +178,7 @@ def courses_dropdown_li(*, variant: str, current_path: str = "") -> str:
     </li>"""
 
 
-def addons_dropdown_li(current_path: str = "") -> str:
+def addons_dropdown_li(*, variant: str = "inner", current_path: str = "") -> str:
     path = current_path.rstrip("/") or "/"
     cols: list[str] = []
     for title, links in ADDON_SECTIONS:
@@ -162,10 +194,16 @@ def addons_dropdown_li(current_path: str = "") -> str:
         )
     grid = "\n".join(cols)
     return f"""    <li class="nav-addons-wrap">
-      <button type="button" class="nav-addons-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="navAddonsPanel">
-        {html_lib.escape(NAV_EXPLORE_LABEL)} <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      <button type="button" class="nav-addons-trigger nav-addons-trigger--explore" aria-expanded="false" aria-haspopup="true" aria-controls="navAddonsPanel">
+        <span class="nav-trigger-label">{html_lib.escape(NAV_EXPLORE_LABEL)}</span>
+        <span class="nav-trigger-glyph nav-trigger-glyph--spark" aria-hidden="true"></span>
+        <span class="nav-addons-caret" aria-hidden="true">▾</span>
       </button>
-      <div class="nav-addons-panel" id="navAddonsPanel" role="menu" hidden>
+      <div class="nav-addons-panel nav-panel--explore" id="navAddonsPanel" role="menu" hidden>
+        <div class="nav-panel-head nav-panel-head--explore">
+          <p class="nav-panel-eyebrow">Discover Nexperts</p>
+          <p class="nav-panel-title">Workshops, blog &amp; community</p>
+        </div>
         <div class="nav-addons-grid">
 {grid}
         </div>
@@ -180,9 +218,10 @@ def _nav_links(variant: str, current_path: str) -> str:
     for label, href, forced in links:
         if label == "Courses":
             parts.append(courses_dropdown_li(variant=variant, current_path=path))
+            parts.append(_nav_sep())
             continue
         if label == "Contact":
-            parts.append(addons_dropdown_li(path))
+            parts.append(addons_dropdown_li(variant=variant, current_path=path))
             cls = forced
             if not cls:
                 norm = href.rstrip("/")
@@ -200,6 +239,8 @@ def _nav_links(variant: str, current_path: str) -> str:
                 cls = "active"
         ac = f' class="{cls}"' if cls else ""
         parts.append(f'    <li><a href="{_esc(href)}"{ac}>{_esc(label)}</a></li>')
+        if label in NAV_SEP_AFTER:
+            parts.append(_nav_sep())
     return "\n".join(parts)
 
 
@@ -230,16 +271,19 @@ def render_site_nav(
     onclick = f' onclick="{enroll_onclick}"' if enroll_onclick else ""
     nav_class = "site-nav site-nav--home" if variant == "home" else "site-nav"
     ai_block = _nav_ai_block(show_mobile_hint=(variant == "home"))
-    return f"""<nav class="{nav_class}">
+    return f"""<nav class="{nav_class}" data-nx-nav="v2">
+  <div class="nav-aurora-track" aria-hidden="true"><span class="nav-aurora-beam"></span></div>
   <a href="/" class="nav-logo" aria-label="Nexperts Academy">
     <img src="{logo_prefix}/image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
   </a>
+  <div class="nav-center">
   <ul class="nav-links" id="sitePrimaryNav">
 {links}
   </ul>
-  <div class="nav-right">
+  </div>
+  <div class="nav-right nav-actions">
     {ai_block}
-    <a href="{_esc(enroll_href)}" class="nav-enroll"{onclick}>Enquire Now</a>
+    <a href="{_esc(enroll_href)}" class="nav-enroll"{onclick}><span class="nav-enroll-text">Enquire Now</span><span class="nav-enroll-arrow" aria-hidden="true">→</span></a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
@@ -267,5 +311,42 @@ NAV_ASSET_TAGS_REL = (
 COURSE_NAV_ASSET_TAGS = (
     '<link rel="stylesheet" href="../css/site-nav.css">\n'
     '<link rel="stylesheet" href="../css/nav-addons.css">\n'
+    '<link rel="stylesheet" href="../css/course-detail-addons.css">\n'
     + _NAV_SCRIPTS.format(prefix="..")
+    + '\n<script src="../js/course-related.js" defer></script>'
 )
+
+COURSE_DETAIL_ADDON_TAGS = {
+    "course": (
+        '<link rel="stylesheet" href="../css/course-detail-addons.css">\n'
+        '<script src="../js/course-related.js" defer></script>'
+    ),
+    "root": (
+        '<link rel="stylesheet" href="/css/course-detail-addons.css">\n'
+        '<script src="/js/course-related.js" defer></script>'
+    ),
+}
+
+WHATSAPP_URL = "https://wa.me/601112216870"
+
+_WHATSAPP_SVG = (
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+    '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>'
+    "</svg>"
+)
+
+
+def render_whatsapp_float() -> str:
+    return (
+        f'<a href="{WHATSAPP_URL}" class="nx-wa-float" target="_blank" '
+        f'rel="noopener noreferrer" aria-label="Chat with Nexperts Academy on WhatsApp">\n'
+        f"  {_WHATSAPP_SVG}\n"
+        f"</a>"
+    )
+
+
+WHATSAPP_FLOAT_CSS = {
+    "root": '<link rel="stylesheet" href="/css/whatsapp-float.css">',
+    "rel": '<link rel="stylesheet" href="css/whatsapp-float.css">',
+    "course": '<link rel="stylesheet" href="../css/whatsapp-float.css">',
+}

@@ -25,9 +25,24 @@
       function syncPanelHidden() {
         if (isDrawerMode()) {
           panel.removeAttribute("hidden");
-        } else {
-          panel.hidden = !wrap.classList.contains("is-open");
+          return;
         }
+        if (wrap.classList.contains("is-open")) {
+          panel.removeAttribute("hidden");
+        } else {
+          panel.setAttribute("hidden", "");
+        }
+      }
+
+      function closeOtherPanels() {
+        document.querySelectorAll(".nav-addons-wrap.is-open").forEach(function (other) {
+          if (other === wrap) return;
+          other.classList.remove("is-open");
+          var otherBtn = other.querySelector(".nav-addons-trigger");
+          var otherPanel = other.querySelector(".nav-addons-panel");
+          if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+          if (otherPanel && !isDrawerMode()) otherPanel.setAttribute("hidden", "");
+        });
       }
 
       function close() {
@@ -45,6 +60,7 @@
           clearTimeout(closeTimer);
           closeTimer = null;
         }
+        if (!isDrawerMode()) closeOtherPanels();
         wrap.classList.add("is-open");
         btn.setAttribute("aria-expanded", "true");
         syncPanelHidden();
@@ -73,6 +89,12 @@
         e.stopPropagation();
         e.stopImmediatePropagation();
         toggle();
+      });
+
+      btn.addEventListener("mouseenter", function () {
+        if (isDrawerMode()) return;
+        cancelClose();
+        open();
       });
 
       wrap.addEventListener("mouseenter", function () {

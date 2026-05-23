@@ -377,30 +377,128 @@ footer{padding:36px 20px 24px}
 <script src="../js/nav-highlight.js" defer></script>
 <script src="../js/nav-addons.js" defer></script>
 <script src="../js/courses-catalog.js" defer></script>
+<link rel="stylesheet" href="../css/course-detail-addons.css">
+<script src="../js/course-related.js" defer></script>
+<link rel="stylesheet" href="../css/whatsapp-float.css">
 </head>
 <body>
 
 <!-- NAV -->
 
-<nav class="site-nav">
+<nav class="site-nav" data-nx-nav="v2">
+  <div class="nav-aurora-track" aria-hidden="true"><span class="nav-aurora-beam"></span></div>
   <a href="/" class="nav-logo" aria-label="Nexperts Academy">
     <img src="/image/nexperts-logo.png" alt="Nexperts Academy logo" width="260" height="84">
   </a>
+  <div class="nav-center">
   <ul class="nav-links" id="sitePrimaryNav">
     <span class="nav-highlight" aria-hidden="true"></span>
     <li><a href="/">Home</a></li>
-    <li><a href="/#courses" class="active">Courses</a></li>
+    <li class="nav-addons-wrap nav-courses-wrap">
+      <button type="button" class="nav-addons-trigger nav-courses-trigger nav-addons-trigger--mega active" aria-expanded="false" aria-haspopup="true" aria-controls="navCoursesPanel">
+        <span class="nav-trigger-label">Courses</span>
+        <span class="nav-trigger-glyph nav-trigger-glyph--grid" aria-hidden="true"></span>
+        <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel nav-courses-panel nav-panel--courses" id="navCoursesPanel" role="menu" hidden>
+        <div class="nav-panel-head nav-panel-head--courses">
+          <p class="nav-panel-eyebrow">Certification catalog</p>
+          <p class="nav-panel-title">Browse 110+ courses</p>
+        </div>
+        <div class="nav-courses-stack">
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Industry Certifications</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="cert">90 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="eccouncil">EC-Council<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="aws">AWS<span class="nav-courses-count">9</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="microsoft">Microsoft<span class="nav-courses-count">25</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="cisco">Cisco<span class="nav-courses-count">8</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="gcp">Google Cloud<span class="nav-courses-count">3</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="peoplecert">PeopleCert<span class="nav-courses-count">7</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="pmi">PMI<span class="nav-courses-count">2</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="scrum">Scrum Alliance<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="linuxfdn">Linux Foundation<span class="nav-courses-count">2</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="hashicorp">HashiCorp<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="tableau">Tableau<span class="nav-courses-count">1</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isaca">ISACA<span class="nav-courses-count">5</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="isc2">ISC2<span class="nav-courses-count">6</span></a>
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="cert" data-nav-brand="offsec">Offensive Security<span class="nav-courses-count">2</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Skill-Based Programs</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="skill">20 courses</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="skill" data-nav-brand="skill">Skill-Based<span class="nav-courses-count">20</span></a>
+        </div>
+      </div>
+      <div class="nav-courses-section">
+        <div class="nav-courses-section-head">
+          <p class="nav-courses-section-title">Specialized &amp; Compliance</p>
+          <a href="/#courses" class="nav-courses-section-link" role="menuitem" data-nav-cat="spec">1 course</a>
+        </div>
+        <div class="nav-courses-vendors">
+          <a href="/#courses" class="nav-courses-vendor" role="menuitem" data-nav-cat="spec" data-nav-brand="comptia">CompTIA<span class="nav-courses-count">1</span></a>
+        </div>
+      </div>
+        </div>
+      </div>
+    </li>
+    <li class="nav-sep" aria-hidden="true"><span></span></li>
     <li><a href="/#roadmap">Roadmaps</a></li>
     <li><a href="/#verify">Verify</a></li>
     <li><a href="/#paths">Career Paths</a></li>
     <li><a href="/#clients">Clients</a></li>
-    <li><a href="../Nexperts beyond.html">Beyond</a></li>
+    <li><a href="/Nexperts beyond.html">Beyond</a></li>
+    <li class="nav-sep" aria-hidden="true"><span></span></li>
+    <li class="nav-addons-wrap">
+      <button type="button" class="nav-addons-trigger nav-addons-trigger--explore" aria-expanded="false" aria-haspopup="true" aria-controls="navAddonsPanel">
+        <span class="nav-trigger-label">Explore</span>
+        <span class="nav-trigger-glyph nav-trigger-glyph--spark" aria-hidden="true"></span>
+        <span class="nav-addons-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-addons-panel nav-panel--explore" id="navAddonsPanel" role="menu" hidden>
+        <div class="nav-panel-head nav-panel-head--explore">
+          <p class="nav-panel-eyebrow">Discover Nexperts</p>
+          <p class="nav-panel-title">Workshops, blog &amp; community</p>
+        </div>
+        <div class="nav-addons-grid">
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Workshops &amp; Events</p>
+        <a href="/workshops" role="menuitem">Workshops</a>
+        <a href="/upcoming-events" role="menuitem">Upcoming Events</a>
+        <a href="/past-events" role="menuitem">Past Events</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Blog</p>
+        <a href="/blog" role="menuitem">Blog Home</a>
+        <a href="/blog/unlocking-the-power-of-data-science-applications-and-challenges" role="menuitem">Data Science Insights</a>
+        <a href="/blog/ccna-certification-guide-complete-beginner-roadmap-2026" role="menuitem">CCNA Certification Guide</a>
+      </div>
+      <div class="nav-addons-col">
+        <p class="nav-addons-col-title">Community</p>
+        <a href="/catalyst-for-change" role="menuitem">Catalyst for Change</a>
+        <a href="/empowering-community-throught-technology" role="menuitem">Empowering Community</a>
+        <a href="/chinese-new-year" role="menuitem">Chinese New Year Event</a>
+        <a href="/tan-boon-heong-event" role="menuitem">Tan Boon Heong Event</a>
+        <a href="/nexpert-x-universiti-teknologi-mara" role="menuitem">Nexperts × UiTM</a>
+      </div>
+        </div>
+      </div>
+    </li>
     <li><a href="/contact-us">Contact</a></li>
     <li><a href="/about">About</a></li>
   </ul>
-  <div class="nav-right">
+  </div>
+  <div class="nav-right nav-actions">
     <div class="nav-ai-wrap"><a href="https://nexpertsai.com" class="nav-ai"><span class="ldot"></span><span class="nav-ai-label">Nexperts AI</span></a></div>
-    <a href="/contact-us?course=cct-cybersecurity-technician&title=CCT%20%E2%80%94%20Cybersecurity%20Technician#enquire" class="nav-enroll">Enquire Now</a>
+    <a href="/contact-us?course=cct-cybersecurity-technician&amp;amp;amp;amp;title=CCT%20%E2%80%94%20Cybersecurity%20Technician#enquire" class="nav-enroll"><span class="nav-enroll-text">Enquire Now</span><span class="nav-enroll-arrow" aria-hidden="true">→</span></a>
   </div>
   <button type="button" class="nav-menu-btn" id="siteNavMenuBtn" aria-controls="sitePrimaryNav" aria-expanded="false" aria-label="Open menu"><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span><span class="nav-menu-bar" aria-hidden="true"></span></button>
 </nav>
@@ -1082,5 +1180,8 @@ document.querySelector('.pass-band').style.display = 'none';
 <script src="../js/course-page-ui.js" defer></script>
 <script src="../admin/overlay.js" defer></script>
   <script src="../js/site-nav-mobile.js" defer></script>
+<a href="https://wa.me/601112216870" class="nx-wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with Nexperts Academy on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 </body>
 </html>

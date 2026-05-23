@@ -28,7 +28,8 @@
   <url><loc>https://www.nexpertsacademy.com/upcoming-events</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.nexpertsacademy.com/past-events</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.nexpertsacademy.com/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.nexpertsacademy.com/post/unlocking-the-power-of-data-science-applications-and-challenges</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.nexpertsacademy.com/blog/unlocking-the-power-of-data-science-applications-and-challenges</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.nexpertsacademy.com/blog/ccna-certification-guide-complete-beginner-roadmap-2026</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.nexpertsacademy.com/catalyst-for-change</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.nexpertsacademy.com/empowering-community-throught-technology</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.nexpertsacademy.com/chinese-new-year</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>

@@ -10,21 +10,31 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from site_nav import (  # noqa: E402
+    COURSE_DETAIL_ADDON_TAGS,
     COURSE_NAV_ASSET_TAGS,
     NAV_ASSET_TAGS,
     NAV_ASSET_TAGS_REL,
+    WHATSAPP_FLOAT_CSS,
     addons_dropdown_li,
     render_site_nav,
+    render_whatsapp_float,
 )
 
 NAV_RE = re.compile(
-    r"<nav class=\"site-nav(?:\s+site-nav--home)?\">.*?</nav>\s*<div class=\"nav-drawer-backdrop\"[^>]*>",
+    r'<nav class="site-nav(?:\s+site-nav--home)?(?:\s+data-nx-nav="v2")?">.*?</nav>\s*'
+    r'<div class="nav-drawer-backdrop"[^>]*>\s*</div>'
+    r'(?:\s*</div>){0,6}',
     re.DOTALL | re.IGNORECASE,
 )
 
 CONTACT_LI_RE = re.compile(
     r"(\s*<li><a href=\"(?:\.\./)?contact-us\"[^>]*>Contact</a></li>)",
     re.IGNORECASE,
+)
+
+WHATSAPP_SOCIAL_RE = re.compile(
+    r'\s*<a href="https://wa\.me/601112216870" class="nx-social-btn nx-social-wa"[^>]*>.*?</a>',
+    re.DOTALL | re.IGNORECASE,
 )
 
 STATIC_PAGES = [
@@ -37,7 +47,8 @@ STATIC_PAGES = [
     "chinese-new-year.html",
     "tan-boon-heong-event.html",
     "nexpert-x-universiti-teknologi-mara.html",
-    "post/unlocking-the-power-of-data-science-applications-and-challenges.html",
+    "blog/unlocking-the-power-of-data-science-applications-and-challenges.html",
+    "blog/ccna-certification-guide-complete-beginner-roadmap-2026.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]
@@ -61,6 +72,8 @@ def path_from_file(rel: str) -> str:
         return "/contact-us"
     if rel == "Nexperts beyond.html":
         return "/Nexperts beyond.html"
+    if rel.startswith("blog/"):
+        return "/" + rel.replace(".html", "")
     if rel.startswith("post/"):
         return "/" + rel.replace(".html", "")
     return "/" + rel.replace(".html", "")
@@ -155,8 +168,74 @@ def ensure_nav_assets(html: str, *, course: bool = False) -> str:
     return html.replace("</head>", tags + "\n</head>", 1)
 
 
+def ensure_course_detail_addons(html: str, *, course: bool = False) -> str:
+    if "enroll-card" not in html or "course-detail-addons.css" in html:
+        return html
+    tags = COURSE_DETAIL_ADDON_TAGS["course" if course else "root"]
+    if 'src="../js/courses-catalog.js"' in html:
+        return html.replace(
+            '<script src="../js/courses-catalog.js" defer></script>',
+            '<script src="../js/courses-catalog.js" defer></script>\n' + tags,
+            1,
+        )
+    if 'src="/js/courses-catalog.js"' in html:
+        return html.replace(
+            '<script src="/js/courses-catalog.js" defer></script>',
+            '<script src="/js/courses-catalog.js" defer></script>\n' + tags,
+            1,
+        )
+    if 'src="js/courses-catalog.js"' in html:
+        return html.replace(
+            '<script src="js/courses-catalog.js" defer></script>',
+            '<script src="js/courses-catalog.js" defer></script>\n' + tags,
+            1,
+        )
+    return html.replace("</head>", tags + "\n</head>", 1)
+
+
+def strip_whatsapp_social(html: str) -> str:
+    return WHATSAPP_SOCIAL_RE.sub("", html)
+
+
+def ensure_whatsapp_float(html: str, *, course: bool = False) -> str:
+    html = strip_whatsapp_social(html)
+    if "nx-wa-float" in html:
+        if "whatsapp-float.css" not in html:
+            css = WHATSAPP_FLOAT_CSS["course" if course else "root"]
+            if course:
+                pass
+            elif 'href="/css/site-nav.css"' in html or 'href="/css/nav-addons.css"' in html:
+                css = WHATSAPP_FLOAT_CSS["root"]
+            elif 'href="css/site-nav.css"' in html or 'href="css/nav-addons.css"' in html:
+                css = WHATSAPP_FLOAT_CSS["rel"]
+            else:
+                css = WHATSAPP_FLOAT_CSS["course" if course else "root"]
+            if css in html:
+                return html
+            if "</head>" in html:
+                html = html.replace("</head>", css + "\n</head>", 1)
+        return html
+
+    if course:
+        css = WHATSAPP_FLOAT_CSS["course"]
+    elif 'href="/css/site-nav.css"' in html or 'href="/css/nav-addons.css"' in html:
+        css = WHATSAPP_FLOAT_CSS["root"]
+    elif 'href="css/site-nav.css"' in html or 'href="css/nav-addons.css"' in html:
+        css = WHATSAPP_FLOAT_CSS["rel"]
+    else:
+        css = WHATSAPP_FLOAT_CSS["root"]
+
+    if "whatsapp-float.css" not in html and "</head>" in html:
+        html = html.replace("</head>", css + "\n</head>", 1)
+
+    block = render_whatsapp_float()
+    if re.search(r"</body>", html, re.IGNORECASE):
+        html = re.sub(r"</body>", block + "\n</body>", html, count=1, flags=re.IGNORECASE)
+    return html
+
+
 def inject_addons_before_contact(html: str, current_path: str) -> str:
-    block = addons_dropdown_li(current_path)
+    block = addons_dropdown_li(variant="inner", current_path=current_path)
     if "nav-addons-wrap" in html:
         return html
     m = CONTACT_LI_RE.search(html)
@@ -207,13 +286,16 @@ def patch_file(path: Path, mode: str, current_path: str) -> bool:
             enroll_href="/contact-us#enquire",
         )
     elif mode == "course":
-        enroll_m = re.search(r'(<a href="[^"]*" class="nav-enroll")', html)
         enroll_href = "/contact-us#enquire"
-        if enroll_m:
-            eh = re.search(r'href="([^"]+)" class="nav-enroll"', html)
-            if eh:
-                enroll_href = eh.group(1)
-        html = inject_addons_before_contact(html, current_path)
+        eh = re.search(r'href="([^"]+)" class="nav-enroll"', html)
+        if eh:
+            enroll_href = eh.group(1)
+        html = replace_full_nav(
+            html,
+            variant="inner",
+            current_path=current_path,
+            enroll_href=enroll_href,
+        )
     elif mode == "static":
         html = replace_full_nav(
             html,
@@ -223,6 +305,9 @@ def patch_file(path: Path, mode: str, current_path: str) -> bool:
         )
 
     html = ensure_nav_assets(html, course=course)
+    html = ensure_whatsapp_float(html, course=course)
+    if "enroll-card" in html:
+        html = ensure_course_detail_addons(html, course=course)
     if html != orig:
         path.write_text(html, encoding="utf-8", newline="\n")
         return True
