@@ -71,6 +71,8 @@
 .nx-social-li .nx-social-icon svg{color:#0a66c2}
 .nx-social-yt{--soc:#ff0000}
 .nx-social-yt .nx-social-icon svg{color:#ff0000}
+.nx-social-tt{--soc:#111111}
+.nx-social-tt .nx-social-icon svg{color:#111111}
 .nx-social-wa{--soc:#25d366}
 .nx-social-wa .nx-social-icon svg{color:#25d366}
 .hero-social .nx-social-btn:hover .nx-social-icon svg,
@@ -98,6 +100,7 @@
 .hero-social .nx-social-ig:hover{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
 .hero-social .nx-social-li:hover{background:linear-gradient(135deg,#0a66c2,#004182)}
 .hero-social .nx-social-yt:hover{background:linear-gradient(135deg,#ff0000,#cc0000)}
+.hero-social .nx-social-tt:hover{background:linear-gradient(135deg,#111111,#2a2a2a)}
 .hero-social .nx-social-wa:hover{background:linear-gradient(135deg,#25d366,#128c7e)}
 .hero-social .nx-social-icon{background:rgba(15,23,42,.06)}
 .hero-social .nx-social-btn:hover .nx-social-icon{background:rgba(0,0,0,.15)}
@@ -129,6 +132,7 @@
 .contact-social .nx-social-ig:hover{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
 .contact-social .nx-social-li:hover{background:linear-gradient(135deg,#0a66c2,#004182)}
 .contact-social .nx-social-yt:hover{background:linear-gradient(135deg,#ff0000,#cc0000)}
+.contact-social .nx-social-tt:hover{background:linear-gradient(135deg,#111111,#2a2a2a)}
 .contact-social .nx-social-wa:hover{background:linear-gradient(135deg,#25d366,#128c7e)}
 .contact-social .nx-social-icon{width:28px;height:28px;background:var(--bg2)}
 

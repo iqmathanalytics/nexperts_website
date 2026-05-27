@@ -716,6 +716,30 @@ h2.head em.m{color:var(--marM)}
 /* ── TESTIMONIALS ── */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:48px}
 .tcard2{background:#fff;padding:30px 26px}
+.gr-head-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:20px}
+.gr-wrap{position:relative;margin-top:18px;padding:6px 0}
+.gr-wrap::before,.gr-wrap::after{content:"";position:absolute;top:0;bottom:0;width:50px;z-index:1;pointer-events:none}
+.gr-wrap::before{left:0;background:linear-gradient(90deg,var(--bg2),rgba(238,246,255,0))}
+.gr-wrap::after{right:0;background:linear-gradient(270deg,var(--bg2),rgba(238,246,255,0))}
+.gr-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(300px,34%);gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:none;padding:4px 2px 10px;scroll-behavior:auto;align-items:start}
+.gr-track.is-paused{cursor:default}
+/* Hide horizontal scrollbar (keep scroll working) */
+.gr-track{-ms-overflow-style:none;scrollbar-width:none}
+.gr-track::-webkit-scrollbar{display:none}
+.gr-card{scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 8px 24px rgba(15,23,42,.06);transition:transform .25s ease,box-shadow .25s ease;align-self:start;height:auto}
+.gr-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(15,23,42,.1)}
+.gr-top{display:flex;align-items:center;gap:10px}
+.gr-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dbeafe;color:#1e3a8a;font-weight:800;font-size:.73rem}
+.gr-name{font-weight:700;color:var(--ink);font-size:.84rem}
+.gr-meta{font-size:.72rem;color:var(--ink4)}
+.gr-google{margin-left:auto;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:conic-gradient(#4285F4 0 25%,#34A853 25% 50%,#FBBC05 50% 75%,#EA4335 75% 100%);color:#fff;font-size:.7rem;font-weight:900}
+.gr-stars{color:#d97706;letter-spacing:1px;font-size:.9rem;margin:12px 0 10px}
+.gr-text{font-size:.82rem;color:var(--ink2);line-height:1.6}
+.gr-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:34px;height:34px;border:1px solid var(--line2);background:#fff;border-radius:999px;cursor:pointer;box-shadow:0 8px 20px rgba(15,23,42,.12)}
+.gr-prev{left:-10px}
+.gr-next{right:-10px}
+@media (max-width:1120px){.gr-track{grid-auto-columns:minmax(300px,48%)}}
+@media (max-width:780px){.gr-track{grid-auto-columns:minmax(280px,84%)}.gr-prev{left:-4px}.gr-next{right:-4px}.gr-wrap::before,.gr-wrap::after{width:28px}}
 .tquote{font-family:‘Fraunces’,serif;font-style:italic;font-size:.97rem;font-weight:300;color:var(--ink2);line-height:1.8;margin-bottom:22px}
 .tauth{display:flex;align-items:center;gap:11px;padding-top:16px;border-top:1px solid var(--line)}
 .tav2{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
@@ -1002,7 +1026,7 @@ body.em-open{overflow:hidden}
         <p class="nav-addons-col-title">Blog</p>
         <a href="/blog" role="menuitem">Blog Home</a>
         <a href="/blog/unlocking-the-power-of-data-science-applications-and-challenges" role="menuitem">Data Science Insights</a>
-        <a href="/blog/ccna-certification-guide-complete-beginner-roadmap-2026" role="menuitem">CCNA Certification Guide</a>
+        <a href="/blog/ccna-certification-guide" role="menuitem">CCNA Certification Guide</a>
       </div>
       <div class="nav-addons-col">
         <p class="nav-addons-col-title">Community</p>
@@ -1070,6 +1094,7 @@ body.em-open{overflow:hidden}
             <div class="nx-social-row">
               <a href="https://www.facebook.com/Nexpertsacademy" class="nx-social-btn nx-social-fb" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on Facebook"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span><span class="nx-social-name">Facebook</span></a>
               <a href="https://www.instagram.com/nexperts?igshid=YmMyMTA2M2Y%3D" class="nx-social-btn nx-social-ig" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on Instagram"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span><span class="nx-social-name">Instagram</span></a>
+              <a href="https://www.tiktok.com/@nexperts_academy" class="nx-social-btn nx-social-tt" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on TikTok"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.321 5.562a5.124 5.124 0 0 1-3.17-2.894A5.14 5.14 0 0 1 15.805 1h-3.41v13.459a2.744 2.744 0 1 1-1.89-2.608V8.39a6.163 6.163 0 1 0 5.31 6.069V8.18a8.498 8.498 0 0 0 5.184 1.76V6.53a5.101 5.101 0 0 1-1.678-.968z"/></svg></span><span class="nx-social-name">TikTok</span></a>
               <a href="https://www.linkedin.com/company/nexperts-academy-sdn-bhd/" class="nx-social-btn nx-social-li" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on LinkedIn"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span><span class="nx-social-name">LinkedIn</span></a>
               <a href="https://www.youtube.com/channel/UC9yAHm3DmVqrVf4fJFKWEQA" class="nx-social-btn nx-social-yt" target="_blank" rel="noopener noreferrer" aria-label="Nexperts Academy on YouTube"><span class="nx-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span class="nx-social-name">YouTube</span></a>
             </div>
@@ -1420,7 +1445,7 @@ body.em-open{overflow:hidden}
       <a href="/courses/sc-300" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="sc-300" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">SC-300: Identity & Access Admin</div><div class="cdesc2">Azure AD, identity governance, conditional access and Zero Trust.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(118)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,880+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       <a href="/courses/pl-300" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="pl-300" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">PL-300: Power BI Data Analyst</div><div class="cdesc2">Interactive BI dashboards and reports — most-requested data cert in MY.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(312)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 12,480+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       <a href="/courses/dp-203" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="dp-203" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">DP-203: Data Engineer</div><div class="cdesc2">Design and implement data solutions in Azure — pipelines, lakes and more.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.9 <em>(138)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,680+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
-      <a href="/courses/ai-102" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="ai-102" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AI-102: Azure AI Engineer</div><div class="cdesc2">Build and manage Azure AI solutions — OpenAI, Cognitive Services and more.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(94)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,460+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
+      <a href="/courses/artificial-intelligence" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="artificial-intelligence" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AI-102: Azure AI Engineer</div><div class="cdesc2">Build and manage Azure AI solutions — OpenAI, Cognitive Services and more.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(94)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 3,460+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       <a href="/courses/ms-102" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="ms-102" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">MS-102: M365 Administrator</div><div class="cdesc2">Microsoft 365 tenant administration, security and compliance management.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.7 <em>(112)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 5,240+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       <a href="/courses/az-500" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="az-500" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-500: Azure Security Engineer</div><div class="cdesc2">Implement security controls, threat protection and identity in Azure.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(116)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 4,280+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
       <a href="/courses/az-700" class="cc show" data-cat="cert" data-brand="microsoft" data-slug="az-700" data-vendor="Microsoft" data-level="Associate"><div class="cv2">Microsoft <span class="cbadge">Cert</span></div><div class="cname2">AZ-700: Azure Network Engineer</div><div class="cdesc2">Design, implement and manage Azure networking, hybrid and ExpressRoute.</div><div class="c-stats">  <span class="c-rate"><span class="c-star">★</span> 4.8 <em>(82)</em></span>  <span class="c-enrol"><span class="c-people">👥</span> 2,640+ enrolled</span></div><div class="cmeta">  <span class="clevel">Associate</span>  <span class="c-cta">View Details <span class="cta-arr">→</span></span></div></a>
@@ -1956,12 +1981,161 @@ body.em-open{overflow:hidden}
   <div class="sw">
     <div class="reveal">
       <div class="eyebrow">What they say</div>
-      <h2 class="head">Real outcomes.<br><em>Real people.</em></h2>
+      <h2 class="head">Real Google reviews.<br><em>Real learners.</em></h2>
     </div>
-    <div class="testi-grid">
-      <div class="tcard2 reveal"><p class="tquote">"Passed CEH on my first attempt. The trainer knew every scenario because he's actually done the work — not just studied for it."</p><div class="tauth"><div class="tav2 tav2-b">AR</div><div><div class="tname">Ahmad Raza</div><div class="trole2">SOC Analyst · Maybank</div></div></div></div>
-      <div class="tcard2 reveal d1"><p class="tquote">"The roadmap they gave me was a game-changer. I knew exactly which cert to do next, how long it would take, and what salary to expect. Cleared AWS SAA in 2 months."</p><div class="tauth"><div class="tav2 tav2-m">SW</div><div><div class="tname">Sarah Wong</div><div class="trole2">Cloud Architect · Telekom Malaysia</div></div></div></div>
-      <div class="tcard2 reveal d2"><p class="tquote">"We enrolled 12 team members for ITIL 4 Foundation. Seamless group package — we passed the audit three weeks later with flying colours."</p><div class="tauth"><div class="tav2 tav2-g">KV</div><div><div class="tname">Kavitha Vijayan</div><div class="trole2">IT Director · Petronas Subsidiary</div></div></div></div>
+    <div class="gr-head-row reveal">
+      <div class="google-reviews-tag"><span class="google-g" aria-hidden="true">G</span> Google Reviews</div>
+      <a href="https://www.google.com/search?q=Nexperts+Academy+Petaling+Jaya+Reviews#lrd=0x31ccca2c63d0a503:0x5614448397674f64,1" target="_blank" rel="noopener noreferrer" class="google-reviews-btn">View all on Google ↗</a>
+    </div>
+    <div class="gr-wrap reveal" id="googleReviewsWrap">
+      <button type="button" class="gr-nav gr-prev" aria-label="Previous reviews">‹</button>
+      <div class="gr-track" id="googleReviewsTrack">
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">SS</div>
+          <div>
+            <div class="gr-name">Sareeyah Salleh</div>
+            <div class="gr-meta">6 reviews · 4 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"I had an excellent learning experience at this IT academy. The trainer is truly awesome, and I learned a lot throughout the course. Mr. Yash Sharma makes every lesson engaging, structured, and easy to understand, especially for beginners like me. He explains complex concepts in a simple way and is always patient when answering questions. The training sessions are interactive and practical, which helped me gain real confidence in my skills. I highly recommend this academy to anyone who wants to build a strong foundation in IT."</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">F</div>
+          <div>
+            <div class="gr-name">Fiydaa</div>
+            <div class="gr-meta">3 reviews · 4 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"I really enjoyed my learning journey with Mr. Yash and my classmates. The process was quite hectic because I had to balance work and classes at the same time, but it was very rewarding. I learned many of useful knowledge that I believe will help me in my future career. There were moments when I felt overwhelmed since the learning process was not always easy, but going through those challenges made the experience more meaningful. Looking back, I feel proud of myself for completing the journey. I would like to sincerely thank Mr. Yash for his passion and dedication in teaching, and also NexPerts and Yayasan Peneraju for giving me this opportunity. It was truly a great experience"</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">SH</div>
+          <div>
+            <div class="gr-name">Shahira Haider</div>
+            <div class="gr-meta">1 review · 3 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"My experience with Nexpert Academy has been highly satisfactory and professionally valuable. The courses are well-structured, practical, and delivered with clarity by knowledgeable instructors. The emphasis on hands-on learning and real-world application significantly enhanced my understanding. The support provided throughout the learning process was responsive and helpful. Overall, Nexpert Academy offers high-quality training that I would confidently recommend to anyone seeking professional development."</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">WM</div>
+          <div>
+            <div class="gr-name">wan muhammad faiz wan mohd zaki</div>
+            <div class="gr-meta">1 review · 3 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"The training is quite tough (9–5 for 30 days), but it is worth taking, especially for those who have zero coding knowledge. The trainer is very good; he shares all the knowledge he has about data science, from technical skills to interview preparation."</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">FR</div>
+          <div>
+            <div class="gr-name">Fanna Rashid</div>
+            <div class="gr-meta">4 reviews · 6 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"I join AI &amp; Machine Learning Bootcamp for 6 weeks. the academy guide me from start until end during this program smoothly. and the trainer, Mr Yash also teach us all the courses very well. Easy understood as a beginner with no IT background. Recommended to join YP courses under Nexpert Academy."</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">NS</div>
+          <div>
+            <div class="gr-name">NOOR SURIYANI Abdul Wahab</div>
+            <div class="gr-meta">10 reviews · 6 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"I would like to express my sincere appreciation to NEXPERTS ACADEMY for organizing the AI &amp; Machine Learning Bootcamp: From Zero to Intermediate. This marks my very first exposure to the world of AI and coding, and the experience has been truly outstanding. The program has sparked a strong interest in me to explore AI more deeply, and I am excited to continue this journey of learning and growth."</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">HM</div>
+          <div>
+            <div class="gr-name">Haziq Malek kydm0060</div>
+            <div class="gr-meta">1 review · 3 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"Nexperts Academy provides excellent learning support with friendly and helpful teachers. The classes are engaging and easy to follow. A very positive experience overall!"</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">AM</div>
+          <div>
+            <div class="gr-name">Ahmad Mirza bin Khirul Annuar</div>
+            <div class="gr-meta">1 review · 4 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"Very good administration practices. Help liaise between trainers and students well and facilitate the learning process at the same time. Easy to follow directions with external sponsors requirements as well."</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">LH</div>
+          <div>
+            <div class="gr-name">Luqman Hakim Bin Fazilah Shuhaimi</div>
+            <div class="gr-meta">2 reviews · a year ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"The training was excellent because the trainer explain very clearly and did practical session to better understand of the topic. At the end of the training session, all the materials were made available to rewatch whenever I want. The trainer's style was engaging and well prepared lesson plan. The place also super conducive for organising training program. Definitely recommend for anyone to undergo training here. Sepriyandi Agusr (Sepz Yasuo) 8 reviews 5 S a year ago At Nexperts Academy, I experienced an innovative learning environment with expert trainers, interactive sessions, and hands-on projects. The focus on practical skills and personalized guidance truly enhanced my growth."</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">KM</div>
+          <div>
+            <div class="gr-name">Kamal Muttaqin</div>
+            <div class="gr-meta">26 reviews · 2 years ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"I took CCNA Classes here and it helps me a lot to understand the basics of networking. Instructor explained everything in a simple way and the classes were very laid-back. it's better if you go to their physical class as you will get to interact with the instructor better. Highly recommend if you want to take CCNA classes and exam here"</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">SR</div>
+          <div>
+            <div class="gr-name">Sivaguru Rajendran</div>
+            <div class="gr-meta">12 reviews · 11 months ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"I had a fantastic learning experience with Nexperts during my Python training. The staff was highly organized, and the lecturer was exceptiona. His teaching style made complex concepts easy to understand. I highly recommend Nexperts to anyone looking to upskill in Python or other courses. Joanne Wong 5 reviews 5 S a year ago I had an incredible learning experience during the Python training bootcamp. Mr. Yash, our trainer, did a remarkable job of explaining the concepts in great detail. His approach helped me gain a deep understanding of Python, and I truly appreciated how thorough he was in covering the topics. The explanations were clear and easy to follow, and I was amazed by how well he tailored the content to suit my learning needs. This course has provided me with the knowledge and confidence I was hoping for, and I'm excited to apply what I've learned in real-world projects. Highly recommended!"</p>
+      </article>
+      <article class="gr-card">
+        <div class="gr-top">
+          <div class="gr-avatar">NA</div>
+          <div>
+            <div class="gr-name">Nor afizan</div>
+            <div class="gr-meta">3 reviews · a week ago</div>
+          </div>
+          <span class="gr-google" aria-hidden="true">G</span>
+        </div>
+        <div class="gr-stars" aria-label="5 out of 5">★★★★★</div>
+        <p class="gr-text">"“Nexperts Academy is an excellent place to learn AI and Machine Learning. I gained valuable knowledge, improved my skills, and now have a much clearer understanding of the field. Highly recommended for anyone interested in AI.”"</p>
+      </article>
+      </div>
+      <button type="button" class="gr-nav gr-next" aria-label="Next reviews">›</button>
     </div>
   </div>
 </section>
@@ -2075,7 +2249,7 @@ body.em-open{overflow:hidden}
               <option data-curriculum="/courses/sc-300">SC-300: Identity &amp; Access Admin</option>
               <option data-curriculum="/courses/pl-300">PL-300: Power BI Data Analyst</option>
               <option data-curriculum="/courses/dp-203">DP-203: Data Engineer</option>
-              <option data-curriculum="/courses/ai-102">AI-102: Azure AI Engineer</option>
+              <option data-curriculum="/courses/artificial-intelligence">AI-102: Azure AI Engineer</option>
               <option data-curriculum="/courses/ms-102">MS-102: M365 Administrator</option>
               <option data-curriculum="/courses/az-500">AZ-500: Azure Security Engineer</option>
               <option data-curriculum="/courses/az-700">AZ-700: Azure Network Engineer</option>
@@ -2430,6 +2604,54 @@ async function submitEnquireModal(e){
   if(!m) return;
   m.addEventListener('click',ev=>{ if(ev.target===m) closeEnquireModal(); });
   document.addEventListener('keydown',ev=>{ if(ev.key==='Escape' && m.classList.contains('show')) closeEnquireModal(); });
+})();
+
+/* ── Google reviews rail (continuous scroll, pause on hover) ── */
+(function(){
+  const wrap=document.getElementById('googleReviewsWrap');
+  const track=document.getElementById('googleReviewsTrack');
+  if(!wrap||!track) return;
+
+  const originals=[...track.children];
+  if(!originals.length) return;
+  originals.forEach(node=>track.appendChild(node.cloneNode(true)));
+
+  const prev=wrap.querySelector('.gr-prev');
+  const next=wrap.querySelector('.gr-next');
+  const manualStep=()=>Math.max(260,Math.floor(track.clientWidth*.85));
+  prev?.addEventListener('click',()=>track.scrollBy({left:-manualStep(),behavior:'smooth'}));
+  next?.addEventListener('click',()=>track.scrollBy({left:manualStep(),behavior:'smooth'}));
+
+  let loopWidth=0;
+  let paused=false;
+  let rafId=0;
+  const speed=0.45;
+
+  function measureLoop(){
+    loopWidth=Math.floor(track.scrollWidth/2);
+    if(loopWidth<1) loopWidth=track.scrollWidth;
+  }
+  measureLoop();
+  window.addEventListener('resize',measureLoop);
+
+  function tick(){
+    if(!paused && loopWidth>0){
+      track.scrollLeft+=speed;
+      if(track.scrollLeft>=loopWidth) track.scrollLeft-=loopWidth;
+    }
+    rafId=requestAnimationFrame(tick);
+  }
+
+  wrap.addEventListener('mouseenter',()=>{
+    paused=true;
+    wrap.classList.add('is-paused');
+  });
+  wrap.addEventListener('mouseleave',()=>{
+    paused=false;
+    wrap.classList.remove('is-paused');
+  });
+
+  rafId=requestAnimationFrame(tick);
 })();
 </script>
 
