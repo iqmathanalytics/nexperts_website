@@ -180,7 +180,7 @@
       "sc-300",
       "pl-300",
       "dp-203",
-      "ai-102",
+      "artificial-intelligence",
       "ms-102",
       "az-500",
       "az-700",
@@ -1021,7 +1021,7 @@
       "price_save": "Save 15%"
     },
     {
-      "slug": "ai-102",
+      "slug": "artificial-intelligence",
       "brand": "microsoft",
       "category": "cert",
       "vendor": "Microsoft",

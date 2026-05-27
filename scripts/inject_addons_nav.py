@@ -48,7 +48,7 @@ STATIC_PAGES = [
     "tan-boon-heong-event.html",
     "nexpert-x-universiti-teknologi-mara.html",
     "blog/unlocking-the-power-of-data-science-applications-and-challenges.html",
-    "blog/ccna-certification-guide-complete-beginner-roadmap-2026.html",
+    "blog/ccna-certification-guide.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]

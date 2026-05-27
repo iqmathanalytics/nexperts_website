@@ -18,7 +18,9 @@
 # --- Trailing slash removal (301; non-trailing slash is canonical) ---
 
 # Legacy & vanity → canonical /courses/{slug} (301; flattened, single hop)
-/artificial-intelligence-machine-learning /courses/ai-102 301
+/artificial-intelligence-machine-learning /courses/artificial-intelligence 301
+/courses/ai-102 /courses/artificial-intelligence 301
+/courses/ai-102.html /courses/artificial-intelligence 301
 /microsoft-certified-azure-administrator /courses/az-104 301
 /courses/data-science-with-python.html /data-science-with-python 301
 /data-analytics-associate-with-python /courses/sql-for-data-professionals 301
@@ -106,3 +108,5 @@
 # Cloudflare Pages does not support status 404 in _redirects (unlike Netlify).
 /post/unlocking-the-power-of-data-science-applications-and-challenges /blog/unlocking-the-power-of-data-science-applications-and-challenges 301
 /post/unlocking-the-power-of-data-science-applications-and-challenges.html /blog/unlocking-the-power-of-data-science-applications-and-challenges 301
+/blog/ccna-certification-guide-complete-beginner-roadmap-2026 /blog/ccna-certification-guide 301
+/blog/ccna-certification-guide-complete-beginner-roadmap-2026.html /blog/ccna-certification-guide 301

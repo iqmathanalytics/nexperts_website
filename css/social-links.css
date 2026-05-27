@@ -54,14 +54,17 @@
 .nx-social-btn:focus-visible{outline:2px solid var(--soc);outline-offset:3px}
 
 .nx-social-icon{
+  position:relative;
+  z-index:1;
   display:flex;align-items:center;justify-content:center;
   width:32px;height:32px;flex-shrink:0;
   border-radius:9px;
   background:rgba(0,0,0,.2);
   box-shadow:0 0 16px color-mix(in srgb, var(--soc) 70%, transparent);
+  transition:background .25s ease,box-shadow .25s ease;
 }
 .nx-social-icon svg{width:18px;height:18px;display:block}
-.nx-social-name{white-space:nowrap}
+.nx-social-name{position:relative;z-index:1;white-space:nowrap}
 
 .nx-social-fb{--soc:#1877f2}
 .nx-social-fb .nx-social-icon svg{color:#1877f2}
@@ -115,17 +118,17 @@
 .footer-social .nx-social-icon{width:100%;height:100%;border-radius:10px;background:transparent;box-shadow:none}
 .footer-social .nx-social-icon svg{width:20px;height:20px}
 
-/* Contact — card strip */
+/* Contact — match hero social button treatment */
 .contact-social{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
 .contact-social .nx-social-label{color:var(--ink4)}
-.contact-social .nx-social-row{gap:8px}
+.contact-social .nx-social-row{gap:10px}
 .contact-social .nx-social-btn{
-  padding:8px 14px 8px 10px;
-  font-size:.74rem;
-  background:#fff;
-  color:var(--ink2);
-  border-color:var(--line);
-  box-shadow:0 6px 18px rgba(15,23,42,.06);
+  padding:10px 16px 10px 12px;
+  font-size:.78rem;
+  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(239,246,255,.85));
+  color:var(--ink2,#1e293b);
+  border-color:rgba(147,197,253,.55);
+  box-shadow:0 4px 20px rgba(29,78,216,.1),0 0 0 1px rgba(255,255,255,.8) inset;
 }
 .contact-social .nx-social-btn:hover{color:#fff}
 .contact-social .nx-social-fb:hover{background:linear-gradient(135deg,#1877f2,#0d65d9)}
@@ -134,7 +137,16 @@
 .contact-social .nx-social-yt:hover{background:linear-gradient(135deg,#ff0000,#cc0000)}
 .contact-social .nx-social-tt:hover{background:linear-gradient(135deg,#111111,#2a2a2a)}
 .contact-social .nx-social-wa:hover{background:linear-gradient(135deg,#25d366,#128c7e)}
-.contact-social .nx-social-icon{width:28px;height:28px;background:var(--bg2)}
+.contact-social .nx-social-icon{
+  width:32px;
+  height:32px;
+  background:rgba(15,23,42,.06);
+  box-shadow:0 0 12px color-mix(in srgb, var(--soc) 45%, transparent);
+}
+.contact-social .nx-social-btn:hover .nx-social-icon{
+  background:rgba(0,0,0,.15);
+  box-shadow:0 0 14px color-mix(in srgb, var(--soc) 55%, transparent);
+}
 
 @media(max-width:680px){
   .hero-social .nx-social-btn{padding:8px 12px 8px 10px;font-size:.72rem}

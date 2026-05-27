@@ -141,7 +141,7 @@ STATIC_PAGES: list[dict] = [
         ],
         "cards": [
             ("Unlocking Data Science", "Applications, challenges and realistic adoption paths for Malaysian enterprises.", "/blog/unlocking-the-power-of-data-science-applications-and-challenges"),
-            ("CCNA Certification Guide", "Complete beginner roadmap for Cisco CCNA in 2026 — exam, study plan and careers.", "/blog/ccna-certification-guide-complete-beginner-roadmap-2026"),
+            ("CCNA Certification Guide", "Complete beginner roadmap for Cisco CCNA in 2026 — exam, study plan and careers.", "/blog/ccna-certification-guide"),
             ("Browse courses", "Full certification catalogue.", "/#courses"),
             ("Workshops", "Short-format hands-on sessions.", "/workshops"),
             ("Contact editorial", "Suggest a topic or partnership.", "/contact-us"),

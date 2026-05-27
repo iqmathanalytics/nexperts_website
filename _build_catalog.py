@@ -53,7 +53,7 @@ P1 = {
     "AZ-400: DevOps Engineer": "az-400",
     "SC-900: Security Fundamentals": "sc-900",
     "SC-300: Identity & Access Admin": "sc-300",
-    "AI-102: Azure AI Engineer": "ai-102",
+    "AI-102: Azure AI Engineer": "artificial-intelligence",
     "MS-102: M365 Administrator": "ms-102",
     "AWS Developer Associate": "aws-developer-associate",
     "AWS SysOps Administrator": "aws-sysops-administrator",

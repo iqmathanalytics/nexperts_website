@@ -26,7 +26,7 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
             ),
             (
                 "CCNA Certification Guide",
-                "/blog/ccna-certification-guide-complete-beginner-roadmap-2026",
+                "/blog/ccna-certification-guide",
             ),
         ],
     ),

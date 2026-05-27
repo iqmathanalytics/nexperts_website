@@ -355,6 +355,9 @@ function loadOverrides() {
 function publishedOverridesUrls() {
   try {
     const h = (location.hostname || "").toLowerCase();
+    if (h === "localhost" || h === "127.0.0.1") {
+      return ["/data/course-overrides.json"];
+    }
     if (h.endsWith(".netlify.app")) {
       return ["/.netlify/functions/course-overrides", "/data/course-overrides.json"];
     }

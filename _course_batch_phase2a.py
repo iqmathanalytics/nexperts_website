@@ -758,7 +758,7 @@ BATCH.append(dict(
 # 5. AI-102  AZURE AI ENGINEER ASSOCIATE
 # ============================================================================
 BATCH.append(dict(
-    slug="ai-102",
+    slug="artificial-intelligence",
     title="AI-102",
     title_html='AI-102<br><em>Azure AI Engineer Associate</em>',
     vendor_short="Microsoft", watermark="AI102", crumb_vendor="Microsoft",

@@ -21,9 +21,15 @@ R_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
 REL_NS = "{http://schemas.openxmlformats.org/package/2006/relationships}"
 
 DATA_SCIENCE_SLUG = "unlocking-the-power-of-data-science-applications-and-challenges"
-CCNA_SLUG = "ccna-certification-guide-complete-beginner-roadmap-2026"
+CCNA_SLUG = "ccna-certification-guide"
+CCNA_IMG_SLUG = "ccna-certification-guide-complete-beginner-roadmap-2026"
+CCNA_META_TITLE = "CCNA Certification Guide 2026: Complete Beginner Roadmap"
+CCNA_META_DESC = (
+    "Learn what CCNA is, exam details, salary, career paths, study roadmap, "
+    "and how beginners can pass the Cisco CCNA 200-301 certification"
+)
 DOCX = ROOT / "CCNA Certification Guide_ Complete Beginner Roadmap in 2026.docx"
-IMG_DIR = ROOT / "image" / "blog" / CCNA_SLUG
+IMG_DIR = ROOT / "image" / "blog" / CCNA_IMG_SLUG
 
 
 def _esc(s: str) -> str:
@@ -57,7 +63,7 @@ def _paragraph_html(p: ET.Element, rel_map: dict[str, str], img_counter: list[in
             media = rel_map[rid].split("/")[-1]
             img_counter[0] += 1
             fname = f"image{img_counter[0]}{Path(media).suffix.lower()}"
-            src = f"/image/blog/{CCNA_SLUG}/{fname}"
+            src = f"/image/blog/{CCNA_IMG_SLUG}/{fname}"
             return (
                 f'<figure class="blog-figure"><img src="{src}" alt="" loading="lazy" width="720" height="405">'
                 f"</figure>"
@@ -133,7 +139,7 @@ def docx_to_body(docx_path: Path) -> tuple[str, str, str]:
                     fname = saved_media[rid]
                     flush_list()
                     blocks.append(
-                        f'<figure class="blog-figure"><img src="/image/blog/{CCNA_SLUG}/{fname}" '
+                        f'<figure class="blog-figure"><img src="/image/blog/{CCNA_IMG_SLUG}/{fname}" '
                         f'alt="CCNA certification guide illustration" loading="lazy" width="720" height="405"></figure>'
                     )
                     break
@@ -405,18 +411,31 @@ def build_ccna_post() -> None:
         raise SystemExit(f"Missing docx: {DOCX}")
     title, desc, body = docx_to_body(DOCX)
     body = _fix_ccna_body_tables(body)
+    body_html = "    " + body.replace("\n", "\n    ")
+    body_html = body_html.replace(
+        "clear grasp of the CCNA certification.",
+        'clear grasp of the <a href="https://www.nexpertsacademy.com/ccna">CCNA certification</a>.',
+    )
     html = _blog_article_html(
         path=f"/blog/{CCNA_SLUG}",
         title=title,
         title_em="Complete beginner roadmap in 2026",
-        description=desc or "CCNA certification guide for beginners — exam details, study roadmap, career paths and essential networking skills for 2026.",
+        description=CCNA_META_DESC,
         hero_meta="May 2026 · Nexperts Cisco Practice",
-        body_html="    " + body.replace("\n", "\n    "),
+        body_html=body_html,
         related_cards=[
             ("CCNA Training", "Official Cisco CCNA 200-301 programme.", "/ccna"),
             ("CCNP Enterprise", "Next step after CCNA.", "/courses/ccnp-enterprise"),
             ("Contact", "Corporate training enquiry.", "/contact-us"),
         ],
+    )
+    html = html.replace(
+        f"<title>{_esc(title)} | Nexperts Academy Blog</title>",
+        f"<title>{_esc(CCNA_META_TITLE)}</title>",
+    )
+    html = html.replace(
+        f'<meta property="og:title" content="{_esc(title)} | Nexperts Academy">',
+        f'<meta property="og:title" content="{_esc(CCNA_META_TITLE)}">',
     )
     out = ROOT / "blog" / f"{CCNA_SLUG}.html"
     out.write_text(html, encoding="utf-8", newline="\n")
