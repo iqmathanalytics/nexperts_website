@@ -270,7 +270,7 @@
     visibility 0.24s ease;
   pointer-events: none;
   z-index: 50;
-  overflow: hidden;
+  overflow: visible;
   backdrop-filter: blur(16px);
 }
 
@@ -317,6 +317,36 @@
   padding: 14px 16px 16px;
 }
 
+/* Explore panel links live inside .nav-links — override nav pill styles */
+.site-nav .nav-addons-panel a,
+.site-nav .nav-addons-grid a {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-height: 1.35;
+  hyphens: auto;
+  padding: 6px 6px;
+  border-radius: 6px;
+  transform: none;
+}
+
+.site-nav .nav-addons-panel a:hover,
+.site-nav .nav-addons-grid a:hover {
+  transform: none;
+}
+
+.nav-addons-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nav-panel--explore {
+  min-width: min(92vw, 640px);
+  max-width: min(680px, calc(100vw - 24px));
+}
+
 .nav-addons-wrap.is-open .nav-addons-panel {
   opacity: 1;
   visibility: visible;
@@ -344,6 +374,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px 18px;
+  align-items: start;
 }
 
 .nav-addons-col-title {
@@ -364,8 +395,9 @@
   font-weight: 600;
   color: var(--ink2, #2a3f5f);
   text-decoration: none;
-  padding: 6px 4px;
+  padding: 6px 6px;
   border-radius: 6px;
+  line-height: 1.35;
   transition: color 0.15s ease, background 0.15s ease;
 }
 
