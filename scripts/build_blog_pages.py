@@ -464,6 +464,7 @@ def patch_sitemap() -> None:
     new_urls = [
         f"  <url><loc>{SITE}/blog/{DATA_SCIENCE_SLUG}</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>",
         f"  <url><loc>{SITE}/blog/{CCNA_SLUG}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>",
+        f"  <url><loc>{SITE}/blog/comptia-network-plus-certification-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>",
     ]
     text = text.replace(
         f"  <url><loc>{old}</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>",
@@ -481,6 +482,7 @@ def patch_sitemap() -> None:
 def main() -> None:
     build_data_science_post()
     build_ccna_post()
+    print("Run: python scripts/build_network_plus_blog.py for Network+ blog")
     patch_redirects()
     patch_sitemap()
     print("Done. Run: python scripts/inject_addons_nav.py")

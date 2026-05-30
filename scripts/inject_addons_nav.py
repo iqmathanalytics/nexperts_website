@@ -21,9 +21,8 @@ from site_nav import (  # noqa: E402
 )
 
 NAV_RE = re.compile(
-    r'<nav class="site-nav(?:\s+site-nav--home)?(?:\s+data-nx-nav="v2")?">.*?</nav>\s*'
-    r'<div class="nav-drawer-backdrop"[^>]*>\s*</div>'
-    r'(?:\s*</div>){0,6}',
+    r'<nav class="site-nav[^"]*"(?:\s+data-nx-nav="v2")?>.*?</nav>\s*'
+    r'<div class="nav-drawer-backdrop"[^>]*>\s*</div>',
     re.DOTALL | re.IGNORECASE,
 )
 
@@ -49,6 +48,7 @@ STATIC_PAGES = [
     "nexpert-x-universiti-teknologi-mara.html",
     "blog/unlocking-the-power-of-data-science-applications-and-challenges.html",
     "blog/ccna-certification-guide.html",
+    "blog/comptia-network-plus-certification-guide.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]
