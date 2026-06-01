@@ -320,14 +320,44 @@ COURSE_NAV_ASSET_TAGS = (
     + '\n<script src="../js/course-related.js" defer></script>'
 )
 
+COURSE_SIDEBAR_ENQUIRY_HEAD = {
+    "course": (
+        '<link rel="stylesheet" href="../css/enquiry-phone.css">\n'
+        '<link rel="stylesheet" href="../css/enquiry-loading.css">\n'
+        '<link rel="stylesheet" href="../css/course-sidebar-enquiry.css">'
+    ),
+    "root": (
+        '<link rel="stylesheet" href="/css/enquiry-phone.css">\n'
+        '<link rel="stylesheet" href="/css/enquiry-loading.css">\n'
+        '<link rel="stylesheet" href="/css/course-sidebar-enquiry.css">'
+    ),
+}
+
+COURSE_SIDEBAR_ENQUIRY_SCRIPTS = {
+    "course": (
+        '<script src="../js/enquiry-config.js"></script>\n'
+        '<script src="../js/enquiry-phone.js" defer></script>\n'
+        '<script src="../js/enquiry-submit.js"></script>\n'
+        '<script src="../js/course-sidebar-enquiry.js" defer></script>'
+    ),
+    "root": (
+        '<script src="/js/enquiry-config.js"></script>\n'
+        '<script src="/js/enquiry-phone.js" defer></script>\n'
+        '<script src="/js/enquiry-submit.js"></script>\n'
+        '<script src="/js/course-sidebar-enquiry.js" defer></script>'
+    ),
+}
+
 COURSE_DETAIL_ADDON_TAGS = {
     "course": (
         '<link rel="stylesheet" href="../css/course-detail-addons.css">\n'
-        '<script src="../js/course-related.js" defer></script>'
+        + COURSE_SIDEBAR_ENQUIRY_HEAD["course"]
+        + '\n<script src="../js/course-related.js" defer></script>'
     ),
     "root": (
         '<link rel="stylesheet" href="/css/course-detail-addons.css">\n'
-        '<script src="/js/course-related.js" defer></script>'
+        + COURSE_SIDEBAR_ENQUIRY_HEAD["root"]
+        + '\n<script src="/js/course-related.js" defer></script>'
     ),
 }
 

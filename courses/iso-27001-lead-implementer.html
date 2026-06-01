@@ -383,6 +383,9 @@ footer{padding:36px 20px 24px}
 <script src="../js/nav-addons.js" defer></script>
 <script src="../js/courses-catalog.js" defer></script>
 <link rel="stylesheet" href="../css/course-detail-addons.css">
+<link rel="stylesheet" href="../css/enquiry-phone.css">
+<link rel="stylesheet" href="../css/enquiry-loading.css">
+<link rel="stylesheet" href="../css/course-sidebar-enquiry.css">
 <script src="../js/course-related.js" defer></script>
 <link rel="stylesheet" href="../css/whatsapp-float.css">
 </head>
@@ -1031,8 +1034,67 @@ footer{padding:36px 20px 24px}
     <span class="price-save">Save 10%</span>
   </div>
   <p class="price-note">Per person · Includes exam voucher, ISMS workshop, complete document set</p>
-  <a href="/contact-us?course=iso-27001-lead-implementer&title=ISO%2027001%20Lead%20Implementer#enquire" class="enroll-btn">Enroll Now →</a>
-  <a href="/contact-us?course=iso-27001-lead-implementer&title=ISO%2027001%20Lead%20Implementer&intent=corporate#enquire" class="corp-btn">Corporate / Group Pricing</a>
+    <div class="course-sidebar-enquiry" id="courseEnquiry" data-nx-course-slug="iso-27001-lead-implementer">
+    <p class="cef-heading">Enquire about this course</p>
+    <form class="course-enquiry-form" novalidate>
+      <input type="hidden" name="course" value="ISO 27001 Lead Implementer">
+      <div class="cef-row">
+        <div class="cef-field">
+          <label>First name <span class="cef-req">*</span></label>
+          <input type="text" name="first" placeholder="Ahmad" required autocomplete="given-name">
+        </div>
+        <div class="cef-field">
+          <label>Last name <span class="cef-req">*</span></label>
+          <input type="text" name="last" placeholder="Raza" required autocomplete="family-name">
+        </div>
+      </div>
+      <div class="cef-field">
+        <label>Email <span class="cef-req">*</span></label>
+        <input type="email" name="email" placeholder="ahmad@company.com.my" required autocomplete="email">
+      </div>
+      <div class="cef-field">
+        <label>Phone / WhatsApp</label>
+        <div class="enquiry-phone-row">
+          <select name="phoneCountry" class="enquiry-phone-cc" aria-label="Country calling code"></select>
+          <input type="tel" name="phone" class="enquiry-phone-num" placeholder="12-345 6789" autocomplete="tel-national" inputmode="tel">
+        </div>
+      </div>
+      <div class="cef-field">
+        <label>Preferred office</label>
+        <select name="office">
+          <option>Malaysia — Petaling Jaya (HQ)</option>
+          <option>United States — Albany, NY</option>
+          <option>Online / Virtual</option>
+        </select>
+      </div>
+      <div class="cef-field">
+        <label>Enquiry type</label>
+        <select name="type">
+          <option>Individual enrolment</option>
+          <option>Corporate / group training (5+ people)</option>
+          <option>HRD Corp claim assistance</option>
+          <option>Schedule / intake dates</option>
+          <option>Pricing &amp; payment options</option>
+          <option>Course eligibility question</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="cef-field">
+        <label>Message</label>
+        <textarea name="message" placeholder="Background, preferred dates, team size, or questions…" rows="3"></textarea>
+      </div>
+      <p class="cef-note">We reply within 4 business hours. Your data is not shared with third parties.</p>
+      <p class="course-enquiry-err" role="alert" hidden></p>
+      <button type="submit" class="cef-submit">Send Enquiry <span class="cef-arr" aria-hidden="true">→</span></button>
+    </form>
+    <div class="course-enquiry-success" hidden>
+      <div class="cef-check" aria-hidden="true">✓</div>
+      <p class="cef-success-title">Enquiry received</p>
+      <p class="cef-success-text">We will reply to your email within 4 business hours.</p>
+    </div>
+  </div>
+
+<a href="/contact-us?course=iso-27001-lead-implementer&title=ISO%2027001%20Lead%20Implementer&intent=corporate#enquire" class="corp-btn">Corporate / Group Pricing</a>
   <div class="guarantee">
     <span class="guarantee-icon">🛡️</span>
     <div>
@@ -1075,7 +1137,7 @@ footer{padding:36px 20px 24px}
 <div class="share-strip">
   <button type="button" class="share-btn nx-share-copy" aria-haspopup="dialog">📤 Share</button>
   <button type="button" class="share-btn nx-share-copy" aria-haspopup="dialog">💾 Save</button>
-  <a href="/contact-us?course=iso-27001-lead-implementer&title=ISO%2027001%20Lead%20Implementer#enquire" class="share-btn">✉️ Enquire</a>
+  <a href="#courseEnquiry" class="share-btn">✉️ Enquire</a>
 </div>
   </div>
 </aside>
@@ -1175,6 +1237,10 @@ document.querySelector('.pass-band').style.display = 'none';
   </div>
 </div>
 
+<script src="../js/enquiry-config.js"></script>
+<script src="../js/enquiry-phone.js" defer></script>
+<script src="../js/enquiry-submit.js"></script>
+<script src="../js/course-sidebar-enquiry.js" defer></script>
 <script src="../js/course-page-ui.js" defer></script>
 <script src="../admin/overlay.js" defer></script>
   <script src="../js/site-nav-mobile.js" defer></script>

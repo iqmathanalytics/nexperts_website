@@ -1,0 +1,221 @@
+/* Inline enquiry form in course price box */
+.course-sidebar-enquiry {
+  margin-bottom: 12px;
+}
+
+.cef-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink3, #7a8194);
+  margin-bottom: 12px;
+}
+
+.course-enquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cef-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cef-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.cef-field label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--ink2, #3d4451);
+  letter-spacing: 0.03em;
+}
+
+.cef-req {
+  color: var(--marM, #991b1b);
+}
+
+.cef-field input,
+.cef-field select,
+.cef-field textarea {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.8rem;
+  color: var(--ink, #0d1117);
+  background: #fff;
+  border: 1.5px solid var(--line2, #d1d5db);
+  border-radius: 8px;
+  padding: 9px 11px;
+  outline: none;
+  width: 100%;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cef-field input:focus,
+.cef-field select:focus,
+.cef-field textarea:focus {
+  border-color: var(--blue, #1d4ed8);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+}
+
+.cef-field textarea {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.5;
+}
+
+.cef-field select {
+  cursor: pointer;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink3, #7a8194) 50%),
+    linear-gradient(135deg, var(--ink3, #7a8194) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 14px, calc(100% - 11px) 14px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 32px;
+}
+
+.course-sidebar-enquiry .enquiry-phone-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.course-sidebar-enquiry .enquiry-phone-cc {
+  flex: 0 0 4.4rem;
+  min-width: 0;
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.course-sidebar-enquiry .enquiry-phone-num {
+  flex: 1;
+  min-width: 0;
+}
+
+.cef-note {
+  font-size: 0.64rem;
+  color: var(--ink4, #b0b6c3);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+
+.course-enquiry-err {
+  font-size: 0.76rem;
+  color: #b91c1c;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.cef-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, var(--blue, #1d4ed8), #2563eb);
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  letter-spacing: 0.01em;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.cef-submit:hover:not(:disabled) {
+  background: var(--brand-hover, #1e40af);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.22);
+}
+
+.cef-submit .cef-arr {
+  transition: transform 0.25s ease;
+}
+
+.cef-submit:hover:not(:disabled) .cef-arr {
+  transform: translateX(3px);
+}
+
+.cef-submit.nexperts-enquiry-sending {
+  pointer-events: none;
+  opacity: 0.94;
+}
+
+.cef-submit.nexperts-enquiry-sending .nexperts-enquiry-spinner {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+}
+
+.course-enquiry-success {
+  text-align: center;
+  padding: 16px 8px 8px;
+  margin-bottom: 10px;
+  animation: cefFadeUp 0.45s ease both;
+}
+
+@keyframes cefFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cef-check {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--greenL, #dcfce7), #bbf7d0);
+  border: 1px solid color-mix(in srgb, var(--green, #16a34a) 40%, transparent);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 12px;
+  font-size: 1.25rem;
+  color: var(--green, #16a34a);
+}
+
+.cef-success-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink, #0d1117);
+  margin-bottom: 6px;
+}
+
+.cef-success-text {
+  font-size: 0.76rem;
+  color: var(--ink3, #7a8194);
+  line-height: 1.55;
+}
+
+.enroll-card .price-note {
+  margin-bottom: 14px;
+}
+
+@media (max-width: 420px) {
+  .cef-row {
+    grid-template-columns: 1fr;
+  }
+}

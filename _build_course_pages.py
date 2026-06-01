@@ -551,6 +551,7 @@ def build_sidebar(c):
     ver = render_verify(c["verify_items"])
     href_enroll = contact_href(c)
     href_corp = contact_href(c, intent="corporate")
+    enquiry_form = render_sidebar_enquiry_form(course_title=c["title"], course_slug=c["slug"])
     return (
         f'<div class="enroll-card" id="enroll">\n'
         f'  <div class="price-row">\n'
@@ -559,7 +560,7 @@ def build_sidebar(c):
         f'    <span class="price-save">{c["price_save"]}</span>\n'
         f'  </div>\n'
         f'  <p class="price-note">{c["price_note"]}</p>\n'
-        f'  <a href="{href_enroll}" class="enroll-btn">Enroll Now →</a>\n'
+        f'{enquiry_form}\n'
         f'  <a href="{href_corp}" class="corp-btn">Corporate / Group Pricing</a>\n'
         f'  <div class="guarantee">\n'
         f'    <span class="guarantee-icon">🛡️</span>\n'
@@ -592,6 +593,7 @@ def build_sidebar(c):
 # COURSES (data only — see _course_data.py)
 # ──────────────────────────────────────────────────────────────────────────────
 from _course_data import COURSES  # noqa: E402
+from scripts.course_sidebar_enquiry import render_sidebar_enquiry_form  # noqa: E402
 
 
 # ──────────────────────────────────────────────────────────────────────────────

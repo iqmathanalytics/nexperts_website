@@ -52,11 +52,14 @@
 
     doc.querySelectorAll('select[name="phoneCountry"]').forEach(function (sel) {
       var prev = String(sel.value || "").trim();
+      var dialOnly =
+        sel.classList.contains("enquiry-phone-cc--dial-only") ||
+        (sel.closest && sel.closest(".course-sidebar-enquiry"));
       sel.textContent = "";
       OPTIONS.forEach(function (pair) {
         var o = doc.createElement("option");
         o.value = pair[0];
-        o.textContent = compact ? pair[0] : pair[1];
+        o.textContent = dialOnly || compact ? pair[0] : pair[1];
         sel.appendChild(o);
       });
       var hasPrev = OPTIONS.some(function (p) {
