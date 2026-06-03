@@ -158,6 +158,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .eyebrow::before{content:’’;width:14px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
 .eyebrow.m{color:var(--marM)}.eyebrow.m::before{background:var(--marM)}
 .eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}
+#sec-overview h2.eyebrow{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.2rem,1.75vw,1.5rem);line-height:1.25;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+#sec-overview h2.eyebrow::before{content:'';width:18px;height:3px;background:var(--blue);border-radius:2px;flex-shrink:0}
+#sec-overview h2.eyebrow.m::before{background:var(--marM)}
+#sec-overview h2.eyebrow.g::before{background:var(--green)}
 h2.sec-head{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.6rem,2.5vw,2.2rem);line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px}
 h2.sec-head em{font-style:italic;color:var(--blue)}
 h2.sec-head em.m{color:var(--marM)}
@@ -587,7 +591,7 @@ footer{padding:36px 20px 24px}
   <!-- OVERVIEW -->
 
   <div id="sec-overview" class="content-sec">
-    <div class="eyebrow">What this course is</div>
+    <h2 class="eyebrow">What this course is</h2>
     <h2 class="sec-head">CPENT AI is<br><em>CEH levelled up.</em></h2>
     <p class="body-text">CPENT AI is EC-Council's advanced practical penetration testing credential. Unlike CEH (theory + practical) and PenTest+ (workflow + report), CPENT is pure practical — a 24-hour live cyber range exam where you compromise a fictional enterprise.</p>
     <p class="body-text">At Nexperts we run a structured 8-day prep cycle plus a full mock 24-hour range engagement. By the time you sit the real CPENT exam, you've done the equivalent under our coaching.</p>
@@ -595,7 +599,7 @@ footer{padding:36px 20px 24px}
     <p class="body-text">CPENT v3 (AI 2026) adds AI-attack scenarios, prompt injection against deployed LLM endpoints, and adversarial ML — the modern surfaces every Malaysian pentester now sees in 2026 engagements.</p>
 
 <div style="margin-top:36px">
-  <div class="eyebrow m">Who should take this course</div>
+  <h2 class="eyebrow m">Who should take this course</h2>
   <div class="who-grid">
     <div class="who-card">
       <span class="who-icon">⚔️</span>
@@ -625,7 +629,7 @@ footer{padding:36px 20px 24px}
 </div>
 
 <div style="margin-top:36px">
-  <div class="eyebrow g">Prerequisites</div>
+  <h2 class="eyebrow g">Prerequisites</h2>
   <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> CEH v13 AI or 5+ years of offensive security experience</div>
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> Strong Linux + Windows command-line fluency</div>

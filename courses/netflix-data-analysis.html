@@ -156,6 +156,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .eyebrow::before{content:’’;width:14px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
 .eyebrow.m{color:var(--marM)}.eyebrow.m::before{background:var(--marM)}
 .eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}
+#sec-overview h2.eyebrow{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.2rem,1.75vw,1.5rem);line-height:1.25;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+#sec-overview h2.eyebrow::before{content:'';width:18px;height:3px;background:var(--blue);border-radius:2px;flex-shrink:0}
+#sec-overview h2.eyebrow.m::before{background:var(--marM)}
+#sec-overview h2.eyebrow.g::before{background:var(--green)}
 h2.sec-head{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.6rem,2.5vw,2.2rem);line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px}
 h2.sec-head em{font-style:italic;color:var(--blue)}
 h2.sec-head em.m{color:var(--marM)}
@@ -585,14 +589,14 @@ footer{padding:36px 20px 24px}
   <!-- OVERVIEW -->
 
   <div id="sec-overview" class="content-sec">
-    <div class="eyebrow">Course Overview</div>
+    <h2 class="eyebrow">Course Overview</h2>
     <h2 class="sec-head">Certified Ethical Hacker V13<br><em>course overview and outcomes.</em></h2>
     <p class="body-text">The Certified Ethical Hacker (CEH) Course offered by Nexperts Academy is a comprehensive cyber network security course designed to equip professionals with the skills and knowledge necessary to identify and prevent potential security threats. This certified ethical hacker CEH training course covers a wide range of topics, including network security, system security, cryptography, and ethical hacking methodologies, ensuring a well-rounded foundation in cyber security.</p>
     <p class="body-text">Participants gain practical hands-on experience through EC-Council iLabs, with real-world cyber-attack scenarios and countermeasures. The course is available in classroom and online delivery, so you can choose the learning mode that best fits your schedule.</p>
     <p class="body-text">On completion, participants receive a certificate of completion from Nexperts Academy and become eligible to sit for the CEH certification exam from EC-Council. If a participant does not pass on the first attempt, Nexperts Academy provides a free exam retake and exam preparation support.</p>
 
     <div style="margin-top:36px">
-      <div class="eyebrow m">Course Outcomes</div>
+      <h2 class="eyebrow m">Course Outcomes</h2>
       <div class="who-grid">
         <div class="who-card"><span class="who-icon">✓</span><div><h4>Ethical hacking concepts and tools</h4><p>Understand core methodologies and practical tooling used by modern ethical hackers.</p></div></div>
         <div class="who-card"><span class="who-icon">✓</span><div><h4>Network scanning and vulnerability analysis</h4><p>Perform scanning, identify weaknesses, and recommend remediation paths.</p></div></div>

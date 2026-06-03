@@ -18,6 +18,28 @@ TEMPLATE_PATH = next((p for p in _TEMPLATE_CANDIDATES if p.is_file()), _TEMPLATE
 TEMPLATE = TEMPLATE_PATH.read_text(encoding="utf-8")
 
 
+OVERVIEW_H2_CSS = """#sec-overview h2.eyebrow{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.2rem,1.75vw,1.5rem);line-height:1.25;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+#sec-overview h2.eyebrow::before{content:'';width:18px;height:3px;background:var(--blue);border-radius:2px;flex-shrink:0}
+#sec-overview h2.eyebrow.m::before{background:var(--marM)}
+#sec-overview h2.eyebrow.g::before{background:var(--green)}"""
+
+OLD_OVERVIEW_H2_CSS = (
+    "h2.eyebrow{font-family:inherit;font-size:.68rem;font-weight:700;margin:0;"
+    "line-height:1.4;letter-spacing:.12em;text-transform:uppercase}"
+)
+
+
+def inject_overview_h2_css(html: str) -> str:
+    if "#sec-overview h2.eyebrow{" in html:
+        while OLD_OVERVIEW_H2_CSS in html:
+            html = html.replace(OLD_OVERVIEW_H2_CSS, "", 1)
+        return html
+    if OLD_OVERVIEW_H2_CSS in html:
+        return html.replace(OLD_OVERVIEW_H2_CSS, OVERVIEW_H2_CSS, 1)
+    needle = ".eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}"
+    return html.replace(needle, needle + "\n" + OVERVIEW_H2_CSS, 1)
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # RENDERERS
 # ──────────────────────────────────────────────────────────────────────────────
@@ -62,6 +84,12 @@ def render_checklist(items):
     )
 
 
+def overview_h2(text: str, eb_class: str = "") -> str:
+    """Semantic h2 for overview subheadings (styled as .eyebrow)."""
+    cls = f"eyebrow {eb_class}".strip()
+    return f'<h2 class="{cls}">{text}</h2>'
+
+
 def render_overview_sections(sections):
     if not sections:
         return ""
@@ -69,7 +97,7 @@ def render_overview_sections(sections):
     for sec in sections:
         eb_class = sec.get("eyebrow_class", "g")
         blocks.append('<div style="margin-top:36px">')
-        blocks.append(f'  <div class="eyebrow {eb_class}">{sec["eyebrow"]}</div>')
+        blocks.append(f'  {overview_h2(sec["eyebrow"], eb_class)}')
         if sec.get("intro"):
             blocks.append(f'  <p class="body-text" style="margin-top:16px">{sec["intro"]}</p>')
         if sec.get("subtitle"):
@@ -452,6 +480,9 @@ def build_page(c):
                 count=1,
             )
 
+    # ── Overview h2 heading size (scoped; div.eyebrow on other tabs stays small)
+    html = inject_overview_h2_css(html)
+
     # ── Hero ::after watermark (smart-quoted)
     html = html.replace("content:\u2018CEH\u2019", f"content:\u2018{c['watermark']}\u2019", 1)
 
@@ -564,7 +595,7 @@ def build_overview(c):
     extra_sections = render_overview_sections(c.get("overview_sections") or [])
     extra_block = f"\n\n{extra_sections}\n\n" if extra_sections else "\n\n"
     return (
-        f'    <div class="eyebrow">{c["overview_eyebrow"]}</div>\n'
+        f'    {overview_h2(c["overview_eyebrow"])}\n'
         f'    <h2 class="sec-head">{h_lead}<br><em>{h_em}</em></h2>\n'
         f'    <p class="body-text">{c["overview_p1"]}</p>\n'
         f'    <p class="body-text">{c["overview_p2"]}</p>\n'
@@ -572,13 +603,13 @@ def build_overview(c):
         f'    <p class="body-text">{c["overview_p3"]}</p>\n'
         f'{extra_block}'
         f'<div style="margin-top:36px">\n'
-        f'  <div class="eyebrow m">Who should take this course</div>\n'
+        f'  {overview_h2("Who should take this course", "m")}\n'
         f'  <div class="who-grid">\n'
         f'    {render_who_grid(c["who_for"])}\n'
         f'  </div>\n'
         f'</div>\n\n'
         f'<div style="margin-top:36px">\n'
-        f'  <div class="eyebrow g">Prerequisites</div>\n'
+        f'  {overview_h2("Prerequisites", "g")}\n'
         f'  <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">\n'
         f'    {render_prereqs(c["prereqs"], c["prereqs_note"])}\n'
         f'  </div>\n'

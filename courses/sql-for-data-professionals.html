@@ -158,6 +158,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .eyebrow::before{content:’’;width:14px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
 .eyebrow.m{color:var(--marM)}.eyebrow.m::before{background:var(--marM)}
 .eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}
+#sec-overview h2.eyebrow{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.2rem,1.75vw,1.5rem);line-height:1.25;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+#sec-overview h2.eyebrow::before{content:'';width:18px;height:3px;background:var(--blue);border-radius:2px;flex-shrink:0}
+#sec-overview h2.eyebrow.m::before{background:var(--marM)}
+#sec-overview h2.eyebrow.g::before{background:var(--green)}
 h2.sec-head{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.6rem,2.5vw,2.2rem);line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px}
 h2.sec-head em{font-style:italic;color:var(--blue)}
 h2.sec-head em.m{color:var(--marM)}
@@ -587,7 +591,7 @@ footer{padding:36px 20px 24px}
   <!-- OVERVIEW -->
 
   <div id="sec-overview" class="content-sec">
-    <div class="eyebrow">What this course is</div>
+    <h2 class="eyebrow">What this course is</h2>
     <h2 class="sec-head">Where data work stops<br><em>being a spreadsheet copy-paste.</em></h2>
     <p class="body-text">SQL is the foundation skill for every data role — from BI analyst to data engineer to data scientist. It is the most-tested skill in interview rounds and the single highest-leverage skill any IT or business professional can pick up. This course turns you from SQL-novice or SQL-shaky into someone who writes window functions in reflex.</p>
     <p class="body-text">At Nexperts, SQL is delivered as a 3-day intensive across 24 hours of live, hands-on lab time. We give you live PostgreSQL and SQL Server sandboxes pre-loaded with realistic MY datasets (banking, telco, retail, e-commerce). By day 3 you've written 60+ queries, built two end-to-end reports and tuned a slow query 100x.</p>
@@ -595,7 +599,7 @@ footer{padding:36px 20px 24px}
     <p class="body-text">We cover ANSI-standard SQL with hands-on across PostgreSQL (the most-asked dialect in MY tech firms), SQL Server (banking + GLC standard), MySQL (e-commerce stack) and Snowflake (modern analytics). Every concept is paired with a real dataset and an exercise.</p>
 
 <div style="margin-top:36px">
-  <div class="eyebrow m">Who should take this course</div>
+  <h2 class="eyebrow m">Who should take this course</h2>
   <div class="who-grid">
     <div class="who-card">
       <span class="who-icon">📊</span>
@@ -625,7 +629,7 @@ footer{padding:36px 20px 24px}
 </div>
 
 <div style="margin-top:36px">
-  <div class="eyebrow g">Prerequisites</div>
+  <h2 class="eyebrow g">Prerequisites</h2>
   <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> Basic computer literacy</div>
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> No database experience required</div>

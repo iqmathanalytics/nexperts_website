@@ -357,6 +357,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .eyebrow::before{content:’’;width:14px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
 .eyebrow.m{color:var(--marM)}.eyebrow.m::before{background:var(--marM)}
 .eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}
+#sec-overview h2.eyebrow{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.2rem,1.75vw,1.5rem);line-height:1.25;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+#sec-overview h2.eyebrow::before{content:'';width:18px;height:3px;background:var(--blue);border-radius:2px;flex-shrink:0}
+#sec-overview h2.eyebrow.m::before{background:var(--marM)}
+#sec-overview h2.eyebrow.g::before{background:var(--green)}
 h2.sec-head{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.6rem,2.5vw,2.2rem);line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px}
 h2.sec-head em{font-style:italic;color:var(--blue)}
 h2.sec-head em.m{color:var(--marM)}
@@ -786,7 +790,7 @@ footer{padding:36px 20px 24px}
   <!-- OVERVIEW -->
 
   <div id="sec-overview" class="content-sec">
-    <div class="eyebrow">What this course is</div>
+    <h2 class="eyebrow">What this course is</h2>
     <h2 class="sec-head">CCNP Enterprise is<br><em>senior network territory.</em></h2>
     <p class="body-text">CCNP Enterprise (350-401 ENCOR + concentration exam) validates that you can design, implement, operate and troubleshoot enterprise networks at scale. It is the credential that distinguishes senior network engineers in Malaysian banks, telcos and large enterprises.</p>
     <p class="body-text">At Nexperts, CCNP Enterprise is delivered against a multi-rack lab including Cisco SD-WAN edges and vManage. We focus on the four highest-value concentrations — ENCOR core plus your choice of Advanced Routing (300-410), SD-WAN (300-415) or Wireless (300-430).</p>
@@ -794,7 +798,7 @@ footer{padding:36px 20px 24px}
     <p class="body-text">The 2026 curriculum strengthens cloud-edge integration, modern automation (Cisco DNAC, ThousandEyes), zero-trust enforcement and Wi-Fi 7. We teach with current MY service-provider and enterprise WAN context.</p>
 
 <div style="margin-top:36px">
-  <div class="eyebrow m">Who should take this course</div>
+  <h2 class="eyebrow m">Who should take this course</h2>
   <div class="who-grid">
     <div class="who-card">
       <span class="who-icon">📡</span>
@@ -824,7 +828,7 @@ footer{padding:36px 20px 24px}
 </div>
 
 <div style="margin-top:36px">
-  <div class="eyebrow g">Prerequisites</div>
+  <h2 class="eyebrow g">Prerequisites</h2>
   <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> CCNA 200-301 or equivalent advanced network experience</div>
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> 3+ years of Cisco network experience</div>

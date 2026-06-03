@@ -158,6 +158,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:62px;display:flex;ali
 .eyebrow::before{content:’’;width:14px;height:2px;background:var(--blue);border-radius:2px;flex-shrink:0}
 .eyebrow.m{color:var(--marM)}.eyebrow.m::before{background:var(--marM)}
 .eyebrow.g{color:var(--green)}.eyebrow.g::before{background:var(--green)}
+#sec-overview h2.eyebrow{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.2rem,1.75vw,1.5rem);line-height:1.25;letter-spacing:-.01em;text-transform:none;color:var(--ink);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+#sec-overview h2.eyebrow::before{content:'';width:18px;height:3px;background:var(--blue);border-radius:2px;flex-shrink:0}
+#sec-overview h2.eyebrow.m::before{background:var(--marM)}
+#sec-overview h2.eyebrow.g::before{background:var(--green)}
 h2.sec-head{font-family:‘Fraunces’,serif;font-weight:300;font-size:clamp(1.6rem,2.5vw,2.2rem);line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px}
 h2.sec-head em{font-style:italic;color:var(--blue)}
 h2.sec-head em.m{color:var(--marM)}
@@ -587,7 +591,7 @@ footer{padding:36px 20px 24px}
   <!-- OVERVIEW -->
 
   <div id="sec-overview" class="content-sec">
-    <div class="eyebrow">What this course is</div>
+    <h2 class="eyebrow">What this course is</h2>
     <h2 class="sec-head">When the breach<br><em>stops being theoretical.</em></h2>
     <p class="body-text">E|CIH (Certified Incident Handler) is EC-Council's dedicated incident-response certification. It sits between the offensive world of CEH and the forensic depth of CHFI — and answers the question every CISO asks: 'When something bad happens, who in the room actually knows the process?'</p>
     <p class="body-text">At Nexperts, E|CIH is delivered with Malaysian context: BNM RMiT-style expectations, MyCERT reporting patterns, and the reality of lean IT teams in GLCs, banks and mid-market enterprises. You will run at least three full tabletops and one full live-lab chain from triage to recovery.</p>
@@ -595,7 +599,7 @@ footer{padding:36px 20px 24px}
     <p class="body-text">The 2024+ exam refresh emphasises cloud IR (Azure, AWS, M365), phishing-to-ransomware chains, and third-party / supply-chain incident handling. We cover all three with hands-on scenarios.</p>
 
 <div style="margin-top:36px">
-  <div class="eyebrow m">Who should take this course</div>
+  <h2 class="eyebrow m">Who should take this course</h2>
   <div class="who-grid">
     <div class="who-card">
       <span class="who-icon">🚨</span>
@@ -625,7 +629,7 @@ footer{padding:36px 20px 24px}
 </div>
 
 <div style="margin-top:36px">
-  <div class="eyebrow g">Prerequisites</div>
+  <h2 class="eyebrow g">Prerequisites</h2>
   <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> CEH, CHFI, Security+ or 2+ years in security / network operations (recommended)</div>
     <div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> Comfort with Windows and Linux command line at a working level</div>
