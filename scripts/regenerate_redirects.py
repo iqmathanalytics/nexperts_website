@@ -123,6 +123,13 @@ LEGACY_REQUESTED_MAP: dict[str, str] = {
     "/netflix-data-analysis": "/courses/netflix-data-analysis",
 }
 
+# Vanity SEO paths → course HTML (200 rewrite; canonical meta uses vanity path)
+VANITY_200_REWRITES: dict[str, str] = {
+    "/fortinet-certified-professional-network-security-course-malaysia": (
+        "/courses/fortinet-certified-professional-network-security.html"
+    ),
+}
+
 
 def transform_dest_course_html(dest: str) -> str:
     for pat in (
@@ -270,11 +277,25 @@ def main() -> None:
     trail_srcs = {s for s, _ in trail_sorted}
     flat_sorted = [(s, d) for s, d in flat_sorted if s not in trail_srcs]
 
+    vanity_200 = [
+        (src, dst)
+        for src, dst in VANITY_200_REWRITES.items()
+        if dst.startswith("/courses/") and dst.endswith(".html")
+    ]
+
     lines: list[str] = [
         _REDIRECTS_PREAMBLE.rstrip("\n"),
         "",
-        "# --- Trailing slash removal (301; non-trailing slash is canonical) ---",
+        "# Vanity SEO URLs (200; canonical meta matches source path)",
     ]
+    for s, d in sort_rules_longest_src_first(vanity_200):
+        lines.append(f"{s} {d} 200")
+    lines.extend(
+        [
+            "",
+            "# --- Trailing slash removal (301; non-trailing slash is canonical) ---",
+        ]
+    )
     for s, d in trail_sorted:
         lines.append(f"{s} {d} 301")
 

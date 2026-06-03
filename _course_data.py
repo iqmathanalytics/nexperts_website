@@ -90,3 +90,6 @@ COURSES.extend(_B_P4B)
 # Legacy Wix SEO URLs (also published at root — see scripts/build_legacy_seo_pages.py)
 from _course_batch_legacy_wix import BATCH as _B_LEGACY_WIX
 COURSES.extend(_B_LEGACY_WIX)
+
+from _course_batch_fortinet import BATCH as _B_FORTINET
+COURSES.extend(_B_FORTINET)

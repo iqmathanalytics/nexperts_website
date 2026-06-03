@@ -144,6 +144,7 @@ P1 = {
     "Django Web Development": "django",
     "iOS Development": "ios-development",
     "Netflix Data Analysis Workshop": "netflix-data-analysis",
+    "Fortinet FCP Network Security": "fortinet-certified-professional-network-security",
 }
 
 # -----------------------------------------------------------------------------
@@ -166,6 +167,7 @@ BRANDS = [
     ("isaca",     "ISACA",            "ISACA",            "Audit, risk, governance and security management.",          "#a30729", "#fef2f2"),
     ("isc2",      "ISC2",             "ISC2",             "CISSP and the ISC2 cybersecurity body of knowledge.",       "#082c5e", "#eef2ff"),
     ("offsec",    "Offensive Security","OffSec",          "Hands-on penetration testing and offensive cybersecurity.", "#0ea5e9", "#f0f9ff"),
+    ("fortinet",  "Fortinet",         "Fortinet",        "FortiGate, Security Fabric, SD-WAN and network security certs.", "#ee3124", "#fef2f2"),
     ("skill",     "Skill-Based",      "Skills",           "Hands-on, role-ready skills \u2014 outcome over paperwork.","#10b981", "#ecfdf5"),
 ]
 
@@ -195,6 +197,7 @@ CARDS = [
     ("eccouncil","cert","EC-Council","Cert","CHFI v11",              "Computer Hacking Forensic Investigator \u2014 digital forensics and evidence.","Intermediate",  4.8,94, 4320),
     ("eccouncil","cert","EC-Council","Cert","Certified SOC Analyst (CSA)","SOC operations, threat monitoring, alert triage and incident reporting.","Entry\u2013Mid",4.8,168,9620),
     ("eccouncil","cert","EC-Council","Cert","CND v3",                "Certified Network Defender \u2014 proactive network protection and defense.","Intermediate",   4.7,124,5780),
+    ("fortinet","cert","Fortinet","Cert","Fortinet FCP Network Security","Fortinet Certified Professional \u2014 FortiGate, VPN, SD-WAN and Security Fabric.","Professional",4.8,118,6420),
     ("eccouncil","cert","EC-Council","Cert","CCISO",                 "Chief Information Security Officer \u2014 executive cybersecurity leadership.","Executive",   4.9,42, 1620),
     ("eccouncil","cert","EC-Council","Cert","CTIA",                  "Certified Threat Intelligence Analyst \u2014 dark web intel, threat hunting.","Advanced",      4.8,86, 2940),
     ("eccouncil","cert","EC-Council","Cert","CCT \u2014 Cybersecurity Technician","Entry-level hands-on cybersecurity \u2014 the right starting point in security.","Entry",4.8,142,7940),

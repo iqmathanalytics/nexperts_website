@@ -54,6 +54,85 @@ def render_who_grid(who):
     )
 
 
+def render_checklist(items):
+    return "\n".join(
+        f'    <div style="display:flex;align-items:flex-start;gap:10px;font-size:.83rem;color:var(--ink2)">'
+        f'<span style="color:var(--green);font-weight:700">✓</span> {x}</div>'
+        for x in items
+    )
+
+
+def render_overview_sections(sections):
+    if not sections:
+        return ""
+    blocks = []
+    for sec in sections:
+        eb_class = sec.get("eyebrow_class", "g")
+        blocks.append('<div style="margin-top:36px">')
+        blocks.append(f'  <div class="eyebrow {eb_class}">{sec["eyebrow"]}</div>')
+        if sec.get("intro"):
+            blocks.append(f'  <p class="body-text" style="margin-top:16px">{sec["intro"]}</p>')
+        if sec.get("subtitle"):
+            blocks.append(f'  <p class="body-text" style="margin-top:12px;font-weight:600;color:var(--ink)">{sec["subtitle"]}</p>')
+        for p in sec.get("paragraphs") or []:
+            blocks.append(f'  <p class="body-text">{p}</p>')
+        if sec.get("bullets"):
+            blocks.append('  <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">')
+            blocks.append(render_checklist(sec["bullets"]))
+            blocks.append("  </div>")
+        for title, bullets in sec.get("skill_groups") or []:
+            blocks.append(f'  <h4 style="font-size:.88rem;font-weight:600;color:var(--ink);margin-top:18px">{title}</h4>')
+            blocks.append('  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">')
+            blocks.append(render_checklist(bullets))
+            blocks.append("  </div>")
+        if sec.get("comparison_table"):
+            ct = sec["comparison_table"]
+            headers = ct["headers"]
+            h0, h1, h2 = headers[0], headers[1], headers[2]
+            blocks.append(
+                '  <div style="overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:10px">'
+                f'<table style="width:100%;border-collapse:collapse;font-size:.78rem;min-width:480px">'
+                '<thead><tr style="background:var(--bg2)">'
+                f'<th style="text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700;color:var(--ink)">{h0}</th>'
+                f'<th style="text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700;color:var(--blue)">{h1}</th>'
+                f'<th style="text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700;color:var(--ink2)">{h2}</th>'
+                "</tr></thead><tbody>"
+            )
+            for i, row in enumerate(ct["rows"]):
+                feat, c1, c2 = row[0], row[1], row[2]
+                border = "border-bottom:1px solid var(--line);" if i < len(ct["rows"]) - 1 else ""
+                blocks.append(
+                    f'<tr><td style="padding:10px 14px;{border}color:var(--ink2)">{feat}</td>'
+                    f'<td style="padding:10px 14px;{border}">{c1}</td>'
+                    f'<td style="padding:10px 14px;{border}">{c2}</td></tr>'
+                )
+            blocks.append("</tbody></table></div>")
+        if sec.get("footer"):
+            blocks.append(f'  <p class="body-text" style="margin-top:14px">{sec["footer"]}</p>')
+        blocks.append("</div>")
+    return "\n\n".join(blocks)
+
+
+def render_faq_modules(faqs):
+    out = []
+    for i, (q, a) in enumerate(faqs):
+        open_cls = " open" if i == 0 else ""
+        num = f"{i + 1:02d}"
+        out.append(
+            f'      <button class="module{open_cls}" onclick="toggleModule(this)">\n'
+            f'        <div class="module-header">\n'
+            f'          <span class="module-num">{num}</span>\n'
+            f'          <h4>{q}</h4>\n'
+            f'          <span class="module-arrow">›</span>\n'
+            f'        </div>\n'
+            f'        <div class="module-body">\n'
+            f'          <div class="body-text" style="margin-top:12px">{a}</div>\n'
+            f'        </div>\n'
+            f'      </button>'
+        )
+    return "\n".join(out)
+
+
 def render_prereqs(items, note):
     rows = "\n    ".join(
         f'<div style="display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--ink2)"><span style="color:var(--green);font-weight:700">✓</span> {x}</div>'
@@ -243,6 +322,54 @@ def contact_href(c, intent=None):
     return f"/contact-us?{contact_link_query(c, intent)}#enquire"
 
 
+SECTION_IDS = (
+    "overview",
+    "curriculum",
+    "labs",
+    "exam",
+    "passrate",
+    "roadmap",
+    "reviews",
+    "faq",
+)
+
+
+def replace_section_by_id(html: str, section_id: str, inner_html: str) -> str:
+    """Replace inner content of sec-{id} through the next sec-* block (CEH-style template)."""
+    needle = f'  <div id="sec-{section_id}"'
+    start = html.find(needle)
+    if start < 0:
+        return html
+    tag_end = html.find(">", start) + 1
+    open_tag = html[start:tag_end]
+    try:
+        idx = SECTION_IDS.index(section_id)
+    except ValueError:
+        idx = -1
+    next_start = -1
+    if idx >= 0 and idx + 1 < len(SECTION_IDS):
+        for next_id in SECTION_IDS[idx + 1 :]:
+            pos = html.find(f'  <div id="sec-{next_id}"', tag_end)
+            if pos >= 0:
+                next_start = pos
+                break
+    if next_start < 0:
+        next_start = html.find("</div><!-- /main -->", tag_end)
+    return html[:start] + open_tag + "\n" + inner_html + "\n  </div>\n\n" + html[next_start:]
+
+
+STANDARD_TABS_HTML = """  <div class="tabs-bar" id="tabBar">
+    <button class="tab on" data-t="overview">Overview</button>
+    <button class="tab" data-t="curriculum">Curriculum</button>
+    <button class="tab" data-t="labs">Labs</button>
+    <button class="tab" data-t="exam">Exam Info</button>
+    <button class="tab" data-t="passrate">Pass Rate</button>
+    <button class="tab" data-t="roadmap">Next Steps</button>
+    <button class="tab" data-t="reviews">Reviews</button>
+    <button class="tab" data-t="faq">FAQs</button>
+  </div>"""
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # PAGE BUILDER
 # ──────────────────────────────────────────────────────────────────────────────
@@ -252,7 +379,78 @@ def build_page(c):
     html = TEMPLATE
 
     # ── <title> + meta
-    html = re.sub(r'<title>.*?</title>', f'<title>{c["title"]} — {c["vendor_short"]} | Nexperts Academy</title>', html, count=1)
+    page_title = c.get("seo_title") or f'{c["title"]} — {c["vendor_short"]} | Nexperts Academy'
+    html = re.sub(r'<title>.*?</title>', f'<title>{page_title}</title>', html, count=1)
+    if c.get("seo_description"):
+        desc = c["seo_description"]
+        html = re.sub(
+            r'<meta name="description" content="[^"]*">',
+            f'<meta name="description" content="{desc}">',
+            html,
+            count=1,
+        )
+        html = re.sub(
+            r'<meta property="og:description" content="[^"]*">',
+            f'<meta property="og:description" content="{desc}">',
+            html,
+            count=1,
+        )
+        html = re.sub(
+            r'<meta name="twitter:description" content="[^"]*">',
+            f'<meta name="twitter:description" content="{desc}">',
+            html,
+            count=1,
+        )
+    if c.get("seo_keywords"):
+        html = re.sub(
+            r'<meta name="keywords" content="[^"]*">',
+            f'<meta name="keywords" content="{c["seo_keywords"]}">',
+            html,
+            count=1,
+        )
+    if c.get("seo_title"):
+        html = re.sub(
+            r'<meta property="og:title" content="[^"]*">',
+            f'<meta property="og:title" content="{c["seo_title"]}">',
+            html,
+            count=1,
+        )
+        html = re.sub(
+            r'<meta name="twitter:title" content="[^"]*">',
+            f'<meta name="twitter:title" content="{c["seo_title"]}">',
+            html,
+            count=1,
+        )
+    if c.get("schema_markup"):
+        markup = c["schema_markup"].strip()
+        html = re.sub(
+            r"\n?<!-- nexperts-schema:v1 -->.*?<!-- /nexperts-schema:v1 -->\n?",
+            "\n",
+            html,
+            flags=re.DOTALL,
+        )
+        html = re.sub(
+            r"(<!-- /nexperts-seo-meta:v1 -->)",
+            rf"\1\n\n<!-- nexperts-schema:v1 -->\n{markup}\n<!-- /nexperts-schema:v1 -->",
+            html,
+            count=1,
+        )
+    canon_slug_path = c.get("canonical_path") or f"/courses/{c['slug']}"
+    if c.get("canonical_path") or c.get("seo_title") or c.get("seo_description"):
+        canon_url = f"https://www.nexpertsacademy.com{canon_slug_path}"
+        html = re.sub(
+            r'<meta property="og:url" content="[^"]*">',
+            f'<meta property="og:url" content="{canon_url}">',
+            html,
+            count=1,
+        )
+        if 'rel="canonical"' in html:
+            html = re.sub(
+                r'<link rel="canonical" href="[^"]*">',
+                f'<link rel="canonical" href="{canon_url}">',
+                html,
+                count=1,
+            )
 
     # ── Hero ::after watermark (smart-quoted)
     html = html.replace("content:\u2018CEH\u2019", f"content:\u2018{c['watermark']}\u2019", 1)
@@ -265,8 +463,11 @@ def build_page(c):
         f'          <span style="color:rgba(255,255,255,.6)">{c["title"]}</span>'
     )
     html = re.sub(
-        r'          <a href="(?:\.\./index\.html|/)">Home</a><span>/</span>.*?<span style="color:rgba\(255,255,255,\.6\)">CEH v13 AI</span>',
-        crumb_block, html, count=1, flags=re.DOTALL,
+        r'<div class="crumb">\s*.*?\s*</div>',
+        f'<div class="crumb">\n{crumb_block}\n        </div>',
+        html,
+        count=1,
+        flags=re.DOTALL,
     )
 
     # ── Course badges
@@ -314,61 +515,24 @@ def build_page(c):
         html, count=1, flags=re.DOTALL,
     )
 
-    # ── Overview section (everything between <!-- OVERVIEW --> and <!-- CURRICULUM -->)
-    overview_html = build_overview(c)
+    # ── Standard course tabs (template may use bootcamp-style labels)
     html = re.sub(
-        r'  <!-- OVERVIEW -->\n\n  <div id="sec-overview" class="content-sec">.*?\n  </div>\n\n  <!-- CURRICULUM -->',
-        f'  <!-- OVERVIEW -->\n\n  <div id="sec-overview" class="content-sec">\n{overview_html}\n  </div>\n\n  <!-- CURRICULUM -->',
-        html, count=1, flags=re.DOTALL,
+        r'  <div class="tabs-bar" id="tabBar">.*?</div>\n\n  <!-- OVERVIEW -->',
+        f'{STANDARD_TABS_HTML}\n\n  <!-- OVERVIEW -->',
+        html,
+        count=1,
+        flags=re.DOTALL,
     )
 
-    # ── Curriculum
-    curr_html = build_curriculum(c)
-    html = re.sub(
-        r'  <!-- CURRICULUM -->\n\n  <div id="sec-curriculum" class="content-sec" style="display:none">.*?\n  </div>\n\n  <!-- LABS -->',
-        f'  <!-- CURRICULUM -->\n\n  <div id="sec-curriculum" class="content-sec" style="display:none">\n{curr_html}\n  </div>\n\n  <!-- LABS -->',
-        html, count=1, flags=re.DOTALL,
-    )
-
-    # ── Labs
-    labs_html = build_labs(c)
-    html = re.sub(
-        r'  <!-- LABS -->\n\n  <div id="sec-labs" class="content-sec" style="display:none">.*?\n  </div>\n\n  <!-- EXAM INFO -->',
-        f'  <!-- LABS -->\n\n  <div id="sec-labs" class="content-sec" style="display:none">\n{labs_html}\n  </div>\n\n  <!-- EXAM INFO -->',
-        html, count=1, flags=re.DOTALL,
-    )
-
-    # ── Exam info
-    exam_html = build_exam(c)
-    html = re.sub(
-        r'  <!-- EXAM INFO -->\n\n  <div id="sec-exam" class="content-sec" style="display:none">.*?\n  </div>\n\n  <!-- PASS RATE -->',
-        f'  <!-- EXAM INFO -->\n\n  <div id="sec-exam" class="content-sec" style="display:none">\n{exam_html}\n  </div>\n\n  <!-- PASS RATE -->',
-        html, count=1, flags=re.DOTALL,
-    )
-
-    # ── Pass rate band
-    pass_html = build_pass(c)
-    html = re.sub(
-        r'  <!-- PASS RATE -->\n\n  <div id="sec-passrate" class="content-sec" style="display:none;padding:0">.*?\n  </div>\n\n  <!-- ROADMAP / NEXT STEPS -->',
-        f'  <!-- PASS RATE -->\n\n  <div id="sec-passrate" class="content-sec" style="display:none;padding:0">\n{pass_html}\n  </div>\n\n  <!-- ROADMAP / NEXT STEPS -->',
-        html, count=1, flags=re.DOTALL,
-    )
-
-    # ── Roadmap / next steps
-    next_html = build_next(c)
-    html = re.sub(
-        r'  <!-- ROADMAP / NEXT STEPS -->\n\n  <div id="sec-roadmap" class="content-sec" style="display:none">.*?\n  </div>\n\n  <!-- REVIEWS -->',
-        f'  <!-- ROADMAP / NEXT STEPS -->\n\n  <div id="sec-roadmap" class="content-sec" style="display:none">\n{next_html}\n  </div>\n\n  <!-- REVIEWS -->',
-        html, count=1, flags=re.DOTALL,
-    )
-
-    # ── Reviews
-    reviews_html = build_reviews(c)
-    html = re.sub(
-        r'  <!-- REVIEWS -->\n\n  <div id="sec-reviews" class="content-sec" style="display:none">.*?\n  </div>\n\n</div><!-- /main -->',
-        f'  <!-- REVIEWS -->\n\n  <div id="sec-reviews" class="content-sec" style="display:none">\n{reviews_html}\n  </div>\n\n</div><!-- /main -->',
-        html, count=1, flags=re.DOTALL,
-    )
+    html = replace_section_by_id(html, "overview", build_overview(c))
+    html = replace_section_by_id(html, "curriculum", build_curriculum(c))
+    html = replace_section_by_id(html, "labs", build_labs(c))
+    html = replace_section_by_id(html, "exam", build_exam(c))
+    html = replace_section_by_id(html, "passrate", build_pass(c))
+    html = replace_section_by_id(html, "roadmap", build_next(c))
+    html = replace_section_by_id(html, "reviews", build_reviews(c))
+    if c.get("faqs"):
+        html = replace_section_by_id(html, "faq", build_faq(c))
 
     # ── Sidebar
     sidebar_html = build_sidebar(c)
@@ -397,13 +561,16 @@ def build_overview(c):
         if pull
         else ""
     )
+    extra_sections = render_overview_sections(c.get("overview_sections") or [])
+    extra_block = f"\n\n{extra_sections}\n\n" if extra_sections else "\n\n"
     return (
         f'    <div class="eyebrow">{c["overview_eyebrow"]}</div>\n'
         f'    <h2 class="sec-head">{h_lead}<br><em>{h_em}</em></h2>\n'
         f'    <p class="body-text">{c["overview_p1"]}</p>\n'
         f'    <p class="body-text">{c["overview_p2"]}</p>\n'
         f'{pull_html}'
-        f'    <p class="body-text">{c["overview_p3"]}</p>\n\n'
+        f'    <p class="body-text">{c["overview_p3"]}</p>\n'
+        f'{extra_block}'
         f'<div style="margin-top:36px">\n'
         f'  <div class="eyebrow m">Who should take this course</div>\n'
         f'  <div class="who-grid">\n'
@@ -529,6 +696,20 @@ def build_next(c):
     )
 
 
+def build_faq(c):
+    faq_head = c.get("faq_head") or (c["title"], "FAQs.")
+    h_lead, h_em = faq_head if isinstance(faq_head, tuple) else (faq_head, "FAQs.")
+    if isinstance(h_em, str) and not h_em.endswith("."):
+        h_em = f"{h_em}."
+    return (
+        f'    <div class="eyebrow">Frequently Asked Questions</div>\n'
+        f'    <h2 class="sec-head">{h_lead}<br><em>{h_em}</em></h2>\n'
+        f'    <div class="modules" style="margin-top:18px">\n'
+        f'{render_faq_modules(c["faqs"])}\n'
+        f'    </div>'
+    )
+
+
 def build_reviews(c):
     h_lead, h_em = c["reviews_head"]
     summary = render_review_summary(c["reviews_summary"])
@@ -551,7 +732,8 @@ def build_sidebar(c):
     ver = render_verify(c["verify_items"])
     href_enroll = contact_href(c)
     href_corp = contact_href(c, intent="corporate")
-    enquiry_form = render_sidebar_enquiry_form(course_title=c["title"], course_slug=c["slug"])
+    enquiry_title = c.get("hidden_course_title") or c["title"]
+    enquiry_form = render_sidebar_enquiry_form(course_title=enquiry_title, course_slug=c["slug"])
     return (
         f'<div class="enroll-card" id="enroll">\n'
         f'  <div class="price-row">\n'
@@ -600,15 +782,22 @@ from scripts.course_sidebar_enquiry import render_sidebar_enquiry_form  # noqa: 
 # DRIVER
 # ──────────────────────────────────────────────────────────────────────────────
 
-def main():
+def main(slugs: list[str] | None = None):
     out_dir = ROOT / "courses"
+    wanted = {s.strip() for s in slugs} if slugs else None
+    n = 0
     for c in COURSES:
         slug = c["slug"]
+        if wanted and slug not in wanted:
+            continue
         page = build_page(c)
         (out_dir / f"{slug}.html").write_text(page, encoding="utf-8")
         print(f"  wrote {slug}.html")
-    print(f"Generated {len(COURSES)} detail pages")
+        n += 1
+    print(f"Generated {n} detail page(s)")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    main(sys.argv[1:] or None)

@@ -13,6 +13,13 @@ SLUG_ALIASES: dict[str, str] = {
     "ceh-v13-ai": "ceh",
 }
 
+# Marketing / legacy SEO paths (page file still under /courses/{slug}.html)
+CANONICAL_PATH_OVERRIDES: dict[str, str] = {
+    "fortinet-certified-professional-network-security": (
+        "/fortinet-certified-professional-network-security-course-malaysia"
+    ),
+}
+
 
 def canonical_slug(slug: str) -> str:
     return SLUG_ALIASES.get(slug, slug)
@@ -20,6 +27,8 @@ def canonical_slug(slug: str) -> str:
 
 def canonical_path_for_slug(slug: str) -> str:
     slug = canonical_slug(slug)
+    if slug in CANONICAL_PATH_OVERRIDES:
+        return CANONICAL_PATH_OVERRIDES[slug]
     if slug in ROOT_CANONICAL_FILES:
         return f"/{slug}"
     return f"/courses/{slug}"

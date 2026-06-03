@@ -13,6 +13,7 @@
 Pricing 100-300 RM below Iverson Malaysia reference rates.
 """
 from _course_data import HERO_IMG, common_meta
+from _course_schema_oscp import OSCP_SCHEMA_MARKUP
 
 BATCH = []
 
@@ -1115,10 +1116,15 @@ BATCH.append(dict(
 # ============================================================================
 BATCH.append(dict(
     slug="oscp",
+    seo_title="OSCP Certification Training Malaysia | OffSec PEN-200",
+    seo_description="Master OSCP certification in Malaysia with OffSec PEN-200 training. Hands-on labs, Active Directory attacks, exam voucher & expert mentoring.",
+    seo_keywords="OSCP, OffSec, PEN-200, penetration testing training Malaysia, OSCP certification, offensive security, Active Directory exploitation",
+    canonical_path="/courses/oscp",
+    schema_markup=OSCP_SCHEMA_MARKUP,
     title="OSCP",
-    title_html='OSCP<br><em>Offensive Security Certified Pro</em>',
+    title_html="Offensive Security Certified Professional (OSCP)<br><em>Certification Training in Malaysia</em>",
     vendor_short="OffSec", watermark="OSCP", crumb_vendor="Offensive Security",
-    subtitle="The gold-standard penetration-testing credential. Try Harder. PEN-200 hands-on bootcamp \u2014 active-directory chain compromise, modern client-side exploitation, web exploitation, post-exploitation. The cert that defines pentest credibility.",
+    subtitle="Master OSCP with OffSec PEN-200 training in Malaysia \u2014 hands-on penetration testing labs, Active Directory attack chains, privilege escalation, web exploitation and professional reporting aligned to the OSCP exam.",
     badges=[("cb-vendor","OffSec Authorised Partner"),("cb-level","Advanced \u00b7 Offensive"),("cb-new","2026 PEN-200"),("cb-hot","Industry Gold Standard")],
     hero_meta=common_meta("10 days / 80 hrs","Bootcamp + 90-day Lab Access","On-site \u00b7 Virtual \u00b7 Hybrid",84,"5 May 2026"),
     hero_img=HERO_IMG,
@@ -1128,12 +1134,164 @@ BATCH.append(dict(
         ("\U0001F511","Privilege escalation","Linux + Windows privesc \u2014 the actual exam differentiator"),
         ("\U0001F4DC","Reporting","OffSec-grade pentest report \u2014 the part most candidates underprepare"),
     ],
-    overview_eyebrow="What this course is",
-    overview_head=("Where you stop scanning","and start exploiting."),
-    overview_p1="OSCP is the global gold-standard penetration-testing credential. The exam is a 24-hour hands-on hack and a 24-hour report-writing window. You get five live boxes \u2014 a stand-alone, an Active Directory set, plus auxiliary boxes. There is no multiple-choice. There is no theory. You exploit, document, deliver.",
-    overview_p2="At Nexperts, OSCP is delivered as a 10-day intensive bootcamp aligned with PEN-200 (current 2026 syllabus). We stand up an OffSec-style live lab with 60+ vulnerable hosts, walk every PEN-200 module, drill privesc, run two full 24-hour mock exams, and gate you for the real exam only when you've cleared a 70-point mock. PEN-200 lab access (90 days) and the exam voucher are included.",
-    overview_quote="OSCP is the cert hiring managers in MY actually trust for pentest roles. CEH gets you to the interview; OSCP gets you the offer. The 'Try Harder' ethos is real \u2014 it shapes how you debug exploitation under timer.",
-    overview_p3="The 2026 PEN-200 update sharpened Active Directory exploitation, modern client-side attacks (HTML smuggling, modern AV bypass), and removed retired tooling. We mirror the current PEN-200 syllabus exactly \u2014 not the 2021 version many courses still teach.",
+    overview_eyebrow="Offensive Security Certified Professional (OSCP)",
+    overview_head=("Penetration testing certification", "training in Malaysia."),
+    overview_p1="The Offensive Security Certified Professional (OSCP) is one of the world's most respected penetration testing certifications, offered by Offensive Security (OffSec). Designed for cybersecurity professionals who want to develop practical offensive security skills, the OSCP certification validates the ability to identify, exploit, and document vulnerabilities in real-world environments.",
+    overview_p2="Unlike traditional certification exams that rely on multiple-choice questions, the OSCP exam requires candidates to demonstrate practical penetration testing expertise through a rigorous hands-on assessment. The certification is based on the PEN-200 (Penetration Testing with Kali Linux) course and is widely recognized by employers seeking skilled penetration testers, red team operators, security consultants, and cybersecurity professionals.",
+    overview_quote="The OSCP credential is considered the industry gold standard for professionals pursuing a career in ethical hacking, penetration testing, vulnerability assessment, and offensive security.",
+    overview_p3="At Nexperts Academy, our OSCP bootcamp mirrors the current PEN-200 syllabus with 90-day official lab access, Active Directory attack-chain drills, two full-length mock exams, report-writing workshops and instructor mentorship \u2014 so you earn your exam slot only when you are exam-ready.",
+    overview_sections=[
+        {
+            "eyebrow": "Why OSCP Is the Gold Standard for Penetration Testing",
+            "eyebrow_class": "m",
+            "intro": "The OSCP certification has earned its reputation because it focuses entirely on real-world offensive security skills.",
+            "subtitle": "Key benefits include",
+            "bullets": [
+                "Hands-on penetration testing training",
+                "Real-world attack scenarios",
+                "Active Directory exploitation",
+                "Web application security testing",
+                "Linux and Windows privilege escalation",
+                "Vulnerability assessment methodologies",
+                "Professional penetration testing reporting",
+                "Industry-recognized OffSec certification",
+            ],
+            "footer": "Employers value OSCP-certified professionals because they can demonstrate practical skills rather than theoretical knowledge. The certification proves your ability to identify and exploit vulnerabilities in systems, networks, and applications under realistic conditions.",
+        },
+        {
+            "eyebrow": "Hands-On Penetration Testing Skills You Will Learn",
+            "intro": "The OSCP bootcamp is designed to develop practical penetration testing skills required by today's cybersecurity industry.",
+            "skill_groups": [
+                (
+                    "Information Gathering & Enumeration",
+                    [
+                        "Network reconnaissance",
+                        "Service enumeration",
+                        "Vulnerability discovery",
+                        "Attack surface mapping",
+                    ],
+                ),
+                (
+                    "Web Application Security Testing",
+                    [
+                        "Authentication attacks",
+                        "File upload vulnerabilities",
+                        "SQL Injection fundamentals",
+                        "Cross-Site Scripting (XSS)",
+                        "Server-Side Request Forgery (SSRF)",
+                    ],
+                ),
+                (
+                    "Active Directory Exploitation",
+                    [
+                        "Domain enumeration",
+                        "Kerberos attacks",
+                        "Credential harvesting",
+                        "Lateral movement",
+                        "Multi-domain attack chains",
+                    ],
+                ),
+                (
+                    "Privilege Escalation",
+                    [
+                        "Linux privilege escalation",
+                        "Windows privilege escalation",
+                        "Misconfiguration exploitation",
+                        "Local privilege escalation techniques",
+                    ],
+                ),
+                (
+                    "Professional Reporting",
+                    [
+                        "Penetration testing documentation",
+                        "Risk assessment reporting",
+                        "Executive summaries",
+                        "Technical findings and remediation",
+                    ],
+                ),
+            ],
+        },
+        {
+            "eyebrow": "OSCP Exam Format Explained",
+            "eyebrow_class": "m",
+            "intro": "The OSCP exam is known as one of the most challenging cybersecurity certification exams available today.",
+            "subtitle": "Exam structure",
+            "bullets": [
+                "24-hour practical penetration testing exam",
+                "24-hour report submission period",
+                "Active Directory attack environment",
+                "Multiple standalone targets",
+                "Real-world exploitation scenarios",
+            ],
+            "footer": "Candidates must demonstrate their ability to identify vulnerabilities, exploit target systems, escalate privileges, move laterally within networks, and document findings professionally. The OSCP exam rewards methodology, persistence, and practical problem-solving skills.",
+        },
+        {
+            "eyebrow": "OSCP vs CEH: Which Certification Should You Choose?",
+            "eyebrow_class": "m",
+            "intro": "Many cybersecurity professionals compare OSCP with Certified Ethical Hacker (CEH).",
+            "comparison_table": {
+                "headers": ("Feature", "OSCP", "CEH"),
+                "rows": [
+                    ("Exam Type", "Hands-On Practical", "Multiple Choice + Practical"),
+                    ("Difficulty Level", "Advanced", "Beginner to Intermediate"),
+                    ("Penetration Testing Focus", "Extensive", "Basic"),
+                    ("Active Directory Attacks", "Extensive", "Limited"),
+                    ("Employer Recognition", "Very High", "High"),
+                    ("Offensive Security Skills", "Advanced", "Intermediate"),
+                    ("Reporting Skills", "Included", "Limited"),
+                ],
+            },
+            "footer": "If your goal is to become a penetration tester, red team operator, or offensive security specialist, OSCP is generally considered the stronger technical credential.",
+        },
+        {
+            "eyebrow": "Career Opportunities After OSCP Certification",
+            "intro": "The demand for offensive security professionals continues to grow across Malaysia and globally.",
+            "subtitle": "Common job roles include",
+            "bullets": [
+                "Penetration Tester",
+                "Security Consultant",
+                "Red Team Operator",
+                "Vulnerability Assessment Specialist",
+                "Security Engineer",
+                "Application Security Engineer",
+                "Cybersecurity Analyst",
+                "Security Researcher",
+                "Ethical Hacker",
+                "Information Security Consultant",
+            ],
+        },
+        {
+            "eyebrow": "How to Prepare for the OSCP Exam",
+            "intro": "To maximize your chances of passing the OSCP certification exam, candidates should build a strong foundation in:",
+            "bullets": [
+                "Linux administration",
+                "Windows fundamentals",
+                "TCP/IP networking",
+                "Active Directory concepts",
+                "Bash scripting",
+                "Python scripting",
+                "Web application technologies",
+                "Penetration testing methodologies",
+            ],
+        },
+        {
+            "eyebrow": "Why Choose Nexperts Academy for OSCP Training in Malaysia?",
+            "intro": "Nexperts Academy delivers an exam-focused OSCP training program aligned with the latest OffSec PEN-200 syllabus.",
+            "subtitle": "What makes Nexperts different",
+            "bullets": [
+                "OffSec Authorized Training Partner",
+                "Instructor-led OSCP bootcamp",
+                "Full PEN-200 coverage",
+                "Active Directory attack-chain training",
+                "90-day official lab access",
+                "Two full-length mock exams",
+                "Report-writing workshops",
+                "Expert mentorship support",
+                "Practical penetration testing methodology",
+                "Malaysia-based instructor support",
+            ],
+        },
+    ],
     who_for=[
         ("\U0001F4BC","Aspiring pentesters","Building the credential most-required for pentest roles in MY."),
         ("\U0001F50D","Red-team aspirants","OSCP is the table-stakes cert before OSEP / OSWE / OSED."),
@@ -1241,17 +1399,17 @@ BATCH.append(dict(
         ("12","Mock Exam 2","24-hour solo mock with full report submission.","lt-attack","Exam"),
     ],
     labs_footer="+ 50+ additional live boxes across our internal lab and the OffSec PEN-200 lab.",
-    exam_eyebrow="Exam Information",
-    exam_head=("24 hours hack.","24 hours report."),
-    exam_intro="OSCP is a 48-hour exam window: 24 hours of hands-on hacking against 5 live targets (one stand-alone + one 3-machine AD chain), then 24 hours to write a professional pentest report. You need 70 / 100 points to pass. Bonus points for a complete lab-report submission.",
-    exam_main=dict(name="OSCP Exam (PEN-200)",rows=[
-        ("Format","24 hr practical hack + 24 hr report"),
-        ("Targets","5 live boxes (1 stand-alone + AD chain of 3 + bonus)"),
-        ("Passing score",'<span class="pass-highlight">70 / 100 points</span>'),
-        ("Proctoring","OffSec live proctored"),
-        ("Validity","3 years (renewable)"),
-        ("Industry avg pass rate",'<span class="fail-note">~30\u201340% first attempt</span>'),
-        ("Nexperts pass rate",'<span class="pass-highlight">84% first attempt</span>'),
+    exam_eyebrow="OSCP Exam Format",
+    exam_head=("24 hours hack.", "24 hours report."),
+    exam_intro="The OSCP exam is one of the most challenging cybersecurity certification exams available. It is a 48-hour window: 24 hours of hands-on penetration testing against live targets (including an Active Directory environment and standalone machines), followed by 24 hours to submit a professional report. You need 70 / 100 points to pass.",
+    exam_main=dict(name="OSCP Exam (PEN-200)", rows=[
+        ("Practical exam", "24-hour hands-on penetration testing"),
+        ("Report window", "24-hour report submission period"),
+        ("Environment", "Active Directory attack environment + standalone targets"),
+        ("Passing score", '<span class="pass-highlight">70 / 100 points</span>'),
+        ("Skills tested", "Exploitation, privesc, lateral movement, reporting"),
+        ("Proctoring", "OffSec live proctored"),
+        ("Nexperts pass rate", '<span class="pass-highlight">84% first attempt</span>'),
     ]),
     exam_optional=None,
     mock_title="Our 4-Mock Programme",
@@ -1284,8 +1442,8 @@ BATCH.append(dict(
     reviews_head=("What our OSCP","graduates say."),
     reviews_summary=("4.9",112,12,4,128),
     reviews=[
-        ("\u2605\u2605\u2605\u2605\u2605","I'd attempted OSCP before with self-study and failed twice. Nexperts' AD chain drills + the 24-hour mocks were the difference. Cleared on first attempt with 90 points. The instructor's privesc methodology alone was worth the fee.","rav-b","KP","Krishna Prasad","Senior Pentester \u00b7 LGMS","\u2713 Passed first attempt (90 pts)"),
-        ("\u2605\u2605\u2605\u2605\u2605","Best OSCP bootcamp in MY full stop. The instructors are practising pentesters, not slide readers. The 24-hour mock with paired debrief was the most valuable single exercise of my prep.","rav-m","FB","Faizal Baharudin","Pentester \u00b7 Sapura Secured","\u2713 Passed first attempt (85 pts)"),
+        ("\u2605\u2605\u2605\u2605\u2605","I'd attempted OSCP before with self-study and failed twice. Nexperts' Active Directory attack-chain drills and 24-hour mock exams made the difference. Cleared on my first attempt with 90 points. The privilege escalation methodology alone was worth the fee.","rav-b","KP","Krishna Prasad","Senior Pentester \u00b7 LGMS","\u2713 Passed first attempt (90 pts)"),
+        ("\u2605\u2605\u2605\u2605\u2605","Best OSCP bootcamp in Malaysia. The instructors are practicing penetration testers, not slide readers. The 24-hour mock exam with paired debrief was the most valuable part of my preparation.","rav-m","FB","Faizal Baharudin","Pentester \u00b7 Sapura Secured","\u2713 Passed first attempt (85 pts)"),
         ("\u2605\u2605\u2605\u2605","OSCP is brutal. Don't sign up thinking it's easy. But Nexperts gave me the structure to push through. Now I do red-team engagements at a Big-4 consultancy.","rav-g","RT","Rachel Tan","Red Team Lead \u00b7 Big-4 MY","\u2713 Passed first attempt (80 pts)"),
         ("\u2605\u2605\u2605\u2605\u2605","The 'Try Harder' ethos is real. Nexperts doesn't hand you answers \u2014 they teach you how to debug exploitation under timer. That mindset shift is the cert in spirit. Cleared in 14 hours of the 24-hour window.","rav-a","ZA","Zarif Anuar","Senior Security Engineer \u00b7 ServiceRocket","\u2713 Passed first attempt (95 pts)"),
     ],
@@ -1318,6 +1476,50 @@ BATCH.append(dict(
         "LinkedIn certificate integration",
     ],
     guarantee_text="Hit our 70-point clearance mock and don't pass the real exam? We cover one OffSec retake voucher. No fine print.",
+    hidden_course_title="Offensive Security Certified Professional (OSCP)",
+    faq_head=("OSCP Certification", "FAQs."),
+    faqs=[
+        (
+            "What is OSCP certification?",
+            "OSCP (Offensive Security Certified Professional) is a globally recognized penetration testing certification offered by Offensive Security that validates practical offensive security skills.",
+        ),
+        (
+            "Is OSCP certification worth it?",
+            "Yes. OSCP is one of the most respected penetration testing certifications and is highly valued by employers hiring offensive security professionals.",
+        ),
+        (
+            "How hard is the OSCP exam?",
+            "The OSCP exam is considered challenging because it requires practical exploitation, privilege escalation, Active Directory attacks, and professional reporting skills.",
+        ),
+        (
+            "Is OSCP better than CEH?",
+            "For penetration testing and offensive security careers, OSCP is generally regarded as the more advanced and technically rigorous certification.",
+        ),
+        (
+            "How long does it take to prepare for OSCP?",
+            "Preparation time varies, but most candidates spend several months practicing enumeration, exploitation, privilege escalation, and Active Directory attacks.",
+        ),
+        (
+            "What happens if I fail the OSCP exam?",
+            "Candidates can retake the exam. Many training providers, including Nexperts Academy, offer structured preparation and mock exams to improve success rates.",
+        ),
+        (
+            "Is OSCP suitable for beginners?",
+            "OSCP is an advanced certification. Candidates should have networking knowledge, Linux fundamentals, scripting experience, and a basic understanding of cybersecurity concepts before attempting the exam.",
+        ),
+        (
+            "What jobs can I get after OSCP?",
+            "Common career paths include Penetration Tester, Red Team Operator, Security Consultant, Security Engineer, Ethical Hacker, and Application Security Engineer.",
+        ),
+        (
+            "Does OSCP increase salary potential?",
+            "Yes. OSCP-certified professionals often qualify for higher-paying cybersecurity and penetration testing roles due to the practical skills validated by the certification.",
+        ),
+        (
+            "How long is OSCP certification valid?",
+            "The OSCP certification remains one of the most respected offensive security credentials and demonstrates practical penetration testing expertise recognized globally.",
+        ),
+    ],
 ))
 
 

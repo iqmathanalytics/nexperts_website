@@ -1,0 +1,180 @@
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Course",
+  "name":"Offensive Security Certified Professional (OSCP) Certification Training",
+  "alternateName":"OSCP PEN-200 Training Malaysia",
+  "description":"Hands-on OSCP certification training in Malaysia aligned with OffSec PEN-200. Learn penetration testing, Active Directory exploitation, privilege escalation, web application security, vulnerability assessment and professional reporting through real-world labs.",
+  "url":"https://www.nexpertsacademy.com/courses/oscp",
+  "courseCode":"PEN-200",
+  "educationalCredentialAwarded":"Offensive Security Certified Professional (OSCP)",
+  "occupationalCredentialAwarded":"OSCP Certification",
+  "inLanguage":"English",
+  "courseMode":[
+    "OnSite",
+    "Online",
+    "Hybrid"
+  ],
+  "provider":{
+    "@type":"Organization",
+    "name":"Nexperts Academy",
+    "url":"https://www.nexpertsacademy.com",
+    "logo":"https://www.nexpertsacademy.com/logo.png"
+  },
+  "offers":{
+    "@type":"Offer",
+    "price":"7500",
+    "priceCurrency":"MYR",
+    "availability":"https://schema.org/InStock",
+    "url":"https://www.nexpertsacademy.com/courses/oscp"
+  },
+  "hasCourseInstance":{
+    "@type":"CourseInstance",
+    "courseMode":"Hybrid",
+    "duration":"P10D"
+  },
+  "teaches":[
+    "Penetration Testing",
+    "Ethical Hacking",
+    "Active Directory Exploitation",
+    "Web Application Security",
+    "Vulnerability Assessment",
+    "Privilege Escalation",
+    "Network Security",
+    "Information Gathering",
+    "Offensive Security",
+    "Professional Reporting",
+    "Kali Linux",
+    "Burp Suite",
+    "Nmap",
+    "BloodHound",
+    "PowerShell",
+    "Linux Privilege Escalation",
+    "Windows Privilege Escalation"
+  ],
+  "aggregateRating":{
+    "@type":"AggregateRating",
+    "ratingValue":"4.9",
+    "bestRating":"5",
+    "reviewCount":"128"
+  },
+  "review":[
+    {
+      "@type":"Review",
+      "author":{
+        "@type":"Person",
+        "name":"Krishna Prasad"
+      },
+      "reviewRating":{
+        "@type":"Rating",
+        "ratingValue":"5",
+        "bestRating":"5"
+      },
+      "reviewBody":"I'd attempted OSCP before with self-study and failed twice. Nexperts' Active Directory attack-chain drills and 24-hour mock exams made the difference. Cleared on my first attempt with 90 points. The privilege escalation methodology alone was worth the fee."
+    },
+    {
+      "@type":"Review",
+      "author":{
+        "@type":"Person",
+        "name":"Faizal Baharudin"
+      },
+      "reviewRating":{
+        "@type":"Rating",
+        "ratingValue":"5",
+        "bestRating":"5"
+      },
+      "reviewBody":"Best OSCP bootcamp in Malaysia. The instructors are practicing penetration testers, not slide readers. The 24-hour mock exam with paired debrief was the most valuable part of my preparation."
+    }
+  ]
+}
+</script>
+
+
+
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {
+   "@type":"Question",
+   "name":"What is OSCP certification?",
+   "acceptedAnswer":{
+    "@type":"Answer",
+    "text":"OSCP (Offensive Security Certified Professional) is a globally recognized penetration testing certification offered by Offensive Security that validates practical offensive security skills."
+   }
+  },
+  {
+   "@type":"Question",
+   "name":"Is OSCP certification worth it?",
+   "acceptedAnswer":{
+    "@type":"Answer",
+    "text":"Yes. OSCP is one of the most respected penetration testing certifications and is highly valued by employers hiring offensive security professionals."
+   }
+  },
+  {
+   "@type":"Question",
+   "name":"How hard is the OSCP exam?",
+   "acceptedAnswer":{
+    "@type":"Answer",
+    "text":"The OSCP exam is considered challenging because it requires practical exploitation, Active Directory attacks, privilege escalation and professional reporting."
+   }
+  },
+  {
+   "@type":"Question",
+   "name":"Is OSCP better than CEH?",
+   "acceptedAnswer":{
+    "@type":"Answer",
+    "text":"For penetration testing and offensive security careers, OSCP is generally considered more advanced and technically rigorous than CEH."
+   }
+  },
+  {
+   "@type":"Question",
+   "name":"What jobs can I get after OSCP?",
+   "acceptedAnswer":{
+    "@type":"Answer",
+    "text":"Common roles include Penetration Tester, Security Consultant, Red Team Operator, Security Engineer, Ethical Hacker and Application Security Engineer."
+   }
+  }
+ ]
+}
+</script>
+
+
+
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"BreadcrumbList",
+ "itemListElement":[
+  {
+   "@type":"ListItem",
+   "position":1,
+   "name":"Home",
+   "item":"https://www.nexpertsacademy.com/"
+  },
+  {
+   "@type":"ListItem",
+   "position":2,
+   "name":"Courses",
+   "item":"https://www.nexpertsacademy.com/courses"
+  },
+  {
+   "@type":"ListItem",
+   "position":3,
+   "name":"Offensive Security",
+   "item":"https://www.nexpertsacademy.com/courses/oscp"
+  },
+  {
+   "@type":"ListItem",
+   "position":4,
+   "name":"OSCP",
+   "item":"https://www.nexpertsacademy.com/courses/oscp"
+  }
+ ]
+}
+</script>
+
+

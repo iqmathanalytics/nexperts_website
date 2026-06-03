@@ -15,43 +15,59 @@
 # All rules below are EXPLICIT (no :slug placeholders) for maximum compatibility.
 # =============================================================================
 
+# Vanity SEO URLs (200; canonical meta matches source path)
+/fortinet-certified-professional-network-security-course-malaysia /courses/fortinet-certified-professional-network-security.html 200
+
 # --- Trailing slash removal (301; non-trailing slash is canonical) ---
 
 # Legacy & vanity → canonical /courses/{slug} (301; flattened, single hop)
 /artificial-intelligence-machine-learning /courses/artificial-intelligence 301
-/courses/ai-102 /courses/artificial-intelligence 301
-/courses/ai-102.html /courses/artificial-intelligence 301
 /microsoft-certified-azure-administrator /courses/az-104 301
 /courses/data-science-with-python.html /data-science-with-python 301
 /data-analytics-associate-with-python /courses/sql-for-data-professionals 301
 /data-science-with-python-associate /courses/sql-for-data-professionals 301
 /aws-certified-solutions-architect /courses/aws-solutions-architect-associate 301
+/microsoft-excel-2019-intermediate /courses/excel-advanced-analytics 301
 /cisco-certified-devnet-associate /courses/devnet-associate 301
 /courses/data-science-with-python /data-science-with-python 301
 /salesforce-admin-and-automation /courses/salesforce-admin 301
 /itil5-foundation-certification /courses/itil-4-foundation 301
 /copy-of-microsoft-excel-basic /courses/excel-advanced-analytics 301
+/microsoft-excel-2019-advanced /courses/excel-advanced-analytics 301
 /courses/python-bootcamp.html /python-bootcamp 301
+/machine-learning-with-python /courses/dp-100 301
 /aws-dataengineer-associate /courses/aws-data-engineer-associate 301
 /full-stack-web-development /courses/full-stack-web-development 301
+/microsoft-excel-2019-basic /courses/excel-basic 301
 /redhat-rhcsa-and-rhce-cert /courses/linux-administration 301
 /servicenow-administration /courses/servicenow-admin 301
+/ethical-hacking-workshop /ceh 301
 /microsoft-excel-advanced /courses/excel-advanced-analytics 301
 /courses/ceh-v13-ai.html /ceh 301
 /courses/python-bootcamp /python-bootcamp 301
+/cyber-security-bootcamp /courses/cyber-security-bootcamp 301
 /aws-cloud-practitioner /courses/aws-cloud-practitioner 301
+/netflix-data-analysis /courses/netflix-data-analysis 301
 /prince2-certification /courses/prince2-foundation-practitioner 301
+/javascript-front-end /courses/full-stack-web-development 301
 /microsoft-power-apps /courses/pl-100 301
+/android-development /courses/android-development 301
+/courses/ai-102.html /courses/artificial-intelligence 301
 /devops-fundamentals /courses/az-400 301
 /servicenow-platform /courses/servicenow-platform 301
 /azure-fundamentals /courses/az-900 301
 /courses/ceh-v13-ai /ceh 301
 /microsoft-power-bi /courses/pl-300 301
+/ccnp-enarsi-sdwan /courses/ccnp-enterprise 301
 /courses/ccna.html /ccna 301
+/power-bi-workshop /courses/pl-300 301
 /courses/ceh.html /ceh 301
 /digitalmarketing /courses/digital-marketing 301
 /java-programming /courses/java-programming 301
 /network-security /courses/ccnp-security 301
+/ios-development /courses/ios-development 301
+/ai-ml-bootcamp /courses/ai-ml-bootcamp 301
+/courses/ai-102 /courses/artificial-intelligence 301
 /aws-advanced /courses/aws-solutions-architect-professional 301
 /courses/ccna /ccna 301
 /azure-ai900 /courses/ai-900 301
@@ -63,33 +79,14 @@
 /excel-basic /courses/excel-basic 301
 /ccnp-encor /courses/ccnp-enterprise 301
 /cisco-scor /courses/ccnp-security 301
+/django /courses/django 301
+/enarsi /courses/ccnp-enterprise 301
 /cissp /courses/cissp 301
 /sdwan /courses/sdwan 301
 /ecih /courses/ecih 301
-
-
-# Legacy Wix URLs → canonical courses (301)
-/ccnp-enarsi-sdwan /courses/ccnp-enterprise 301
-/enarsi /courses/ccnp-enterprise 301
-/ethical-hacking-workshop /ceh 301
-/javascript-front-end /courses/full-stack-web-development 301
-/machine-learning-with-python /courses/dp-100 301
-/microsoft-excel-2019-advanced /courses/excel-advanced-analytics 301
-/microsoft-excel-2019-basic /courses/excel-basic 301
-/microsoft-excel-2019-intermediate /courses/excel-advanced-analytics 301
-/power-bi-workshop /courses/pl-300 301
 /sql /courses/sql-for-data-professionals 301
 
-# Legacy Wix URLs → canonical courses (301)
-/ai-ml-bootcamp /courses/ai-ml-bootcamp 301
-/android-development /courses/android-development 301
-/cyber-security-bootcamp /courses/cyber-security-bootcamp 301
-/django /courses/django 301
-/ios-development /courses/ios-development 301
-/netflix-data-analysis /courses/netflix-data-analysis 301
 # Filename & legacy paths → pretty canonical URLs (301)
-# Cloudflare Pages resolves /about → about.html automatically (clean URLs). Do NOT add
-# matching 200 rewrites here — they cause ERR_TOO_MANY_REDIRECTS (see commit 9204aa4).
 /index.html / 301
 /about.html /about 301
 /contact.html /contact 301
@@ -101,12 +98,5 @@
 /course /#courses 301
 /course/ /#courses 301
 
-# Netlify Functions
-/.netlify/functions/* /.netlify/functions/:splat 200
-
 # Unknown paths: set Custom 404 document to /404.html in Cloudflare Pages (Dashboard).
 # Cloudflare Pages does not support status 404 in _redirects (unlike Netlify).
-/post/unlocking-the-power-of-data-science-applications-and-challenges /blog/unlocking-the-power-of-data-science-applications-and-challenges 301
-/post/unlocking-the-power-of-data-science-applications-and-challenges.html /blog/unlocking-the-power-of-data-science-applications-and-challenges 301
-/blog/ccna-certification-guide-complete-beginner-roadmap-2026 /blog/ccna-certification-guide 301
-/blog/ccna-certification-guide-complete-beginner-roadmap-2026.html /blog/ccna-certification-guide 301
