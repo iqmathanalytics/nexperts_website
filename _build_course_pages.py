@@ -45,7 +45,11 @@ def inject_overview_h2_css(html: str) -> str:
 # ──────────────────────────────────────────────────────────────────────────────
 
 def render_badges(badges):
-    return "\n          ".join(f'<span class="cbadge {cls}">{txt}</span>' for cls, txt in badges)
+    from _partner_claims import filter_badges
+
+    return "\n          ".join(
+        f'<span class="cbadge {cls}">{txt}</span>' for cls, txt in filter_badges(badges)
+    )
 
 
 def render_meta(meta):
@@ -329,7 +333,14 @@ def render_sidebar_meta(rows):
 
 
 def render_includes(items):
-    return "\n  ".join(f'<div class="include-item">{x}</div>' for x in items)
+    from _partner_claims import sanitize_partner_text
+
+    lines = []
+    for x in items:
+        cleaned = sanitize_partner_text(x)
+        if cleaned:
+            lines.append(f'<div class="include-item">{cleaned}</div>')
+    return "\n  ".join(lines)
 
 
 def render_verify(items):
@@ -482,6 +493,10 @@ def build_page(c):
 
     # ── Overview h2 heading size (scoped; div.eyebrow on other tabs stays small)
     html = inject_overview_h2_css(html)
+
+    from _partner_claims import sanitize_partner_html
+
+    html = sanitize_partner_html(html)
 
     # ── Hero ::after watermark (smart-quoted)
     html = html.replace("content:\u2018CEH\u2019", f"content:\u2018{c['watermark']}\u2019", 1)
