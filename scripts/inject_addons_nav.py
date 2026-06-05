@@ -49,6 +49,7 @@ STATIC_PAGES = [
     "blog/unlocking-the-power-of-data-science-applications-and-challenges.html",
     "blog/ccna-certification-guide.html",
     "blog/comptia-network-plus-certification-guide.html",
+    "blog/top-data-science-training-institutes-malaysia.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]

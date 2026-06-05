@@ -100,3 +100,5 @@
 
 # Unknown paths: set Custom 404 document to /404.html in Cloudflare Pages (Dashboard).
 # Cloudflare Pages does not support status 404 in _redirects (unlike Netlify).
+/top-data-science-training-institutes-malaysia /blog/top-data-science-training-institutes-malaysia 301
+/top-data-science-training-institutes-malaysia/ /blog/top-data-science-training-institutes-malaysia 301
