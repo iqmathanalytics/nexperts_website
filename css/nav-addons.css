@@ -134,7 +134,7 @@
 /* Courses mega-menu: stacked section headings + horizontal vendor chips */
 .nav-courses-panel {
   min-width: min(92vw, 520px);
-  max-width: min(560px, calc(100vw - 24px));
+  max-width: min(560px, calc(100% - 24px));
 }
 
 @media (min-width: 1025px) {
@@ -344,7 +344,7 @@
 
 .nav-panel--explore {
   min-width: min(92vw, 640px);
-  max-width: min(680px, calc(100vw - 24px));
+  max-width: min(680px, calc(100% - 24px));
 }
 
 .nav-addons-wrap.is-open .nav-addons-panel {

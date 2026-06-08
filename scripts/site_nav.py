@@ -305,18 +305,21 @@ _NAV_SCRIPTS = (
 )
 
 NAV_ASSET_TAGS = (
+    '<link rel="stylesheet" href="/css/site-base.css">\n'
     '<link rel="stylesheet" href="/css/site-nav.css">\n'
     '<link rel="stylesheet" href="/css/nav-addons.css">\n'
     + _NAV_SCRIPTS.format(prefix="")
 )
 
 NAV_ASSET_TAGS_REL = (
+    '<link rel="stylesheet" href="css/site-base.css">\n'
     '<link rel="stylesheet" href="css/site-nav.css">\n'
     '<link rel="stylesheet" href="css/nav-addons.css">\n'
     + _NAV_SCRIPTS.format(prefix="")
 )
 
 COURSE_NAV_ASSET_TAGS = (
+    '<link rel="stylesheet" href="../css/site-base.css">\n'
     '<link rel="stylesheet" href="../css/site-nav.css">\n'
     '<link rel="stylesheet" href="../css/nav-addons.css">\n'
     '<link rel="stylesheet" href="../css/course-detail-addons.css">\n'

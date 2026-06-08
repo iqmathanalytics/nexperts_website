@@ -80,6 +80,41 @@ def path_from_file(rel: str) -> str:
     return "/" + rel.replace(".html", "")
 
 
+def _ensure_site_base_css(html: str, *, course: bool = False) -> str:
+    if "site-base.css" in html:
+        return html
+    pairs: list[tuple[str, str]] = []
+    if course:
+        pairs = [
+            (
+                '<link rel="stylesheet" href="../css/site-nav.css">',
+                '<link rel="stylesheet" href="../css/site-base.css">\n',
+            ),
+            (
+                '<link rel="stylesheet" href="/css/site-nav.css">',
+                '<link rel="stylesheet" href="/css/site-base.css">\n',
+            ),
+        ]
+    elif 'href="/css/site-nav.css"' in html:
+        pairs = [
+            (
+                '<link rel="stylesheet" href="/css/site-nav.css">',
+                '<link rel="stylesheet" href="/css/site-base.css">\n',
+            ),
+        ]
+    elif 'href="css/site-nav.css"' in html:
+        pairs = [
+            (
+                '<link rel="stylesheet" href="css/site-nav.css">',
+                '<link rel="stylesheet" href="css/site-base.css">\n',
+            ),
+        ]
+    for needle, ins in pairs:
+        if needle in html:
+            return html.replace(needle, ins + needle, 1)
+    return html
+
+
 def ensure_nav_assets(html: str, *, course: bool = False) -> str:
     tags = COURSE_NAV_ASSET_TAGS if course else NAV_ASSET_TAGS
     if course:
@@ -153,6 +188,7 @@ def ensure_nav_assets(html: str, *, course: bool = False) -> str:
                     '<script src="js/courses-catalog.js" defer></script>',
                     1,
                 )
+        html = _ensure_site_base_css(html, course=course)
         return html
     if course:
         anchor = '<link rel="stylesheet" href="../css/site-nav-mobile.css">'
@@ -165,8 +201,10 @@ def ensure_nav_assets(html: str, *, course: bool = False) -> str:
         else:
             rep = anchor + "\n" + tags
     if anchor in html:
-        return html.replace(anchor, rep, 1)
-    return html.replace("</head>", tags + "\n</head>", 1)
+        html = html.replace(anchor, rep, 1)
+    else:
+        html = html.replace("</head>", tags + "\n</head>", 1)
+    return _ensure_site_base_css(html, course=course)
 
 
 def ensure_course_detail_addons(html: str, *, course: bool = False) -> str:

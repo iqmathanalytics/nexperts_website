@@ -3,6 +3,19 @@
  * Desktop at 100% keeps the full bar; 125%+ zoom uses .site-nav-drawer-force (JS).
  */
 
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
 @media (min-width: 1025px) {
   html:not(.site-nav-drawer-force) nav.site-nav .nav-menu-btn {
     display: none !important;
@@ -142,8 +155,8 @@
     top: var(--nx-nav-h, 62px);
     right: max(12px, env(safe-area-inset-right));
     left: auto;
-    width: min(360px, calc(100vw - 24px));
-    max-width: calc(100vw - 24px);
+    width: min(360px, calc(100% - 24px));
+    max-width: calc(100% - 24px);
     flex: none !important;
     min-width: 0 !important;
     flex-direction: column;
@@ -373,8 +386,8 @@
     top: var(--nx-nav-h, 68px);
     right: max(12px, env(safe-area-inset-right));
     left: auto;
-    width: min(360px, calc(100vw - 24px));
-    max-width: calc(100vw - 24px);
+    width: min(360px, calc(100% - 24px));
+    max-width: calc(100% - 24px);
     flex: none !important;
     flex-direction: column;
     align-items: stretch;
