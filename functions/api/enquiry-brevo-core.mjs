@@ -11,6 +11,10 @@ const PRODUCTION_PUBLIC_SITE = "https://www.nexpertsacademy.com";
 const DEFAULT_SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1vuZbvwAkuwIFU1F-CLjz8xMOKRXpJp0vqKCGbiZt0PE/edit?usp=sharing";
 
+/** Keep in sync with webAppUrl in js/enquiry-config.js — used when hosting env omits APPS_SCRIPT_ENQUIRY_URL. */
+const DEFAULT_APPS_SCRIPT_ENQUIRY_URL =
+  "https://script.google.com/macros/s/AKfycbyNSKTV_CkeClhp0_dNkDRmWZR67iAvzvZe4e_uSjNV1djhswzm1W6SE1_D1Ky2d47ULQ/exec";
+
 function corsHeaders() {
   const allow = String(process.env.BREVO_ALLOWED_ORIGINS || "*").trim() || "*";
   return {
@@ -383,9 +387,12 @@ function resolveAppsScriptEnquiryUrl(env) {
   const e = env || process.env || {};
   for (const k of APPS_SCRIPT_URL_ENV_KEYS) {
     const v = String(e[k] || "").trim();
-    if (v && /^https:\/\/script\.google\.com\/macros\//i.test(v)) return normalizeAppsScriptUrl(v);
+    if (v && /^https:\/\/script\.google\.com\/macros\//i.test(v)) {
+      return { url: normalizeAppsScriptUrl(v), fromEnv: true };
+    }
   }
-  return "";
+  const fallback = normalizeAppsScriptUrl(DEFAULT_APPS_SCRIPT_ENQUIRY_URL);
+  return fallback ? { url: fallback, fromEnv: false } : { url: "", fromEnv: false };
 }
 
 /** Strip query/hash so POST targets the web app endpoint cleanly. */
@@ -609,7 +616,8 @@ export async function handler(event) {
     };
   }
 
-  const appsScriptUrl = resolveAppsScriptEnquiryUrl(process.env);
+  const appsScript = resolveAppsScriptEnquiryUrl(process.env);
+  const appsScriptUrl = appsScript.url;
   let sheetLogged = false;
   let sheetError = null;
   if (appsScriptUrl) {
@@ -628,7 +636,10 @@ export async function handler(event) {
   };
   if (!appsScriptUrl) {
     bodyOut.sheetHint =
-      "APPS_SCRIPT_ENQUIRY_URL is not set — add it to .env (local) or site env on Cloudflare Pages / Netlify (same URL as webAppUrl in js/enquiry-config.js), then redeploy.";
+      "Apps Script web app URL is missing — set APPS_SCRIPT_ENQUIRY_URL in hosting env (same as webAppUrl in js/enquiry-config.js), then redeploy.";
+  } else if (!appsScript.fromEnv) {
+    bodyOut.sheetHint =
+      "Using built-in Apps Script URL (APPS_SCRIPT_ENQUIRY_URL not set in hosting env). Set the env var to override.";
   }
 
   return {
