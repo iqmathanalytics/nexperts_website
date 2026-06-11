@@ -24,6 +24,17 @@ This folder contains **Google Apps Script** bound to your **Google Sheet**. The 
 
 - In the script editor, run **`testAppendSampleRow`** once, then open the **`Enquiries`** tab — you should see a sample row.
 - Or POST from the site with `provider: "apps_script"` and a valid `webAppUrl`, then confirm a new row appears.
+- After each web POST, check the **`WebhookLog`** tab (same spreadsheet). If rows are missing but Executions show **Completed**, look at the **Error** column — common values:
+  - **`forbidden`** — `ENQUIRY_SECRET` in Script properties does not match `secret` in `js/enquiry-config.js` / `BREVO_ENQUIRY_SECRET` on hosting. Fix the value or **delete** `ENQUIRY_SECRET` to disable the check.
+  - **`empty_payload`** — POST body not parsed; redeploy Web app and confirm URL ends with `/exec`.
+  - **`no_spreadsheet`** — set Script property **`SPREADSHEET_ID`** to your sheet ID (default in code: master leads sheet).
+
+## Script properties (recommended)
+
+| Property | Purpose |
+|----------|---------|
+| `SPREADSHEET_ID` | Google Sheet ID to write rows (defaults to `1vuZbvwAkuwIFU1F-CLjz8xMOKRXpJp0vqKCGbiZt0PE` if unset) |
+| `ENQUIRY_SECRET` | Optional; must match website `secret` and hosting `BREVO_ENQUIRY_SECRET` |
 
 ## Security (practical)
 
