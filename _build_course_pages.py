@@ -607,8 +607,10 @@ def build_overview(c):
         if pull
         else ""
     )
-    extra_sections = render_overview_sections(c.get("overview_sections") or [])
-    extra_block = f"\n\n{extra_sections}\n\n" if extra_sections else "\n\n"
+    extra_before = render_overview_sections(c.get("overview_sections") or [])
+    extra_after_who = render_overview_sections(c.get("overview_sections_after_who") or [])
+    before_block = f"\n\n{extra_before}\n\n" if extra_before else "\n\n"
+    after_who_block = f"\n\n{extra_after_who}\n\n" if extra_after_who else "\n\n"
     return (
         f'    {overview_h2(c["overview_eyebrow"])}\n'
         f'    <h2 class="sec-head">{h_lead}<br><em>{h_em}</em></h2>\n'
@@ -616,13 +618,14 @@ def build_overview(c):
         f'    <p class="body-text">{c["overview_p2"]}</p>\n'
         f'{pull_html}'
         f'    <p class="body-text">{c["overview_p3"]}</p>\n'
-        f'{extra_block}'
+        f'{before_block}'
         f'<div style="margin-top:36px">\n'
         f'  {overview_h2("Who should take this course", "m")}\n'
         f'  <div class="who-grid">\n'
         f'    {render_who_grid(c["who_for"])}\n'
         f'  </div>\n'
-        f'</div>\n\n'
+        f'</div>\n'
+        f'{after_who_block}'
         f'<div style="margin-top:36px">\n'
         f'  {overview_h2("Prerequisites", "g")}\n'
         f'  <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">\n'

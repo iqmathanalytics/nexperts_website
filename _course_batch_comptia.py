@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """CompTIA course data (5 courses: A+, Network+, Security+, CySA+, PenTest+)."""
 from _course_data import HERO_IMG, common_meta
+from _course_schema_loader import schema_markup_from_file
 
 BATCH = []
 
@@ -373,10 +374,15 @@ BATCH.append(dict(
 # 3. CompTIA Security+
 BATCH.append(dict(
     slug="comptia-security-plus",
+    seo_title="Best CompTIA Security+ Certification Training in Malaysia (SY0-701)",
+    seo_description="Join CompTIA Security+ (SY0-701) certification training in Malaysia. Includes exam voucher, hands-on labs, mock exams, and expert-led cybersecurity training. Learn Security+ and get certified.",
+    seo_keywords="CompTIA Security+, SY0-701, Security+ certification Malaysia, cybersecurity training, SOC analyst certification, Security+ exam voucher, PBQ workshop",
+    canonical_path="/courses/comptia-security-plus",
+    schema_markup=schema_markup_from_file(),
     title="CompTIA Security+",
-    title_html='CompTIA Security+<br><em>SY0-701</em>',
+    title_html='CompTIA Security+ Certification Training<br><em>in Malaysia (SY0-701)</em>',
     vendor_short="CompTIA", watermark="S+", crumb_vendor="CompTIA",
-    subtitle="The most-requested cybersecurity credential by Malaysian employers. Threats, attacks, vulnerabilities, architecture, identity, governance and operations \u2014 the cybersecurity baseline.",
+    subtitle="Join CompTIA Security+ (SY0-701) certification training in Malaysia \u2014 hands-on cybersecurity labs, Pearson VUE exam voucher, mock exams and instructor-led preparation for the global Security+ credential.",
     badges=[("cb-vendor","CompTIA Authorized"),("cb-level","Intermediate"),("cb-new","SY0-701 \u00b7 2026"),("cb-hot","DoD 8570 / 8140")],
     hero_meta=common_meta("5 days / 40 hrs","Instructor-Led + Range Labs","On-site \u00b7 Virtual \u00b7 Hybrid",97,"26 May 2026"),
     hero_img=HERO_IMG,
@@ -386,12 +392,12 @@ BATCH.append(dict(
         ("\U0001F3DB\uFE0F","Governance, risk & compliance","PDPA, ISO 27001, NIST CSF \u2014 applied to the Malaysian context"),
         ("\U0001F916","Zero-trust & cloud-native","Modern architecture, IAM, SASE and edge \u2014 the SY0-701 priority"),
     ],
-    overview_eyebrow="What this course is",
-    overview_head=("Security+ is","the cybersecurity baseline."),
-    overview_p1="CompTIA Security+ (SY0-701) is the credential employers screen for when hiring for a junior security role. Bank Negara, Petronas, Maxis and most local banks list it as a baseline expectation.",
+    overview_eyebrow="CompTIA Security+ SY0-701",
+    overview_head=("Certification training", "in Malaysia."),
+    overview_p1="Build a career in cybersecurity with CompTIA Security+ (SY0-701) certification training in Malaysia. This instructor-led programme prepares you for the globally recognised Security+ exam with hands-on labs, mock exams, PBQ workshops and a bundled Pearson VUE voucher.",
     overview_p2="At Nexperts Academy, we teach Security+ from the perspective of someone who actually responds to incidents \u2014 not someone who has only read about them. Our instructor has led IR engagements across Malaysian financial institutions for over a decade.",
     overview_quote="You don't pass Security+ by memorising terms. You pass it by recognising the patterns of an attack the second the alert fires.",
-    overview_p3="SY0-701 modernises the older SY0-601 \u2014 the new domains emphasise cloud security, zero trust, automation, and modern threat actors. We teach with current Malaysian incidents \u2014 what really happened, how it was detected, how it was contained.",
+    overview_p3="The SY0-701 exam focuses on cloud security, zero trust architecture, automation, governance and modern cyber threats \u2014 making it highly relevant for today's security workforce in Malaysia and globally.",
     who_for=[
         ("\U0001F6E1\uFE0F","Aspiring SOC analysts","Security+ is the fastest path into a SOC role in a Malaysian bank or MNC."),
         ("\U0001F310","Network+ holders","Pivot directly from networking into security with a credential that proves the transition."),
@@ -407,49 +413,129 @@ BATCH.append(dict(
         "Understanding of basic system administration",
     ],
     prereqs_note="No Network+? Ask us about our combined Network+ \u2192 Security+ track.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "What is CompTIA Security+ Certification?",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "CompTIA Security+ is a globally recognized cybersecurity certification designed for IT professionals who want to build a career in information security, SOC operations, risk management, cloud security, and network defense.",
+                "The Security+ certification validates practical skills in threats, attacks, and vulnerabilities; security architecture and design; identity and access management (IAM); risk management and compliance; security operations and incident response; and cloud and hybrid environment security.",
+                "Security+ is often considered the first cybersecurity certification for professionals entering the cybersecurity industry. Many employers in Malaysia use CompTIA Security+ certification as a benchmark when hiring SOC Analysts, Security Engineers, Cybersecurity Specialists, and IT Security Administrators.",
+                "The latest SY0-701 version focuses heavily on cloud security, zero trust architecture, automation, governance, and modern cyber threats, making it highly relevant for today's security workforce.",
+            ],
+        },
+        {
+            "eyebrow": "Why Choose CompTIA Security+ Training in Malaysia?",
+            "paragraphs": [
+                "Cybersecurity demand continues to grow across Malaysia as organizations strengthen their defenses against ransomware, phishing attacks, insider threats, and cloud security risks.",
+                "By completing CompTIA Security+ training in Malaysia, you gain practical knowledge that can be applied immediately in Security Operations Centers (SOC), banking and financial services, government agencies, managed security service providers (MSSPs), cloud and infrastructure teams, and risk and compliance departments.",
+            ],
+            "footer": "At Nexperts Academy, students learn through instructor-led sessions, hands-on cybersecurity labs, simulated attack scenarios, and exam-focused workshops designed to prepare candidates for the SY0-701 certification exam.",
+        },
+        {
+            "eyebrow": "CompTIA Security+ Certification Cost in Malaysia",
+            "intro": 'One of the most common questions students ask is: "How much does CompTIA Security+ certification cost in Malaysia?" The total cost typically depends on training provider, course materials, lab access, practice exams, and exam voucher inclusion.',
+            "subtitle": "What's included at Nexperts Academy",
+            "bullets": [
+                "Official CompTIA courseware",
+                "Pearson VUE exam voucher (SY0-701)",
+                "Hands-on cybersecurity labs",
+                "Practice tests and mock exams",
+                "Dedicated PBQ workshops",
+                "Post-course instructor support",
+            ],
+            "footer": "This provides students with a complete learning path from training to certification without requiring additional resources.",
+        },
+        {
+            "eyebrow": "How Long Does It Take to Get a CompTIA Security+ Certification?",
+            "paragraphs": [
+                "Most professionals can prepare for and complete the CompTIA Security+ certification within a few weeks depending on their background.",
+            ],
+            "bullets": [
+                "5 days of instructor-led training",
+                "40 instructor-led hours",
+                "Hands-on lab sessions",
+                "Practical security exercises",
+            ],
+            "footer": "Candidates with networking knowledge or previous IT experience typically find Security+ to be one of the fastest pathways into cybersecurity.",
+        },
+        {
+            "eyebrow": "Is CompTIA Security+ Certification Worth It?",
+            "paragraphs": [
+                "Yes. CompTIA Security+ is one of the most valuable entry-level cybersecurity certifications available today.",
+            ],
+            "bullets": [
+                "Globally recognized certification",
+                "Employer-recognized cybersecurity credential",
+                "DoD 8570 and 8140 compliance",
+                "Foundation for advanced certifications",
+                "Increased cybersecurity job opportunities",
+                "Stronger understanding of modern cyber threats",
+            ],
+            "footer": "Many professionals use Security+ as a stepping stone toward advanced certifications such as CySA+, PenTest+, SecurityX, CISSP, and cloud security certifications.",
+        },
+        {
+            "eyebrow": "How to Get CompTIA Security+ Certified",
+            "bullets": [
+                "Learn Security+ concepts and SY0-701 exam objectives",
+                "Complete hands-on cybersecurity labs",
+                "Practice with mock exams and PBQs",
+                "Schedule the SY0-701 exam through Pearson VUE",
+                "Pass the Security+ certification exam",
+                "Earn your globally recognized CompTIA Security+ credential",
+            ],
+            "footer": "At Nexperts Academy, we guide students through each step from enrollment to certification success.",
+        },
+    ],
     curriculum_eyebrow="Course Curriculum",
-    curriculum_head=("Five domains.","The full security stack."),
-    curriculum_intro="SY0-701 is structured into General Security Concepts, Threats and Vulnerabilities, Security Architecture, Security Operations, and Security Program Management.",
+    curriculum_head=("Five SY0-701 domains.","The full security stack."),
+    curriculum_intro="SY0-701 is structured into five weighted domains aligned with the official CompTIA exam objectives: General Security Concepts (12%), Threats, Vulnerabilities, and Mitigations (22%), Security Architecture (18%), Security Operations (28%), and Security Program Management and Oversight (20%).",
     modules=[
-        ("01","General Security Concepts",[
-            "Confidentiality, Integrity, Availability \u2014 applied",
-            "Security control types \u2014 preventive, detective, corrective",
-            "Zero trust architecture and assumptions",
-            "Cryptography \u2014 symmetric, asymmetric, hashing",
-            "Identity and access management essentials",
-            "Lab: Build a CA and issue certificates",
+        ("01","General Security Concepts (12%)",[
+            "CIA triad, non-repudiation and AAA (authentication, authorization, accounting)",
+            "Security control types \u2014 preventive, detective, corrective, compensating, directive",
+            "Zero trust architecture \u2014 control plane, data plane, policy enforcement",
+            "Change management processes and security impact",
+            "Cryptography \u2014 symmetric, asymmetric, hashing and PKI",
+            "Deception technology \u2014 honeypots, honeynets and honeytokens",
+            "Lab: Build a CA hierarchy and issue certificates",
         ]),
-        ("02","Threats, Vulnerabilities & Mitigations",[
-            "Threat actor types and motivations",
-            "Common attack vectors \u2014 phishing, supply chain, IoT",
-            "Malware families and indicators",
-            "Application attacks \u2014 XSS, SQLi, request forgery",
-            "Vulnerability scanning and patch management",
-            "Lab: Run a Nessus scan, prioritise via CVSS",
+        ("02","Threats, Vulnerabilities & Mitigations (22%)",[
+            "Threat actor types, motivations and attack surfaces",
+            "Threat vectors \u2014 phishing, social engineering, supply chain, IoT",
+            "Malware families, password attacks and malicious activity indicators",
+            "Application and cloud-specific vulnerabilities",
+            "Vulnerability scanning, prioritisation and patch management",
+            "Mitigation techniques \u2014 segmentation, hardening, isolation",
+            "Lab: Run a Nessus scan and prioritise findings via CVSS",
         ]),
-        ("03","Security Architecture",[
-            "Network architecture \u2014 segmentation, DMZ, VLANs",
-            "Cloud architecture \u2014 IaaS / PaaS / SaaS security",
-            "Resilience and recovery \u2014 RPO, RTO, BCP/DR",
-            "Data protection \u2014 DLP, tokenisation, masking",
-            "Encryption at rest and in transit",
+        ("03","Security Architecture (18%)",[
+            "Enterprise infrastructure and architecture models",
+            "Network segmentation, DMZ, VLANs and secure design",
+            "Cloud and hybrid security \u2014 IaaS, PaaS, SaaS responsibilities",
+            "Data protection \u2014 DLP, tokenisation, masking and encryption",
+            "Resilience and recovery \u2014 RPO, RTO, backups and continuity",
+            "Secure application development fundamentals",
             "Lab: Design a zero-trust network for a 200-user firm",
         ]),
-        ("04","Security Operations",[
-            "Security monitoring and SIEM concepts",
+        ("04","Security Operations (28%)",[
+            "Asset management and secure computing resource hardening",
+            "Vulnerability management lifecycle and remediation",
+            "Security monitoring, alerting and SIEM concepts",
+            "Identity and access management (IAM) implementation",
             "Incident response phases \u2014 NIST 800-61 model",
-            "Digital forensics \u2014 chain of custody",
-            "Threat hunting and intelligence integration",
-            "Endpoint detection and response (EDR)",
+            "Digital forensics, threat hunting and EDR",
+            "Automation, orchestration and SOAR fundamentals",
             "Lab: Triage a simulated phishing-to-ransomware incident",
         ]),
-        ("05","Security Program Management & Oversight",[
-            "Governance, Risk and Compliance (GRC)",
-            "Frameworks \u2014 ISO 27001, NIST CSF, PCI-DSS",
+        ("05","Security Program Management & Oversight (20%)",[
+            "Governance, risk and compliance (GRC) frameworks",
+            "ISO 27001, NIST CSF, PCI-DSS and audit processes",
             "Malaysian context \u2014 PDPA, BNM RMiT, MyDigital",
-            "Risk management \u2014 qualitative and quantitative",
-            "Third-party risk and supply chain",
-            "Lab: Build a Security+ aligned policy pack",
+            "Risk management \u2014 qualitative and quantitative analysis",
+            "Third-party risk, supply chain and security awareness",
+            "Privacy, data protection and oversight activities",
+            "Lab: Build a Security+ aligned policy and gap assessment pack",
         ]),
     ],
     labs_eyebrow="Hands-On Range",
@@ -551,6 +637,41 @@ BATCH.append(dict(
         "ANSI / ISO 17024 accredited",
     ],
     guarantee_text="Hit the 85% mock threshold and don't pass first attempt? We cover the retake voucher.",
+    faq_head=("Security+", "FAQs."),
+    faqs=[
+        (
+            "What is CompTIA Security+ Certification?",
+            "CompTIA Security+ is a vendor-neutral cybersecurity certification that validates foundational security knowledge and practical skills in security operations, threats, vulnerabilities, governance, risk management and cloud security.",
+        ),
+        (
+            "Is Security+ suitable for beginners?",
+            "Yes. Security+ is widely recommended for IT professionals, students, help desk engineers, network administrators and career changers entering cybersecurity. Network+ or equivalent networking knowledge is recommended.",
+        ),
+        (
+            "Is CompTIA Security+ Certification worth it?",
+            "Yes. Security+ is widely recognized by employers and serves as a foundation for cybersecurity careers including SOC Analyst, Security Administrator and Cybersecurity Analyst roles. It is DoD 8570/8140 approved.",
+        ),
+        (
+            "How long does it take to get CompTIA Security+ certified?",
+            "Most candidates complete training and certification preparation within a few weeks. Nexperts Academy delivers the course in 5 days (40 instructor-led hours) with hands-on labs and mock exams.",
+        ),
+        (
+            "What is the passing score for Security+ SY0-701?",
+            "The passing score for the CompTIA Security+ SY0-701 exam is 750 out of 900.",
+        ),
+        (
+            "What jobs can I get after Security+ Certification?",
+            "Common roles include SOC Analyst, Cybersecurity Analyst, Security Administrator, Information Security Specialist, Junior Security Engineer and Security Operations Associate.",
+        ),
+        (
+            "Does Security+ include cloud security?",
+            "Yes. The latest SY0-701 exam includes cloud security concepts, zero trust architecture, identity management and modern security operations across hybrid environments.",
+        ),
+        (
+            "Is Security+ recognized in Malaysia?",
+            "Yes. Security+ is recognized by employers throughout Malaysia and globally, including banking, telecom, government and MSSP sectors.",
+        ),
+    ],
 ))
 
 # 4. CompTIA CySA+

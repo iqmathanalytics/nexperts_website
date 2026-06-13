@@ -1,16 +1,22 @@
 # -*- coding: utf-8 -*-
 """Phase 4B: Full-stack, marketing, Excel basics, Salesforce, ServiceNow — skill & platform pages."""
 from _course_data import HERO_IMG, common_meta
+from _course_schema_loader import schema_markup_from_file
 
 BATCH = []
 
 
 BATCH.append(dict(
     slug="full-stack-web-development",
+    seo_title="Full Stack Web Development Course in Malaysia",
+    seo_description="Learn HTML, CSS, JavaScript, React, Node.js, Express, SQL databases, authentication, API development and deployment through project-based Full Stack Web Development training in Malaysia.",
+    seo_keywords="full stack web development, full stack developer course Malaysia, React Node training, web development classes, JavaScript developer course, portfolio project training",
+    canonical_path="/courses/full-stack-web-development",
+    schema_markup=schema_markup_from_file(),
     title="Full Stack Web Development",
-    title_html='Full Stack<br><em>Web Development</em>',
+    title_html='Full Stack Web Development Course<br><em>in Malaysia</em>',
     vendor_short="Skill", watermark="FULL", crumb_vendor="Skill-Based",
-    subtitle="HTML, CSS, JavaScript, React front-end, Node/Express API layer, SQL data access, auth basics and deploy to a public URL \u2014 a portfolio project employers can click through.",
+    subtitle="Learn HTML, CSS, JavaScript, React, Node.js, Express, SQL databases, authentication and deployment \u2014 build and ship a portfolio project employers can click through.",
     badges=[("cb-vendor","Nexperts Skill"),("cb-level","Beginner \u2192 Intermediate"),("cb-new","2026 Stack"),("cb-hot","Portfolio")],
     hero_meta=common_meta("6 days / 48 hrs","Instructor-Led + Project Labs","On-site \u00b7 Virtual \u00b7 Hybrid",91,"12 Aug 2026"),
     hero_img=HERO_IMG,
@@ -20,18 +26,80 @@ BATCH.append(dict(
         ("\U0001F4BE","Data tier","PostgreSQL or SQLite + migrations mindset"),
         ("\u2601\uFE0F","Deploy","GitHub Actions smoke deploy to Netlify / Render pattern"),
     ],
-    overview_eyebrow="What this course is",
-    overview_head=("Ship a real","clickable product."),
-    overview_p1="Full-stack means you can translate a feature from database column to pixel. This immersive programme gives you one coached portfolio project \u2014 typically a booking, ticketing or learning-admin mini-app \u2014 with code reviews that mirror industry PR feedback.",
-    overview_p2="We intentionally align with what Malaysian hiring managers test in junior interviews: Git discipline, REST hygiene, component thinking, and calm debugging under time pressure.",
-    overview_p3="You will pair-program during labs and solo the capstone with mentor office hours each evening.",
+    overview_eyebrow="Full Stack Web Development",
+    overview_head=("Certification training", "in Malaysia."),
+    overview_p1="Build a career in web development with our Full Stack Web Development Course in Malaysia \u2014 a 6-day, project-based programme covering front-end, back-end, databases, authentication and cloud deployment.",
+    overview_p2="Unlike traditional web development classes that focus only on front-end technologies, this full stack developer course teaches both client-side and server-side skills required by modern employers across Malaysia.",
+    overview_p3="You will pair-program during labs and solo the capstone with mentor office hours each evening \u2014 finishing with a deployed portfolio project you can demonstrate in interviews.",
     who_for=[
-        ("\U0001F393","Career switchers","You need proof, not promises."),
-        ("\U0001F4BB","IT pros expanding","Sysadmins and testers entering dev."),
-        ("\U0001F4BC","Startup hires","Small teams that need generalists."),
-        ("\U0001F4DA","Bootcamp grads","You want structure + local mentorship."),
-        ("\U0001F3AF","Serious hobbyists","Ready to commit 6 focused days."),
+        ("\U0001F393","Career switchers","No prior coding required \u2014 structured path into software development."),
+        ("\U0001F4BB","IT pros expanding","Sysadmins and testers entering dev roles."),
+        ("\U0001F4BC","Startup hires","Small teams that need versatile full stack generalists."),
+        ("\U0001F4DA","Students & graduates","Portfolio-ready skills alongside your degree."),
+        ("\U0001F3AF","Serious hobbyists","Ready to commit 6 focused days to shipping a real app."),
         ("\U0001F465","Corporate cohorts","Ask us for closed-team pricing."),
+    ],
+    overview_sections_after_who=[
+        {
+            "eyebrow": "Full Stack Web Development Course in Malaysia",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "Looking to become a professional web developer? Our Full Stack Web Development Course in Malaysia is designed to help beginners and aspiring developers learn the complete web development lifecycle\u2014from designing responsive user interfaces to building secure backend systems and deploying applications to production.",
+                "By the end of the training, you will build and deploy a complete portfolio project that demonstrates your ability to work as a full stack web developer.",
+            ],
+            "subtitle": "You will learn",
+            "bullets": [
+                "HTML5 and semantic web development",
+                "CSS3 and responsive design",
+                "JavaScript fundamentals",
+                "React development with components and hooks",
+                "REST API development with Node.js and Express",
+                "Database management using PostgreSQL or SQLite",
+                "Authentication and authorization basics",
+                "Git and GitHub workflows",
+                "Deployment to public cloud platforms",
+            ],
+        },
+        {
+            "eyebrow": "Why Learn Full Stack Web Development?",
+            "paragraphs": [
+                "Full stack developers are among the most versatile professionals in today's technology industry. Companies increasingly prefer developers who can contribute across the entire application stack instead of specializing in only one area.",
+            ],
+            "bullets": [
+                "Build responsive web applications",
+                "Design and consume APIs",
+                "Manage databases",
+                "Debug front-end and back-end issues",
+                "Deploy applications to production environments",
+                "Collaborate effectively with development teams",
+            ],
+            "footer": "These skills make full stack development one of the most in-demand career paths in Malaysia's growing technology sector.",
+        },
+        {
+            "eyebrow": "Career Opportunities After Full Stack Development Training",
+            "paragraphs": [
+                "Completing a full stack web development course can open opportunities for roles such as:",
+            ],
+            "bullets": [
+                "Full Stack Developer",
+                "Front-End Developer",
+                "Back-End Developer",
+                "Web Application Developer",
+                "React Developer",
+                "JavaScript Developer",
+                "Software Engineer",
+                "Junior Web Developer",
+            ],
+            "footer": "Many employers in Malaysia look for practical development experience, which is why our training includes project-based learning and portfolio development.",
+        },
+        {
+            "eyebrow": "Is This Full Stack Developer Course Suitable for Beginners?",
+            "paragraphs": [
+                "Yes. This course is designed for beginners, career switchers, students, and working professionals who want to build practical web development skills.",
+                "No prior programming experience is required. Our instructors guide students through each stage of the development process, from writing their first HTML page to deploying a complete full stack web application.",
+                "Whether you are looking for web development classes near you, a web development certification, or a structured path into software development, this programme provides a practical foundation for entering the industry.",
+            ],
+        },
     ],
     prereqs=[
         "Comfortable using a computer daily",
@@ -41,14 +109,51 @@ BATCH.append(dict(
     prereqs_note="Install Node LTS + VS Code \u2014 setup checklist emailed after enrolment.",
     curriculum_eyebrow="Course Curriculum",
     curriculum_head=("Six days.","Front to cloud."),
-    curriculum_intro="Each day ends with a merged PR to your portfolio repo \u2014 instructors tag release checkpoints.",
+    curriculum_intro="Each day maps to a layer of the modern full stack \u2014 HTML/CSS, JavaScript, React, Node/Express APIs, databases with authentication, then Git, deployment and capstone delivery. Every day ends with a merged PR to your portfolio repo.",
     modules=[
-        ("01","Web foundations",["HTML5 semantics","CSS layout (flex/grid)","Accessibility basics","DOM + fetch intro","Lab: static landing page"]),
-        ("02","JavaScript & React",["ES modules","React components","Hooks + state","Client routing","Lab: dashboard shell"]),
-        ("03","API & auth",["Express project layout","Validation","JWT cookie/session discussion","Error handling","Lab: secured CRUD"]),
-        ("04","Database",["SQL modelling","Migrations mindset","ORM-lite with Prisma or Knex","Lab: schema for capstone"]),
-        ("05","Integration",["End-to-end feature slice","Testing hooks with Jest intro","Performance sanity","Lab: vertical slice"]),
-        ("06","Capstone sprint",["Polish UX","README + demo script","Deploy pipeline","Showcase rehearsal"]),
+        ("01","HTML5 & CSS3",[
+            "Semantic HTML5 structure and accessibility basics",
+            "CSS3 layout \u2014 Flexbox, Grid and responsive design",
+            "Mobile-first patterns and media queries",
+            "Forms, typography and component styling",
+            "Lab: responsive marketing landing page",
+        ]),
+        ("02","JavaScript Fundamentals",[
+            "Variables, functions, arrays and objects",
+            "DOM manipulation, events and fetch API",
+            "Async/await and error handling",
+            "ES modules and npm project basics",
+            "Lab: interactive UI components",
+        ]),
+        ("03","React Front-End",[
+            "Components, props and JSX",
+            "State management with hooks (useState, useEffect)",
+            "Client routing and form validation",
+            "Consuming REST APIs from React",
+            "Lab: dashboard shell with live data",
+        ]),
+        ("04","Node.js, Express & REST APIs",[
+            "Node.js project structure and middleware",
+            "Express routing, validation and error handling",
+            "REST API design patterns",
+            "Environment config and security hygiene",
+            "Lab: secured CRUD API endpoints",
+        ]),
+        ("05","Databases & Authentication",[
+            "SQL modelling with PostgreSQL or SQLite",
+            "Queries, joins and migrations mindset",
+            "ORM patterns with Prisma or Knex",
+            "Authentication and authorization \u2014 JWT and sessions",
+            "Lab: auth flow + database schema for capstone",
+        ]),
+        ("06","Git, Deploy & Capstone",[
+            "Git workflows and GitHub collaboration",
+            "Pull requests, code review and branching",
+            "CI/CD basics with GitHub Actions",
+            "Deploy to Netlify, Render or cloud platform",
+            "Capstone polish, README, demo script and showcase",
+            "Lab: ship portfolio project to production",
+        ]),
     ],
     labs_eyebrow="Project Labs",
     labs_head=("Repo-driven.","PR by PR."),
@@ -103,6 +208,33 @@ BATCH.append(dict(
     whats_included=["Repo templates","Code reviews","Deploy playbook","Demo coaching","Certificate"],
     verify_items=["Nexperts skill verification ID","Public demo URL archived"],
     guarantee_text="Complete sprint + fail rubric? One complimentary remediation week.",
+    faq_head=("Full Stack", "FAQs."),
+    faqs=[
+        (
+            "What is Full Stack Web Development?",
+            "Full Stack Web Development refers to building both the front-end and back-end components of a web application. Full stack developers work with user interfaces, APIs, databases, authentication systems, and deployment environments.",
+        ),
+        (
+            "Is Full Stack Development a Good Career in Malaysia?",
+            "Yes. Full stack developers are in demand across startups, software companies, digital agencies, financial institutions, and enterprise technology teams throughout Malaysia.",
+        ),
+        (
+            "How Long Does It Take to Learn Full Stack Development?",
+            "The learning timeline depends on your background and learning pace. This programme delivers 48 hours of instructor-led training over 6 days, combined with project-based learning to help students gain practical experience quickly.",
+        ),
+        (
+            "What Technologies Will I Learn?",
+            "Students learn HTML, CSS, JavaScript, React, Node.js, Express, SQL databases (PostgreSQL or SQLite), Git, GitHub, REST API development, authentication, and deployment workflows.",
+        ),
+        (
+            "Will I Build Real Projects?",
+            "Yes. Every participant develops a portfolio-ready application that can be demonstrated to employers during interviews. You deploy a complete full stack project to a public URL before course end.",
+        ),
+        (
+            "Do I Need Coding Experience?",
+            "No. The course is beginner-friendly and suitable for students, career changers, and professionals entering web development. No prior programming experience is required.",
+        ),
+    ],
 ))
 
 
