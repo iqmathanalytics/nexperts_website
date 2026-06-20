@@ -2,6 +2,7 @@
 """AWS course data (CCP, SAA, SAP)."""
 from _course_data import HERO_IMG, common_meta
 from _course_schema_aws_clf import AWS_CLF_SCHEMA_MARKUP
+from _course_schema_loader import schema_markup_from_file
 
 BATCH = []
 
@@ -324,10 +325,15 @@ BATCH.append(dict(
 # 2. AWS Solutions Architect Associate (SAA)
 BATCH.append(dict(
     slug="aws-solutions-architect-associate",
+    seo_title="AWS Certified Solutions Architect Training Malaysia - Advanced Architecting on AWS",
+    seo_description="Prepare for AWS Certified Solutions Architect Associate (SAA-C03) in Malaysia. Learn secure, resilient, high-performing and cost-optimized AWS architecture with labs and exam prep.",
+    seo_keywords="AWS Solutions Architect Associate, SAA-C03, AWS certification Malaysia, AWS training Malaysia, Advanced Architecting on AWS, Architecting on AWS certification, AWS Skill Builder",
+    canonical_path="/courses/aws-solutions-architect-associate",
+    schema_markup=schema_markup_from_file(),
     title="AWS Solutions Architect Associate",
-    title_html='AWS Solutions Architect<br><em>SAA-C03</em>',
+    title_html='AWS Certified Solutions Architect Training Malaysia –<br><em>Advanced Architecting on AWS</em>',
     vendor_short="AWS", watermark="SAA", crumb_vendor="AWS",
-    subtitle="The most-hired AWS credential globally. Design scalable, resilient, secure and cost-effective architectures \u2014 the AWS skill set Malaysian enterprises pay top ringgit for.",
+    subtitle="Prepare for AWS Certified Solutions Architect Associate (SAA-C03) in Malaysia. Design secure, resilient, high-performing and cost-optimized AWS architectures with hands-on labs and exam preparation.",
     badges=[("cb-vendor","AWS Authorized"),("cb-level","Associate"),("cb-new","SAA-C03 \u00b7 2026"),("cb-hot","Top 5 IT Certs Globally")],
     hero_meta=common_meta("5 days / 40 hrs","Instructor-Led + Multi-Account Sandbox","On-site \u00b7 Virtual \u00b7 Hybrid",96,"7 July 2026"),
     hero_img=HERO_IMG,
@@ -337,12 +343,12 @@ BATCH.append(dict(
         ("\U0001F310","Networking & security depth","VPC peering, Transit Gateway, IAM, KMS, security groups"),
         ("\U0001F50D","Pattern recognition","30 reference architectures every architect should know"),
     ],
-    overview_eyebrow="What this course is",
+    overview_eyebrow="AWS Certified Solutions Architect Associate Certification (SAA-C03)",
     overview_head=("SAA is","the AWS career multiplier."),
-    overview_p1="AWS Solutions Architect Associate is the most-hired AWS credential globally and in Malaysia. It validates that you can design highly available, scalable, secure and cost-effective architectures using AWS.",
+    overview_p1="The AWS Certified Solutions Architect Associate (SAA-C03) certification is one of the most sought-after cloud certifications globally. It validates the ability to design secure, resilient, high-performing and cost-optimized architectures on Amazon Web Services (AWS).",
     overview_p2="Nexperts SAA is delivered against a multi-account AWS sandbox \u2014 you'll architect across accounts, set up Transit Gateway, configure cross-region replication, and design for fault tolerance the way real production teams do.",
     overview_quote="An architect's job is not to choose AWS services. It is to make trade-offs. SAA is graded on whether you can defend your trade-offs.",
-    overview_p3="SAA-C03 emphasises serverless architectures, hybrid networking, security-first design and machine-learning workload patterns. We teach all four with case studies from Malaysian banking, telco and energy deployments.",
+    overview_p3="For professionals looking to advance beyond foundational cloud knowledge, the AWS Solutions Architect Associate certification is often considered the most important step in an AWS certification journey.",
     who_for=[
         ("\u2601\uFE0F","CCP graduates","The most logical next step. SAA is where AWS careers actually start paying out."),
         ("\U0001F4CA","System administrators","Move from ops into architecture with the most-respected entry-level architecture credential."),
@@ -358,6 +364,110 @@ BATCH.append(dict(
         "Basic Linux command-line and IAM fluency",
     ],
     prereqs_note="No CCP? Ask us about our 8-day combined CCP \u2192 SAA accelerated track.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "AWS Certified Solutions Architect Malaysia",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "As organizations across Malaysia continue adopting cloud technologies, demand for AWS Certified Solutions Architect professionals continues to increase.",
+                "The AWS Certified Solutions Architect Associate credential is recognized by multinational corporations, technology consultancies, banking institutions and government-linked organizations throughout Malaysia.",
+            ],
+            "subtitle": "Employers value AWS certification because it demonstrates practical knowledge of",
+            "bullets": [
+                "Cloud architecture design",
+                "AWS networking",
+                "Security best practices",
+                "High availability architectures",
+                "Disaster recovery planning",
+                "Cost optimization strategies",
+                "Migration planning",
+                "Well-Architected Framework implementation",
+            ],
+        },
+        {
+            "eyebrow": "AWS Solutions Architect Associate Exam Details",
+            "paragraphs": [
+                "The AWS Certified Solutions Architect Associate exam validates the ability to design cloud solutions that meet business and technical requirements.",
+                "The SAA-C03 exam focuses on designing secure architectures, resilient systems, high-performing workloads and cost-optimized AWS environments.",
+            ],
+            "comparison_table": {
+                "headers": ["Detail", "Information", "Notes"],
+                "rows": [
+                    ["Certification", "AWS Certified Solutions Architect Associate", "Associate-level AWS architecture credential"],
+                    ["Exam Code", "SAA-C03", "Current Solutions Architect Associate exam"],
+                    ["Exam Duration", "130 minutes", "Scenario-based questions"],
+                    ["Question Types", "Multiple Choice & Multiple Response", "Select best-fit architecture answers"],
+                    ["Certification Provider", "Amazon Web Services (AWS)", "Delivered through Pearson VUE"],
+                    ["Level", "Associate", "Intermediate cloud architecture"],
+                    ["Validity", "3 years", "Renew before expiry"],
+                ],
+            },
+        },
+        {
+            "eyebrow": "AWS Solutions Architect Associate Exam Difficulty",
+            "paragraphs": [
+                "The exam is considered intermediate-level and is significantly more advanced than AWS Cloud Practitioner. Hands-on AWS experience combined with structured training significantly improves success rates.",
+            ],
+            "subtitle": "Candidates are expected to understand",
+            "bullets": [
+                "Amazon EC2, Amazon S3, Amazon RDS and AWS Lambda",
+                "Amazon VPC, Route 53, Elastic Load Balancing and Auto Scaling",
+                "AWS IAM, AWS KMS and AWS Organizations",
+                "Amazon CloudFront and AWS Transit Gateway",
+            ],
+        },
+        {
+            "eyebrow": "Architecting on AWS Certification Path",
+            "paragraphs": [
+                "Many learners search for Architecting on AWS certification and Advanced Architecting on AWS certification when planning their cloud career progression.",
+            ],
+            "bullets": [
+                "Step 1: AWS Cloud Practitioner (CLF-C02)",
+                "Step 2: AWS Certified Solutions Architect Associate (SAA-C03)",
+                "Step 3: AWS Solutions Architect Professional (SAP-C02)",
+                "Step 4: AWS Specialty Certifications such as Security Specialty, Machine Learning Specialty, Advanced Networking Specialty or Data Engineer Associate",
+            ],
+            "footer": "This certification path helps professionals progress from cloud fundamentals to enterprise architecture expertise.",
+        },
+        {
+            "eyebrow": "AWS Certification Cost and Training Investment",
+            "paragraphs": [
+                "Understanding AWS certification cost is an important part of planning your certification journey.",
+                "At Nexperts Academy, learners receive instructor-led training, hands-on AWS labs, multi-account sandbox environments, mock exams, architecture playbooks and certification preparation support.",
+            ],
+            "subtitle": "Typical investment areas include",
+            "bullets": [
+                "AWS Solutions Architect Associate training",
+                "AWS certification exam voucher",
+                "Practice exams",
+                "AWS Skill Builder subscription",
+                "AWS sandbox access",
+            ],
+        },
+        {
+            "eyebrow": "AWS Skill Builder and Exam Preparation",
+            "paragraphs": [
+                "AWS Skill Builder is Amazon's official learning platform that provides learning paths, practice assessments, hands-on labs and certification preparation resources.",
+                "Learners should combine instructor-led training, AWS Skill Builder resources, practice assessments, hands-on architecture labs, real-world AWS design scenarios and mock examinations.",
+            ],
+            "footer": "This approach helps learners build practical architecture knowledge rather than relying solely on memorization.",
+        },
+        {
+            "eyebrow": "Core AWS Services Covered",
+            "paragraphs": [
+                "The AWS Solutions Architect Associate course introduces learners to essential AWS services used in modern cloud architectures.",
+            ],
+            "bullets": [
+                "Amazon EC2, Amazon S3, Amazon EBS, Amazon RDS and Amazon DynamoDB",
+                "AWS Lambda, Amazon ECS and Amazon EKS",
+                "Amazon VPC, AWS Transit Gateway and AWS Direct Connect",
+                "Elastic Load Balancing, Auto Scaling, Route 53 and CloudFront",
+                "AWS IAM, AWS KMS, AWS Organizations and AWS CloudFormation",
+                "AWS Well-Architected Framework",
+            ],
+            "footer": "These services form the foundation of secure, scalable and resilient cloud architectures.",
+        },
+    ],
     curriculum_eyebrow="Course Curriculum",
     curriculum_head=("Four domains.","Architecture mastery."),
     curriculum_intro="SAA-C03 is structured into Design Secure Architectures, Design Resilient Architectures, Design High-Performing Architectures, and Design Cost-Optimised Architectures. We sequence by complexity, not exam weighting.",
@@ -368,6 +478,7 @@ BATCH.append(dict(
             "Stateless service design and externalising state",
             "Decoupling \u2014 SQS, SNS, EventBridge",
             "Database resilience \u2014 RDS Multi-AZ, Aurora, DynamoDB Global",
+            "Migration planning for resilient cutovers and rollback",
             "Lab: Design a multi-region active-active architecture",
         ]),
         ("02","Design High-Performing Architectures",[
@@ -375,6 +486,7 @@ BATCH.append(dict(
             "Storage selection \u2014 EBS, S3 storage classes, EFS",
             "Database selection trees \u2014 OLTP, OLAP, NoSQL, time-series",
             "Caching layers \u2014 ElastiCache, CloudFront, DAX",
+            "Container workload choices \u2014 ECS, EKS and Fargate",
             "Auto-scaling and predictive scaling",
             "Lab: Architect a low-latency global API",
         ]),
@@ -382,6 +494,8 @@ BATCH.append(dict(
             "IAM identity boundaries and SCPs",
             "Encryption at rest and in transit \u2014 KMS, ACM",
             "VPC security \u2014 security groups, NACLs, GuardDuty",
+            "Hybrid networking \u2014 Transit Gateway, Direct Connect and VPC endpoints",
+            "Infrastructure governance \u2014 AWS Organizations and CloudFormation",
             "Edge security \u2014 WAF, Shield, CloudFront signed URLs",
             "Secrets management \u2014 Secrets Manager, Parameter Store",
             "Lab: Lock down a 3-tier app to BNM-grade security",
@@ -392,6 +506,7 @@ BATCH.append(dict(
             "Network egress optimisation \u2014 VPC endpoints, Direct Connect",
             "Right-sizing using Cost Explorer and Compute Optimizer",
             "FinOps fundamentals for architects",
+            "Well-Architected Framework cost and sustainability trade-offs",
             "Lab: Optimise a sample 50-instance workload by 35%",
         ]),
     ],
@@ -494,6 +609,29 @@ BATCH.append(dict(
         "Stacks toward SAP and Specialty exams",
     ],
     guarantee_text="Hit the 84% mock threshold and don't pass first attempt? AWS retake voucher on us.",
+    faq_head=("AWS Solutions Architect", "FAQs."),
+    faqs=[
+        (
+            "What is AWS Solutions Architect Associate?",
+            "AWS Solutions Architect Associate (SAA-C03) is an associate-level AWS certification that validates cloud architecture and solution design skills.",
+        ),
+        (
+            "Is AWS Solutions Architect Associate worth it?",
+            "Yes. It is one of the most recognized and in-demand cloud certifications globally and is frequently requested by employers hiring cloud engineers and architects.",
+        ),
+        (
+            "What is Architecting on AWS?",
+            "Architecting on AWS is a training program focused on designing secure, scalable, resilient and cost-efficient architectures using AWS services and best practices.",
+        ),
+        (
+            "What is Advanced Architecting on AWS?",
+            "Advanced Architecting on AWS expands on foundational architecture concepts and introduces complex enterprise design patterns, hybrid architectures, multi-region deployments and advanced networking.",
+        ),
+        (
+            "What comes after AWS Solutions Architect Associate?",
+            "Most learners continue with AWS Solutions Architect Professional, AWS Security Specialty, AWS Machine Learning Specialty, AWS Advanced Networking Specialty or AWS DevOps Engineer Professional.",
+        ),
+    ],
 ))
 
 # 3. AWS Solutions Architect Professional (SAP)
