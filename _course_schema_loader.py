@@ -32,7 +32,10 @@ def schema_markup_from_file(path: Path | None = None) -> str:
     page_blocks = [
         b
         for b in blocks
-        if re.search(r'"@type"\s*:\s*"(?:Course|FAQPage)"', b)
+        if re.search(
+            r'"@type"\s*:\s*"(?:Course|FAQPage|BreadcrumbList|EducationalOrganization)"',
+            b,
+        )
     ]
     scripts = []
     for block in page_blocks:
