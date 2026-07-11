@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Phase 4A: High-demand pages previously missing (ECIH, Azure data fundamentals, Cisco pro, SD-WAN, Java)."""
 from _course_data import HERO_IMG, common_meta
+from _course_schema_loader import schema_markup_from_file
 
 BATCH = []
 
@@ -173,10 +174,15 @@ BATCH.append(dict(
 # DP-900 — Azure Data Fundamentals
 BATCH.append(dict(
     slug="dp-900",
+    seo_title="Microsoft Azure Data Fundamentals (DP-900) Training & Certification",
+    seo_description="Microsoft Azure Data Fundamentals (DP-900) training in Malaysia covering Azure SQL, Azure Cosmos DB, Azure Synapse Analytics, Microsoft Fabric, Power BI, relational and non-relational databases, analytics workloads and certification preparation.",
+    seo_keywords="Azure Data Fundamentals, DP-900, DP-900 Training, Azure Data Fundamentals Training, Microsoft Azure Data Fundamentals, Azure Data Fundamentals Certification, DP-900 Certification Malaysia",
+    canonical_path="/courses/dp-900",
+    schema_markup=schema_markup_from_file(),
     title="DP-900",
-    title_html='Microsoft Azure Data<br><em>Fundamentals (DP-900)</em>',
+    title_html='Microsoft Azure Data Fundamentals (DP-900)<br><em>Training &amp; Certification</em>',
     vendor_short="Microsoft", watermark="DP900", crumb_vendor="Microsoft",
-    subtitle="The essential first step into Azure data roles. Relational and non-relational data, analytics workloads, and modern data services \u2014 explained in business language with hands-on Azure portal labs.",
+    subtitle="Microsoft Certified: Azure Data Fundamentals (DP-900) training in Malaysia \u2014 relational and non-relational data, analytics workloads, Microsoft Fabric and Azure data services with hands-on labs and exam preparation.",
     badges=[("cb-vendor","Microsoft Learning Partner"),("cb-level","Foundation \u00b7 Data"),("cb-new","2026 Skills"),("cb-hot","DP path entry")],
     hero_meta=common_meta("2 days / 16 hrs","Instructor-Led + Azure Labs","On-site \u00b7 Virtual \u00b7 Hybrid",96,"18 June 2026"),
     hero_img=HERO_IMG,
@@ -186,12 +192,12 @@ BATCH.append(dict(
         ("\U0001F9E0","Analytics basics","Power BI connection \u2014 how dashboards consume governed data"),
         ("\u2705","Exam ready","DP-900 \u2014 45 questions, 60 minutes, Pearson VUE"),
     ],
-    overview_eyebrow="What this course is",
-    overview_head=("The data runway","for every Azure role."),
-    overview_p1="DP-900 is Microsoft's foundational data certification. It is the fastest way for analysts, developers, DBAs and aspiring data engineers to prove they understand how data is stored, processed and governed in Azure \u2014 without jumping straight into coding-heavy DP-203.",
-    overview_p2="At Nexperts, DP-900 is two intensive days with live Azure subscriptions. You will provision core services, load sample datasets, and connect Power BI to a semantic model so you see the full story from raw data to insight.",
+    overview_eyebrow="Microsoft Certified Azure Data Fundamentals (DP-900)",
+    overview_head=("Training &amp; certification", "in Malaysia."),
+    overview_p1="Microsoft Certified: Azure Data Fundamentals (DP-900) is Microsoft's entry-level certification for professionals who want to understand modern data concepts and Microsoft Azure data services.",
+    overview_p2="The DP-900 certification introduces learners to relational databases, non-relational databases, analytics workloads, cloud data services, data governance, and Microsoft Azure's data platform without requiring previous database administration or programming experience.",
     overview_quote="Too many teams hire 'Azure people' who cannot explain how their application data flows. DP-900 fixes that vocabulary gap in 48 hours.",
-    overview_p3="We map every objective to Malaysian enterprise examples: retail loyalty data, banking transaction stores, and telco clickstream patterns.",
+    overview_p3="Whether you are starting a career in data analytics, cloud computing, business intelligence, database administration, or data engineering, Azure Data Fundamentals provides the knowledge required to understand how modern data solutions are designed and implemented in Microsoft Azure. The certification is widely recognised by organisations adopting Microsoft Azure for data platforms, reporting, analytics, and AI workloads.",
     who_for=[
         ("\U0001F4BC","Business and data analysts","You live in Excel and Power BI. DP-900 explains what sits underneath."),
         ("\U0001F468\u200D\U0001F4BB","Developers","You ship apps but treat the database as a black box."),
@@ -206,29 +212,186 @@ BATCH.append(dict(
         "Microsoft Learn account (free)",
     ],
     prereqs_note="Bring your work scenarios \u2014 we reserve time to whiteboard your real pipelines.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "Azure Data Fundamentals Training in Malaysia",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "Azure Data Fundamentals training in Malaysia helps professionals build foundational knowledge of Microsoft Azure data services while preparing for the Microsoft Certified: Azure Data Fundamentals (DP-900) certification.",
+                "This instructor-led training combines theoretical concepts with hands-on Azure labs, enabling learners to understand how data is stored, processed, governed, and analysed using Microsoft Azure.",
+                "Nexperts Academy provides Azure Data Fundamentals virtual training, classroom training, and corporate training across Malaysia with practical Azure portal exercises and Microsoft Learn aligned content.",
+            ],
+            "subtitle": "The course is suitable for",
+            "bullets": [
+                "Business Analysts",
+                "Data Analysts",
+                "Database Administrators",
+                "Data Engineers",
+                "Software Developers",
+                "Solution Architects",
+                "IT Professionals",
+                "Students entering cloud and data careers",
+            ],
+        },
+        {
+            "eyebrow": "What Is Azure Data Fundamentals Certification?",
+            "paragraphs": [
+                "Microsoft Certified: Azure Data Fundamentals validates foundational knowledge of modern data concepts and Azure data services.",
+                "Unlike role-based Azure certifications, DP-900 introduces data concepts before learners specialise in data engineering, database administration, or analytics.",
+            ],
+            "subtitle": "The certification focuses on understanding",
+            "bullets": [
+                "Relational data",
+                "Non-relational data",
+                "Data analytics",
+                "Data warehousing",
+                "Streaming data",
+                "Microsoft Azure data services",
+                "Cloud databases",
+                "Data governance",
+            ],
+        },
+        {
+            "eyebrow": "DP-900 Exam Overview",
+            "paragraphs": [
+                "The DP-900 certification exam evaluates your understanding of Azure data concepts and Microsoft Azure data services.",
+            ],
+            "comparison_table": {
+                "headers": ["Detail", "Information", "Notes"],
+                "rows": [
+                    ["Certification", "Microsoft Certified: Azure Data Fundamentals", "Foundation-level Microsoft data credential"],
+                    ["Exam Code", "DP-900", "Current Azure Data Fundamentals exam"],
+                    ["Provider", "Microsoft", "Delivered through Pearson VUE"],
+                    ["Delivery", "Pearson VUE", "Online or test centre"],
+                    ["Level", "Fundamentals", "No prior Azure experience required"],
+                    ["Duration", "Approximately 60 minutes", "Multiple choice and multi-select"],
+                    ["Recommended Experience", "No prior Azure experience required", "Basic IT literacy helpful"],
+                ],
+            },
+            "subtitle": "The DP-900 exam covers",
+            "bullets": [
+                "Core data concepts",
+                "Relational data",
+                "Non-relational data",
+                "Azure SQL",
+                "Azure Cosmos DB",
+                "Azure Storage",
+                "Azure Synapse Analytics",
+                "Microsoft Fabric",
+                "Power BI",
+                "Data analytics workloads",
+            ],
+        },
+        {
+            "eyebrow": "Azure Data Services Covered During DP-900 Training",
+            "paragraphs": [
+                "Throughout the course, learners gain practical exposure to the Azure data platform and Microsoft data ecosystem.",
+            ],
+            "bullets": [
+                "Azure SQL Database",
+                "Azure SQL Managed Instance",
+                "Azure Cosmos DB",
+                "Azure Blob Storage",
+                "Azure Data Lake Storage Gen2",
+                "Azure Files",
+                "Azure Synapse Analytics",
+                "Microsoft Fabric",
+                "Azure Stream Analytics",
+                "Azure Data Factory",
+                "Azure HDInsight",
+                "Azure Databricks",
+                "Microsoft Power BI",
+                "Microsoft Fabric Real-Time Intelligence",
+            ],
+            "footer": "Learners also understand how these services work together when building cloud-native data platforms and analytics solutions.",
+        },
+        {
+            "eyebrow": "Core Data Concepts You'll Learn",
+            "paragraphs": [
+                "DP-900 introduces essential data concepts that every cloud professional should understand.",
+            ],
+            "bullets": [
+                "Relational databases",
+                "Non-relational databases",
+                "Structured, semi-structured and unstructured data",
+                "OLTP workloads",
+                "OLAP workloads",
+                "Batch processing",
+                "Stream processing",
+                "Data warehouses",
+                "Data lakes",
+                "Data ingestion and transformation",
+                "Data visualization and Business Intelligence",
+            ],
+            "footer": "Understanding these concepts prepares learners for advanced Microsoft Azure certifications.",
+        },
+        {
+            "eyebrow": "Microsoft Azure Data Certification Path",
+            "paragraphs": [
+                "The DP-900 certification is the recommended starting point for Microsoft's Azure Data certification pathway.",
+            ],
+            "bullets": [
+                "Microsoft Certified: Azure Data Fundamentals (DP-900)",
+                "DP-203 Azure Data Engineer Associate",
+                "DP-300 Azure Database Administrator Associate",
+                "DP-600 Microsoft Fabric Analytics Engineer Associate",
+                "DP-700 Microsoft Fabric Data Engineer",
+                "PL-300 Power BI Data Analyst",
+                "AI-900 Azure AI Fundamentals",
+                "AI-102 Azure AI Engineer",
+            ],
+            "footer": "Learners interested in analytics can continue with PL-300, AI-900, or AI-102 after building their DP-900 foundation.",
+        },
+        {
+            "eyebrow": "Microsoft Azure Data Technologies Covered",
+            "paragraphs": [
+                "During the Microsoft Azure Data Fundamentals (DP-900) course, learners work with Azure SQL Database, Azure SQL Managed Instance, Azure Cosmos DB, Azure Blob Storage, Azure Data Lake Storage Gen2, Azure Files, Azure Synapse Analytics, Azure Data Factory, Azure Databricks, Azure Stream Analytics, Microsoft Fabric, Microsoft Fabric Real-Time Intelligence, Microsoft Power BI, Azure HDInsight, Azure Storage Accounts, Microsoft Learn, and Azure Portal.",
+                "Learners also explore relational databases, non-relational databases, transactional processing (OLTP), analytical processing (OLAP), data warehouses, data lakes, streaming analytics, batch processing, and modern cloud data architectures.",
+            ],
+        },
+        {
+            "eyebrow": "Why Learn Azure Data Fundamentals?",
+            "paragraphs": [
+                "Azure Data Fundamentals helps professionals understand how data supports business intelligence, reporting, analytics, artificial intelligence, and digital transformation initiatives.",
+                "It is particularly valuable for professionals working with Microsoft Azure, Microsoft Fabric, SQL Server, Power BI, analytics platforms, and cloud-native applications.",
+                "The certification demonstrates that learners understand the foundational concepts needed before progressing to advanced Azure Data Engineer, Database Administrator, Analytics Engineer, and AI certifications.",
+            ],
+        },
+    ],
     curriculum_eyebrow="Course Curriculum",
-    curriculum_head=("DP-900 objectives.","Mapped 1:1."),
-    curriculum_intro="Microsoft publishes six objective domains for DP-900. We teach in exam order with one consolidated capstone lab per day.",
+    curriculum_head=("Four exam domains.","Mapped 1:1."),
+    curriculum_intro="DP-900 is structured into four official Microsoft exam domains: Describe Core Data Concepts (25\u201330%), Identify Considerations for Relational Data on Azure (20\u201325%), Describe Considerations for Non-relational Data on Azure (15\u201320%), and Describe an Analytics Workload on Azure (25\u201330%).",
     modules=[
-        ("01","Describe Core Data Concepts",[
-            "Batch vs streaming; structured vs semi-structured data",
+        ("01","Describe Core Data Concepts (25\u201330%)",[
+            "Structured, semi-structured and unstructured data",
+            "Batch vs streaming data processing",
+            "Transactional (OLTP) vs analytical (OLAP) workloads",
             "Data roles: engineer, analyst, scientist, steward",
-            "Transactional vs analytical workloads",
-            "Modern analytics + lakehouse introduction",
+            "Data warehouses, data lakes and modern analytics",
             "Lab: Classify three Malaysian sample datasets",
         ]),
-        ("02","Relational Workloads on Azure",[
-            "Azure SQL options: single database, elastic pools, managed instance",
-            "PostgreSQL / MySQL PaaS overview",
-            "Security: firewall, AAD auth, Always Encrypted concepts",
+        ("02","Relational Data on Azure (20\u201325%)",[
+            "Azure SQL Database, elastic pools and managed instance",
+            "Azure Database for PostgreSQL and MySQL overview",
+            "Security: firewall, Microsoft Entra ID auth, encryption",
             "Performance tiers and DTU/vCore intuition",
+            "Relational data migration and governance basics",
             "Lab: Deploy Azure SQL and load sample retail data",
         ]),
-        ("03","Non-relational & Analytics",[
-            "Cosmos DB API models at decision-maker depth",
-            "Azure Blob + Data Lake Gen2 patterns",
-            "Synapse workspace tour; Fabric lakehouse positioning",
-            "Power BI connectivity and semantic models",
+        ("03","Non-relational Data on Azure (15\u201320%)",[
+            "Azure Cosmos DB API models and use cases",
+            "Azure Blob Storage and Azure Data Lake Storage Gen2",
+            "Azure Files for shared storage patterns",
+            "Non-relational security and access control",
+            "Choosing relational vs non-relational workloads",
+            "Lab: Insert and query documents in Cosmos DB",
+        ]),
+        ("04","Analytics Workloads on Azure (25\u201330%)",[
+            "Azure Synapse Analytics and Microsoft Fabric overview",
+            "Azure Data Factory, Databricks and Stream Analytics",
+            "Azure HDInsight and real-time intelligence concepts",
+            "Microsoft Power BI connectivity and semantic models",
+            "Data ingestion, transformation and visualization",
             "Lab: Connect Power BI to a governed dataset",
         ]),
     ],
@@ -318,6 +481,29 @@ BATCH.append(dict(
         "Shows on LinkedIn Microsoft certification widget",
     ],
     guarantee_text="Attend all labs and fail DP-900 first attempt? Exam coaching session + voucher extension assistance on us.",
+    faq_head=("Azure Data Fundamentals", "FAQs."),
+    faqs=[
+        (
+            "What is DP-900?",
+            "DP-900 is Microsoft's Azure Data Fundamentals certification that validates foundational knowledge of data concepts and Azure data services.",
+        ),
+        (
+            "Is DP-900 suitable for beginners?",
+            "Yes. DP-900 is designed for beginners and does not require previous Azure or SQL experience.",
+        ),
+        (
+            "What is covered in Azure Data Fundamentals?",
+            "The course covers relational databases, non-relational databases, Azure SQL, Azure Cosmos DB, Azure Storage, analytics workloads, Power BI, Microsoft Fabric, and cloud data concepts.",
+        ),
+        (
+            "What comes after DP-900?",
+            "Many learners continue with DP-203 Azure Data Engineer Associate, DP-300 Azure Database Administrator Associate, DP-600 Microsoft Fabric Analytics Engineer Associate, or PL-300 Power BI Data Analyst.",
+        ),
+        (
+            "Is Azure Data Fundamentals worth it?",
+            "Yes. DP-900 is an excellent starting point for professionals pursuing careers in cloud data, analytics, business intelligence, database administration, and data engineering.",
+        ),
+    ],
 ))
 
 

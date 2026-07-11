@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """ITIL / PM / DevOps course data (ITIL 4 Foundation, PMP, CKA)."""
 from _course_data import HERO_IMG, common_meta
+from _course_schema_loader import schema_markup_from_file
 
 BATCH = []
 
@@ -376,10 +377,15 @@ BATCH.append(dict(
 # 3. CKA - Certified Kubernetes Administrator
 BATCH.append(dict(
     slug="cka",
+    seo_title="Certified Kubernetes Administrator (CKA) Training Malaysia",
+    seo_description="Join Certified Kubernetes Administrator (CKA) training in Malaysia. Master Kubernetes administration, pass the Linux Foundation CNCF exam with hands-on labs and an exam voucher.",
+    seo_keywords="Certified Kubernetes Administrator, CKA, CKA Training, Kubernetes Administrator Certification, Linux Foundation Kubernetes, CNCF Certification, Kubernetes Training Malaysia",
+    canonical_path="/courses/cka",
+    schema_markup=schema_markup_from_file(),
     title="CKA",
-    title_html='Certified Kubernetes<br><em>Administrator (CKA)</em>',
+    title_html='Certified Kubernetes Administrator (CKA)<br><em>Training &amp; Certification Malaysia</em>',
     vendor_short="CNCF / Linux Foundation", watermark="CKA", crumb_vendor="Linux Foundation",
-    subtitle="The hands-on Kubernetes administrator credential. 100% performance-based exam \u2014 you build, troubleshoot and operate live clusters under time pressure.",
+    subtitle="Certified Kubernetes Administrator (CKA) training in Malaysia \u2014 hands-on Kubernetes cluster administration, Linux Foundation CNCF exam preparation with live clusters and exam voucher.",
     badges=[("cb-vendor","Linux Foundation"),("cb-level","Professional"),("cb-new","2026 Updated"),("cb-hot","DevOps Hire")],
     hero_meta=common_meta("4 days / 32 hrs","Instructor-Led + Live Clusters","On-site \u00b7 Hybrid",92,"6 October 2026"),
     hero_img=HERO_IMG,
@@ -389,12 +395,12 @@ BATCH.append(dict(
         ("\U0001F310","Networking & ingress","Services, NetworkPolicy, CNI, CoreDNS, Gateway API"),
         ("\U0001F510","RBAC & security","ServiceAccounts, RBAC, PodSecurity admission, secrets"),
     ],
-    overview_eyebrow="What this course is",
-    overview_head=("CKA is","100% hands-on Kubernetes."),
-    overview_p1="The Certified Kubernetes Administrator (CKA) is the most-respected hands-on Kubernetes credential. Unlike vendor exams, CKA is 100% performance-based \u2014 a 2-hour live exam where you build, troubleshoot and operate real Kubernetes clusters under time pressure.",
-    overview_p2="At Nexperts, CKA is delivered against six live multi-node Kubernetes clusters. You spend 32 hours at the kubectl prompt \u2014 not slides. We break things deliberately and you fix them.",
+    overview_eyebrow="Certified Kubernetes Administrator (CKA) Training in Malaysia",
+    overview_head=("Linux Foundation", "CNCF certification."),
+    overview_p1="The Certified Kubernetes Administrator (CKA) certification is the industry's leading hands-on Kubernetes credential developed by the Cloud Native Computing Foundation (CNCF) and the Linux Foundation. Unlike multiple-choice certification exams, the CKA exam is entirely performance-based, requiring candidates to configure, troubleshoot and administer live Kubernetes clusters within a timed environment.",
+    overview_p2="Nexperts Academy provides instructor-led Certified Kubernetes Administrator (CKA) training in Malaysia with live Kubernetes clusters, exam-focused labs, real production scenarios and Kubernetes troubleshooting exercises designed to prepare learners for the official Linux Foundation certification.",
     overview_quote="CKA is the closest thing to a real-job exam in IT. There is no multiple choice. There is no recall. There is only \u2014 fix this broken cluster, build this thing, in 2 hours.",
-    overview_p3="The 2026 update strengthens troubleshooting depth, Gateway API coverage and modern CNI patterns (Cilium, Calico). We teach with current MY platform-team Kubernetes deployments throughout.",
+    overview_p3="Whether you are a Linux administrator, DevOps engineer, cloud engineer, platform engineer or Site Reliability Engineer (SRE), this course develops the practical Kubernetes administration skills expected in enterprise environments.",
     who_for=[
         ("\U0001F427","Linux administrators","The natural credential for Linux admins moving into platform engineering."),
         ("\u2601\uFE0F","Cloud engineers","AKS, EKS, GKE all use vanilla Kubernetes. CKA gives you the platform-agnostic depth."),
@@ -410,48 +416,188 @@ BATCH.append(dict(
         "Vim / nano comfort \u2014 you'll edit YAML in the exam",
     ],
     prereqs_note="No Linux fluency yet? Ask us about our pre-CKA Linux + Docker primer.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "Why Earn the Certified Kubernetes Administrator (CKA) Certification?",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "The Certified Kubernetes Administrator (CKA) certification validates your ability to install, configure, secure, maintain and troubleshoot Kubernetes clusters.",
+                "Because the CKA exam is fully hands-on, employers recognise it as one of the most respected Kubernetes certifications for DevOps and cloud infrastructure professionals.",
+            ],
+            "subtitle": "The certification demonstrates practical skills in",
+            "bullets": [
+                "Kubernetes cluster administration",
+                "kubectl command-line operations",
+                "etcd backup and recovery",
+                "RBAC configuration",
+                "Networking",
+                "Services",
+                "Ingress",
+                "CoreDNS",
+                "Storage",
+                "Persistent Volumes",
+                "Scheduling",
+                "Cluster upgrades",
+                "Security",
+                "Troubleshooting",
+                "High Availability",
+            ],
+        },
+        {
+            "eyebrow": "Linux Foundation & CNCF Certification",
+            "paragraphs": [
+                "The Certified Kubernetes Administrator (CKA) certification is developed by the Cloud Native Computing Foundation (CNCF) in partnership with the Linux Foundation.",
+                "Holding a Linux Foundation Kubernetes certification demonstrates practical operational skills that transfer across public cloud and on-premises Kubernetes environments.",
+            ],
+            "subtitle": "The certification is globally recognised across organisations using Kubernetes platforms including",
+            "bullets": [
+                "Amazon EKS",
+                "Microsoft AKS",
+                "Google Kubernetes Engine (GKE)",
+                "Red Hat OpenShift",
+                "VMware Tanzu",
+                "Rancher Kubernetes",
+            ],
+        },
+        {
+            "eyebrow": "CKA Exam Overview",
+            "paragraphs": [
+                "The CKA exam evaluates your ability to solve real Kubernetes administration tasks rather than answer multiple-choice questions.",
+            ],
+            "comparison_table": {
+                "headers": ["Feature", "Details", "Notes"],
+                "rows": [
+                    ["Certification", "Certified Kubernetes Administrator", "Linux Foundation / CNCF credential"],
+                    ["Exam Code", "CKA", "Current Kubernetes administrator exam"],
+                    ["Provider", "Linux Foundation & CNCF", "Delivered through PSI online proctoring"],
+                    ["Exam Type", "Performance Based", "Live cluster tasks only"],
+                    ["Duration", "2 Hours", "Timed practical tasks"],
+                    ["Questions", "Practical Tasks", "Approximately 15\u201320 tasks"],
+                    ["Passing Score", "Linux Foundation Standard", "66 / 100 scaled score"],
+                    ["Delivery", "Online Proctored", "PSI Secure Browser"],
+                ],
+            },
+        },
+        {
+            "eyebrow": "What You'll Learn During CKA Training",
+            "paragraphs": [
+                "This Kubernetes administrator course covers the core operational skills tested on the CKA exam and used in production environments.",
+            ],
+            "bullets": [
+                "Kubernetes Architecture",
+                "Cluster Installation",
+                "kubeadm",
+                "etcd Backup & Restore",
+                "kubectl",
+                "YAML",
+                "RBAC",
+                "Service Accounts",
+                "Secrets",
+                "ConfigMaps",
+                "Persistent Volumes",
+                "Storage Classes",
+                "Networking",
+                "Ingress Controllers",
+                "CoreDNS",
+                "CNI Plugins",
+                "Network Policies",
+                "Node Management",
+                "Cluster Troubleshooting",
+                "Monitoring",
+                "Logging",
+                "Pod Scheduling",
+                "Cluster Security",
+            ],
+            "footer": "Learners perform these tasks using live Kubernetes clusters throughout the course.",
+        },
+        {
+            "eyebrow": "CKA Certification Cost",
+            "paragraphs": [
+                "The total cost of earning the Certified Kubernetes Administrator certification typically consists of CKA training, an official Linux Foundation exam voucher, practice labs, mock examinations, Kubernetes cluster access and post-course mentoring.",
+                "Nexperts Academy combines instructor-led Kubernetes training with hands-on practice and certification preparation to help learners maximise their chances of passing the performance-based exam.",
+            ],
+        },
+        {
+            "eyebrow": "Kubernetes Career Path",
+            "paragraphs": [
+                "After completing the Certified Kubernetes Administrator certification, professionals commonly continue with advanced Kubernetes credentials and platform engineering roles.",
+            ],
+            "skill_groups": [
+                (
+                    "After CKA, professionals commonly continue with",
+                    [
+                        "Certified Kubernetes Application Developer (CKAD)",
+                        "Certified Kubernetes Security Specialist (CKS)",
+                        "Kubernetes and Cloud Native Associate (KCNA)",
+                    ],
+                ),
+                (
+                    "Many learners also progress into roles such as",
+                    [
+                        "Kubernetes Administrator",
+                        "Platform Engineer",
+                        "DevOps Engineer",
+                        "Cloud Engineer",
+                        "Site Reliability Engineer (SRE)",
+                        "Infrastructure Engineer",
+                        "Cloud Consultant",
+                    ],
+                ),
+            ],
+        },
+        {
+            "eyebrow": "Kubernetes Technologies Covered",
+            "paragraphs": [
+                "During the Certified Kubernetes Administrator (CKA) course, learners work extensively with Kubernetes, kubectl, kubeadm, etcd, CoreDNS, Container Network Interface (CNI), Calico, Cilium, Gateway API, Ingress Controllers, Persistent Volumes, Storage Classes, ConfigMaps, Secrets, Service Accounts, RBAC, Helm, Kustomize, YAML, Linux, Docker, container runtimes, Cluster Networking, High Availability, Monitoring, Logging, and Kubernetes Troubleshooting.",
+                "The course aligns with the official Linux Foundation and CNCF Certified Kubernetes Administrator certification objectives while preparing learners for real-world Kubernetes operations.",
+            ],
+        },
+    ],
     curriculum_eyebrow="Course Curriculum",
-    curriculum_head=("Five domains.","Pure Kubernetes operations."),
-    curriculum_intro="CKA covers Cluster Architecture / Installation / Configuration (25%), Workloads & Scheduling (15%), Services & Networking (20%), Storage (10%), and Troubleshooting (30%). We sequence by exam weight and operational reality.",
+    curriculum_head=("Five exam domains.","Mapped 1:1."),
+    curriculum_intro="CKA is structured into five official Linux Foundation exam domains: Cluster Architecture, Installation & Configuration (25%), Workloads & Scheduling (15%), Services & Networking (20%), Storage (10%), and Troubleshooting (30%).",
     modules=[
-        ("01","Cluster Architecture & Installation",[
+        ("01","Cluster Architecture, Installation & Configuration (25%)",[
             "Control plane components \u2014 API server, scheduler, controller-manager, etcd",
-            "kubeadm cluster build",
+            "kubeadm cluster build and node lifecycle",
             "Cluster upgrades \u2014 minor version drift",
             "etcd backup, restore and migrate",
             "TLS bootstrapping and certificate rotation",
+            "RBAC, ServiceAccounts and namespace-scoped access",
+            "Helm and Kustomize for cluster components",
             "Lab: Build a 3-node cluster from scratch with kubeadm",
         ]),
-        ("02","Workloads & Scheduling",[
+        ("02","Workloads & Scheduling (15%)",[
             "Deployments, ReplicaSets, StatefulSets, DaemonSets",
             "Pod design \u2014 init, sidecar, ambient containers",
+            "ConfigMaps and Secrets for application configuration",
             "Resource requests, limits, QoS classes",
             "Affinity, anti-affinity, taints, tolerations",
-            "Horizontal Pod Autoscaler",
+            "Horizontal Pod Autoscaler and PodDisruptionBudgets",
             "Lab: Deploy a stateful app with HPA + PDB",
         ]),
-        ("03","Services, Ingress & NetworkPolicy",[
+        ("03","Services & Networking (20%)",[
             "Service types \u2014 ClusterIP, NodePort, LoadBalancer, ExternalName",
-            "Ingress controllers \u2014 nginx, Traefik, Gateway API",
+            "Ingress controllers and Gateway API",
             "NetworkPolicy fundamentals",
-            "CoreDNS, ExternalDNS",
+            "CoreDNS and cluster DNS troubleshooting",
             "CNI choices \u2014 Calico, Cilium, Flannel",
             "Lab: Lock down a 3-namespace app with NetworkPolicy",
         ]),
-        ("04","Storage & Persistence",[
+        ("04","Storage (10%)",[
             "PersistentVolumes, PersistentVolumeClaims, StorageClasses",
-            "Dynamic provisioning, CSI drivers",
+            "Dynamic provisioning and CSI drivers",
+            "Volume types, access modes and reclaim policies",
             "Volume snapshots and cloning",
-            "ConfigMaps and Secrets at scale",
-            "etcd-backed vs cloud-backed PV",
+            "etcd-backed vs cloud-backed PV patterns",
             "Lab: Migrate a stateful app to a new StorageClass",
         ]),
-        ("05","Troubleshooting (the big one)",[
+        ("05","Troubleshooting (30%)",[
             "Cluster troubleshooting \u2014 control plane, kubelet, etcd",
             "Pod troubleshooting \u2014 ImagePullBackOff, CrashLoopBackOff, OOM",
             "Service & DNS troubleshooting",
             "Node troubleshooting \u2014 NotReady, disk pressure",
-            "Logging and journalctl drill-down",
+            "Logging, monitoring and journalctl drill-down",
             "Lab: 5 broken-cluster scenarios in 90 minutes",
         ]),
     ],
@@ -554,4 +700,27 @@ BATCH.append(dict(
         "Pathway to CKS and CKAD",
     ],
     guarantee_text="Hit the 78 / 100 mock threshold and don't pass first attempt? Linux Foundation retake voucher on us.",
+    faq_head=("Certified Kubernetes Administrator", "FAQs."),
+    faqs=[
+        (
+            "What is the Certified Kubernetes Administrator (CKA) certification?",
+            "The Certified Kubernetes Administrator (CKA) certification is a performance-based Kubernetes certification developed by the Linux Foundation and CNCF to validate Kubernetes administration skills.",
+        ),
+        (
+            "Is the CKA exam hands-on?",
+            "Yes. The CKA exam is completely performance-based and requires candidates to complete live Kubernetes administration tasks.",
+        ),
+        (
+            "Does the course include a CKA exam voucher?",
+            "Eligible Nexperts Academy course packages include an official Linux Foundation CKA exam voucher.",
+        ),
+        (
+            "How do I register for the CKA exam?",
+            "Candidates register through the Linux Foundation certification portal after receiving their exam voucher.",
+        ),
+        (
+            "What comes after CKA?",
+            "Most professionals continue with CKAD (Certified Kubernetes Application Developer) or CKS (Certified Kubernetes Security Specialist).",
+        ),
+    ],
 ))

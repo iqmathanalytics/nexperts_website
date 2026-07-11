@@ -33,7 +33,7 @@ def schema_markup_from_file(path: Path | None = None) -> str:
         b
         for b in blocks
         if re.search(
-            r'"@type"\s*:\s*"(?:Course|FAQPage|BreadcrumbList|EducationalOrganization)"',
+            r'"@type"\s*:\s*"(?:Course|FAQPage|BreadcrumbList|EducationalOrganization|EducationalOccupationalCredential|Product|AggregateRating|Review)"',
             b,
         )
     ]

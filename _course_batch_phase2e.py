@@ -13,6 +13,7 @@
 Pricing 100-250 RM below Malaysian market rates (Iverson reference).
 """
 from _course_data import HERO_IMG, common_meta
+from _course_schema_loader import schema_markup_from_file
 
 BATCH = []
 
@@ -22,10 +23,15 @@ BATCH = []
 # ============================================================================
 BATCH.append(dict(
     slug="ai-900",
-    title="AI-900: Azure AI Fundamentals",
-    title_html='AI-900<br><em>Azure AI Fundamentals</em>',
+    seo_title="Microsoft Azure AI Fundamentals (AI-900) Training & Certification in Malaysia",
+    seo_description="Microsoft Azure AI Fundamentals (AI-900) training in Malaysia covering Azure AI services, machine learning, generative AI, Azure OpenAI, Azure AI Foundry, computer vision, NLP, Responsible AI and certification preparation.",
+    seo_keywords="AI-900, Azure AI Fundamentals, Microsoft Azure AI Fundamentals, AI-900 Training, AI-900 Course, Azure AI Certification, AI Training Malaysia",
+    canonical_path="/courses/ai-900",
+    schema_markup=schema_markup_from_file(),
+    title="AI-900",
+    title_html='Microsoft Azure AI Fundamentals (AI-900)<br><em>Training &amp; Certification in Malaysia</em>',
     vendor_short="Microsoft", watermark="AI-900", crumb_vendor="Microsoft",
-    subtitle="The Microsoft foundation credential for AI on Azure \u2014 ML concepts, computer vision, NLP, generative AI, document intelligence and Responsible AI \u2014 mapped to AI-900.",
+    subtitle="Microsoft Certified: Azure AI Fundamentals (AI-900) training in Malaysia \u2014 machine learning, generative AI, computer vision, NLP, Azure AI services and Responsible AI with hands-on labs and exam preparation.",
     badges=[("cb-vendor","Microsoft Authorised"),("cb-level","Foundation \u00b7 AI"),("cb-new","2026 Objectives"),("cb-hot","Most-Booked AI Foundation")],
     hero_meta=common_meta("2 days / 16 hrs","Instructor-Led + Azure AI Tours","On-site \u00b7 Virtual \u00b7 Hybrid",98,"6 May 2026"),
     hero_img=HERO_IMG,
@@ -35,12 +41,12 @@ BATCH.append(dict(
         ("\U0001F441\ufe0f","Vision & speech","Azure AI Vision, Speech, OCR, Document Intelligence in real demos"),
         ("\U0001F310","NLP & search","Azure AI Language, Translator, AI Search and the new agent stacks"),
     ],
-    overview_eyebrow="What this course is",
-    overview_head=("Where AI on Azure stops","being a black box."),
-    overview_p1="AI-900 is Microsoft's AI foundation credential. It is genuinely a starting point \u2014 designed for technology professionals, project managers, business decision-makers and aspiring data professionals who need fluency in AI on Azure without committing to a hands-on engineering track.",
-    overview_p2="At Nexperts, AI-900 is delivered as a structured 2-day programme where every concept is anchored to a real Azure portal walkthrough. By day 2 you've toured Azure AI Foundry, Azure OpenAI Studio, AI Vision, Speech, Document Intelligence and AI Search \u2014 not just heard about them.",
+    overview_eyebrow="Microsoft Azure AI Fundamentals (AI-900) Certification",
+    overview_head=("Training &amp; certification", "in Malaysia."),
+    overview_p1="Microsoft Certified: Azure AI Fundamentals (AI-900) is Microsoft's entry-level artificial intelligence certification designed for professionals who want to understand AI concepts, machine learning, generative AI, and Azure AI services without requiring programming experience.",
+    overview_p2="The AI-900 certification introduces learners to modern AI workloads, responsible AI principles, computer vision, natural language processing (NLP), conversational AI, document intelligence, and Microsoft Azure AI services.",
     overview_quote="AI-900 is the cert most often dismissed as 'too easy'. It is also the cert that produces the highest unblocking effect on every AI project conversation in your first six months.",
-    overview_p3="The 2026 AI-900 update sharpened the focus on Generative AI, Azure AI Foundry, Phi-4 small language models, agent design and Responsible AI in production. We cover all four with hands-on portal tours.",
+    overview_p3="Whether you are an IT professional, business analyst, project manager, student, or decision-maker, AI-900 provides a strong foundation before progressing to role-based Microsoft AI certifications.",
     who_for=[
         ("\U0001F393","IT students & graduates","Entering the workforce \u2014 AI-900 makes you fluent in AI conversations from day one."),
         ("\U0001F4BC","Project managers","Working on AI projects but lost in technical conversations. AI-900 gives the vocabulary."),
@@ -56,11 +62,153 @@ BATCH.append(dict(
         "Curiosity and willingness to navigate the Azure portal",
     ],
     prereqs_note="No prerequisites required. AI-900 is genuinely a starting point.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "AI-900 Training in Malaysia",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "Microsoft Azure AI Fundamentals (AI-900) training in Malaysia helps learners understand artificial intelligence concepts through instructor-led sessions, Azure portal demonstrations, and hands-on Azure AI labs.",
+                "Nexperts Academy delivers AI-900 classroom training, virtual instructor-led training, and corporate AI training across Malaysia with practical demonstrations using Microsoft Azure AI services.",
+            ],
+            "subtitle": "This course is suitable for",
+            "bullets": [
+                "IT Professionals",
+                "Business Analysts",
+                "Project Managers",
+                "Software Developers",
+                "Students",
+                "Solution Architects",
+                "AI Beginners",
+                "Decision Makers",
+                "Digital Transformation Teams",
+            ],
+        },
+        {
+            "eyebrow": "What Is Microsoft Azure AI Fundamentals?",
+            "paragraphs": [
+                "Microsoft Azure AI Fundamentals introduces the core concepts required to understand artificial intelligence and Microsoft Azure AI services.",
+                "Unlike engineering-focused certifications, AI-900 emphasizes business understanding and practical awareness of Azure AI technologies.",
+            ],
+            "subtitle": "Learners gain knowledge of",
+            "bullets": [
+                "Artificial Intelligence",
+                "Machine Learning",
+                "Deep Learning",
+                "Generative AI",
+                "Responsible AI",
+                "Computer Vision",
+                "Natural Language Processing",
+                "Conversational AI",
+                "Information Extraction",
+                "Azure AI Services",
+            ],
+        },
+        {
+            "eyebrow": "AI-900 Exam Overview",
+            "paragraphs": [
+                "The Microsoft AI-900 certification validates foundational knowledge of artificial intelligence concepts and Azure AI services.",
+            ],
+            "comparison_table": {
+                "headers": ["Detail", "Information", "Notes"],
+                "rows": [
+                    ["Certification", "Microsoft Certified: Azure AI Fundamentals", "Foundation-level Microsoft AI credential"],
+                    ["Exam Code", "AI-900", "Current Azure AI Fundamentals exam"],
+                    ["Provider", "Microsoft", "Delivered through Pearson VUE"],
+                    ["Delivery", "Pearson VUE", "Online or test centre"],
+                    ["Level", "Fundamentals", "No coding or Azure experience required"],
+                    ["Duration", "Approximately 45\u201360 minutes", "Multiple choice and multi-select"],
+                    ["Recommended Experience", "No coding or Azure experience required", "Basic IT literacy helpful"],
+                ],
+            },
+            "subtitle": "The AI-900 exam measures knowledge across",
+            "bullets": [
+                "AI workloads",
+                "Machine learning concepts",
+                "Generative AI",
+                "Computer Vision",
+                "Azure AI Vision",
+                "Azure AI Language",
+                "Azure AI Speech",
+                "Azure AI Document Intelligence",
+                "Azure AI Search",
+                "Responsible AI",
+            ],
+        },
+        {
+            "eyebrow": "Azure AI Services Covered During AI-900 Training",
+            "paragraphs": [
+                "During Microsoft Azure AI Fundamentals training, learners explore the Microsoft AI ecosystem through guided Azure portal exercises.",
+            ],
+            "subtitle": "Key Azure AI services include",
+            "bullets": [
+                "Azure AI Foundry",
+                "Azure OpenAI Service",
+                "Azure AI Vision",
+                "Azure AI Language",
+                "Azure AI Speech",
+                "Azure AI Translator",
+                "Azure AI Search",
+                "Azure AI Document Intelligence",
+                "Azure AI Content Understanding",
+                "Azure Machine Learning",
+                "Azure AI Studio",
+                "Microsoft Copilot",
+                "Azure AI Agent Service",
+            ],
+            "footer": "Participants also learn prompt engineering basics, Retrieval-Augmented Generation (RAG), foundation models, and responsible AI implementation.",
+        },
+        {
+            "eyebrow": "AI Concepts Covered",
+            "paragraphs": [
+                "The AI-900 course introduces the core concepts behind modern artificial intelligence.",
+            ],
+            "bullets": [
+                "Artificial Intelligence",
+                "Machine Learning",
+                "Supervised Learning",
+                "Unsupervised Learning",
+                "Reinforcement Learning",
+                "Deep Learning",
+                "Neural Networks",
+                "Large Language Models (LLMs)",
+                "Generative AI",
+                "Prompt Engineering",
+                "Computer Vision",
+                "Optical Character Recognition (OCR)",
+                "Natural Language Processing (NLP)",
+                "Speech Recognition",
+                "Conversational AI",
+                "Responsible AI",
+            ],
+            "footer": "These concepts provide the knowledge required before progressing to advanced Azure AI certifications.",
+        },
+        {
+            "eyebrow": "Microsoft AI Certification Path",
+            "paragraphs": [
+                "Microsoft Azure AI Fundamentals is the recommended starting point for Microsoft's AI certification pathway.",
+            ],
+            "bullets": [
+                "AI-900 Microsoft Azure AI Fundamentals",
+                "AI-102 Azure AI Engineer Associate",
+                "DP-100 Azure Data Scientist Associate",
+                "DP-203 Azure Data Engineer Associate",
+                "AZ-204 Azure Developer Associate",
+            ],
+            "footer": "Learners interested in generative AI can continue with Azure OpenAI, Azure AI Foundry, and Microsoft Copilot development technologies.",
+        },
+        {
+            "eyebrow": "Why Learn Azure AI Fundamentals?",
+            "paragraphs": [
+                "Microsoft Azure AI Fundamentals helps professionals understand how artificial intelligence is used across cloud applications, automation, analytics, customer service, search, language processing, document understanding, and generative AI solutions.",
+                "The certification demonstrates foundational AI knowledge before specializing in AI engineering, machine learning, or data science roles.",
+            ],
+        },
+    ],
     curriculum_eyebrow="Course Curriculum",
-    curriculum_head=("Five domains.","Full Azure AI literacy."),
-    curriculum_intro="AI-900 is structured into AI Workloads & Considerations, ML Fundamentals on Azure, Computer Vision Workloads, NLP Workloads, and Generative AI Workloads. We deliver every domain anchored to a real portal screen.",
+    curriculum_head=("Five exam domains.","Mapped 1:1."),
+    curriculum_intro="AI-900 is structured into five official Microsoft exam domains: Describe Artificial Intelligence Workloads and Considerations (15\u201320%), Describe Fundamental Principles of Machine Learning on Azure (15\u201320%), Describe Features of Computer Vision Workloads on Azure (15\u201320%), Describe Features of Natural Language Processing (NLP) Workloads on Azure (15\u201320%), and Describe Features of Generative AI Workloads on Azure (20\u201325%).",
     modules=[
-        ("01","AI Workloads & Considerations",[
+        ("01","AI Workloads & Considerations (15\u201320%)",[
             "Common AI workload types and decision criteria",
             "Responsible AI principles \u2014 Microsoft's six pillars",
             "Fairness, reliability, privacy, inclusiveness, transparency, accountability",
@@ -68,7 +216,7 @@ BATCH.append(dict(
             "Risk identification and mitigation in AI projects",
             "Tour: Walk Azure AI Content Safety + Responsible AI dashboard",
         ]),
-        ("02","Machine Learning Fundamentals",[
+        ("02","Machine Learning Fundamentals on Azure (15\u201320%)",[
             "Supervised, unsupervised and reinforcement learning",
             "Common features \u2014 classification, regression, clustering",
             "Train, validate, evaluate \u2014 in plain English",
@@ -76,7 +224,7 @@ BATCH.append(dict(
             "AutoML and the AML designer",
             "Tour: Walk an Azure ML workspace and AutoML run",
         ]),
-        ("03","Computer Vision Workloads on Azure",[
+        ("03","Computer Vision Workloads on Azure (15\u201320%)",[
             "Image classification, object detection, OCR",
             "Facial detection, recognition and analysis",
             "Azure AI Vision capabilities and endpoints",
@@ -84,7 +232,7 @@ BATCH.append(dict(
             "Document Intelligence for forms and invoices",
             "Tour: Run a real OCR + key-value extraction in Document Intelligence Studio",
         ]),
-        ("04","NLP Workloads on Azure",[
+        ("04","NLP Workloads on Azure (15\u201320%)",[
             "Sentiment analysis, key-phrase extraction",
             "Entity recognition and PII detection",
             "Translation \u2014 text and speech",
@@ -92,7 +240,7 @@ BATCH.append(dict(
             "Azure AI Search and semantic ranking",
             "Tour: Build a sentiment + entity demo in Azure AI Foundry",
         ]),
-        ("05","Generative AI Workloads on Azure",[
+        ("05","Generative AI Workloads on Azure (20\u201325%)",[
             "Generative AI patterns \u2014 chat, RAG, agents",
             "Azure OpenAI service \u2014 models, deployment, quotas",
             "Prompt engineering essentials",
@@ -200,6 +348,29 @@ BATCH.append(dict(
         "LinkedIn certificate integration",
     ],
     guarantee_text="Follow our programme and don't pass AI-900? We cover one retake voucher. No fine print.",
+    faq_head=("Azure AI Fundamentals", "FAQs."),
+    faqs=[
+        (
+            "What is AI-900?",
+            "AI-900 is Microsoft's Azure AI Fundamentals certification that validates foundational knowledge of artificial intelligence concepts and Azure AI services.",
+        ),
+        (
+            "Is AI-900 suitable for beginners?",
+            "Yes. AI-900 is designed for beginners and does not require programming experience or previous Azure knowledge.",
+        ),
+        (
+            "What is covered in AI-900?",
+            "The course covers machine learning, generative AI, computer vision, Azure AI Vision, Azure AI Language, Azure AI Speech, Azure AI Search, Azure AI Document Intelligence, and Responsible AI.",
+        ),
+        (
+            "What comes after AI-900?",
+            "Many learners continue with AI-102 Azure AI Engineer Associate, DP-100 Azure Data Scientist Associate, or AZ-204 Azure Developer Associate.",
+        ),
+        (
+            "Is AI-900 worth it?",
+            "Yes. AI-900 provides a strong foundation for professionals pursuing careers in artificial intelligence, cloud computing, machine learning, data science, and Azure AI services.",
+        ),
+    ],
 ))
 
 

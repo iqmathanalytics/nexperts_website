@@ -14,6 +14,7 @@ Mix:
 Pricing calibrated 100-200 RM below Malaysian market rates (Iverson reference).
 """
 from _course_data import HERO_IMG, common_meta
+from _course_schema_loader import schema_markup_from_file
 
 BATCH = []
 
@@ -953,10 +954,15 @@ BATCH.append(dict(
 # ============================================================================
 BATCH.append(dict(
     slug="terraform-associate",
+    seo_title="Terraform Associate Certification Training Malaysia | 003",
+    seo_description="Prepare for the HashiCorp Terraform Associate (003) certification with hands-on Terraform training in Malaysia. Learn Infrastructure as Code, modules, state and multi-cloud automation.",
+    seo_keywords="Terraform Associate, Terraform Associate Certification, Terraform Associate Training Malaysia, HashiCorp Certification, Infrastructure as Code, Terraform Cloud, Terraform Enterprise, Terraform Certification",
+    canonical_path="/courses/terraform-associate",
+    schema_markup=schema_markup_from_file(),
     title="Terraform Associate",
-    title_html='Terraform Associate<br><em>HashiCorp Certified</em>',
+    title_html='HashiCorp Terraform Associate Certification<br><em>Training Malaysia (003)</em>',
     vendor_short="HashiCorp", watermark="TF", crumb_vendor="HashiCorp",
-    subtitle="The HashiCorp credential for infrastructure as code. Provision, manage and scale cloud infrastructure with Terraform across AWS, Azure, GCP and on-prem.",
+    subtitle="HashiCorp Certified: Terraform Associate (003) training in Malaysia \u2014 Infrastructure as Code, Terraform Cloud, modules, state management, AWS, Azure and multi-cloud automation.",
     badges=[("cb-vendor","HashiCorp Authorised"),("cb-level","Associate"),("cb-new","003 Objectives"),("cb-hot","DevOps Foundation")],
     hero_meta=common_meta("3 days / 24 hrs","Instructor-Led + Multi-Cloud Sandbox","On-site \u00b7 Virtual \u00b7 Hybrid",95,"12 May 2026"),
     hero_img=HERO_IMG,
@@ -966,12 +972,12 @@ BATCH.append(dict(
         ("\U0001F4E6","Modules","Build, version and consume modules from a registry or git"),
         ("\U0001F510","State & secrets","Remote state, locking, sensitive variables and secret backends"),
     ],
-    overview_eyebrow="What this course is",
-    overview_head=("Where infrastructure stops","being clicked."),
-    overview_p1="Terraform Associate is HashiCorp's IaC credential. Terraform is the dominant infrastructure-as-code tool in MY enterprises and MNCs \u2014 the cert proves you can use it as a discipline, not as a notebook.",
-    overview_p2="At Nexperts, Terraform Associate is delivered against multi-cloud sandboxes (AWS + Azure). By day 3 you've provisioned a 3-tier app on AWS, the same pattern on Azure, built and consumed three modules from a private registry, and operated state with a real backend.",
+    overview_eyebrow="HashiCorp Terraform Associate Certification",
+    overview_head=("Training &amp; certification", "in Malaysia."),
+    overview_p1="The HashiCorp Certified: Terraform Associate (003) certification validates your ability to provision, manage and automate infrastructure using Terraform. It demonstrates practical knowledge of Infrastructure as Code (IaC), Terraform workflows, modules, state management, providers and cloud automation across AWS, Microsoft Azure and Google Cloud Platform.",
+    overview_p2="The certification is recognised by organisations adopting DevOps, platform engineering and cloud automation practices. It is suitable for cloud engineers, DevOps engineers, platform engineers, system administrators and infrastructure specialists seeking to validate their Terraform skills.",
     overview_quote="Terraform looks easy until you ship a 100-resource module across three clouds and need to refactor without an outage. The associate cert tests the basics; this course teaches the discipline.",
-    overview_p3="The 003 update of Terraform Associate sharpened the focus on workflows, modules, state, and Terraform Cloud / Enterprise. We cover all four with hands-on builds.",
+    overview_p3="At Nexperts Academy, Terraform Associate training combines instructor-led sessions, practical labs and multi-cloud deployment exercises aligned with the latest HashiCorp Terraform Associate (003) objectives.",
     who_for=[
         ("\u2699\ufe0f","DevOps engineers","Already using Terraform and want the formal credential."),
         ("\u2601\ufe0f","Cloud engineers","Operating multi-cloud environments. Terraform is the lingua franca."),
@@ -987,73 +993,177 @@ BATCH.append(dict(
         "Familiarity with JSON / YAML data formats",
     ],
     prereqs_note="No cloud experience? Ask about our AZ-900 \u2192 Terraform Associate bundle.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "Terraform Associate Training in Malaysia",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "Our Terraform Associate training in Malaysia prepares learners for the HashiCorp Terraform Associate (003) certification through instructor-led sessions, practical labs and multi-cloud deployment exercises.",
+                "The course is suitable for professionals working with AWS, Azure, Google Cloud Platform and hybrid infrastructure.",
+            ],
+            "subtitle": "Throughout the course you will",
+            "bullets": [
+                "Build Infrastructure as Code using HashiCorp Terraform",
+                "Automate AWS and Azure resources",
+                "Deploy reusable Terraform modules",
+                "Work with remote state and state locking",
+                "Understand Terraform Cloud workflows",
+                "Prepare for the Terraform Associate certification exam",
+            ],
+        },
+        {
+            "eyebrow": "Infrastructure as Code (IaC) with Terraform",
+            "paragraphs": [
+                "Infrastructure as Code (IaC) enables infrastructure to be managed using version-controlled configuration files instead of manual provisioning.",
+                "During this course you will learn how Terraform uses declarative configuration to provision infrastructure consistently across multiple cloud providers.",
+            ],
+            "bullets": [
+                "Terraform Providers",
+                "Resources",
+                "Variables",
+                "Outputs",
+                "Local Values",
+                "Modules",
+                "State Files",
+                "Remote Backends",
+                "Workspaces",
+                "Terraform Cloud",
+                "Terraform Enterprise",
+            ],
+        },
+        {
+            "eyebrow": "Terraform Associate (003) Exam Overview",
+            "paragraphs": [
+                "The HashiCorp Certified: Terraform Associate (003) certification evaluates your understanding of Terraform fundamentals and Infrastructure as Code best practices.",
+                "This course aligns with the latest Terraform Associate (003) objectives.",
+            ],
+            "bullets": [
+                "Infrastructure as Code concepts",
+                "Terraform CLI workflow",
+                "HCL syntax",
+                "Providers and Resources",
+                "Variables and Outputs",
+                "Modules",
+                "State Management",
+                "Remote Backends",
+                "Terraform Cloud",
+                "Terraform Enterprise",
+                "Version Control",
+                "Collaboration",
+                "Security Best Practices",
+            ],
+        },
+        {
+            "eyebrow": "Terraform Certification Cost & Exam Voucher",
+            "paragraphs": [
+                "Many learners search for Terraform certification cost, Terraform Associate exam cost, Terraform certification voucher and HashiCorp certification cost.",
+                "At Nexperts Academy, eligible course packages include the HashiCorp Terraform Associate examination voucher, instructor support, official curriculum mapping, practice exams and cloud sandbox access.",
+                "Please contact our training advisors for the latest Malaysia pricing and available promotions.",
+            ],
+        },
+        {
+            "eyebrow": "HashiCorp Certifications Path",
+            "paragraphs": [
+                "After earning the Terraform Associate certification, professionals typically continue into cloud engineering, DevOps and platform engineering roles.",
+            ],
+            "bullets": [
+                "Terraform Associate",
+                "Kubernetes (CKA / CKAD)",
+                "AWS Solutions Architect Associate",
+                "Azure Administrator (AZ-104)",
+                "Docker",
+                "Ansible",
+                "GitHub Actions",
+                "CI/CD",
+                "Platform Engineering",
+            ],
+        },
+        {
+            "eyebrow": "Terraform vs Other Infrastructure as Code Tools",
+            "paragraphs": [
+                "Terraform is one of the most widely adopted Infrastructure as Code platforms because it supports multiple cloud providers from a single workflow.",
+            ],
+            "bullets": [
+                "Terraform supports AWS, Azure, Google Cloud Platform and on-premises infrastructure.",
+                "Terraform uses declarative configuration with HashiCorp Configuration Language (HCL).",
+                "Terraform offers reusable modules, provider plugins and remote state management.",
+                "Terraform integrates with Kubernetes, Docker, GitHub Actions, Azure DevOps and CI/CD pipelines.",
+            ],
+        },
+        {
+            "eyebrow": "Technologies Covered",
+            "paragraphs": [
+                "During the Terraform Associate training you will work with HashiCorp Terraform, Terraform Cloud, Terraform Enterprise, HCL (HashiCorp Configuration Language), AWS, Microsoft Azure, Google Cloud Platform (GCP), Infrastructure as Code (IaC), Git, GitHub, Remote State, State Locking, Modules, Providers, Variables, Outputs, Workspaces, CI/CD pipelines, Kubernetes, Docker, Sentinel Policies, Azure DevOps and GitHub Actions.",
+            ],
+        },
+    ],
     curriculum_eyebrow="Course Curriculum",
-    curriculum_head=("Eight domains.","One IaC discipline."),
-    curriculum_intro="Terraform Associate covers IaC concepts, Terraform's purpose, basics, workflow, state, modules, configuration and Terraform Cloud. We deliver workflow-first \u2014 you provision real infrastructure on day 1.",
+    curriculum_head=("Eight exam domains.","Mapped 1:1."),
+    curriculum_intro="The HashiCorp Terraform Associate (003) exam covers eight official domains: Infrastructure as Code (IaC), Terraform Fundamentals, Core Terraform Workflow, Read Generate and Modify Configuration, Terraform Modules, Terraform State Management, Maintain Infrastructure with Terraform, and HCP Terraform.",
     modules=[
-        ("01","IaC Concepts & Terraform Purpose",[
-            "Why IaC \u2014 idempotency, repeatability, audit",
-            "Terraform's place in the IaC landscape",
-            "Comparison with Pulumi, CFN, CDK, Bicep, Ansible",
-            "Providers \u2014 official, partner, community",
-            "Terraform Cloud / Enterprise overview",
+        ("01","Infrastructure as Code (IaC)",[
+            "Why IaC \u2014 idempotency, repeatability and auditability",
+            "Advantages of IaC patterns in enterprise environments",
+            "Multi-cloud, hybrid cloud and service-agnostic workflows",
+            "Terraform's place vs Pulumi, CFN, CDK, Bicep and Ansible",
+            "Version control and collaboration fundamentals",
             "Lab: Provision a 3-tier AWS app from a fresh repo",
         ]),
-        ("02","Terraform Basics & HCL",[
-            "Resources, data sources, providers, expressions",
-            "Variables \u2014 type constraints and validation",
-            "Outputs, locals and dependency graphs",
-            "Functions and dynamic blocks",
-            "Lifecycle and meta-arguments",
-            "Lab: Refactor a flat configuration into clean HCL",
+        ("02","Terraform Fundamentals",[
+            "Install and version Terraform CLI",
+            "Providers \u2014 official, partner and community",
+            "Configure multiple providers and aliases",
+            "Resources, data sources and dependency graphs",
+            "How Terraform tracks and manages state",
+            "Lab: Configure AWS and Azure providers in one project",
         ]),
-        ("03","Workflow & Plan Discipline",[
-            "init, plan, apply, destroy",
+        ("03","Core Terraform Workflow",[
+            "init, plan, apply and destroy",
             "fmt, validate, taint and untaint",
-            "Plan-as-code review and approval",
-            "import workflow for existing resources",
-            "Workspaces \u2014 CLI vs Cloud workspaces",
+            "Generate and review execution plans",
+            "Plan-as-code review and approval discipline",
+            "Workspaces in the CLI workflow",
             "Lab: Review and approve a 30-resource plan in 30 minutes",
         ]),
-        ("04","State Management & Backends",[
-            "Local vs remote state \u2014 trade-offs and reality",
-            "S3 + DynamoDB, Azure Storage, GCS backends",
-            "State locking and consistency",
-            "Sensitive values and state encryption",
-            "Refactoring \u2014 mv, rm, import",
-            "Lab: Migrate from local to S3 + DynamoDB backend safely",
+        ("04","Read, Generate and Modify Configuration",[
+            "HCL syntax \u2014 resources, data sources and expressions",
+            "Variables, outputs, locals and complex types",
+            "Functions, dynamic blocks and meta-arguments",
+            "Resource dependencies and custom validation",
+            "Sensitive data and secrets management best practices",
+            "Lab: Refactor a flat configuration into clean HCL",
         ]),
-        ("05","Modules \u2014 Build & Consume",[
+        ("05","Terraform Modules",[
             "Module structure, inputs and outputs",
-            "Version constraints and source addressing",
+            "Module sources and version constraints",
             "Public Terraform Registry and private registries",
-            "Composition patterns and anti-patterns",
+            "Composition patterns and module versioning",
             "Module testing with Terraform Test",
             "Lab: Build a network module and consume across two repos",
         ]),
-        ("06","Configuration Patterns & Multi-Cloud",[
-            "Multi-cloud abstractions (AWS + Azure together)",
-            "Provider aliases and multi-region",
-            "for_each vs count \u2014 when to pick which",
-            "Terraform with cloud-init and packer images",
-            "Sensitive variables and Vault integration",
-            "Lab: Provision the same workload pattern on AWS + Azure",
+        ("06","Terraform State Management",[
+            "Local vs remote state backends",
+            "S3 + DynamoDB, Azure Storage and GCS backends",
+            "State locking and consistency",
+            "State encryption and sensitive values",
+            "Resource drift detection and reconciliation",
+            "Lab: Migrate from local to S3 + DynamoDB backend safely",
         ]),
-        ("07","Terraform Cloud / Enterprise",[
-            "Workspaces, runs, policy as code (Sentinel / OPA)",
-            "VCS-driven, CLI-driven, API-driven workflows",
-            "Private module registry on Terraform Cloud",
-            "Cost estimation and policy gates",
-            "Team management and least-privilege access",
-            "Lab: Configure a Terraform Cloud workspace with VCS + Sentinel",
-        ]),
-        ("08","Production Patterns & Refactoring",[
-            "Structuring repositories for scale",
-            "Refactoring without outage",
-            "Drift detection and reconciliation",
-            "CI / CD integration patterns",
-            "Common production failures and fixes",
+        ("07","Maintain Infrastructure with Terraform",[
+            "Import existing resources into Terraform state",
+            "terraform state mv, rm and inspect commands",
+            "Refactoring without resource recreation",
+            "Multi-cloud abstractions (AWS + Azure patterns)",
+            "CI/CD integration and production troubleshooting",
             "Lab: Refactor a monolith repo into 5 modules safely",
+        ]),
+        ("08","HCP Terraform (Terraform Cloud / Enterprise)",[
+            "HCP Terraform workspaces and run workflows",
+            "VCS-driven, CLI-driven and API-driven runs",
+            "Private module registry on Terraform Cloud",
+            "Policy as code with Sentinel and governance",
+            "Team management, cost estimation and access control",
+            "Lab: Configure a Terraform Cloud workspace with VCS + Sentinel",
         ]),
     ],
     labs_eyebrow="Hands-On Multi-Cloud Sandbox",
@@ -1155,6 +1265,29 @@ BATCH.append(dict(
         "LinkedIn certificate integration",
     ],
     guarantee_text="Follow our programme and don't pass Terraform Associate? We cover one retake voucher. No fine print.",
+    faq_head=("Terraform Associate", "FAQs."),
+    faqs=[
+        (
+            "What is Terraform Associate?",
+            "Terraform Associate is the entry-level HashiCorp certification that validates Infrastructure as Code and Terraform automation skills.",
+        ),
+        (
+            "Is Terraform Associate worth it?",
+            "Yes. It is one of the most recognised Infrastructure as Code certifications for DevOps, cloud and platform engineering professionals.",
+        ),
+        (
+            "Does this course prepare me for Terraform Associate (003)?",
+            "Yes. The curriculum is aligned with the latest HashiCorp Certified: Terraform Associate (003) objectives.",
+        ),
+        (
+            "Does the course include an exam voucher?",
+            "Eligible training packages include a HashiCorp Terraform Associate examination voucher.",
+        ),
+        (
+            "Which cloud platforms are used?",
+            "Hands-on labs include AWS and Microsoft Azure, with concepts applicable to Google Cloud Platform.",
+        ),
+    ],
 ))
 
 
