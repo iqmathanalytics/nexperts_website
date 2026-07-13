@@ -102,3 +102,7 @@
 # Cloudflare Pages does not support status 404 in _redirects (unlike Netlify).
 /top-data-science-training-institutes-malaysia /blog/top-data-science-training-institutes-malaysia 301
 /top-data-science-training-institutes-malaysia/ /blog/top-data-science-training-institutes-malaysia 301
+/aws-certification-guide /blog/aws-certification-roadmap 301
+/aws-certification-guide/ /blog/aws-certification-roadmap 301
+/aws-certification-roadmap/ /blog/aws-certification-roadmap 301
+/aws-certification-roadmap /blog/aws-certification-roadmap 301

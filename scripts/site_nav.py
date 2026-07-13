@@ -36,6 +36,10 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
                 "Data Science Institutes 2026",
                 "/blog/top-data-science-training-institutes-malaysia",
             ),
+            (
+                "AWS Certification Roadmap 2026",
+                "/blog/aws-certification-roadmap",
+            ),
         ],
     ),
     (
