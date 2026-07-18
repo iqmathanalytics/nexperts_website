@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Phase 4A: High-demand pages previously missing (ECIH, Azure data fundamentals, Cisco pro, SD-WAN, Java)."""
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -160,7 +160,7 @@ BATCH.append(dict(
     seo_description="Microsoft Azure Data Fundamentals (DP-900) training in Malaysia covering Azure SQL, Azure Cosmos DB, Azure Synapse Analytics, Microsoft Fabric, Power BI, relational and non-relational databases, analytics workloads and certification preparation.",
     seo_keywords="Azure Data Fundamentals, DP-900, DP-900 Training, Azure Data Fundamentals Training, Microsoft Azure Data Fundamentals, Azure Data Fundamentals Certification, DP-900 Certification Malaysia",
     canonical_path="/courses/dp-900",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("dp-900"),
     title="DP-900",
     title_html='Microsoft Azure Data Fundamentals (DP-900)<br><em>Training &amp; Certification</em>',
     vendor_short="Microsoft", watermark="DP900", crumb_vendor="Microsoft",

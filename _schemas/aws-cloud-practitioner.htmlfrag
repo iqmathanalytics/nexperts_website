@@ -1,0 +1,103 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"name": "AWS Cloud Practitioner Essentials Training in Malaysia (CLF-C02)",
+"description": "AWS Cloud Practitioner Essentials Training in Malaysia covering AWS Cloud concepts, security, pricing, architecture, billing and certification preparation for the AWS Certified Cloud Practitioner CLF-C02 exam.",
+"provider": {
+"@type": "Organization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"educationalCredentialAwarded": "AWS Certified Cloud Practitioner (CLF-C02)",
+"courseCode": "CLF-C02",
+"educationalLevel": "Beginner",
+"timeRequired": "P3D",
+"inLanguage": "en",
+"occupationalCredentialAwarded": "AWS Certified Cloud Practitioner",
+"teaches": [
+"AWS Cloud Concepts",
+"Amazon EC2",
+"Amazon S3",
+"Amazon RDS",
+"AWS Lambda",
+"AWS IAM",
+"AWS Security",
+"AWS Billing and Pricing",
+"AWS Cost Explorer",
+"AWS Budgets",
+"AWS Well-Architected Framework"
+],
+"offers": {
+"@type": "Offer",
+"category": "Training Course",
+"availability": "https://schema.org/InStock",
+"priceCurrency": "MYR",
+"price": "2500"
+}
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "FAQPage",
+"mainEntity": [
+{
+"@type": "Question",
+"name": "What is AWS Cloud Practitioner Essentials?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "AWS Cloud Practitioner Essentials is a foundational AWS training course that covers cloud concepts, AWS services, security, pricing, billing and support while preparing learners for the AWS Certified Cloud Practitioner CLF-C02 certification exam."
+}
+},
+{
+"@type": "Question",
+"name": "Is AWS Cloud Practitioner worth it in Malaysia?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Yes. AWS Cloud Practitioner is one of the most recognized cloud certifications for beginners and professionals looking to enter cloud computing roles in Malaysia."
+}
+},
+{
+"@type": "Question",
+"name": "How much does AWS Cloud Practitioner certification cost?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "The AWS Certified Cloud Practitioner exam fee is USD 100. Training costs vary depending on the provider and delivery format."
+}
+},
+{
+"@type": "Question",
+"name": "What is the AWS Cloud Practitioner exam code?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "The AWS Certified Cloud Practitioner exam code is CLF-C02."
+}
+},
+{
+"@type": "Question",
+"name": "How long does AWS Cloud Practitioner training take?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "AWS Cloud Practitioner training typically takes between 1 and 3 days depending on the training provider and learning format."
+}
+},
+{
+"@type": "Question",
+"name": "Do I need prior AWS experience?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "No. AWS Cloud Practitioner is designed for beginners and does not require prior AWS experience."
+}
+},
+{
+"@type": "Question",
+"name": "What comes after AWS Cloud Practitioner?",
+"acceptedAnswer": {
+"@type": "Answer",
+"text": "Most learners continue with AWS Solutions Architect Associate, AWS Developer Associate, AWS SysOps Administrator Associate, AWS Security Specialty or AWS Data Engineer Associate certifications."
+}
+}
+]
+}
+</script>

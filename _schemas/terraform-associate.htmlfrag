@@ -1,0 +1,82 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/terraform-associate#course",
+"name": "HashiCorp Terraform Associate (003) Certification Training Malaysia",
+"description": "Hands-on HashiCorp Terraform Associate certification training covering Infrastructure as Code (IaC), Terraform Cloud, HCL, modules, state management, AWS, Azure and multi-cloud automation.",
+"url": "https://www.nexpertsacademy.com/courses/terraform-associate",
+"courseCode": "Terraform Associate (003)",
+"educationalLevel": "Associate",
+"occupationalCredentialAwarded": "HashiCorp Certified: Terraform Associate",
+"timeRequired": "P3D",
+"inLanguage": "en",
+"provider": {
+"@type": "EducationalOrganization",
+"@id": "https://www.nexpertsacademy.com/#organization"
+},
+"keywords": [
+"Terraform Associate",
+"Terraform Associate Certification",
+"Terraform Associate Training Malaysia",
+"HashiCorp Certification",
+"Infrastructure as Code",
+"Terraform Cloud",
+"Terraform Enterprise",
+"Terraform Certification"
+],
+"teaches": [
+"Infrastructure as Code",
+"Terraform CLI",
+"Terraform Cloud",
+"Terraform Enterprise",
+"Terraform Modules",
+"Terraform State",
+"Remote State",
+"State Locking",
+"Terraform Providers",
+"HashiCorp Configuration Language",
+"AWS Automation",
+"Azure Automation",
+"Multi-cloud Infrastructure"
+]
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "AggregateRating",
+"@id": "https://www.nexpertsacademy.com/courses/terraform-associate#rating",
+"itemReviewed": {
+"@id": "https://www.nexpertsacademy.com/courses/terraform-associate#course"
+},
+"ratingValue": "4.8",
+"reviewCount": "156",
+"bestRating": "5",
+"worstRating": "1"
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Review",
+"@id": "https://www.nexpertsacademy.com/courses/terraform-associate#review1",
+"author": {
+"@type": "Person",
+"name": "Saiful Sazali"
+},
+"reviewRating": {
+"@type": "Rating",
+"ratingValue": "5",
+"bestRating": "5"
+},
+"reviewBody": "Best Terraform course in MY. The HCL refactor and module-build labs are exactly what working engineers need. Cleared the exam two weeks after.",
+"publisher": {
+"@type": "Organization",
+"name": "Nexperts Academy"
+},
+"itemReviewed": {
+"@id": "https://www.nexpertsacademy.com/courses/terraform-associate#course"
+}
+}
+</script>

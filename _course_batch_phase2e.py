@@ -13,7 +13,7 @@
 Pricing 100-250 RM below Malaysian market rates (Iverson reference).
 """
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -27,7 +27,7 @@ BATCH.append(dict(
     seo_description="Microsoft Azure AI Fundamentals (AI-900) training in Malaysia covering Azure AI services, machine learning, generative AI, Azure OpenAI, Azure AI Foundry, computer vision, NLP, Responsible AI and certification preparation.",
     seo_keywords="AI-900, Azure AI Fundamentals, Microsoft Azure AI Fundamentals, AI-900 Training, AI-900 Course, Azure AI Certification, AI Training Malaysia",
     canonical_path="/courses/ai-900",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("ai-900"),
     title="AI-900",
     title_html='Microsoft Azure AI Fundamentals (AI-900)<br><em>Training &amp; Certification in Malaysia</em>',
     vendor_short="Microsoft", watermark="AI-900", crumb_vendor="Microsoft",

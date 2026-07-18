@@ -1,0 +1,61 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/ccnp-enterprise#course",
+"name": "Cisco CCNP Enterprise Training Malaysia",
+"description": "Cisco CCNP Enterprise (350-401 ENCOR) training in Malaysia covering enterprise routing, SD-WAN, automation, wireless, infrastructure security and Cisco Enterprise certification preparation.",
+"url": "https://www.nexpertsacademy.com/courses/ccnp-enterprise",
+"provider": {
+"@type": "EducationalOrganization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"courseCode": "350-401 ENCOR",
+"educationalLevel": "Professional",
+"occupationalCredentialAwarded": "Cisco Certified Network Professional Enterprise",
+"timeRequired": "P8D",
+"inLanguage": "en",
+"keywords": [
+"CCNP Enterprise",
+"CCNP Enterprise Training",
+"Cisco CCNP Enterprise",
+"ENCOR 350-401",
+"Cisco Enterprise Certification",
+"CCNP Malaysia",
+"Cisco Networking"
+],
+"teaches": [
+"Enterprise Routing",
+"BGP",
+"OSPF",
+"EIGRP",
+"SD-WAN",
+"Cisco DNA Center",
+"Cisco Catalyst",
+"NETCONF",
+"RESTCONF",
+"YANG",
+"Network Automation",
+"Infrastructure Security",
+"QoS",
+"Wireless",
+"High Availability"
+]
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "AggregateRating",
+"@id": "https://www.nexpertsacademy.com/courses/ccnp-enterprise#rating",
+"ratingValue": "4.9",
+"reviewCount": "107",
+"bestRating": "5",
+"worstRating": "1",
+"itemReviewed": {
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/ccnp-enterprise#course"
+}
+}
+</script>

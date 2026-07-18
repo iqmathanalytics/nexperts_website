@@ -51,6 +51,7 @@ STATIC_PAGES = [
     "blog/comptia-network-plus-certification-guide.html",
     "blog/top-data-science-training-institutes-malaysia.html",
     "blog/aws-certification-roadmap.html",
+    "blog/cisco-certification-path.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]

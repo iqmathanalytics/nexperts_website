@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ITIL / PM / DevOps course data (ITIL 4 Foundation, PMP, CKA)."""
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -341,7 +341,7 @@ BATCH.append(dict(
     seo_description="Join Certified Kubernetes Administrator (CKA) training in Malaysia. Master Kubernetes administration, pass the Linux Foundation CNCF exam with hands-on labs and an exam voucher.",
     seo_keywords="Certified Kubernetes Administrator, CKA, CKA Training, Kubernetes Administrator Certification, Linux Foundation Kubernetes, CNCF Certification, Kubernetes Training Malaysia",
     canonical_path="/courses/cka",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("cka"),
     title="CKA",
     title_html='Certified Kubernetes Administrator (CKA)<br><em>Training &amp; Certification Malaysia</em>',
     vendor_short="CNCF / Linux Foundation", watermark="CKA", crumb_vendor="Linux Foundation",

@@ -1,0 +1,29 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"name": "AWS Certified Solutions Architect Associate Training Malaysia",
+"courseCode": "SAA-C03",
+"description": "AWS Solutions Architect Associate training covering cloud architecture, networking, security, cost optimization, high availability, AWS services and certification preparation.",
+"provider": {
+"@type": "Organization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"educationalLevel": "Associate",
+"occupationalCredentialAwarded": "AWS Certified Solutions Architect Associate",
+"teaches": [
+"Amazon EC2",
+"Amazon S3",
+"Amazon RDS",
+"AWS Lambda",
+"Amazon VPC",
+"AWS IAM",
+"AWS KMS",
+"AWS CloudFormation",
+"AWS Well-Architected Framework",
+"AWS Transit Gateway",
+"Route 53"
+]
+}
+</script>

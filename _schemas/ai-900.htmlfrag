@@ -1,0 +1,69 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/ai-900#course",
+"name": "Microsoft Azure AI Fundamentals (AI-900) Training Malaysia",
+"description": "Microsoft Azure AI Fundamentals (AI-900) training in Malaysia covering Azure AI services, machine learning, generative AI, Azure OpenAI, Azure AI Foundry, computer vision, NLP, Responsible AI and certification preparation.",
+"url": "https://www.nexpertsacademy.com/courses/ai-900",
+"provider": {
+"@type": "EducationalOrganization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"courseCode": "AI-900",
+"educationalLevel": "Foundation",
+"occupationalCredentialAwarded": "Microsoft Certified: Azure AI Fundamentals",
+"timeRequired": "P2D",
+"inLanguage": "en",
+"keywords": [
+"AI-900",
+"Azure AI Fundamentals",
+"Microsoft Azure AI Fundamentals",
+"AI-900 Training",
+"AI-900 Course",
+"Azure AI Certification",
+"AI Training Malaysia"
+],
+"teaches": [
+"Artificial Intelligence",
+"Machine Learning",
+"Generative AI",
+"Azure OpenAI",
+"Azure AI Foundry",
+"Azure AI Vision",
+"Azure AI Language",
+"Azure AI Speech",
+"Azure AI Search",
+"Azure AI Document Intelligence",
+"Responsible AI",
+"Prompt Engineering",
+"Computer Vision",
+"Natural Language Processing"
+]
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Product",
+"@id": "https://www.nexpertsacademy.com/courses/ai-900#product",
+"name": "Microsoft Azure AI Fundamentals (AI-900) Training",
+"description": "Instructor-led Microsoft Azure AI Fundamentals (AI-900) certification training in Malaysia with Azure AI labs, Microsoft exam voucher and official courseware.",
+"brand": {
+"@type": "Brand",
+"name": "Nexperts Academy"
+},
+"category": "IT Certification Training",
+"image": "https://www.nexpertsacademy.com/path-to-ai900-image.jpg",
+"url": "https://www.nexpertsacademy.com/courses/ai-900",
+"offers": {
+"@type": "Offer",
+"price": "1650",
+"priceCurrency": "MYR",
+"availability": "https://schema.org/InStock",
+"itemCondition": "https://schema.org/NewCondition",
+"url": "https://www.nexpertsacademy.com/courses/ai-900"
+}
+}
+</script>

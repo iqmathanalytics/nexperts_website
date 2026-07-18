@@ -2,7 +2,7 @@
 """AWS course data (CCP, SAA, SAP)."""
 from _course_data import HERO_IMG, common_meta
 from _course_schema_aws_clf import AWS_CLF_SCHEMA_MARKUP
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -302,7 +302,7 @@ BATCH.append(dict(
     seo_description="Prepare for AWS Certified Solutions Architect Associate (SAA-C03) in Malaysia. Learn secure, resilient, high-performing and cost-optimized AWS architecture with labs and exam prep.",
     seo_keywords="AWS Solutions Architect Associate, SAA-C03, AWS certification Malaysia, AWS training Malaysia, Advanced Architecting on AWS, Architecting on AWS certification, AWS Skill Builder",
     canonical_path="/courses/aws-solutions-architect-associate",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("aws-solutions-architect-associate"),
     title="AWS Solutions Architect Associate",
     title_html='AWS Certified Solutions Architect Training Malaysia –<br><em>Advanced Architecting on AWS</em>',
     vendor_short="AWS", watermark="SAA", crumb_vendor="AWS",

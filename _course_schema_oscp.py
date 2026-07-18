@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-"""JSON-LD schema blocks for /courses/oscp (from schema_imp.txt)."""
+"""JSON-LD schema blocks for /courses/oscp."""
 
-from pathlib import Path
+from _course_schema_loader import schema_markup_for_slug
 
-_SCHEMA_FILE = Path(__file__).parent / "schema_imp.txt"
-OSCP_SCHEMA_MARKUP = _SCHEMA_FILE.read_text(encoding="utf-8").strip()
+OSCP_SCHEMA_MARKUP = schema_markup_for_slug("oscp")

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Microsoft course data (AZ-900, AZ-104, AZ-305, SC-200, PL-300, DP-203)."""
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -12,7 +12,7 @@ BATCH.append(dict(
     seo_description="Microsoft Azure Fundamentals (AZ-900) training covering cloud concepts, Azure services, governance, security, compliance, pricing and certification preparation.",
     seo_keywords="AZ-900, Azure Fundamentals, Microsoft Azure certification Malaysia, Azure training, cloud fundamentals, Microsoft Certified Azure Fundamentals",
     canonical_path="/courses/az-900",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("az-900"),
     title="AZ-900: Azure Fundamentals",
     title_html='AZ-900: Azure Fundamentals<br><em>Training in Malaysia</em>',
     vendor_short="Microsoft", watermark="AZ-900", crumb_vendor="Microsoft",
@@ -314,7 +314,7 @@ BATCH.append(_ms_course(
     seo_description="Microsoft Azure Administrator Associate (AZ-104) training in Malaysia covering Azure administration, Microsoft Entra ID, virtual networking, Azure storage, governance, monitoring and certification preparation.",
     seo_keywords="AZ-104, Azure Administrator, Microsoft Certified Azure Administrator Associate, Azure training Malaysia, Azure Administrator certification Malaysia, Microsoft Entra ID",
     canonical_path="/courses/az-104",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("az-104"),
     title="AZ-104: Azure Administrator",
     title_html='AZ-104: Azure Administrator Associate<br><em>Certification &amp; Training in Malaysia</em>',
     watermark="AZ-104",

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Cisco + GCP course data (CCNA, CCNP Enterprise, GCP Cloud Architect)."""
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -176,7 +176,7 @@ BATCH.append(dict(
     seo_description="Master Cisco CCNP Enterprise (ENCOR 350-401) training in Malaysia. Learn enterprise networking, SD-WAN, automation, security and prepare for Cisco certification.",
     seo_keywords="CCNP Enterprise, CCNP Enterprise Training, Cisco CCNP Enterprise, ENCOR 350-401, Cisco Enterprise Certification, CCNP Malaysia, Cisco Networking",
     canonical_path="/courses/ccnp-enterprise",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("ccnp-enterprise"),
     title="CCNP Enterprise",
     title_html='Cisco Certified Network Professional (CCNP)<br><em>Enterprise Training Malaysia</em>',
     vendor_short="Cisco", watermark="CCNP", crumb_vendor="Cisco",

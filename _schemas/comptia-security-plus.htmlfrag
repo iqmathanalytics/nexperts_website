@@ -1,0 +1,112 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"name": "CompTIA Security+ Certification Training in Malaysia (SY0-701)",
+"description": "CompTIA Security+ SY0-701 certification training in Malaysia with hands-on labs, exam voucher, mock exams, and instructor-led cybersecurity training.",
+"provider": {
+"@type": "Organization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"url": "https://www.nexpertsacademy.com/courses/comptia-security-plus",
+"courseMode": [
+"On-site",
+"Virtual",
+"Hybrid"
+],
+"aggregateRating": {
+"@type": "AggregateRating",
+"ratingValue": "4.9",
+"reviewCount": "263",
+"bestRating": "5",
+"worstRating": "1"
+},
+"review": [
+{
+"@type": "Review",
+"author": {
+"@type": "Person",
+"name": "Mohd Ehsan"
+},
+"reviewRating": {
+"@type": "Rating",
+"ratingValue": "5"
+},
+"reviewBody": "The PDPA and BNM mapping content alone made me look like the most prepared person in the team's first audit drill."
+},
+{
+"@type": "Review",
+"author": {
+"@type": "Person",
+"name": "Anita Raman"
+},
+"reviewRating": {
+"@type": "Rating",
+"ratingValue": "5"
+},
+"reviewBody": "The phishing-to-foothold trace lab is exactly the kind of incident I deal with in real life."
+},
+{
+"@type": "Review",
+"author": {
+"@type": "Person",
+"name": "Vincent Cheong"
+},
+"reviewRating": {
+"@type": "Rating",
+"ratingValue": "5"
+},
+"reviewBody": "The PBQ workshop and live range made the difference. Worth every ringgit."
+}
+]
+}
+</script>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"FAQPage",
+"mainEntity":[
+{
+"@type":"Question",
+"name":"What is CompTIA Security+ Certification?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"CompTIA Security+ is a globally recognized cybersecurity certification that validates foundational knowledge in security operations, threats, vulnerabilities, governance, risk management and cloud security."
+}
+},
+{
+"@type":"Question",
+"name":"Is CompTIA Security+ Certification worth it?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Yes. Security+ is widely recognized by employers and serves as a foundation for cybersecurity careers including SOC Analyst, Security Administrator and Cybersecurity Analyst roles."
+}
+},
+{
+"@type":"Question",
+"name":"How long does it take to get CompTIA Security+ certified?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Most candidates complete training and certification preparation within a few weeks. Nexperts Academy delivers the course in 5 days of instructor-led training."
+}
+},
+{
+"@type":"Question",
+"name":"What is the passing score for Security+ SY0-701?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"The passing score for the CompTIA Security+ SY0-701 exam is 750 out of 900."
+}
+},
+{
+"@type":"Question",
+"name":"What jobs can I get after Security+ Certification?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Common roles include SOC Analyst, Security Administrator, Cybersecurity Analyst, Information Security Specialist and Junior Security Engineer."
+}
+}
+]
+}
+</script>

@@ -1,0 +1,72 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/cka#course",
+"name": "Certified Kubernetes Administrator (CKA) Training Malaysia",
+"description": "Certified Kubernetes Administrator (CKA) training in Malaysia covering Kubernetes administration, cluster operations, networking, storage, RBAC, troubleshooting and Linux Foundation CNCF certification preparation.",
+"url": "https://www.nexpertsacademy.com/courses/cka",
+"provider": {
+"@type": "EducationalOrganization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"courseCode": "CKA",
+"educationalLevel": "Professional",
+"occupationalCredentialAwarded": "Certified Kubernetes Administrator (CKA)",
+"timeRequired": "P4D",
+"inLanguage": "en",
+"keywords": [
+"Certified Kubernetes Administrator",
+"CKA",
+"CKA Training",
+"Kubernetes Administrator Certification",
+"Linux Foundation Kubernetes",
+"CNCF Certification",
+"Kubernetes Training Malaysia"
+],
+"teaches": [
+"Kubernetes Administration",
+"kubectl",
+"kubeadm",
+"etcd Backup and Restore",
+"RBAC",
+"Service Accounts",
+"Ingress",
+"Gateway API",
+"CoreDNS",
+"Persistent Volumes",
+"Storage Classes",
+"Kubernetes Networking",
+"Network Policies",
+"Cluster Troubleshooting",
+"Cluster Upgrades",
+"Helm",
+"YAML"
+]
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Product",
+"@id": "https://www.nexpertsacademy.com/courses/cka#product",
+"name": "Certified Kubernetes Administrator (CKA) Training",
+"description": "Hands-on Certified Kubernetes Administrator (CKA) training with Linux Foundation exam voucher, live Kubernetes clusters, mock exams and instructor-led coaching.",
+"brand": {
+"@type": "Brand",
+"name": "Nexperts Academy"
+},
+"category": "IT Certification Training",
+"url": "https://www.nexpertsacademy.com/courses/cka",
+"image": "https://www.nexpertsacademy.com/path-to-cka-image.jpg",
+"offers": {
+"@type": "Offer",
+"url": "https://www.nexpertsacademy.com/courses/cka",
+"price": "3800",
+"priceCurrency": "MYR",
+"availability": "https://schema.org/InStock",
+"itemCondition": "https://schema.org/NewCondition"
+}
+}
+</script>

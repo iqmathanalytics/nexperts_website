@@ -1,0 +1,206 @@
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@graph":[
+{
+"@type":"Organization",
+"@id":"https://www.nexpertsacademy.com/#organization",
+"name":"Nexperts Academy",
+"url":"https://www.nexpertsacademy.com",
+"telephone":"+60 1112216870",
+"email":"enquiry@nexpertsacademy.com",
+"address":{
+"@type":"PostalAddress",
+"streetAddress":"Unit 313 Block E, Phileo Damansara 1, Jalan 16/11 off Jalan Damansara",
+"addressLocality":"Petaling Jaya",
+"addressRegion":"Selangor",
+"postalCode":"46350",
+"addressCountry":"MY"
+}
+},
+{
+"@type":"BreadcrumbList",
+"@id":"https://www.nexpertsacademy.com/courses/full-stack-web-development#breadcrumb",
+"itemListElement":[
+{
+"@type":"ListItem",
+"position":1,
+"name":"Home",
+"item":"https://www.nexpertsacademy.com"
+},
+{
+"@type":"ListItem",
+"position":2,
+"name":"Courses",
+"item":"https://www.nexpertsacademy.com/courses"
+},
+{
+"@type":"ListItem",
+"position":3,
+"name":"Skill-Based",
+"item":"https://www.nexpertsacademy.com/courses"
+},
+{
+"@type":"ListItem",
+"position":4,
+"name":"Full Stack Web Development",
+"item":"https://www.nexpertsacademy.com/courses/full-stack-web-development"
+}
+]
+},
+{
+"@type":"Course",
+"@id":"https://www.nexpertsacademy.com/courses/full-stack-web-development#course",
+"name":"Full Stack Web Development Course in Malaysia",
+"description":"Learn HTML, CSS, JavaScript, React, Node.js, Express, SQL databases, authentication, API development and deployment through project-based Full Stack Web Development training in Malaysia.",
+"url":"https://www.nexpertsacademy.com/courses/full-stack-web-development",
+"educationalLevel":"Beginner to Intermediate",
+"provider":{
+"@id":"https://www.nexpertsacademy.com/#organization"
+},
+"coursePrerequisites":"Comfortable using a computer daily. No prior programming experience required. GitHub account before day one.",
+"teaches":[
+"HTML5",
+"CSS3",
+"JavaScript",
+"React",
+"Node.js",
+"Express.js",
+"REST APIs",
+"Authentication",
+"SQL Databases",
+"Git",
+"GitHub",
+"Web Deployment",
+"Full Stack Development"
+],
+"hasCourseInstance":{
+"@type":"CourseInstance",
+"courseMode":[
+"Online",
+"Onsite",
+"Hybrid"
+],
+"duration":"P6D",
+"inLanguage":"English"
+},
+"offers":{
+"@type":"Offer",
+"price":"3200",
+"priceCurrency":"MYR",
+"availability":"https://schema.org/InStock",
+"url":"https://www.nexpertsacademy.com/courses/full-stack-web-development"
+},
+"aggregateRating":{
+"@type":"AggregateRating",
+"ratingValue":"4.8",
+"reviewCount":"224",
+"bestRating":"5",
+"worstRating":"1"
+},
+"review":[
+{
+"@type":"Review",
+"author":{
+"@type":"Person",
+"name":"Siti Chan"
+},
+"reviewRating":{
+"@type":"Rating",
+"ratingValue":"5",
+"bestRating":"5"
+},
+"reviewBody":"Deployed my capstone on Friday, interviewed Monday and received an offer shortly after."
+},
+{
+"@type":"Review",
+"author":{
+"@type":"Person",
+"name":"Darren Wong"
+},
+"reviewRating":{
+"@type":"Rating",
+"ratingValue":"5",
+"bestRating":"5"
+},
+"reviewBody":"The code review process significantly improved my Git workflow and development practices."
+},
+{
+"@type":"Review",
+"author":{
+"@type":"Person",
+"name":"Ivy Lim"
+},
+"reviewRating":{
+"@type":"Rating",
+"ratingValue":"4",
+"bestRating":"5"
+},
+"reviewBody":"A challenging but valuable programme focused on practical development skills."
+},
+{
+"@type":"Review",
+"author":{
+"@type":"Person",
+"name":"Vinesh Gopal"
+},
+"reviewRating":{
+"@type":"Rating",
+"ratingValue":"5",
+"bestRating":"5"
+},
+"reviewBody":"Responsive instructors and practical support throughout the programme."
+}
+]
+}
+]
+}
+</script>
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"FAQPage",
+"mainEntity":[
+{
+"@type":"Question",
+"name":"What is Full Stack Web Development?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Full Stack Web Development involves building both front-end and back-end components of web applications including user interfaces, APIs, databases and deployment."
+}
+},
+{
+"@type":"Question",
+"name":"Is this Full Stack Developer course suitable for beginners?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Yes. The course is designed for beginners, career switchers, students and professionals with no prior programming experience."
+}
+},
+{
+"@type":"Question",
+"name":"What technologies are covered in this Full Stack Web Development course?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Students learn HTML, CSS, JavaScript, React, Node.js, Express, SQL databases, REST APIs, Git, GitHub and deployment workflows."
+}
+},
+{
+"@type":"Question",
+"name":"How long is the Full Stack Web Development training?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"The programme consists of 6 days and 48 hours of instructor-led training with practical project labs."
+}
+},
+{
+"@type":"Question",
+"name":"Will I build real-world projects during the course?",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"Yes. Students complete portfolio projects, deploy applications publicly and participate in project-based learning activities."
+}
+}
+]
+}
+</script>

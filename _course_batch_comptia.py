@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """CompTIA course data (5 courses: A+, Network+, Security+, CySA+, PenTest+)."""
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -338,7 +338,7 @@ BATCH.append(dict(
     seo_description="Join CompTIA Security+ (SY0-701) certification training in Malaysia. Includes exam voucher, hands-on labs, mock exams, and expert-led cybersecurity training. Learn Security+ and get certified.",
     seo_keywords="CompTIA Security+, SY0-701, Security+ certification Malaysia, cybersecurity training, SOC analyst certification, Security+ exam voucher, PBQ workshop",
     canonical_path="/courses/comptia-security-plus",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("comptia-security-plus"),
     title="CompTIA Security+",
     title_html='CompTIA Security+ Certification Training<br><em>in Malaysia (SY0-701)</em>',
     vendor_short="CompTIA", watermark="S+", crumb_vendor="CompTIA",

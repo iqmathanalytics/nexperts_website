@@ -460,8 +460,14 @@ def build_page(c):
             html,
             count=1,
         )
+    from scripts.site_paths import canonical_path_for_slug
+    from _course_schema_loader import align_schema_urls
+
+    canon_slug_path = c.get("canonical_path") or canonical_path_for_slug(c["slug"])
+    canon_url = f"https://www.nexpertsacademy.com{canon_slug_path}"
+
     if c.get("schema_markup"):
-        markup = c["schema_markup"].strip()
+        markup = align_schema_urls(c["schema_markup"].strip(), canon_url)
         html = re.sub(
             r"\n?<!-- nexperts-schema:v1 -->.*?<!-- /nexperts-schema:v1 -->\n?",
             "\n",
@@ -474,22 +480,40 @@ def build_page(c):
             html,
             count=1,
         )
-    canon_slug_path = c.get("canonical_path") or f"/courses/{c['slug']}"
-    if c.get("canonical_path") or c.get("seo_title") or c.get("seo_description"):
-        canon_url = f"https://www.nexpertsacademy.com{canon_slug_path}"
+    else:
+        # Align any template schema (e.g. CEH leftovers) to this page's canonical
+        def _align_schema_block(m: re.Match) -> str:
+            body = align_schema_urls(m.group(1).strip(), canon_url)
+            return f"<!-- nexperts-schema:v1 -->\n{body}\n<!-- /nexperts-schema:v1 -->"
+
         html = re.sub(
-            r'<meta property="og:url" content="[^"]*">',
-            f'<meta property="og:url" content="{canon_url}">',
+            r"<!-- nexperts-schema:v1 -->\s*(.*?)\s*<!-- /nexperts-schema:v1 -->",
+            _align_schema_block,
+            html,
+            count=1,
+            flags=re.DOTALL,
+        )
+
+    html = re.sub(
+        r'<meta property="og:url" content="[^"]*">',
+        f'<meta property="og:url" content="{canon_url}">',
+        html,
+        count=1,
+    )
+    if 'rel="canonical"' in html:
+        html = re.sub(
+            r'<link rel="canonical" href="[^"]*">',
+            f'<link rel="canonical" href="{canon_url}">',
             html,
             count=1,
         )
-        if 'rel="canonical"' in html:
-            html = re.sub(
-                r'<link rel="canonical" href="[^"]*">',
-                f'<link rel="canonical" href="{canon_url}">',
-                html,
-                count=1,
-            )
+    else:
+        html = re.sub(
+            r"(<!-- /nexperts-seo-meta:v1 -->)",
+            f'<link rel="canonical" href="{canon_url}">\n\\1',
+            html,
+            count=1,
+        )
 
     # ── Overview h2 heading size (scoped; div.eyebrow on other tabs stays small)
     html = inject_overview_h2_css(html)
@@ -832,7 +856,8 @@ from scripts.course_sidebar_enquiry import render_sidebar_enquiry_form  # noqa: 
 # ──────────────────────────────────────────────────────────────────────────────
 
 def main(slugs: list[str] | None = None):
-    out_dir = ROOT / "courses"
+    from scripts.site_paths import detail_html_path
+
     wanted = {s.strip() for s in slugs} if slugs else None
     n = 0
     for c in COURSES:
@@ -840,8 +865,10 @@ def main(slugs: list[str] | None = None):
         if wanted and slug not in wanted:
             continue
         page = build_page(c)
-        (out_dir / f"{slug}.html").write_text(page, encoding="utf-8")
-        print(f"  wrote {slug}.html")
+        out_path = detail_html_path(ROOT, slug)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(page, encoding="utf-8")
+        print(f"  wrote {out_path.relative_to(ROOT).as_posix()}")
         n += 1
     print(f"Generated {n} detail page(s)")
 

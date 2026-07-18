@@ -14,7 +14,7 @@ Mix:
 Pricing calibrated 100-200 RM below Malaysian market rates (Iverson reference).
 """
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -858,7 +858,7 @@ BATCH.append(dict(
     seo_description="Prepare for the HashiCorp Terraform Associate (003) certification with hands-on Terraform training in Malaysia. Learn Infrastructure as Code, modules, state and multi-cloud automation.",
     seo_keywords="Terraform Associate, Terraform Associate Certification, Terraform Associate Training Malaysia, HashiCorp Certification, Infrastructure as Code, Terraform Cloud, Terraform Enterprise, Terraform Certification",
     canonical_path="/courses/terraform-associate",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("terraform-associate"),
     title="Terraform Associate",
     title_html='HashiCorp Terraform Associate Certification<br><em>Training Malaysia (003)</em>',
     vendor_short="HashiCorp", watermark="TF", crumb_vendor="HashiCorp",

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Phase 4B: Full-stack, marketing, Excel basics, Salesforce, ServiceNow — skill & platform pages."""
 from _course_data import HERO_IMG, common_meta
-from _course_schema_loader import schema_markup_from_file
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -12,7 +12,7 @@ BATCH.append(dict(
     seo_description="Learn HTML, CSS, JavaScript, React, Node.js, Express, SQL databases, authentication, API development and deployment through project-based Full Stack Web Development training in Malaysia.",
     seo_keywords="full stack web development, full stack developer course Malaysia, React Node training, web development classes, JavaScript developer course, portfolio project training",
     canonical_path="/courses/full-stack-web-development",
-    schema_markup=schema_markup_from_file(),
+    schema_markup=schema_markup_for_slug("full-stack-web-development"),
     title="Full Stack Web Development",
     title_html='Full Stack Web Development Course<br><em>in Malaysia</em>',
     vendor_short="Skill", watermark="FULL", crumb_vendor="Skill-Based",
