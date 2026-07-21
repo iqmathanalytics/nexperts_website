@@ -1,0 +1,72 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional#course",
+"name": "AWS Certified DevOps Engineer – Professional (DOP-C02)",
+"description": "Instructor-led AWS DevOps Engineer Professional (DOP-C02) training in Malaysia covering CI/CD, Infrastructure as Code, CloudFormation, AWS CDK, CodePipeline, observability, governance, security and Site Reliability Engineering with hands-on AWS labs.",
+"provider": {
+"@type": "Organization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"courseCode": "DOP-C02",
+"educationalLevel": "Professional",
+"teaches": [
+"AWS DevOps",
+"CI/CD",
+"AWS CodePipeline",
+"AWS CodeBuild",
+"AWS CodeDeploy",
+"AWS CloudFormation",
+"AWS CDK",
+"Infrastructure as Code",
+"Amazon ECS",
+"Amazon EKS",
+"AWS Organizations",
+"AWS Control Tower",
+"CloudWatch",
+"OpenTelemetry",
+"Site Reliability Engineering",
+"DevSecOps"
+],
+"inLanguage": "en",
+"url": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional"
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Product",
+"@id": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional#product",
+"name": "AWS Certified DevOps Engineer – Professional Training (DOP-C02)",
+"description": "Professional AWS DevOps Engineer certification training in Malaysia with instructor-led delivery, AWS sandbox, official courseware and exam voucher.",
+"brand": {
+"@type": "Brand",
+"name": "Nexperts Academy"
+},
+"category": "AWS Professional Certification Training",
+"image": "https://www.nexpertsacademy.com/images/aws-devops-engineer-professional.webp",
+"sku": "AWS-DOP-C02",
+"offers": {
+"@type": "Offer",
+"url": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional",
+"price": "5300",
+"priceCurrency": "MYR",
+"availability": "https://schema.org/InStock",
+"itemCondition": "https://schema.org/NewCondition",
+"priceValidUntil": "2027-12-31",
+"seller": {
+"@type": "Organization",
+"name": "Nexperts Academy"
+}
+},
+"aggregateRating": {
+"@type": "AggregateRating",
+"ratingValue": "4.9",
+"reviewCount": "198",
+"bestRating": "5",
+"worstRating": "1"
+}
+}
+</script>

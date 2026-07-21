@@ -24,10 +24,15 @@ BATCH = []
 # ============================================================================
 BATCH.append(dict(
     slug="aws-devops-engineer-professional",
+    seo_title="AWS Certified DevOps Engineer Professional Training Malaysia | DOP-C02",
+    seo_description="Join AWS DevOps Engineer Professional (DOP-C02) training in Malaysia. Master CI/CD, CloudFormation, CDK, observability, governance and SRE with hands-on AWS labs and exam voucher.",
+    seo_keywords="AWS DevOps Engineer Professional, DOP-C02, AWS DevOps certification Malaysia, AWS CodePipeline, CloudFormation, AWS CDK, DevOps training Malaysia, AWS Professional certification",
+    canonical_path="/courses/aws-devops-engineer-professional",
+    schema_markup=schema_markup_for_slug("aws-devops-engineer-professional"),
     title="AWS DevOps Engineer Professional",
-    title_html='AWS DevOps Engineer Pro<br><em>DOP-C02</em>',
+    title_html='AWS Certified DevOps Engineer \u2013 Professional<br><em>(DOP-C02) Training Malaysia</em>',
     vendor_short="AWS", watermark="DOP", crumb_vendor="AWS",
-    subtitle="The senior AWS delivery and operations credential. CI/CD at enterprise scale, observability, governance, multi-account automation and SRE practice \u2014 mapped to AWS DOP-C02.",
+    subtitle="Advanced AWS DevOps certification training covering CI/CD, Infrastructure as Code, multi-account governance, observability and Site Reliability Engineering \u2014 mapped to DOP-C02.",
     badges=[("cb-vendor","AWS Authorised"),("cb-level","Professional \u00b7 DevOps"),("cb-new","DOP-C02"),("cb-hot","Top-paying AWS Cert")],
     hero_meta=common_meta("5 days / 40 hrs","Instructor-Led + AWS Sandbox","On-site \u00b7 Virtual \u00b7 Hybrid",90,"26 May 2026"),
     hero_img=HERO_IMG,
@@ -36,69 +41,130 @@ BATCH.append(dict(
         ("\U0001F4CA","Observability at scale","CloudWatch, X-Ray, OpenTelemetry, Distro for OpenTelemetry, Logs Insights"),
         ("\U0001F4DC","Governance & IaC","CloudFormation, CDK, Service Catalog, Organizations and Control Tower"),
         ("\u2699\ufe0f","SRE on AWS","SLI / SLO / error budgets, progressive delivery, chaos engineering")],
-    overview_eyebrow="What this course is",
+    overview_eyebrow="AWS Certified DevOps Engineer \u2013 Professional (DOP-C02)",
     overview_head=("Where AWS delivery","becomes engineering."),
-    overview_p1="DOP-C02 is AWS's senior delivery credential \u2014 the cert that proves you can engineer modern continuous delivery, observability and SRE practice on AWS at enterprise scale, not just spin up CodePipeline.",
-    overview_p2="At Nexperts, DOP-C02 is delivered against a multi-account AWS Organizations sandbox. By day 5 you've built a four-stage gated CodePipeline with OIDC, an OpenTelemetry-instrumented release, a Control-Tower-governed multi-account topology, and run a chaos experiment that didn't break the SLO.",
-    overview_quote="DOP-C02 is the AWS cert that filters delivery dabblers from delivery engineers. The exam puts you in front of multi-account scenarios most candidates have never operated.",
-    overview_p3="The 2026 DOP-C02 update sharpened the focus on supply-chain security, OIDC federation, multi-account governance and observability with OpenTelemetry. We cover all four with hands-on builds.",
+    overview_p1="The AWS Certified DevOps Engineer \u2013 Professional (DOP-C02) certification validates advanced technical expertise in implementing, operating and managing continuous delivery systems, cloud automation, observability and security on Amazon Web Services (AWS).",
+    overview_p2="Designed for experienced DevOps professionals, this certification demonstrates your ability to automate software delivery pipelines, manage infrastructure as code, implement governance across multi-account AWS environments and improve application reliability using Site Reliability Engineering (SRE) practices.",
+    overview_quote="Whether you are preparing for an AWS DevOps Engineer Professional certification or advancing your cloud career, this course provides practical experience with enterprise-scale AWS deployments.",
+    overview_p3="Our AWS DevOps Professional training in Malaysia is delivered against a multi-account AWS Organizations sandbox. Participants implement real-world DevOps workflows using AWS native services and prepare for DOP-C02 through hands-on labs and scenario-based exercises.",
     who_for=[
-        ("\u2699\ufe0f","Senior DevOps engineers","Already running pipelines on AWS but want the formal pro credential and depth."),
-        ("\U0001F468\u200D\U0001F4BB","Senior developers","Stepping up to platform engineering or release engineering roles."),
-        ("\U0001F4CA","SRE / platform engineers","Owning AWS reliability outcomes. DOP gives the AWS-native SRE lens."),
-        ("\U0001F4BC","Cloud architects","Already designing on AWS, want to keep current with delivery-side patterns."),
-        ("\U0001F31F","SOA holders","Natural progression. SOA gave operations depth. DOP adds delivery and governance."),
-        ("\U0001F510","Application security engineers","Wanting to operate inside the SDLC. DOP's secure-pipeline track is built for you.")],
+        ("\u2699\ufe0f","DevOps Engineers","Build and operate CI/CD, automation and cloud delivery platforms on AWS."),
+        ("\u2601\ufe0f","Cloud Engineers","Advance from associate-level AWS skills into professional DevOps practice."),
+        ("\U0001F4BB","Platform Engineers","Own shared AWS platforms, pipelines and multi-account governance."),
+        ("\U0001F4CA","Site Reliability Engineers (SRE)","Apply SLI/SLO discipline, progressive delivery and incident automation on AWS."),
+        ("\U0001F3D7\ufe0f","AWS Solutions Architects","Add delivery, operations and automation depth to architecture skills."),
+        ("\U0001F527","Cloud Operations / Infrastructure Engineers","Automate operations, resilience and compliance across AWS environments."),
+        ("\U0001F680","Release / Automation Engineers","Design gated pipelines, deployments and release automation at scale."),
+        ("\U0001F4BC","Cloud Consultants","Advise enterprise clients on AWS DevOps, governance and SRE patterns.")],
     prereqs=[
         "AWS SAA, SOA or DVA (or 2+ years professional AWS experience)",
         "1\u20132 years using AWS-native CI/CD or third-party pipelines on AWS",
         "Comfortable with YAML, Bash, Python and one IaC tool (CloudFormation or Terraform)",
         "Working knowledge of containers (ECS, EKS) at a conceptual level"],
     prereqs_note="Don't have an associate-level AWS cert? Ask about our SAA \u2192 DOP bridge programme.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "What You Will Learn",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "This AWS DevOps certification course covers the major domains of the DOP-C02 examination."],
+            "bullets": [
+                "Continuous Integration (CI) and Continuous Delivery (CD)",
+                "Infrastructure as Code with AWS CloudFormation and AWS CDK",
+                "Multi-account AWS architecture with Organizations and Control Tower",
+                "Blue/Green, canary and rolling deployments",
+                "GitHub Actions and AWS CodePipeline automation",
+                "Container deployments using Amazon ECS and Amazon EKS",
+                "Observability with Amazon CloudWatch, AWS X-Ray and OpenTelemetry",
+                "Incident response automation and DevSecOps",
+                "Governance, compliance, cost optimization, monitoring and logging"],
+        },
+        {
+            "eyebrow": "AWS DevOps Engineer Professional Certification Exam",
+            "paragraphs": [
+                "The AWS Certified DevOps Engineer \u2013 Professional (DOP-C02) exam evaluates advanced skills in implementing DevOps practices on AWS.",
+                "Candidates are expected to demonstrate practical experience with automation, deployment strategies, cloud governance and operational excellence."],
+            "subtitle": "The certification validates expertise across six domains",
+            "bullets": [
+                "SDLC Automation",
+                "Configuration Management and Infrastructure as Code",
+                "Resilient Cloud Solutions",
+                "Monitoring and Logging",
+                "Incident and Event Response",
+                "Security and Compliance"],
+        },
+        {
+            "eyebrow": "AWS Services Covered",
+            "paragraphs": [
+                "This course provides practical experience with enterprise AWS services used in modern DevOps platforms."],
+            "bullets": [
+                "AWS CodePipeline, CodeBuild, CodeDeploy, CloudFormation and CDK",
+                "AWS Organizations, Control Tower, IAM, Config, CloudTrail and Security Hub",
+                "Amazon ECS, Amazon EKS, AWS Lambda, EC2, Auto Scaling and Elastic Load Balancing",
+                "Amazon CloudWatch, AWS X-Ray, EventBridge and Systems Manager",
+                "AWS Secrets Manager, Amazon Inspector, Amazon S3"],
+        },
+        {
+            "eyebrow": "AWS DevOps Certification Cost & Exam Voucher",
+            "paragraphs": [
+                "Many professionals search for AWS DevOps certification cost, AWS DevOps Engineer Professional exam cost and AWS DevOps Professional training price.",
+                "At Nexperts Academy, eligible course packages include the AWS Certified DevOps Engineer \u2013 Professional (DOP-C02) examination voucher, instructor-led training, official courseware, AWS sandbox access, practice exams and post-course mentoring."],
+        },
+        {
+            "eyebrow": "Career Opportunities After AWS DevOps Professional",
+            "paragraphs": [
+                "Professionals who complete the AWS DevOps Engineer Professional certification commonly progress into senior delivery and platform roles."],
+            "bullets": [
+                "Senior DevOps Engineer / AWS DevOps Engineer",
+                "Platform Engineer / Cloud Architect",
+                "Site Reliability Engineer (SRE)",
+                "Cloud Automation Engineer / Infrastructure Engineer",
+                "DevSecOps Engineer / Cloud Operations Lead"],
+        }],
     curriculum_eyebrow="Course Curriculum",
     curriculum_head=("Six domains.","One delivery practice."),
-    curriculum_intro="DOP-C02 is structured into SDLC Automation, Configuration Management & IaC, Resilient Cloud Solutions, Monitoring & Logging, Incident & Event Response, and Security & Compliance. We deliver in build-order \u2014 by day 2 you have a real working pipeline.",
+    curriculum_intro="DOP-C02 is structured into SDLC Automation, Configuration Management and IaC, Resilient Cloud Solutions, Monitoring and Logging, Incident and Event Response, and Security and Compliance. We deliver in build-order \u2014 by day 2 you have a real working pipeline.",
     modules=[
         ("01","SDLC Automation",[
-            "CodeCommit, CodeBuild, CodeDeploy, CodePipeline patterns",
+            "AWS CodePipeline, CodeBuild, CodeDeploy and CodeCommit patterns",
             "GitHub Actions on AWS with OIDC federation",
             "Multi-stage gated pipelines with manual approvals",
-            "Blue/green and canary deployment strategies",
-            "Container deployments \u2014 ECS, ECR, EKS",
+            "Blue/green, canary and rolling deployment strategies",
+            "Container and serverless deployments \u2014 ECS, ECR, EKS and Lambda",
             "Lab: 4-stage gated pipeline with OIDC and signed artefacts"]),
-        ("02","Configuration Management & Infrastructure as Code",[
+        ("02","Configuration Management and Infrastructure as Code",[
             "CloudFormation \u2014 stacks, change sets, StackSets, drift",
             "AWS CDK in TypeScript and Python",
-            "Service Catalog and AWS Organizations Control Tower",
+            "AWS Organizations, Control Tower and Service Catalog",
             "Systems Manager Patch Manager and automation documents",
-            "Configuration drift and reconciliation patterns",
+            "Configuration drift detection and reconciliation patterns",
             "Lab: Re-platform a workload from raw CFN to CDK modules"]),
         ("03","Resilient Cloud Solutions",[
-            "High-availability patterns \u2014 ASG, ALB, multi-AZ",
+            "High-availability patterns \u2014 Auto Scaling, ELB, multi-AZ",
             "Multi-region active-active and active-passive designs",
             "DR strategies \u2014 backup-restore, pilot-light, warm-standby",
             "Aurora Global, DynamoDB Global Tables, S3 Cross-Region",
-            "RTO/RPO planning and validation",
+            "RTO/RPO planning, validation and cost-aware resilience choices",
             "Lab: Build a multi-region active-passive RDS with Route 53"]),
-        ("04","Monitoring & Logging",[
+        ("04","Monitoring and Logging",[
             "CloudWatch metrics, dashboards and composite alarms",
             "CloudWatch Logs Insights queries you actually use",
             "X-Ray + AWS Distro for OpenTelemetry",
             "ServiceLens for service-mesh-style observability",
-            "EventBridge for event-driven operations",
+            "EventBridge for event-driven operations and cost/ops signals",
             "Lab: Wire a release-decision dashboard for a production service"]),
-        ("05","Incident & Event Response",[
+        ("05","Incident and Event Response",[
             "EventBridge \u2014 rules, targets, schemas, archive",
             "Systems Manager Incident Manager runbooks",
             "Auto-remediation patterns with EventBridge \u2192 Lambda",
             "AWS Health and Service Health response patterns",
             "Post-incident review and chaos engineering",
             "Lab: Build automated remediation for a 3-vector incident"]),
-        ("06","Security & Compliance Automation",[
+        ("06","Security and Compliance",[
             "AWS Config conformance packs and remediation",
-            "Security Hub aggregator and standards adoption",
-            "AWS GuardDuty, Inspector, Macie integration",
-            "AWS WAF and Network Firewall in pipelines",
+            "Security Hub, Inspector and CloudTrail automation",
+            "IAM, Secrets Manager and DevSecOps in pipelines",
+            "GuardDuty, WAF and Network Firewall integration",
             "Software supply-chain security on AWS",
             "Lab: Automated CIS-benchmark drift detection and fix"])],
     labs_eyebrow="Hands-On AWS Multi-Account Sandbox",
@@ -189,6 +255,28 @@ BATCH.append(dict(
         "ANSI accredited",
         "LinkedIn certificate integration"],
     guarantee_text="Follow our programme and clear the mock threshold before booking. Dedicated exam coaching and instructor support included.",
+    faq_head=("AWS DevOps Engineer Professional", "FAQs."),
+    faqs=[
+        (
+            "What is AWS Certified DevOps Engineer – Professional (DOP-C02)?",
+            "AWS Certified DevOps Engineer – Professional is AWS's advanced certification for professionals implementing DevOps, CI/CD, automation, governance and cloud operations on AWS.",
+        ),
+        (
+            "Is AWS DevOps Professional difficult?",
+            "Yes. It is considered one of AWS's most advanced certifications and is recommended for professionals with real-world AWS and DevOps experience.",
+        ),
+        (
+            "Does this course prepare me for DOP-C02?",
+            "Yes. The curriculum aligns with the latest AWS Certified DevOps Engineer – Professional (DOP-C02) exam objectives.",
+        ),
+        (
+            "Does the course include an exam voucher?",
+            "Yes. Eligible course packages include an AWS examination voucher.",
+        ),
+        (
+            "Which AWS services are covered?",
+            "The course includes AWS CodePipeline, CodeBuild, CodeDeploy, CloudFormation, CDK, ECS, EKS, Lambda, CloudWatch, X-Ray, Organizations, Control Tower, IAM and many other services relevant to the DOP-C02 exam.",
+        )],
 ))
 
 

@@ -1,87 +1,73 @@
 {
   "@context": "https://schema.org",
   "@type": "Course",
-  "@id": "https://www.nexpertsacademy.com/courses/terraform-associate#course",
-  "name": "HashiCorp Terraform Associate (003) Certification Training Malaysia",
-  "description": "Hands-on HashiCorp Terraform Associate certification training covering Infrastructure as Code (IaC), Terraform Cloud, HCL, modules, state management, AWS, Azure and multi-cloud automation.",
-  "url": "https://www.nexpertsacademy.com/courses/terraform-associate",
-  "courseCode": "Terraform Associate (003)",
-  "educationalLevel": "Associate",
-  "occupationalCredentialAwarded": "HashiCorp Certified: Terraform Associate",
-  "timeRequired": "P3D",
-  "inLanguage": "en",
+  "@id": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional#course",
+  "name": "AWS Certified DevOps Engineer – Professional (DOP-C02)",
+  "description": "Instructor-led AWS DevOps Engineer Professional (DOP-C02) training in Malaysia covering CI/CD, Infrastructure as Code, CloudFormation, AWS CDK, CodePipeline, observability, governance, security and Site Reliability Engineering with hands-on AWS labs.",
   "provider": {
-    "@type": "EducationalOrganization",
-    "@id": "https://www.nexpertsacademy.com/#organization"
-  },
-  "keywords": [
-    "Terraform Associate",
-    "Terraform Associate Certification",
-    "Terraform Associate Training Malaysia",
-    "HashiCorp Certification",
-    "Infrastructure as Code",
-    "Terraform Cloud",
-    "Terraform Enterprise",
-    "Terraform Certification"
-  ],
-  "teaches": [
-    "Infrastructure as Code",
-    "Terraform CLI",
-    "Terraform Cloud",
-    "Terraform Enterprise",
-    "Terraform Modules",
-    "Terraform State",
-    "Remote State",
-    "State Locking",
-    "Terraform Providers",
-    "HashiCorp Configuration Language",
-    "AWS Automation",
-    "Azure Automation",
-    "Multi-cloud Infrastructure"
-  ]
-}
-
-
-
-
-
-{
-  "@context": "https://schema.org",
-  "@type": "AggregateRating",
-  "@id": "https://www.nexpertsacademy.com/courses/terraform-associate#rating",
-  "itemReviewed": {
-    "@id": "https://www.nexpertsacademy.com/courses/terraform-associate#course"
-  },
-  "ratingValue": "4.8",
-  "reviewCount": "156",
-  "bestRating": "5",
-  "worstRating": "1"
-}
-
-
-
-
-
-
-{
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "@id": "https://www.nexpertsacademy.com/courses/terraform-associate#review1",
-  "author": {
-    "@type": "Person",
-    "name": "Saiful Sazali"
-  },
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": "5",
-    "bestRating": "5"
-  },
-  "reviewBody": "Best Terraform course in MY. The HCL refactor and module-build labs are exactly what working engineers need. Cleared the exam two weeks after.",
-  "publisher": {
     "@type": "Organization",
+    "name": "Nexperts Academy",
+    "url": "https://www.nexpertsacademy.com"
+  },
+  "courseCode": "DOP-C02",
+  "educationalLevel": "Professional",
+  "teaches": [
+    "AWS DevOps",
+    "CI/CD",
+    "AWS CodePipeline",
+    "AWS CodeBuild",
+    "AWS CodeDeploy",
+    "AWS CloudFormation",
+    "AWS CDK",
+    "Infrastructure as Code",
+    "Amazon ECS",
+    "Amazon EKS",
+    "AWS Organizations",
+    "AWS Control Tower",
+    "CloudWatch",
+    "OpenTelemetry",
+    "Site Reliability Engineering",
+    "DevSecOps"
+  ],
+  "inLanguage": "en",
+  "url": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional"
+}
+
+
+
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional#product",
+  "name": "AWS Certified DevOps Engineer – Professional Training (DOP-C02)",
+  "description": "Professional AWS DevOps Engineer certification training in Malaysia with instructor-led delivery, AWS sandbox, official courseware and exam voucher.",
+  "brand": {
+    "@type": "Brand",
     "name": "Nexperts Academy"
   },
-  "itemReviewed": {
-    "@id": "https://www.nexpertsacademy.com/courses/terraform-associate#course"
+  "category": "AWS Professional Certification Training",
+  "image": "https://www.nexpertsacademy.com/images/aws-devops-engineer-professional.webp",
+  "sku": "AWS-DOP-C02",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional",
+    "price": "5300",
+    "priceCurrency": "MYR",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "priceValidUntil": "2027-12-31",
+    "seller": {
+      "@type": "Organization",
+      "name": "Nexperts Academy"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "198",
+    "bestRating": "5",
+    "worstRating": "1"
   }
 }
+
+
