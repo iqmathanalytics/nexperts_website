@@ -52,6 +52,7 @@ STATIC_PAGES = [
     "blog/top-data-science-training-institutes-malaysia.html",
     "blog/aws-certification-roadmap.html",
     "blog/cisco-certification-path.html",
+    "blog/fortinet-certification-guide.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]

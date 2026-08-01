@@ -1,73 +1,92 @@
 {
   "@context": "https://schema.org",
   "@type": "Course",
-  "@id": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional#course",
-  "name": "AWS Certified DevOps Engineer – Professional (DOP-C02)",
-  "description": "Instructor-led AWS DevOps Engineer Professional (DOP-C02) training in Malaysia covering CI/CD, Infrastructure as Code, CloudFormation, AWS CDK, CodePipeline, observability, governance, security and Site Reliability Engineering with hands-on AWS labs.",
+  "@id": "https://www.nexpertsacademy.com/courses/hcispp#course",
+  "name": "HCISPP Certification Training Malaysia",
+  "alternateName": "ISC2 Healthcare Information Security and Privacy Practitioner (HCISPP)",
+  "description": "Instructor-led HCISPP certification training in Malaysia covering healthcare information security, privacy, HIPAA, PDPA, HL7 FHIR, healthcare governance, risk management and regulatory compliance.",
+  "url": "https://www.nexpertsacademy.com/courses/hcispp",
+  "courseCode": "HCISPP",
+  "educationalLevel": "Intermediate",
+  "occupationalCredentialAwarded": "ISC2 HCISPP Certification",
   "provider": {
-    "@type": "Organization",
-    "name": "Nexperts Academy",
-    "url": "https://www.nexpertsacademy.com"
+    "@type": "EducationalOrganization",
+    "@id": "https://www.nexpertsacademy.com/#organization"
   },
-  "courseCode": "DOP-C02",
-  "educationalLevel": "Professional",
-  "teaches": [
-    "AWS DevOps",
-    "CI/CD",
-    "AWS CodePipeline",
-    "AWS CodeBuild",
-    "AWS CodeDeploy",
-    "AWS CloudFormation",
-    "AWS CDK",
-    "Infrastructure as Code",
-    "Amazon ECS",
-    "Amazon EKS",
-    "AWS Organizations",
-    "AWS Control Tower",
-    "CloudWatch",
-    "OpenTelemetry",
-    "Site Reliability Engineering",
-    "DevSecOps"
-  ],
   "inLanguage": "en",
-  "url": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional"
+  "keywords": [
+    "HCISPP",
+    "HCISPP Training",
+    "HCISPP Certification",
+    "ISC2 HCISPP",
+    "Healthcare Information Security and Privacy Practitioner",
+    "HIPAA",
+    "Healthcare Security",
+    "Healthcare Privacy",
+    "Malaysia"
+  ],
+  "teaches": [
+    "Healthcare Information Security",
+    "Healthcare Privacy",
+    "Healthcare Risk Management",
+    "Healthcare Information Governance",
+    "Healthcare Compliance",
+    "HIPAA",
+    "PDPA",
+    "GDPR",
+    "HL7 FHIR",
+    "EMR",
+    "EHR",
+    "Healthcare Incident Response",
+    "Healthcare Third Party Risk"
+  ]
 }
+
+
 
 
 
 {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "@id": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional#product",
-  "name": "AWS Certified DevOps Engineer – Professional Training (DOP-C02)",
-  "description": "Professional AWS DevOps Engineer certification training in Malaysia with instructor-led delivery, AWS sandbox, official courseware and exam voucher.",
-  "brand": {
-    "@type": "Brand",
-    "name": "Nexperts Academy"
-  },
-  "category": "AWS Professional Certification Training",
-  "image": "https://www.nexpertsacademy.com/images/aws-devops-engineer-professional.webp",
-  "sku": "AWS-DOP-C02",
-  "offers": {
-    "@type": "Offer",
-    "url": "https://www.nexpertsacademy.com/courses/aws-devops-engineer-professional",
-    "price": "5300",
-    "priceCurrency": "MYR",
-    "availability": "https://schema.org/InStock",
-    "itemCondition": "https://schema.org/NewCondition",
-    "priceValidUntil": "2027-12-31",
-    "seller": {
-      "@type": "Organization",
-      "name": "Nexperts Academy"
-    }
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "198",
-    "bestRating": "5",
-    "worstRating": "1"
-  }
+  "@context":"https://schema.org",
+  "@type":"EducationalOrganization",
+  "@id":"https://www.nexpertsacademy.com/#organization",
+  "name":"Nexperts Academy",
+  "url":"https://www.nexpertsacademy.com",
+  "description":"Professional IT and cybersecurity certification training provider in Malaysia.",
+  "knowsAbout":[
+    "HCISPP",
+    "Healthcare Information Security",
+    "Healthcare Privacy",
+    "HIPAA",
+    "PDPA",
+    "Healthcare Compliance",
+    "Healthcare Risk Management",
+    "ISC2",
+    "Healthcare Cybersecurity"
+  ]
 }
 
+
+
+
+
+{
+  "@context":"https://schema.org",
+  "@type":"EducationalOrganization",
+  "@id":"https://www.nexpertsacademy.com/#organization",
+  "name":"Nexperts Academy",
+  "url":"https://www.nexpertsacademy.com",
+  "description":"Professional IT and cybersecurity certification training provider in Malaysia.",
+  "knowsAbout":[
+    "HCISPP",
+    "Healthcare Information Security",
+    "Healthcare Privacy",
+    "HIPAA",
+    "PDPA",
+    "Healthcare Compliance",
+    "Healthcare Risk Management",
+    "ISC2",
+    "Healthcare Cybersecurity"
+  ]
+}
 

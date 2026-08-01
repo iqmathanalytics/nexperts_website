@@ -14,6 +14,7 @@ Pricing 100-300 RM below Iverson Malaysia reference rates.
 """
 from _course_data import HERO_IMG, common_meta
 from _course_schema_oscp import OSCP_SCHEMA_MARKUP
+from _course_schema_loader import schema_markup_for_slug
 
 BATCH = []
 
@@ -642,10 +643,15 @@ BATCH.append(dict(
 # ============================================================================
 BATCH.append(dict(
     slug="hcispp",
+    seo_title="HCISPP Certification Training Malaysia | ISC2 Healthcare Information Security & Privacy Practitioner",
+    seo_description="Join HCISPP certification training in Malaysia. Master healthcare information security, privacy, HIPAA, PDPA, HL7 FHIR, risk management and ISC2 exam prep with instructor-led labs.",
+    seo_keywords="HCISPP, HCISPP Training Malaysia, ISC2 HCISPP, Healthcare Information Security and Privacy Practitioner, HIPAA, PDPA, healthcare cybersecurity, healthcare privacy, HL7 FHIR",
+    canonical_path="/courses/hcispp",
+    schema_markup=schema_markup_for_slug("hcispp"),
     title="HCISPP",
-    title_html='HCISPP<br><em>Healthcare Info Security &amp; Privacy</em>',
+    title_html='HCISPP Certification Training Malaysia<br><em>ISC2 Healthcare Information Security &amp; Privacy Practitioner</em>',
     vendor_short="ISC2", watermark="HCISPP", crumb_vendor="ISC2",
-    subtitle="ISC2's healthcare-specific security and privacy credential. The cert for security and privacy professionals in MY's hospitals, health insurance, telemedicine and digital-health startups \u2014 mapped to MOH PDPA, HL7 FHIR and HIPAA.",
+    subtitle="ISC2 Healthcare Information Security and Privacy Practitioner training covering PHI protection, healthcare governance, HIPAA, PDPA, HL7 FHIR, risk management and third-party governance.",
     badges=[("cb-vendor","ISC2 Authorised"),("cb-level","Intermediate \u00b7 Healthcare"),("cb-new","2026 ECO"),("cb-hot","Healthcare-Specialised")],
     hero_meta=common_meta("4 days / 32 hrs","Instructor-Led + Healthcare Sims","On-site \u00b7 Virtual \u00b7 Hybrid",92,"9 Jun 2026"),
     hero_img=HERO_IMG,
@@ -654,78 +660,148 @@ BATCH.append(dict(
         ("\U0001F4CB","Healthcare regulation","MY MOH PDPA, HIPAA, GDPR Art. 9 (special-category data)"),
         ("\U0001F510","Privacy + security controls","Consent, de-identification, breach response, BAAs"),
         ("\U0001F4CA","Risk + governance","Healthcare-specific risk, third-party risk, MA-eclipse + telemed")],
-    overview_eyebrow="What this course is",
+    overview_eyebrow="What is HCISPP Certification?",
     overview_head=("Where healthcare data stops","being just personal data."),
-    overview_p1="HCISPP is ISC2's healthcare-specific security and privacy credential. It is the cert for security and privacy professionals working in MY's hospitals, health insurance, telemedicine, hospital networks and digital-health startups \u2014 organisations bound by both PDPA and the special-category-data treatment of medical information.",
-    overview_p2="At Nexperts, HCISPP is delivered as a 4-day intensive that walks the seven exam domains in real-world MY healthcare scenarios \u2014 KPJ Healthcare, IHH, MOH hospitals, BookDoc, DoctorOnCall, and digital-health players. By day 4 you've designed privacy controls for an EMR, run a hospital breach simulation and defended a third-party-risk programme.",
-    overview_quote="MY's healthcare digitisation \u2014 telemedicine, MyHEALTH, MySejahtera \u2014 has created a real demand for privacy-and-security professionals who understand healthcare data specifically. HCISPP is the only cert that signals this dual literacy.",
-    overview_p3="HCISPP is the most healthcare-specific cert in the global landscape. We map every conversation to MY's MOH-PDPA hospital framework, the GLC-hospital procurement guidelines and the digital-health regulatory environment in ASEAN.",
+    overview_p1="HCISPP (Healthcare Information Security and Privacy Practitioner) is the globally recognized healthcare cybersecurity certification from ISC2. It validates the knowledge required to implement, manage and assess security and privacy controls that protect Protected Health Information (PHI) across hospitals, healthcare providers, insurers, telemedicine platforms and digital health organizations.",
+    overview_p2="Unlike general cybersecurity certifications, HCISPP combines information security, healthcare privacy, regulatory compliance and risk management into a single credential designed specifically for the healthcare industry. The certification covers seven domains, including healthcare governance, healthcare technologies, regulatory environments, privacy and security, risk management and third-party risk.",
+    overview_quote="Our HCISPP training in Malaysia prepares professionals for the ISC2 exam through instructor-led sessions, healthcare case studies and hands-on security scenarios mapped to hospitals, insurers and digital-health platforms.",
+    overview_p3="Learners gain practical experience with healthcare privacy regulations, EMR/EHR security, healthcare interoperability, HL7 FHIR, telemedicine security, hospital risk management and third-party healthcare vendor governance. This programme is suitable for professionals working in hospitals, healthcare providers, insurance companies, digital health platforms, pharmaceutical organisations and government healthcare agencies.",
     who_for=[
-        ("\U0001FA7A","Hospital IT / security leads","Owning EMR security and PDPA at hospitals and group networks."),
-        ("\U0001F510","DPOs in healthcare","Owning data protection at health insurers, hospital networks, MyHEALTH."),
-        ("\U0001F468\u200D\u2695\uFE0F","Digital-health startups","BookDoc, DoctorOnCall, Naluri, Klinik MyKad. Privacy is a moat."),
-        ("\U0001F4DA","Health-insurance compliance","Allianz, AIA, Etiqa health-insurance teams. Claims data + privacy."),
-        ("\U0001F4C8","Pharma compliance","Pharma data (clinical trials, real-world evidence). HCISPP is recognised."),
-        ("\U0001F4DC","Healthcare auditors","CISA holders moving into healthcare-specific risk and compliance.")],
+        ("\U0001FA7A","Healthcare security professionals","Protect PHI and clinical systems across hospital and provider networks."),
+        ("\U0001F510","Privacy officers / DPOs","Own healthcare privacy, consent and breach-notification programmes."),
+        ("\U0001F4CB","Compliance managers","Align hospital and insurer operations with HIPAA, PDPA and audit controls."),
+        ("\U0001F468\u200D\u2695\uFE0F","Hospital IT administrators","Secure EMR/EHR platforms, HIE and clinical information systems."),
+        ("\U0001F4DA","Healthcare consultants & auditors","Advise digital-health, pharma and insurer clients on privacy and security."),
+        ("\U0001F4C8","Digital health specialists","Build privacy-by-design into telemedicine and health-tech platforms.")],
     prereqs=[
-        "2 years of cumulative paid work experience",
-        "Experience must be in 1 of the 7 HCISPP domains",
-        "1 of the 2 years must be in healthcare-related work",
-        "ISC2 endorsement required after exam pass"],
-    prereqs_note="Don't yet meet experience? Pass the exam to become an ISC2 Associate; full cert grants when experience is met.",
+        "Two years of cumulative paid work experience",
+        "Experience in at least one HCISPP Common Body of Knowledge (CBK) domain",
+        "One year of healthcare-related experience",
+        "Successful completion of the HCISPP examination and ISC2 endorsement"],
+    prereqs_note="Candidates who do not yet meet the work experience requirement may become an Associate of ISC2 after passing the examination and complete the required experience within the allowed period.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "What You Will Learn",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "During this HCISPP certification course you will learn the seven ISC2 exam domains plus the healthcare technologies and regulations used in practice."],
+            "bullets": [
+                "Healthcare Industry fundamentals",
+                "Information Governance in Healthcare",
+                "Information Technologies in Healthcare",
+                "Healthcare Regulatory and Standards Environment",
+                "Healthcare Privacy and Security",
+                "Healthcare Risk Management and Risk Assessment",
+                "Third-Party Risk Management",
+                "HIPAA Privacy Rule and HIPAA Security Rule",
+                "Protected Health Information (PHI), EMR, EHR and HL7 FHIR",
+                "Healthcare incident response, vendor risk and compliance auditing"],
+        },
+        {
+            "eyebrow": "HCISPP Certification Requirements",
+            "paragraphs": [
+                "To earn the HCISPP certification, ISC2 requires candidates to meet experience and examination requirements."],
+            "bullets": [
+                "Two years of cumulative paid work experience",
+                "Experience in at least one HCISPP CBK domain",
+                "One year of healthcare-related experience",
+                "Successful completion of the HCISPP examination",
+                "ISC2 endorsement after passing the examination"],
+            "footer": "Candidates who do not yet meet the work experience requirement may become an Associate of ISC2 after passing the examination and complete the required experience within the allowed period.",
+        },
+        {
+            "eyebrow": "HIPAA, PDPA & Healthcare Privacy",
+            "paragraphs": [
+                "Healthcare organisations process some of the world's most sensitive personal information. HCISPP prepares professionals to implement security and privacy controls that align with healthcare regulations.",
+                "The course also introduces healthcare-specific concepts such as consent management, breach notification, healthcare privacy governance, data minimisation and secure health information exchange."],
+            "bullets": [
+                "HIPAA Privacy Rule and HIPAA Security Rule",
+                "Malaysian Personal Data Protection Act (PDPA)",
+                "GDPR Article 9",
+                "Healthcare Data Governance",
+                "Protected Health Information (PHI) and Personally Identifiable Information (PII)"],
+        },
+        {
+            "eyebrow": "Healthcare Technologies Covered",
+            "paragraphs": [
+                "Practical healthcare technologies discussed during training include:"],
+            "bullets": [
+                "Electronic Medical Records (EMR) and Electronic Health Records (EHR)",
+                "HL7, HL7 FHIR and Health Information Exchange (HIE)",
+                "PACS, DICOM, telemedicine and remote patient monitoring",
+                "Digital health platforms and clinical information systems",
+                "Identity and access management, encryption, security monitoring and healthcare cloud security"],
+        },
+        {
+            "eyebrow": "Career Opportunities After HCISPP",
+            "paragraphs": [
+                "HCISPP certification is suitable for professionals pursuing specialised healthcare security, privacy and compliance roles.",
+                "HCISPP demonstrates specialised expertise in healthcare security and privacy, helping professionals qualify for senior healthcare compliance, governance and cybersecurity positions."],
+            "bullets": [
+                "Healthcare Information Security Manager / Privacy Officer",
+                "Healthcare Compliance Manager / Security Auditor",
+                "Information Security Consultant / Cybersecurity Analyst",
+                "Healthcare Risk Manager / Data Protection Officer (DPO)",
+                "Information Governance Manager / Security Compliance Officer"],
+        },
+        {
+            "eyebrow": "HCISPP Salary & Career Growth",
+            "paragraphs": [
+                "Professionals holding HCISPP certification often work within hospitals, healthcare providers, health insurance companies, medical research organisations, pharmaceutical companies, telemedicine providers, digital health startups, government healthcare agencies and healthcare consulting firms."],
+        }],
     curriculum_eyebrow="Course Curriculum",
     curriculum_head=("Seven domains.","Healthcare-specialised."),
-    curriculum_intro="HCISPP covers seven exam domains: Healthcare Industry, Information Governance & Risk, Information Risk Assessment, Third-Party Risk, Privacy & Security in Healthcare, Regulatory Environment, and Risk Management & Mitigation. We deliver in healthcare-flow order.",
+    curriculum_intro="HCISPP covers seven official ISC2 exam domains: Healthcare Industry, Information Governance in Healthcare, Information Technologies in Healthcare, Regulatory and Standards Environment, Privacy and Security in Healthcare, Risk Management and Risk Assessment, and Third-Party Risk Management. We deliver in healthcare-flow order.",
     modules=[
         ("01","Healthcare Industry",[
-            "Healthcare ecosystem in MY (MOH, GLC hospitals, private, insurance, pharma)",
-            "Healthcare data types (clinical, claims, demographic, genomic)",
-            "EMR / EHR / HIE architectures",
-            "Telemedicine and remote-monitoring data",
-            "Pharma and clinical-trial data",
+            "Healthcare ecosystem fundamentals (providers, payers, pharma, digital health)",
+            "Healthcare data types \u2014 clinical, claims, demographic and genomic",
+            "Hospital, insurer and telemedicine operating models",
+            "Protected Health Information (PHI) lifecycle",
+            "Malaysia and ASEAN healthcare delivery context",
             "Workshop: Map a hospital data flow end-to-end"]),
-        ("02","Information Governance & Risk",[
+        ("02","Information Governance in Healthcare",[
             "Healthcare information governance frameworks",
-            "Data classification for healthcare (PHI, PII, financial)",
-            "Privacy programme governance",
-            "Healthcare-specific roles (DPO, DSO, BAA owner)",
-            "Records retention and destruction in healthcare",
+            "Data classification, retention and destruction for PHI/PII",
+            "Privacy programme governance and security governance",
+            "Healthcare roles \u2014 DPO, privacy officer, BAA owner",
+            "Privacy Impact Assessments and compliance auditing",
             "Workshop: Design a hospital privacy and security programme"]),
-        ("03","Information Risk Assessment",[
-            "Healthcare-specific threat landscape",
-            "Risk-assessment methodologies in healthcare",
-            "Vendor-risk assessment (EHR, billing, lab vendors)",
-            "Cloud-risk in healthcare",
-            "Healthcare BCDR",
-            "Workshop: Risk assessment for a tertiary hospital"]),
-        ("04","Third-Party Risk",[
-            "Business Associate Agreements (BAA)",
-            "Vendor due diligence in healthcare",
-            "Contract clauses (privacy, security, breach notification)",
-            "Vendor-monitoring programmes",
-            "Sub-contractor and chain-of-trust risk",
-            "Workshop: Build a BAA template for a hospital EHR vendor"]),
-        ("05","Privacy & Security in Healthcare",[
-            "PHI handling \u2014 collection, use, disclosure, destruction",
-            "Patient consent and authorisation",
-            "De-identification, pseudonymisation, k-anonymity for clinical data",
-            "Access controls in EMR (role-based, break-glass)",
-            "Audit logging in healthcare",
-            "Workshop: De-identify a clinical research dataset"]),
-        ("06","Regulatory Environment",[
-            "MY MOH PDPA hospital framework",
-            "HIPAA and HITECH (US influence on global SaaS)",
+        ("03","Information Technologies in Healthcare",[
+            "EMR / EHR architectures and clinical information systems",
+            "HL7, HL7 FHIR and Health Information Exchange (HIE)",
+            "PACS, DICOM, telemedicine and remote patient monitoring",
+            "Identity and access management in clinical systems",
+            "Encryption, security monitoring and healthcare cloud security",
+            "Workshop: Secure an EMR / FHIR integration scenario"]),
+        ("04","Regulatory and Standards Environment",[
+            "HIPAA Privacy Rule and HIPAA Security Rule",
+            "Malaysian Personal Data Protection Act (PDPA)",
             "GDPR Article 9 (special-category data)",
-            "Cross-border patient-data transfer",
-            "ASEAN healthcare data localisation",
-            "Workshop: Cross-border data transfer for telemedicine to Singapore"]),
-        ("07","Risk Management & Mitigation",[
-            "Incident response in healthcare",
-            "Healthcare breach notification (regulators, patients, media)",
-            "Disaster recovery for clinical systems",
-            "Cyber-hygiene at hospital scale",
-            "Audit and assurance for hospitals",
-            "Workshop: Run a 72-hour hospital breach simulation"])],
+            "Healthcare standards and cross-border patient-data transfer",
+            "Consent management and breach-notification duties",
+            "Workshop: Cross-border telemedicine data-transfer assessment"]),
+        ("05","Privacy and Security in Healthcare",[
+            "PHI handling \u2014 collection, use, disclosure and destruction",
+            "Patient consent, authorisation and data minimisation",
+            "De-identification, pseudonymisation and clinical research data",
+            "Access controls in EMR (role-based, break-glass)",
+            "Audit logging and healthcare incident response basics",
+            "Workshop: De-identify a clinical research dataset"]),
+        ("06","Risk Management and Risk Assessment",[
+            "Healthcare-specific threat landscape and risk methodologies",
+            "Hospital risk assessment and risk treatment",
+            "Healthcare BCDR and clinical-system resilience",
+            "Incident response and healthcare breach notification",
+            "Security monitoring and assurance for hospitals",
+            "Workshop: Risk assessment for a tertiary hospital"]),
+        ("07","Third-Party Risk Management",[
+            "Business Associate Agreements (BAA) and vendor contracts",
+            "Vendor due diligence for EHR, billing and lab providers",
+            "Contract clauses \u2014 privacy, security, breach notification",
+            "Vendor-monitoring programmes and chain-of-trust risk",
+            "Healthcare cloud and digital-health vendor governance",
+            "Workshop: Build a BAA template for a hospital EHR vendor"])],
     labs_eyebrow="Healthcare Sims",
     labs_head=("8 sprints.","Real MY healthcare scenarios."),
     labs_intro="HCISPP at Nexperts is delivered as case-study workshops grounded in MY healthcare. By day 4 you've worked through scenarios across hospitals, health insurance, telemedicine and digital-health startups.",
@@ -807,10 +883,31 @@ BATCH.append(dict(
         "Healthcare-specific credential",
         "LinkedIn certificate integration"],
     guarantee_text="Follow our programme and clear the mock threshold before booking. Dedicated exam coaching and instructor support included.",
+    faq_head=("HCISPP", "FAQs."),
+    faqs=[
+        (
+            "What is HCISPP?",
+            "HCISPP is the Healthcare Information Security and Privacy Practitioner certification offered by ISC2 for professionals responsible for protecting healthcare information and ensuring regulatory compliance.",
+        ),
+        (
+            "Who should take HCISPP training?",
+            "The course is ideal for healthcare security professionals, privacy officers, compliance managers, hospital IT administrators, healthcare consultants, auditors and digital health specialists.",
+        ),
+        (
+            "What experience is required for HCISPP?",
+            "Candidates need two years of cumulative paid work experience, including one year in healthcare-related work and experience in at least one HCISPP domain.",
+        ),
+        (
+            "Does HCISPP cover HIPAA?",
+            "Yes. HCISPP includes healthcare privacy and security principles that encompass HIPAA concepts alongside other healthcare regulations and governance practices.",
+        ),
+        (
+            "Is HCISPP recognised internationally?",
+            "Yes. HCISPP is an internationally recognised healthcare cybersecurity certification from ISC2 for professionals working in healthcare information security and privacy.",
+        )],
 ))
 
 
-# ============================================================================
 # 6. CSSLP \u2014 Certified Secure Software Lifecycle Professional
 # ============================================================================
 BATCH.append(dict(

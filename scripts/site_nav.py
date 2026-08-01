@@ -44,6 +44,10 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
                 "Cisco Certification Path 2026",
                 "/blog/cisco-certification-path",
             ),
+            (
+                "Fortinet Certification Guide 2026",
+                "/blog/fortinet-certification-guide",
+            ),
         ],
     ),
     (

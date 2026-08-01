@@ -1,0 +1,66 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/hcispp#course",
+"name": "HCISPP Certification Training Malaysia",
+"alternateName": "ISC2 Healthcare Information Security and Privacy Practitioner (HCISPP)",
+"description": "Instructor-led HCISPP certification training in Malaysia covering healthcare information security, privacy, HIPAA, PDPA, HL7 FHIR, healthcare governance, risk management and regulatory compliance.",
+"url": "https://www.nexpertsacademy.com/courses/hcispp",
+"courseCode": "HCISPP",
+"educationalLevel": "Intermediate",
+"occupationalCredentialAwarded": "ISC2 HCISPP Certification",
+"provider": {
+"@type": "EducationalOrganization",
+"@id": "https://www.nexpertsacademy.com/#organization"
+},
+"inLanguage": "en",
+"keywords": [
+"HCISPP",
+"HCISPP Training",
+"HCISPP Certification",
+"ISC2 HCISPP",
+"Healthcare Information Security and Privacy Practitioner",
+"HIPAA",
+"Healthcare Security",
+"Healthcare Privacy",
+"Malaysia"
+],
+"teaches": [
+"Healthcare Information Security",
+"Healthcare Privacy",
+"Healthcare Risk Management",
+"Healthcare Information Governance",
+"Healthcare Compliance",
+"HIPAA",
+"PDPA",
+"GDPR",
+"HL7 FHIR",
+"EMR",
+"EHR",
+"Healthcare Incident Response",
+"Healthcare Third Party Risk"
+]
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "EducationalOrganization",
+"@id": "https://www.nexpertsacademy.com/#organization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com",
+"description": "Professional IT and cybersecurity certification training provider in Malaysia.",
+"knowsAbout": [
+"HCISPP",
+"Healthcare Information Security",
+"Healthcare Privacy",
+"HIPAA",
+"PDPA",
+"Healthcare Compliance",
+"Healthcare Risk Management",
+"ISC2",
+"Healthcare Cybersecurity"
+]
+}
+</script>
