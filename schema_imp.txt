@@ -1,92 +1,125 @@
 {
   "@context": "https://schema.org",
   "@type": "Course",
-  "@id": "https://www.nexpertsacademy.com/courses/hcispp#course",
-  "name": "HCISPP Certification Training Malaysia",
-  "alternateName": "ISC2 Healthcare Information Security and Privacy Practitioner (HCISPP)",
-  "description": "Instructor-led HCISPP certification training in Malaysia covering healthcare information security, privacy, HIPAA, PDPA, HL7 FHIR, healthcare governance, risk management and regulatory compliance.",
-  "url": "https://www.nexpertsacademy.com/courses/hcispp",
-  "courseCode": "HCISPP",
-  "educationalLevel": "Intermediate",
-  "occupationalCredentialAwarded": "ISC2 HCISPP Certification",
+  "name": "Microsoft Excel 2019 Basic (EXC19B)",
+  "description": "Microsoft Excel Basic Training in Malaysia covering Excel 2019 and Microsoft 365. Learn spreadsheet fundamentals, formulas, formatting, charts, tables, printing, and workplace reporting through instructor-led hands-on labs.",
   "provider": {
-    "@type": "EducationalOrganization",
-    "@id": "https://www.nexpertsacademy.com/#organization"
+    "@type": "Organization",
+    "name": "Nexperts Academy",
+    "url": "https://www.nexpertsacademy.com"
   },
-  "inLanguage": "en",
-  "keywords": [
-    "HCISPP",
-    "HCISPP Training",
-    "HCISPP Certification",
-    "ISC2 HCISPP",
-    "Healthcare Information Security and Privacy Practitioner",
-    "HIPAA",
-    "Healthcare Security",
-    "Healthcare Privacy",
-    "Malaysia"
-  ],
+  "url": "https://www.nexpertsacademy.com/courses/excel-basic",
+  "courseCode": "EXC19B",
+  "educationalLevel": "Beginner",
   "teaches": [
-    "Healthcare Information Security",
-    "Healthcare Privacy",
-    "Healthcare Risk Management",
-    "Healthcare Information Governance",
-    "Healthcare Compliance",
-    "HIPAA",
-    "PDPA",
-    "GDPR",
-    "HL7 FHIR",
-    "EMR",
-    "EHR",
-    "Healthcare Incident Response",
-    "Healthcare Third Party Risk"
-  ]
+    "Microsoft Excel",
+    "Excel 2019",
+    "Microsoft 365",
+    "Spreadsheet Fundamentals",
+    "Excel Formulas",
+    "SUM Function",
+    "AVERAGE Function",
+    "IF Function",
+    "Tables",
+    "Charts",
+    "Conditional Formatting",
+    "Workbook Management",
+    "Business Reporting"
+  ],
+  "inLanguage": [
+    "en",
+    "ms"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.nexpertsacademy.com/courses/excel-basic",
+    "price": "990",
+    "priceCurrency": "MYR",
+    "availability": "https://schema.org/InStock"
+  }
 }
+
 
 
 
 
 
 {
-  "@context":"https://schema.org",
-  "@type":"EducationalOrganization",
-  "@id":"https://www.nexpertsacademy.com/#organization",
-  "name":"Nexperts Academy",
-  "url":"https://www.nexpertsacademy.com",
-  "description":"Professional IT and cybersecurity certification training provider in Malaysia.",
-  "knowsAbout":[
-    "HCISPP",
-    "Healthcare Information Security",
-    "Healthcare Privacy",
-    "HIPAA",
-    "PDPA",
-    "Healthcare Compliance",
-    "Healthcare Risk Management",
-    "ISC2",
-    "Healthcare Cybersecurity"
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Microsoft Excel 2019 Basic Training",
+  "image": "https://www.nexpertsacademy.com/path-to-course-image.jpg",
+  "description": "Hands-on Microsoft Excel Basic training course in Malaysia covering Excel 2019 and Microsoft 365 for beginners.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Nexperts Academy"
+  },
+  "category": "Microsoft Excel Training",
+  "sku": "EXC19B",
+  "url": "https://www.nexpertsacademy.com/courses/excel-basic",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://www.nexpertsacademy.com/courses/excel-basic",
+    "priceCurrency": "MYR",
+    "price": "990",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  },
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "Duration",
+      "value": "2 Days / 16 Hours"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Delivery",
+      "value": "On-site, Virtual"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Level",
+      "value": "Foundation"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Language",
+      "value": "English, Bahasa Malaysia"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Exam",
+      "value": "Practical"
+    }
   ]
 }
-
 
 
 
 
 {
-  "@context":"https://schema.org",
-  "@type":"EducationalOrganization",
-  "@id":"https://www.nexpertsacademy.com/#organization",
-  "name":"Nexperts Academy",
-  "url":"https://www.nexpertsacademy.com",
-  "description":"Professional IT and cybersecurity certification training provider in Malaysia.",
-  "knowsAbout":[
-    "HCISPP",
-    "Healthcare Information Security",
-    "Healthcare Privacy",
-    "HIPAA",
-    "PDPA",
-    "Healthcare Compliance",
-    "Healthcare Risk Management",
-    "ISC2",
-    "Healthcare Cybersecurity"
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Microsoft Excel 2019 Basic Training",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "312"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Corporate Learner"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "reviewBody": "Practical Microsoft Excel training with hands-on exercises that improved my reporting and spreadsheet skills."
+    }
   ]
 }
+
 

@@ -1,0 +1,85 @@
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Course",
+"@id": "https://www.nexpertsacademy.com/courses/excel-basic#course",
+"name": "Microsoft Excel 2019 Basic (EXC19B)",
+"description": "Microsoft Excel Basic Training in Malaysia covering Excel 2019 and Microsoft 365. Learn spreadsheet fundamentals, formulas, formatting, charts, tables, printing, and workplace reporting through instructor-led hands-on labs.",
+"provider": {
+"@type": "Organization",
+"name": "Nexperts Academy",
+"url": "https://www.nexpertsacademy.com"
+},
+"url": "https://www.nexpertsacademy.com/courses/excel-basic",
+"courseCode": "EXC19B",
+"educationalLevel": "Beginner",
+"teaches": [
+"Microsoft Excel",
+"Excel 2019",
+"Microsoft 365",
+"Spreadsheet Fundamentals",
+"Excel Formulas",
+"SUM Function",
+"AVERAGE Function",
+"IF Function",
+"Tables",
+"Charts",
+"Conditional Formatting",
+"Workbook Management",
+"Business Reporting"
+],
+"inLanguage": ["en", "ms"],
+"offers": {
+"@type": "Offer",
+"url": "https://www.nexpertsacademy.com/courses/excel-basic",
+"price": "990",
+"priceCurrency": "MYR",
+"availability": "https://schema.org/InStock"
+}
+}
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Product",
+"@id": "https://www.nexpertsacademy.com/courses/excel-basic#product",
+"name": "Microsoft Excel 2019 Basic Training",
+"image": "https://www.nexpertsacademy.com/image/nexperts-logo.png",
+"description": "Hands-on Microsoft Excel Basic training course in Malaysia covering Excel 2019 and Microsoft 365 for beginners.",
+"brand": {
+"@type": "Brand",
+"name": "Nexperts Academy"
+},
+"category": "Microsoft Excel Training",
+"sku": "EXC19B",
+"url": "https://www.nexpertsacademy.com/courses/excel-basic",
+"offers": {
+"@type": "Offer",
+"url": "https://www.nexpertsacademy.com/courses/excel-basic",
+"priceCurrency": "MYR",
+"price": "990",
+"availability": "https://schema.org/InStock",
+"itemCondition": "https://schema.org/NewCondition"
+},
+"additionalProperty": [
+{"@type": "PropertyValue", "name": "Duration", "value": "2 Days / 16 Hours"},
+{"@type": "PropertyValue", "name": "Delivery", "value": "On-site, Virtual"},
+{"@type": "PropertyValue", "name": "Level", "value": "Foundation"},
+{"@type": "PropertyValue", "name": "Language", "value": "English, Bahasa Malaysia"},
+{"@type": "PropertyValue", "name": "Exam", "value": "Practical"}
+],
+"aggregateRating": {
+"@type": "AggregateRating",
+"ratingValue": "4.9",
+"reviewCount": "312"
+},
+"review": [
+{
+"@type": "Review",
+"author": {"@type": "Person", "name": "Corporate Learner"},
+"reviewRating": {"@type": "Rating", "ratingValue": "5"},
+"reviewBody": "Practical Microsoft Excel training with hands-on exercises that improved my reporting and spreadsheet skills."
+}
+]
+}
+</script>

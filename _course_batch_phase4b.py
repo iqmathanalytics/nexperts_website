@@ -305,40 +305,116 @@ BATCH.append(dict(
 
 BATCH.append(dict(
     slug="excel-basic",
+    seo_title="Microsoft Excel Basic Training Malaysia | Nexperts Academy",
+    seo_description="Join Microsoft Excel Basic training in Malaysia. Learn formulas, formatting, charts, tables and workplace Excel skills with hands-on labs and HRD Corp support.",
+    seo_keywords="Microsoft Excel Basic Training Malaysia, Excel 2019, Microsoft 365 Excel course, Excel formulas, Excel charts, Excel tables, beginner Excel course Malaysia, HRD Corp Excel training",
+    canonical_path="/courses/excel-basic",
+    schema_markup=schema_markup_for_slug("excel-basic"),
     title="Microsoft Excel 2019 Basic",
-    title_html='Microsoft Excel 2019<br><em>Basic (EXC19B)</em>',
+    title_html='Microsoft Excel Basic Training Course in Malaysia<br><em>(Excel 2019 / Microsoft 365)</em>',
     vendor_short="Skill", watermark="XLSX", crumb_vendor="Skill-Based",
-    subtitle="Spreadsheet confidence for every office professional \u2014 navigation, formatting, formulas, charts and printing \u2014 using Excel 2019 / Microsoft 365 with Malaysian business examples.",
+    subtitle="Beginner-friendly Excel training covering Microsoft Excel 2019 and Microsoft 365 \u2014 worksheets, formulas, formatting, tables, charts and professional workplace reports.",
     badges=[("cb-vendor","Nexperts Skill"),("cb-level","Foundation"),("cb-new","EXC19B aligned"),("cb-hot","Office essential")],
     hero_meta=common_meta("2 days / 16 hrs","Hands-on Lab","On-site \u00b7 Virtual",98,"26 Aug 2026"),
     hero_img=HERO_IMG,
     quick_wins=[
-        ("\U0001F4C4","Navigation","Ribbon, quick access, freeze panes, efficient selection"),
-        ("\u2712\uFE0F","Formatting","Number formats, tables, conditional formatting basics"),
-        ("\u2795","Formulas","SUM, AVERAGE, logical IF, relative vs absolute refs"),
-        ("\U0001F4CA","Charts & print","Present insights + print-ready layouts")],
-    overview_eyebrow="What this course is",
+        ("\U0001F4C4","Navigation","Ribbon, Quick Access Toolbar, workbooks and worksheets"),
+        ("\u2712\uFE0F","Formatting","Fonts, borders, number formats, tables and conditional formatting"),
+        ("\u2795","Formulas","SUM, AVERAGE, COUNT, MIN, MAX, IF, relative vs absolute refs"),
+        ("\U0001F4CA","Charts & print","Column, pie and line charts plus print-ready layouts")],
+    overview_eyebrow="Microsoft Excel Basic Training in Malaysia",
     overview_head=("Excel basics","that stick."),
-    overview_p1="Most workplace frustration with Excel is not intelligence \u2014 it is never being shown the efficient patterns. Two focused days fix that for HR, finance, ops and admin teams.",
-    overview_p2="Each learner works on realistic datasets (leave trackers, simple P&amp;L summaries, inventory lists).",
-    overview_p3="Optional half-day add-on introduces Power Query awareness for teams planning to continue to our Advanced Analytics track.",
+    overview_p1="Whether you're new to spreadsheets or looking to improve your workplace productivity, our Microsoft Excel Basic Training in Malaysia helps you build practical Excel skills through hands-on exercises and real business scenarios.",
+    overview_p2="This beginner-friendly Excel course covers Microsoft Excel 2019 and Microsoft 365, teaching learners how to confidently create worksheets, organise data, use formulas, format spreadsheets, build charts and produce professional reports.",
+    overview_quote="Every participant works with practical business datasets including HR reports, finance trackers, inventory sheets and administrative templates to develop workplace-ready Excel skills.",
+    overview_p3="By the end of the training, learners can confidently create professional spreadsheets used in finance, HR, administration, operations and sales. No previous Excel experience is required.",
     who_for=[
-        ("\U0001F4BC","Administrators","Daily reporting duties."),
-        ("\U0001F4DA","Fresh graduates","Workplace readiness."),
-        ("\U0001F4C8","Managers","Delegating template standards."),
-        ("\U0001F3AF","Career returnees","Confidence rebuild."),
-        ("\U0001F465","Corporate teams","On-site cohorts welcome."),
-        ("\U0001F9E0","Anyone avoiding Excel","We normalise asking questions.")],
-    prereqs=["Basic Windows/macOS literacy","Excel installed (2019 or Microsoft 365)"],
-    prereqs_note="HRD Corp claims supported \u2014 speak to our coordinator.",
+        ("\U0001F4BC","Office Administrators","Daily reporting and spreadsheet duties."),
+        ("\U0001F465","HR / Finance / Ops staff","HR executives, finance executives, account assistants and operations teams."),
+        ("\U0001F4C8","Sales & business support","Sales coordinators and business support teams."),
+        ("\U0001F4DA","Fresh graduates & students","Workplace Excel readiness."),
+        ("\U0001F3AF","Job seekers","Build practical spreadsheet confidence for interviews."),
+        ("\U0001F3E2","Corporate teams & SME owners","On-site and customised cohorts welcome.")],
+    prereqs=["Basic Windows/macOS literacy","Excel installed (2019 or Microsoft 365)","No previous Excel experience required"],
+    prereqs_note="HRD Corp claim assistance is available for eligible organisations.",
+    overview_sections_after_who=[
+        {
+            "eyebrow": "What You'll Learn in this Excel Course",
+            "eyebrow_class": "m",
+            "paragraphs": [
+                "During this Microsoft Excel training course you'll learn how to navigate Excel efficiently and create professional workplace spreadsheets."],
+            "bullets": [
+                "Navigate Microsoft Excel and manage workbooks",
+                "Enter, edit and organise data",
+                "Format professional worksheets and create Excel Tables",
+                "Sort and filter data",
+                "Use Excel formulas \u2014 SUM, AVERAGE, MIN, MAX, COUNT and IF",
+                "Apply relative and absolute references",
+                "Create charts and print-ready reports",
+                "Apply basic spreadsheet best practices"],
+        },
+        {
+            "eyebrow": "Microsoft Excel Skills You'll Gain",
+            "paragraphs": [
+                "Throughout this course you'll develop practical workplace Excel skills."],
+            "bullets": [
+                "Spreadsheet design, data entry and data formatting",
+                "Formula writing and cell referencing",
+                "Conditional formatting, tables and charts",
+                "Printing, workbook management and productivity shortcuts",
+                "Business reporting and data organisation"],
+        },
+        {
+            "eyebrow": "Why Learn Microsoft Excel?",
+            "paragraphs": [
+                "Microsoft Excel remains one of the most widely used business applications across finance, administration, HR, operations, logistics, procurement and project management.",
+                "Whether you are beginning your career or improving workplace efficiency, Excel continues to be one of the most valuable office productivity tools."],
+            "bullets": [
+                "Increase productivity and reduce manual work",
+                "Improve reporting accuracy",
+                "Analyse business data and create professional dashboards",
+                "Make faster business decisions"],
+        },
+        {
+            "eyebrow": "Microsoft Excel Certification & Course Information",
+            "paragraphs": [
+                "After completing the course, participants receive a certificate of completion from Nexperts Academy.",
+                "The course is delivered through instructor-led practical sessions using Microsoft Excel 2019 and Microsoft 365 with guided exercises and workplace examples. Corporate training and HRD Corp claim assistance are also available for eligible organisations."],
+        }],
     curriculum_eyebrow="Course Curriculum",
-    curriculum_head=("Two days.","Hands-on."),
-    curriculum_intro="See trainer screen + replicate immediately \u2014 no death-by-slide.",
+    curriculum_head=("Five modules.","Hands-on Excel basics."),
+    curriculum_intro="The Microsoft Excel Basic training follows a practical workplace sequence \u2014 workbook fundamentals, data entry, formatting, formulas, then charts and print-ready reports.",
     modules=[
-        ("01","Interface & editing",["Workbooks vs sheets","Efficient navigation","Data entry patterns","Find/replace","Lab: clean messy attendance sheet"]),
-        ("02","Formatting & tables",["Cell styles","Table objects","Sort/filter","Lab: HR roster"]),
-        ("03","Formulas",["Operators","SUM/AVERAGE/MIN/MAX","IF basics","Relative/Absolute refs","Lab: budget variance"]),
-        ("04","Charts & output",["Charts","Sparklines intro","Page setup & print","Lab: one-page summary for boss"])],
+        ("01","Workbook Fundamentals",[
+            "Excel interface, Ribbon and Quick Access Toolbar",
+            "Workbooks vs worksheets",
+            "Efficient navigation and selection",
+            "Freeze panes and productivity shortcuts",
+            "Lab: set up a clean workplace workbook"]),
+        ("02","Data Entry",[
+            "Entering and editing data",
+            "AutoFill patterns",
+            "Copy, paste and paste options",
+            "Find and Replace",
+            "Lab: clean a messy attendance / inventory sheet"]),
+        ("03","Formatting & Tables",[
+            "Fonts, borders, colours and cell styles",
+            "Number formatting for finance and HR data",
+            "Conditional formatting basics",
+            "Excel Tables, sort and filter",
+            "Lab: format an HR roster as a professional table"]),
+        ("04","Excel Formulas",[
+            "Formula operators and structure",
+            "SUM, AVERAGE, COUNT, MIN and MAX",
+            "IF functions for workplace decisions",
+            "Relative vs absolute references",
+            "Lab: build a budget variance sheet"]),
+        ("05","Charts & Reports",[
+            "Column, pie and line charts",
+            "Sparklines introduction",
+            "Page layout, headers and footers",
+            "Print setup for professional reports",
+            "Lab: create a one-page summary for management"])],
     labs_eyebrow="Labs",
     labs_head=("Repeatable patterns.","Immediate apply."),
     labs_intro="Every learner leaves with starter templates for their department.",
@@ -386,6 +462,32 @@ BATCH.append(dict(
     whats_included=["Workbook","Templates","Certificate","HRD assist"],
     verify_items=["Nexperts verification"],
     guarantee_text="Follow our programme and clear the mock threshold before booking. Dedicated exam coaching and instructor support included.",
+    faq_head=("Microsoft Excel Basic", "FAQs."),
+    faqs=[
+        (
+            "Is this Microsoft Excel course suitable for beginners?",
+            "Yes. This course is designed for beginners with little or no previous Excel experience.",
+        ),
+        (
+            "Which version of Excel is used?",
+            "Training covers Microsoft Excel 2019 and Microsoft 365.",
+        ),
+        (
+            "Is this an instructor-led Excel training course?",
+            "Yes. All sessions are instructor-led with practical hands-on exercises.",
+        ),
+        (
+            "Can companies arrange corporate Excel training?",
+            "Yes. Nexperts Academy provides on-site and customised Microsoft Excel training for organisations.",
+        ),
+        (
+            "Is HRD Corp claim available?",
+            "Yes. HRD Corp claim assistance is available for eligible organisations.",
+        ),
+        (
+            "Will I receive a certificate?",
+            "Yes. Participants receive a certificate after successfully completing the course.",
+        )],
 ))
 
 
