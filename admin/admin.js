@@ -10,7 +10,8 @@
  *      custom_brands: { [key]: { key, label, tagline, color, color_tint } },
  *      custom_courses: [ { slug, brand, category, vendor, badge, badge_variant,
  *                          name, description, level, rating, reviews, enrolled,
- *                          card_href } ]
+ *                          card_href } ],
+ *      pricing: { enabled, base, regions: { my, uk, dubai, india } }
  *    }
  *  Public site: overlay.js loads published overrides (Netlify) + local draft.
  * -------------------------------------------------------------- */
@@ -25,14 +26,28 @@ const SESSION_TTL_MS = 24 * 60 * 60 * 1000;
 
 const FIELDS_CATALOG = ["name", "description"];
 const FIELDS_DETAIL = ["duration", "next_intake", "price", "price_original"];
+const FIELDS_REGIONAL = [
+  "price_uk",
+  "price_original_uk",
+  "price_dubai",
+  "price_original_dubai",
+  "price_india",
+  "price_original_india",
+];
 
 const FIELD_LABELS = {
   name: "Course name",
   description: "Description",
   duration: "Duration",
   next_intake: "Next intake",
-  price: "Price (current)",
-  price_original: "Price (original)",
+  price: "Price (current, Malaysia RM)",
+  price_original: "Price (original, Malaysia RM)",
+  price_uk: "UK price (optional override)",
+  price_original_uk: "UK original (optional)",
+  price_dubai: "Dubai price (optional override)",
+  price_original_dubai: "Dubai original (optional)",
+  price_india: "India price (optional override)",
+  price_original_india: "India original (optional)",
 };
 const FIELD_PLACEHOLDERS = {
   name: "e.g. CEH v13 AI",
@@ -41,7 +56,56 @@ const FIELD_PLACEHOLDERS = {
   next_intake: "e.g. 12 May 2026",
   price: "e.g. RM 3,800",
   price_original: "e.g. RM 4,500",
+  price_uk: "e.g. £1,250 — leave blank to convert from RM",
+  price_original_uk: "e.g. £1,450",
+  price_dubai: "e.g. AED 4,500 — leave blank to convert from RM",
+  price_original_dubai: "e.g. AED 5,200",
+  price_india: "e.g. ₹66,000 — leave blank to convert from RM",
+  price_original_india: "e.g. ₹78,000",
 };
+
+const DEFAULT_PRICING = {
+  enabled: true,
+  base: "my",
+  regions: {
+    my: { label: "Malaysia", countries: ["MY"], currency: "MYR", symbol: "RM", rate_from_myr: 1 },
+    uk: { label: "United Kingdom", countries: ["GB"], currency: "GBP", symbol: "£", rate_from_myr: 0.18, rounding: 10 },
+    dubai: { label: "Dubai / UAE", countries: ["AE"], currency: "AED", symbol: "AED", rate_from_myr: 0.85, rounding: 10 },
+    india: { label: "India", countries: ["IN"], currency: "INR", symbol: "₹", rate_from_myr: 20, rounding: 10 },
+  },
+};
+
+function cloneDefaultPricing() {
+  return JSON.parse(JSON.stringify(DEFAULT_PRICING));
+}
+
+function normalizePricing(raw) {
+  const fallback = cloneDefaultPricing();
+  if (!raw || typeof raw !== "object") return fallback;
+  const regions = {};
+  for (const key of ["my", "uk", "dubai", "india"]) {
+    const d = fallback.regions[key];
+    const r = raw.regions && typeof raw.regions[key] === "object" ? raw.regions[key] : {};
+    const rate = Number(r.rate_from_myr);
+    const rounding = Number(r.rounding);
+    const countries = Array.isArray(r.countries)
+      ? r.countries.map(c => String(c || "").toUpperCase()).filter(Boolean)
+      : [];
+    regions[key] = {
+      label: String(r.label || d.label),
+      countries: countries.length ? countries : d.countries.slice(),
+      currency: String(r.currency || d.currency),
+      symbol: String(r.symbol != null && r.symbol !== "" ? r.symbol : d.symbol),
+      rate_from_myr: Number.isFinite(rate) && rate > 0 ? rate : d.rate_from_myr,
+      rounding: Number.isFinite(rounding) && rounding > 0 ? rounding : d.rounding || 1,
+    };
+  }
+  return {
+    enabled: raw.enabled !== false,
+    base: "my",
+    regions,
+  };
+}
 
 let baseline = null;
 let courseBySlug = {};
@@ -326,6 +390,7 @@ function defaultOverrides() {
     brand_order: null,
     custom_brands: {},
     custom_courses: [],
+    pricing: cloneDefaultPricing(),
   };
 }
 
@@ -338,18 +403,26 @@ function normalizeOverrideState(obj) {
     brand_order: obj.brand_order || null,
     custom_brands: obj.custom_brands || {},
     custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
+    pricing: normalizePricing(obj.pricing),
   };
 }
 
-function loadOverrides() {
+function loadOverridesRaw() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultOverrides();
-    return normalizeOverrideState(JSON.parse(raw));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : null;
   } catch (e) {
     console.warn("admin: failed to parse storage, starting fresh", e);
-    return defaultOverrides();
+    return null;
   }
+}
+
+function loadOverrides() {
+  const parsed = loadOverridesRaw();
+  if (!parsed) return defaultOverrides();
+  return normalizeOverrideState(parsed);
 }
 
 function publishedOverridesUrls() {
@@ -367,15 +440,20 @@ function publishedOverridesUrls() {
   return ["/api/course-overrides", "/data/course-overrides.json"];
 }
 
-function publishedStateHasData(state) {
-  if (!state) return false;
+function rawHasPublishedData(raw) {
+  if (!raw || typeof raw !== "object") return false;
   return (
-    Object.keys(state.courses || {}).length > 0 ||
-    (state.custom_courses || []).length > 0 ||
-    Object.keys(state.custom_brands || {}).length > 0 ||
-    (state.brand_order && state.brand_order.length > 0) ||
-    Object.keys(state.card_order || {}).length > 0
+    Object.keys(raw.courses || {}).length > 0 ||
+    (raw.custom_courses || []).length > 0 ||
+    Object.keys(raw.custom_brands || {}).length > 0 ||
+    (raw.brand_order && raw.brand_order.length > 0) ||
+    Object.keys(raw.card_order || {}).length > 0 ||
+    !!(raw.pricing && typeof raw.pricing === "object")
   );
+}
+
+function publishedStateHasData(state) {
+  return rawHasPublishedData(state);
 }
 
 async function fetchPublishedOverrides() {
@@ -383,8 +461,9 @@ async function fetchPublishedOverrides() {
     try {
       const res = await fetch(url, { cache: "no-store", credentials: "same-origin" });
       if (!res.ok) continue;
-      const state = normalizeOverrideState(await res.json());
-      if (publishedStateHasData(state)) return state;
+      const raw = await res.json();
+      if (!rawHasPublishedData(raw)) continue;
+      return normalizeOverrideState(raw);
     } catch (e) {
       /* try next */
     }
@@ -392,9 +471,10 @@ async function fetchPublishedOverrides() {
   return null;
 }
 
-function mergePublishedWithLocal(published, local) {
+function mergePublishedWithLocal(published, localRaw) {
+  const draftHadPricing = !!(localRaw && localRaw.pricing && typeof localRaw.pricing === "object");
   const pub = normalizeOverrideState(published);
-  const draft = normalizeOverrideState(local);
+  const draft = normalizeOverrideState(localRaw);
   const courses = { ...pub.courses };
   for (const slug of Object.keys(draft.courses)) {
     courses[slug] = { ...(courses[slug] || {}), ...draft.courses[slug] };
@@ -413,6 +493,7 @@ function mergePublishedWithLocal(published, local) {
     brand_order: draft.brand_order || pub.brand_order,
     custom_brands,
     custom_courses: Object.values(customBySlug),
+    pricing: normalizePricing(draftHadPricing ? draft.pricing : pub.pricing),
   };
 }
 
@@ -572,9 +653,10 @@ async function init() {
     return;
   }
 
-  const localDraft = loadOverrides();
+  const localRaw = loadOverridesRaw();
+  const localDraft = localRaw ? normalizeOverrideState(localRaw) : defaultOverrides();
   const published = await fetchPublishedOverrides();
-  overrides = published ? mergePublishedWithLocal(published, localDraft) : localDraft;
+  overrides = published ? mergePublishedWithLocal(published, localRaw) : localDraft;
   rebuildCourseIndex();
   pruneStaleOverrides();
   rebuildCourseIndex();
@@ -807,6 +889,10 @@ async function openDrawer(slug) {
   FIELDS_DETAIL.forEach(f => {
     html += renderField(f, c[f] || "");
   });
+  html += `<p class="ad-field-help" style="margin:4px 0 12px">Malaysia RM is the source of truth. UK/Dubai/India fields below override conversion for this course only. Schema and salary copy stay RM.</p>`;
+  FIELDS_REGIONAL.forEach(f => {
+    html += renderField(f, c[f] || "", { emptyIsBaseline: true });
+  });
   html += `</div>`;
 
   let initStruct = normalizeCurriculumStruct(c.curriculum_struct);
@@ -844,10 +930,10 @@ async function openDrawer(slug) {
   }
 }
 
-function renderField(f, val) {
+function renderField(f, val, opts = {}) {
   const label = FIELD_LABELS[f];
   const placeholder = FIELD_PLACEHOLDERS[f];
-  const baseVal = courseBySlug[activeSlug]?.[f] ?? "";
+  const baseVal = opts.emptyIsBaseline ? "" : (courseBySlug[activeSlug]?.[f] ?? "");
   const changed = val !== baseVal;
   const help = changed ? `<span class="ad-field-help" style="color:var(--blue)">● modified from baseline</span>` : "";
 
@@ -861,7 +947,7 @@ function renderField(f, val) {
 function onDrawerInput(e) {
   const f = e.target.dataset.field;
   if (!f) return;
-  const baseVal = courseBySlug[activeSlug]?.[f] ?? "";
+  const baseVal = FIELDS_REGIONAL.includes(f) ? "" : (courseBySlug[activeSlug]?.[f] ?? "");
   const changed = e.target.value !== baseVal;
   const wrap = e.target.closest(".ad-field");
   if (!wrap) return;
@@ -893,6 +979,11 @@ function applyDrawer() {
   $$("#adDrawerBody [data-field]").forEach(el => {
     const f = el.dataset.field;
     const v = el.value.trim();
+    if (FIELDS_REGIONAL.includes(f)) {
+      if (v) merged[f] = v;
+      else delete merged[f];
+      return;
+    }
     const baseVal = courseBySlug[slug]?.[f] ?? "";
     if (v === baseVal) delete merged[f];
     else merged[f] = v;
@@ -929,11 +1020,12 @@ function revertCard(slug) {
 }
 
 function resetAll() {
-  if (!confirm("Reset ALL course edits, custom courses, custom brands and order changes?")) return;
+  if (!confirm("Reset ALL course edits, custom courses, custom brands, regional pricing and order changes?")) return;
   overrides = defaultOverrides();
   saveOverrides(false);
   rebuildCourseIndex();
   renderBoard();
+  fillPricingPanel();
   toast("Restored to baseline", "success");
 }
 
@@ -992,15 +1084,9 @@ async function verifyPublishCredentials(user, pass) {
 }
 
 async function publishLive() {
-  const edited = Object.keys(overrides.courses || {}).length;
-  const custom = (overrides.custom_courses || []).length;
-  if (!edited && !custom) {
-    toast("No edits to publish — save a draft first", "error");
-    return;
-  }
   if (
     !confirm(
-      "Publish all saved edits to the live website for every visitor?\n\nThis updates the public course pages immediately."
+      "Publish all saved edits (including regional pricing) to the live website for every visitor?\n\nThis updates the public course pages immediately. HTML schema stays Malaysia RM; UK/Dubai/India prices display in the browser."
     )
   ) {
     return;
@@ -1044,7 +1130,7 @@ async function publishLive() {
     toast("Published live — all visitors will see your updates shortly", "success");
     const refreshed = await fetchPublishedOverrides();
     if (refreshed) {
-      overrides = mergePublishedWithLocal(refreshed, loadOverrides());
+      overrides = mergePublishedWithLocal(refreshed, loadOverridesRaw());
       rebuildCourseIndex();
       pruneStaleOverrides();
       rebuildCourseIndex();
@@ -1089,12 +1175,14 @@ function importJSON(file) {
         brand_order: obj.brand_order || null,
         custom_brands: obj.custom_brands || {},
         custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
+        pricing: normalizePricing(obj.pricing),
       };
       rebuildCourseIndex();
       pruneStaleOverrides();
       rebuildCourseIndex();
       saveOverrides(false);
       renderBoard();
+      fillPricingPanel();
       const customCount = (overrides.custom_courses || []).length;
       $("#kpiCourses").textContent = String(baseline.courses.length + customCount);
       toast("Imported overrides · saved", "success");
@@ -1249,7 +1337,59 @@ function toast(msg, kind = "") {
   }, 2400);
 }
 
+function fillPricingPanel() {
+  const p = normalizePricing(overrides.pricing);
+  overrides.pricing = p;
+  const enabled = $("#adPriceEnabled");
+  const gbp = $("#adPriceGbp");
+  const aed = $("#adPriceAed");
+  const inr = $("#adPriceInr");
+  const rounding = $("#adPriceRounding");
+  if (enabled) enabled.checked = p.enabled !== false;
+  if (gbp) gbp.value = String(p.regions.uk.rate_from_myr);
+  if (aed) aed.value = String(p.regions.dubai.rate_from_myr);
+  if (inr) inr.value = String(p.regions.india.rate_from_myr);
+  if (rounding) rounding.value = String(p.regions.uk.rounding || p.regions.dubai.rounding || p.regions.india.rounding || 10);
+}
+
+function readPricingFromPanel() {
+  const current = normalizePricing(overrides.pricing);
+  const enabledEl = $("#adPriceEnabled");
+  const gbp = Number($("#adPriceGbp")?.value);
+  const aed = Number($("#adPriceAed")?.value);
+  const inr = Number($("#adPriceInr")?.value);
+  const rounding = Number($("#adPriceRounding")?.value);
+  current.enabled = enabledEl ? !!enabledEl.checked : true;
+  if (Number.isFinite(gbp) && gbp > 0) current.regions.uk.rate_from_myr = gbp;
+  if (Number.isFinite(aed) && aed > 0) current.regions.dubai.rate_from_myr = aed;
+  if (Number.isFinite(inr) && inr > 0) current.regions.india.rate_from_myr = inr;
+  if (Number.isFinite(rounding) && rounding > 0) {
+    current.regions.uk.rounding = rounding;
+    current.regions.dubai.rounding = rounding;
+    current.regions.india.rounding = rounding;
+  }
+  current.regions.my.rate_from_myr = 1;
+  return current;
+}
+
+function persistPricingFromPanel() {
+  overrides.pricing = readPricingFromPanel();
+  saveOverrides(false);
+  toast("Regional pricing saved in this browser · Publish live for visitors", "success");
+}
+
+function bindPricingPanel() {
+  fillPricingPanel();
+  ["adPriceEnabled", "adPriceGbp", "adPriceAed", "adPriceInr", "adPriceRounding"].forEach(id => {
+    const el = $("#" + id);
+    if (!el || el.dataset.nxBound) return;
+    el.dataset.nxBound = "1";
+    el.addEventListener("change", persistPricingFromPanel);
+  });
+}
+
 function bindUI() {
+  bindPricingPanel();
   $$(".ad-chip").forEach(b =>
     b.addEventListener("click", () => {
       $$(".ad-chip").forEach(x => x.classList.remove("on"));

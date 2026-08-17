@@ -4,6 +4,79 @@
  */
 
 export const KV_KEY = "published";
+
+export const DEFAULT_PRICING = {
+  enabled: true,
+  base: "my",
+  regions: {
+    my: {
+      label: "Malaysia",
+      countries: ["MY"],
+      currency: "MYR",
+      symbol: "RM",
+      rate_from_myr: 1,
+    },
+    uk: {
+      label: "United Kingdom",
+      countries: ["GB"],
+      currency: "GBP",
+      symbol: "£",
+      rate_from_myr: 0.18,
+      rounding: 10,
+    },
+    dubai: {
+      label: "Dubai / UAE",
+      countries: ["AE"],
+      currency: "AED",
+      symbol: "AED",
+      rate_from_myr: 0.85,
+      rounding: 10,
+    },
+    india: {
+      label: "India",
+      countries: ["IN"],
+      currency: "INR",
+      symbol: "₹",
+      rate_from_myr: 20,
+      rounding: 10,
+    },
+  },
+};
+
+const REGION_KEYS = ["my", "uk", "dubai", "india"];
+
+function cloneDefaultPricing() {
+  return JSON.parse(JSON.stringify(DEFAULT_PRICING));
+}
+
+export function normalizePricing(raw) {
+  const fallback = cloneDefaultPricing();
+  if (!raw || typeof raw !== "object") return fallback;
+  const regions = {};
+  for (const key of REGION_KEYS) {
+    const d = fallback.regions[key];
+    const r = raw.regions && typeof raw.regions[key] === "object" ? raw.regions[key] : {};
+    const rate = Number(r.rate_from_myr);
+    const rounding = Number(r.rounding);
+    const countries = Array.isArray(r.countries)
+      ? r.countries.map((c) => String(c || "").toUpperCase()).filter(Boolean)
+      : [];
+    regions[key] = {
+      label: String(r.label || d.label),
+      countries: countries.length ? countries : d.countries.slice(),
+      currency: String(r.currency || d.currency),
+      symbol: String(r.symbol != null && r.symbol !== "" ? r.symbol : d.symbol),
+      rate_from_myr: Number.isFinite(rate) && rate > 0 ? rate : d.rate_from_myr,
+      rounding: Number.isFinite(rounding) && rounding > 0 ? rounding : d.rounding || 1,
+    };
+  }
+  return {
+    enabled: raw.enabled !== false,
+    base: "my",
+    regions,
+  };
+}
+
 const EMPTY = {
   version: 2,
   courses: {},
@@ -11,7 +84,20 @@ const EMPTY = {
   brand_order: null,
   custom_brands: {},
   custom_courses: [],
+  pricing: cloneDefaultPricing(),
 };
+
+function payloadHasPublishedData(normalized, raw) {
+  if (!normalized) return false;
+  return (
+    Object.keys(normalized.courses || {}).length > 0 ||
+    (normalized.custom_courses && normalized.custom_courses.length > 0) ||
+    Object.keys(normalized.custom_brands || {}).length > 0 ||
+    (normalized.brand_order && normalized.brand_order.length > 0) ||
+    Object.keys(normalized.card_order || {}).length > 0 ||
+    !!(raw && raw.pricing && typeof raw.pricing === "object")
+  );
+}
 
 /** Merge process.env with Cloudflare Pages `context.env` (string vars only; skip KV/D1 bindings). */
 export function mergeRuntimeEnv(runtimeEnv = {}) {
@@ -100,7 +186,17 @@ export function checkAuth(event, runtimeEnv = {}) {
 }
 
 export function normalizePayload(obj) {
-  if (!obj || typeof obj !== "object") return { ...EMPTY };
+  if (!obj || typeof obj !== "object") {
+    return {
+      version: 2,
+      courses: {},
+      card_order: {},
+      brand_order: null,
+      custom_brands: {},
+      custom_courses: [],
+      pricing: cloneDefaultPricing(),
+    };
+  }
   return {
     version: 2,
     courses: obj.courses && typeof obj.courses === "object" ? obj.courses : {},
@@ -112,6 +208,7 @@ export function normalizePayload(obj) {
         ? obj.custom_brands
         : {},
     custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
+    pricing: normalizePricing(obj.pricing),
   };
 }
 
@@ -151,9 +248,7 @@ export async function handler(event, storage = {}, runtimeEnv = {}) {
         const blob = await storage.getPublished();
         if (blob && typeof blob === "object") {
           const data = normalizePayload(blob);
-          const has =
-            Object.keys(data.courses).length > 0 ||
-            (data.custom_courses && data.custom_courses.length > 0);
+          const has = payloadHasPublishedData(data, blob);
           if (has) {
             return {
               statusCode: 200,

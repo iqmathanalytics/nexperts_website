@@ -53,6 +53,7 @@ STATIC_PAGES = [
     "blog/aws-certification-roadmap.html",
     "blog/cisco-certification-path.html",
     "blog/fortinet-certification-guide.html",
+    "blog/microsoft-azure-certification-guide.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]

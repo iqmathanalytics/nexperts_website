@@ -90,7 +90,7 @@
   <section class="ad-hero">
     <div class="ad-eyebrow">Course catalog</div>
     <h1>Manage <em>course details &amp; ordering.</em></h1>
-    <p class="ad-sub">Edit course names, descriptions, duration, next intake, pricing and curriculum on detail pages. <strong>Save draft</strong> stores edits in this browser for preview. Click <strong>Publish live</strong> for all visitors (Cloudflare: bind <code>COURSE_OVERRIDES</code> KV — see deploy docs). Export JSON to commit <code>data/course-overrides.json</code> as a backup.</p>
+    <p class="ad-sub">Edit course names, descriptions, duration, next intake, pricing and curriculum on detail pages. Set UK, Dubai, and India conversion rates below — visitors see converted enroll-card prices after load; Google still gets Malaysia RM HTML and schema. <strong>Save draft</strong> stores edits in this browser for preview. Click <strong>Publish live</strong> for all visitors (Cloudflare: bind <code>COURSE_OVERRIDES</code> KV — see deploy docs). Export JSON to commit <code>data/course-overrides.json</code> as a backup.</p>
     <div class="ad-quick">
       <span class="ad-quick-i"><b id="kpiBrands">0</b><span>Brands</span></span>
       <span class="ad-quick-i"><b id="kpiCourses">0</b><span>Courses</span></span>
@@ -108,6 +108,34 @@
       <span class="ad-tools-spacer"></span>
       <label class="ad-toggle"><input type="checkbox" id="adShowEditedOnly"> <span>Show edited only</span></label>
     </div>
+  </section>
+
+  <section class="ad-pricing" id="adPricing">
+    <h2>Regional pricing</h2>
+    <p class="ad-pricing-lead">Malaysia RM is the canonical sell price (HTML, schema, and salary copy stay RM). UK, Dubai, and India visitors see converted enroll-card prices in the browser, based on IP country only. Starter rates are placeholders — set live GBP/AED/INR rates before relying on them. Per-course UK/Dubai/India fields in the course drawer beat these rates.</p>
+    <label class="ad-toggle ad-pricing-enable">
+      <input type="checkbox" id="adPriceEnabled" checked>
+      <span>Enable regional display prices</span>
+    </label>
+    <div class="ad-pricing-grid">
+      <div class="ad-field">
+        <label for="adPriceGbp">GBP per 1 MYR</label>
+        <input type="number" id="adPriceGbp" min="0.0001" step="0.0001" value="0.18">
+      </div>
+      <div class="ad-field">
+        <label for="adPriceAed">AED per 1 MYR</label>
+        <input type="number" id="adPriceAed" min="0.0001" step="0.0001" value="0.85">
+      </div>
+      <div class="ad-field">
+        <label for="adPriceInr">INR per 1 MYR</label>
+        <input type="number" id="adPriceInr" min="0.0001" step="0.0001" value="20">
+      </div>
+      <div class="ad-field">
+        <label for="adPriceRounding">Round converted prices to nearest</label>
+        <input type="number" id="adPriceRounding" min="1" step="1" value="10">
+      </div>
+    </div>
+    <p class="ad-pricing-note">Public course pages show one price only, based on the visitor’s Cloudflare country IP. United Kingdom → GBP, UAE → AED, India → INR. Malaysia and unknown countries stay RM. Localhost has no country header, so it defaults to Malaysia.</p>
   </section>
 
   <section class="ad-board" id="adBoard"></section>

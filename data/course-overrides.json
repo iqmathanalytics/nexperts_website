@@ -4,5 +4,42 @@
   "card_order": {},
   "brand_order": null,
   "custom_brands": {},
-  "custom_courses": []
+  "custom_courses": [],
+  "pricing": {
+    "enabled": true,
+    "base": "my",
+    "regions": {
+      "my": {
+        "label": "Malaysia",
+        "countries": ["MY"],
+        "currency": "MYR",
+        "symbol": "RM",
+        "rate_from_myr": 1
+      },
+      "uk": {
+        "label": "United Kingdom",
+        "countries": ["GB"],
+        "currency": "GBP",
+        "symbol": "£",
+        "rate_from_myr": 0.18,
+        "rounding": 10
+      },
+      "dubai": {
+        "label": "Dubai / UAE",
+        "countries": ["AE"],
+        "currency": "AED",
+        "symbol": "AED",
+        "rate_from_myr": 0.85,
+        "rounding": 10
+      },
+      "india": {
+        "label": "India",
+        "countries": ["IN"],
+        "currency": "INR",
+        "symbol": "₹",
+        "rate_from_myr": 20,
+        "rounding": 10
+      }
+    }
+  }
 }

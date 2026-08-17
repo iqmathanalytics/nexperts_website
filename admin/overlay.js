@@ -7,6 +7,50 @@
   "use strict";
 
   const STORAGE_KEY = "nexperts_admin_v1";
+  const GEO_COUNTRY_KEY = "nexperts_geo_country";
+  const DEFAULT_PRICING = {
+    enabled: true,
+    base: "my",
+    regions: {
+      my: { label: "Malaysia", countries: ["MY"], currency: "MYR", symbol: "RM", rate_from_myr: 1 },
+      uk: { label: "United Kingdom", countries: ["GB"], currency: "GBP", symbol: "£", rate_from_myr: 0.18, rounding: 10 },
+      dubai: { label: "Dubai / UAE", countries: ["AE"], currency: "AED", symbol: "AED", rate_from_myr: 0.85, rounding: 10 },
+      india: { label: "India", countries: ["IN"], currency: "INR", symbol: "₹", rate_from_myr: 20, rounding: 10 },
+    },
+  };
+
+  function cloneDefaultPricing() {
+    return JSON.parse(JSON.stringify(DEFAULT_PRICING));
+  }
+
+  function normalizePricing(raw) {
+    const fallback = cloneDefaultPricing();
+    if (!raw || typeof raw !== "object") return fallback;
+    const regions = {};
+    ["my", "uk", "dubai", "india"].forEach(key => {
+      const d = fallback.regions[key];
+      const r = raw.regions && typeof raw.regions[key] === "object" ? raw.regions[key] : {};
+      const rate = Number(r.rate_from_myr);
+      const rounding = Number(r.rounding);
+      const countries = Array.isArray(r.countries)
+        ? r.countries.map(c => String(c || "").toUpperCase()).filter(Boolean)
+        : [];
+      regions[key] = {
+        label: String(r.label || d.label),
+        countries: countries.length ? countries : d.countries.slice(),
+        currency: String(r.currency || d.currency),
+        symbol: String(r.symbol != null && r.symbol !== "" ? r.symbol : d.symbol),
+        rate_from_myr: Number.isFinite(rate) && rate > 0 ? rate : d.rate_from_myr,
+        rounding: Number.isFinite(rounding) && rounding > 0 ? rounding : d.rounding || 1,
+      };
+    });
+    return {
+      enabled: raw.enabled !== false,
+      base: "my",
+      regions,
+    };
+  }
+
   function publishedUrls() {
     try {
       const h = (location.hostname || "").toLowerCase();
@@ -38,6 +82,7 @@
       brand_order: null,
       custom_brands: {},
       custom_courses: [],
+      pricing: cloneDefaultPricing(),
     };
   }
 
@@ -49,6 +94,7 @@
       brand_order: obj.brand_order || null,
       custom_brands: obj.custom_brands || {},
       custom_courses: Array.isArray(obj.custom_courses) ? obj.custom_courses : [],
+      pricing: obj.pricing ? normalizePricing(obj.pricing) : null,
     };
   }
 
@@ -67,14 +113,16 @@
       try {
         const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) continue;
-        const state = normalizeState(await res.json());
+        const raw = await res.json();
+        const state = normalizeState(raw);
         if (!state) continue;
         const has =
           Object.keys(state.courses).length > 0 ||
           state.custom_courses.length > 0 ||
           Object.keys(state.custom_brands).length > 0 ||
           (state.brand_order && state.brand_order.length > 0) ||
-          Object.keys(state.card_order).length > 0;
+          Object.keys(state.card_order).length > 0 ||
+          !!(raw.pricing && typeof raw.pricing === "object");
         if (has) return state;
       } catch (e) {
         /* try next */
@@ -84,9 +132,11 @@
   }
 
   function mergeState(published, local) {
-    if (!published && !local) return null;
+    if (!published && !local) return emptyState();
     const base = published || emptyState();
-    if (!local) return base;
+    if (!local) {
+      return { ...base, pricing: normalizePricing(base.pricing) };
+    }
 
     const courses = { ...base.courses };
     Object.keys(local.courses || {}).forEach(slug => {
@@ -115,6 +165,7 @@
         local.brand_order && local.brand_order.length ? local.brand_order : base.brand_order,
       custom_brands,
       custom_courses: Object.values(customBySlug),
+      pricing: normalizePricing(local.pricing || base.pricing),
     };
   }
 
@@ -678,13 +729,179 @@
     setText(saveEl, label);
   }
 
+  function looksLikeMyr(text) {
+    return /^(RM|MYR)\b/i.test(String(text || "").trim());
+  }
+
+  function convertFromMyr(myr, region) {
+    const rate = Number(region && region.rate_from_myr) || 1;
+    const rounding = Number(region && region.rounding) > 0 ? Number(region.rounding) : 1;
+    const raw = Number(myr) * rate;
+    if (!Number.isFinite(raw)) return null;
+    return Math.round(raw / rounding) * rounding;
+  }
+
+  function formatRegionalPrice(amount, region) {
+    const n = Number(amount);
+    if (!Number.isFinite(n)) return "";
+    const formatted = Math.round(n).toLocaleString("en-US");
+    const sym = (region && region.symbol) || "";
+    if (sym === "£") return "£" + formatted;
+    if (sym === "₹") return "₹" + formatted;
+    if (sym === "RM") return "RM " + formatted;
+    return (sym + " " + formatted).replace(/\s+/g, " ").trim();
+  }
+
+  function countryToRegion(country, pricing) {
+    const cc = String(country || "").toUpperCase();
+    if (!cc) return "my";
+    const regions = (pricing && pricing.regions) || {};
+    const keys = Object.keys(regions);
+    for (let i = 0; i < keys.length; i++) {
+      const id = keys[i];
+      const countries = regions[id] && regions[id].countries;
+      if (Array.isArray(countries) && countries.indexOf(cc) !== -1) return id;
+    }
+    return "my";
+  }
+
+  function readStoredCountry() {
+    try {
+      const stored = sessionStorage.getItem(GEO_COUNTRY_KEY);
+      if (stored && /^[A-Z]{2}$/.test(stored)) return stored;
+    } catch (e) {
+      /* ignore */
+    }
+    return "";
+  }
+
+  function writeStoredCountry(cc) {
+    try {
+      sessionStorage.removeItem("nexperts_price_region");
+      if (cc) sessionStorage.setItem(GEO_COUNTRY_KEY, cc);
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  async function detectRegion(pricing) {
+    const cached = readStoredCountry();
+    if (cached) return countryToRegion(cached, pricing);
+    try {
+      const res = await fetch("/api/geo", { cache: "no-store" });
+      if (res.ok) {
+        const data = await res.json();
+        const country = String((data && data.country) || "").toUpperCase();
+        writeStoredCountry(country);
+        return countryToRegion(country, pricing);
+      }
+    } catch (e) {
+      /* localhost / no Pages Function — Malaysia */
+    }
+    return "my";
+  }
+
+  function captureMyr(card) {
+    const priceEl = card.querySelector(".price");
+    if (!priceEl) return;
+    const text = (priceEl.textContent || "").trim();
+    if (looksLikeMyr(text) || !card.dataset.nxMyr) {
+      const n = parseCurrencyNumber(text);
+      if (n != null) card.dataset.nxMyr = String(n);
+      const origEl = card.querySelector(".price-orig");
+      if (origEl) {
+        const o = parseCurrencyNumber(origEl.textContent);
+        card.dataset.nxMyrOrig = o != null ? String(o) : "";
+      }
+    }
+  }
+
+  function paintRegion(card, pricing, regionId, ov) {
+    const regions = pricing.regions || {};
+    const region = regions[regionId] || regions.my;
+    const myRegion = regions.my || DEFAULT_PRICING.regions.my;
+    const priceEl = card.querySelector(".price");
+    const origEl = card.querySelector(".price-orig");
+    const saveEl = card.querySelector(".price-save");
+    const myr = Number(card.dataset.nxMyr);
+    const myrOrig = Number(card.dataset.nxMyrOrig);
+    if (!priceEl || !Number.isFinite(myr) || myr <= 0) return;
+
+    let priceText = "";
+    let origText = "";
+    const ukOverride = ov && String(ov.price_uk || "").trim();
+    const dubaiOverride = ov && String(ov.price_dubai || "").trim();
+    const indiaOverride = ov && String(ov.price_india || "").trim();
+    const ukOrigOverride = ov && String(ov.price_original_uk || "").trim();
+    const dubaiOrigOverride = ov && String(ov.price_original_dubai || "").trim();
+    const indiaOrigOverride = ov && String(ov.price_original_india || "").trim();
+
+    if (regionId === "uk" && ukOverride) {
+      priceText = ukOverride;
+      origText = ukOrigOverride || (Number.isFinite(myrOrig) && myrOrig > 0
+        ? formatRegionalPrice(convertFromMyr(myrOrig, region), region)
+        : "");
+    } else if (regionId === "dubai" && dubaiOverride) {
+      priceText = dubaiOverride;
+      origText = dubaiOrigOverride || (Number.isFinite(myrOrig) && myrOrig > 0
+        ? formatRegionalPrice(convertFromMyr(myrOrig, region), region)
+        : "");
+    } else if (regionId === "india" && indiaOverride) {
+      priceText = indiaOverride;
+      origText = indiaOrigOverride || (Number.isFinite(myrOrig) && myrOrig > 0
+        ? formatRegionalPrice(convertFromMyr(myrOrig, region), region)
+        : "");
+    } else if (regionId === "my") {
+      priceText = formatRegionalPrice(myr, myRegion);
+      origText = Number.isFinite(myrOrig) && myrOrig > 0 ? formatRegionalPrice(myrOrig, myRegion) : "";
+    } else {
+      const converted = convertFromMyr(myr, region);
+      priceText = formatRegionalPrice(converted, region);
+      origText = Number.isFinite(myrOrig) && myrOrig > 0
+        ? formatRegionalPrice(convertFromMyr(myrOrig, region), region)
+        : "";
+    }
+
+    if (priceText) setText(priceEl, priceText);
+    if (origEl) {
+      if (origText) {
+        setText(origEl, origText);
+        origEl.style.display = "";
+      } else if (regionId !== "my") {
+        origEl.style.display = origEl.textContent ? "" : "none";
+      }
+    }
+    if (saveEl) {
+      const p = parseCurrencyNumber(priceText);
+      const o = parseCurrencyNumber(origText);
+      const label = formatSaveLabel(p, o);
+      if (label) setText(saveEl, label);
+    }
+  }
+
+  async function applyRegionalPricing(state) {
+    const card = document.querySelector(".enroll-card");
+    if (!card || !card.querySelector(".price")) return;
+    const pricing = normalizePricing(state && state.pricing);
+    const leftover = card.querySelector(".nx-price-region");
+    if (leftover) leftover.remove();
+    captureMyr(card);
+    if (!pricing.enabled) {
+      paintRegion(card, pricing, "my", {});
+      return;
+    }
+    const regionId = await detectRegion(pricing);
+    const slug = slugFromPath(location.pathname || "");
+    const ov = slug ? mergedCourseFields(state, slug) : {};
+    paintRegion(card, pricing, regionId, ov);
+  }
+
   async function run() {
     const [published, local] = await Promise.all([
       loadPublished(),
       Promise.resolve(loadLocal()),
     ]);
     const state = mergeState(published, local);
-    if (!state) return;
     const onLanding = !!document.querySelector("#courses .cg");
     if (onLanding) {
       removeInjected();
@@ -692,6 +909,7 @@
       applyCatalogOverrides(state);
     }
     applyDetailOverrides(state);
+    await applyRegionalPricing(state);
   }
 
   if (document.readyState === "loading") {

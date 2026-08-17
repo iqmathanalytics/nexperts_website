@@ -68,6 +68,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:linear-gradient(180de
 /* ── BOARD ── */
 .ad-board{margin-top:28px;display:flex;flex-direction:column;gap:20px}
 
+/* ── REGIONAL PRICING ── */
+.ad-pricing{margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 24px 20px;box-shadow:var(--shadow-sm)}
+.ad-pricing h2{font-family:'Fraunces',serif;font-weight:300;font-size:1.45rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:8px}
+.ad-pricing-lead{font-size:.84rem;color:var(--ink3);line-height:1.65;max-width:820px;margin-bottom:16px}
+.ad-pricing-enable{margin-bottom:16px}
+.ad-pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ad-pricing-grid .ad-field input{width:100%;font-family:inherit;font-size:.88rem;padding:10px 12px;border-radius:9px;border:1.5px solid var(--line2);background:var(--bg2)}
+.ad-pricing-grid .ad-field input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(29,78,216,.1)}
+.ad-pricing-note{margin-top:12px;font-size:.76rem;color:var(--ink3);line-height:1.55}
+.ad-pricing-note code{font-size:.72rem;background:var(--bluM);color:var(--blue);padding:1px 6px;border-radius:4px}
+
 /* ── BRAND BLOCK ── */
 .bblock{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow-sm);transition:box-shadow .3s ease}
 .bblock::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--bk),color-mix(in srgb,var(--bk) 50%,#fff));opacity:.9;z-index:1}
@@ -252,4 +263,5 @@ body.ad-locked .ad-login{display:flex}
   .ad-tools{padding:12px;flex-direction:column;align-items:stretch}
   .ad-search{flex:1 1 100%}
   .ad-field-row{grid-template-columns:1fr}
+  .ad-pricing-grid{grid-template-columns:1fr}
 }
