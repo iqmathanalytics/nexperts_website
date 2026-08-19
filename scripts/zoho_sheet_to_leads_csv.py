@@ -134,6 +134,19 @@ def truncate(s: str, max_len: int) -> str:
     return s[: max_len - 1] + "…"
 
 
+def map_company_list_field(row: dict, idx: dict[str, str]) -> str:
+    course = get(row, idx, "course")
+    office = get(row, idx, "office")
+    message = get(row, idx, "message")
+    if course and message:
+        return truncate(f"{course} · {message}", 200)
+    if course:
+        return truncate(course, 200)
+    if message:
+        return truncate(message, 200)
+    return truncate(office, 200)
+
+
 def to_lead(row: dict, idx: dict[str, str]) -> dict[str, str] | None:
     email = get(row, idx, "email")
     last = get(row, idx, "last") or "Unknown"
@@ -142,17 +155,13 @@ def to_lead(row: dict, idx: dict[str, str]) -> dict[str, str] | None:
         return None
     phone = get(row, idx, "phone")
     page = get(row, idx, "page")
-    course = get(row, idx, "course")
-    office = get(row, idx, "office")
-    message = get(row, idx, "message")
     return {
         "First Name": first[:40],
         "Last Name": last[:80],
         "Email": email,
         "Phone": phone,
         "Mobile": phone,
-        "Company": truncate(course or office, 200),
-        "Designation": truncate(message, 100),
+        "Company": map_company_list_field(row, idx),
         "Website": page[:255],
         "Lead Source": map_lead_source(get(row, idx, "source")),
         "Industry": map_industry(get(row, idx, "type")),
@@ -220,7 +229,6 @@ def main() -> int:
         "Phone",
         "Mobile",
         "Company",
-        "Designation",
         "Website",
         "Lead Source",
         "Industry",

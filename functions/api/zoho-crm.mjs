@@ -88,15 +88,18 @@ function buildDescription(data) {
   return lines.join("\n").slice(0, 30000);
 }
 
-/** Free edition: Company + Designation are visible in the Leads list view. */
-function mapListVisibleFields(data) {
+/** Free edition: Company is almost always in the Leads list; Designation often is not. */
+export function mapCompanyListField(data) {
   const course = String((data && data.course) || "").trim();
   const office = String((data && data.office) || "").trim();
   const message = String((data && data.message) || "").trim();
-  return {
-    company: truncateField(course || office, 200),
-    designation: truncateField(message, 100),
-  };
+
+  if (course && message) {
+    return truncateField(`${course} · ${message}`, 200);
+  }
+  if (course) return truncateField(course, 200);
+  if (message) return truncateField(message, 200);
+  return truncateField(office, 200);
 }
 
 function dropEmpty(record) {
@@ -120,7 +123,6 @@ export function mapEnquiryToLead(data, env) {
   const office = String((data && data.office) || "").trim();
   const pageUrl = String((data && data.pageUrl) || "").trim();
   const industry = mapIndustry(data && data.type);
-  const listFields = mapListVisibleFields(data);
 
   const record = {
     First_Name: first.slice(0, 40),
@@ -128,8 +130,7 @@ export function mapEnquiryToLead(data, env) {
     Email: email,
     Phone: phone,
     Mobile: phone,
-    Company: listFields.company,
-    Designation: listFields.designation,
+    Company: mapCompanyListField(data),
     Website: pageUrl.slice(0, 255),
     Lead_Source: mapLeadSource(data && data.source),
     Lead_Status: envStr(e, "ZOHO_LEAD_STATUS", "Not Contacted"),
