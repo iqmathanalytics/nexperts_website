@@ -33,10 +33,19 @@ This site is static HTML at the repository root, with a **Pages Function** at `/
 | `BREVO_ENQUIRY_SECRET` | Must match `secret` in `js/enquiry-config.js` if you use server-side verification |
 | `BREVO_ALLOWED_ORIGINS` | CORS origin(s); use `*` or your site origin |
 | `APPS_SCRIPT_ENQUIRY_URL` | Optional; same Google Apps Script web app URL as in `enquiry-config.js` for sheet logging |
+| `APPS_SCRIPT_ENQUIRY_DISABLED` | Optional; `1` to stop sheet logging (Phase 4). Also accepts `APPS_SCRIPT_ENQUIRY_URL=off` |
 | `APPS_SCRIPT_ENQUIRY_SECRET` | Optional; aligns with Apps Script if used |
 | `NEXPERTS_PUBLIC_SITE_URL` | Optional; reserved for other server logic (enquiry **email buttons** always use `https://www.nexpertsacademy.com` unless overridden below) |
 | `NEXPERTS_EMAIL_SITE_URL` | Optional; override base URL for **all public links inside Brevo emails** (defaults to `https://www.nexpertsacademy.com` so preview/Netlify hosts never appear in student or lead mail) |
 | `NEXPERTS_LEADS_SHEET_URL` | Optional; sheet URL shown in internal emails |
+| `ZOHO_CLIENT_ID` | Zoho API Self Client ID (encrypted). Skip CRM locally if unset |
+| `ZOHO_CLIENT_SECRET` | Self Client secret (encrypted) |
+| `ZOHO_REFRESH_TOKEN` | Refresh token from `scripts/zoho_exchange_grant.mjs` (encrypted) |
+| `ZOHO_ACCOUNTS_URL` | Optional; default `https://accounts.zoho.com` (use `.in` / `.eu` / `.com.au` if that is your org DC) |
+| `ZOHO_API_DOMAIN` | Optional; default `https://www.zohoapis.com` |
+| `ZOHO_API_VERSION` | Optional; default `v8` |
+| `ZOHO_LEAD_STATUS` | Optional; default `Not Contacted` |
+| `ZOHO_USE_CUSTOM_FIELDS` | Optional; `1` after Standard custom fields exist (see `docs/zoho/PHASE_4_HARDEN.md`) |
 | `ADMIN_USER` | **Same username** you use to sign in at `/admin/` (e.g. `admin`) — set for **Production** (and Preview if you use preview URLs) |
 | `ADMIN_PASS` | **Same password** you use to sign in at `/admin/` (e.g. `123`) — mark **Encrypted** |
 
@@ -83,7 +92,9 @@ After deploy, confirm the build log shows **no** “Skipping remaining … lines
 
 **Custom 404:** In the Pages project → **Settings** → set the **404 page** to `/404.html`. Do **not** use `/* /404.html 404` in `_redirects` — Cloudflare Pages only allows status codes `200`, `301`, `302`, `303`, `307`, and `308` in that file (Netlify allows `404`). An invalid catch-all rule can cause the deploy log to warn and may affect how subsequent rules are applied.
 
-## 5. Enquiry endpoint (Brevo)
+## 5. Enquiry endpoint (Brevo + Zoho CRM)
+
+After Brevo sends the student and internal emails, the same Function **upserts a Zoho Lead** (by Email) and forwards the payload to Google Apps Script. Sheet or Zoho errors do **not** fail the enquiry (`ok: true` with `sheetError` / `zohoError`). Setup: [`docs/zoho/PHASE_0_SETUP.md`](zoho/PHASE_0_SETUP.md).
 
 - **Cloudflare Pages** (including custom domains): the browser uses **`/api/enquiry-brevo`** by default (see `js/enquiry-submit.js`).
 - **Netlify** `*.netlify.app`: the default remains **`/.netlify/functions/enquiry-brevo`**.
@@ -92,6 +103,8 @@ After deploy, confirm the build log shows **no** “Skipping remaining … lines
 ```js
 brevoEndpoint: "/.netlify/functions/enquiry-brevo",
 ```
+
+A successful JSON body can include `zohoLogged`, `zohoLeadId`, `zohoAction` (`insert` or `update`), and `zohoHint` if credentials are missing.
 
 ## 6. Custom domain
 
@@ -119,13 +132,8 @@ After **Publish live** in `/admin/`:
 1. Data is saved to KV (`COURSE_OVERRIDES`).
 2. All visitors load overrides via the API + `data/course-overrides.json` fallback.
 
-## 9. Keeping Brevo logic in sync
+## 9. Keeping enquiry logic in sync
 
-Server-side Brevo logic exists in two places so each platform can bundle it:
-
-- `netlify/functions/enquiry-brevo.mjs` (Netlify)
-- `functions/api/enquiry-brevo-core.mjs` (Cloudflare Pages)
-
-When you change email templates or Brevo behaviour, update **both** files (or extract a shared module later).
+Email templates, sheet forward, and Zoho upsert all live in **`functions/api/enquiry-brevo-core.mjs`**. Netlify re-exports that file (`netlify/functions/enquiry-brevo.mjs`). Zoho mapping is **`functions/api/zoho-crm.mjs`**. Edit those modules once — do not duplicate handlers.
 
 Course overrides shared logic: `functions/api/course-overrides-core.mjs` (used by Cloudflare; Netlify function is a separate copy with Blobs).

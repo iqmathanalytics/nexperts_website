@@ -1,7 +1,9 @@
 /**
- * Website enquiry → Brevo (shared logic for Netlify + Cloudflare Pages).
- * Keep in sync with `netlify/functions/enquiry-brevo.mjs` when changing behaviour.
+ * Website enquiry → Brevo + Google Sheet + Zoho CRM (shared logic for Netlify + Cloudflare Pages).
+ * Zoho upsert lives in `./zoho-crm.mjs`. Sheet / Zoho failures do not fail the HTTP 200.
  */
+
+import { isZohoConfigured, upsertEnquiryLead } from "./zoho-crm.mjs";
 
 const BREVO_URL = "https://api.brevo.com/v3/smtp/email";
 
@@ -292,7 +294,7 @@ function buildInternalEmailHtml(data, ctx) {
     </td></tr>
   </table>
   <p style="margin:14px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#64748b;line-height:1.5;">
-    Your master <strong style="color:#0f172a;">Enquiries</strong> log lives in Google Sheets — open it to file this lead next to your pipeline.<br/>
+    Work this lead in <strong style="color:#0f172a;">Zoho CRM</strong> (Leads). Google Sheets remains a backup log.<br/>
     <a href="${escapeHtml(sheet)}" target="_blank" rel="noopener" style="color:#1d4ed8;word-break:break-all;">${escapeHtml(sheet)}</a>
   </p>
 </td></tr>
@@ -349,7 +351,8 @@ function buildInternalEmailText(data, ctx) {
     `Page: ${data.pageUrl || ""}\n` +
     `Submitted: ${data.submittedAt || ""}\n` +
     `User-Agent: ${data.userAgent || ""}\n\n` +
-    `GOOGLE SHEET (all leads):\n${sheet}\n`
+    `ZOHO CRM: open Leads and search this email.\n` +
+    `GOOGLE SHEET (backup log):\n${sheet}\n`
   );
 }
 
@@ -385,8 +388,17 @@ const APPS_SCRIPT_URL_ENV_KEYS = [
 
 function resolveAppsScriptEnquiryUrl(env) {
   const e = env || process.env || {};
+  const disabled = String(e.APPS_SCRIPT_ENQUIRY_DISABLED || "")
+    .trim()
+    .toLowerCase();
+  if (disabled === "1" || disabled === "true" || disabled === "yes") {
+    return { url: "", fromEnv: true, disabled: true };
+  }
   for (const k of APPS_SCRIPT_URL_ENV_KEYS) {
     const v = String(e[k] || "").trim();
+    if (v === "-" || v.toLowerCase() === "off" || v.toLowerCase() === "disabled") {
+      return { url: "", fromEnv: true, disabled: true };
+    }
     if (v && /^https:\/\/script\.google\.com\/macros\//i.test(v)) {
       return { url: normalizeAppsScriptUrl(v), fromEnv: true };
     }
@@ -620,26 +632,65 @@ export async function handler(event) {
   const appsScriptUrl = appsScript.url;
   let sheetLogged = false;
   let sheetError = null;
-  if (appsScriptUrl) {
-    try {
-      await forwardEnquiryToAppsScript(appsScriptUrl, data);
-      sheetLogged = true;
-    } catch (e) {
-      sheetError = String(e.message || e).slice(0, 220);
-    }
-  }
+  const sheetPromise = appsScriptUrl
+    ? forwardEnquiryToAppsScript(appsScriptUrl, data)
+        .then(() => {
+          sheetLogged = true;
+        })
+        .catch((e) => {
+          sheetError = String(e.message || e).slice(0, 220);
+        })
+    : Promise.resolve();
+
+  let zohoLogged = false;
+  let zohoSkipped = false;
+  let zohoError = null;
+  let zohoLeadId = null;
+  let zohoAction = null;
+  const zohoPromise = upsertEnquiryLead(data, process.env)
+    .then((z) => {
+      if (z && z.skipped) {
+        zohoSkipped = true;
+        return;
+      }
+      if (z && z.ok) {
+        zohoLogged = true;
+        zohoLeadId = z.id || null;
+        zohoAction = z.action || null;
+        return;
+      }
+      zohoError = String((z && z.error) || "zoho_failed").slice(0, 220);
+    })
+    .catch((e) => {
+      zohoError = String(e.message || e).slice(0, 220);
+    });
+
+  await Promise.all([sheetPromise, zohoPromise]);
 
   const bodyOut = {
     ok: true,
     sheetLogged,
+    zohoLogged,
     ...(sheetError ? { sheetError } : {}),
+    ...(zohoError ? { zohoError } : {}),
+    ...(zohoLeadId ? { zohoLeadId } : {}),
+    ...(zohoAction ? { zohoAction } : {}),
   };
   if (!appsScriptUrl) {
-    bodyOut.sheetHint =
-      "Apps Script web app URL is missing — set APPS_SCRIPT_ENQUIRY_URL in hosting env (same as webAppUrl in js/enquiry-config.js), then redeploy.";
+    if (appsScript.disabled) {
+      bodyOut.sheetHint =
+        "Google Sheet logging is disabled (APPS_SCRIPT_ENQUIRY_DISABLED or APPS_SCRIPT_ENQUIRY_URL=off).";
+    } else {
+      bodyOut.sheetHint =
+        "Apps Script web app URL is missing — set APPS_SCRIPT_ENQUIRY_URL in hosting env (same as webAppUrl in js/enquiry-config.js), then redeploy.";
+    }
   } else if (!appsScript.fromEnv) {
     bodyOut.sheetHint =
       "Using built-in Apps Script URL (APPS_SCRIPT_ENQUIRY_URL not set in hosting env). Set the env var to override.";
+  }
+  if (zohoSkipped && !isZohoConfigured(process.env)) {
+    bodyOut.zohoHint =
+      "Zoho CRM skipped — set ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, and ZOHO_REFRESH_TOKEN (see docs/zoho/PHASE_0_SETUP.md), then redeploy.";
   }
 
   return {

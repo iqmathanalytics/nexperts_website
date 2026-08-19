@@ -1,6 +1,6 @@
 /**
  * Cloudflare Pages Function — POST/OPTIONS for `/api/enquiry-brevo`.
- * Injects Pages env bindings into `process.env` for the shared Brevo handler.
+ * Injects Pages env bindings into `process.env` for the shared Brevo + Zoho handler.
  */
 import { handler } from "./enquiry-brevo-core.mjs";
 
