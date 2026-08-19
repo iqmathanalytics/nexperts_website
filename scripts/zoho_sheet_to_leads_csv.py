@@ -125,6 +125,15 @@ def description(row: dict, idx: dict[str, str]) -> str:
     return "\n".join(lines)[:30000]
 
 
+def truncate(s: str, max_len: int) -> str:
+    s = str(s or "").strip()
+    if not s:
+        return ""
+    if len(s) <= max_len:
+        return s
+    return s[: max_len - 1] + "…"
+
+
 def to_lead(row: dict, idx: dict[str, str]) -> dict[str, str] | None:
     email = get(row, idx, "email")
     last = get(row, idx, "last") or "Unknown"
@@ -133,13 +142,17 @@ def to_lead(row: dict, idx: dict[str, str]) -> dict[str, str] | None:
         return None
     phone = get(row, idx, "phone")
     page = get(row, idx, "page")
+    course = get(row, idx, "course")
+    office = get(row, idx, "office")
+    message = get(row, idx, "message")
     return {
         "First Name": first[:40],
         "Last Name": last[:80],
         "Email": email,
         "Phone": phone,
         "Mobile": phone,
-        "Company": get(row, idx, "office")[:200],
+        "Company": truncate(course or office, 200),
+        "Designation": truncate(message, 100),
         "Website": page[:255],
         "Lead Source": map_lead_source(get(row, idx, "source")),
         "Industry": map_industry(get(row, idx, "type")),
@@ -207,6 +220,7 @@ def main() -> int:
         "Phone",
         "Mobile",
         "Company",
+        "Designation",
         "Website",
         "Lead Source",
         "Industry",

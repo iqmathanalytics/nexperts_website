@@ -62,10 +62,19 @@ export function useCustomFields(env) {
   return v === "1" || v === "true" || v === "yes";
 }
 
+function truncateField(value, max) {
+  const s = String(value || "").trim();
+  if (!s) return "";
+  if (s.length <= max) return s;
+  return `${s.slice(0, Math.max(0, max - 1))}…`;
+}
+
 function buildDescription(data) {
+  const course = String((data && data.course) || "").trim();
+  const message = String((data && data.message) || "").trim();
   const lines = [
     "Website enquiry",
-    `Course: ${data.course || "—"}`,
+    `Course: ${course || "—"}`,
     `Enquiry type: ${data.type || "—"}`,
     `Preferred office: ${data.office || "—"}`,
     `Source: ${data.source || "—"}`,
@@ -74,9 +83,20 @@ function buildDescription(data) {
     `Submitted: ${data.submittedAt || "—"}`,
     "",
     "Message:",
-    String(data.message || "—").trim() || "—",
+    message || "—",
   ];
   return lines.join("\n").slice(0, 30000);
+}
+
+/** Free edition: Company + Designation are visible in the Leads list view. */
+function mapListVisibleFields(data) {
+  const course = String((data && data.course) || "").trim();
+  const office = String((data && data.office) || "").trim();
+  const message = String((data && data.message) || "").trim();
+  return {
+    company: truncateField(course || office, 200),
+    designation: truncateField(message, 100),
+  };
 }
 
 function dropEmpty(record) {
@@ -100,6 +120,7 @@ export function mapEnquiryToLead(data, env) {
   const office = String((data && data.office) || "").trim();
   const pageUrl = String((data && data.pageUrl) || "").trim();
   const industry = mapIndustry(data && data.type);
+  const listFields = mapListVisibleFields(data);
 
   const record = {
     First_Name: first.slice(0, 40),
@@ -107,7 +128,8 @@ export function mapEnquiryToLead(data, env) {
     Email: email,
     Phone: phone,
     Mobile: phone,
-    Company: office.slice(0, 200),
+    Company: listFields.company,
+    Designation: listFields.designation,
     Website: pageUrl.slice(0, 255),
     Lead_Source: mapLeadSource(data && data.source),
     Lead_Status: envStr(e, "ZOHO_LEAD_STATUS", "Not Contacted"),

@@ -80,6 +80,28 @@ Converted is applied automatically when you use **Convert**.
 
 ---
 
+## 5b. Leads list columns (course + message)
+
+On **Free**, course and message use standard fields so they show in the **Leads table** without custom fields:
+
+| Zoho column | Shows |
+|-------------|--------|
+| **Company** | Course name (from form or course sidebar). If empty, preferred office. |
+| **Designation** | User message (first ~100 characters; full text stays in **Description**) |
+| **Description** | Full enquiry (office, page URL, complete message, etc.) |
+
+**Show these in the list view:**
+
+1. Open **Leads**.
+2. Click the **column picker** (gear / **Customize columns** on the list).
+3. Enable **Company**, **Designation**, and optionally **Description**.
+4. Drag **Company** and **Designation** next to **Email** or **Lead Source**.
+5. Save the view (e.g. as your default **All Leads** layout).
+
+Tip: mentally read **Company** as “Course” until you upgrade to Standard and add a real Course custom field.
+
+---
+
 ## 6. Follow-up workflow (4 business hours)
 
 **Setup → Automation → Workflow Rules → Create Rule** → module **Leads**.
