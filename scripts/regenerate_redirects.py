@@ -116,6 +116,8 @@ LEGACY_REQUESTED_MAP: dict[str, str] = {
     "/ethical-hacking-workshop": "/ceh",
     "/power-bi-workshop": "/courses/pl-300",
     "/ai-ml-bootcamp": "/courses/ai-ml-bootcamp",
+    "/gen-ai": "/courses/gen-ai",
+    "/agentic-ai": "/courses/agentic-ai",
     "/cyber-security-bootcamp": "/courses/cyber-security-bootcamp",
     "/android-development": "/courses/android-development",
     "/django": "/courses/django",

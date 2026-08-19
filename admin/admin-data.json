@@ -107,6 +107,13 @@
       "color": "#0ea5e9",
       "color_tint": "#f0f9ff"
     },
+    "fortinet": {
+      "key": "fortinet",
+      "label": "Fortinet",
+      "tagline": "FortiGate, Security Fabric, SD-WAN and network security certs.",
+      "color": "#ee3124",
+      "color_tint": "#fef2f2"
+    },
     "skill": {
       "key": "skill",
       "label": "Skill-Based",
@@ -131,6 +138,7 @@
     "isaca",
     "isc2",
     "offsec",
+    "fortinet",
     "skill"
   ],
   "card_order": {
@@ -156,6 +164,9 @@
       "ctia",
       "cct-cybersecurity-technician",
       "ecih"
+    ],
+    "fortinet": [
+      "fortinet-certified-professional-network-security"
     ],
     "aws": [
       "aws-cloud-practitioner",
@@ -271,6 +282,8 @@
       "servicenow-admin",
       "servicenow-platform",
       "ai-ml-bootcamp",
+      "gen-ai",
+      "agentic-ai",
       "cyber-security-bootcamp",
       "android-development",
       "django",
@@ -562,6 +575,25 @@
       "next_intake": "12 May 2026",
       "price": "RM 3,950",
       "price_original": "RM 4,400",
+      "price_save": "Save 10%"
+    },
+    {
+      "slug": "fortinet-certified-professional-network-security",
+      "brand": "fortinet",
+      "category": "cert",
+      "vendor": "Fortinet",
+      "badge": "Cert",
+      "name": "Fortinet FCP Network Security",
+      "description": "Fortinet Certified Professional — FortiGate, VPN, SD-WAN and Security Fabric.",
+      "level": "Professional",
+      "rating": 4.8,
+      "reviews": 118,
+      "enrolled": 6420,
+      "has_detail_page": true,
+      "duration": "5 days / 40 hrs",
+      "next_intake": "16 Jun 2026",
+      "price": "RM 4,200",
+      "price_original": "RM 4,650",
       "price_save": "Save 10%"
     },
     {
@@ -2292,6 +2324,44 @@
       "price": "RM 3,800",
       "price_original": "RM 4,200",
       "price_save": "Save 10%"
+    },
+    {
+      "slug": "gen-ai",
+      "brand": "skill",
+      "category": "skill",
+      "vendor": "Skill-Based",
+      "badge": "AI 2026",
+      "name": "Gen AI",
+      "description": "Prompt engineering, RAG, evaluation and safe deployment — production-minded Gen AI literacy in five days.",
+      "level": "Intermediate",
+      "rating": 4.9,
+      "reviews": 94,
+      "enrolled": 5280,
+      "has_detail_page": true,
+      "duration": "5 days / 40 hrs",
+      "next_intake": "14 Oct 2026",
+      "price": "RM 2,000",
+      "price_original": "RM 10,000",
+      "price_save": "Save 80%"
+    },
+    {
+      "slug": "agentic-ai",
+      "brand": "skill",
+      "category": "skill",
+      "vendor": "Skill-Based",
+      "badge": "AI 2026",
+      "name": "Agentic AI",
+      "description": "Multi-step agents, tool orchestration, memory and human-in-the-loop — agentic systems you can audit and scale.",
+      "level": "Advanced",
+      "rating": 4.8,
+      "reviews": 78,
+      "enrolled": 4620,
+      "has_detail_page": true,
+      "duration": "5 days / 40 hrs",
+      "next_intake": "21 Oct 2026",
+      "price": "RM 2,500",
+      "price_original": "RM 12,000",
+      "price_save": "Save 79%"
     },
     {
       "slug": "cyber-security-bootcamp",

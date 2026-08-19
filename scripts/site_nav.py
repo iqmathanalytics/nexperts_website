@@ -146,15 +146,17 @@ def _catalog_menu_data() -> tuple[dict[str, dict[str, int]], dict[str, str]]:
 
 def courses_dropdown_li(*, variant: str, current_path: str = "") -> str:
     counts, brand_labels = _catalog_menu_data()
-    courses_href = "#courses" if variant == "home" else "/#courses"
-    cols: list[str] = []
     import sys
     from pathlib import Path
 
     root = Path(__file__).resolve().parents[1]
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
-    from _build_catalog import BRANDS  # noqa: WPS433
+    from _build_catalog import BRANDS, CARDS  # noqa: WPS433
+
+    catalog_total = len(CARDS)
+    courses_href = "#courses" if variant == "home" else "/#courses"
+    cols: list[str] = []
 
     sections: list[str] = []
     for cat_key, title in COURSE_CATALOG_SECTIONS:
@@ -193,7 +195,7 @@ def courses_dropdown_li(*, variant: str, current_path: str = "") -> str:
       <div class="nav-addons-panel nav-courses-panel nav-panel--courses" id="navCoursesPanel" role="menu" hidden>
         <div class="nav-panel-head nav-panel-head--courses">
           <p class="nav-panel-eyebrow">Certification catalog</p>
-          <p class="nav-panel-title">Browse 110+ courses</p>
+          <p class="nav-panel-title">Browse {catalog_total}+ courses</p>
         </div>
         <div class="nav-courses-stack">
 {stack}

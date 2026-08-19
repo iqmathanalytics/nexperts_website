@@ -77,10 +77,12 @@
 /cisco-spcor /courses/cisco-spcor 301
 /courses/ceh /ceh 301
 /excel-basic /courses/excel-basic 301
+/agentic-ai /courses/agentic-ai 301
 /ccnp-encor /courses/ccnp-enterprise 301
 /cisco-scor /courses/ccnp-security 301
 /django /courses/django 301
 /enarsi /courses/ccnp-enterprise 301
+/gen-ai /courses/gen-ai 301
 /cissp /courses/cissp 301
 /sdwan /courses/sdwan 301
 /ecih /courses/ecih 301
@@ -100,18 +102,3 @@
 
 # Unknown paths: set Custom 404 document to /404.html in Cloudflare Pages (Dashboard).
 # Cloudflare Pages does not support status 404 in _redirects (unlike Netlify).
-/top-data-science-training-institutes-malaysia /blog/top-data-science-training-institutes-malaysia 301
-/top-data-science-training-institutes-malaysia/ /blog/top-data-science-training-institutes-malaysia 301
-/aws-certification-guide /blog/aws-certification-roadmap 301
-/aws-certification-guide/ /blog/aws-certification-roadmap 301
-/aws-certification-roadmap/ /blog/aws-certification-roadmap 301
-/aws-certification-roadmap /blog/aws-certification-roadmap 301
-/cisco-certification-path /blog/cisco-certification-path 301
-/cisco-certification-path/ /blog/cisco-certification-path 301
-/blog/cisco-certification-path/ /blog/cisco-certification-path 301
-/fortinet-certification /blog/fortinet-certification-guide 301
-/fortinet-certification/ /blog/fortinet-certification-guide 301
-/blog/fortinet-certification-guide/ /blog/fortinet-certification-guide 301
-/azure-certification-guide /blog/microsoft-azure-certification-guide 301
-/azure-certification-guide/ /blog/microsoft-azure-certification-guide 301
-/blog/microsoft-azure-certification-guide/ /blog/microsoft-azure-certification-guide 301
