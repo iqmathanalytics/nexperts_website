@@ -135,11 +135,10 @@ def truncate(s: str, max_len: int) -> str:
 
 
 def map_company_list_field(row: dict, idx: dict[str, str]) -> str:
+    """Prefer course alone so Zoho ${Leads.Company} is a clean course name."""
     course = get(row, idx, "course")
     office = get(row, idx, "office")
     message = get(row, idx, "message")
-    if course and message:
-        return truncate(f"{course} · {message}", 200)
     if course:
         return truncate(course, 200)
     if message:

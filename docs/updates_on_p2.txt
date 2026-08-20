@@ -1,0 +1,1035 @@
+I have now finalized 10 professional HTML email templates for the CRM.
+
+The templates use the Nexperts Academy branding:
+- Logo:
+  https://www.nexpertsacademy.com/image/nexperts-logo.png
+- Website:
+  https://www.nexpertsacademy.com/
+- Primary dark color:
+  #081722
+- Primary accent/lime:
+  #c8f36b
+- Clean white/light-grey backgrounds
+- Professional corporate training style
+- Email-safe HTML suitable for Zoho CRM
+
+Your task now is to inspect the existing CRM implementation and modify it so that the email templates can use dynamic CRM data instead of manual placeholders.
+
+IMPORTANT:
+Do not blindly create duplicate fields, duplicate workflows, duplicate API integrations, or duplicate Zoho modules.
+First inspect the existing implementation and determine what already exists.
+Reuse existing fields and logic wherever possible.
+Only add what is missing.
+
+====================================================
+1. THE 10 EMAIL TEMPLATES
+====================================================
+
+The finalized templates are:
+
+1. First follow-up individual
+2. First follow-up corporate group
+3. HRD Corp claim next steps
+4. Pricing payment options
+5. Schedule intake dates
+6. Quote attached
+7. Invoice payment reminder
+8. Enrolment confirmation
+9. Lost not now
+10. Workshop event invite
+
+These templates are intended to be used from Zoho CRM.
+
+The module currently being used for the templates is:
+
+Leads
+
+The first name merge field currently used is:
+
+${Leads.First Name}
+
+Continue using Zoho's official merge-field syntax and use the actual field names available in the Zoho CRM implementation.
+
+Do NOT invent merge-field syntax.
+
+If a field does not exist in Zoho, create/configure it appropriately or clearly report that it needs to be created.
+
+====================================================
+2. CURRENT PLACEHOLDERS IN THE EMAIL TEMPLATES
+====================================================
+
+The templates currently contain placeholders such as:
+
+[COURSE NAME]
+[AMOUNT]
+[TRAINING DURATION]
+[DATE]
+[START DATE]
+[END DATE]
+[FORMAT]
+[LOCATION]
+[TIME]
+[PAYMENT LINK]
+[QUOTE NUMBER]
+[QUOTE DATE]
+[TOTAL]
+[VALIDITY DATE]
+[CONFIRMATION / PAYMENT LINK]
+[INVOICE NUMBER]
+[INVOICE DATE]
+[DUE DATE]
+[PAYMENT METHOD]
+[PAYMENT REFERENCE]
+[JOINING LINK OR DETAILS]
+[EVENT NAME]
+[SHORT EVENT DESCRIPTION]
+[EVENT DATE]
+[EVENT TIME]
+[KEY TOPIC / LEARNING OUTCOME 01]
+[KEY TOPIC / LEARNING OUTCOME 02]
+[KEY TOPIC / LEARNING OUTCOME 03]
+[KEY TOPIC / LEARNING OUTCOME 04]
+[REGISTRATION MESSAGE]
+[REGISTRATION DEADLINE]
+[REGISTRATION LINK]
+
+These are NOT supposed to remain as literal text in the final production emails.
+
+Where appropriate, convert them into dynamic Zoho CRM merge fields.
+
+====================================================
+3. REQUIRED LEAD FIELDS
+====================================================
+
+Inspect the existing Lead fields first.
+
+The system should support, at minimum, the following business information.
+
+PERSONAL / LEAD INFORMATION
+
+- First Name
+- Last Name
+- Email
+- Phone
+- Company
+- Country
+- City
+- Lead Source
+- Lead Owner
+- Lead Status
+
+COURSE / TRAINING INFORMATION
+
+Create or reuse equivalent fields for:
+
+- Interested Course
+- Training Fee
+- Training Duration
+- Training Mode
+- Training Location
+- Intake Date
+- Training Start Date
+- Training End Date
+- Training Time
+- Payment Link
+- Joining Link
+
+Suggested field types:
+
+Interested Course:
+Picklist or appropriate lookup/reference
+
+Training Fee:
+Currency
+
+Training Duration:
+Single Line / appropriate text field
+
+Training Mode:
+Picklist
+
+Suggested values:
+- Online
+- On-site
+- Hybrid
+
+Training Location:
+Single Line
+
+Intake Date:
+Date
+
+Training Start Date:
+Date
+
+Training End Date:
+Date
+
+Training Time:
+Single Line
+
+Payment Link:
+URL
+
+Joining Link:
+URL
+
+====================================================
+4. CORPORATE / GROUP TRAINING FIELDS
+====================================================
+
+For corporate leads, support:
+
+- Lead Type
+- Number of Participants
+- Corporate Training Required
+- Preferred Training Date
+- Preferred Training Location
+- Corporate Requirements
+- HRD Corp Required
+
+Suggested Lead Type values:
+
+- Individual
+- Corporate / Group
+
+If equivalent fields already exist, reuse them.
+
+====================================================
+5. HRD CORP FIELDS
+====================================================
+
+The HRD Corp email requires company information.
+
+Support the following:
+
+- HRD Corp Required
+- HRD Corp Account Number
+- Company Registration Number
+- Employee Count
+- HRD Corp Application Status
+
+Suggested HRD Corp Application Status values:
+
+- Not Required
+- Pending Information
+- Application In Progress
+- Submitted
+- Approved
+- Rejected
+- Completed
+
+Do not claim automatic HRD Corp approval.
+
+The email should communicate that eligibility and approval are subject to HRD Corp requirements.
+
+The HRD Corp email address used by Nexperts Academy is:
+
+hrdcorp@nexpertsacademy.com
+
+====================================================
+6. QUOTATION INFORMATION
+====================================================
+
+The "Quote attached" email needs quotation data.
+
+Inspect whether the existing system already has Quotes/Deals/quotation functionality.
+
+Do NOT create a second quotation system if one already exists.
+
+The system should support:
+
+- Quote Number
+- Quote Date
+- Quote Amount / Total
+- Quote Valid Until
+- Quote PDF / Attachment
+- Quote Status
+- Confirmation / Payment Link
+
+Suggested Quote Status values:
+
+- Draft
+- Sent
+- Viewed
+- Accepted
+- Rejected
+- Expired
+
+The "Quote attached" email should be able to:
+
+1. Identify the quotation.
+2. Display the relevant quotation summary.
+3. Attach the quotation PDF.
+4. Provide the appropriate CTA/link if available.
+5. Track that the quotation was sent.
+
+The quotation should NOT be manually embedded inside the email body.
+
+The quotation should remain a proper PDF/document attachment.
+
+====================================================
+7. INVOICE / PAYMENT INFORMATION
+====================================================
+
+The "Invoice payment reminder" email needs:
+
+- Invoice Number
+- Invoice Date
+- Course
+- Amount Due
+- Payment Due Date
+- Payment Link
+- Payment Method
+- Payment Reference
+- Payment Status
+- Payment Confirmation
+
+Suggested Payment Status:
+
+- Pending
+- Partially Paid
+- Paid
+- Overdue
+- Cancelled
+
+Do not send a payment reminder when the invoice is already marked Paid.
+
+The system should prevent accidental reminder emails for completed payments.
+
+====================================================
+8. ENROLMENT INFORMATION
+====================================================
+
+The "Enrolment confirmation" email needs:
+
+- Course
+- Start Date
+- End Date
+- Training Mode
+- Location
+- Joining Link
+- Participant Name
+- Enrolment Status
+
+Suggested Enrolment Status:
+
+- Pending
+- Confirmed
+- Cancelled
+- Completed
+
+When payment/enrolment is confirmed, the system should be able to populate the confirmation email dynamically.
+
+====================================================
+9. WORKSHOP / EVENT INFORMATION
+====================================================
+
+The "Workshop event invite" email requires event information.
+
+Inspect whether an Events/Activities module already exists.
+
+If there is already an appropriate event system, reuse it.
+
+The event data should support:
+
+- Event Name
+- Event Description
+- Event Date
+- Event Time
+- Event Format
+- Event Location
+- Registration Link
+- Registration Deadline
+- Event Status
+- Learning Outcome 1
+- Learning Outcome 2
+- Learning Outcome 3
+- Learning Outcome 4
+- Target Audience
+
+Suggested Event Format:
+
+- Online
+- On-site
+- Hybrid
+
+The event email should dynamically populate these values where possible.
+
+====================================================
+10. EMAIL TEMPLATE FIELD MAPPING
+====================================================
+
+Map the finalized email templates approximately as follows.
+
+TEMPLATE 1
+First follow-up individual
+
+Dynamic data:
+
+- First Name
+- Course
+- Training/interest information
+- Salesperson/contact details where applicable
+
+Primary purpose:
+Follow up with an individual lead after the initial enquiry.
+
+----------------------------------------------------
+
+TEMPLATE 2
+First follow-up corporate group
+
+Dynamic data:
+
+- First Name
+- Company
+- Interested Course
+- Number of Participants
+- Preferred Training Date
+- Training Mode
+- Training Location
+- Corporate Requirements
+- HRD Corp Required
+
+Primary purpose:
+Follow up with corporate/group training enquiries.
+
+----------------------------------------------------
+
+TEMPLATE 3
+HRD Corp claim next steps
+
+Dynamic data:
+
+- First Name
+- Company
+- Company Registration Number
+- Employee Count
+- HRD Corp Account Number
+- Interested Course
+- Training Fee
+- HRD Corp Application Status
+
+Primary purpose:
+Explain the HRD Corp claim/application next steps.
+
+----------------------------------------------------
+
+TEMPLATE 4
+Pricing payment options
+
+Dynamic data:
+
+- First Name
+- Interested Course
+- Training Fee
+- Training Duration
+- Training Mode
+- Intake Date
+- Certification
+- Payment Link
+- HRD Corp Required
+
+Primary purpose:
+Provide pricing and payment options.
+
+----------------------------------------------------
+
+TEMPLATE 5
+Schedule intake dates
+
+Dynamic data:
+
+- First Name
+- Course
+- Start Date
+- End Date
+- Training Duration
+- Training Mode
+- Location
+- Training Time
+- Training Fee
+- Available Intake Dates
+
+If multiple upcoming intakes are supported by the backend, do not force multiple dates into a single Lead field.
+
+Use an appropriate data structure/module for course schedules or intakes if the current architecture supports it.
+
+----------------------------------------------------
+
+TEMPLATE 6
+Quote attached
+
+Dynamic data:
+
+- First Name
+- Course
+- Quote Number
+- Quote Date
+- Quote Total
+- Quote Valid Until
+- Confirmation / Payment Link
+
+Attachment:
+
+- Quote PDF
+
+The PDF must be attached to the outgoing email.
+
+----------------------------------------------------
+
+TEMPLATE 7
+Invoice payment reminder
+
+Dynamic data:
+
+- First Name
+- Invoice Number
+- Invoice Date
+- Course
+- Amount Due
+- Due Date
+- Payment Link
+- Payment Method
+- Payment Reference
+- Payment Status
+
+Do not send if Payment Status = Paid.
+
+----------------------------------------------------
+
+TEMPLATE 8
+Enrolment confirmation
+
+Dynamic data:
+
+- First Name
+- Course
+- Start Date
+- End Date
+- Training Mode
+- Location
+- Joining Link
+- Enrolment Status
+
+Only send as a confirmation after the appropriate enrolment/payment condition has been satisfied.
+
+----------------------------------------------------
+
+TEMPLATE 9
+Lost not now
+
+Dynamic data:
+
+- First Name
+- Course
+- Lead Status
+- Future Follow-up Date if available
+- Lead Owner
+
+Primary purpose:
+Close the current sales cycle professionally without permanently losing the lead.
+
+----------------------------------------------------
+
+TEMPLATE 10
+Workshop event invite
+
+Dynamic data:
+
+- First Name
+- Event Name
+- Event Description
+- Event Date
+- Event Time
+- Event Format
+- Event Location
+- Registration Link
+- Registration Deadline
+- Learning Outcomes
+- Target Audience
+
+====================================================
+11. IMPORTANT: DO NOT HARD-CODE DYNAMIC DATA
+====================================================
+
+Do NOT leave values such as:
+
+[COURSE NAME]
+[AMOUNT]
+[DATE]
+[PAYMENT LINK]
+[QUOTE NUMBER]
+[INVOICE NUMBER]
+
+as permanent literal text in production emails.
+
+Replace them with actual Zoho merge fields where possible.
+
+For example:
+
+Current:
+
+Hi ${Leads.First Name}
+
+Course:
+
+[COURSE NAME]
+
+Should eventually become something equivalent to:
+
+${Leads.Interested Course}
+
+ONLY use the exact merge-field syntax supported by the actual Zoho CRM configuration.
+
+Do not assume a field API name.
+
+Inspect the actual Zoho field/API names first.
+
+====================================================
+12. DO NOT USE UNSUPPORTED MERGE FIELDS
+====================================================
+
+This is extremely important.
+
+Before putting a merge field into a Zoho template:
+
+1. Verify that the field exists.
+2. Verify the field belongs to the correct module.
+3. Verify the API name.
+4. Verify that the field can be used in email templates.
+5. Test the actual generated email.
+
+If the field does not exist, either:
+
+- create it properly, or
+- report that it needs to be configured.
+
+Do not create fake merge-field syntax.
+
+====================================================
+13. COURSE DATA SHOULD NOT BE DUPLICATED
+====================================================
+
+The Nexperts Academy website has multiple courses and course-specific information.
+
+Do not hard-code course names/prices into the frontend or email templates.
+
+Course information should have a single source of truth.
+
+Ideally support a structure similar to:
+
+Course
+- Course Name
+- Course Code
+- Description
+- Duration
+- Default Price
+- Certification
+- Training Mode
+- Available Intakes
+- Payment Link
+- Course URL
+
+Then a Lead should reference/select the relevant course.
+
+If the current implementation already has a course table/module/API, reuse it.
+
+====================================================
+14. PRICING SHOULD NOT BE HARDCODED
+====================================================
+
+Course prices can change.
+
+Do not hard-code current pricing directly into the email template.
+
+The email should obtain the price from the CRM/course/quotation data.
+
+For quotation emails, the quotation amount should take precedence over the generic course price.
+
+For invoice emails, the invoice amount should take precedence.
+
+====================================================
+15. PAYMENT LINKS
+====================================================
+
+Do not use a generic static payment link for every lead.
+
+Payment links may depend on:
+
+- Course
+- Amount
+- Customer
+- Quote
+- Invoice
+
+Use the appropriate existing payment integration if already implemented.
+
+If a payment link is unavailable, the email should not show a broken CTA.
+
+Instead, either:
+
+- hide the CTA, or
+- use the configured enquiry/payment contact workflow.
+
+====================================================
+16. EMAIL TEMPLATE DESIGN
+====================================================
+
+Do NOT redesign the templates.
+
+I have already finalized the visual design.
+
+Maintain:
+
+- Nexperts Academy logo
+- Dark #081722 header/footer
+- Lime #c8f36b accent
+- White content area
+- Light grey email background
+- Professional typography
+- Responsive email-safe table layout
+- Inline CSS
+- Outlook/Gmail compatible structure
+
+Logo:
+
+https://www.nexpertsacademy.com/image/nexperts-logo.png
+
+Do not replace the logo with a different URL.
+
+Do not introduce heavy JavaScript.
+
+Do not use external CSS.
+
+Do not use web fonts that may fail in email clients.
+
+Keep the HTML email-compatible.
+
+====================================================
+17. EMAIL TEMPLATE NAMES
+====================================================
+
+Use these exact Zoho-safe template names:
+
+1. First follow-up individual
+2. First follow-up corporate group
+3. HRD Corp claim next steps
+4. Pricing payment options
+5. Schedule intake dates
+6. Quote attached
+7. Invoice payment reminder
+8. Enrolment confirmation
+9. Lost not now
+10. Workshop event invite
+
+Do NOT use parentheses in the template names.
+
+For example:
+
+WRONG:
+First follow-up (individual)
+
+CORRECT:
+First follow-up individual
+
+====================================================
+18. WEBSITE LEAD CAPTURE
+====================================================
+
+Inspect the existing Nexperts Academy website lead/enquiry forms.
+
+Ensure that when a user submits an enquiry, the following information is passed to Zoho where available:
+
+- First Name
+- Last Name
+- Email
+- Phone
+- Company
+- Country
+- Interested Course
+- Lead Source
+- Enquiry Message
+- Corporate/Individual type
+- Number of Participants
+- Preferred Training Date
+- HRD Corp interest
+
+Do not break the existing website forms.
+
+Do not remove current functionality.
+
+Ensure duplicate lead handling is considered.
+
+Prefer email as the primary duplicate-check field unless the current CRM architecture has a better strategy.
+
+====================================================
+19. LEAD STATUS WORKFLOW
+====================================================
+
+Inspect the existing Lead Status implementation.
+
+The intended lifecycle should approximately support:
+
+New Lead
+↓
+Contacted
+↓
+Interested
+↓
+Qualified
+↓
+Quotation Sent
+↓
+Negotiation
+↓
+Payment Pending
+↓
+Enrolled
+↓
+Completed
+
+Alternative exit:
+
+Not Now / Lost
+
+Do not blindly change existing statuses if the implementation already has them.
+
+Map the email templates to the relevant lifecycle stages.
+
+For example:
+
+New/Contacted:
+First follow-up individual
+
+Corporate:
+First follow-up corporate group
+
+HRD Corp Required:
+HRD Corp claim next steps
+
+Pricing discussion:
+Pricing payment options
+
+Schedule discussion:
+Schedule intake dates
+
+Quotation:
+Quote attached
+
+Payment pending:
+Invoice payment reminder
+
+Successful enrolment:
+Enrolment confirmation
+
+Lost / Not Now:
+Lost not now
+
+Marketing/event:
+Workshop event invite
+
+====================================================
+20. EMAIL SEND SAFETY
+====================================================
+
+Implement safeguards.
+
+Before sending an email:
+
+- Verify lead email exists.
+- Verify required fields for the selected template.
+- Do not send an invoice reminder if payment is already marked Paid.
+- Do not send an enrolment confirmation if enrolment is cancelled.
+- Do not send a workshop invitation if the event is cancelled.
+- Do not send a quotation email if there is no quotation.
+- Do not attach a missing quotation PDF.
+- Do not generate broken links.
+
+If required data is missing, show a clear error to the CRM user instead of sending an incomplete email.
+
+====================================================
+21. EMAIL LOGGING
+====================================================
+
+Ensure outgoing emails are logged against the appropriate CRM record.
+
+At minimum, track:
+
+- Recipient
+- Template used
+- Subject
+- Timestamp
+- Lead/Contact ID
+- Related Deal/Quote/Invoice/Event where applicable
+- Send status
+- Error message if failed
+
+Reuse existing email logging functionality if already implemented.
+
+====================================================
+22. AUTOMATION
+====================================================
+
+Do NOT make every email automatically send immediately.
+
+First implement the templates and data mapping.
+
+Then create controlled automation where appropriate.
+
+Recommended automation candidates:
+
+- New lead → first follow-up
+- Quote sent → quote email
+- Invoice overdue → payment reminder
+- Payment confirmed → enrolment confirmation
+- Workshop/event registration campaign → event invite
+
+However, automatic sending should be configurable and should not accidentally spam leads.
+
+Provide appropriate triggers and safeguards.
+
+====================================================
+23. FUTURE FOLLOW-UP FOR "NOT NOW"
+====================================================
+
+For "Lost not now", support a future follow-up date if the salesperson knows when to reconnect.
+
+Example:
+
+Lead says:
+"Contact me next month."
+
+Store:
+
+Future Follow-up Date
+
+Then the system can create a task/reminder for the lead owner.
+
+Do not permanently delete the lead.
+
+====================================================
+24. TESTING
+====================================================
+
+After implementation, test each template.
+
+Create test Lead records containing realistic values.
+
+Test:
+
+1. First follow-up individual
+2. First follow-up corporate group
+3. HRD Corp claim next steps
+4. Pricing payment options
+5. Schedule intake dates
+6. Quote attached
+7. Invoice payment reminder
+8. Enrolment confirmation
+9. Lost not now
+10. Workshop event invite
+
+For every template verify:
+
+- First name is populated.
+- Course is populated.
+- Amount is populated where required.
+- Dates are populated.
+- Links work.
+- Logo loads.
+- CTA works.
+- No [PLACEHOLDER] remains.
+- No broken merge fields remain.
+- Email is responsive.
+- Desktop rendering is correct.
+- Mobile rendering is correct.
+- Gmail-compatible.
+- Outlook-compatible.
+
+Also test missing data.
+
+For example:
+
+If Training Fee is missing, the email should not accidentally display:
+
+RM null
+
+or:
+
+RM undefined
+
+or:
+
+[AMOUNT]
+
+Handle missing values gracefully.
+
+====================================================
+25. IMPORTANT IMPLEMENTATION RULE
+====================================================
+
+Before changing anything:
+
+1. Inspect the existing codebase.
+2. Identify the current Zoho integration.
+3. Identify current modules.
+4. Identify current Lead fields.
+5. Identify current API field names.
+6. Identify existing course data.
+7. Identify existing quote/invoice/payment systems.
+8. Identify existing website forms.
+9. Identify existing email functionality.
+10. Reuse existing architecture.
+
+Do not create parallel systems unnecessarily.
+
+====================================================
+26. FINAL DELIVERABLE
+====================================================
+
+After making the changes, provide me with a concise implementation report containing:
+
+A. Existing fields reused
+
+B. New Zoho fields created
+
+C. Exact Zoho field labels
+
+D. Exact Zoho API names
+
+E. Which email template uses which fields
+
+F. Which fields are still manual
+
+G. Which fields are dynamically populated
+
+H. Which automations were added
+
+I. Which automations were intentionally NOT added
+
+J. Test results for all 10 email templates
+
+K. Any Zoho CRM configuration I still need to perform manually
+
+L. Any credentials/API configuration required
+
+M. Any limitations caused by the Zoho CRM plan
+
+IMPORTANT:
+Do not claim something is dynamically populated until you have verified the actual Zoho CRM field/API configuration.
+
+The final goal is:
+
+Website enquiry
+→ Zoho Lead
+→ Course selection
+→ Sales process
+→ Pricing
+→ Quote
+→ Invoice/payment
+→ Enrolment
+→ Training
+→ Follow-up
+
+with the 10 Nexperts Academy email templates integrated cleanly into that lifecycle.

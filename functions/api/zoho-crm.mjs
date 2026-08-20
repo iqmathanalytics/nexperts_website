@@ -88,15 +88,13 @@ function buildDescription(data) {
   return lines.join("\n").slice(0, 30000);
 }
 
-/** Free edition: Company is almost always in the Leads list; Designation often is not. */
+/** Free edition: Company shows course for list + email merges; message stays in Description. */
 export function mapCompanyListField(data) {
   const course = String((data && data.course) || "").trim();
   const office = String((data && data.office) || "").trim();
   const message = String((data && data.message) || "").trim();
 
-  if (course && message) {
-    return truncateField(`${course} · ${message}`, 200);
-  }
+  // Prefer course alone so ${Leads.Company} is a clean course name in email templates.
   if (course) return truncateField(course, 200);
   if (message) return truncateField(message, 200);
   return truncateField(office, 200);

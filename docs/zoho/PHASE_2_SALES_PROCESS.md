@@ -54,22 +54,16 @@ Probability is optional. Closed Lost should be a lost stage so reports stay hone
 
 ## 4. Email templates (max 10 on Free)
 
-**Setup → Email → Email Templates** (Leads / Contacts / Deals as needed). Suggested set:
+Templates are already created (Phase 2). For Free-safe merge mapping and send rules see:
 
-1. First follow-up (individual) — course, next intake, ask for WhatsApp
-2. First follow-up (corporate / group)
-3. HRD Corp claim next steps
-4. Pricing / payment options
-5. Schedule / intake dates
-6. Quote attached (after convert)
-7. Invoice / payment reminder
-8. Enrolment confirmation
-9. Lost / not now (leave the door open)
-10. Spare / workshop-event invite
+- [TEMPLATE_FIELD_MAP.md](TEMPLATE_FIELD_MAP.md)
+- [TEMPLATE_EDIT_GUIDE.md](TEMPLATE_EDIT_GUIDE.md) — replace `[COURSE NAME]` with **Company** in Zoho UI
+- [TEMPLATE_SEND_CHECKLIST.md](TEMPLATE_SEND_CHECKLIST.md)
+- [IMPLEMENTATION_REPORT.md](IMPLEMENTATION_REPORT.md)
 
-Use merge fields: First Name, Last Name, Email. Course lives in **Description** on Free — copy from the Lead description when composing, or wait for Standard custom fields (`Course`).
+**Company** = course name from the website. **Description** = full enquiry including message. Do not invent custom merge fields on Free.
 
-Workflow alerts on Free can only email **CRM users**. Do not rely on Zoho to email the student automatically.
+Workflow alerts on Free can only email **CRM users**. Do not auto-send the 10 templates to leads. Student mail stays on Brevo.
 
 ---
 

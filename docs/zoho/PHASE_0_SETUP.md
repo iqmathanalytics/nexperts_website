@@ -86,18 +86,20 @@ On **Free**, there are no custom fields and **Designation** is often hidden from
 
 | Zoho column | Shows in the list |
 |-------------|-------------------|
-| **Company** | `Course · message` (e.g. `Certified Ethical Hacker (CEH) · Need March intake…`). Course only, message only, or office if both are empty. |
-| **Description** | Full enquiry (office, page URL, complete message). Add this column for long messages. |
+| **Company** | **Course name** (from form / course sidebar). If no course: message, then preferred office. Used as `${Leads.Company}` in email templates. |
+| **Description** | Full enquiry (office, page URL, complete message). Add this column for the message. |
 | **Industry** | Enquiry type (Individual, Corporate, HRD Corp, …) |
 
 **List view setup:**
 
 1. Open **Leads**.
 2. **Customize columns** → ensure **Company** and **Industry** are visible.
-3. Optional: add **Description** for the full message when Company truncates it.
+3. Add **Description** for the full message.
 4. Save the view.
 
-You do **not** need Designation. Read **Company** as course + short message in one cell.
+Read **Company** as “Course” for list + email merges. Full message is always in **Description**.
+
+Email templates: [TEMPLATE_FIELD_MAP.md](TEMPLATE_FIELD_MAP.md) · [TEMPLATE_EDIT_GUIDE.md](TEMPLATE_EDIT_GUIDE.md) · [TEMPLATE_SEND_CHECKLIST.md](TEMPLATE_SEND_CHECKLIST.md)
 
 ---
 
