@@ -398,9 +398,12 @@ def brand_block(brand_meta, cards):
     count = len(cards)
     cards_html = "\n".join(card_html(c) for c in cards)
     initials = "".join(part[0] for part in label.split()[:2]).upper()
+    # Use data-course-count (NOT data-count) — data-count is reserved for the
+    # hero animated counter which replaces element textContent.
+    size_cls = f" brand-block--n{count}" if count <= 2 else ""
     return (
-        f'    <div class="brand-block" data-brand="{key}" '
-        f'style="--bk:{color};--bk-tint:{tint}">\n'
+        f'    <div class="brand-block{size_cls}" data-brand="{key}" '
+        f'data-course-count="{count}" style="--bk:{color};--bk-tint:{tint}">\n'
         f'      <div class="brand-head">\n'
         f'        <div class="bh-mark" aria-hidden="true">{initials}</div>\n'
         f'        <div class="bh-text">\n'
