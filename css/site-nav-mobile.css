@@ -1,5 +1,5 @@
 /**
- * Drawer nav: tablets/phones (max-width 1024px) at normal zoom.
+ * Drawer nav: tablets/phones (max-width 1280px) at normal zoom.
  * Desktop at 100% keeps the full bar; 125%+ zoom uses .site-nav-drawer-force (JS).
  */
 
@@ -16,7 +16,7 @@ body {
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1281px) {
   html:not(.site-nav-drawer-force) nav.site-nav .nav-menu-btn {
     display: none !important;
   }
@@ -26,7 +26,7 @@ body {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
   nav.site-nav.site-nav-open {
     z-index: 220;
   }
@@ -292,7 +292,7 @@ body {
 }
 
 /* Desktop at 125%+ browser zoom only (class set by site-nav-mobile.js) */
-@media (min-width: 1025px) {
+@media (min-width: 1281px) {
   html.site-nav-drawer-force nav.site-nav .nav-menu-btn {
     display: flex !important;
     flex-shrink: 0;

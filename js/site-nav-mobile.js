@@ -1,6 +1,11 @@
 (function () {
-  /** Tablet/phone drawer (normal zoom). Desktop drawer only at 125%+ zoom via JS class. */
-  var DRAWER_MAX_PX = 1024;
+  /**
+   * Drawer nav when:
+   * - viewport ≤ 1280px (links would clip on the glass pill bar), or
+   * - browser zoom ≥ 125%, or
+   * - desktop width but .nav-links still overflow horizontally.
+   */
+  var DRAWER_MAX_PX = 1280;
   var ZOOM_MENU_MIN = 1.25;
   var drawerMq = window.matchMedia("(max-width: " + DRAWER_MAX_PX + "px)");
 
@@ -51,8 +56,26 @@
     return getBrowserZoom() >= ZOOM_MENU_MIN - 0.005;
   }
 
-  function syncDrawerForce() {
-    var force = shouldForceDrawerForZoom();
+  /**
+   * If the horizontal link pill cannot fit Home…About without clipping, use the drawer.
+   * Temporarily clears overflow-force so we measure the desktop row layout.
+   */
+  function measureOverflowWithoutForce(nav) {
+    if (drawerMq.matches || !nav) return false;
+    var html = document.documentElement;
+    var wasForced = html.classList.contains("site-nav-drawer-force");
+    if (wasForced) html.classList.remove("site-nav-drawer-force");
+    void nav.offsetWidth;
+    var links = nav.querySelector(".nav-links");
+    var overflow = !!(links && links.scrollWidth > links.clientWidth + 2);
+    if (wasForced) html.classList.add("site-nav-drawer-force");
+    return overflow;
+  }
+
+  function syncDrawerForce(nav) {
+    var force =
+      shouldForceDrawerForZoom() ||
+      measureOverflowWithoutForce(nav || document.querySelector("nav.site-nav"));
     document.documentElement.classList.toggle("site-nav-drawer-force", force);
     return force;
   }
@@ -137,7 +160,7 @@
     });
 
     function onLayoutChange() {
-      syncDrawerForce();
+      syncDrawerForce(nav);
       positionAiOverlay();
       positionAiMobileHint();
       if (!usesNavDrawer()) {
