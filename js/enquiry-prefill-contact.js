@@ -10,6 +10,7 @@
   var SS_COURSE = "nx_enquiry_course";
   var SS_TITLE = "nx_enquiry_title";
   var SS_INTENT = "nx_enquiry_intent";
+  var SS_MESSAGE = "nx_enquiry_message";
 
   function decodeSafe(s) {
     try {
@@ -36,6 +37,7 @@
       sessionStorage.removeItem(SS_COURSE);
       sessionStorage.removeItem(SS_TITLE);
       sessionStorage.removeItem(SS_INTENT);
+      sessionStorage.removeItem(SS_MESSAGE);
     } catch (_) {}
   }
 
@@ -119,6 +121,37 @@
     }
   }
 
+  function applyMessage(form, message) {
+    var msg = String(message || "").trim();
+    if (!msg) return;
+    var ta = form.elements.namedItem("message");
+    if (!ta) return;
+    if (String(ta.value || "").trim()) return;
+    ta.value = msg;
+  }
+
+  function selectTitleOnly(sel, titleDecoded) {
+    var label = String(titleDecoded || "").trim();
+    if (!label) return false;
+    for (var i = 0; i < sel.options.length; i++) {
+      var t = String(sel.options[i].textContent || "").trim();
+      if (t === label || t.indexOf(label) === 0) {
+        sel.selectedIndex = i;
+        sel.dispatchEvent(new Event("change", { bubbles: true }));
+        return true;
+      }
+    }
+    var opt = document.createElement("option");
+    opt.value = label;
+    opt.textContent = label;
+    var ref = sel.options[1] || null;
+    if (ref) sel.insertBefore(opt, ref);
+    else sel.appendChild(opt);
+    opt.selected = true;
+    sel.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+  }
+
   function apply() {
     try {
       var params = new URLSearchParams(window.location.search || "");
@@ -127,28 +160,37 @@
       var titleP = params.get("title") || "";
       var curriculum = params.get("curriculum") || "";
       var intent = params.get("intent") || "";
+      var message = params.get("message") || "";
 
       try {
         if (!slug) slug = sessionStorage.getItem(SS_COURSE) || "";
         if (!titleP) titleP = sessionStorage.getItem(SS_TITLE) || "";
         if (!intent) intent = sessionStorage.getItem(SS_INTENT) || "";
+        if (!message) message = sessionStorage.getItem(SS_MESSAGE) || "";
       } catch (_) {}
 
       slug = String(slug || "").trim();
       curriculum = curriculum ? decodeSafe(curriculum) : "";
       var titleDecoded = titleP ? decodeSafe(titleP) : "";
-
-      if (!slug && !curriculum) return;
+      message = message ? decodeSafe(message) : "";
 
       var form = document.getElementById("enquiryForm");
       if (!form) return;
       var sel = getCourseSelect();
-      if (!sel) return;
 
-      selectCourse(sel, slug || "", titleDecoded, curriculum || "");
+      var hadCourse = !!(slug || curriculum || titleDecoded);
+      if (sel && (slug || curriculum)) {
+        selectCourse(sel, slug || "", titleDecoded, curriculum || "");
+      } else if (sel && titleDecoded) {
+        selectTitleOnly(sel, titleDecoded);
+      }
+
       applyIntent(form, intent);
+      applyMessage(form, message || (titleDecoded ? "TikTok Live Exclusive interest: " + titleDecoded : ""));
 
-      clearSession();
+      if (hadCourse || message) clearSession();
+
+      if (!hadCourse && !message) return;
 
       try {
         if (window.location.hash !== "#enquire") {

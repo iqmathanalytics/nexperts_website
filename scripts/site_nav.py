@@ -14,6 +14,7 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
             ("Workshops", "/workshops"),
             ("Upcoming Events", "/upcoming-events"),
             ("Past Events", "/past-events"),
+            ("TikTok Live Exclusive", "/tiktok-live-exclusive"),
         ],
     ),
     (

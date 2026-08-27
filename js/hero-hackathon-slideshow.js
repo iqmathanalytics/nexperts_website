@@ -1,12 +1,12 @@
 /**
- * Hero hackathon carousel — automatic advance every 2s, pause on hover / hidden tab.
- * Images live under /image/hackathon/ (see FILES).
+ * Hero hackathon carousel — lighter paint: optimized images, adjacent preload only,
+ * slower cadence, pause when hero is off-screen / tab hidden / hover.
  */
 (function () {
   "use strict";
 
-  var INTERVAL_MS = 2000;
-  var BASE = "/image/hackathon/";
+  var INTERVAL_MS = 4000;
+  var BASE = "/image/hackathon/sm/";
 
   var FILES = [
     "WhatsApp Image 2026-05-13 at 11.53.20.jpeg",
@@ -36,12 +36,15 @@
     var root = document.getElementById("heroHackathon");
     var track = document.getElementById("heroHackathonTrack");
     var bar = document.getElementById("heroHackathonProgressBar");
+    var hero = document.getElementById("heroSection");
     if (!root || !track || !bar) return;
 
     var slides = [];
+    var imgs = [];
     var idx = 0;
     var timer = null;
     var paused = false;
+    var heroVisible = true;
 
     FILES.forEach(function (file, i) {
       var fig = document.createElement("figure");
@@ -49,15 +52,39 @@
       fig.setAttribute("aria-hidden", i === 0 ? "false" : "true");
 
       var img = document.createElement("img");
-      img.src = srcFor(file);
       img.alt = "Nexperts Academy hackathon — event photo " + (i + 1) + " of " + FILES.length;
-      img.loading = i === 0 ? "eager" : "lazy";
       img.decoding = "async";
-      img.sizes = "(max-width: 1024px) 96vw, min(94vw, 1040px)";
+      img.width = 960;
+      img.height = 540;
+      img.sizes = "(max-width: 1024px) 96vw, min(60vw, 720px)";
+      if (i === 0) {
+        img.src = srcFor(file);
+        img.loading = "eager";
+        img.fetchPriority = "high";
+      } else {
+        img.loading = "lazy";
+        img.dataset.src = srcFor(file);
+      }
       fig.appendChild(img);
       track.appendChild(fig);
       slides.push(fig);
+      imgs.push(img);
     });
+
+    function ensureSrc(i) {
+      var img = imgs[i];
+      if (!img) return;
+      if (!img.getAttribute("src") && img.dataset.src) {
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+      }
+    }
+
+    function preloadNeighbors(i) {
+      ensureSrc(i);
+      ensureSrc((i + 1) % imgs.length);
+      if (imgs.length > 2) ensureSrc((i + imgs.length - 1) % imgs.length);
+    }
 
     function setActive(i) {
       slides.forEach(function (el, j) {
@@ -66,12 +93,15 @@
         el.setAttribute("aria-hidden", on ? "false" : "true");
       });
       idx = i;
+      preloadNeighbors(i);
     }
 
     function kickProgress() {
       bar.classList.remove("is-anim");
       void bar.offsetWidth;
-      bar.classList.add("is-anim");
+      if (!paused && heroVisible && !prefersReducedMotion()) {
+        bar.classList.add("is-anim");
+      }
     }
 
     function goTo(i, user) {
@@ -98,7 +128,7 @@
 
     function schedule() {
       clearTimer();
-      if (paused || prefersReducedMotion() || slides.length < 2) return;
+      if (paused || !heroVisible || prefersReducedMotion() || slides.length < 2) return;
       timer = window.setInterval(next, INTERVAL_MS);
     }
 
@@ -127,6 +157,25 @@
 
     document.addEventListener("visibilitychange", onVis);
 
+    if (hero && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (en) {
+            heroVisible = en.isIntersecting;
+            if (!heroVisible) {
+              clearTimer();
+              bar.classList.remove("is-anim");
+            } else if (!paused) {
+              kickProgress();
+              schedule();
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      io.observe(hero);
+    }
+
     root.addEventListener("keydown", function (e) {
       if (e.key === "ArrowRight") {
         e.preventDefault();
@@ -136,6 +185,8 @@
         goTo(idx - 1, true);
       }
     });
+
+    preloadNeighbors(0);
 
     if (!prefersReducedMotion() && slides.length > 1) {
       kickProgress();

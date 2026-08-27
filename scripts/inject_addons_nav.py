@@ -46,6 +46,7 @@ STATIC_PAGES = [
     "chinese-new-year.html",
     "tan-boon-heong-event.html",
     "nexpert-x-universiti-teknologi-mara.html",
+    "tiktok-live-exclusive.html",
     "blog/unlocking-the-power-of-data-science-applications-and-challenges.html",
     "blog/ccna-certification-guide.html",
     "blog/comptia-network-plus-certification-guide.html",
