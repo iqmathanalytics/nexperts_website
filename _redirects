@@ -15,8 +15,8 @@
 # All rules below are EXPLICIT (no :slug placeholders) for maximum compatibility.
 # =============================================================================
 
-# Vanity SEO URLs (200; canonical meta matches source path)
-/fortinet-certified-professional-network-security-course-malaysia /courses/fortinet-certified-professional-network-security.html 200
+# Vanity SEO URLs → canonical /courses/{slug} (301)
+/fortinet-certified-professional-network-security-course-malaysia /courses/fortinet-certified-professional-network-security 301
 
 # --- Trailing slash removal (301; non-trailing slash is canonical) ---
 
