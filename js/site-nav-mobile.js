@@ -137,17 +137,47 @@
       });
     }
 
+    // Closing the drawer synchronously on click can cancel navigation on mobile
+    // browsers (link becomes visibility:hidden / pointer-events:none mid-tap).
     nav.querySelectorAll("#sitePrimaryNav a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        if (usesNavDrawer()) {
+      link.addEventListener("click", function (e) {
+        if (!usesNavDrawer()) return;
+
+        var hrefAttr = link.getAttribute("href");
+        if (!hrefAttr || hrefAttr === "#") {
           closeMenu(nav, btn);
+          return;
         }
+
+        var dest = link.href;
+        // Wait one tick so sibling handlers (e.g. courses-catalog) can preventDefault,
+        // and so WebKit/Blink finish the tap before the drawer is torn down.
+        window.setTimeout(function () {
+          if (e.defaultPrevented) {
+            closeMenu(nav, btn);
+            return;
+          }
+
+          closeMenu(nav, btn);
+
+          // Same-page hash (#courses etc.): browser handles scroll; just close.
+          if (hrefAttr.charAt(0) === "#") return;
+
+          try {
+            if (dest && dest !== window.location.href) {
+              window.location.assign(dest);
+            }
+          } catch (_) {
+            if (dest) window.location.href = dest;
+          }
+        }, 10);
       });
     });
 
     nav.querySelectorAll(".nav-addons-trigger").forEach(function (trigger) {
       trigger.addEventListener("click", function (e) {
         if (!usesNavDrawer()) return;
+        // Keep accordion toggle inside the open drawer; do not close the menu.
         e.stopPropagation();
       });
     });

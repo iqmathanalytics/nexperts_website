@@ -11,7 +11,8 @@
       var panel = wrap.querySelector(".nav-addons-panel");
       if (!btn || !panel) return;
 
-      var mq = window.matchMedia("(max-width: 1024px)");
+      // Keep in sync with js/site-nav-mobile.js DRAWER_MAX_PX (1280).
+      var mq = window.matchMedia("(max-width: 1280px)");
       var closeTimer = null;
       var CLOSE_DELAY_MS = 220;
 
@@ -135,6 +136,8 @@
 
       document.addEventListener("click", function (e) {
         if (!isDrawerMode()) return;
+        // Don't collapse accordion when tapping a real link (navigation is in progress).
+        if (e.target && e.target.closest && e.target.closest("a[href]")) return;
         if (!wrap.contains(e.target)) close();
       });
 
