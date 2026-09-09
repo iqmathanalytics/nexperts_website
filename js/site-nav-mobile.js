@@ -4,6 +4,10 @@
    * - viewport ≤ 1280px (links would clip on the glass pill bar), or
    * - browser zoom ≥ 125%, or
    * - desktop width but .nav-links still overflow horizontally.
+   *
+   * While open, #sitePrimaryNav is moved onto <body> so menu taps hit the panel
+   * instead of the dimmed backdrop (fixed panel inside a short header fails on
+   * iOS/WebKit hit-testing).
    */
   var DRAWER_MAX_PX = 1280;
   var ZOOM_MENU_MIN = 1.25;
@@ -30,8 +34,9 @@
     );
   }
 
-  function closeExplorePanels(nav) {
-    nav.querySelectorAll(".nav-addons-wrap.is-open").forEach(function (wrap) {
+  function closeExplorePanels(scope) {
+    var root = scope || document;
+    root.querySelectorAll(".nav-addons-wrap.is-open").forEach(function (wrap) {
       wrap.classList.remove("is-open");
       var panel = wrap.querySelector(".nav-addons-panel");
       var trigger = wrap.querySelector(".nav-addons-trigger");
@@ -40,26 +45,11 @@
     });
   }
 
-  function closeMenu(nav, btn) {
-    closeExplorePanels(nav);
-    nav.classList.remove("site-nav-open");
-    document.body.classList.remove("site-nav-open");
-    if (btn) {
-      btn.setAttribute("aria-expanded", "false");
-      btn.setAttribute("aria-label", "Open menu");
-    }
-  }
-
-  /** Force hamburger on desktop only when browser zoom is 125% or more. */
   function shouldForceDrawerForZoom() {
     if (drawerMq.matches) return false;
     return getBrowserZoom() >= ZOOM_MENU_MIN - 0.005;
   }
 
-  /**
-   * If the horizontal link pill cannot fit Home…About without clipping, use the drawer.
-   * Temporarily clears overflow-force so we measure the desktop row layout.
-   */
   function measureOverflowWithoutForce(nav) {
     if (drawerMq.matches || !nav) return false;
     var html = document.documentElement;
@@ -73,6 +63,10 @@
   }
 
   function syncDrawerForce(nav) {
+    // Don't measure the pill row while the list is portaled onto <body>.
+    if (document.body.classList.contains("site-nav-open")) {
+      return document.documentElement.classList.contains("site-nav-drawer-force");
+    }
     var force =
       shouldForceDrawerForZoom() ||
       measureOverflowWithoutForce(nav || document.querySelector("nav.site-nav"));
@@ -83,7 +77,11 @@
   function init() {
     var nav = document.querySelector("nav.site-nav");
     var btn = document.getElementById("siteNavMenuBtn");
-    if (!nav || !btn) return;
+    var links = document.getElementById("sitePrimaryNav");
+    if (!nav || !btn || !links) return;
+
+    var linksHome = links.parentElement;
+    var backdrop = document.querySelector(".nav-drawer-backdrop");
 
     function positionAiOverlay() {
       var aiBtn = document.querySelector("nav.site-nav .nav-right .nav-ai");
@@ -104,7 +102,9 @@
     function positionAiMobileHint() {
       if (!window.matchMedia("(max-width: 560px)").matches) return;
       var aiBtn = document.querySelector("nav.site-nav .nav-right .nav-ai");
-      var hint = document.querySelector("nav.site-nav .nav-right .nav-ai-mobile-hint");
+      var hint = document.querySelector(
+        "nav.site-nav .nav-right .nav-ai-mobile-hint"
+      );
       if (!aiBtn || !hint) return;
 
       var btnRect = aiBtn.getBoundingClientRect();
@@ -115,86 +115,121 @@
       hint.style.transform = "translateX(-50%)";
     }
 
-    var backdrop = nav.nextElementSibling;
-    if (!backdrop || !backdrop.classList.contains("nav-drawer-backdrop")) {
-      backdrop = null;
+    function mountDrawer(open) {
+      if (open) {
+        if (links.parentElement !== document.body) {
+          document.body.appendChild(links);
+        }
+        links.classList.add("site-nav-drawer-panel");
+      } else {
+        links.classList.remove("site-nav-drawer-panel");
+        if (linksHome && links.parentElement !== linksHome) {
+          linksHome.appendChild(links);
+        }
+      }
+    }
+
+    function setMenuOpen(open) {
+      if (open) {
+        mountDrawer(true);
+        nav.classList.add("site-nav-open");
+        document.body.classList.add("site-nav-open");
+      } else {
+        closeExplorePanels(links);
+        nav.classList.remove("site-nav-open");
+        document.body.classList.remove("site-nav-open");
+        mountDrawer(false);
+      }
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      if (backdrop) {
+        backdrop.setAttribute("aria-hidden", open ? "false" : "true");
+      }
+    }
+
+    function closeMenu() {
+      setMenuOpen(false);
     }
 
     btn.addEventListener("click", function (e) {
       e.preventDefault();
+      e.stopPropagation();
       if (!usesNavDrawer()) return;
-      var open = nav.classList.toggle("site-nav-open");
-      document.body.classList.toggle("site-nav-open", open);
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      setMenuOpen(!nav.classList.contains("site-nav-open"));
       positionAiOverlay();
       positionAiMobileHint();
     });
 
     if (backdrop) {
       backdrop.addEventListener("click", function () {
-        closeMenu(nav, btn);
+        closeMenu();
       });
     }
 
-    // Closing the drawer synchronously on click can cancel navigation on mobile
-    // browsers (link becomes visibility:hidden / pointer-events:none mid-tap).
-    nav.querySelectorAll("#sitePrimaryNav a").forEach(function (link) {
-      link.addEventListener("click", function (e) {
-        if (!usesNavDrawer()) return;
+    // Delegation stays valid after the list is moved to <body>.
+    links.addEventListener("click", function (e) {
+      if (!usesNavDrawer()) return;
+      if (!document.body.classList.contains("site-nav-open")) return;
 
-        var hrefAttr = link.getAttribute("href");
-        if (!hrefAttr || hrefAttr === "#") {
-          closeMenu(nav, btn);
+      var link = e.target.closest && e.target.closest("a[href]");
+      if (!link || !links.contains(link)) return;
+
+      var hrefAttr = link.getAttribute("href");
+      if (!hrefAttr || hrefAttr === "#") {
+        e.preventDefault();
+        closeMenu();
+        return;
+      }
+
+      var dest = link.href;
+
+      // Let courses-catalog.js run first; then close and finish navigation.
+      window.setTimeout(function () {
+        if (e.defaultPrevented) {
+          closeMenu();
           return;
         }
 
-        var dest = link.href;
-        // Wait one tick so sibling handlers (e.g. courses-catalog) can preventDefault,
-        // and so WebKit/Blink finish the tap before the drawer is torn down.
-        window.setTimeout(function () {
-          if (e.defaultPrevented) {
-            closeMenu(nav, btn);
-            return;
+        closeMenu();
+
+        if (hrefAttr.charAt(0) === "#") return;
+
+        try {
+          if (dest && dest !== window.location.href) {
+            window.location.assign(dest);
           }
-
-          closeMenu(nav, btn);
-
-          // Same-page hash (#courses etc.): browser handles scroll; just close.
-          if (hrefAttr.charAt(0) === "#") return;
-
-          try {
-            if (dest && dest !== window.location.href) {
-              window.location.assign(dest);
-            }
-          } catch (_) {
-            if (dest) window.location.href = dest;
-          }
-        }, 10);
-      });
+        } catch (_) {
+          if (dest) window.location.href = dest;
+        }
+      }, 10);
     });
 
-    nav.querySelectorAll(".nav-addons-trigger").forEach(function (trigger) {
+    links.querySelectorAll(".nav-addons-trigger").forEach(function (trigger) {
       trigger.addEventListener("click", function (e) {
         if (!usesNavDrawer()) return;
-        // Keep accordion toggle inside the open drawer; do not close the menu.
         e.stopPropagation();
       });
     });
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("site-nav-open")) {
-        closeMenu(nav, btn);
+        closeMenu();
         btn.focus();
       }
     });
 
     function onLayoutChange() {
+      // Measure overflow only with the list back in the header.
+      if (nav.classList.contains("site-nav-open") && !usesNavDrawer()) {
+        closeMenu();
+      } else if (!nav.classList.contains("site-nav-open")) {
+        mountDrawer(false);
+      }
       syncDrawerForce(nav);
       positionAiOverlay();
       positionAiMobileHint();
-      if (!usesNavDrawer()) {
-        closeMenu(nav, btn);
+      if (!usesNavDrawer() && nav.classList.contains("site-nav-open")) {
+        closeMenu();
       }
     }
 

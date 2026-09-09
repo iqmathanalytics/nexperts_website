@@ -442,11 +442,7 @@
   }
 
   .nav-addons-wrap.is-open .nav-addons-panel {
-    display: block;
-  }
-
-  .nav-panel-head {
-    padding: 12px 16px 10px;
+    display: block !important;
   }
 
   .nav-panel-eyebrow {
@@ -460,15 +456,6 @@
   .nav-panel--courses .nav-courses-stack,
   .nav-panel--explore .nav-addons-grid {
     padding: 8px 10px 4px;
-  }
-
-  .nav-addons-wrap:hover .nav-addons-panel {
-    display: none;
-  }
-
-  .nav-addons-wrap.is-open:hover .nav-addons-panel,
-  .nav-addons-wrap.is-open .nav-addons-panel {
-    display: block;
   }
 
   .nav-addons-trigger {

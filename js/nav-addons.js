@@ -136,8 +136,11 @@
 
       document.addEventListener("click", function (e) {
         if (!isDrawerMode()) return;
-        // Don't collapse accordion when tapping a real link (navigation is in progress).
+        // Keep accordion open when tapping links; drawer navigation owns those taps.
         if (e.target && e.target.closest && e.target.closest("a[href]")) return;
+        // Ignore taps on the accordion trigger (handled by toggle).
+        if (e.target && e.target.closest && e.target.closest(".nav-addons-trigger"))
+          return;
         if (!wrap.contains(e.target)) close();
       });
 
