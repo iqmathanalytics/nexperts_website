@@ -91,5 +91,8 @@ COURSES.extend(_B_P4B)
 from _course_batch_legacy_wix import BATCH as _B_LEGACY_WIX
 COURSES.extend(_B_LEGACY_WIX)
 
+from _course_batch_ai_ds_short import BATCH as _B_AI_DS_SHORT
+COURSES.extend(_B_AI_DS_SHORT)
+
 from _course_batch_fortinet import BATCH as _B_FORTINET
 COURSES.extend(_B_FORTINET)

@@ -15,8 +15,8 @@ Keep the Google Sheet as the full archive. Import only recent / still-workable l
 ## 1. Export the sheet
 
 1. Open the Enquiries spreadsheet (same ID as in Apps Script / `NEXPERTS_LEADS_SHEET_URL`).
-2. **File → Download → Comma Separated Values (.csv)** of the **Enquiries** tab.
-3. Save locally, e.g. `Enquiries.csv`. Expected headers:
+2. **File → Download → Comma Separated Values (.csv)** *or* Excel (`.xlsx`) of the **Enquiries** tab.
+3. Save locally, e.g. `Enquiries.csv` or `Nexperts Enquiry Leads.xlsx`. Expected headers:
 
    `Submitted At (ISO)`, `Source`, `Page URL`, `First`, `Last`, `Email`, `Phone`, `Office`, `Course`, `Type`, `Message`, `User Agent`
 
@@ -28,14 +28,17 @@ From the repo root:
 
 ```bash
 python scripts/zoho_sheet_to_leads_csv.py Enquiries.csv --since 2025-01-01 --limit 4000
+# or
+python scripts/zoho_sheet_to_leads_csv.py "Nexperts Enquiry Leads.xlsx" -o docs/zoho/Nexperts-Enquiry-Leads-zoho-leads.csv
 ```
 
-This writes `Enquiries-zoho-leads.csv` with Zoho display-name headers. Behaviour:
+This writes `*-zoho-leads.csv` with Zoho display-name headers. Behaviour:
 
 - Drops rows without a valid email
 - Keeps the **latest** row per email
 - Maps Source / Type the same way as the website API
 - Sets Lead Source to `Google Sheet Import` when the sheet source is not a website form
+- Sets **Company** to the **course name** (same as live website Free mapper)
 - Puts course, office, message, and URL into **Description** (Free has no custom fields)
 
 If the output has more than 1,000 rows, split it (Excel, or any CSV splitter) into batches of 1,000.
@@ -55,7 +58,7 @@ If the output has more than 1,000 rows, split it (Excel, or any CSV splitter) in
    | Email | Email |
    | Phone | Phone |
    | Mobile | Mobile |
-   | Company | Company (preferred office) |
+   | Company | Company (**interested course**) |
    | Website | Website |
    | Lead Source | Lead Source |
    | Industry | Industry |

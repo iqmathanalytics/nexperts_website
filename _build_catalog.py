@@ -147,6 +147,20 @@ P1 = {
     "iOS Development": "ios-development",
     "Netflix Data Analysis Workshop": "netflix-data-analysis",
     "Fortinet FCP Network Security": "fortinet-certified-professional-network-security",
+    # AI Field + Data Science short programmes (2026)
+    "Introduction to Machine Learning": "introduction-to-machine-learning",
+    "Building a Chatbot Using Python": "building-a-chatbot-using-python",
+    "AI Fundamentals Course — Introduction to Artificial Intelligence for Beginners": "ai-fundamentals-for-beginners",
+    "Deep Learning Using PyTorch": "deep-learning-using-pytorch",
+    "Generative AI Applications and Python Fundamentals": "generative-ai-applications-python-fundamentals",
+    "Microsoft Copilot": "microsoft-copilot",
+    "Prompt Engineering Certification Course with LLM": "prompt-engineering-certification",
+    "Claude AI in 90 Minutes Productivity Course: Build Your AI Work Assistant": "claude-ai-productivity-90-minutes",
+    "Oracle PL/SQL Database Programming Course": "oracle-plsql-database-programming",
+    "Tableau for Beginners": "tableau-for-beginners",
+    "Data Science Foundation": "data-science-foundation",
+    "Advanced Data Visualization Using Tableau": "advanced-data-visualization-tableau",
+    "Data Visualization with Seaborn Using Python": "data-visualization-with-seaborn",
 }
 
 # -----------------------------------------------------------------------------
@@ -326,6 +340,20 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","Django Web Development","Models, DRF APIs, auth and deploy \u2014 production-shaped Python web apps.","Intermediate",4.8,82, 3840),
     ("skill","skill","Skill-Based","Skills","iOS Development","Swift, SwiftUI, TestFlight and MVVM \u2014 ship an iPhone portfolio app.","Beginner\u2192Intermediate",4.7,74, 3620),
     ("skill","skill","Skill-Based","Workshop","Netflix Data Analysis Workshop","pandas + visualization storytelling on a streaming dataset \u2014 two-day workshop.","Beginner+",4.9,62, 2840),
+    # ---- AI Field + Data Science shorts ----
+    ("skill","skill","Skill-Based","AI 2026","Introduction to Machine Learning","Core ML concepts, first model labs and evaluation basics \u2014 practical ML starting point.","Beginner",4.8,72, 3180),
+    ("skill","skill","Skill-Based","AI 2026","Building a Chatbot Using Python","Build a deployable conversational assistant with Python \u2014 intents, APIs and demo day.","Beginner+",4.8,64, 2760),
+    ("skill","skill","Skill-Based","AI 2026","AI Fundamentals Course — Introduction to Artificial Intelligence for Beginners","Non-vendor AI literacy \u2014 concepts, use cases, Gen AI basics and responsible AI.","Beginner",4.9,88, 4120),
+    ("skill","skill","Skill-Based","AI 2026","Deep Learning Using PyTorch","Tensors, training loops and transfer learning with PyTorch \u2014 hands-on deep learning.","Intermediate",4.8,58, 2420),
+    ("skill","skill","Skill-Based","AI 2026","Generative AI Applications and Python Fundamentals","Python essentials plus Gen AI apps \u2014 LLM APIs, simple RAG and a working mini-app.","Beginner+",4.8,70, 2980),
+    ("skill","skill","Skill-Based","AI 2026","Microsoft Copilot","Practical Microsoft 365 Copilot workflows for Word, Excel, PowerPoint, Teams and Outlook.","Beginner",4.9,96, 5340),
+    ("skill","skill","Skill-Based","AI 2026","Prompt Engineering Certification Course with LLM","Structured prompting, few-shot patterns, evaluation and reusable prompt libraries.","Beginner+",4.9,84, 3860),
+    ("skill","skill","Skill-Based","Workshop","Claude AI in 90 Minutes Productivity Course: Build Your AI Work Assistant","Fast Claude setup workshop \u2014 build your personal AI work assistant in 90 minutes.","Beginner",4.9,54, 2180),
+    ("skill","skill","Skill-Based","Skills","Oracle PL/SQL Database Programming Course","Procedures, functions, packages, cursors and exceptions for Oracle database development.","Intermediate",4.8,66, 2640),
+    ("skill","skill","Skill-Based","Skills","Tableau for Beginners","First interactive Tableau dashboards \u2014 connect data, build charts and share insights.","Beginner",4.8,78, 3460),
+    ("skill","skill","Skill-Based","Skills","Data Science Foundation","Data science lifecycle foundations \u2014 wrangling, EDA, light modelling and storytelling.","Beginner+",4.8,82, 3720),
+    ("skill","skill","Skill-Based","Skills","Advanced Data Visualization Using Tableau","LOD, advanced calcs, interactivity and executive-ready Tableau dashboard design.","Intermediate",4.8,60, 2480),
+    ("skill","skill","Skill-Based","Skills","Data Visualization with Seaborn Using Python","Statistical visuals with Seaborn \u2014 distributions, relationships and report-ready figures.","Beginner+",4.8,68, 2860),
 ]
 
 

@@ -1,4 +1,4 @@
-"""Convert a Google Sheets Enquiries export into a Zoho CRM Leads import CSV.
+"""Convert an Enquiries sheet export (CSV or XLSX) into a Zoho CRM Leads import CSV.
 
 Free edition: 1,000 rows per import batch and 5,000 records in the whole org.
 Deduplicate by email (keep the latest submittedAt). Default cap is 4,000 rows
@@ -6,6 +6,7 @@ so live website upserts still have headroom.
 
 Usage:
   python scripts/zoho_sheet_to_leads_csv.py path/to/Enquiries.csv
+  python scripts/zoho_sheet_to_leads_csv.py \"Nexperts Enquiry Leads.xlsx\"
   python scripts/zoho_sheet_to_leads_csv.py Enquiries.csv --since 2025-01-01 --limit 4000
   python scripts/zoho_sheet_to_leads_csv.py Enquiries.csv -o zoho-leads-import.csv
 
@@ -169,9 +170,60 @@ def to_lead(row: dict, idx: dict[str, str]) -> dict[str, str] | None:
     }
 
 
+def cell_str(value: object) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, datetime):
+        return value.isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+    return str(value).strip()
+
+
+def load_sheet_rows(src: Path) -> tuple[list[str], list[dict[str, str]]]:
+    """Load CSV or first sheet of an XLSX as DictReader-compatible rows."""
+    suffix = src.suffix.lower()
+    if suffix in {".xlsx", ".xlsm", ".xltx", ".xltm"}:
+        try:
+            import openpyxl
+        except ImportError as exc:
+            raise SystemExit(
+                "openpyxl is required for Excel files. Run: pip install openpyxl"
+            ) from exc
+        wb = openpyxl.load_workbook(src, read_only=True, data_only=True)
+        ws = wb[wb.sheetnames[0]]
+        raw_rows = list(ws.iter_rows(values_only=True))
+        if not raw_rows:
+            return [], []
+        fieldnames = [cell_str(h) for h in raw_rows[0]]
+        rows: list[dict[str, str]] = []
+        for raw in raw_rows[1:]:
+            if not any(cell_str(c) for c in raw):
+                continue
+            row = {
+                fieldnames[i]: cell_str(raw[i] if i < len(raw) else "")
+                for i in range(len(fieldnames))
+                if fieldnames[i]
+            }
+            rows.append(row)
+        return fieldnames, rows
+
+    with src.open("r", encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        if not reader.fieldnames:
+            return [], []
+        fieldnames = list(reader.fieldnames)
+        rows = [{k: cell_str(v) for k, v in row.items()} for row in reader]
+        return fieldnames, rows
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("input_csv", type=Path, help="CSV exported from the Enquiries Google Sheet")
+    p.add_argument(
+        "input_csv",
+        type=Path,
+        help="CSV or XLSX exported from the Enquiries Google Sheet",
+    )
     p.add_argument("-o", "--output", type=Path, default=None, help="Output CSV path")
     p.add_argument("--since", default="", help="Keep rows on/after this date (YYYY-MM-DD)")
     p.add_argument("--limit", type=int, default=4000, help="Max unique emails to write (default 4000)")
@@ -186,16 +238,14 @@ def main() -> int:
     if args.since.strip():
         since_d = date.fromisoformat(args.since.strip())
 
-    with src.open("r", encoding="utf-8-sig", newline="") as f:
-        reader = csv.DictReader(f)
-        if not reader.fieldnames:
-            print("CSV has no header row.", file=sys.stderr)
-            return 1
-        idx = build_index(list(reader.fieldnames))
-        if "email" not in idx:
-            print("Could not find an Email column. Headers:", reader.fieldnames, file=sys.stderr)
-            return 1
-        rows = list(reader)
+    fieldnames, rows = load_sheet_rows(src)
+    if not fieldnames:
+        print("Sheet has no header row.", file=sys.stderr)
+        return 1
+    idx = build_index(fieldnames)
+    if "email" not in idx:
+        print("Could not find an Email column. Headers:", fieldnames, file=sys.stderr)
+        return 1
 
     dated: list[tuple[datetime, dict]] = []
     skipped = 0

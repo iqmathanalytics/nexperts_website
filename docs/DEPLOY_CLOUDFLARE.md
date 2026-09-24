@@ -77,7 +77,7 @@ Without a valid KV `id`, **Publish live** returns **503**. You can still **Expor
 
 ## 3. Python version (optional)
 
-The build runs Python scripts (`scripts/build_contact_course_select.py`, `scripts/inject_ga4.py`). The repo includes **`.python-version`** (`3.11`) so compatible Cloudflare build images can pick a consistent Python. If the build cannot find `python`, set **Environment variable** `PYTHON_VERSION` to `3.11` in the Pages project (see Cloudflare docs for the current variable name and supported versions).
+The build runs Python scripts (`scripts/build_contact_course_select.py`, `scripts/inject_gtm.py`). The repo includes **`.python-version`** (`3.11`) so compatible Cloudflare build images can pick a consistent Python. If the build cannot find `python`, set **Environment variable** `PYTHON_VERSION` to `3.11` in the Pages project (see Cloudflare docs for the current variable name and supported versions).
 
 ## 4. Redirects
 

@@ -74,6 +74,71 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://www.nexpertsacademy.com/courses/introduction-to-machine-learning</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/building-a-chatbot-using-python</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/ai-fundamentals-for-beginners</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/deep-learning-using-pytorch</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/generative-ai-applications-python-fundamentals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/microsoft-copilot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/prompt-engineering-certification</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/claude-ai-productivity-90-minutes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/oracle-plsql-database-programming</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/tableau-for-beginners</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/data-science-foundation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/advanced-data-visualization-tableau</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/data-visualization-with-seaborn</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.nexpertsacademy.com/courses/ai-900</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
