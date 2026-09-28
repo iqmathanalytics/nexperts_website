@@ -7,7 +7,7 @@
 "@id":"https://www.nexpertsacademy.com/#organization",
 "name":"Nexperts Academy",
 "url":"https://www.nexpertsacademy.com",
-"telephone":"+60 1112216870",
+"telephone":"011 1221 6870",
 "email":"enquiry@nexpertsacademy.com",
 "address":{
 "@type":"PostalAddress",
