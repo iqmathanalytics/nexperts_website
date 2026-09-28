@@ -50,185 +50,160 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Course",
-  "url": "https://www.nexpertsacademy.com/ccna",
-  "name": "Certified Ethical Hacker (CEH v13) Certification Training in Malaysia",
-  "description": "Join CEH v13 certification training in Malaysia with EC-Council labs, exam voucher, hands-on ethical hacking labs, and cybersecurity experts.",
-  "provider": {
-    "@type": "Organization",
-    "name": "Nexperts Academy",
-    "sameAs": "https://www.nexpertsacademy.com/"
-  },
-  "educationalCredentialAwarded": "CEH v13",
-  "timeRequired": "P5D",
-  "coursePrerequisites": "Beginners with networking and basic IT knowledge are recommended.",
-  "learningResourceType": [
-    "Instructor-Led + Labs",
-    "On-site Training",
-    "Virtual Training",
-    "Hybrid Training",
-    "EC-Council iLabs",
-    "EC-Council official courseware (digital)",
-    "EC-Council exam voucher (312-50)",
-    "220+ iLabs hands-on lab access (6 months)",
-    "3 full timed mock exams",
-    "Mock exam review sessions with instructor",
-    "Nexperts exam strategy guide",
-    "Post-course instructor access (30 days)"
-  ],
-  "hasCourseInstance": {
-    "@type": "CourseInstance",
-    "courseMode": [
-      "On-site",
-      "Virtual",
-      "Hybrid"
-    ],
-    "startDate": "2026-05-12",
-    "duration": "P5D",
-    "courseWorkload": "PT40H"
-  },
-  "about": [
-    {"@type": "Thing", "name": "Think like an attacker"},
-    {"@type": "Thing", "name": "AI-integrated curriculum"},
-    {"@type": "Thing", "name": "220+ hands-on labs"},
-    {"@type": "Thing", "name": "DoD 8140 approved"},
-    {"@type": "Thing", "name": "Ethical hacking concepts and tools"},
-    {"@type": "Thing", "name": "Network scanning and vulnerability analysis"},
-    {"@type": "Thing", "name": "Web and server security testing"},
-    {"@type": "Thing", "name": "Cloud, mobile, wireless, IoT/OT security"},
-    {"@type": "Thing", "name": "Cryptography fundamentals"},
-    {"@type": "Thing", "name": "Exam readiness"}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "Is CEH certification worth it in Malaysia?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CEH certification is one of the most recognized cybersecurity certifications globally and is highly valued by employers in Malaysia for penetration testing, SOC, and security analyst roles."
+      "@type": "Course",
+      "@id": "https://www.nexpertsacademy.com/ccna#course",
+      "url": "https://www.nexpertsacademy.com/ccna",
+      "name": "Cisco Certified Network Associate (CCNA) 200-301 v1.1 Training",
+      "description": "CCNA 200-301 v1.1 training in Malaysia covering network fundamentals, network access, IP connectivity, IP services, security fundamentals, automation and programmability, with hands-on Cisco IOS rack labs.",
+      "provider": {
+        "@type": "EducationalOrganization",
+        "@id": "https://www.nexpertsacademy.com/#organization",
+        "name": "Nexperts Academy",
+        "url": "https://www.nexpertsacademy.com/"
+      },
+      "courseCode": "200-301",
+      "educationalLevel": "Associate",
+      "educationalCredentialAwarded": "Cisco Certified Network Associate (CCNA)",
+      "inLanguage": [
+        "en",
+        "ms"
+      ],
+      "timeRequired": "P5D",
+      "coursePrerequisites": "Network+ or 1+ year of networking experience, familiarity with command-line interfaces, understanding of TCP/IP and subnetting, and basic Windows and Linux knowledge.",
+      "learningResourceType": [
+        "Instructor-Led Training",
+        "Hands-on Lab",
+        "Cisco IOS Rack Lab"
+      ],
+      "teaches": [
+        "Network Fundamentals",
+        "Network Access",
+        "IP Connectivity",
+        "IP Services",
+        "Security Fundamentals",
+        "Automation and Programmability",
+        "Cisco IOS",
+        "IPv4",
+        "IPv6",
+        "VLANs",
+        "802.1Q",
+        "Spanning Tree Protocol",
+        "EtherChannel",
+        "OSPF",
+        "HSRP",
+        "DHCP",
+        "DNS",
+        "NTP",
+        "SNMP",
+        "NAT",
+        "AAA",
+        "ACLs",
+        "IPsec VPN",
+        "REST APIs",
+        "RESTCONF",
+        "Python",
+        "Netmiko",
+        "Ansible"
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "@id": "https://www.nexpertsacademy.com/ccna#course-instance",
+        "courseMode": [
+          "onsite",
+          "blended"
+        ],
+        "duration": "P5D",
+        "courseWorkload": "PT40H"
       }
     },
+
     {
-      "@type": "Question",
-      "name": "What is the salary of CEH certified professionals in Malaysia?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ethical hacker salary in Malaysia depends on experience, technical skills, and cybersecurity specialization. Certified professionals often qualify for higher-paying cybersecurity roles."
+      "@type": "Product",
+      "@id": "https://www.nexpertsacademy.com/ccna#product",
+      "name": "CCNA 200-301 Training",
+      "description": "Cisco Certified Network Associate training with Cisco courseware, Cisco exam voucher, hands-on real Cisco IOS rack access, mock exams and simulator-question coaching.",
+      "category": "Cisco Networking Certification Training",
+      "brand": {
+        "@type": "Brand",
+        "name": "Cisco"
+      },
+      "url": "https://www.nexpertsacademy.com/ccna",
+      "sku": "CCNA-200-301",
+      "offers": {
+        "@type": "Offer",
+        "@id": "https://www.nexpertsacademy.com/ccna#offer",
+        "url": "https://www.nexpertsacademy.com/ccna",
+        "price": "3300",
+        "priceCurrency": "MYR",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.nexpertsacademy.com/#organization",
+          "name": "Nexperts Academy"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "231",
+        "bestRating": "5",
+        "worstRating": "1"
       }
     },
+
     {
-      "@type": "Question",
-      "name": "Is the CEH exam difficult?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The CEH exam requires understanding of cybersecurity concepts, ethical hacking tools, network security, and attack methodologies. Hands-on practice significantly improves exam readiness."
-      }
+      "@type": "EducationalOrganization",
+      "@id": "https://www.nexpertsacademy.com/#organization",
+      "name": "Nexperts Academy",
+      "url": "https://www.nexpertsacademy.com/",
+      "logo": "https://www.nexpertsacademy.com/image/nexperts-logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+601112216870",
+        "contactType": "customer service",
+        "email": "enquiry@nexpertsacademy.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/nexperts-academy-sdn-bhd/",
+        "https://twitter.com/nexpertsacademy/",
+        "https://www.tiktok.com/@nexperts.academy/",
+        "https://www.instagram.com/nexperts/"
+      ]
     },
+
     {
-      "@type": "Question",
-      "name": "How long does it take to prepare for the CEH exam?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most learners prepare for the CEH certification exam within several weeks to a few months depending on prior cybersecurity experience and lab practice."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does the CEH course include the exam voucher?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Nexperts Academy includes the EC-Council CEH exam voucher as part of the training package."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can beginners learn ethical hacking?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Beginners with networking and basic IT knowledge can start learning ethical hacking through structured cybersecurity training and hands-on labs."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What jobs can I get after CEH certification?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CEH-certified professionals commonly work as SOC Analysts, Penetration Testers, Security Analysts, Ethical Hackers, and Cybersecurity Consultants."
-      }
+      "@type": "BreadcrumbList",
+      "@id": "https://www.nexpertsacademy.com/ccna#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.nexpertsacademy.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Courses",
+          "item": "https://www.nexpertsacademy.com/#courses"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cisco",
+          "item": "https://www.nexpertsacademy.com/ccna"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "CCNA",
+          "item": "https://www.nexpertsacademy.com/ccna"
+        }
+      ]
     }
   ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  "name": "Nexperts Academy",
-  "url": "https://www.nexpertsacademy.com/",
-  "logo": "https://www.nexpertsacademy.com/image/nexperts-logo.png",
-  "contactPoint": [
-    {
-      "@type": "ContactPoint",
-      "telephone": "+601112216870",
-      "contactType": "customer service",
-      "email": "enquiry@nexpertsacademy.com"
-    }
-  ],
-  "address": [
-    {
-      "@type": "PostalAddress",
-      "streetAddress": "Unit 313, Block E, Phileo Damansara 1, Jalan 16/11 off Jalan Damansara",
-      "addressLocality": "Petaling Jaya",
-      "addressRegion": "Selangor",
-      "postalCode": "46350",
-      "addressCountry": "MY"
-    },
-    {
-      "@type": "PostalAddress",
-      "streetAddress": "54 State Street, Ste 804 #13408",
-      "addressLocality": "Albany",
-      "addressRegion": "NY",
-      "postalCode": "12207",
-      "addressCountry": "US"
-    }
-  ],
-  "sameAs": [
-    "https://www.linkedin.com/company/nexperts-academy-sdn-bhd/",
-    "https://twitter.com/nexpertsacademy/",
-    "https://www.tiktok.com/@nexperts.academy/",
-    "https://www.instagram.com/nexperts/"
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.nexpertsacademy.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Courses", "item": "https://www.nexpertsacademy.com/#courses"},
-    {"@type": "ListItem", "position": 3, "name": "EC-Council", "item": "https://www.nexpertsacademy.com/ceh"},
-    {"@type": "ListItem", "position": 4, "name": "Certified Ethical Hacker V13", "item": "https://www.nexpertsacademy.com/ceh"}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Certified Ethical Hacker (CEH v13) Certification Training in Malaysia",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "612"
-  },
-  "review": []
 }
 </script>
 <!-- /nexperts-schema:v1 -->

@@ -8,6 +8,7 @@ BATCH = []
 # 1. CCNA
 BATCH.append(dict(
     slug="ccna",
+    schema_markup=schema_markup_for_slug("ccna"),
     title="CCNA",
     title_html='Cisco Certified<br><em>Network Associate</em>',
     vendor_short="Cisco", watermark="CCNA", crumb_vendor="Cisco",

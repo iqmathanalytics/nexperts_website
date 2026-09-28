@@ -904,8 +904,11 @@ BATCH.append(_ms_course(
 # 5. PL-300 Power BI Data Analyst
 BATCH.append(_ms_course(
     slug="pl-300",
+    seo_title="PL-300 Power BI Training Malaysia | Data Analyst Certification",
+    seo_description="Prepare for Microsoft PL-300 certification in Malaysia with Power Query, data modelling, DAX, dashboards, deployment and hands-on Power BI labs.",
+    seo_keywords="PL-300, Power BI training Malaysia, Microsoft Power BI course, Power BI Data Analyst certification, Power Query, DAX, Power BI classes Malaysia",
     title="PL-300: Power BI Data Analyst",
-    title_html='PL-300: Power BI<br><em>Data Analyst Associate</em>',
+    title_html='PL-300 Power BI Training Malaysia<br><em>Microsoft Power BI Data Analyst Certification</em>',
     watermark="PL-300",
     subtitle="The most-requested data cert in Malaysia. Build BI dashboards and reports that executives actually use \u2014 from Power Query through DAX to enterprise governance.",
     badges_extra=[("cb-level","Associate"),("cb-new","2026 Updated"),("cb-hot","Top Data Hire in MY")],
@@ -923,6 +926,127 @@ BATCH.append(_ms_course(
     overview_p2="At Nexperts, PL-300 is delivered against three real-shaped MY datasets \u2014 a banking transactions extract, a hospital admissions view, and a retail point-of-sale feed. You build executive-grade reports for each.",
     overview_quote="The hardest part of Power BI is not DAX. It is choosing what to put on the page so the exec acts on it. We coach that, not just the formulas.",
     overview_p3="The 2026 update covers Microsoft Fabric integration, Copilot for Power BI, and modern enterprise deployment with deployment pipelines. We teach all three with current MY enterprise BI deployments.",
+    overview_sections=[
+        {
+            "eyebrow": "Power BI Training in Malaysia",
+            "paragraphs": [
+                "Our Power BI training in Malaysia prepares professionals to use Microsoft Power BI for data preparation, data modelling, reporting, visualization and business analysis.",
+                "The course combines instructor-led training with practical Power BI exercises using realistic business datasets. Participants work through the complete analytics workflow: connecting to data, cleaning and transforming it with Power Query, building data models, creating DAX measures, designing interactive reports and managing Power BI assets.",
+                "The programme is available through on-site, virtual and hybrid delivery, making it suitable for individuals and corporate teams across Malaysia.",
+            ],
+        },
+        {
+            "eyebrow": "Power BI Course in Malaysia",
+            "paragraphs": [
+                "This Power BI course in Malaysia is designed for professionals who want practical skills rather than only theoretical exam preparation.",
+            ],
+            "subtitle": "You will learn how to:",
+            "bullets": [
+                "Connect Power BI to Excel, SQL and other data sources",
+                "Clean and transform data with Power Query",
+                "Build relational and star-schema data models",
+                "Create relationships and manage filter direction",
+                "Develop DAX measures and calculated columns",
+                "Create interactive dashboards and reports",
+                "Use slicers, filters, drill-through and tooltips",
+                "Apply conditional formatting and report themes",
+                "Implement Row-Level Security (RLS)",
+                "Manage workspaces and deployment pipelines",
+                "Configure refresh and gateway settings",
+                "Use Power BI service capabilities",
+                "Work with Microsoft Fabric and Copilot for Power BI where applicable",
+            ],
+        },
+        {
+            "eyebrow": "Microsoft PL-300 Exam Skills and Certification",
+            "paragraphs": [
+                "The Microsoft Certified: Power BI Data Analyst Associate certification validates the ability to work with Power BI to prepare data, model data, visualize and analyze information, and manage and secure Power BI environments.",
+                "The current PL-300 exam measures four official skill areas.",
+            ],
+            "skill_groups": [
+                ("1. Prepare the Data \u2014 25\u201330%", [
+                    "Learn how to connect to data sources, profile and clean data, transform data with Power Query, manage data types and create reusable queries.",
+                ]),
+                ("2. Model the Data \u2014 25\u201330%", [
+                    "Build effective data models, configure relationships and cardinality, create date tables, and use DAX for calculations and time intelligence.",
+                ]),
+                ("3. Visualize and Analyze the Data \u2014 25\u201330%", [
+                    "Create reports and select appropriate visuals, configure filters and slicers, apply themes and conditional formatting, and use Power BI capabilities to communicate insights.",
+                ]),
+                ("4. Manage and Secure Power BI \u2014 15\u201320%", [
+                    "Work with Power BI workspaces and assets, manage semantic models, configure security and maintain Power BI solutions in an organizational environment.",
+                ]),
+            ],
+            "footer": "These percentages and skill areas reflect Microsoft's current PL-300 study guide, updated for the exam skills measured from April 20, 2026. Our five practical learning modules are aligned with these four official exam skill areas.",
+        },
+        {
+            "eyebrow": "What Does the PL-300 Power BI Certification Cover?",
+            "paragraphs": [
+                "The PL-300 certification focuses on the practical responsibilities of a Power BI Data Analyst.",
+            ],
+            "subtitle": "Candidates should be able to:",
+            "bullets": [
+                "Acquire and prepare business data",
+                "Transform data using Power Query",
+                "Design reliable data models",
+                "Write DAX calculations",
+                "Build analytical reports",
+                "Select appropriate visualizations",
+                "Create dashboards for business stakeholders",
+                "Apply filters and slicers",
+                "Configure Row-Level Security",
+                "Manage Power BI workspaces",
+                "Maintain semantic models and reports",
+                "Support self-service analytics",
+            ],
+            "footer": "Microsoft describes the role as working with business stakeholders to identify requirements and using Power BI to prepare, model, visualize, analyze, manage and secure data.",
+        },
+        {
+            "eyebrow": "PL-300 Certification Cost and Training Price in Malaysia",
+            "paragraphs": [
+                "The cost of becoming PL-300 certified can involve both training fees and the Microsoft certification examination.",
+                "Microsoft's examination price varies by country or region rather than having one universal global price.",
+            ],
+            "subtitle": "The Nexperts Academy course currently includes:",
+            "bullets": [
+                "Microsoft PL-300 exam voucher",
+                "Official Microsoft courseware",
+                "Three practical datasets",
+                "Three timed mock exams",
+                "DAX fluency workshop",
+                "Power BI service access",
+                "Post-course instructor support",
+            ],
+            "footer": "The training package is listed at RM 3,200 per person, including the Microsoft voucher and course materials.",
+        },
+        {
+            "eyebrow": "Power BI Training in Kuala Lumpur",
+            "paragraphs": [
+                "Nexperts Academy provides Power BI training in Kuala Lumpur and Malaysia through on-site, virtual and hybrid delivery.",
+                "Participants can apply Power BI skills to real business scenarios involving finance, healthcare, retail, operations and management reporting.",
+            ],
+            "subtitle": "The programme is suitable for:",
+            "bullets": [
+                "Data analysts",
+                "Business analysts",
+                "Finance professionals",
+                "Operations managers",
+                "Reporting specialists",
+                "Excel power users",
+                "BI professionals",
+                "Corporate teams",
+                "Professionals transitioning into data analytics",
+            ],
+        },
+        {
+            "eyebrow": "Power BI Certificate and Microsoft Certification",
+            "paragraphs": [
+                "There is an important distinction between a training completion certificate and the official Microsoft certification.",
+                "After completing the Nexperts training programme, participants receive the applicable course completion documentation from the training provider.",
+                "The Microsoft Certified: Power BI Data Analyst Associate credential is awarded by Microsoft after the candidate meets Microsoft's certification requirements, including passing the PL-300 examination.",
+            ],
+        },
+    ],
     who_for=[
         ("\U0001F4CA","Business analysts","BAs in finance, ops, marketing \u2014 PL-300 is the credential that proves your BI fluency."),
         ("\U0001F4BB","Excel power users","Move beyond pivots into proper enterprise BI."),
@@ -937,8 +1061,8 @@ BATCH.append(_ms_course(
         "Curiosity about how data tells a story"],
     prereqs_note="No data background? PL-300 is accessible. Ask us about our pre-PL-300 fundamentals primer.",
     curriculum_eyebrow="Course Curriculum",
-    curriculum_head=("Five domains.","From data to decision."),
-    curriculum_intro="PL-300 covers Prepare Data, Model Data, Visualize and Analyze Data, and Deploy and Maintain Assets. We deliver as a continuous BI build cycle, not as discrete topics.",
+    curriculum_head=("Five practical learning modules.","Aligned with four official PL-300 skill areas."),
+    curriculum_intro="Five practical learning modules aligned with Microsoft's four official PL-300 exam skill areas: Prepare the Data, Model the Data, Visualize and Analyze the Data, and Manage and Secure Power BI. We deliver them as a continuous BI build cycle, not as five exam domains.",
     modules=[
         ("01","Prepare Data with Power Query",[
             "Connect to Excel, SQL, REST APIs, OData, Fabric",
