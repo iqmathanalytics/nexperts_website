@@ -814,7 +814,6 @@ def build_sidebar(c):
         f'    <span class="price-orig">{c["price_orig"]}</span>\n'
         f'    <span class="price-save">{c["price_save"]}</span>\n'
         f'  </div>\n'
-        f'  <p class="price-note">{c["price_note"]}</p>\n'
         f'{enquiry_form}\n'
         f'  <a href="{href_corp}" class="corp-btn">Corporate / Group Pricing</a>\n'
         f'  <div class="guarantee">\n'
