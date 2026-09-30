@@ -139,7 +139,7 @@ P1 = {
     "ServiceNow Platform Implementation": "servicenow-platform",
     # Legacy Wix bootcamps & skills (detail under /courses/{slug})
     "AI & Machine Learning Bootcamp": "ai-ml-bootcamp",
-    "Gen AI": "gen-ai",
+    "Generative AI for Workplace Productivity & Business Automation": "generative-ai-workplace-productivity",
     "Agentic AI": "agentic-ai",
     "Cyber Security Bootcamp": "cyber-security-bootcamp",
     "Android Development": "android-development",
@@ -148,9 +148,7 @@ P1 = {
     "Netflix Data Analysis Workshop": "netflix-data-analysis",
     "Fortinet FCP Network Security": "fortinet-certified-professional-network-security",
     # AI Field + Data Science short programmes (2026)
-    "Introduction to Machine Learning": "introduction-to-machine-learning",
     "Building a Chatbot Using Python": "building-a-chatbot-using-python",
-    "AI Fundamentals Course — Introduction to Artificial Intelligence for Beginners": "ai-fundamentals-for-beginners",
     "Deep Learning Using PyTorch": "deep-learning-using-pytorch",
     "Generative AI Applications and Python Fundamentals": "generative-ai-applications-python-fundamentals",
     "Microsoft Copilot": "microsoft-copilot",
@@ -161,6 +159,8 @@ P1 = {
     "Data Science Foundation": "data-science-foundation",
     "Advanced Data Visualization Using Tableau": "advanced-data-visualization-tableau",
     "Data Visualization with Seaborn Using Python": "data-visualization-with-seaborn",
+    "Artificial Intelligence (AI) Course Malaysia": "artificial-intelligence-ai-course-malaysia",
+    "Artificial Intelligence & Machine Learning Course Malaysia": "ai-machine-learning-course-malaysia",
 }
 
 # -----------------------------------------------------------------------------
@@ -333,7 +333,7 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","ServiceNow Administration Fundamentals","Core Now Platform admin \u2014 users, ACLs, workflows and safe instance operations.","Fundamentals",4.8,84, 4360),
     ("skill","skill","Skill-Based","Skills","ServiceNow Platform Implementation","Lead greenfield programmes \u2014 CMDB, integrations and steering-ready artefacts.","Professional",4.7,58, 2140),
     ("skill","skill","Skill-Based","Skills","AI & Machine Learning Bootcamp","Python, scikit-learn, model evaluation and capstone \u2014 MY-context ML literacy in five days.","Intermediate",4.8,118,6420),
-    ("skill","skill","Skill-Based","AI 2026","Gen AI","Prompt engineering, RAG, evaluation and safe deployment \u2014 production-minded Gen AI literacy in five days.","Intermediate",4.9,94,5280),
+    ("skill","skill","Skill-Based","AI 2026","Generative AI for Workplace Productivity & Business Automation","Two-day workplace programme — professional prompts, department scenarios, AI workflows and responsible use.","All levels",4.9,94,5280),
     ("skill","skill","Skill-Based","AI 2026","Agentic AI","Multi-step agents, tool orchestration, memory and human-in-the-loop \u2014 agentic systems you can audit and scale.","Advanced",4.8,78,4620),
     ("skill","skill","Skill-Based","Skills","Cyber Security Bootcamp","Blue-team, ethical hacking labs and IR tabletop \u2014 security champions for Malaysian enterprises.","Foundation\u2192Intermediate",4.9,132,7180),
     ("skill","skill","Skill-Based","Skills","Android Development","Kotlin, Jetpack Compose, MVVM and Play Store readiness with portfolio coaching.","Beginner\u2192Intermediate",4.7,86, 4280),
@@ -341,9 +341,7 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","iOS Development","Swift, SwiftUI, TestFlight and MVVM \u2014 ship an iPhone portfolio app.","Beginner\u2192Intermediate",4.7,74, 3620),
     ("skill","skill","Skill-Based","Workshop","Netflix Data Analysis Workshop","pandas + visualization storytelling on a streaming dataset \u2014 two-day workshop.","Beginner+",4.9,62, 2840),
     # ---- AI Field + Data Science shorts ----
-    ("skill","skill","Skill-Based","AI 2026","Introduction to Machine Learning","Core ML concepts, first model labs and evaluation basics \u2014 practical ML starting point.","Beginner",4.8,72, 3180),
     ("skill","skill","Skill-Based","AI 2026","Building a Chatbot Using Python","Build a deployable conversational assistant with Python \u2014 intents, APIs and demo day.","Beginner+",4.8,64, 2760),
-    ("skill","skill","Skill-Based","AI 2026","AI Fundamentals Course — Introduction to Artificial Intelligence for Beginners","Non-vendor AI literacy \u2014 concepts, use cases, Gen AI basics and responsible AI.","Beginner",4.9,88, 4120),
     ("skill","skill","Skill-Based","AI 2026","Deep Learning Using PyTorch","Tensors, training loops and transfer learning with PyTorch \u2014 hands-on deep learning.","Intermediate",4.8,58, 2420),
     ("skill","skill","Skill-Based","AI 2026","Generative AI Applications and Python Fundamentals","Python essentials plus Gen AI apps \u2014 LLM APIs, simple RAG and a working mini-app.","Beginner+",4.8,70, 2980),
     ("skill","skill","Skill-Based","AI 2026","Microsoft Copilot","Practical Microsoft 365 Copilot workflows for Word, Excel, PowerPoint, Teams and Outlook.","Beginner",4.9,96, 5340),
@@ -354,6 +352,8 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","Data Science Foundation","Data science lifecycle foundations \u2014 wrangling, EDA, light modelling and storytelling.","Beginner+",4.8,82, 3720),
     ("skill","skill","Skill-Based","Skills","Advanced Data Visualization Using Tableau","LOD, advanced calcs, interactivity and executive-ready Tableau dashboard design.","Intermediate",4.8,60, 2480),
     ("skill","skill","Skill-Based","Skills","Data Visualization with Seaborn Using Python","Statistical visuals with Seaborn \u2014 distributions, relationships and report-ready figures.","Beginner+",4.8,68, 2860),
+    ("skill","skill","Skill-Based","AI 2026","Artificial Intelligence (AI) Course Malaysia","Instructor-led AI from fundamentals through Python, Machine Learning, Generative AI, LLMs, RAG and an introduction to AI agents.","Beginner to Intermediate",4.9,48,3920),
+    ("skill","skill","Skill-Based","AI 2026","Artificial Intelligence & Machine Learning Course Malaysia","40-hour hands-on Machine Learning with Python — regression, classification, clustering, evaluation and neural networks.","Beginner to Intermediate",4.8,42,3560),
 ]
 
 

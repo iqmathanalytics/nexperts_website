@@ -82,7 +82,10 @@
 /cisco-scor /courses/ccnp-security 301
 /django /courses/django 301
 /enarsi /courses/ccnp-enterprise 301
-/gen-ai /courses/gen-ai 301
+/gen-ai /courses/generative-ai-workplace-productivity 301
+/courses/gen-ai /courses/generative-ai-workplace-productivity 301
+/courses/introduction-to-machine-learning /courses/ai-machine-learning-course-malaysia 301
+/courses/ai-fundamentals-for-beginners /courses/artificial-intelligence-ai-course-malaysia 301
 /cissp /courses/cissp 301
 /sdwan /courses/sdwan 301
 /ecih /courses/ecih 301

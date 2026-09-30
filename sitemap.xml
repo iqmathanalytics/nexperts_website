@@ -64,7 +64,17 @@
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/courses/gen-ai</loc>
+    <loc>https://www.nexpertsacademy.com/courses/generative-ai-workplace-productivity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/artificial-intelligence-ai-course-malaysia</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.nexpertsacademy.com/courses/ai-machine-learning-course-malaysia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -74,17 +84,7 @@
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.nexpertsacademy.com/courses/introduction-to-machine-learning</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
     <loc>https://www.nexpertsacademy.com/courses/building-a-chatbot-using-python</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.nexpertsacademy.com/courses/ai-fundamentals-for-beginners</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>

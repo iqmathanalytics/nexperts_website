@@ -52,9 +52,14 @@ def render_badges(badges):
     )
 
 
+COURSE_DELIVERY = "Classroom · Virtual · Hybrid"
+
+
 def render_meta(meta):
     parts = []
     for icon, label, val, color in meta:
+        if label == "Delivery":
+            val = COURSE_DELIVERY
         style_attr = f' style="color:{color}"' if color else ""
         parts.append(
             f'<div class="hmeta"><span class="hmeta-icon">{icon}</span>'
@@ -329,7 +334,12 @@ def render_reviews(reviews):
 
 
 def render_sidebar_meta(rows):
-    return "\n    ".join(f'<div class="smeta-row"><span>{k}</span><strong>{v}</strong></div>' for k, v in rows)
+    parts = []
+    for label, value in rows:
+        if label == "Format":
+            value = COURSE_DELIVERY
+        parts.append(f'<div class="smeta-row"><span>{label}</span><strong>{value}</strong></div>')
+    return "\n    ".join(parts)
 
 
 def render_includes(items):

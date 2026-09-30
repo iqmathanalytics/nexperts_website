@@ -94,5 +94,15 @@ COURSES.extend(_B_LEGACY_WIX)
 from _course_batch_ai_ds_short import BATCH as _B_AI_DS_SHORT
 COURSES.extend(_B_AI_DS_SHORT)
 
+from _course_batch_ai_malaysia import BATCH as _B_AI_MY
+COURSES.extend(_B_AI_MY)
+
 from _course_batch_fortinet import BATCH as _B_FORTINET
 COURSES.extend(_B_FORTINET)
+
+_RETIRED = {
+    "introduction-to-machine-learning",
+    "ai-fundamentals-for-beginners",
+    "gen-ai",
+}
+COURSES[:] = [c for c in COURSES if c.get("slug") not in _RETIRED]
