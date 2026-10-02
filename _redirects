@@ -15,6 +15,11 @@
 # All rules below are EXPLICIT (no :slug placeholders) for maximum compatibility.
 # =============================================================================
 
+# Retired promo page
+/tiktok-live-exclusive / 301
+/tiktok-live-exclusive/ / 301
+/tiktok-live-exclusive.html / 301
+
 # Vanity SEO URLs → canonical /courses/{slug} (301)
 /fortinet-certified-professional-network-security-course-malaysia /courses/fortinet-certified-professional-network-security 301
 

@@ -14,7 +14,6 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
             ("Workshops", "/workshops"),
             ("Upcoming Events", "/upcoming-events"),
             ("Past Events", "/past-events"),
-            ("TikTok Live Exclusive", "/tiktok-live-exclusive"),
         ],
     ),
     (
@@ -205,21 +204,12 @@ def courses_dropdown_li(*, variant: str, current_path: str = "") -> str:
     </li>"""
 
 
-def _hide_tiktok_live_promo(path: str) -> bool:
-    """CEH and CompTIA course pages do not show the TikTok Live offer."""
-    leaf = (path.rstrip("/") or "/").split("/")[-1].lower()
-    return leaf == "ceh" or leaf.startswith("comptia-")
-
-
 def addons_dropdown_li(*, variant: str = "inner", current_path: str = "") -> str:
     path = current_path.rstrip("/") or "/"
-    hide_tiktok = _hide_tiktok_live_promo(path)
     cols: list[str] = []
     for title, links in ADDON_SECTIONS:
         items = []
         for label, href in links:
-            if hide_tiktok and href.rstrip("/") == "/tiktok-live-exclusive":
-                continue
             active = ' class="active"' if path == href.rstrip("/") or path == href else ""
             items.append(f'        <a href="{_esc(href)}" role="menuitem"{active}>{_esc(label)}</a>')
         cols.append(
