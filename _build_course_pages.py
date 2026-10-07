@@ -342,14 +342,17 @@ def render_sidebar_meta(rows):
     return "\n    ".join(parts)
 
 
-def render_includes(items):
-    from _partner_claims import sanitize_partner_text
+# Fixed for every course sidebar (course-specific whats_included is ignored).
+STANDARD_INCLUDES = [
+    "Official courseware",
+    "Class and Study Materials",
+    "Full class recording downloadable",
+    "Software access if applicable",
+]
 
-    lines = []
-    for x in items:
-        cleaned = sanitize_partner_text(x)
-        if cleaned:
-            lines.append(f'<div class="include-item">{cleaned}</div>')
+
+def render_includes(items=None):
+    lines = [f'<div class="include-item">{x}</div>' for x in STANDARD_INCLUDES]
     return "\n  ".join(lines)
 
 
@@ -811,7 +814,7 @@ def build_reviews(c):
 
 def build_sidebar(c):
     meta = render_sidebar_meta(c["sidebar_meta"])
-    inc = render_includes(c["whats_included"])
+    inc = render_includes()
     ver = render_verify(c["verify_items"])
     href_enroll = contact_href(c)
     href_corp = contact_href(c, intent="corporate")
