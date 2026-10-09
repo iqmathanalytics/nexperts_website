@@ -114,9 +114,37 @@
       "color": "#ee3124",
       "color_tint": "#fef2f2"
     },
-    "skill": {
-      "key": "skill",
-      "label": "Skill-Based",
+    "anthropic": {
+      "key": "anthropic",
+      "label": "Anthropic",
+      "tagline": "Claude certifications and practical Anthropic AI workflows.",
+      "color": "#d97706",
+      "color_tint": "#fffbeb"
+    },
+    "salesforce": {
+      "key": "salesforce",
+      "label": "Salesforce",
+      "tagline": "Admin, automation and CRM platform skills on Salesforce.",
+      "color": "#00a1e0",
+      "color_tint": "#eff9ff"
+    },
+    "servicenow": {
+      "key": "servicenow",
+      "label": "ServiceNow",
+      "tagline": "Now Platform administration and implementation programmes.",
+      "color": "#81b5a1",
+      "color_tint": "#f0fdf6"
+    },
+    "oracle": {
+      "key": "oracle",
+      "label": "Oracle",
+      "tagline": "Oracle database development and PL/SQL programming.",
+      "color": "#f80000",
+      "color_tint": "#fef2f2"
+    },
+    "nonvendor": {
+      "key": "nonvendor",
+      "label": "Non-Vendor",
       "tagline": "Hands-on, role-ready skills — outcome over paperwork.",
       "color": "#10b981",
       "color_tint": "#ecfdf5"
@@ -139,7 +167,11 @@
     "isc2",
     "offsec",
     "fortinet",
-    "skill"
+    "anthropic",
+    "salesforce",
+    "servicenow",
+    "oracle",
+    "nonvendor"
   ],
   "card_order": {
     "comptia": [
@@ -177,7 +209,11 @@
       "aws-devops-engineer-professional",
       "aws-security-specialty",
       "aws-data-engineer-associate",
-      "aws-machine-learning-specialty"
+      "aws-machine-learning-specialty",
+      "aws-ml-engineer-associate",
+      "aws-generative-ai-developer-professional",
+      "aws-ai-business-strategist",
+      "aws-ai-practitioner"
     ],
     "microsoft": [
       "az-900",
@@ -204,7 +240,16 @@
       "pl-100",
       "pl-200",
       "pl-400",
-      "pl-600"
+      "pl-600",
+      "excel-advanced-analytics",
+      "excel-basic",
+      "microsoft-copilot",
+      "ai-business-professional",
+      "azure-ai-apps-agents-developer",
+      "mlops-engineer-associate",
+      "azure-ai-cloud-developer",
+      "sql-ai-developer-associate",
+      "azure-databricks-data-engineer"
     ],
     "cisco": [
       "ccna",
@@ -219,7 +264,10 @@
     "gcp": [
       "gcp-cloud-digital-leader",
       "gcp-associate-cloud-engineer",
-      "gcp-professional-cloud-architect"
+      "gcp-professional-cloud-architect",
+      "gcp-generative-ai-leader",
+      "gcp-professional-machine-learning-engineer",
+      "gcp-professional-data-engineer"
     ],
     "peoplecert": [
       "itil-4-foundation",
@@ -245,7 +293,9 @@
       "terraform-associate"
     ],
     "tableau": [
-      "tableau-desktop-specialist"
+      "tableau-desktop-specialist",
+      "tableau-for-beginners",
+      "advanced-data-visualization-tableau"
     ],
     "isaca": [
       "cism",
@@ -266,21 +316,16 @@
       "oscp",
       "oswe"
     ],
-    "skill": [
+    "nonvendor": [
       "docker-containers",
       "cicd-jenkins-gitlab",
       "python-bootcamp",
       "data-science-with-python",
       "linux-administration",
       "sql-for-data-professionals",
-      "excel-advanced-analytics",
-      "excel-basic",
       "java-programming",
       "full-stack-web-development",
       "digital-marketing",
-      "salesforce-admin",
-      "servicenow-admin",
-      "servicenow-platform",
       "ai-ml-bootcamp",
       "generative-ai-workplace-productivity",
       "agentic-ai",
@@ -292,16 +337,28 @@
       "building-a-chatbot-using-python",
       "deep-learning-using-pytorch",
       "generative-ai-applications-python-fundamentals",
-      "microsoft-copilot",
       "prompt-engineering-certification",
-      "claude-ai-productivity-90-minutes",
-      "oracle-plsql-database-programming",
-      "tableau-for-beginners",
       "data-science-foundation",
-      "advanced-data-visualization-tableau",
       "data-visualization-with-seaborn",
       "artificial-intelligence-ai-course-malaysia",
       "ai-machine-learning-course-malaysia"
+    ],
+    "salesforce": [
+      "salesforce-admin"
+    ],
+    "servicenow": [
+      "servicenow-admin",
+      "servicenow-platform"
+    ],
+    "anthropic": [
+      "claude-ai-productivity-90-minutes",
+      "claude-certified-associate-foundations",
+      "claude-certified-developer-foundations",
+      "claude-certified-architect-foundations",
+      "claude-certified-architect-professional"
+    ],
+    "oracle": [
+      "oracle-plsql-database-programming"
     ]
   },
   "courses": [
@@ -309,6 +366,10 @@
       "slug": "comptia-a-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA A+",
@@ -328,6 +389,10 @@
       "slug": "comptia-network-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA Network+",
@@ -347,6 +412,10 @@
       "slug": "comptia-security-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA Security+",
@@ -366,6 +435,10 @@
       "slug": "comptia-cysa-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA CySA+",
@@ -385,6 +458,10 @@
       "slug": "comptia-pentest-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA PenTest+",
@@ -404,6 +481,10 @@
       "slug": "comptia-securityx",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA SecurityX",
@@ -423,6 +504,10 @@
       "slug": "comptia-linux-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA Linux+",
@@ -442,6 +527,10 @@
       "slug": "comptia-cloud-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA Cloud+",
@@ -461,6 +550,10 @@
       "slug": "comptia-tech-plus",
       "brand": "comptia",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "CompTIA",
       "badge": "Cert",
       "name": "CompTIA Tech+",
@@ -480,6 +573,12 @@
       "slug": "comptia-secai-plus",
       "brand": "comptia",
       "category": "spec",
+      "categories": [
+        "spec",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
       "vendor": "CompTIA",
       "badge": "New 2026",
       "name": "CompTIA SecAI+",
@@ -499,6 +598,10 @@
       "slug": "ceh",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "CEH v13 AI",
@@ -518,6 +621,12 @@
       "slug": "cpent-ai",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "CPENT AI",
@@ -537,6 +646,10 @@
       "slug": "chfi-v11",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "CHFI v11",
@@ -556,6 +669,10 @@
       "slug": "certified-soc-analyst-csa",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "Certified SOC Analyst (CSA)",
@@ -575,6 +692,10 @@
       "slug": "cnd-v3",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "CND v3",
@@ -594,6 +715,10 @@
       "slug": "fortinet-certified-professional-network-security",
       "brand": "fortinet",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Fortinet",
       "badge": "Cert",
       "name": "Fortinet FCP Network Security",
@@ -613,6 +738,10 @@
       "slug": "cciso",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "CCISO",
@@ -632,6 +761,10 @@
       "slug": "ctia",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "CTIA",
@@ -651,6 +784,10 @@
       "slug": "cct-cybersecurity-technician",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "CCT — Cybersecurity Technician",
@@ -670,6 +807,10 @@
       "slug": "ecih",
       "brand": "eccouncil",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "EC-Council",
       "badge": "Cert",
       "name": "E|CIH",
@@ -689,6 +830,10 @@
       "slug": "aws-cloud-practitioner",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS Cloud Practitioner",
@@ -708,6 +853,10 @@
       "slug": "aws-solutions-architect-associate",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS Solutions Architect Associate",
@@ -727,6 +876,10 @@
       "slug": "aws-sysops-administrator",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS SysOps Administrator",
@@ -746,6 +899,10 @@
       "slug": "aws-developer-associate",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS Developer Associate",
@@ -765,6 +922,10 @@
       "slug": "aws-solutions-architect-professional",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS Solutions Architect Professional",
@@ -784,6 +945,10 @@
       "slug": "aws-devops-engineer-professional",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS DevOps Engineer Professional",
@@ -803,6 +968,10 @@
       "slug": "aws-security-specialty",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS Security Specialty",
@@ -822,6 +991,10 @@
       "slug": "aws-data-engineer-associate",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS Data Engineer Associate",
@@ -841,6 +1014,12 @@
       "slug": "aws-machine-learning-specialty",
       "brand": "aws",
       "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
       "vendor": "AWS",
       "badge": "Cert",
       "name": "AWS Machine Learning Specialty",
@@ -860,6 +1039,10 @@
       "slug": "az-900",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-900: Azure Fundamentals",
@@ -879,6 +1062,10 @@
       "slug": "dp-900",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "DP-900: Azure Data Fundamentals",
@@ -898,6 +1085,10 @@
       "slug": "az-104",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-104: Azure Administrator",
@@ -917,6 +1108,10 @@
       "slug": "az-204",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-204: Azure Developer",
@@ -936,6 +1131,10 @@
       "slug": "az-305",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-305: Solutions Architect",
@@ -955,6 +1154,10 @@
       "slug": "az-400",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-400: DevOps Engineer",
@@ -974,6 +1177,10 @@
       "slug": "sc-900",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "SC-900: Security Fundamentals",
@@ -993,6 +1200,10 @@
       "slug": "sc-200",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "SC-200: Security Operations",
@@ -1012,6 +1223,10 @@
       "slug": "sc-300",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "SC-300: Identity & Access Admin",
@@ -1031,6 +1246,10 @@
       "slug": "pl-300",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "PL-300: Power BI Data Analyst",
@@ -1050,6 +1269,10 @@
       "slug": "dp-203",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "DP-203: Data Engineer",
@@ -1069,6 +1292,12 @@
       "slug": "artificial-intelligence",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AI-102: Azure AI Engineer",
@@ -1088,6 +1317,10 @@
       "slug": "ms-102",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "MS-102: M365 Administrator",
@@ -1107,6 +1340,10 @@
       "slug": "az-500",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-500: Azure Security Engineer",
@@ -1126,6 +1363,10 @@
       "slug": "az-700",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-700: Azure Network Engineer",
@@ -1145,6 +1386,10 @@
       "slug": "az-140",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AZ-140: Azure Virtual Desktop",
@@ -1164,6 +1409,10 @@
       "slug": "md-102",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "MD-102: M365 Endpoint Administrator",
@@ -1183,6 +1432,10 @@
       "slug": "ms-700",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "MS-700: Managing Microsoft Teams",
@@ -1202,6 +1455,12 @@
       "slug": "ai-900",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "AI-900: Azure AI Fundamentals",
@@ -1211,16 +1470,22 @@
       "reviews": 212,
       "enrolled": 11420,
       "has_detail_page": true,
-      "duration": "2 days / 16 hrs",
-      "next_intake": "6 May 2026",
-      "price": "RM 1,650",
-      "price_original": "RM 2,000",
-      "price_save": "Save 17%"
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
     },
     {
       "slug": "dp-100",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "DP-100: Azure Data Scientist",
@@ -1240,6 +1505,10 @@
       "slug": "dp-300",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "DP-300: Azure Database Admin",
@@ -1259,6 +1528,10 @@
       "slug": "pl-100",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "PL-100: Power Platform App Maker",
@@ -1278,6 +1551,10 @@
       "slug": "pl-200",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "PL-200: Power Platform Functional",
@@ -1297,6 +1574,10 @@
       "slug": "pl-400",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "PL-400: Power Platform Developer",
@@ -1316,6 +1597,10 @@
       "slug": "pl-600",
       "brand": "microsoft",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Microsoft",
       "badge": "Cert",
       "name": "PL-600: Power Platform Architect",
@@ -1335,6 +1620,10 @@
       "slug": "ccna",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "CCNA",
@@ -1354,6 +1643,10 @@
       "slug": "ccnp-enterprise",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "CCNP Enterprise",
@@ -1373,6 +1666,10 @@
       "slug": "ccnp-security",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "CCNP Security",
@@ -1392,6 +1689,10 @@
       "slug": "ccnp-collaboration",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "CCNP Collaboration",
@@ -1411,6 +1712,10 @@
       "slug": "devnet-associate",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "DevNet Associate",
@@ -1430,6 +1735,10 @@
       "slug": "cisco-spcor",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "CCNP SPCOR",
@@ -1449,6 +1758,10 @@
       "slug": "cisco-dccor",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "CCNP DCCOR",
@@ -1468,6 +1781,10 @@
       "slug": "sdwan",
       "brand": "cisco",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Cisco",
       "badge": "Cert",
       "name": "Cisco SD-WAN ENSDWI",
@@ -1487,6 +1804,12 @@
       "slug": "gcp-cloud-digital-leader",
       "brand": "gcp",
       "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
       "vendor": "Google Cloud",
       "badge": "Cert",
       "name": "Cloud Digital Leader",
@@ -1496,16 +1819,20 @@
       "reviews": 98,
       "enrolled": 5240,
       "has_detail_page": true,
-      "duration": "2 days / 16 hrs",
-      "next_intake": "6 May 2026",
-      "price": "RM 2,000",
-      "price_original": "RM 2,400",
-      "price_save": "Save 17%"
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
     },
     {
       "slug": "gcp-associate-cloud-engineer",
       "brand": "gcp",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Google Cloud",
       "badge": "Cert",
       "name": "Associate Cloud Engineer",
@@ -1525,6 +1852,10 @@
       "slug": "gcp-professional-cloud-architect",
       "brand": "gcp",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Google Cloud",
       "badge": "Cert",
       "name": "Professional Cloud Architect",
@@ -1544,6 +1875,10 @@
       "slug": "itil-4-foundation",
       "brand": "peoplecert",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PeopleCert",
       "badge": "Cert",
       "name": "ITIL 4 Foundation",
@@ -1563,6 +1898,10 @@
       "slug": "itil-4-specialist-cds",
       "brand": "peoplecert",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PeopleCert",
       "badge": "Cert",
       "name": "ITIL 4 Specialist: CDS",
@@ -1582,6 +1921,10 @@
       "slug": "itil-4-specialist-dsv",
       "brand": "peoplecert",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PeopleCert",
       "badge": "Cert",
       "name": "ITIL 4 Specialist: DSV",
@@ -1601,6 +1944,10 @@
       "slug": "itil-4-strategist-dpi",
       "brand": "peoplecert",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PeopleCert",
       "badge": "Cert",
       "name": "ITIL 4 Strategist: DPI",
@@ -1620,6 +1967,10 @@
       "slug": "prince2-foundation-practitioner",
       "brand": "peoplecert",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PeopleCert",
       "badge": "Cert",
       "name": "PRINCE2 Foundation & Practitioner",
@@ -1639,6 +1990,10 @@
       "slug": "agilepm-foundation-practitioner",
       "brand": "peoplecert",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PeopleCert",
       "badge": "Cert",
       "name": "AgilePM Foundation & Practitioner",
@@ -1658,6 +2013,10 @@
       "slug": "iso-27001-lead-implementer",
       "brand": "peoplecert",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PeopleCert",
       "badge": "Cert",
       "name": "ISO 27001 Lead Implementer",
@@ -1677,6 +2036,10 @@
       "slug": "pmp",
       "brand": "pmi",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PMI",
       "badge": "Cert",
       "name": "PMP",
@@ -1696,6 +2059,10 @@
       "slug": "capm",
       "brand": "pmi",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "PMI",
       "badge": "Cert",
       "name": "CAPM",
@@ -1715,6 +2082,10 @@
       "slug": "certified-scrum-master-csm",
       "brand": "scrum",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Scrum Alliance",
       "badge": "Cert",
       "name": "Certified ScrumMaster (CSM)",
@@ -1734,6 +2105,10 @@
       "slug": "cka",
       "brand": "linuxfdn",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Linux Foundation",
       "badge": "Cert",
       "name": "Kubernetes Administrator (CKA)",
@@ -1753,6 +2128,10 @@
       "slug": "ckad-kubernetes-app-developer",
       "brand": "linuxfdn",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Linux Foundation",
       "badge": "Cert",
       "name": "CKAD — Kubernetes App Developer",
@@ -1772,6 +2151,10 @@
       "slug": "terraform-associate",
       "brand": "hashicorp",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "HashiCorp",
       "badge": "Cert",
       "name": "Terraform Associate",
@@ -1791,6 +2174,10 @@
       "slug": "tableau-desktop-specialist",
       "brand": "tableau",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Tableau",
       "badge": "Cert",
       "name": "Tableau Desktop Specialist",
@@ -1810,6 +2197,10 @@
       "slug": "cism",
       "brand": "isaca",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISACA",
       "badge": "Cert",
       "name": "CISM",
@@ -1829,6 +2220,10 @@
       "slug": "cisa",
       "brand": "isaca",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISACA",
       "badge": "Cert",
       "name": "CISA",
@@ -1848,6 +2243,10 @@
       "slug": "crisc",
       "brand": "isaca",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISACA",
       "badge": "Cert",
       "name": "CRISC",
@@ -1867,6 +2266,10 @@
       "slug": "cgeit",
       "brand": "isaca",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISACA",
       "badge": "Cert",
       "name": "CGEIT",
@@ -1886,6 +2289,10 @@
       "slug": "cdpse",
       "brand": "isaca",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISACA",
       "badge": "Cert",
       "name": "CDPSE",
@@ -1905,6 +2312,10 @@
       "slug": "cissp",
       "brand": "isc2",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISC2",
       "badge": "Cert",
       "name": "CISSP",
@@ -1924,6 +2335,10 @@
       "slug": "sscp",
       "brand": "isc2",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISC2",
       "badge": "Cert",
       "name": "SSCP",
@@ -1943,6 +2358,10 @@
       "slug": "cc-certified-in-cybersecurity",
       "brand": "isc2",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISC2",
       "badge": "Cert",
       "name": "CC — Certified in Cybersecurity",
@@ -1962,6 +2381,10 @@
       "slug": "ccsp",
       "brand": "isc2",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISC2",
       "badge": "Cert",
       "name": "CCSP",
@@ -1981,6 +2404,10 @@
       "slug": "hcispp",
       "brand": "isc2",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISC2",
       "badge": "Cert",
       "name": "HCISPP",
@@ -2000,6 +2427,10 @@
       "slug": "csslp",
       "brand": "isc2",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "ISC2",
       "badge": "Cert",
       "name": "CSSLP",
@@ -2019,6 +2450,10 @@
       "slug": "oscp",
       "brand": "offsec",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Offensive Security",
       "badge": "Cert",
       "name": "OSCP",
@@ -2038,6 +2473,10 @@
       "slug": "oswe",
       "brand": "offsec",
       "category": "cert",
+      "categories": [
+        "cert"
+      ],
+      "is_ai": false,
       "vendor": "Offensive Security",
       "badge": "Cert",
       "name": "OSWE",
@@ -2055,9 +2494,13 @@
     },
     {
       "slug": "docker-containers",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Docker & Containers",
       "description": "Containerisation fundamentals — build, ship and run applications anywhere.",
@@ -2074,9 +2517,13 @@
     },
     {
       "slug": "cicd-jenkins-gitlab",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "CI/CD with Jenkins & GitLab",
       "description": "Automated delivery pipelines from code commit to production.",
@@ -2093,9 +2540,13 @@
     },
     {
       "slug": "python-bootcamp",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Python Bootcamp Certification Training",
       "description": "Completely project-based Python Bootcamp Certification Training Course.",
@@ -2112,9 +2563,13 @@
     },
     {
       "slug": "data-science-with-python",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Data Science with Python Certification",
       "description": "Live Online | Project-Based | Career-Focused",
@@ -2131,9 +2586,13 @@
     },
     {
       "slug": "linux-administration",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Linux Administration",
       "description": "Server management, shell scripting and system operations on Linux.",
@@ -2150,9 +2609,13 @@
     },
     {
       "slug": "sql-for-data-professionals",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "SQL for Data Professionals",
       "description": "Non-negotiable foundation for every data and analytics role.",
@@ -2169,9 +2632,13 @@
     },
     {
       "slug": "excel-advanced-analytics",
-      "brand": "skill",
+      "brand": "microsoft",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Microsoft",
       "badge": "Skills",
       "name": "Excel Advanced Analytics",
       "description": "PivotTables, Power Query and advanced formulas for business analysts.",
@@ -2188,9 +2655,13 @@
     },
     {
       "slug": "excel-basic",
-      "brand": "skill",
+      "brand": "microsoft",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Microsoft",
       "badge": "Skills",
       "name": "Microsoft Excel 2019 Basic",
       "description": "Spreadsheet essentials — navigation, formulas, charts and workplace productivity.",
@@ -2207,9 +2678,13 @@
     },
     {
       "slug": "java-programming",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Certified Java Programming",
       "description": "Enterprise Java foundations through JDBC and Spring Boot introduction — portfolio-ready.",
@@ -2226,9 +2701,13 @@
     },
     {
       "slug": "full-stack-web-development",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Full Stack Web Development",
       "description": "React, Node and SQL in one portfolio sprint — modern web stack for junior roles.",
@@ -2245,9 +2724,13 @@
     },
     {
       "slug": "digital-marketing",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Digital Marketing Certification",
       "description": "SEO, paid media, analytics and campaign storytelling with Malaysian market examples.",
@@ -2264,9 +2747,13 @@
     },
     {
       "slug": "salesforce-admin",
-      "brand": "skill",
+      "brand": "salesforce",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Salesforce",
       "badge": "Skills",
       "name": "Salesforce Admin & Automation",
       "description": "Lightning admin, security model, Flow automation and release hygiene on Salesforce.",
@@ -2283,9 +2770,13 @@
     },
     {
       "slug": "servicenow-admin",
-      "brand": "skill",
+      "brand": "servicenow",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "ServiceNow",
       "badge": "Skills",
       "name": "ServiceNow Administration Fundamentals",
       "description": "Core Now Platform admin — users, ACLs, workflows and safe instance operations.",
@@ -2302,9 +2793,13 @@
     },
     {
       "slug": "servicenow-platform",
-      "brand": "skill",
+      "brand": "servicenow",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "ServiceNow",
       "badge": "Skills",
       "name": "ServiceNow Platform Implementation",
       "description": "Lead greenfield programmes — CMDB, integrations and steering-ready artefacts.",
@@ -2321,10 +2816,15 @@
     },
     {
       "slug": "ai-ml-bootcamp",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
-      "badge": "Skills",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
+      "badge": "AI 2026",
       "name": "AI & Machine Learning Bootcamp",
       "description": "Python, scikit-learn, model evaluation and capstone — MY-context ML literacy in five days.",
       "level": "Intermediate",
@@ -2340,9 +2840,14 @@
     },
     {
       "slug": "generative-ai-workplace-productivity",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Generative AI for Workplace Productivity & Business Automation",
       "description": "Two-day workplace programme — professional prompts, department scenarios, AI workflows and responsible use.",
@@ -2359,9 +2864,14 @@
     },
     {
       "slug": "agentic-ai",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Agentic AI",
       "description": "Multi-step agents, tool orchestration, memory and human-in-the-loop — agentic systems you can audit and scale.",
@@ -2378,9 +2888,13 @@
     },
     {
       "slug": "cyber-security-bootcamp",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Cyber Security Bootcamp",
       "description": "Blue-team, ethical hacking labs and IR tabletop — security champions for Malaysian enterprises.",
@@ -2397,9 +2911,13 @@
     },
     {
       "slug": "android-development",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Android Development",
       "description": "Kotlin, Jetpack Compose, MVVM and Play Store readiness with portfolio coaching.",
@@ -2416,9 +2934,13 @@
     },
     {
       "slug": "django",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Django Web Development",
       "description": "Models, DRF APIs, auth and deploy — production-shaped Python web apps.",
@@ -2435,9 +2957,13 @@
     },
     {
       "slug": "ios-development",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "iOS Development",
       "description": "Swift, SwiftUI, TestFlight and MVVM — ship an iPhone portfolio app.",
@@ -2454,9 +2980,13 @@
     },
     {
       "slug": "netflix-data-analysis",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Workshop",
       "name": "Netflix Data Analysis Workshop",
       "description": "pandas + visualization storytelling on a streaming dataset — two-day workshop.",
@@ -2473,9 +3003,14 @@
     },
     {
       "slug": "building-a-chatbot-using-python",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Building a Chatbot Using Python",
       "description": "Build a deployable conversational assistant with Python — intents, APIs and demo day.",
@@ -2492,9 +3027,14 @@
     },
     {
       "slug": "deep-learning-using-pytorch",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Deep Learning Using PyTorch",
       "description": "Tensors, training loops and transfer learning with PyTorch — hands-on deep learning.",
@@ -2511,9 +3051,14 @@
     },
     {
       "slug": "generative-ai-applications-python-fundamentals",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Generative AI Applications and Python Fundamentals",
       "description": "Python essentials plus Gen AI apps — LLM APIs, simple RAG and a working mini-app.",
@@ -2530,9 +3075,14 @@
     },
     {
       "slug": "microsoft-copilot",
-      "brand": "skill",
+      "brand": "microsoft",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Microsoft",
       "badge": "AI 2026",
       "name": "Microsoft Copilot",
       "description": "Practical Microsoft 365 Copilot workflows for Word, Excel, PowerPoint, Teams and Outlook.",
@@ -2549,9 +3099,14 @@
     },
     {
       "slug": "prompt-engineering-certification",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Prompt Engineering Certification Course with LLM",
       "description": "Structured prompting, few-shot patterns, evaluation and reusable prompt libraries.",
@@ -2568,9 +3123,14 @@
     },
     {
       "slug": "claude-ai-productivity-90-minutes",
-      "brand": "skill",
+      "brand": "anthropic",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Anthropic",
       "badge": "Workshop",
       "name": "Claude AI in 90 Minutes Productivity Course: Build Your AI Work Assistant",
       "description": "Fast Claude setup workshop — build your personal AI work assistant in 90 minutes.",
@@ -2587,9 +3147,13 @@
     },
     {
       "slug": "oracle-plsql-database-programming",
-      "brand": "skill",
+      "brand": "oracle",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Oracle",
       "badge": "Skills",
       "name": "Oracle PL/SQL Database Programming Course",
       "description": "Procedures, functions, packages, cursors and exceptions for Oracle database development.",
@@ -2606,9 +3170,13 @@
     },
     {
       "slug": "tableau-for-beginners",
-      "brand": "skill",
+      "brand": "tableau",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Tableau",
       "badge": "Skills",
       "name": "Tableau for Beginners",
       "description": "First interactive Tableau dashboards — connect data, build charts and share insights.",
@@ -2625,9 +3193,13 @@
     },
     {
       "slug": "data-science-foundation",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Data Science Foundation",
       "description": "Data science lifecycle foundations — wrangling, EDA, light modelling and storytelling.",
@@ -2644,9 +3216,13 @@
     },
     {
       "slug": "advanced-data-visualization-tableau",
-      "brand": "skill",
+      "brand": "tableau",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Tableau",
       "badge": "Skills",
       "name": "Advanced Data Visualization Using Tableau",
       "description": "LOD, advanced calcs, interactivity and executive-ready Tableau dashboard design.",
@@ -2663,9 +3239,13 @@
     },
     {
       "slug": "data-visualization-with-seaborn",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill"
+      ],
+      "is_ai": false,
+      "vendor": "Non-Vendor",
       "badge": "Skills",
       "name": "Data Visualization with Seaborn Using Python",
       "description": "Statistical visuals with Seaborn — distributions, relationships and report-ready figures.",
@@ -2682,9 +3262,14 @@
     },
     {
       "slug": "artificial-intelligence-ai-course-malaysia",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Artificial Intelligence (AI) Course Malaysia",
       "description": "Instructor-led AI from fundamentals through Python, Machine Learning, Generative AI, LLMs, RAG and an introduction to AI agents.",
@@ -2701,9 +3286,14 @@
     },
     {
       "slug": "ai-machine-learning-course-malaysia",
-      "brand": "skill",
+      "brand": "nonvendor",
       "category": "skill",
-      "vendor": "Skill-Based",
+      "categories": [
+        "skill",
+        "ai"
+      ],
+      "is_ai": true,
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Artificial Intelligence & Machine Learning Course Malaysia",
       "description": "40-hour hands-on Machine Learning with Python — regression, classification, clustering, evaluation and neural networks.",
@@ -2717,6 +3307,431 @@
       "price": "RM 5,500",
       "price_original": "RM 6,800",
       "price_save": "Save 19%"
+    },
+    {
+      "slug": "ai-business-professional",
+      "brand": "microsoft",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Microsoft",
+      "badge": "New 2026",
+      "name": "AI Business Professional",
+      "description": "Microsoft 365 Copilot foundations for business users, managers and analysts.",
+      "level": "Foundation",
+      "rating": 4.8,
+      "reviews": 36,
+      "enrolled": 1680,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "azure-ai-apps-agents-developer",
+      "brand": "microsoft",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Microsoft",
+      "badge": "New 2026",
+      "name": "Azure AI Apps and Agents Developer Associate",
+      "description": "Build AI apps and agents on Azure with responsible development practices.",
+      "level": "Associate",
+      "rating": 4.8,
+      "reviews": 28,
+      "enrolled": 1420,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "mlops-engineer-associate",
+      "brand": "microsoft",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Microsoft",
+      "badge": "New 2026",
+      "name": "Machine Learning Operations Engineer Associate",
+      "description": "MLOps on Azure — pipelines, monitoring and production ML operations.",
+      "level": "Associate",
+      "rating": 4.8,
+      "reviews": 24,
+      "enrolled": 1180,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "azure-ai-cloud-developer",
+      "brand": "microsoft",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Microsoft",
+      "badge": "New 2026",
+      "name": "Azure AI Cloud Developer Associate",
+      "description": "Develop AI-powered cloud applications on Microsoft Azure.",
+      "level": "Associate",
+      "rating": 4.8,
+      "reviews": 26,
+      "enrolled": 1260,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "sql-ai-developer-associate",
+      "brand": "microsoft",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Microsoft",
+      "badge": "New 2026",
+      "name": "SQL AI Developer Associate",
+      "description": "Apply AI capabilities in SQL and data workloads on Microsoft platforms.",
+      "level": "Associate",
+      "rating": 4.8,
+      "reviews": 22,
+      "enrolled": 1040,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "azure-databricks-data-engineer",
+      "brand": "microsoft",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Microsoft",
+      "badge": "New 2026",
+      "name": "Azure Databricks Data Engineer Associate",
+      "description": "Data engineering with Azure Databricks for analytics and AI pipelines.",
+      "level": "Associate",
+      "rating": 4.8,
+      "reviews": 30,
+      "enrolled": 1380,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "aws-ml-engineer-associate",
+      "brand": "aws",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "AWS",
+      "badge": "New 2026",
+      "name": "Machine Learning Engineer Associate",
+      "description": "Build, train and deploy ML solutions on AWS (MLA-C01).",
+      "level": "Associate",
+      "rating": 4.8,
+      "reviews": 32,
+      "enrolled": 1540,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "aws-generative-ai-developer-professional",
+      "brand": "aws",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "AWS",
+      "badge": "New 2026",
+      "name": "Generative AI Developer Professional",
+      "description": "Professional generative AI development on AWS (AIP-C01).",
+      "level": "Professional",
+      "rating": 4.8,
+      "reviews": 20,
+      "enrolled": 980,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "aws-ai-business-strategist",
+      "brand": "aws",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "AWS",
+      "badge": "New 2026",
+      "name": "AI Business Strategist",
+      "description": "Guide AI investment, adoption and transformation on AWS (AIB-C01).",
+      "level": "Foundation",
+      "rating": 4.8,
+      "reviews": 18,
+      "enrolled": 860,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "aws-ai-practitioner",
+      "brand": "aws",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "AWS",
+      "badge": "New 2026",
+      "name": "AWS Certified AI Practitioner",
+      "description": "Foundational AI literacy and AWS AI services for the AIF-C01 exam.",
+      "level": "Foundation",
+      "rating": 4.9,
+      "reviews": 48,
+      "enrolled": 2140,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "gcp-generative-ai-leader",
+      "brand": "gcp",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Google Cloud",
+      "badge": "New 2026",
+      "name": "Generative AI Leader",
+      "description": "Lead generative AI strategy and adoption on Google Cloud.",
+      "level": "Foundation",
+      "rating": 4.8,
+      "reviews": 22,
+      "enrolled": 1120,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "gcp-professional-machine-learning-engineer",
+      "brand": "gcp",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Google Cloud",
+      "badge": "New 2026",
+      "name": "Professional Machine Learning Engineer",
+      "description": "Design and productionise ML solutions on Google Cloud.",
+      "level": "Professional",
+      "rating": 4.8,
+      "reviews": 34,
+      "enrolled": 1480,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "gcp-professional-data-engineer",
+      "brand": "gcp",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Google Cloud",
+      "badge": "New 2026",
+      "name": "Professional Data Engineer",
+      "description": "Design reliable data processing systems on Google Cloud.",
+      "level": "Professional",
+      "rating": 4.8,
+      "reviews": 40,
+      "enrolled": 1720,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "claude-certified-associate-foundations",
+      "brand": "anthropic",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Anthropic",
+      "badge": "New 2026",
+      "name": "Claude Certified Associate - Foundations",
+      "description": "Non-technical Claude foundations for everyday workplace use (CCAO-F).",
+      "level": "Foundation",
+      "rating": 4.8,
+      "reviews": 16,
+      "enrolled": 720,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "claude-certified-developer-foundations",
+      "brand": "anthropic",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Anthropic",
+      "badge": "New 2026",
+      "name": "Claude Certified Developer - Foundations",
+      "description": "Developer foundations for building with Claude (CCDV-F).",
+      "level": "Foundation",
+      "rating": 4.8,
+      "reviews": 14,
+      "enrolled": 640,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "claude-certified-architect-foundations",
+      "brand": "anthropic",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Anthropic",
+      "badge": "New 2026",
+      "name": "Claude Certified Architect - Foundations",
+      "description": "Architecture foundations for Claude solutions (CCAR-F).",
+      "level": "Foundation",
+      "rating": 4.8,
+      "reviews": 12,
+      "enrolled": 580,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
+    },
+    {
+      "slug": "claude-certified-architect-professional",
+      "brand": "anthropic",
+      "category": "cert",
+      "categories": [
+        "cert",
+        "ai",
+        "skill"
+      ],
+      "is_ai": true,
+      "vendor": "Anthropic",
+      "badge": "New 2026",
+      "name": "Claude Certified Architect - Professional",
+      "description": "Professional Claude solution architecture (CCAR-P).",
+      "level": "Professional",
+      "rating": 4.8,
+      "reviews": 10,
+      "enrolled": 520,
+      "has_detail_page": true,
+      "duration": "Enquire for schedule",
+      "next_intake": "Enquire",
+      "price": "Enquire",
+      "price_original": "",
+      "price_save": ""
     }
   ]
 }

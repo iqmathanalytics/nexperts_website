@@ -2,6 +2,21 @@
  * Course catalog: nav mega-menu deep links + homepage search.
  */
 (function () {
+  function cardCats(card) {
+    var raw = card.getAttribute("data-cats");
+    if (raw && raw.trim()) {
+      return raw.trim().split(/\s+/);
+    }
+    var single = card.getAttribute("data-cat") || "";
+    return single ? [single] : [];
+  }
+
+  function cardMatchesFilter(card, filterCat) {
+    if (!filterCat || filterCat === "all") return true;
+    if (filterCat === "ai" && card.getAttribute("data-ai") === "1") return true;
+    return cardCats(card).indexOf(filterCat) !== -1;
+  }
+
   function applyCatalogFilter(cat, brand) {
     var section = document.getElementById("courses");
     if (!section) return;
@@ -13,7 +28,7 @@
     document.querySelectorAll(".brand-block").forEach(function (block) {
       var visible = 0;
       block.querySelectorAll(".cc").forEach(function (c) {
-        var match = filterCat === "all" || c.dataset.cat === filterCat;
+        var match = cardMatchesFilter(c, filterCat);
         if (brand && block.dataset.brand !== brand) match = false;
         if (match) {
           c.classList.add("show");

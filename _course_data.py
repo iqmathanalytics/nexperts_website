@@ -100,9 +100,18 @@ COURSES.extend(_B_AI_MY)
 from _course_batch_fortinet import BATCH as _B_FORTINET
 COURSES.extend(_B_FORTINET)
 
+from _course_batch_ai_vendor_pdfs import BATCH as _B_AI_VENDOR_PDFS
+COURSES.extend(_B_AI_VENDOR_PDFS)
+
 _RETIRED = {
     "introduction-to-machine-learning",
     "ai-fundamentals-for-beginners",
     "gen-ai",
 }
 COURSES[:] = [c for c in COURSES if c.get("slug") not in _RETIRED]
+
+# Prefer later batch definitions when the same slug appears twice (PDF overwrite).
+_by_slug = {}
+for _c in COURSES:
+    _by_slug[_c["slug"]] = _c
+COURSES[:] = list(_by_slug.values())

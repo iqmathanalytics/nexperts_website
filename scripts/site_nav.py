@@ -122,6 +122,7 @@ def _count_label(n: int) -> str:
 
 COURSE_CATALOG_SECTIONS: list[tuple[str, str]] = [
     ("cert", "Industry Certifications"),
+    ("ai", "AI & Automation"),
     ("skill", "Skill-Based Programs"),
     ("spec", "Specialized & Compliance"),
 ]
@@ -139,8 +140,11 @@ def _catalog_menu_data() -> tuple[dict[str, dict[str, int]], dict[str, str]]:
 
     brand_labels = {key: label for key, label, *_ in BRANDS}
     counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
-    for brand_key, cat, *_rest in CARDS:
-        counts[cat][brand_key] += 1
+    for row in CARDS:
+        brand_key = row[0]
+        cats = row[10] if len(row) >= 11 else (row[1],)
+        for cat in cats:
+            counts[cat][brand_key] += 1
     return counts, brand_labels
 
 

@@ -2,11 +2,10 @@
 """Rebuild the Course Catalog block in index.html.
 
 Output:
-- 4 filter tabs (All, Industry Certifications, Skill-Based Programs, Specialized & Compliance)
+- Filter tabs (All, Industry Certifications, AI & Automation, Skill-Based, Specialized)
 - Courses visually grouped by BRAND (CompTIA, EC-Council, AWS, ...)
+- Multi-cat placement via data-cats / data-ai (one card per course)
 - Brand-themed color accents per group
-- Each card shows: vendor badge, name, description, level chip,
-  rating (star + count), students enrolled, and a "View Details" button
 """
 from pathlib import Path
 import re
@@ -15,6 +14,8 @@ try:
     from scripts.site_paths import canonical_path_for_slug
 except ModuleNotFoundError:
     from site_paths import canonical_path_for_slug
+
+from _catalog_placement import apply_placements
 
 ROOT = Path(__file__).parent
 INDEX = ROOT / "index.html"
@@ -161,6 +162,24 @@ P1 = {
     "Data Visualization with Seaborn Using Python": "data-visualization-with-seaborn",
     "Artificial Intelligence (AI) Course Malaysia": "artificial-intelligence-ai-course-malaysia",
     "Artificial Intelligence & Machine Learning Course Malaysia": "ai-machine-learning-course-malaysia",
+    # AI vendor certs from New Course PDFs (2026)
+    "AI Business Professional": "ai-business-professional",
+    "Azure AI Apps and Agents Developer Associate": "azure-ai-apps-agents-developer",
+    "Machine Learning Operations Engineer Associate": "mlops-engineer-associate",
+    "Azure AI Cloud Developer Associate": "azure-ai-cloud-developer",
+    "SQL AI Developer Associate": "sql-ai-developer-associate",
+    "Azure Databricks Data Engineer Associate": "azure-databricks-data-engineer",
+    "Machine Learning Engineer Associate": "aws-ml-engineer-associate",
+    "Generative AI Developer Professional": "aws-generative-ai-developer-professional",
+    "AI Business Strategist": "aws-ai-business-strategist",
+    "AWS Certified AI Practitioner": "aws-ai-practitioner",
+    "Generative AI Leader": "gcp-generative-ai-leader",
+    "Professional Machine Learning Engineer": "gcp-professional-machine-learning-engineer",
+    "Professional Data Engineer": "gcp-professional-data-engineer",
+    "Claude Certified Associate - Foundations": "claude-certified-associate-foundations",
+    "Claude Certified Developer - Foundations": "claude-certified-developer-foundations",
+    "Claude Certified Architect - Foundations": "claude-certified-architect-foundations",
+    "Claude Certified Architect - Professional": "claude-certified-architect-professional",
 }
 
 # -----------------------------------------------------------------------------
@@ -184,7 +203,11 @@ BRANDS = [
     ("isc2",      "ISC2",             "ISC2",             "CISSP and the ISC2 cybersecurity body of knowledge.",       "#082c5e", "#eef2ff"),
     ("offsec",    "Offensive Security","OffSec",          "Hands-on penetration testing and offensive cybersecurity.", "#0ea5e9", "#f0f9ff"),
     ("fortinet",  "Fortinet",         "Fortinet",        "FortiGate, Security Fabric, SD-WAN and network security certs.", "#ee3124", "#fef2f2"),
-    ("skill",     "Skill-Based",      "Skills",           "Hands-on, role-ready skills \u2014 outcome over paperwork.","#10b981", "#ecfdf5"),
+    ("anthropic", "Anthropic",        "Anthropic",       "Claude certifications and practical Anthropic AI workflows.", "#d97706", "#fffbeb"),
+    ("salesforce","Salesforce",       "Salesforce",      "Admin, automation and CRM platform skills on Salesforce.", "#00a1e0", "#eff9ff"),
+    ("servicenow","ServiceNow",       "ServiceNow",      "Now Platform administration and implementation programmes.", "#81b5a1", "#f0fdf6"),
+    ("oracle",    "Oracle",           "Oracle",          "Oracle database development and PL/SQL programming.", "#f80000", "#fef2f2"),
+    ("nonvendor", "Non-Vendor",       "Skills",          "Hands-on, role-ready skills \u2014 outcome over paperwork.","#10b981", "#ecfdf5"),
 ]
 
 # -----------------------------------------------------------------------------
@@ -354,7 +377,58 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","Data Visualization with Seaborn Using Python","Statistical visuals with Seaborn \u2014 distributions, relationships and report-ready figures.","Beginner+",4.8,68, 2860),
     ("skill","skill","Skill-Based","AI 2026","Artificial Intelligence (AI) Course Malaysia","Instructor-led AI from fundamentals through Python, Machine Learning, Generative AI, LLMs, RAG and an introduction to AI agents.","Beginner to Intermediate",4.9,48,3920),
     ("skill","skill","Skill-Based","AI 2026","Artificial Intelligence & Machine Learning Course Malaysia","40-hour hands-on Machine Learning with Python — regression, classification, clustering, evaluation and neural networks.","Beginner to Intermediate",4.8,42,3560),
+
+    # ---- New AI vendor certifications (New Course PDFs) ----
+    ("microsoft","cert","Microsoft","New 2026","AI Business Professional","Microsoft 365 Copilot foundations for business users, managers and analysts.","Foundation",4.8,36,1680),
+    ("microsoft","cert","Microsoft","New 2026","Azure AI Apps and Agents Developer Associate","Build AI apps and agents on Azure with responsible development practices.","Associate",4.8,28,1420),
+    ("microsoft","cert","Microsoft","New 2026","Machine Learning Operations Engineer Associate","MLOps on Azure — pipelines, monitoring and production ML operations.","Associate",4.8,24,1180),
+    ("microsoft","cert","Microsoft","New 2026","Azure AI Cloud Developer Associate","Develop AI-powered cloud applications on Microsoft Azure.","Associate",4.8,26,1260),
+    ("microsoft","cert","Microsoft","New 2026","SQL AI Developer Associate","Apply AI capabilities in SQL and data workloads on Microsoft platforms.","Associate",4.8,22,1040),
+    ("microsoft","cert","Microsoft","New 2026","Azure Databricks Data Engineer Associate","Data engineering with Azure Databricks for analytics and AI pipelines.","Associate",4.8,30,1380),
+    ("aws","cert","AWS","New 2026","Machine Learning Engineer Associate","Build, train and deploy ML solutions on AWS (MLA-C01).","Associate",4.8,32,1540),
+    ("aws","cert","AWS","New 2026","Generative AI Developer Professional","Professional generative AI development on AWS (AIP-C01).","Professional",4.8,20,980),
+    ("aws","cert","AWS","New 2026","AI Business Strategist","Guide AI investment, adoption and transformation on AWS (AIB-C01).","Foundation",4.8,18,860),
+    ("aws","cert","AWS","New 2026","AWS Certified AI Practitioner","Foundational AI literacy and AWS AI services for the AIF-C01 exam.","Foundation",4.9,48,2140),
+    ("gcp","cert","Google Cloud","New 2026","Generative AI Leader","Lead generative AI strategy and adoption on Google Cloud.","Foundation",4.8,22,1120),
+    ("gcp","cert","Google Cloud","New 2026","Professional Machine Learning Engineer","Design and productionise ML solutions on Google Cloud.","Professional",4.8,34,1480),
+    ("gcp","cert","Google Cloud","New 2026","Professional Data Engineer","Design reliable data processing systems on Google Cloud.","Professional",4.8,40,1720),
+    ("anthropic","cert","Anthropic","New 2026","Claude Certified Associate - Foundations","Non-technical Claude foundations for everyday workplace use (CCAO-F).","Foundation",4.8,16,720),
+    ("anthropic","cert","Anthropic","New 2026","Claude Certified Developer - Foundations","Developer foundations for building with Claude (CCDV-F).","Foundation",4.8,14,640),
+    ("anthropic","cert","Anthropic","New 2026","Claude Certified Architect - Foundations","Architecture foundations for Claude solutions (CCAR-F).","Foundation",4.8,12,580),
+    ("anthropic","cert","Anthropic","New 2026","Claude Certified Architect - Professional","Professional Claude solution architecture (CCAR-P).","Professional",4.8,10,520),
 ]
+
+# Normalize brands/cats (Skill Vendor split + AI dual placement)
+CARDS = apply_placements(CARDS)
+
+# Dual-list new AI vendor certs (same rule as AI_VENDOR_CERT_EXTRA)
+_NEW_AI_CERT_NAMES = {
+    "AI Business Professional",
+    "Azure AI Apps and Agents Developer Associate",
+    "Machine Learning Operations Engineer Associate",
+    "Azure AI Cloud Developer Associate",
+    "SQL AI Developer Associate",
+    "Azure Databricks Data Engineer Associate",
+    "Machine Learning Engineer Associate",
+    "Generative AI Developer Professional",
+    "AI Business Strategist",
+    "AWS Certified AI Practitioner",
+    "Generative AI Leader",
+    "Professional Machine Learning Engineer",
+    "Professional Data Engineer",
+    "Claude Certified Associate - Foundations",
+    "Claude Certified Developer - Foundations",
+    "Claude Certified Architect - Foundations",
+    "Claude Certified Architect - Professional",
+}
+_fixed = []
+for c in CARDS:
+    brand, cat, vendor, badge, name, desc, level, rating, reviews, enrolled, cats = c
+    if name in _NEW_AI_CERT_NAMES:
+        cats = tuple(dict.fromkeys(cats + ("ai", "skill")))
+        cat = "cert"
+    _fixed.append((brand, cat, vendor, badge, name, desc, level, rating, reviews, enrolled, cats))
+CARDS = _fixed
 
 
 # -----------------------------------------------------------------------------
@@ -375,6 +449,8 @@ def badge_html(badge_label, badge_class):
         return '<span class="cbadge nw">New 2026</span>'
     if badge_label == "AI 2026":
         return '<span class="cbadge mr">AI 2026</span>'
+    if badge_label == "Workshop":
+        return '<span class="cbadge">Workshop</span>'
     return f'<span class="cbadge">{badge_label}</span>'
 
 
@@ -393,11 +469,13 @@ def name_to_slug(name: str) -> str:
 
 def card_html(c):
     (brand, cat, vendor, badge_label, name, desc, level,
-     rating, reviews, enrolled) = c
+     rating, reviews, enrolled, cats) = c
     bh = badge_html(badge_label, badge_label)
     rating_str = f"{rating:.1f}"
     enrolled_str = fmt_int(enrolled)
     slug = P1.get(name) or name_to_slug(name)
+    cats_attr = " ".join(cats)
+    data_ai = "1" if "ai" in cats else "0"
 
     inner = (
         f'<div class="cv2">{vendor} {bh}</div>'
@@ -412,9 +490,11 @@ def card_html(c):
         '  <span class="c-cta">View Details <span class="cta-arr">\u2192</span></span>'
         '</div>'
     )
-    common_attrs = (f'data-cat="{cat}" data-brand="{brand}" '
-                    f'data-slug="{slug}" data-vendor="{vendor}" '
-                    f'data-level="{level}"')
+    common_attrs = (
+        f'data-cat="{cat}" data-cats="{cats_attr}" data-ai="{data_ai}" '
+        f'data-brand="{brand}" data-slug="{slug}" data-vendor="{vendor}" '
+        f'data-level="{level}"'
+    )
     if name in P1:
         return (f'      <a href="{canonical_path_for_slug(slug)}" '
                 f'class="cc show" {common_attrs}>{inner}</a>')
@@ -460,6 +540,7 @@ def build_catalog():
         '    <div class="filter-tabs">\n'
         '      <button class="ftab on" data-cat="all">All</button>\n'
         '      <button class="ftab" data-cat="cert">Industry Certifications</button>\n'
+        '      <button class="ftab" data-cat="ai">AI &amp; Automation</button>\n'
         '      <button class="ftab" data-cat="skill">Skill-Based Programs</button>\n'
         '      <button class="ftab" data-cat="spec">Specialized &amp; Compliance</button>\n'
         '    </div>'

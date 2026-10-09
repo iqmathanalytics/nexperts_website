@@ -83,7 +83,8 @@ order_by_brand: dict[str, list[str]] = {}
 
 for c in CARDS:
     (brand, cat, vendor, badge_label, name, desc, level,
-     rating, reviews, enrolled) = c
+     rating, reviews, enrolled) = c[:10]
+    cats = list(c[10]) if len(c) >= 11 else [cat]
     slug = P1.get(name) or name_to_slug(name)
     has_detail = slug in P1.values()
     detail = detail_for(slug) if has_detail else {}
@@ -92,6 +93,8 @@ for c in CARDS:
         "slug": slug,
         "brand": brand,
         "category": cat,
+        "categories": cats,
+        "is_ai": "ai" in cats,
         "vendor": vendor,
         "badge": badge_label,
         "name": name,
