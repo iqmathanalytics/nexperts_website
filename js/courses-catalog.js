@@ -17,6 +17,18 @@
     return cardCats(card).indexOf(filterCat) !== -1;
   }
 
+  /** Match sparse-vendor layout: 1→n1, 2→n2, else full 3-col grid. */
+  function syncBrandBlockSize(block, visible) {
+    block.classList.remove("brand-block--n1", "brand-block--n2");
+    if (visible === 1) block.classList.add("brand-block--n1");
+    else if (visible === 2) block.classList.add("brand-block--n2");
+    var label = block.querySelector(".bh-count");
+    if (label && visible > 0) {
+      label.innerHTML =
+        "<span>" + visible + "</span> course" + (visible === 1 ? "" : "s");
+    }
+  }
+
   function applyCatalogFilter(cat, brand) {
     var section = document.getElementById("courses");
     if (!section) return;
@@ -38,6 +50,7 @@
         }
       });
       block.classList.toggle("b-hide", visible === 0);
+      if (visible > 0) syncBrandBlockSize(block, visible);
     });
 
     if (brand) {
@@ -127,6 +140,7 @@
           block.classList.add("b-hide");
         } else {
           block.classList.remove("b-hide");
+          syncBrandBlockSize(block, blockVisible);
           visibleBrands++;
         }
       });
@@ -157,9 +171,12 @@
         });
         document.querySelectorAll(".brand-block").forEach(function (block) {
           block.classList.remove("b-hide");
+          var n = 0;
           block.querySelectorAll(".cc").forEach(function (c) {
             c.classList.add("show");
+            n++;
           });
+          syncBrandBlockSize(block, n);
         });
         runSearch();
       });
@@ -167,6 +184,11 @@
   }
 
   function init() {
+    document.querySelectorAll(".brand-block").forEach(function (block) {
+      var n = block.querySelectorAll(".cc.show").length;
+      if (!n) n = block.querySelectorAll(".cc").length;
+      if (n) syncBrandBlockSize(block, n);
+    });
     readNavIntent();
     initSearch();
   }

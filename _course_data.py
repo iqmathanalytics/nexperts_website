@@ -103,6 +103,9 @@ COURSES.extend(_B_FORTINET)
 from _course_batch_ai_vendor_pdfs import BATCH as _B_AI_VENDOR_PDFS
 COURSES.extend(_B_AI_VENDOR_PDFS)
 
+from _course_batch_ai_skill_pdfs import BATCH as _B_AI_SKILL_PDFS
+COURSES.extend(_B_AI_SKILL_PDFS)
+
 _RETIRED = {
     "introduction-to-machine-learning",
     "ai-fundamentals-for-beginners",

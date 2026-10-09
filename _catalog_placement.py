@@ -21,16 +21,20 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
     "ServiceNow Administration Fundamentals": ("servicenow", "ServiceNow", ("skill",), "Skills"),
     "ServiceNow Platform Implementation": ("servicenow", "ServiceNow", ("skill",), "Skills"),
     "Tableau for Beginners": ("tableau", "Tableau", ("skill",), "Skills"),
+    "Data Analytics & Visualisation with Tableau": ("tableau", "Tableau", ("skill",), "Skills"),
     "Advanced Data Visualization Using Tableau": ("tableau", "Tableau", ("skill",), "Skills"),
     "Oracle PL/SQL Database Programming Course": ("oracle", "Oracle", ("skill",), "Skills"),
-    # AI vendor skills
+    # AI vendor / tool skills
     "Microsoft Copilot": ("microsoft", "Microsoft", ("skill", "ai"), "AI 2026"),
+    "Microsoft Copilot Masterclass": ("microsoft", "Microsoft", ("skill", "ai"), "AI 2026"),
     "Claude AI in 90 Minutes Productivity Course: Build Your AI Work Assistant": (
         "anthropic",
         "Anthropic",
         ("skill", "ai"),
-        "Workshop",
+        "AI 2026",
     ),
+    "Claude AI Masterclass": ("anthropic", "Anthropic", ("skill", "ai"), "AI 2026"),
+    "ChatGPT Masterclass": ("openai", "OpenAI", ("skill", "ai"), "AI 2026"),
     # Non-vendor non-AI
     "Docker & Containers": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     "CI/CD with Jenkins & GitLab": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
@@ -38,6 +42,8 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
     "Data Science with Python Certification": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     "Linux Administration": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     "SQL for Data Professionals": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
+    "SQL for Data Analytics": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
+    "Python for Data Analytics": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     "Certified Java Programming": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     "Full Stack Web Development": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     "Digital Marketing Certification": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
@@ -50,6 +56,7 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
     "Data Visualization with Seaborn Using Python": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     # Non-vendor AI
     "AI & Machine Learning Bootcamp": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
+    "Machine Learning with Python": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Generative AI for Workplace Productivity & Business Automation": (
         "nonvendor",
         "Non-Vendor",
@@ -58,8 +65,15 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
     ),
     "Agentic AI": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Building a Chatbot Using Python": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
+    "Building AI Chatbots with Python": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Deep Learning Using PyTorch": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Generative AI Applications and Python Fundamentals": (
+        "nonvendor",
+        "Non-Vendor",
+        ("skill", "ai"),
+        "AI 2026",
+    ),
+    "Build Generative AI Applications with LLMs": (
         "nonvendor",
         "Non-Vendor",
         ("skill", "ai"),
@@ -71,6 +85,16 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
         ("skill", "ai"),
         "AI 2026",
     ),
+    "Prompt Engineering Masterclass": (
+        "nonvendor",
+        "Non-Vendor",
+        ("skill", "ai"),
+        "AI 2026",
+    ),
+    "AI Workflow Automation (No-Code)": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
+    "AI-Powered Workflow Automation": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
+    "AI Fundamentals": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
+    "AI-Powered Data Analytics": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Artificial Intelligence (AI) Course Malaysia": (
         "nonvendor",
         "Non-Vendor",
