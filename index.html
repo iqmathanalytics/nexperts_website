@@ -931,9 +931,45 @@ a.cc{text-decoration:none;color:inherit}
 .hero-h-tagline,.hero-h-sub{max-width:42ch;margin-left:auto;margin-right:auto}
 .hero-hackathon-media{min-height:min(38vw,216px);border-left:none;border-top:1px solid rgba(255,255,255,.5)}
 .hero-hackathon-scrim{background:linear-gradient(0deg,rgba(15,23,42,.55) 0%,transparent 50%)}
-.hero-float{position:relative;left:auto;top:auto;width:100%;max-width:320px;margin:14px auto 0}
-.hero-kpi{position:relative;right:auto;top:auto;width:auto;margin:16px 16px 0}
-.hero-pill-track{position:relative;left:auto;right:auto;bottom:auto;padding:0 16px 16px;flex-wrap:wrap}
+/* Mobile hero visual: hide robot, stack snapshot + pills cleanly (desktop unchanged) */
+.hero-robot{display:none!important}
+.hero-frame{
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+  gap:12px;
+  padding:16px;
+}
+.hero-frame::after{inset:10px;border-radius:18px;pointer-events:none}
+.hero-frame-grid,.hero-frame-core{display:none}
+.hero-float{
+  position:relative;
+  left:auto;top:auto;
+  width:100%;
+  max-width:100%;
+  margin:0;
+  z-index:2;
+}
+.hero-kpi{
+  position:relative;
+  right:auto;top:auto;
+  width:100%;
+  max-width:100%;
+  margin:0;
+  z-index:2;
+}
+.hero-pill-track{
+  position:relative;
+  left:auto;right:auto;bottom:auto;
+  padding:0;
+  margin:0;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  z-index:2;
+}
 .photo-mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:120px;max-width:none;margin-left:0;margin-right:0}
 .photo-tile.t1,.photo-tile.t2,.photo-tile.t3,.photo-tile.t4,.photo-tile.t5{grid-column:auto;grid-row:auto;min-height:240px}
 .learn-show-grid{grid-template-columns:1fr}
@@ -958,9 +994,13 @@ section{padding:72px 24px}
 .hero{padding:calc(62px + env(safe-area-inset-top,0px) + 12px + 68px + 14px) 20px 56px}
 .hero-split{padding-top:0}
 .hero-float strong{font-size:1.5rem}
+.hero-float{padding:14px 16px}
+.hero-float span{font-size:.7rem}
 .hero-title{font-size:2.4rem}
 .hero-kpi{display:none}
 .hero-pill-track{gap:6px}
+.hero-pill-track i{font-size:.58rem;padding:5px 8px}
+.hero-frame{padding:14px;gap:10px;border-radius:22px}
 .photo-mosaic{gap:16px}
 .photo-mosaic{grid-template-columns:1fr;grid-auto-rows:auto}
 .photo-tile.t1,.photo-tile.t2,.photo-tile.t3,.photo-tile.t4,.photo-tile.t5{min-height:auto;aspect-ratio:4/3}

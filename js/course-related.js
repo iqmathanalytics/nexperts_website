@@ -91,7 +91,7 @@
 
     var wrap = document.createElement("div");
     wrap.className = "related-courses";
-    wrap.setAttribute("aria-label", "Related courses from " + vendorLabel);
+    wrap.setAttribute("aria-label", "Recommended courses for you from " + vendorLabel);
     wrap.style.setProperty("--related-accent", accent);
     wrap.style.setProperty("--related-bg", tint);
     wrap.style.setProperty(
@@ -102,7 +102,10 @@
     var head = document.createElement("div");
     head.className = "related-courses-head";
     head.innerHTML =
-      '<p class="related-courses-eyebrow">Related courses</p>' +
+      '<div class="related-courses-title-wrap">' +
+      '<p class="related-courses-eyebrow">Hand-picked for you</p>' +
+      '<h3 class="related-courses-title">Recommended Courses for you</h3>' +
+      "</div>" +
       '<span class="related-courses-vendor">More from ' +
       escapeHtml(vendorLabel) +
       "</span>";
