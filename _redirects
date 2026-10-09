@@ -96,6 +96,10 @@
 /ecih /courses/ecih 301
 /sql /courses/sql-for-data-professionals 301
 
+
+# Legacy Wix URLs → canonical courses (301)
+/post/unlocking-the-power-of-data-science-applications-and-challenges /blog/unlocking-the-power-of-data-science-applications-and-challenges 301
+/post/unlocking-the-power-of-data-science-applications-and-challenges.html /blog/unlocking-the-power-of-data-science-applications-and-challenges 301
 # Filename & legacy paths → pretty canonical URLs (301)
 /index.html / 301
 /about.html /about 301

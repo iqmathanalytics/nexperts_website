@@ -9,6 +9,11 @@ Output:
 """
 from pathlib import Path
 import re
+import sys
+
+ROOT = Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 try:
     from scripts.site_paths import canonical_path_for_slug
@@ -17,7 +22,6 @@ except ModuleNotFoundError:
 
 from _catalog_placement import apply_placements
 
-ROOT = Path(__file__).parent
 INDEX = ROOT / "index.html"
 
 # -----------------------------------------------------------------------------

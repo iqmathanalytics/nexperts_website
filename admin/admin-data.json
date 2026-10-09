@@ -2848,11 +2848,11 @@
       "reviews": 118,
       "enrolled": 6420,
       "has_detail_page": true,
-      "duration": "Enquire for schedule",
-      "next_intake": "Enquire",
-      "price": "Enquire",
-      "price_original": "",
-      "price_save": ""
+      "duration": "5 days / 40 hrs",
+      "next_intake": "9 Sep 2026",
+      "price": "RM 3,800",
+      "price_original": "RM 4,200",
+      "price_save": "Save 10%"
     },
     {
       "slug": "generative-ai-workplace-productivity",

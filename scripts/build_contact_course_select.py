@@ -25,6 +25,10 @@ MARK_INDEX_END = "<!-- NX_INDEX_COURSE_OPTIONS_END -->"
 
 
 def load_catalog():
+    # Running as scripts/... puts scripts/ on sys.path; catalog deps live at repo root.
+    root = str(ROOT)
+    if root not in sys.path:
+        sys.path.insert(0, root)
     spec = importlib.util.spec_from_file_location("_build_catalog", CATALOG)
     mod = importlib.util.module_from_spec(spec)
     sys.modules["_build_catalog"] = mod

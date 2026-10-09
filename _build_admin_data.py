@@ -15,8 +15,10 @@ import re
 import importlib.util
 import sys
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).resolve().parent
 CATALOG = ROOT / "_build_catalog.py"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from scripts.site_paths import detail_html_path
 
