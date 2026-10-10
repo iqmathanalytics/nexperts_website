@@ -27,13 +27,14 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
     # AI vendor / tool skills
     "Microsoft Copilot": ("microsoft", "Microsoft", ("skill", "ai"), "AI 2026"),
     "Microsoft Copilot Masterclass": ("microsoft", "Microsoft", ("skill", "ai"), "AI 2026"),
+    # Claude Masterclass = practical tool skill, no Anthropic exam → Non-Vendor
     "Claude AI in 90 Minutes Productivity Course: Build Your AI Work Assistant": (
-        "anthropic",
-        "Anthropic",
+        "nonvendor",
+        "Non-Vendor",
         ("skill", "ai"),
         "AI 2026",
     ),
-    "Claude AI Masterclass": ("anthropic", "Anthropic", ("skill", "ai"), "AI 2026"),
+    "Claude AI Masterclass": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "ChatGPT Masterclass": ("openai", "OpenAI", ("skill", "ai"), "AI 2026"),
     # Non-vendor non-AI
     "Docker & Containers": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
@@ -64,6 +65,7 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
         "AI 2026",
     ),
     "Agentic AI": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
+    "Agentic AI Engineering": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Building a Chatbot Using Python": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Building AI Chatbots with Python": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Deep Learning Using PyTorch": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),

@@ -410,16 +410,21 @@ def replace_section_by_id(html: str, section_id: str, inner_html: str) -> str:
     return html[:start] + open_tag + "\n" + inner_html + "\n  </div>\n\n" + html[next_start:]
 
 
-STANDARD_TABS_HTML = """  <div class="tabs-bar" id="tabBar">
+def standard_tabs_html(c=None):
+    exam_label = (c or {}).get("exam_tab_label") or "Exam Info"
+    return f"""  <div class="tabs-bar" id="tabBar">
     <button class="tab on" data-t="overview">Overview</button>
     <button class="tab" data-t="curriculum">Curriculum</button>
     <button class="tab" data-t="labs">Labs</button>
-    <button class="tab" data-t="exam">Exam Info</button>
+    <button class="tab" data-t="exam">{exam_label}</button>
     <button class="tab" data-t="passrate">Pass Rate</button>
     <button class="tab" data-t="roadmap">Next Steps</button>
     <button class="tab" data-t="reviews">Reviews</button>
     <button class="tab" data-t="faq">FAQs</button>
   </div>"""
+
+
+STANDARD_TABS_HTML = standard_tabs_html()
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -601,7 +606,7 @@ def build_page(c):
     # ── Standard course tabs (template may use bootcamp-style labels)
     html = re.sub(
         r'  <div class="tabs-bar" id="tabBar">.*?</div>\n\n  <!-- OVERVIEW -->',
-        f'{STANDARD_TABS_HTML}\n\n  <!-- OVERVIEW -->',
+        f'{standard_tabs_html(c)}\n\n  <!-- OVERVIEW -->',
         html,
         count=1,
         flags=re.DOTALL,

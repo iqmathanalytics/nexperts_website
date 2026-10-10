@@ -1,0 +1,124 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.nexpertsacademy.com/#organization",
+      "name": "Nexperts Academy",
+      "url": "https://www.nexpertsacademy.com",
+      "telephone": "011 1221 6870",
+      "email": "enquiry@nexpertsacademy.com"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.nexpertsacademy.com/courses/agentic-ai#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.nexpertsacademy.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Courses",
+          "item": "https://www.nexpertsacademy.com/#courses"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Agentic AI Engineering",
+          "item": "https://www.nexpertsacademy.com/courses/agentic-ai"
+        }
+      ]
+    },
+    {
+      "@type": "Course",
+      "@id": "https://www.nexpertsacademy.com/courses/agentic-ai#course",
+      "name": "Professional Agentic AI Engineering Course in Malaysia",
+      "description": "Live instructor-led training from Python basics to production multi-agent systems — 20 intensive sessions, 80 hours, portfolio-ready builds with LangChain, LangGraph, CrewAI, RAG and FastAPI.",
+      "url": "https://www.nexpertsacademy.com/courses/agentic-ai",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalCredentialAwarded": "Nexperts Academy Professional Certificate in Agentic AI Engineering",
+      "provider": {
+        "@id": "https://www.nexpertsacademy.com/#organization"
+      },
+      "coursePrerequisites": "Basic programming comfort. Commitment to Mon, Wed, Fri 6pm–10pm for 7 weeks. Laptop and stable internet for Microsoft Teams.",
+      "timeRequired": "P49D",
+      "teaches": [
+        "Python for AI",
+        "NLP and Transformers",
+        "Prompt Engineering",
+        "LangChain",
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "RAG",
+        "Vector Databases",
+        "MCP",
+        "Multi-Agent Systems",
+        "FastAPI",
+        "Streamlit",
+        "LangSmith",
+        "Responsible AI"
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": ["Online"],
+        "startDate": "2026-11-16",
+        "endDate": "2027-01-02",
+        "duration": "P49D",
+        "courseWorkload": "PT80H",
+        "inLanguage": "English"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "799",
+        "priceCurrency": "MYR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.nexpertsacademy.com/courses/agentic-ai"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.nexpertsacademy.com/courses/agentic-ai#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the schedule for Cohort 6?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cohort 6 runs 16 Nov 2026 – 2 Jan 2027, Monday · Wednesday · Friday, 6pm–10pm (7 weeks, 20 live sessions on Microsoft Teams). Cohort 5 is full."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the price?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Market value is RM 12,000+. The current promotional price is RM 799. Confirm the latest offer with enrolment when you enquire."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need prior AI experience?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Basic programming comfort is enough — Session 1 starts with Python foundations. You must be willing to write code and attend all live sessions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What certificate do I receive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A Nexperts Academy Professional Certificate in Agentic AI Engineering upon successful completion of the 20-session programme and capstone evaluation."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

@@ -1,7 +1,34 @@
 /**
  * Related courses from the same vendor — injected at the bottom of #sec-overview.
+ * Also syncs mobile-only price-sidebar order vs tab content (desktop untouched).
  */
 (function () {
+  function syncMobileSidebarOrder() {
+    var page = document.querySelector(".page");
+    if (!page || !page.querySelector(".enroll-card")) return;
+    var on = document.querySelector(".tab.on");
+    var tabId = on && on.getAttribute("data-t");
+    page.classList.toggle("nx-tab-sidebar-after", !!tabId && tabId !== "overview");
+  }
+
+  function bindMobileSidebarOrder() {
+    var tabs = document.querySelectorAll(".tab[data-t]");
+    if (!tabs.length) return;
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        // Run after the page's inline tab handler updates .tab.on
+        setTimeout(syncMobileSidebarOrder, 0);
+      });
+    });
+    syncMobileSidebarOrder();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindMobileSidebarOrder);
+  } else {
+    bindMobileSidebarOrder();
+  }
+
   var ROOT_CANONICAL = {
     ccna: true,
     "python-bootcamp": true,
@@ -67,7 +94,7 @@
     return "";
   }
 
-  function renderRelated(data, brandKey, currentSlug) {
+  function renderRelated(data, brandKey, currentSlug, current) {
     var overview = document.getElementById("sec-overview");
     if (!overview || overview.querySelector(".related-courses")) return;
 
@@ -76,6 +103,12 @@
       if (!c || c.brand !== brandKey) return false;
       if (canonicalSlug(c.slug) === canonicalSlug(currentSlug)) return false;
       if (c.has_detail_page === false) return false;
+      // AI skill pages: only recommend other AI programmes (avoid mixing cert exams / unrelated skills)
+      if (current && current.is_ai) return !!c.is_ai;
+      // Non-vendor non-AI: keep skill-based peers
+      if (brandKey === "nonvendor" && current && current.categories) {
+        return (c.categories || []).indexOf("skill") >= 0;
+      }
       return true;
     });
 
@@ -87,7 +120,10 @@
 
     var accent = (brand && brand.color) || "#1d4ed8";
     var tint = (brand && brand.color_tint) || "rgba(29, 78, 216, 0.06)";
-    var vendorLabel = (brand && brand.label) || "this vendor";
+    var vendorLabel =
+      current && current.is_ai && brandKey === "nonvendor"
+        ? "Non-Vendor AI"
+        : (brand && brand.label) || "this vendor";
 
     var wrap = document.createElement("div");
     wrap.className = "related-courses";
@@ -158,7 +194,7 @@
         }
         var brandKey = detectBrand(data, current);
         if (!brandKey) return;
-        renderRelated(data, brandKey, slug);
+        renderRelated(data, brandKey, slug, current);
       })
       .catch(function () {
         /* silent — optional enhancement */

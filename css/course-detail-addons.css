@@ -3,7 +3,10 @@
  * Desktop layout is unchanged.
  */
 
-/* ── Mobile: pricing card above overview (below tabs) ── */
+/* ── Mobile only: price sidebar vs tab content order (desktop unchanged) ──
+   Overview: price bar above tab content.
+   Other tabs: tab content first, then price bar.
+*/
 @media (max-width: 1100px) {
   .page:has(.enroll-card) {
     display: flex;
@@ -38,7 +41,8 @@
     background: var(--bg2, #fff);
   }
 
-  .page:has(.enroll-card) .content-sec {
+  .page:has(.enroll-card) .content-sec,
+  .page:has(.enroll-card) .pass-band {
     order: 5;
   }
 
@@ -46,6 +50,16 @@
   .page:has(.enroll-card) .verify-strip,
   .page:has(.enroll-card) .share-strip {
     order: 6;
+  }
+
+  /* Non-overview tabs: content above price sidebar (class set by course-related.js) */
+  .page.nx-tab-sidebar-after:has(.enroll-card) .content-sec,
+  .page.nx-tab-sidebar-after:has(.enroll-card) .pass-band {
+    order: 4;
+  }
+
+  .page.nx-tab-sidebar-after:has(.enroll-card) .enroll-card {
+    order: 5;
   }
 }
 

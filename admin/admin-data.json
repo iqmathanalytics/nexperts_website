@@ -117,7 +117,7 @@
     "anthropic": {
       "key": "anthropic",
       "label": "Anthropic",
-      "tagline": "Claude certifications and practical Anthropic AI workflows.",
+      "tagline": "Claude Certified exam tracks (Associate, Developer, Architect).",
       "color": "#d97706",
       "color_tint": "#fffbeb"
     },
@@ -346,6 +346,7 @@
       "deep-learning-using-pytorch",
       "generative-ai-applications-python-fundamentals",
       "prompt-engineering-certification",
+      "claude-ai-productivity-90-minutes",
       "data-science-foundation",
       "data-visualization-with-seaborn",
       "artificial-intelligence-ai-course-malaysia",
@@ -363,18 +364,17 @@
       "servicenow-admin",
       "servicenow-platform"
     ],
-    "anthropic": [
-      "claude-ai-productivity-90-minutes",
-      "claude-certified-associate-foundations",
-      "claude-certified-developer-foundations",
-      "claude-certified-architect-foundations",
-      "claude-certified-architect-professional"
-    ],
     "oracle": [
       "oracle-plsql-database-programming"
     ],
     "openai": [
       "chatgpt-masterclass"
+    ],
+    "anthropic": [
+      "claude-certified-associate-foundations",
+      "claude-certified-developer-foundations",
+      "claude-certified-architect-foundations",
+      "claude-certified-architect-professional"
     ]
   },
   "courses": [
@@ -2889,18 +2889,18 @@
       "is_ai": true,
       "vendor": "Non-Vendor",
       "badge": "AI 2026",
-      "name": "Agentic AI",
-      "description": "Multi-step agents, tool orchestration, memory and human-in-the-loop — agentic systems you can audit and scale.",
-      "level": "Advanced",
+      "name": "Agentic AI Engineering",
+      "description": "Live 20-session programme from Python to production multi-agent systems — LangGraph, RAG, FastAPI and a portfolio capstone.",
+      "level": "Beginner→Advanced",
       "rating": 4.8,
       "reviews": 78,
       "enrolled": 4620,
       "has_detail_page": true,
-      "duration": "5 days / 40 hrs",
-      "next_intake": "21 Oct 2026",
-      "price": "RM 2,500",
+      "duration": "20 sessions / 80 hrs",
+      "next_intake": "16 Nov 2026",
+      "price": "RM 799",
       "price_original": "RM 12,000",
-      "price_save": "Save 79%"
+      "price_save": "Save 93%"
     },
     {
       "slug": "cyber-security-bootcamp",
@@ -3139,14 +3139,14 @@
     },
     {
       "slug": "claude-ai-productivity-90-minutes",
-      "brand": "anthropic",
+      "brand": "nonvendor",
       "category": "skill",
       "categories": [
         "skill",
         "ai"
       ],
       "is_ai": true,
-      "vendor": "Anthropic",
+      "vendor": "Non-Vendor",
       "badge": "AI 2026",
       "name": "Claude AI Masterclass",
       "description": "Master Claude for workplace productivity — writing, research and repeatable workflows.",
