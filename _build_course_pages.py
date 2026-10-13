@@ -458,7 +458,14 @@ def build_page(c):
             html,
             count=1,
         )
-    if c.get("seo_keywords"):
+    if c.get("omit_keywords"):
+        html = re.sub(
+            r'\n?\s*<meta name="keywords" content="[^"]*">\n?',
+            "\n",
+            html,
+            count=1,
+        )
+    elif c.get("seo_keywords"):
         html = re.sub(
             r'<meta name="keywords" content="[^"]*">',
             f'<meta name="keywords" content="{c["seo_keywords"]}">',
@@ -484,7 +491,14 @@ def build_page(c):
     canon_slug_path = c.get("canonical_path") or canonical_path_for_slug(c["slug"])
     canon_url = f"https://www.nexpertsacademy.com{canon_slug_path}"
 
-    if c.get("schema_markup"):
+    if c.get("omit_schema"):
+        html = re.sub(
+            r"\n?<!-- nexperts-schema:v1 -->.*?<!-- /nexperts-schema:v1 -->\n?",
+            "\n",
+            html,
+            flags=re.DOTALL,
+        )
+    elif c.get("schema_markup"):
         markup = align_schema_urls(c["schema_markup"].strip(), canon_url)
         html = re.sub(
             r"\n?<!-- nexperts-schema:v1 -->.*?<!-- /nexperts-schema:v1 -->\n?",

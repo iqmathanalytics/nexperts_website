@@ -3168,3 +3168,10 @@ BATCH.append(dict(
     ],
 ))
 
+
+# Bulk PDF ingest: no schema / meta keywords on these pages (leave older courses untouched).
+for _c in BATCH:
+    _c["omit_schema"] = True
+    _c["omit_keywords"] = True
+    _c.pop("schema_markup", None)
+    _c.pop("seo_keywords", None)
