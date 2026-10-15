@@ -486,45 +486,23 @@ def build_page(c):
             count=1,
         )
     from scripts.site_paths import canonical_path_for_slug
-    from _course_schema_loader import align_schema_urls
 
     canon_slug_path = c.get("canonical_path") or canonical_path_for_slug(c["slug"])
     canon_url = f"https://www.nexpertsacademy.com{canon_slug_path}"
 
-    if c.get("omit_schema"):
-        html = re.sub(
-            r"\n?<!-- nexperts-schema:v1 -->.*?<!-- /nexperts-schema:v1 -->\n?",
-            "\n",
-            html,
-            flags=re.DOTALL,
-        )
-    elif c.get("schema_markup"):
-        markup = align_schema_urls(c["schema_markup"].strip(), canon_url)
-        html = re.sub(
-            r"\n?<!-- nexperts-schema:v1 -->.*?<!-- /nexperts-schema:v1 -->\n?",
-            "\n",
-            html,
-            flags=re.DOTALL,
-        )
-        html = re.sub(
-            r"(<!-- /nexperts-seo-meta:v1 -->)",
-            rf"\1\n\n<!-- nexperts-schema:v1 -->\n{markup}\n<!-- /nexperts-schema:v1 -->",
-            html,
-            count=1,
-        )
-    else:
-        # Align any template schema (e.g. CEH leftovers) to this page's canonical
-        def _align_schema_block(m: re.Match) -> str:
-            body = align_schema_urls(m.group(1).strip(), canon_url)
-            return f"<!-- nexperts-schema:v1 -->\n{body}\n<!-- /nexperts-schema:v1 -->"
-
-        html = re.sub(
-            r"<!-- nexperts-schema:v1 -->\s*(.*?)\s*<!-- /nexperts-schema:v1 -->",
-            _align_schema_block,
-            html,
-            count=1,
-            flags=re.DOTALL,
-        )
+    # Course pages: never ship JSON-LD / schema blocks (homepage & other pages untouched).
+    html = re.sub(
+        r"\n?<!-- nexperts-schema:v1 -->.*?<!-- /nexperts-schema:v1 -->\n?",
+        "\n",
+        html,
+        flags=re.DOTALL,
+    )
+    html = re.sub(
+        r"\n?\s*<script\b[^>]*type=[\"']application/ld\+json[\"'][^>]*>.*?</script>\s*",
+        "\n",
+        html,
+        flags=re.DOTALL | re.IGNORECASE,
+    )
 
     html = re.sub(
         r'<meta property="og:url" content="[^"]*">',
