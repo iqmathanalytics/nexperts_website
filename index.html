@@ -398,7 +398,28 @@ body.preload .hero::after{opacity:.2!important}
 .hero-title em{font-style:italic;color:var(--blue)}
 .hero-subtitle{font-size:.92rem;font-weight:600;letter-spacing:.02em;color:var(--ink2);max-width:560px;margin:0 auto 16px;line-height:1.55;animation:fadeup .4s ease .07s both}
 .hero-split .hero-subtitle{margin-left:0;margin-right:0;max-width:42ch}
-.hero-sub{font-size:1.05rem;font-weight:300;color:var(--ink3);max-width:520px;margin:0 auto 40px;line-height:1.7;animation:fadeup .4s ease .1s both}
+.hero-course-search{display:flex;flex-direction:column;align-items:stretch;gap:10px;width:100%;max-width:460px;margin:0 0 22px;animation:fadeup .45s ease .1s both}
+.hero-split .hero-course-search{margin-left:0;margin-right:0}
+.hero-course-search-shell{position:relative;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 16px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(239,246,255,.88));border:1px solid rgba(147,197,253,.55);box-shadow:0 14px 36px rgba(37,99,235,.1),0 2px 0 rgba(255,255,255,.85) inset,0 0 0 1px rgba(255,255,255,.4) inset;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.hero-course-search-shell::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(96,165,250,.55),rgba(255,255,255,.15) 40%,rgba(29,78,216,.35));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.7}
+.hero-course-search-shell:focus-within{border-color:rgba(37,99,235,.45);box-shadow:0 18px 42px rgba(37,99,235,.16),0 0 0 4px rgba(59,130,246,.12),0 2px 0 rgba(255,255,255,.9) inset;transform:translateY(-1px)}
+.hero-course-search-field{position:relative;flex:1 1 auto;min-width:0;display:flex;align-items:center}
+.hero-course-search-icon{position:absolute;left:0;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#3b82f6;pointer-events:none;opacity:.9}
+.hero-course-search-icon svg{display:block;width:18px;height:18px}
+.hero-course-search input{width:100%;box-sizing:border-box;border:none;background:transparent;padding:11px 10px 11px 28px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--ink);outline:none;letter-spacing:.01em}
+.hero-course-search input::placeholder{color:#94a3b8;font-weight:400}
+.hero-course-search input::-webkit-search-decoration,
+.hero-course-search input::-webkit-search-cancel-button{display:none}
+.hero-course-search-btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:999px;padding:11px 18px;background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 55%,#3b82f6 100%);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.02em;cursor:pointer;white-space:nowrap;box-shadow:0 8px 20px rgba(37,99,235,.28),inset 0 1px 0 rgba(255,255,255,.28);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.hero-course-search-btn svg{width:14px;height:14px;display:block}
+.hero-course-search-btn:hover{transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 12px 26px rgba(37,99,235,.36),inset 0 1px 0 rgba(255,255,255,.35)}
+.hero-course-search-btn:active{transform:translateY(0)}
+.hero-course-search-hints{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 2px}
+.hero-course-search-hints span{font-size:.68rem;font-weight:600;color:#94a3b8;letter-spacing:.02em;margin-right:2px}
+.hero-course-search-hints button{appearance:none;border:1px solid rgba(147,197,253,.55);background:rgba(255,255,255,.72);color:#1e40af;font-family:'Plus Jakarta Sans',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.01em;padding:5px 10px;border-radius:999px;cursor:pointer;transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;box-shadow:0 4px 12px rgba(37,99,235,.06)}
+.hero-course-search-hints button:hover{background:#eff6ff;border-color:rgba(59,130,246,.45);color:#1d4ed8;transform:translateY(-1px)}
+.hero-course-search-shell:focus-within .hero-course-search-icon{color:#1d4ed8}
+.hero-sub{font-size:1.05rem;font-weight:300;color:var(--ink3);max-width:520px;margin:0 auto 36px;line-height:1.7;animation:fadeup .4s ease .12s both}
 .hero-split .hero-sub{margin-left:0;margin-right:0;max-width:46ch}
 .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeup .38s ease .16s both}
 .hero-split .hero-actions{justify-content:flex-start}
@@ -925,6 +946,7 @@ a.cc{text-decoration:none;color:inherit}
 .hero-copy{text-align:center}
 .hero-split .hero-title{max-width:none}
 .hero-split .hero-subtitle,.hero-split .hero-sub{max-width:560px;margin-left:auto;margin-right:auto}
+.hero-split .hero-course-search{max-width:480px;margin-left:auto;margin-right:auto}
 .hero-split .hero-actions,.hero-split .hero-chips,.hero-split .chips{justify-content:center}
 .hero-hackathon-banner{width:100%;max-width:none;margin:0}
 .hero-hackathon-layout{grid-template-columns:1fr;height:auto;min-height:0;max-height:none}
@@ -998,6 +1020,15 @@ section{padding:72px 24px}
 .hero-float{padding:14px 16px}
 .hero-float span{font-size:.7rem}
 .hero-title{font-size:2.4rem}
+.hero-course-search{max-width:100%;margin-bottom:18px;gap:8px}
+.hero-course-search-shell{padding:5px 5px 5px 14px;border-radius:18px}
+.hero-course-search input{padding:10px 8px 10px 26px;font-size:.84rem}
+.hero-course-search-icon{width:16px;height:16px}
+.hero-course-search-icon svg{width:16px;height:16px}
+.hero-course-search-btn{padding:10px 14px;font-size:.76rem}
+.hero-course-search-btn .hero-search-btn-label{display:none}
+.hero-course-search-hints{gap:5px}
+.hero-course-search-hints button{font-size:.64rem;padding:4px 9px}
 .hero-kpi{display:none}
 .hero-pill-track{gap:6px}
 .hero-pill-track i{font-size:.58rem;padding:5px 8px}
@@ -1103,6 +1134,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="nav-panel-head nav-panel-head--courses">
           <p class="nav-panel-eyebrow">Certification catalog</p>
           <p class="nav-panel-title">Browse 150+ courses</p>
+          <form class="nav-courses-search" role="search" data-nx-course-search="nav" action="#courses" method="get">
+            <label class="nav-courses-search-field" for="navCoursesSearch">
+              <span class="nav-courses-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg></span>
+              <input type="search" id="navCoursesSearch" name="q" placeholder="Search courses…" autocomplete="off" enterkeyhint="search" aria-label="Search courses">
+            </label>
+            <button type="submit" class="nav-courses-search-btn" aria-label="Search courses">Search</button>
+          </form>
         </div>
         <div class="nav-courses-stack">
       <div class="nav-courses-section">
@@ -1254,6 +1292,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hero-inner">
         <h1 class="hero-title">IT Certification &amp; <em>AI Training Courses</em> in Malaysia</h1>
         <p class="hero-subtitle">Cybersecurity | Cloud Computing | Networking | Artificial Intelligence | Data Analytics | Automation</p>
+        <form class="hero-course-search" role="search" data-nx-course-search="hero" action="#courses" method="get">
+          <div class="hero-course-search-shell">
+            <label class="hero-course-search-field" for="heroCourseSearch">
+              <span class="hero-course-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg></span>
+              <input type="search" id="heroCourseSearch" name="q" placeholder="Search CCNA, AWS, Azure, AI…" autocomplete="off" enterkeyhint="search" aria-label="Search courses">
+            </label>
+            <button type="submit" class="hero-course-search-btn">
+              <span class="hero-search-btn-label">Search</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="hero-course-search-hints" aria-label="Popular searches">
+            <span>Popular</span>
+            <button type="button" data-nx-search-hint="CCNA">CCNA</button>
+            <button type="button" data-nx-search-hint="AWS">AWS</button>
+            <button type="button" data-nx-search-hint="Azure">Azure</button>
+            <button type="button" data-nx-search-hint="AI">AI</button>
+            <button type="button" data-nx-search-hint="CompTIA">CompTIA</button>
+          </div>
+        </form>
         <p class="hero-sub">Nexperts Academy delivers professional IT certification courses and hands-on AI training in Malaysia—from Cisco CCNA, CompTIA, CEH, AWS and Microsoft Azure to Generative AI, Agentic AI, Python, Power BI, Data Analytics and DevOps. Practical, industry-ready skills for IT professionals, beginners and businesses adopting AI.</p>
         <div class="hero-actions">
           <a href="#courses" class="btn-primary">Explore courses →</a>

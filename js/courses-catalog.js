@@ -71,10 +71,125 @@
     }
   }
 
+  function cardText(card) {
+    var name = card.querySelector(".cname2");
+    var desc = card.querySelector(".cdesc2");
+    return (
+      (name ? name.textContent : "") +
+      " " +
+      (desc ? desc.textContent : "") +
+      " " +
+      (card.dataset.vendor || "") +
+      " " +
+      (card.dataset.brand || "") +
+      " " +
+      (card.dataset.level || "")
+    ).toLowerCase();
+  }
+
+  function syncSearchInputs(q) {
+    var value = q || "";
+    var catalog = document.getElementById("catalogSearch");
+    if (catalog) catalog.value = value;
+    document
+      .querySelectorAll("form[data-nx-course-search] input[name='q']")
+      .forEach(function (el) {
+        el.value = value;
+      });
+  }
+
+  function runCatalogSearch(q) {
+    var input = document.getElementById("catalogSearch");
+    var meta = document.getElementById("catalogSearchMeta");
+    var clearBtn = document.querySelector(".catalog-search-clear");
+    if (!document.getElementById("courses")) return;
+
+    q = (q || "").trim().toLowerCase();
+    if (clearBtn) clearBtn.hidden = !q;
+
+    var visibleCards = 0;
+    var visibleBrands = 0;
+
+    document.querySelectorAll(".brand-block").forEach(function (block) {
+      var blockVisible = 0;
+      block.querySelectorAll(".cc").forEach(function (card) {
+        var match = !q || cardText(card).indexOf(q) !== -1;
+        if (match) {
+          card.classList.add("show");
+          blockVisible++;
+          visibleCards++;
+        } else {
+          card.classList.remove("show");
+        }
+      });
+      if (blockVisible === 0) {
+        block.classList.add("b-hide");
+      } else {
+        block.classList.remove("b-hide");
+        syncBrandBlockSize(block, blockVisible);
+        visibleBrands++;
+      }
+    });
+
+    if (meta) {
+      if (!q) {
+        meta.textContent = "";
+      } else if (visibleCards === 0) {
+        meta.textContent =
+          "No courses match your search. Try another keyword or vendor.";
+      } else {
+        meta.textContent =
+          visibleCards +
+          (visibleCards === 1 ? " course" : " courses") +
+          " in " +
+          visibleBrands +
+          (visibleBrands === 1 ? " vendor" : " vendors");
+      }
+    }
+
+    if (input && input.value.trim().toLowerCase() !== q) {
+      input.value = q;
+    }
+  }
+
+  function goToCatalogSearch(q) {
+    q = (q || "").trim();
+    syncSearchInputs(q);
+
+    if (!document.getElementById("courses")) {
+      if (q) sessionStorage.setItem("nxCatalogQ", q);
+      else sessionStorage.removeItem("nxCatalogQ");
+      var url = q
+        ? "/?q=" + encodeURIComponent(q) + "#courses"
+        : "/#courses";
+      window.location.href = url;
+      return;
+    }
+
+    document.querySelectorAll(".ftab").forEach(function (btn) {
+      btn.classList.toggle("on", btn.dataset.cat === "all");
+    });
+    runCatalogSearch(q);
+    var section = document.getElementById("courses");
+    if (section) {
+      setTimeout(function () {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 40);
+    }
+  }
+
   function readNavIntent() {
     var params = new URLSearchParams(window.location.search);
+    var q = params.get("q") || sessionStorage.getItem("nxCatalogQ") || "";
+    if (q) {
+      sessionStorage.removeItem("nxCatalogQ");
+      goToCatalogSearch(q);
+      return;
+    }
+
     var cat = params.get("cat") || sessionStorage.getItem("nxCatalogCat") || "";
-    var brand = params.get("brand") || sessionStorage.getItem("nxCatalogBrand") || "";
+    var brand =
+      params.get("brand") || sessionStorage.getItem("nxCatalogBrand") || "";
     if (!cat && !brand) return;
     sessionStorage.removeItem("nxCatalogCat");
     sessionStorage.removeItem("nxCatalogBrand");
@@ -82,7 +197,9 @@
   }
 
   document.addEventListener("click", function (e) {
-    var link = e.target.closest(".nav-courses-vendor, .nav-courses-section-link");
+    var link = e.target.closest(
+      ".nav-courses-vendor, .nav-courses-section-link"
+    );
     if (!link || !link.closest(".nav-courses-panel")) return;
     var cat = link.getAttribute("data-nav-cat") || "";
     var brand = link.getAttribute("data-nav-brand") || "";
@@ -97,75 +214,19 @@
 
   function initSearch() {
     var input = document.getElementById("catalogSearch");
-    var meta = document.getElementById("catalogSearchMeta");
     var clearBtn = document.querySelector(".catalog-search-clear");
-    if (!input) return;
 
-    function cardText(card) {
-      var name = card.querySelector(".cname2");
-      var desc = card.querySelector(".cdesc2");
-      return (
-        (name ? name.textContent : "") +
-        " " +
-        (desc ? desc.textContent : "") +
-        " " +
-        (card.dataset.vendor || "") +
-        " " +
-        (card.dataset.brand || "") +
-        " " +
-        (card.dataset.level || "")
-      ).toLowerCase();
-    }
-
-    function runSearch() {
-      var q = input.value.trim().toLowerCase();
-      if (clearBtn) clearBtn.hidden = !q;
-
-      var visibleCards = 0;
-      var visibleBrands = 0;
-
-      document.querySelectorAll(".brand-block").forEach(function (block) {
-        var blockVisible = 0;
-        block.querySelectorAll(".cc").forEach(function (card) {
-          var match = !q || cardText(card).indexOf(q) !== -1;
-          if (match) {
-            card.classList.add("show");
-            blockVisible++;
-            visibleCards++;
-          } else {
-            card.classList.remove("show");
-          }
-        });
-        if (blockVisible === 0) {
-          block.classList.add("b-hide");
-        } else {
-          block.classList.remove("b-hide");
-          syncBrandBlockSize(block, blockVisible);
-          visibleBrands++;
-        }
+    if (input) {
+      input.addEventListener("input", function () {
+        syncSearchInputs(input.value);
+        runCatalogSearch(input.value);
       });
-
-      if (meta) {
-        if (!q) {
-          meta.textContent = "";
-        } else if (visibleCards === 0) {
-          meta.textContent = "No courses match your search. Try another keyword or vendor.";
-        } else {
-          meta.textContent =
-            visibleCards +
-            (visibleCards === 1 ? " course" : " courses") +
-            " in " +
-            visibleBrands +
-            (visibleBrands === 1 ? " vendor" : " vendors");
-        }
-      }
     }
 
-    input.addEventListener("input", runSearch);
     if (clearBtn) {
       clearBtn.addEventListener("click", function () {
-        input.value = "";
-        input.focus();
+        syncSearchInputs("");
+        if (input) input.focus();
         document.querySelectorAll(".ftab").forEach(function (btn) {
           btn.classList.toggle("on", btn.dataset.cat === "all");
         });
@@ -178,9 +239,27 @@
           });
           syncBrandBlockSize(block, n);
         });
-        runSearch();
+        runCatalogSearch("");
       });
     }
+
+    document
+      .querySelectorAll("form[data-nx-course-search]")
+      .forEach(function (form) {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var field = form.querySelector("input[name='q']");
+          goToCatalogSearch(field ? field.value : "");
+        });
+      });
+
+    document
+      .querySelectorAll("[data-nx-search-hint]")
+      .forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          goToCatalogSearch(btn.getAttribute("data-nx-search-hint") || "");
+        });
+      });
   }
 
   function init() {
@@ -189,8 +268,8 @@
       if (!n) n = block.querySelectorAll(".cc").length;
       if (n) syncBrandBlockSize(block, n);
     });
-    readNavIntent();
     initSearch();
+    readNavIntent();
   }
 
   if (document.readyState === "loading") {

@@ -287,6 +287,106 @@
   );
 }
 
+.nav-courses-search {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 12px;
+  padding: 5px 5px 5px 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.9));
+  border: 1px solid rgba(147, 197, 253, 0.55);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-courses-search:focus-within {
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12), 0 0 0 3px rgba(59, 130, 246, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.nav-courses-search-field {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav-courses-search-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: #3b82f6;
+  pointer-events: none;
+}
+
+.nav-courses-search-icon svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.nav-courses-search input {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 8px 8px 8px 22px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #0f172a;
+  outline: none;
+  box-shadow: none;
+}
+
+.nav-courses-search input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.nav-courses-search input:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.nav-courses-search input::-webkit-search-decoration,
+.nav-courses-search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.nav-courses-search-btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb 55%, #3b82f6);
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.nav-courses-search-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
 .nav-panel-head--explore {
   background: linear-gradient(
     135deg,
@@ -451,6 +551,22 @@
 
   .nav-panel-title {
     font-size: 0.84rem;
+  }
+
+  .nav-courses-search {
+    margin-top: 10px;
+    padding: 4px 4px 4px 11px;
+    border-radius: 16px;
+  }
+
+  .nav-courses-search input {
+    font-size: 0.8rem;
+    padding: 9px 8px 9px 22px;
+  }
+
+  .nav-courses-search-btn {
+    padding: 9px 12px;
+    font-size: 0.72rem;
   }
 
   .nav-panel--courses .nav-courses-stack,

@@ -200,6 +200,13 @@ def courses_dropdown_li(*, variant: str, current_path: str = "") -> str:
         <div class="nav-panel-head nav-panel-head--courses">
           <p class="nav-panel-eyebrow">Certification catalog</p>
           <p class="nav-panel-title">Browse {catalog_total}+ courses</p>
+          <form class="nav-courses-search" role="search" data-nx-course-search="nav" action="{_esc(courses_href)}" method="get">
+            <label class="nav-courses-search-field" for="navCoursesSearch">
+              <span class="nav-courses-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg></span>
+              <input type="search" id="navCoursesSearch" name="q" placeholder="Search courses…" autocomplete="off" enterkeyhint="search" aria-label="Search courses">
+            </label>
+            <button type="submit" class="nav-courses-search-btn" aria-label="Search courses">Search</button>
+          </form>
         </div>
         <div class="nav-courses-stack">
 {stack}

@@ -124,6 +124,19 @@
         scheduleClose();
       });
 
+      panel.addEventListener("focusin", function () {
+        if (isDrawerMode()) return;
+        cancelClose();
+        open();
+      });
+
+      panel.addEventListener("focusout", function (e) {
+        if (isDrawerMode()) return;
+        var related = e.relatedTarget;
+        if (related && wrap.contains(related)) return;
+        scheduleClose();
+      });
+
       btn.addEventListener("keydown", function (e) {
         if (e.key === "Escape") close();
         if (e.key === "Enter" || e.key === " ") {
