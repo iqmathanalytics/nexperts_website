@@ -54,6 +54,8 @@ STATIC_PAGES = [
     "blog/cisco-certification-path.html",
     "blog/fortinet-certification-guide.html",
     "blog/microsoft-azure-certification-guide.html",
+    "blog/cybersecurity-courses-malaysia-students.html",
+    "blog/how-to-become-ethical-hacker-malaysia.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]

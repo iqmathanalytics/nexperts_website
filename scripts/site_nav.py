@@ -49,8 +49,16 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
                 "/blog/fortinet-certification-guide",
             ),
             (
-                "Microsoft Azure Certification Guide 2026",
+                "Azure Certification Path 2026",
                 "/blog/microsoft-azure-certification-guide",
+            ),
+            (
+                "Cyber Security Courses for CS Students",
+                "/blog/cybersecurity-courses-malaysia-students",
+            ),
+            (
+                "Become an Ethical Hacker in Malaysia",
+                "/blog/how-to-become-ethical-hacker-malaysia",
             ),
         ],
     ),
