@@ -1055,30 +1055,9 @@ def wire_site() -> None:
     else:
         print("blog.html cards already present")
 
-    # Pretty URL 200 rewrites (safe even if host auto-resolves .html)
-    redirects = ROOT / "_redirects"
-    rtxt = redirects.read_text(encoding="utf-8")
-    rules = [
-        "/blog/cybersecurity-courses-malaysia-students /blog/cybersecurity-courses-malaysia-students.html 200",
-        "/blog/how-to-become-ethical-hacker-malaysia /blog/how-to-become-ethical-hacker-malaysia.html 200",
-        "/blog/cybersecurity-courses-malaysia-students.html /blog/cybersecurity-courses-malaysia-students 301",
-        "/blog/how-to-become-ethical-hacker-malaysia.html /blog/how-to-become-ethical-hacker-malaysia 301",
-    ]
-    added = False
-    for rule in rules:
-        if rule.split()[0] not in rtxt:
-            # insert before legacy post section if present
-            needle = "# Legacy Wix URLs"
-            if needle in rtxt:
-                rtxt = rtxt.replace(needle, rule + "\n" + needle, 1)
-            else:
-                rtxt = rtxt.rstrip() + "\n" + rule + "\n"
-            added = True
-    if added:
-        redirects.write_text(rtxt, encoding="utf-8", newline="\n")
-        print("Updated _redirects")
-    else:
-        print("_redirects already has blog rules")
+    # Do not add blog pretty-URL ↔ .html rewrite/redirect pairs in _redirects.
+    # Hosting already resolves /blog/{slug} → blog/{slug}.html; explicit 200/301
+    # pairs cause ERR_TOO_MANY_REDIRECTS (unlike other blog pages).
 
 
 def main() -> None:
