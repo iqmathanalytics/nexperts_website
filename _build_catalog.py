@@ -379,7 +379,7 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","ServiceNow Platform Implementation","Lead greenfield programmes \u2014 CMDB, integrations and steering-ready artefacts.","Professional",4.7,58, 2140),
     ("skill","skill","Skill-Based","AI 2026","Machine Learning with Python","Build predictive models, evaluate results and turn data into practical ML solutions.","Beginner to Intermediate",4.8,118,6420),
     ("skill","skill","Skill-Based","AI 2026","Generative AI for Workplace Productivity & Business Automation","Two-day workplace programme — professional prompts, department scenarios, AI workflows and responsible use.","All levels",4.9,94,5280),
-    ("skill","skill","Skill-Based","AI 2026","Agentic AI Engineering","Live 20-session programme from Python to production multi-agent systems — LangGraph, RAG, FastAPI and a portfolio capstone.","Beginner\u2192Advanced",4.8,78,4620),
+    ("skill","skill","Skill-Based","AI 2026","Agentic AI Engineering","Live 24-session programme from Python to production multi-agent systems — LangGraph, RAG, FastAPI and a portfolio capstone.","Beginner\u2192Advanced",4.8,78,4620),
     ("skill","skill","Skill-Based","Skills","Cyber Security Bootcamp","Blue-team, ethical hacking labs and IR tabletop \u2014 security champions for Malaysian enterprises.","Foundation\u2192Intermediate",4.9,132,7180),
     ("skill","skill","Skill-Based","Skills","Android Development","Kotlin, Jetpack Compose, MVVM and Play Store readiness with portfolio coaching.","Beginner\u2192Intermediate",4.7,86, 4280),
     ("skill","skill","Skill-Based","Skills","Django Web Development","Models, DRF APIs, auth and deploy \u2014 production-shaped Python web apps.","Intermediate",4.8,82, 3840),
