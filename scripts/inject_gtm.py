@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Inject Google Tag Manager (GTM) head + body noscript across public HTML.
+Inject Google Tag Manager (GTM) + optional GA4 gtag across public HTML.
 
-Replaces the older direct GA4 (nexperts-ga4:v1) snippets so analytics loads
-through GTM only (avoids double-counting if GA4 is also configured in GTM).
+Resolution order:
+  GTM: NEXPERTS_GTM_ID → config/gtm.json → container_id
+  GA4: NEXPERTS_GA4_ID → config/gtm.json → ga4_measurement_id
 
-Resolution order for the container ID:
-  1. Environment variable NEXPERTS_GTM_ID
-  2. config/gtm.json → "container_id"
-
-If no ID is set, existing GTM + GA4 marker blocks are removed and nothing is injected.
+If neither ID is set, existing marker blocks are removed and nothing is injected.
 
 Run from repo root: python scripts/inject_gtm.py
 """
@@ -36,6 +33,7 @@ VIEWPORT_RE = re.compile(
 )
 BODY_RE = re.compile(r"(<body\b[^>]*>)", re.I)
 GTM_ID_RE = re.compile(r"^GTM-[A-Z0-9]+$")
+GA4_ID_RE = re.compile(r"^G-[A-Z0-9]+$")
 
 SKIP_DIRS = frozenset(
     {
@@ -49,18 +47,24 @@ SKIP_DIRS = frozenset(
 )
 
 
-def load_container_id() -> str:
-    env = os.environ.get("NEXPERTS_GTM_ID", "").strip()
-    if env:
-        return env
+def load_analytics_config() -> tuple[str, str]:
+    data: dict = {}
     path = ROOT / "config" / "gtm.json"
-    if not path.is_file():
-        return ""
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return ""
-    return str(data.get("container_id", "")).strip()
+    if path.is_file():
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(raw, dict):
+                data = raw
+        except (json.JSONDecodeError, OSError):
+            data = {}
+
+    gtm = os.environ.get("NEXPERTS_GTM_ID", "").strip() or str(
+        data.get("container_id", "")
+    ).strip()
+    ga4 = os.environ.get("NEXPERTS_GA4_ID", "").strip() or str(
+        data.get("ga4_measurement_id", "")
+    ).strip()
+    return gtm, ga4
 
 
 def remove_marked_block(html: str, start: str, end: str) -> str:
@@ -75,12 +79,27 @@ def strip_legacy_blocks(html: str) -> str:
     html = remove_marked_block(html, GA4_START, GA4_END)
     html = remove_marked_block(html, GTM_HEAD_START, GTM_HEAD_END)
     html = remove_marked_block(html, GTM_BODY_START, GTM_BODY_END)
-    # Clean leftover blank runs after removals (keep one newline max cluster).
     html = re.sub(r"\n{4,}", "\n\n\n", html)
     return html
 
 
-def build_head_snippet(container_id: str) -> str:
+def build_ga4_snippet(measurement_id: str) -> str:
+    return (
+        f"\n{GA4_START}\n"
+        "<!-- Google tag (gtag.js) -->\n"
+        f'<script async src="https://www.googletagmanager.com/gtag/js?id={measurement_id}"></script>\n'
+        "<script>\n"
+        "  window.dataLayer = window.dataLayer || [];\n"
+        "  function gtag(){dataLayer.push(arguments);}\n"
+        "  gtag('js', new Date());\n"
+        "\n"
+        f"  gtag('config', '{measurement_id}');\n"
+        "</script>\n"
+        f"{GA4_END}\n"
+    )
+
+
+def build_gtm_head_snippet(container_id: str) -> str:
     return (
         f"\n{GTM_HEAD_START}\n"
         "<!-- Google Tag Manager -->\n"
@@ -94,7 +113,7 @@ def build_head_snippet(container_id: str) -> str:
     )
 
 
-def build_body_snippet(container_id: str) -> str:
+def build_gtm_body_snippet(container_id: str) -> str:
     return (
         f"\n{GTM_BODY_START}\n"
         "<!-- Google Tag Manager (noscript) -->\n"
@@ -126,7 +145,7 @@ def iter_public_html() -> list[Path]:
     return sorted(files)
 
 
-def process_file(path: Path, container_id: str | None) -> str:
+def process_file(path: Path, container_id: str | None, ga4_id: str | None) -> str:
     """Return status: ok | skip-viewport | skip-body | error."""
     try:
         html = path.read_text(encoding="utf-8")
@@ -136,12 +155,16 @@ def process_file(path: Path, container_id: str | None) -> str:
 
     html = strip_legacy_blocks(html)
 
-    if not container_id:
+    if not container_id and not ga4_id:
         path.write_text(html, encoding="utf-8", newline="\n")
         return "ok"
 
-    head = build_head_snippet(container_id)
-    body = build_body_snippet(container_id)
+    head_parts: list[str] = []
+    if ga4_id:
+        head_parts.append(build_ga4_snippet(ga4_id))
+    if container_id:
+        head_parts.append(build_gtm_head_snippet(container_id))
+    head = "".join(head_parts)
 
     out = inject_after_viewport(html, head)
     if out is None:
@@ -149,18 +172,21 @@ def process_file(path: Path, container_id: str | None) -> str:
         print(f"SKIP (no viewport meta): {path.relative_to(ROOT)}", file=sys.stderr)
         return "skip-viewport"
 
-    out2 = inject_after_body(out, body)
-    if out2 is None:
-        path.write_text(out, encoding="utf-8", newline="\n")
-        print(f"SKIP (no body tag): {path.relative_to(ROOT)}", file=sys.stderr)
-        return "skip-body"
+    if container_id:
+        body = build_gtm_body_snippet(container_id)
+        out2 = inject_after_body(out, body)
+        if out2 is None:
+            path.write_text(out, encoding="utf-8", newline="\n")
+            print(f"SKIP (no body tag): {path.relative_to(ROOT)}", file=sys.stderr)
+            return "skip-body"
+        out = out2
 
-    path.write_text(out2, encoding="utf-8", newline="\n")
+    path.write_text(out, encoding="utf-8", newline="\n")
     return "ok"
 
 
 def main() -> int:
-    cid = load_container_id()
+    cid, ga4 = load_analytics_config()
     if cid and not GTM_ID_RE.match(cid):
         print(
             "Invalid GTM container ID (expected format GTM-XXXXXXX): "
@@ -168,11 +194,18 @@ def main() -> int:
             file=sys.stderr,
         )
         return 1
+    if ga4 and not GA4_ID_RE.match(ga4):
+        print(
+            "Invalid GA4 measurement ID (expected format G-XXXXXXX): "
+            + repr(ga4[:24] + ("…" if len(ga4) > 24 else "")),
+            file=sys.stderr,
+        )
+        return 1
 
     ok = 0
     fail = 0
     for path in iter_public_html():
-        status = process_file(path, cid or None)
+        status = process_file(path, cid or None, ga4 or None)
         rel = path.relative_to(ROOT).as_posix()
         if status == "ok":
             ok += 1
@@ -180,14 +213,19 @@ def main() -> int:
         else:
             fail += 1
 
-    if not cid:
+    if not cid and not ga4:
         print(
-            "GTM: no container id — stripped markers only. "
-            "Set NEXPERTS_GTM_ID or config/gtm.json, then re-run.",
+            "Analytics: no GTM/GA4 id — stripped markers only. "
+            "Set config/gtm.json (container_id / ga4_measurement_id), then re-run.",
             file=sys.stderr,
         )
     else:
-        print(f"GTM {cid}: updated {ok} file(s), {fail} skip/error(s)")
+        bits = []
+        if cid:
+            bits.append(f"GTM {cid}")
+        if ga4:
+            bits.append(f"GA4 {ga4}")
+        print(f"{' + '.join(bits)}: updated {ok} file(s), {fail} skip/error(s)")
     return 1 if fail else 0
 
 
