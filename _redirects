@@ -26,7 +26,7 @@
 # --- Trailing slash removal (301; non-trailing slash is canonical) ---
 
 # Legacy & vanity → canonical /courses/{slug} (301; flattened, single hop)
-/artificial-intelligence-machine-learning /courses/artificial-intelligence 301
+/artificial-intelligence-machine-learning /courses/ai-102 301
 /microsoft-certified-azure-administrator /courses/az-104 301
 /courses/data-science-with-python.html /data-science-with-python 301
 /data-analytics-associate-with-python /courses/sql-for-data-professionals 301
@@ -57,7 +57,7 @@
 /javascript-front-end /courses/full-stack-web-development 301
 /microsoft-power-apps /courses/pl-100 301
 /android-development /courses/android-development 301
-/courses/ai-102.html /courses/artificial-intelligence 301
+
 /devops-fundamentals /courses/az-400 301
 /servicenow-platform /courses/servicenow-platform 301
 /azure-fundamentals /courses/az-900 301
@@ -72,7 +72,7 @@
 /network-security /courses/ccnp-security 301
 /ios-development /courses/ios-development 301
 /ai-ml-bootcamp /courses/ai-ml-bootcamp 301
-/courses/ai-102 /courses/artificial-intelligence 301
+
 /aws-advanced /courses/aws-solutions-architect-professional 301
 /courses/ccna /ccna 301
 /azure-ai900 /courses/ai-900 301
@@ -90,12 +90,13 @@
 /gen-ai /courses/generative-ai-workplace-productivity 301
 /courses/gen-ai /courses/generative-ai-workplace-productivity 301
 /courses/introduction-to-machine-learning /courses/ai-machine-learning-course-malaysia 301
+/courses/artificial-intelligence.html /courses/ai-102 301
+/courses/artificial-intelligence /courses/ai-102 301
 /courses/ai-fundamentals-for-beginners /courses/artificial-intelligence-ai-course-malaysia 301
 /cissp /courses/cissp 301
 /sdwan /courses/sdwan 301
 /ecih /courses/ecih 301
 /sql /courses/sql-for-data-professionals 301
-
 
 # Legacy Wix URLs → canonical courses (301)
 /post/unlocking-the-power-of-data-science-applications-and-challenges /blog/unlocking-the-power-of-data-science-applications-and-challenges 301
