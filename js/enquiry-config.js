@@ -7,7 +7,7 @@
  *    Deploy on Netlify or Cloudflare Pages, set environment variables (see google-apps-script/README.md),
  *    set provider: "brevo" below, use the same optional `secret` as BREVO_ENQUIRY_SECRET,
  *    and set `teamInbox` to the same address as BREVO_INTERNAL_TO (for mailto links + error text).
- *    Sheet rows: the Brevo function forwards each lead to webAppUrl (Apps Script) after mail sends.
+ *    Sheet rows: the Brevo function forwards each lead to webAppUrl (Apps Script) in parallel with mail.
  *    Optionally set APPS_SCRIPT_ENQUIRY_URL in hosting env to override; if omitted, the server uses webAppUrl below.
  *
  * 2) apps_script — Google Apps Script Web App + Sheet (see /google-apps-script/).

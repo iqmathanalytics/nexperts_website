@@ -1,6 +1,7 @@
 /**
  * Website enquiry → Brevo + Google Sheet + Zoho CRM (shared logic for Netlify + Cloudflare Pages).
- * Zoho upsert lives in `./zoho-crm.mjs`. Sheet / Zoho failures do not fail the HTTP 200.
+ * Zoho upsert lives in `./zoho-crm.mjs`. Sheet / Zoho run in parallel with email (sheet retries
+ * transient failures). Sheet / Zoho failures do not fail the HTTP 200 when email succeeds.
  */
 
 import { isZohoConfigured, upsertEnquiryLead } from "./zoho-crm.mjs";
@@ -472,6 +473,22 @@ function describeAppsScriptFailure(res, json, text) {
   return `${String(err).slice(0, 120)}${hint} · ${t.slice(0, 100)}`;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/** Do not retry auth/validation failures — only transient network / Google flakiness. */
+function isRetryableSheetError(message) {
+  const m = String(message || "").toLowerCase();
+  if (!m) return true;
+  if (m.includes("forbidden")) return false;
+  if (m.includes("missing_name_or_email")) return false;
+  if (m.includes("invalid_json")) return false;
+  if (m.includes("empty_payload")) return false;
+  if (m.includes("apps_script_bad_url")) return false;
+  return true;
+}
+
 /**
  * Append row in bound Sheet (same contract as browser → Apps Script).
  * Tries x-www-form-urlencoded payload=, then JSON body on the resolved URL.
@@ -492,7 +509,7 @@ async function forwardEnquiryToAppsScript(webAppUrl, data) {
   );
   let parsed = parseJsonSafe(r.text);
   if (r.res.ok && parsed && parsed.ok === true) {
-    return { skipped: false, ok: true };
+    return { skipped: false, ok: true, row: parsed.row || null };
   }
 
   const firstErr = describeAppsScriptFailure(r.res, parsed, r.text);
@@ -500,12 +517,28 @@ async function forwardEnquiryToAppsScript(webAppUrl, data) {
   let r2 = await fetchAppsScriptOnce(base, jsonStr, "application/json;charset=UTF-8");
   let p2 = parseJsonSafe(r2.text);
   if (r2.res.ok && p2 && p2.ok === true) {
-    return { skipped: false, ok: true };
+    return { skipped: false, ok: true, row: p2.row || null };
   }
 
   throw new Error(
     `${describeAppsScriptFailure(r2.res, p2, r2.text)} | form_try: ${firstErr}`.slice(0, 380),
   );
+}
+
+/** Up to 3 attempts so Cloudflare→Google flakes do not drop the sheet row after email succeeds. */
+async function forwardEnquiryToAppsScriptWithRetry(webAppUrl, data, attempts = 3) {
+  let lastErr = null;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await forwardEnquiryToAppsScript(webAppUrl, data);
+    } catch (e) {
+      lastErr = e;
+      const msg = String(e && e.message ? e.message : e);
+      if (!isRetryableSheetError(msg) || i === attempts - 1) break;
+      await sleep(400 * (i + 1));
+    }
+  }
+  throw lastErr || new Error("sheet_forward_failed");
 }
 
 export async function handler(event) {
@@ -589,6 +622,14 @@ export async function handler(event) {
     };
   }
 
+  // Normalize fields used by sheet + Zoho before any side effects.
+  data.first = first;
+  data.last = last;
+  data.email = email;
+  if (!String(data.submittedAt || "").trim()) {
+    data.submittedAt = new Date().toISOString();
+  }
+
   const studentName = `${first} ${last}`.trim();
   const internalSubject = `[Website enquiry] ${studentName} — ${String(data.course || "Course not selected").slice(0, 80)}`;
   const ctx = getCtx(data, process.env);
@@ -598,44 +639,21 @@ export async function handler(event) {
   const internalHtml = buildInternalEmailHtml(data, ctx);
   const internalText = buildInternalEmailText(data, ctx);
 
-  try {
-    await brevoSend(apiKey, {
-      sender: { name: senderName, email: senderEmail },
-      to: [{ email, name: studentName }],
-      replyTo: { email: internalTo, name: senderName },
-      subject: "We received your enquiry — Nexperts Academy",
-      textContent: studentText,
-      htmlContent: studentHtml,
-    });
-
-    await brevoSend(apiKey, {
-      sender: { name: senderName, email: senderEmail },
-      to: internalRecipients,
-      replyTo: { email, name: studentName },
-      subject: internalSubject,
-      textContent: internalText,
-      htmlContent: internalHtml,
-    });
-  } catch (e) {
-    return {
-      statusCode: 502,
-      headers: h,
-      body: JSON.stringify({
-        ok: false,
-        error: "email_send_failed",
-        detail: String(e.message || e).slice(0, 200),
-      }),
-    };
-  }
-
+  /*
+   * Run sheet + Zoho in parallel with Brevo. Previously sheet ran only AFTER both
+   * emails finished — Cloudflare CPU/wall time could cut off the sheet step while
+   * emails had already been delivered (lead email without Enquiries row).
+   */
   const appsScript = resolveAppsScriptEnquiryUrl(process.env);
   const appsScriptUrl = appsScript.url;
   let sheetLogged = false;
   let sheetError = null;
+  let sheetRow = null;
   const sheetPromise = appsScriptUrl
-    ? forwardEnquiryToAppsScript(appsScriptUrl, data)
-        .then(() => {
+    ? forwardEnquiryToAppsScriptWithRetry(appsScriptUrl, data)
+        .then((r) => {
           sheetLogged = true;
+          if (r && r.row) sheetRow = r.row;
         })
         .catch((e) => {
           sheetError = String(e.message || e).slice(0, 220);
@@ -665,12 +683,52 @@ export async function handler(event) {
       zohoError = String(e.message || e).slice(0, 220);
     });
 
-  await Promise.all([sheetPromise, zohoPromise]);
+  let emailError = null;
+  const emailPromise = (async () => {
+    await brevoSend(apiKey, {
+      sender: { name: senderName, email: senderEmail },
+      to: [{ email, name: studentName }],
+      replyTo: { email: internalTo, name: senderName },
+      subject: "We received your enquiry — Nexperts Academy",
+      textContent: studentText,
+      htmlContent: studentHtml,
+    });
+
+    await brevoSend(apiKey, {
+      sender: { name: senderName, email: senderEmail },
+      to: internalRecipients,
+      replyTo: { email, name: studentName },
+      subject: internalSubject,
+      textContent: internalText,
+      htmlContent: internalHtml,
+    });
+  })().catch((e) => {
+    emailError = String(e.message || e).slice(0, 200);
+  });
+
+  await Promise.all([sheetPromise, zohoPromise, emailPromise]);
+
+  if (emailError) {
+    return {
+      statusCode: 502,
+      headers: h,
+      body: JSON.stringify({
+        ok: false,
+        error: "email_send_failed",
+        detail: emailError,
+        sheetLogged,
+        zohoLogged,
+        ...(sheetError ? { sheetError } : {}),
+        ...(zohoError ? { zohoError } : {}),
+      }),
+    };
+  }
 
   const bodyOut = {
     ok: true,
     sheetLogged,
     zohoLogged,
+    ...(sheetRow ? { sheetRow } : {}),
     ...(sheetError ? { sheetError } : {}),
     ...(zohoError ? { zohoError } : {}),
     ...(zohoLeadId ? { zohoLeadId } : {}),
