@@ -904,8 +904,8 @@ BATCH.append(_ms_course(
 # 5. PL-300 Power BI Data Analyst
 BATCH.append(_ms_course(
     slug="pl-300",
-    seo_title="PL-300 Power BI Training Malaysia | Data Analyst Certification",
-    seo_description="Prepare for Microsoft PL-300 certification in Malaysia with Power Query, data modelling, DAX, dashboards, deployment and hands-on Power BI labs.",
+    seo_title="Power BI Training Malaysia - PL-300 Certification Course",
+    seo_description="Join Microsoft Power BI training in Malaysia. Learn Power BI Desktop, DAX, Power Query & dashboards with hands-on PL-300 certification labs.",
     seo_keywords="PL-300, Power BI training Malaysia, Microsoft Power BI course, Power BI Data Analyst certification, Power Query, DAX, Power BI classes Malaysia",
     title="PL-300: Power BI Data Analyst",
     title_html='PL-300 Power BI Training Malaysia<br><em>Microsoft Power BI Data Analyst Certification</em>',
