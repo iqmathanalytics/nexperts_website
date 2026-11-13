@@ -437,7 +437,6 @@
     }
 
     function showSuccess() {
-      if (active.settled) return;
       active.settled = true;
       stopWatching();
       closePopupQuietly();
@@ -461,6 +460,13 @@
     }
 
     function markPaidAndFulfill(sessionId) {
+      // Lock immediately so poll + postMessage cannot fire fulfill repeatedly
+      // while the first request (email + PDF) is still in flight.
+      if (active.settled) return;
+      active.settled = true;
+      stopWatching();
+      closePopupQuietly();
+      if (form) setBusy(form, false);
       setModalState({
         id: "confirming",
         tone: "wait",
@@ -476,6 +482,7 @@
         .catch(function (err) {
           // Payment may still have succeeded; avoid alarming if status was paid.
           if (err && err.status === 402) {
+            active.settled = false;
             showFailed("Payment is still processing. If you were charged, contact us with your email and we will confirm your seat.");
             return;
           }

@@ -1,7 +1,9 @@
 /**
  * After a paid Checkout Session: send confirmation email (+ PDF) and log to the
  * "Paid Enrollments" tab (same Google Spreadsheet as Enquiries — not the Enquiries tab).
- * Idempotent via Stripe session metadata flags.
+ *
+ * Idempotent under concurrent callers (webhook + popup poll + success page):
+ * claim email_sent / sheet_logged as "pending" in Stripe metadata BEFORE side effects.
  */
 
 import Stripe from "stripe";
@@ -21,6 +23,54 @@ function normalizeAppsScriptUrl(url) {
     return parsed.toString();
   } catch {
     return "";
+  }
+}
+
+function claimToken() {
+  return `p${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+}
+
+/**
+ * Compare-and-set style claim on Checkout Session metadata.
+ * Returns claimed:true only for the winner of the race.
+ */
+async function claimSessionFlag(stripe, sessionId, flagKey) {
+  const tokKey = `${flagKey}_tok`;
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  const md = { ...(session.metadata || {}) };
+  const cur = String(md[flagKey] || "");
+  if (cur === "1" || cur === "pending") {
+    return { claimed: false, alreadyDone: cur === "1", session, md };
+  }
+
+  const token = claimToken();
+  md[flagKey] = "pending";
+  md[tokKey] = token;
+  await stripe.checkout.sessions.update(sessionId, { metadata: md });
+
+  const fresh = await stripe.checkout.sessions.retrieve(sessionId);
+  const fmd = { ...(fresh.metadata || {}) };
+  if (String(fmd[tokKey] || "") !== token) {
+    return { claimed: false, alreadyDone: String(fmd[flagKey] || "") === "1", session: fresh, md: fmd };
+  }
+  return { claimed: true, alreadyDone: false, session: fresh, md: fmd, token };
+}
+
+async function finalizeSessionFlag(stripe, sessionId, flagKey, ok) {
+  try {
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    const md = { ...(session.metadata || {}) };
+    const tokKey = `${flagKey}_tok`;
+    if (ok) {
+      md[flagKey] = "1";
+    } else if (String(md[flagKey] || "") === "pending") {
+      // Allow a later retry if this attempt failed.
+      md[flagKey] = "";
+    }
+    md[tokKey] = "";
+    await stripe.checkout.sessions.update(sessionId, { metadata: md });
+  } catch (err) {
+    console.warn("stripe_metadata_finalize", flagKey, err && err.message);
   }
 }
 
@@ -49,10 +99,9 @@ async function postToAppsScript(webAppUrl, payload) {
     json = null;
   }
   if (res.ok && json && json.ok === true) {
-    return { skipped: false, ok: true, row: json.row || null };
+    return { skipped: false, ok: true, row: json.row || null, duplicate: !!json.duplicate };
   }
 
-  // Fallback JSON body
   const res2 = await fetch(base, {
     method: "POST",
     headers: {
@@ -70,7 +119,7 @@ async function postToAppsScript(webAppUrl, payload) {
     json2 = null;
   }
   if (res2.ok && json2 && json2.ok === true) {
-    return { skipped: false, ok: true, row: json2.row || null };
+    return { skipped: false, ok: true, row: json2.row || null, duplicate: !!json2.duplicate };
   }
   throw new Error(
     String((json2 && json2.error) || (json && json.error) || text2 || text || "sheet_failed").slice(
@@ -97,7 +146,6 @@ function sheetPayloadFromSession(session) {
   const receiptNumber = String(session.payment_intent || session.id || "").trim();
 
   const payload = {
-    // Apps Script routes this to the "Paid Enrollments" tab (not "Enquiries").
     targetSheet: "Paid Enrollments",
     recordType: "paid_enrollment",
     first: first || "Paid",
@@ -123,7 +171,7 @@ function sheetPayloadFromSession(session) {
 }
 
 /**
- * Send email + sheet log once for a paid session. Safe to call from webhook and success page.
+ * Send email + sheet log once for a paid session. Safe under concurrent callers.
  */
 export async function fulfillPaidEnrollment(session, stripe) {
   if (!session || !session.id) {
@@ -132,44 +180,68 @@ export async function fulfillPaidEnrollment(session, stripe) {
   if (String(session.payment_status || "") === "unpaid") {
     return { ok: false, error: "not_paid" };
   }
-
-  const md = { ...(session.metadata || {}) };
-  const result = {
-    ok: true,
-    sessionId: session.id,
-    emailed: md.email_sent === "1",
-    sheetLogged: md.sheet_logged === "1",
-  };
-
-  if (!result.emailed) {
-    await sendEnrollmentConfirmation({ session });
-    result.emailed = true;
-    md.email_sent = "1";
+  if (!stripe) {
+    return { ok: false, error: "stripe_client_required" };
   }
 
-  if (!result.sheetLogged) {
-    const appsUrl = env("APPS_SCRIPT_ENQUIRY_URL");
-    if (appsUrl) {
-      try {
-        const sheetRes = await postToAppsScript(appsUrl, sheetPayloadFromSession(session));
-        result.sheetLogged = !sheetRes.skipped;
-        if (sheetRes.row) result.sheetRow = sheetRes.row;
-        md.sheet_logged = "1";
-      } catch (err) {
-        console.warn("enrollment_sheet_failed", err && err.message);
-        result.sheetError = String((err && err.message) || err).slice(0, 180);
-      }
-    } else {
-      result.sheetLogged = false;
-      result.sheetSkipped = true;
+  const sessionId = session.id;
+  const result = {
+    ok: true,
+    sessionId,
+    emailed: false,
+    sheetLogged: false,
+    emailSkipped: false,
+    sheetSkipped: false,
+  };
+
+  // --- Email (claim before send) ---
+  const emailClaim = await claimSessionFlag(stripe, sessionId, "email_sent");
+  if (emailClaim.alreadyDone) {
+    result.emailed = true;
+    result.emailSkipped = true;
+  } else if (!emailClaim.claimed) {
+    result.emailed = false;
+    result.emailSkipped = true;
+  } else {
+    try {
+      await sendEnrollmentConfirmation({ session: emailClaim.session || session });
+      await finalizeSessionFlag(stripe, sessionId, "email_sent", true);
+      result.emailed = true;
+    } catch (err) {
+      await finalizeSessionFlag(stripe, sessionId, "email_sent", false);
+      throw err;
     }
   }
 
-  if (stripe && (md.email_sent === "1" || md.sheet_logged === "1")) {
-    try {
-      await stripe.checkout.sessions.update(session.id, { metadata: md });
-    } catch (updErr) {
-      console.warn("stripe_metadata_update", updErr && updErr.message);
+  // --- Sheet (claim before write) ---
+  const sheetClaim = await claimSessionFlag(stripe, sessionId, "sheet_logged");
+  if (sheetClaim.alreadyDone) {
+    result.sheetLogged = true;
+    result.sheetSkipped = true;
+  } else if (!sheetClaim.claimed) {
+    result.sheetLogged = false;
+    result.sheetSkipped = true;
+  } else {
+    const appsUrl = env("APPS_SCRIPT_ENQUIRY_URL");
+    if (!appsUrl) {
+      await finalizeSessionFlag(stripe, sessionId, "sheet_logged", false);
+      result.sheetLogged = false;
+      result.sheetSkipped = true;
+    } else {
+      try {
+        const sheetRes = await postToAppsScript(
+          appsUrl,
+          sheetPayloadFromSession(sheetClaim.session || session)
+        );
+        await finalizeSessionFlag(stripe, sessionId, "sheet_logged", true);
+        result.sheetLogged = !sheetRes.skipped;
+        if (sheetRes.row) result.sheetRow = sheetRes.row;
+        if (sheetRes.duplicate) result.sheetDuplicate = true;
+      } catch (err) {
+        await finalizeSessionFlag(stripe, sessionId, "sheet_logged", false);
+        console.warn("enrollment_sheet_failed", err && err.message);
+        result.sheetError = String((err && err.message) || err).slice(0, 180);
+      }
     }
   }
 
@@ -193,13 +265,17 @@ export async function getCheckoutSessionStatus(sessionId) {
   const stripe = new Stripe(secret);
   const session = await stripe.checkout.sessions.retrieve(id);
   const md = (session && session.metadata) || {};
+  const emailFlag = String(md.email_sent || "");
+  const sheetFlag = String(md.sheet_logged || "");
   return {
     ok: true,
     sessionId: session.id,
     status: session.status,
     payment_status: session.payment_status,
-    email_sent: md.email_sent === "1",
-    sheet_logged: md.sheet_logged === "1",
+    email_sent: emailFlag === "1",
+    sheet_logged: sheetFlag === "1",
+    email_pending: emailFlag === "pending",
+    sheet_pending: sheetFlag === "pending",
     course_slug: md.course_slug || "",
   };
 }

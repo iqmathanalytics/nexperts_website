@@ -149,6 +149,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var sessionId = String(params.get("session_id") || "").trim();
     var msg = document.getElementById("fulfillMsg");
     if (!sessionId) return;
+    // Avoid double-call on refresh / back-forward cache.
+    var guardKey = "nx_fulfill_" + sessionId;
+    try {
+      if (sessionStorage.getItem(guardKey) === "1") return;
+      sessionStorage.setItem(guardKey, "1");
+    } catch (_) { /* ignore */ }
     fetch("/api/stripe-fulfill", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -157,8 +163,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       .then(function (r) { return r.json().catch(function () { return null; }); })
       .then(function (data) {
         if (!msg || !data) return;
-        if (data.ok && data.emailed) {
-          msg.textContent = "Confirmation email with your PDF receipt has been sent. Please also check spam or promotions.";
+        if (data.ok) {
+          msg.textContent = "Confirmation email with your PDF receipt has been sent (or was already sent). Please also check spam or promotions.";
         } else if (data && data.error === "not_paid") {
           msg.textContent = "Payment is still processing. If you were charged, contact us with your receipt.";
         }

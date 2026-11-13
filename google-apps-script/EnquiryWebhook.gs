@@ -35,7 +35,7 @@ function doGet() {
   return jsonOut_({
     ok: true,
     service: "nexperts-enquiry-webhook",
-    version: 5,
+    version: 6,
     spreadsheetId: getSpreadsheetId_(),
     sheets: [SHEET_NAME, PAID_SHEET_NAME, LOG_SHEET_NAME],
   });
@@ -99,10 +99,23 @@ function doPost(e) {
     var target = resolveTargetSheet_(data);
     log.sheet = target;
 
+    var beforeLast = 0;
+    try {
+      if (target === PAID_SHEET_NAME) {
+        beforeLast = getOrCreateSheet_(PAID_SHEET_NAME).getLastRow();
+      }
+    } catch (ignoreBefore) {
+      beforeLast = 0;
+    }
+
     var rowNum =
       target === PAID_SHEET_NAME
         ? writePaidEnrollmentRow_(data)
         : writeEnquiryRow_(data);
+
+    var duplicate =
+      target === PAID_SHEET_NAME && beforeLast > 0 && rowNum > 0 && rowNum <= beforeLast;
+
     log.ok = true;
     log.row = rowNum;
     writeWebhookLog_(log);
@@ -110,6 +123,7 @@ function doPost(e) {
       ok: true,
       saved: true,
       row: rowNum,
+      duplicate: !!duplicate,
       spreadsheetId: getSpreadsheetId_(),
       sheet: target,
     });
@@ -416,9 +430,32 @@ function writeEnquiryRow_(data) {
   return r;
 }
 
+/**
+ * If this Stripe session id was already logged, return that row instead of appending.
+ * Column B = "Stripe Session ID".
+ */
+function findPaidRowBySessionId_(sh, sessionId) {
+  var id = trim_(sessionId);
+  if (!id) return 0;
+  var last = sh.getLastRow();
+  if (last < 2) return 0;
+  var values = sh.getRange(2, 2, last, 2).getValues();
+  for (var i = 0; i < values.length; i++) {
+    if (trim_(values[i][0]) === id) return i + 2;
+  }
+  return 0;
+}
+
 function writePaidEnrollmentRow_(data) {
   var sh = getOrCreateSheet_(PAID_SHEET_NAME);
   ensurePaidHeaders_(sh);
+  var existing = findPaidRowBySessionId_(
+    sh,
+    data.stripeSessionId || data.sessionId || ""
+  );
+  if (existing) {
+    return existing;
+  }
   var row = buildPaidRowArray_(data);
   if (row.length !== PAID_COL_COUNT) {
     throw new Error("paid_row_length_mismatch");
