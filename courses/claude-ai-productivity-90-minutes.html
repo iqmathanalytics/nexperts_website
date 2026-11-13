@@ -423,6 +423,7 @@ footer{padding:36px 20px 24px}
 <link rel="stylesheet" href="/css/enquiry-phone.css">
 <link rel="stylesheet" href="/css/enquiry-loading.css">
 <link rel="stylesheet" href="/css/course-sidebar-enquiry.css">
+<link rel="stylesheet" href="/css/course-stripe-enroll.css">
 <script src="/js/course-related.js" defer></script>
 <link rel="stylesheet" href="/css/whatsapp-float.css">
 </head>
@@ -1082,6 +1083,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="price-orig"></span>
     <span class="price-save"></span>
   </div>
+<div class="course-stripe-enroll" data-nx-course-slug="claude-ai-productivity-90-minutes">
+    <p class="cse-heading">Register &amp; Pay</p>
+    <form class="course-enroll-form" novalidate>
+      <div class="cef-row">
+        <div class="cef-field">
+          <label>First name <span class="cef-req">*</span></label>
+          <input type="text" name="first" placeholder="Ahmad" required autocomplete="given-name">
+        </div>
+        <div class="cef-field">
+          <label>Last name <span class="cef-req">*</span></label>
+          <input type="text" name="last" placeholder="Raza" required autocomplete="family-name">
+        </div>
+      </div>
+      <div class="cef-field">
+        <label>Email <span class="cef-req">*</span></label>
+        <input type="email" name="email" placeholder="ahmad@company.com.my" required autocomplete="email">
+      </div>
+      <div class="cef-field">
+        <label>Phone / WhatsApp <span class="cef-req">*</span></label>
+        <div class="enquiry-phone-row">
+          <select name="phoneCountry" class="enquiry-phone-cc enquiry-phone-cc--dial-only" aria-label="Country calling code"></select>
+          <input type="tel" name="phone" class="enquiry-phone-num" placeholder="12-345 6789" required autocomplete="tel-national" inputmode="tel">
+        </div>
+      </div>
+      <div class="cef-field">
+        <label>Training mode <span class="cef-req">*</span></label>
+        <select name="trainingMode" required>
+          <option value="Live Online">Live Online</option>
+          <option value="Classroom">Classroom</option>
+        </select>
+      </div>
+      <div class="cef-field">
+        <label>Intake <span class="cef-req">*</span></label>
+        <select name="intakeId" required>
+          <option value="2026-11-28">28–29 Nov 2026 · 2 days · 9am–5pm</option>
+        </select>
+      </div>
+      <p class="cse-note">Secure payment via Stripe. You will receive a confirmation email with your PDF receipt after payment.</p>
+      <p class="course-enroll-err" role="alert" hidden></p>
+      <button type="submit" class="cse-submit">Pay RM 599 <span aria-hidden="true">→</span></button>
+    </form>
+    <button type="button" class="cse-toggle-enquire">Enquire instead</button>
+  </div>
   <div class="course-sidebar-enquiry" id="courseEnquiry" data-nx-course-slug="claude-ai-productivity-90-minutes">
     <p class="cef-heading">Enquire about this course</p>
     <form class="course-enquiry-form" novalidate>
@@ -1281,6 +1325,7 @@ document.querySelector('.pass-band').style.display = 'none';
 <script src="/js/enquiry-phone.js" defer></script>
 <script src="/js/enquiry-submit.js"></script>
 <script src="/js/course-sidebar-enquiry.js" defer></script>
+<script src="/js/course-stripe-enroll.js" defer></script>
 <script src="../js/course-page-ui.js" defer></script>
 <script src="../admin/overlay.js" defer></script>
   <script src="../js/site-nav-mobile.js" defer></script>

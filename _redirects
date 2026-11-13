@@ -15,6 +15,10 @@
 # All rules below are EXPLICIT (no :slug placeholders) for maximum compatibility.
 # =============================================================================
 
+# Enrollment Stripe return URLs (pretty)
+/enrollment/success /enrollment/success.html 200
+/enrollment/cancel /enrollment/cancel.html 200
+
 # Retired promo page
 /tiktok-live-exclusive / 301
 /tiktok-live-exclusive/ / 301

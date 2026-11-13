@@ -48,8 +48,13 @@ This site is static HTML at the repository root, with a **Pages Function** at `/
 | `ZOHO_USE_CUSTOM_FIELDS` | Optional; `1` after Standard custom fields exist (see `docs/zoho/PHASE_4_HARDEN.md`) |
 | `ADMIN_USER` | **Same username** you use to sign in at `/admin/` (e.g. `admin`) — set for **Production** (and Preview if you use preview URLs) |
 | `ADMIN_PASS` | **Same password** you use to sign in at `/admin/` (e.g. `123`) — mark **Encrypted** |
+| `STRIPE_SECRET_KEY` | Stripe secret key (`sk_test_…` or `sk_live_…`) for Agentic AI + Claude Masterclass Checkout |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret (`whsec_…`) for `/api/stripe-webhook` |
+| `STRIPE_PUBLISHABLE_KEY` | Optional publishable key (`pk_…`) |
 
-Mark secrets **Encrypted** in the dashboard. After changing these values, **redeploy** so Functions see the new credentials. If they are missing, the API falls back to `admin` / `123`.
+Mark secrets **Encrypted** in the dashboard. After changing these values, **redeploy** so Functions see the new credentials. If they are missing, the API falls back to `admin` / `123`. Without Stripe keys, the enroll forms show a friendly “payment option currently unavailable” message.
+
+**Stripe webhook URL (Production):** `https://www.nexpertsacademy.com/api/stripe-webhook` — subscribe to `checkout.session.completed`.
 
 ### KV for admin course publish (required for **Publish live**)
 

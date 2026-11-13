@@ -7,3 +7,33 @@
 
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Stripe webhook needs the raw request body for signature verification.
+[functions.stripe-webhook]
+  included_files = []
+
+[[redirects]]
+  from = "/enrollment/success"
+  to = "/enrollment/success.html"
+  status = 200
+
+[[redirects]]
+  from = "/enrollment/cancel"
+  to = "/enrollment/cancel.html"
+  status = 200
+
+[[redirects]]
+  from = "/api/stripe-checkout"
+  to = "/.netlify/functions/stripe-checkout"
+  status = 200
+
+[[redirects]]
+  from = "/api/stripe-webhook"
+  to = "/.netlify/functions/stripe-webhook"
+  status = 200
+
+[[redirects]]
+  from = "/api/fx-rates"
+  to = "/.netlify/functions/fx-rates"
+  status = 200
