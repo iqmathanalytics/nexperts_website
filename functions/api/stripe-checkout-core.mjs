@@ -85,6 +85,8 @@ export async function stripeCheckoutHandler(event) {
   }
 
   const base = siteBaseUrl(event);
+  // Pretty paths (Cloudflare clean URLs). Do not add matching 200 rewrites in _redirects —
+  // that combination causes ERR_TOO_MANY_REDIRECTS on Pages.
   const successUrl = `${base}/enrollment/success?session_id={CHECKOUT_SESSION_ID}`;
   const cancelUrl = `${base}/enrollment/cancel?course=${encodeURIComponent(course.slug)}`;
 

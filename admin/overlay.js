@@ -877,6 +877,15 @@
       const label = formatSaveLabel(p, o);
       if (label) setText(saveEl, label);
     }
+    // Keep Stripe "Pay …" button in sync with the visible enroll-card price (RM / ₹ / £ / AED).
+    const payBtn = card.querySelector(".course-stripe-enroll .cse-submit");
+    if (payBtn && priceText && !/^enquire/i.test(priceText)) {
+      const payLabel = "Pay " + priceText;
+      payBtn.dataset.cseLabel = payLabel;
+      if (payBtn.getAttribute("aria-busy") !== "true") {
+        payBtn.innerHTML = payLabel + ' <span aria-hidden="true">→</span>';
+      }
+    }
   }
 
   async function applyRegionalPricing(state) {

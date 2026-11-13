@@ -6,6 +6,7 @@
 
   var COURSE_CONFIG = {
     "agentic-ai": {
+      amountRm: 799,
       intakes: [
         {
           id: "2026-11-16",
@@ -14,6 +15,7 @@
       ],
     },
     "claude-ai-productivity-90-minutes": {
+      amountRm: 599,
       intakes: [
         { id: "2026-11-28", label: "28–29 Nov 2026 · 2 days · 9am–5pm" },
       ],
@@ -56,16 +58,41 @@
     return cc + num.replace(/^0+/, "");
   }
 
+  function payButtonHtml(label) {
+    return String(label || "Pay") + ' <span aria-hidden="true">→</span>';
+  }
+
+  function syncPayButton(wrap) {
+    if (!wrap) return;
+    var btn = wrap.querySelector(".cse-submit");
+    if (!btn) return;
+    var card = wrap.closest(".enroll-card") || wrap.parentElement;
+    var priceEl = card && card.querySelector(".price");
+    var priceText = priceEl ? String(priceEl.textContent || "").replace(/\s+/g, " ").trim() : "";
+    var cfg = COURSE_CONFIG[String(wrap.getAttribute("data-nx-course-slug") || "").trim()];
+    var label = "";
+    if (priceText && !/^enquire\b/i.test(priceText) && /\d/.test(priceText)) {
+      label = "Pay " + priceText;
+    } else if (cfg && cfg.amountRm) {
+      label = "Pay RM " + cfg.amountRm;
+    } else {
+      label = btn.dataset.cseLabel || "Pay";
+    }
+    btn.dataset.cseLabel = label;
+    if (btn.getAttribute("aria-busy") === "true") return;
+    btn.innerHTML = payButtonHtml(label);
+  }
+
   function setBusy(form, busy) {
     var btn = form.querySelector(".cse-submit");
     if (btn) {
       btn.disabled = !!busy;
       btn.setAttribute("aria-busy", busy ? "true" : "false");
       if (busy) {
-        btn.dataset.cseLabel = btn.dataset.cseLabel || btn.textContent;
+        btn.dataset.cseLabel = btn.dataset.cseLabel || (btn.textContent || "").replace(/\s+/g, " ").trim();
         btn.textContent = "Redirecting to payment…";
       } else if (btn.dataset.cseLabel) {
-        btn.textContent = btn.dataset.cseLabel;
+        btn.innerHTML = payButtonHtml(btn.dataset.cseLabel);
       }
     }
   }
@@ -177,6 +204,23 @@
 
     // Default: pay form visible, enquire secondary
     if (enquireWrap) enquireWrap.hidden = true;
+
+    syncPayButton(wrap);
+    // Geo pricing in admin/overlay.js updates .price asynchronously — keep Pay label matched.
+    var card = wrap.closest(".enroll-card") || wrap.parentElement;
+    var priceEl = card && card.querySelector(".price");
+    if (priceEl && typeof MutationObserver !== "undefined") {
+      var mo = new MutationObserver(function () {
+        syncPayButton(wrap);
+      });
+      mo.observe(priceEl, { childList: true, characterData: true, subtree: true });
+    }
+    var tries = 0;
+    var poll = global.setInterval(function () {
+      syncPayButton(wrap);
+      tries += 1;
+      if (tries >= 20) global.clearInterval(poll);
+    }, 250);
 
     if (!form) return;
 
