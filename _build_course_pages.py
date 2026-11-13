@@ -630,6 +630,11 @@ def build_page(c):
         count=1,
     )
 
+    from scripts.course_stripe_enroll import ensure_stripe_assets, is_stripe_course
+
+    if is_stripe_course(c["slug"]):
+        html = ensure_stripe_assets(html)
+
     return html
 
 
@@ -810,6 +815,8 @@ def build_reviews(c):
 
 
 def build_sidebar(c):
+    from scripts.course_stripe_enroll import is_stripe_course, render_stripe_enroll
+
     meta = render_sidebar_meta(c["sidebar_meta"])
     inc = render_includes()
     ver = render_verify(c["verify_items"])
@@ -817,6 +824,7 @@ def build_sidebar(c):
     href_corp = contact_href(c, intent="corporate")
     enquiry_title = c.get("hidden_course_title") or c["title"]
     enquiry_form = render_sidebar_enquiry_form(course_title=enquiry_title, course_slug=c["slug"])
+    stripe_form = render_stripe_enroll(course_slug=c["slug"]) if is_stripe_course(c["slug"]) else ""
     return (
         f'<div class="enroll-card" id="enroll">\n'
         f'  <div class="price-row">\n'
@@ -824,6 +832,7 @@ def build_sidebar(c):
         f'    <span class="price-orig">{c["price_orig"]}</span>\n'
         f'    <span class="price-save">{c["price_save"]}</span>\n'
         f'  </div>\n'
+        f'{stripe_form}'
         f'{enquiry_form}\n'
         f'  <a href="{href_corp}" class="corp-btn">Corporate / Group Pricing</a>\n'
         f'  <div class="guarantee">\n'
