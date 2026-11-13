@@ -14,6 +14,16 @@
   included_files = []
 
 [[redirects]]
+  from = "/enrollment/completed"
+  to = "/enrollment/completed.html"
+  status = 200
+
+[[redirects]]
+  from = "/enrollment/cancelled"
+  to = "/enrollment/cancelled.html"
+  status = 200
+
+[[redirects]]
   from = "/enrollment/success"
   to = "/enrollment/success.html"
   status = 200

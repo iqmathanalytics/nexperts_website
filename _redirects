@@ -16,8 +16,9 @@
 # =============================================================================
 
 # Enrollment return pages: do NOT add /enrollment/* → *.html 200 rewrites here.
-# Cloudflare Pages clean URLs already serve enrollment/cancel.html at /enrollment/cancel;
-# a 200 rewrite + clean-URL redirect causes ERR_TOO_MANY_REDIRECTS.
+# Cloudflare Pages clean URLs already serve enrollment/*.html at /enrollment/*.
+# A 200 rewrite + clean-URL redirect caused ERR_TOO_MANY_REDIRECTS (and cached 308s).
+# Stripe now returns to /enrollment/cancelled and /enrollment/completed for that reason.
 # Netlify still maps pretty URLs via netlify.toml [[redirects]].
 
 # Retired promo page
