@@ -6,13 +6,17 @@ This folder contains **Google Apps Script** bound to your **Google Sheet**. The 
 
 1. Accepts `POST` with the same JSON payload as the website (`first`, `last`, `email`, …).
 2. Optionally checks `ENQUIRY_SECRET` (must match `secret` in `js/enquiry-config.js` if set).
-3. **Appends one row** to the **`Enquiries`** sheet (cells use **text** number format `@`, and values that start with `+`, `=`, `-`, or `@` are prefixed so Sheets does not treat them as formulas).
+3. **Appends one row** to:
+   - **`Enquiries`** — normal website enquiries
+   - **`Paid Enrollments`** — Stripe paid checkouts (`targetSheet: "Paid Enrollments"` / `source: "stripe-checkout"`)
+   (Same Google Spreadsheet file; cells use **text** number format `@`.)
 
 ## One-time setup
 
 1. Open the **Google Sheet** that should store leads (or create a new one).
 2. **Extensions → Apps Script** → paste **`EnquiryWebhook.gs`** (project must stay **bound** to that spreadsheet).
 3. Run **`setupSheetHeaders`** once → **Run** → approve permissions (creates/clears the `Enquiries` tab and headers).
+3b. Run **`setupPaidEnrollmentsHeaders`** once (creates/clears the **`Paid Enrollments`** tab for Stripe payments).
 4. *(Recommended)* **Project Settings → Script properties** → add:
    - `ENQUIRY_SECRET` = a long random string (same value as `secret` in `js/enquiry-config.js` if the site POSTs to this web app).
 5. **Deploy → New deployment** → **Web app**

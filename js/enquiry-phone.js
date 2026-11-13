@@ -69,6 +69,18 @@
     });
   }
 
+  function bindDialTouched() {
+    var doc = global.document;
+    if (!doc || !doc.querySelectorAll) return;
+    doc.querySelectorAll('select[name="phoneCountry"]').forEach(function (sel) {
+      if (!sel || sel.dataset.nxDialBound === "1") return;
+      sel.dataset.nxDialBound = "1";
+      sel.addEventListener("change", function () {
+        sel.dataset.nxDialTouched = "1";
+      });
+    });
+  }
+
   function bindViewport() {
     try {
       var mq = global.matchMedia(COMPACT_MQ);
@@ -85,7 +97,10 @@
       "resize",
       function () {
         clearTimeout(t);
-        t = setTimeout(syncPhoneCountrySelects, 120);
+        t = setTimeout(function () {
+          syncPhoneCountrySelects();
+          bindDialTouched();
+        }, 120);
       },
       { passive: true }
     );
@@ -95,10 +110,12 @@
     if (global.document.readyState === "loading") {
       global.document.addEventListener("DOMContentLoaded", function () {
         syncPhoneCountrySelects();
+        bindDialTouched();
         bindViewport();
       });
     } else {
       syncPhoneCountrySelects();
+      bindDialTouched();
       bindViewport();
     }
   }

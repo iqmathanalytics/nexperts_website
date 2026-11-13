@@ -24,6 +24,11 @@
   status = 200
 
 [[redirects]]
+  from = "/enrollment/popup-done"
+  to = "/enrollment/popup-done.html"
+  status = 200
+
+[[redirects]]
   from = "/enrollment/success"
   to = "/enrollment/success.html"
   status = 200
@@ -44,6 +49,21 @@
   status = 200
 
 [[redirects]]
+  from = "/api/stripe-fulfill"
+  to = "/.netlify/functions/stripe-fulfill"
+  status = 200
+
+[[redirects]]
   from = "/api/fx-rates"
   to = "/.netlify/functions/fx-rates"
+  status = 200
+
+[[redirects]]
+  from = "/api/geo"
+  to = "/.netlify/functions/geo"
+  status = 200
+
+[[redirects]]
+  from = "/api/course-overrides"
+  to = "/.netlify/functions/course-overrides"
   status = 200

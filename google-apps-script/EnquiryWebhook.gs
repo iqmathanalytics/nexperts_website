@@ -1,15 +1,16 @@
 /**
  * Nexperts Academy — Enquiry Webhook (Google Apps Script)
  *
- * Saves each enquiry as one row in the "Enquiries" tab.
- * Email is handled elsewhere (e.g. Brevo + Netlify / Cloudflare).
+ * - Website enquiries → "Enquiries" tab
+ * - Stripe paid enrollments → "Paid Enrollments" tab (same spreadsheet file)
+ * Email is handled elsewhere (Brevo + Netlify / Cloudflare).
  *
  * SETUP:
  * 1. Extensions → Apps Script → paste this file (bound or standalone).
  * 2. Script properties (Project settings):
  *    - SPREADSHEET_ID = Google Sheet ID (optional; defaults below)
  *    - ENQUIRY_SECRET = same as secret in js/enquiry-config.js (optional)
- * 3. Run setupSheetHeaders() once.
+ * 3. Run setupSheetHeaders() and setupPaidEnrollmentsHeaders() once.
  * 4. Deploy → Web app → Execute as: Me, Who has access: Anyone → New version.
  * 5. webAppUrl in js/enquiry-config.js + APPS_SCRIPT_ENQUIRY_URL on hosting (optional override).
  *
@@ -20,8 +21,10 @@
  */
 
 var SHEET_NAME = "Enquiries";
+var PAID_SHEET_NAME = "Paid Enrollments";
 var LOG_SHEET_NAME = "WebhookLog";
 var COL_COUNT = 12;
+var PAID_COL_COUNT = 14;
 var LOG_COL_COUNT = 7;
 var MAX_LOG_ROWS = 200;
 
@@ -32,8 +35,9 @@ function doGet() {
   return jsonOut_({
     ok: true,
     service: "nexperts-enquiry-webhook",
-    version: 4,
+    version: 5,
     spreadsheetId: getSpreadsheetId_(),
+    sheets: [SHEET_NAME, PAID_SHEET_NAME, LOG_SHEET_NAME],
   });
 }
 
@@ -44,6 +48,7 @@ function doPost(e) {
     source: "",
     email: "",
     row: 0,
+    sheet: "",
   };
   try {
     var raw = extractRawPayload_(e);
@@ -91,7 +96,13 @@ function doPost(e) {
       return jsonOut_({ ok: false, error: log.error });
     }
 
-    var rowNum = writeEnquiryRow_(data);
+    var target = resolveTargetSheet_(data);
+    log.sheet = target;
+
+    var rowNum =
+      target === PAID_SHEET_NAME
+        ? writePaidEnrollmentRow_(data)
+        : writeEnquiryRow_(data);
     log.ok = true;
     log.row = rowNum;
     writeWebhookLog_(log);
@@ -100,13 +111,53 @@ function doPost(e) {
       saved: true,
       row: rowNum,
       spreadsheetId: getSpreadsheetId_(),
-      sheet: SHEET_NAME,
+      sheet: target,
     });
   } catch (err) {
     log.error = String(err && err.message ? err.message : err);
     writeWebhookLog_(log);
     return jsonOut_({ ok: false, error: log.error });
   }
+}
+
+/**
+ * Route paid Stripe enrollments to "Paid Enrollments"; everything else → "Enquiries".
+ * Server should send targetSheet / sheet / recordType explicitly.
+ */
+function resolveTargetSheet_(data) {
+  var explicit = trim_(data.targetSheet || data.sheet || data.sheetName);
+  if (explicit) {
+    var lower = explicit.toLowerCase();
+    if (
+      lower === "paid enrollments" ||
+      lower === "paid_enrollments" ||
+      lower === "payments" ||
+      lower === "enrollments"
+    ) {
+      return PAID_SHEET_NAME;
+    }
+    if (lower === "enquiries" || lower === "enquiry") {
+      return SHEET_NAME;
+    }
+  }
+  var recordType = trim_(data.recordType || data.record_type).toLowerCase();
+  if (
+    recordType === "paid_enrollment" ||
+    recordType === "payment" ||
+    recordType === "stripe"
+  ) {
+    return PAID_SHEET_NAME;
+  }
+  var source = trim_(data.source).toLowerCase();
+  var type = trim_(data.type).toLowerCase();
+  if (
+    source === "stripe-checkout" ||
+    source.indexOf("stripe") === 0 ||
+    type === "paid enrollment"
+  ) {
+    return PAID_SHEET_NAME;
+  }
+  return SHEET_NAME;
 }
 
 /** One-time: (re)creates "Enquiries" tab with header row only. */
@@ -127,6 +178,30 @@ function setupSheetHeaders() {
       "Type",
       "Message",
       "User Agent",
+    ],
+  ]);
+}
+
+/** One-time: (re)creates "Paid Enrollments" tab with payment headers. */
+function setupPaidEnrollmentsHeaders() {
+  var sh = getOrCreateSheet_(PAID_SHEET_NAME);
+  sh.clear();
+  sh.getRange(1, 1, 1, PAID_COL_COUNT).setValues([
+    [
+      "Paid At (ISO)",
+      "Stripe Session ID",
+      "Receipt / Payment Intent",
+      "First",
+      "Last",
+      "Email",
+      "Phone",
+      "Course",
+      "Intake",
+      "Training Mode",
+      "Amount",
+      "Payment Status",
+      "Page URL",
+      "Source",
     ],
   ]);
 }
@@ -165,6 +240,27 @@ function testAppendSampleRow() {
     userAgent: "AppsScriptEditor/1.0",
   });
   Logger.log("Wrote row " + rowNum + " to " + SHEET_NAME);
+}
+
+/** Manual smoke test — check "Paid Enrollments" after Run. */
+function testAppendPaidEnrollmentRow() {
+  var rowNum = writePaidEnrollmentRow_({
+    submittedAt: new Date().toISOString(),
+    stripeSessionId: "cs_test_sample",
+    receiptNumber: "pi_test_sample",
+    first: "Paid",
+    last: "Sample",
+    email: "paid-sample@example.com",
+    phone: "+91 98765 43210",
+    course: "Claude AI Masterclass",
+    intakeLabel: "28–29 Nov 2026",
+    trainingMode: "Live Online",
+    amountLabel: "RM 599",
+    paymentStatus: "paid",
+    pageUrl: "https://www.nexpertsacademy.com/courses/claude-ai-productivity-90-minutes",
+    source: "stripe-checkout",
+  });
+  Logger.log("Wrote row " + rowNum + " to " + PAID_SHEET_NAME);
 }
 
 // --- Internals ---
@@ -247,10 +343,23 @@ function getOrCreateSheet_(name) {
   return sh;
 }
 
+function ensurePaidHeaders_(sh) {
+  if (sh.getLastRow() === 0) {
+    setupPaidEnrollmentsHeaders();
+    return;
+  }
+  var first = String(sh.getRange(1, 1).getValue() || "");
+  if (!first) {
+    setupPaidEnrollmentsHeaders();
+  }
+}
+
 function nextDataRowIndex_(sh) {
   if (sh.getLastRow() === 0) {
     if (sh.getName() === SHEET_NAME) {
       setupSheetHeaders();
+    } else if (sh.getName() === PAID_SHEET_NAME) {
+      setupPaidEnrollmentsHeaders();
     } else if (sh.getName() === LOG_SHEET_NAME) {
       setupWebhookLogHeaders();
     }
@@ -275,6 +384,25 @@ function buildRowArray_(data) {
   ];
 }
 
+function buildPaidRowArray_(data) {
+  return [
+    escapeSheetCell_(data.submittedAt || data.paidAt || new Date().toISOString()),
+    escapeSheetCell_(data.stripeSessionId || data.sessionId || ""),
+    escapeSheetCell_(data.receiptNumber || data.paymentIntent || ""),
+    escapeSheetCell_(data.first || ""),
+    escapeSheetCell_(data.last || ""),
+    escapeSheetCell_(data.email || ""),
+    trim_(data.phone),
+    escapeSheetCell_(data.course || ""),
+    escapeSheetCell_(data.intakeLabel || data.intake || ""),
+    escapeSheetCell_(data.trainingMode || data.mode || ""),
+    escapeSheetCell_(data.amountLabel || data.amount || ""),
+    escapeSheetCell_(data.paymentStatus || "paid"),
+    escapeSheetCell_(data.pageUrl || ""),
+    escapeSheetCell_(data.source || "stripe-checkout"),
+  ];
+}
+
 function writeEnquiryRow_(data) {
   var sh = getOrCreateSheet_(SHEET_NAME);
   var row = buildRowArray_(data);
@@ -283,6 +411,20 @@ function writeEnquiryRow_(data) {
   }
   var r = nextDataRowIndex_(sh);
   var range = sh.getRange(r, 1, 1, COL_COUNT);
+  range.setNumberFormat("@");
+  range.setValues([row]);
+  return r;
+}
+
+function writePaidEnrollmentRow_(data) {
+  var sh = getOrCreateSheet_(PAID_SHEET_NAME);
+  ensurePaidHeaders_(sh);
+  var row = buildPaidRowArray_(data);
+  if (row.length !== PAID_COL_COUNT) {
+    throw new Error("paid_row_length_mismatch");
+  }
+  var r = nextDataRowIndex_(sh);
+  var range = sh.getRange(r, 1, 1, PAID_COL_COUNT);
   range.setNumberFormat("@");
   range.setValues([row]);
   return r;
@@ -298,7 +440,7 @@ function writeWebhookLog_(log) {
         new Date().toISOString(),
         log.ok ? "yes" : "no",
         trim_(log.error),
-        trim_(log.source),
+        trim_(log.source) + (log.sheet ? " → " + log.sheet : ""),
         trim_(log.email),
         log.row ? String(log.row) : "",
         getSpreadsheetId_(),

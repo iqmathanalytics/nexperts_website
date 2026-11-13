@@ -85,11 +85,16 @@ export async function stripeCheckoutHandler(event) {
   }
 
   const base = siteBaseUrl(event);
-  // Use /cancelled + /completed (not /cancel|/success). Browsers cache 308s from an earlier
-  // clean-URL + _redirects loop on those old paths; new paths avoid ERR_TOO_MANY_REDIRECTS.
-  // Do not add matching 200 rewrites for these in Cloudflare _redirects.
-  const successUrl = `${base}/enrollment/completed?session_id={CHECKOUT_SESSION_ID}`;
-  const cancelUrl = `${base}/enrollment/cancelled?course=${encodeURIComponent(course.slug)}`;
+  const returnMode = String(body.returnMode || body.ui || "").trim().toLowerCase();
+  const usePopupReturn = returnMode === "popup" || returnMode === "window";
+  // Popup return pages postMessage to the course tab and close; full-page uses completed/cancelled.
+  // Do not add matching 200 rewrites for enrollment paths in Cloudflare _redirects.
+  const successUrl = usePopupReturn
+    ? `${base}/enrollment/popup-done?result=success&session_id={CHECKOUT_SESSION_ID}&course=${encodeURIComponent(course.slug)}`
+    : `${base}/enrollment/completed?session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = usePopupReturn
+    ? `${base}/enrollment/popup-done?result=cancel&course=${encodeURIComponent(course.slug)}`
+    : `${base}/enrollment/cancelled?course=${encodeURIComponent(course.slug)}`;
 
   const stripe = new Stripe(secret);
 

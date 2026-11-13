@@ -54,16 +54,41 @@
   function publishedUrls() {
     try {
       const h = (location.hostname || "").toLowerCase();
-      if (h === "localhost" || h === "127.0.0.1") {
-        return ["/data/course-overrides.json"];
-      }
-      if (h.endsWith(".netlify.app")) {
-        return ["/.netlify/functions/course-overrides", "/data/course-overrides.json"];
+      if (h === "localhost" || h === "127.0.0.1" || h.endsWith(".netlify.app")) {
+        // netlify dev serves /api/* → functions; static JSON is the offline fallback.
+        return ["/api/course-overrides", "/data/course-overrides.json"];
       }
     } catch (e) {
       /* ignore */
     }
     return ["/api/course-overrides", "/data/course-overrides.json"];
+  }
+
+  const DIAL_BY_COUNTRY = {
+    MY: "+60",
+    IN: "+91",
+    GB: "+44",
+    AE: "+971",
+    SG: "+65",
+    US: "+1",
+    CA: "+1",
+    AU: "+61",
+    PK: "+92",
+    BD: "+880",
+    LK: "+94",
+    ID: "+62",
+    TH: "+66",
+    PH: "+63",
+  };
+
+  function syncPhoneDialFromCountry(country) {
+    const dial = DIAL_BY_COUNTRY[String(country || "").toUpperCase()];
+    if (!dial || !document.querySelectorAll) return;
+    document.querySelectorAll('select[name="phoneCountry"]').forEach((sel) => {
+      if (!sel || sel.dataset.nxDialTouched === "1") return;
+      const has = Array.from(sel.options || []).some((o) => o.value === dial);
+      if (has) sel.value = dial;
+    });
   }
 
   /** Root detail pages (not under /courses/) — mirrors scripts/site_paths.py */
@@ -784,21 +809,29 @@
     }
   }
 
-  async function detectRegion(pricing) {
+  async function detectCountry() {
     const cached = readStoredCountry();
-    if (cached) return countryToRegion(cached, pricing);
+    if (cached) return cached;
     try {
       const res = await fetch("/api/geo", { cache: "no-store" });
       if (res.ok) {
         const data = await res.json();
         const country = String((data && data.country) || "").toUpperCase();
-        writeStoredCountry(country);
-        return countryToRegion(country, pricing);
+        if (country) {
+          writeStoredCountry(country);
+          return country;
+        }
       }
     } catch (e) {
-      /* localhost / no Pages Function — Malaysia */
+      /* localhost / no geo function — fall through */
     }
-    return "my";
+    return "";
+  }
+
+  async function detectRegion(pricing) {
+    const country = await detectCountry();
+    if (country) syncPhoneDialFromCountry(country);
+    return countryToRegion(country, pricing);
   }
 
   function captureMyr(card) {

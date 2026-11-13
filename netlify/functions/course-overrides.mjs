@@ -176,30 +176,37 @@ export async function handler(event) {
     return { statusCode: 204, headers, body: "" };
   }
 
-  const store = getStore({ name: STORE_NAME, consistency: "strong" });
+  let store = null;
+  try {
+    store = getStore({ name: STORE_NAME, consistency: "strong" });
+  } catch (e) {
+    console.warn("course-overrides blobs unavailable:", e && e.message);
+  }
 
   if (method === "GET") {
-    try {
-      const blob = await store.get(BLOB_KEY, { type: "json" });
-      if (blob && typeof blob === "object") {
-        const data = normalizePayload(blob);
-        const has =
-          Object.keys(data.courses).length > 0 ||
-          (data.custom_courses && data.custom_courses.length > 0) ||
-          Object.keys(data.custom_brands || {}).length > 0 ||
-          (data.brand_order && data.brand_order.length > 0) ||
-          Object.keys(data.card_order || {}).length > 0 ||
-          !!(blob.pricing && typeof blob.pricing === "object");
-        if (has) {
-          return {
-            statusCode: 200,
-            headers,
-            body: JSON.stringify(data),
-          };
+    if (store) {
+      try {
+        const blob = await store.get(BLOB_KEY, { type: "json" });
+        if (blob && typeof blob === "object") {
+          const data = normalizePayload(blob);
+          const has =
+            Object.keys(data.courses).length > 0 ||
+            (data.custom_courses && data.custom_courses.length > 0) ||
+            Object.keys(data.custom_brands || {}).length > 0 ||
+            (data.brand_order && data.brand_order.length > 0) ||
+            Object.keys(data.card_order || {}).length > 0 ||
+            !!(blob.pricing && typeof blob.pricing === "object");
+          if (has) {
+            return {
+              statusCode: 200,
+              headers,
+              body: JSON.stringify(data),
+            };
+          }
         }
+      } catch (e) {
+        console.warn("course-overrides GET blob:", e);
       }
-    } catch (e) {
-      console.warn("course-overrides GET blob:", e);
     }
     const fallback = await loadStaticFallback(event);
     return {
@@ -225,6 +232,15 @@ export async function handler(event) {
         statusCode: 400,
         headers,
         body: JSON.stringify({ error: "Invalid JSON body" }),
+      };
+    }
+    if (!store) {
+      return {
+        statusCode: 503,
+        headers,
+        body: JSON.stringify({
+          error: "Netlify Blobs not available in this environment",
+        }),
       };
     }
     try {

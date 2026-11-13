@@ -1,11 +1,10 @@
 /**
- * Stripe webhook — on checkout.session.completed, send Brevo email + PDF once.
- * Idempotency: skip if session metadata.email_sent === "1" after marking via Stripe update,
- * or use in-memory / Blob set of processed session ids when available.
+ * Stripe webhook — on checkout.session.completed, fulfill enrollment
+ * (Brevo email + PDF + Enquiries sheet row). Idempotent via metadata flags.
  */
 
 import Stripe from "stripe";
-import { sendEnrollmentConfirmation } from "./enrollment-email.mjs";
+import { fulfillPaidEnrollment } from "./enrollment-fulfill.mjs";
 import { corsHeaders, jsonResponse } from "./stripe-http.mjs";
 
 const processedSessions = new Set();
@@ -68,27 +67,20 @@ export async function stripeWebhookHandler(event) {
   }
 
   const md = session.metadata || {};
-  if (md.email_sent === "1") {
+  if (md.email_sent === "1" && md.sheet_logged === "1") {
     processedSessions.add(sessionId);
     return jsonResponse(200, { ok: true, duplicate: true });
   }
 
   try {
-    await sendEnrollmentConfirmation({ session });
+    const result = await fulfillPaidEnrollment(session, stripe);
     processedSessions.add(sessionId);
-    try {
-      await stripe.checkout.sessions.update(sessionId, {
-        metadata: { ...md, email_sent: "1" },
-      });
-    } catch (updErr) {
-      console.warn("stripe_metadata_update", updErr && updErr.message);
-    }
-    return jsonResponse(200, { ok: true, emailed: true });
+    return jsonResponse(200, { ok: true, ...result });
   } catch (err) {
-    console.error("enrollment_email_failed", err && err.message);
+    console.error("enrollment_fulfill_failed", err && err.message);
     return jsonResponse(500, {
       ok: false,
-      error: "email_failed",
+      error: "fulfill_failed",
       detail: String((err && err.message) || "").slice(0, 160),
     });
   }

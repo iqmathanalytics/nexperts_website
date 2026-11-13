@@ -25,12 +25,27 @@ export function jsonResponse(status, body, extraHeaders) {
 }
 
 export function siteBaseUrl(event) {
-  const env =
-    String(process.env.NEXPERTS_PUBLIC_SITE_URL || process.env.NEXPERTS_EMAIL_SITE_URL || "").trim();
-  if (env) return env.replace(/\/$/, "");
   const headers = (event && event.headers) || {};
-  const proto = String(headers["x-forwarded-proto"] || "https").split(",")[0].trim();
-  const host = String(headers["x-forwarded-host"] || headers.host || "").split(",")[0].trim();
+  const host = String(headers["x-forwarded-host"] || headers.host || headers.Host || "")
+    .split(",")[0]
+    .trim();
+  const hostOnly = host.split(":")[0].toLowerCase();
+  const isLocal = hostOnly === "localhost" || hostOnly === "127.0.0.1";
+  const proto = String(
+    headers["x-forwarded-proto"] || (isLocal ? "http" : "https")
+  )
+    .split(",")[0]
+    .trim();
+
+  // Local netlify dev / static servers must return to this host — never production env URL.
+  if (isLocal && host) {
+    return `${proto}://${host}`.replace(/\/$/, "");
+  }
+
+  const env = String(
+    process.env.NEXPERTS_PUBLIC_SITE_URL || process.env.NEXPERTS_EMAIL_SITE_URL || ""
+  ).trim();
+  if (env) return env.replace(/\/$/, "");
   if (host) return `${proto}://${host}`.replace(/\/$/, "");
   return "https://www.nexpertsacademy.com";
 }

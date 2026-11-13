@@ -135,12 +135,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="check" aria-hidden="true">✓</div>
     <h1>Payment successful</h1>
     <p>Thank you for enrolling. Your seat is confirmed.</p>
-    <p>Please check your email for the confirmation message and PDF payment receipt. If it does not arrive within a few minutes, check spam or promotions.</p>
+    <p id="fulfillMsg">Please check your email for the confirmation message and PDF payment receipt. If it does not arrive within a few minutes, check spam or promotions.</p>
     <div class="actions">
       <a class="btn btn-primary" href="/">Back to home</a>
       <a class="btn btn-ghost" href="/contact">Contact us</a>
     </div>
   </div>
 </main>
+<script>
+(function () {
+  try {
+    var params = new URLSearchParams(location.search || "");
+    var sessionId = String(params.get("session_id") || "").trim();
+    var msg = document.getElementById("fulfillMsg");
+    if (!sessionId) return;
+    fetch("/api/stripe-fulfill", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ session_id: sessionId }),
+    })
+      .then(function (r) { return r.json().catch(function () { return null; }); })
+      .then(function (data) {
+        if (!msg || !data) return;
+        if (data.ok && data.emailed) {
+          msg.textContent = "Confirmation email with your PDF receipt has been sent. Please also check spam or promotions.";
+        } else if (data && data.error === "not_paid") {
+          msg.textContent = "Payment is still processing. If you were charged, contact us with your receipt.";
+        }
+      })
+      .catch(function () { /* webhook may still deliver */ });
+  } catch (_) { /* ignore */ }
+})();
+</script>
 </body>
 </html>

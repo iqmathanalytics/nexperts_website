@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Returning to enrollment… | Nexperts Academy</title>
+<meta name="robots" content="noindex, follow">
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background: #f4f6f8;
+    color: #0d1117;
+    padding: 24px;
+    text-align: center;
+  }
+  p { color: #7a8194; line-height: 1.5; }
+</style>
+</head>
+<body>
+<p id="msg">Returning to your course page…</p>
+<script>
+(function () {
+  try {
+    var params = new URLSearchParams(location.search || "");
+    var result = String(params.get("result") || "").toLowerCase();
+    var sessionId = String(params.get("session_id") || "").trim();
+    var course = String(params.get("course") || "").trim();
+    var payload = {
+      source: "nexperts-stripe-checkout",
+      result: result === "success" ? "success" : "cancel",
+      session_id: sessionId,
+      course: course,
+    };
+    var origin = location.origin;
+    if (window.opener && !window.opener.closed) {
+      try {
+        window.opener.postMessage(payload, origin);
+      } catch (_) {
+        /* ignore */
+      }
+      try {
+        window.close();
+      } catch (_) {
+        /* ignore */
+      }
+      document.getElementById("msg").textContent =
+        "You can close this window and return to the course page.";
+      return;
+    }
+    if (payload.result === "success" && sessionId) {
+      location.replace("/enrollment/completed?session_id=" + encodeURIComponent(sessionId));
+    } else {
+      location.replace(
+        "/enrollment/cancelled" + (course ? "?course=" + encodeURIComponent(course) : "")
+      );
+    }
+  } catch (_) {
+    location.replace("/");
+  }
+})();
+</script>
+</body>
+</html>
