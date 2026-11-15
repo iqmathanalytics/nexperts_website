@@ -22,9 +22,11 @@
 
 var SHEET_NAME = "Enquiries";
 var PAID_SHEET_NAME = "Paid Enrollments";
+var RECEIPT_INDEX_NAME = "Receipt Index";
 var LOG_SHEET_NAME = "WebhookLog";
 var COL_COUNT = 12;
-var PAID_COL_COUNT = 14;
+var PAID_COL_COUNT = 18;
+var RECEIPT_INDEX_COLS = 6;
 var LOG_COL_COUNT = 7;
 var MAX_LOG_ROWS = 200;
 
@@ -35,9 +37,9 @@ function doGet() {
   return jsonOut_({
     ok: true,
     service: "nexperts-enquiry-webhook",
-    version: 6,
+    version: 7,
     spreadsheetId: getSpreadsheetId_(),
-    sheets: [SHEET_NAME, PAID_SHEET_NAME, LOG_SHEET_NAME],
+    sheets: [SHEET_NAME, PAID_SHEET_NAME, RECEIPT_INDEX_NAME, LOG_SHEET_NAME],
   });
 }
 
@@ -67,7 +69,7 @@ function doPost(e) {
       return jsonOut_({ ok: false, error: log.error });
     }
 
-    log.source = trim_(data.source);
+    log.source = trim_(data.source || data.action);
     log.email = trim_(data.email);
 
     var expected = PropertiesService.getScriptProperties().getProperty(
@@ -84,6 +86,23 @@ function doPost(e) {
         error: "forbidden",
         hint:
           "ENQUIRY_SECRET in Script properties does not match the secret sent by the website. Fix or remove ENQUIRY_SECRET.",
+      });
+    }
+
+    // Allocate / reuse professional receipt numbers (NXA-RCP-YYYY-###### / NXA-ORD-YYYY-######)
+    if (trim_(data.action).toLowerCase() === "allocate_receipt") {
+      var allocated = allocateReceiptNumbers_(data);
+      log.ok = true;
+      log.source = "allocate_receipt";
+      log.email = trim_(data.stripeSessionId || data.paymentIntent);
+      writeWebhookLog_(log);
+      return jsonOut_({
+        ok: true,
+        invoiceNo: allocated.invoiceNo,
+        orderRef: allocated.orderRef,
+        year: allocated.year,
+        seq: allocated.seq,
+        reused: !!allocated.reused,
       });
     }
 
@@ -200,24 +219,46 @@ function setupSheetHeaders() {
 function setupPaidEnrollmentsHeaders() {
   var sh = getOrCreateSheet_(PAID_SHEET_NAME);
   sh.clear();
-  sh.getRange(1, 1, 1, PAID_COL_COUNT).setValues([
+  sh.getRange(1, 1, 1, PAID_COL_COUNT).setValues([paidEnrollmentHeaders_()]);
+}
+
+/** One-time: Receipt Index for durable invoice/order allocation. */
+function setupReceiptIndexHeaders() {
+  var sh = getOrCreateSheet_(RECEIPT_INDEX_NAME);
+  if (sh.getLastRow() > 0) return;
+  sh.getRange(1, 1, 1, RECEIPT_INDEX_COLS).setValues([
     [
-      "Paid At (ISO)",
+      "Allocated At (ISO)",
+      "Year",
+      "Seq",
+      "Invoice No",
+      "Order Ref",
       "Stripe Session ID",
-      "Receipt / Payment Intent",
-      "First",
-      "Last",
-      "Email",
-      "Phone",
-      "Course",
-      "Intake",
-      "Training Mode",
-      "Amount",
-      "Payment Status",
-      "Page URL",
-      "Source",
     ],
   ]);
+}
+
+function paidEnrollmentHeaders_() {
+  return [
+    "Paid At (ISO)",
+    "Invoice No",
+    "Order Ref",
+    "Stripe Session ID",
+    "Payment Intent",
+    "First",
+    "Last",
+    "Email",
+    "Phone",
+    "Course",
+    "Intake",
+    "Training Mode",
+    "Amount",
+    "Currency",
+    "Payment Method",
+    "Payment Status",
+    "Page URL",
+    "Source",
+  ];
 }
 
 /** One-time: headers for WebhookLog tab. */
@@ -258,10 +299,16 @@ function testAppendSampleRow() {
 
 /** Manual smoke test — check "Paid Enrollments" after Run. */
 function testAppendPaidEnrollmentRow() {
+  var nums = allocateReceiptNumbers_({
+    stripeSessionId: "cs_test_sample_" + Date.now(),
+  });
   var rowNum = writePaidEnrollmentRow_({
     submittedAt: new Date().toISOString(),
     stripeSessionId: "cs_test_sample",
-    receiptNumber: "pi_test_sample",
+    paymentIntent: "pi_test_sample",
+    invoiceNo: nums.invoiceNo,
+    orderRef: nums.orderRef,
+    receiptNumber: nums.invoiceNo,
     first: "Paid",
     last: "Sample",
     email: "paid-sample@example.com",
@@ -270,11 +317,23 @@ function testAppendPaidEnrollmentRow() {
     intakeLabel: "28–29 Nov 2026",
     trainingMode: "Live Online",
     amountLabel: "RM 599",
+    currency: "MYR",
+    paymentMethod: "Visa ending 4242",
     paymentStatus: "paid",
     pageUrl: "https://www.nexpertsacademy.com/courses/claude-ai-productivity-90-minutes",
     source: "stripe-checkout",
   });
-  Logger.log("Wrote row " + rowNum + " to " + PAID_SHEET_NAME);
+  Logger.log(
+    "Wrote row " + rowNum + " to " + PAID_SHEET_NAME + " " + nums.invoiceNo
+  );
+}
+
+/** Manual: allocate next receipt numbers. */
+function testAllocateReceipt() {
+  var nums = allocateReceiptNumbers_({
+    stripeSessionId: "cs_manual_" + Date.now(),
+  });
+  Logger.log(JSON.stringify(nums));
 }
 
 // --- Internals ---
@@ -365,6 +424,13 @@ function ensurePaidHeaders_(sh) {
   var first = String(sh.getRange(1, 1).getValue() || "");
   if (!first) {
     setupPaidEnrollmentsHeaders();
+    return;
+  }
+  // Upgrade header row in place when older 14-col layout is detected (no Invoice No).
+  var header = sh.getRange(1, 1, 1, Math.max(sh.getLastColumn(), PAID_COL_COUNT)).getValues()[0];
+  var joined = header.join(" | ").toLowerCase();
+  if (joined.indexOf("invoice no") < 0) {
+    sh.getRange(1, 1, 1, PAID_COL_COUNT).setValues([paidEnrollmentHeaders_()]);
   }
 }
 
@@ -374,6 +440,8 @@ function nextDataRowIndex_(sh) {
       setupSheetHeaders();
     } else if (sh.getName() === PAID_SHEET_NAME) {
       setupPaidEnrollmentsHeaders();
+    } else if (sh.getName() === RECEIPT_INDEX_NAME) {
+      setupReceiptIndexHeaders();
     } else if (sh.getName() === LOG_SHEET_NAME) {
       setupWebhookLogHeaders();
     }
@@ -401,8 +469,10 @@ function buildRowArray_(data) {
 function buildPaidRowArray_(data) {
   return [
     escapeSheetCell_(data.submittedAt || data.paidAt || new Date().toISOString()),
+    escapeSheetCell_(data.invoiceNo || data.receiptNumber || ""),
+    escapeSheetCell_(data.orderRef || ""),
     escapeSheetCell_(data.stripeSessionId || data.sessionId || ""),
-    escapeSheetCell_(data.receiptNumber || data.paymentIntent || ""),
+    escapeSheetCell_(data.paymentIntent || ""),
     escapeSheetCell_(data.first || ""),
     escapeSheetCell_(data.last || ""),
     escapeSheetCell_(data.email || ""),
@@ -411,6 +481,8 @@ function buildPaidRowArray_(data) {
     escapeSheetCell_(data.intakeLabel || data.intake || ""),
     escapeSheetCell_(data.trainingMode || data.mode || ""),
     escapeSheetCell_(data.amountLabel || data.amount || ""),
+    escapeSheetCell_(data.currency || "MYR"),
+    escapeSheetCell_(data.paymentMethod || "Card (Stripe)"),
     escapeSheetCell_(data.paymentStatus || "paid"),
     escapeSheetCell_(data.pageUrl || ""),
     escapeSheetCell_(data.source || "stripe-checkout"),
@@ -432,18 +504,90 @@ function writeEnquiryRow_(data) {
 
 /**
  * If this Stripe session id was already logged, return that row instead of appending.
- * Column B = "Stripe Session ID".
+ * Locates the "Stripe Session ID" column from the header row.
  */
 function findPaidRowBySessionId_(sh, sessionId) {
   var id = trim_(sessionId);
   if (!id) return 0;
   var last = sh.getLastRow();
   if (last < 2) return 0;
-  var values = sh.getRange(2, 2, last, 2).getValues();
+  var lastCol = Math.max(sh.getLastColumn(), 1);
+  var headers = sh.getRange(1, 1, 1, lastCol).getValues()[0];
+  var col = 4; // default for new layout
+  for (var h = 0; h < headers.length; h++) {
+    if (String(headers[h] || "").toLowerCase() === "stripe session id") {
+      col = h + 1;
+      break;
+    }
+  }
+  var values = sh.getRange(2, col, last, col).getValues();
   for (var i = 0; i < values.length; i++) {
     if (trim_(values[i][0]) === id) return i + 2;
   }
   return 0;
+}
+
+function padSeq6_(n) {
+  var s = String(Math.max(0, Number(n) || 0));
+  while (s.length < 6) s = "0" + s;
+  return s.slice(-6);
+}
+
+/**
+ * Allocate NXA-RCP-YYYY-###### and NXA-ORD-YYYY-###### atomically.
+ * Reuses an existing assignment for the same Stripe session id.
+ */
+function allocateReceiptNumbers_(data) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    setupReceiptIndexHeaders();
+    var sessionId = trim_(data.stripeSessionId || data.sessionId || "");
+    var index = getOrCreateSheet_(RECEIPT_INDEX_NAME);
+    if (sessionId && index.getLastRow() >= 2) {
+      var existing = index.getRange(2, 1, index.getLastRow(), RECEIPT_INDEX_COLS).getValues();
+      for (var i = 0; i < existing.length; i++) {
+        if (trim_(existing[i][5]) === sessionId) {
+          return {
+            invoiceNo: trim_(existing[i][3]),
+            orderRef: trim_(existing[i][4]),
+            year: trim_(existing[i][1]),
+            seq: Number(existing[i][2]) || 0,
+            reused: true,
+          };
+        }
+      }
+    }
+
+    var year = String(new Date().getFullYear());
+    var props = PropertiesService.getScriptProperties();
+    var key = "RECEIPT_SEQ_" + year;
+    var next = parseInt(props.getProperty(key) || "0", 10) + 1;
+    if (!isFinite(next) || next < 1) next = 1;
+    props.setProperty(key, String(next));
+    var seq = padSeq6_(next);
+    var invoiceNo = "NXA-RCP-" + year + "-" + seq;
+    var orderRef = "NXA-ORD-" + year + "-" + seq;
+
+    index.appendRow([
+      new Date().toISOString(),
+      year,
+      next,
+      invoiceNo,
+      orderRef,
+      sessionId,
+    ]);
+
+    return {
+      invoiceNo: invoiceNo,
+      orderRef: orderRef,
+      year: year,
+      seq: next,
+      reused: false,
+    };
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function writePaidEnrollmentRow_(data) {

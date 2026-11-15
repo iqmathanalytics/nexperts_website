@@ -21,3 +21,8 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+# Local receipt previews / generated samples
+Nexperts-Receipt-Sample-preview.png
+Nexperts-Receipt-Generated-Sample.pdf
+

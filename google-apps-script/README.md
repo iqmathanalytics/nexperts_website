@@ -16,7 +16,8 @@ This folder contains **Google Apps Script** bound to your **Google Sheet**. The 
 1. Open the **Google Sheet** that should store leads (or create a new one).
 2. **Extensions → Apps Script** → paste **`EnquiryWebhook.gs`** (project must stay **bound** to that spreadsheet).
 3. Run **`setupSheetHeaders`** once → **Run** → approve permissions (creates/clears the `Enquiries` tab and headers).
-3b. Run **`setupPaidEnrollmentsHeaders`** once (creates/clears the **`Paid Enrollments`** tab for Stripe payments).
+3b. Run **`setupPaidEnrollmentsHeaders`** once (creates/clears the **`Paid Enrollments`** tab for Stripe payments — includes Invoice No + Order Ref columns).
+3c. Run **`setupReceiptIndexHeaders`** once (creates **`Receipt Index`** for durable `NXA-RCP-YYYY-######` / `NXA-ORD-YYYY-######` allocation).
 4. *(Recommended)* **Project Settings → Script properties** → add:
    - `ENQUIRY_SECRET` = a long random string (same value as `secret` in `js/enquiry-config.js` if the site POSTs to this web app).
 5. **Deploy → New deployment** → **Web app**

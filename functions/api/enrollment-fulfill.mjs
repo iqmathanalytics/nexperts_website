@@ -9,6 +9,7 @@
 import Stripe from "stripe";
 import { sendEnrollmentConfirmation } from "./enrollment-email.mjs";
 import { getStripeCourse } from "./stripe-courses.mjs";
+import { resolveReceiptNumbers } from "./receipt-numbers.mjs";
 
 function env(name, fallback = "") {
   return String(process.env[name] || fallback).trim();
@@ -129,7 +130,7 @@ async function postToAppsScript(webAppUrl, payload) {
   );
 }
 
-function sheetPayloadFromSession(session) {
+function sheetPayloadFromSession(session, numbers) {
   const md = (session && session.metadata) || {};
   const first = String(md.first_name || "").trim();
   const last = String(md.last_name || "").trim();
@@ -141,9 +142,16 @@ function sheetPayloadFromSession(session) {
   const courseSlug = String(md.course_slug || "").trim();
   const course = getStripeCourse(courseSlug);
   const pagePath = (course && course.pagePath) || (courseSlug ? `/courses/${courseSlug}` : "");
-  const amountLabel = String(md.amount_label || "").trim();
+  const amountLabel =
+    String(md.amount_label || "").trim() ||
+    (numbers && numbers.amountLabel) ||
+    "";
   const secret = env("APPS_SCRIPT_ENQUIRY_SECRET") || env("BREVO_ENQUIRY_SECRET");
-  const receiptNumber = String(session.payment_intent || session.id || "").trim();
+  const paymentIntent = String(session.payment_intent || "").trim();
+  const invoiceNo = String(
+    (numbers && numbers.invoiceNo) || md.invoice_no || md.receipt_no || ""
+  ).trim();
+  const orderRef = String((numbers && numbers.orderRef) || md.order_ref || "").trim();
 
   const payload = {
     targetSheet: "Paid Enrollments",
@@ -156,9 +164,14 @@ function sheetPayloadFromSession(session) {
     intakeLabel: String(md.intake_label || md.intake_id || "").trim(),
     trainingMode: String(md.training_mode || "").trim(),
     amountLabel,
+    currency: String(session.currency || "myr").toUpperCase(),
     paymentStatus: String(session.payment_status || "paid").trim(),
+    paymentMethod: String((numbers && numbers.paymentMethod) || "Card (Stripe)").trim(),
     stripeSessionId: String(session.id || "").trim(),
-    receiptNumber,
+    paymentIntent,
+    receiptNumber: invoiceNo || paymentIntent,
+    invoiceNo,
+    orderRef,
     type: "Paid Enrollment",
     source: "stripe-checkout",
     pageUrl: pagePath ? `https://www.nexpertsacademy.com${pagePath}` : "",
@@ -194,6 +207,19 @@ export async function fulfillPaidEnrollment(session, stripe) {
     sheetSkipped: false,
   };
 
+  // Allocate invoice / order ref once (persisted on Stripe metadata).
+  const numbers = await resolveReceiptNumbers({ session, stripe });
+  result.invoiceNo = numbers.invoiceNo;
+  result.orderRef = numbers.orderRef;
+
+  // Refresh session so email/sheet see invoice metadata.
+  let workingSession = session;
+  try {
+    workingSession = await stripe.checkout.sessions.retrieve(sessionId);
+  } catch (_) {
+    workingSession = session;
+  }
+
   // --- Email (claim before send) ---
   const emailClaim = await claimSessionFlag(stripe, sessionId, "email_sent");
   if (emailClaim.alreadyDone) {
@@ -204,7 +230,11 @@ export async function fulfillPaidEnrollment(session, stripe) {
     result.emailSkipped = true;
   } else {
     try {
-      await sendEnrollmentConfirmation({ session: emailClaim.session || session });
+      await sendEnrollmentConfirmation({
+        session: emailClaim.session || workingSession,
+        stripe,
+        numbers,
+      });
       await finalizeSessionFlag(stripe, sessionId, "email_sent", true);
       result.emailed = true;
     } catch (err) {
@@ -231,7 +261,7 @@ export async function fulfillPaidEnrollment(session, stripe) {
       try {
         const sheetRes = await postToAppsScript(
           appsUrl,
-          sheetPayloadFromSession(sheetClaim.session || session)
+          sheetPayloadFromSession(sheetClaim.session || workingSession, numbers)
         );
         await finalizeSessionFlag(stripe, sessionId, "sheet_logged", true);
         result.sheetLogged = !sheetRes.skipped;
