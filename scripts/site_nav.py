@@ -60,6 +60,10 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
                 "Become an Ethical Hacker in Malaysia",
                 "/blog/how-to-become-ethical-hacker-malaysia",
             ),
+            (
+                "CAPM vs PMP in Malaysia",
+                "/blog/capm-vs-pmp-malaysia",
+            ),
         ],
     ),
     (
