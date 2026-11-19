@@ -57,6 +57,7 @@ STATIC_PAGES = [
     "blog/cybersecurity-courses-malaysia-students.html",
     "blog/how-to-become-ethical-hacker-malaysia.html",
     "blog/capm-vs-pmp-malaysia.html",
+    "blog/how-to-become-a-data-analyst-in-malaysia.html",
 ]
 
 ROOT_PAGES_HOME = ["index.html"]

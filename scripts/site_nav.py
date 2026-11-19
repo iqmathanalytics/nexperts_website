@@ -64,6 +64,10 @@ ADDON_SECTIONS: list[tuple[str, list[tuple[str, str]]]] = [
                 "CAPM vs PMP in Malaysia",
                 "/blog/capm-vs-pmp-malaysia",
             ),
+            (
+                "Become a Data Analyst in Malaysia",
+                "/blog/how-to-become-a-data-analyst-in-malaysia",
+            ),
         ],
     ),
     (
