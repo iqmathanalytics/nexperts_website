@@ -106,7 +106,7 @@ BATCH.append(dict(
     exam_optional=dict(name="ITIL Career Path",rows=[
         ("Stacks with","ITIL 4 Foundation \u2192 Specialist / Strategist"),
         ("Pathways","Managing Professional / Strategic Leader"),
-        ("Voucher","Bundled \u2014 PeopleCert voucher included"),
+        ("Voucher","Exam fee not included — arrange separately"),
         ("Renewal","No expiration at Foundation level"),
         ("MY recognition","Required by MyDigital ITSM transformation"),
         ("Career fit","Service desk, ops manager, BA, project manager"),
@@ -153,7 +153,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "PeopleCert / AXELOS official ITIL 4 courseware",
-        "PeopleCert exam voucher",
+        "Exam fee not included — arrange separately",
         "Three deep MY case-study workbooks",
         "3 full timed mock exams",
         "Service Value Chain reference card",
@@ -338,14 +338,14 @@ BATCH.append(dict(
 BATCH.append(dict(
     slug="cka",
     seo_title="Certified Kubernetes Administrator (CKA) Training Malaysia",
-    seo_description="Join Certified Kubernetes Administrator (CKA) training in Malaysia. Master Kubernetes administration, pass the Linux Foundation CNCF exam with hands-on labs and an exam voucher.",
+    seo_description="Join Certified Kubernetes Administrator (CKA) training in Malaysia. Master Kubernetes administration, pass the Linux Foundation CNCF exam with hands-on labs. Exam fee not included.",
     seo_keywords="Certified Kubernetes Administrator, CKA, CKA Training, Kubernetes Administrator Certification, Linux Foundation Kubernetes, CNCF Certification, Kubernetes Training Malaysia",
     canonical_path="/courses/cka",
     schema_markup=schema_markup_for_slug("cka"),
     title="CKA",
     title_html='Certified Kubernetes Administrator (CKA)<br><em>Training &amp; Certification Malaysia</em>',
     vendor_short="CNCF / Linux Foundation", watermark="CKA", crumb_vendor="Linux Foundation",
-    subtitle="Certified Kubernetes Administrator (CKA) training in Malaysia \u2014 hands-on Kubernetes cluster administration, Linux Foundation CNCF exam preparation with live clusters and exam voucher.",
+    subtitle="Certified Kubernetes Administrator (CKA) training in Malaysia \u2014 hands-on Kubernetes cluster administration, Linux Foundation CNCF exam preparation with live clusters. Exam fee not included.",
     badges=[("cb-vendor","Linux Foundation"),("cb-level","Professional"),("cb-new","2026 Updated"),("cb-hot","DevOps Hire")],
     hero_meta=common_meta("4 days / 32 hrs","Instructor-Led + Live Clusters","On-site \u00b7 Hybrid",92,"6 October 2026"),
     hero_img=HERO_IMG,
@@ -565,7 +565,7 @@ BATCH.append(dict(
     exam_optional=dict(name="Kubernetes Career Path",rows=[
         ("Stacks with","CKA \u2192 CKS / CKAD"),
         ("MY salary uplift","Average +RM 1,800/mo post-cert"),
-        ("Voucher","Bundled \u2014 Linux Foundation voucher included"),
+        ("Voucher","Exam fee not included — arrange separately"),
         ("Renewal","2-year cycle via re-exam"),
         ("Open-book","Yes \u2014 official Kubernetes docs only"),
         ("Career fit","SRE, platform engineer, DevOps engineer"),
@@ -612,7 +612,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "Linux Foundation official CKA courseware",
-        "Linux Foundation exam voucher",
+        "Exam fee not included — arrange separately",
         "Six live multi-node Kubernetes clusters",
         "60-day cluster access post-course",
         "3 full timed mock exams",
@@ -637,7 +637,7 @@ BATCH.append(dict(
         ),
         (
             "Does the course include a CKA exam voucher?",
-            "Eligible Nexperts Academy course packages include an official Linux Foundation CKA exam voucher.",
+            "No. The Linux Foundation CKA exam voucher / exam fee is not included in the course fee. Ask enrolment about arranging a voucher separately.",
         ),
         (
             "How do I register for the CKA exam?",

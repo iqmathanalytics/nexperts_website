@@ -25,7 +25,7 @@ BATCH = []
 BATCH.append(dict(
     slug="aws-devops-engineer-professional",
     seo_title="AWS Certified DevOps Engineer Professional Training Malaysia | DOP-C02",
-    seo_description="Join AWS DevOps Engineer Professional (DOP-C02) training in Malaysia. Master CI/CD, CloudFormation, CDK, observability, governance and SRE with hands-on AWS labs and exam voucher.",
+    seo_description="Join AWS DevOps Engineer Professional (DOP-C02) training in Malaysia. Master CI/CD, CloudFormation, CDK, observability, governance and SRE with hands-on AWS labs. Exam fee not included.",
     seo_keywords="AWS DevOps Engineer Professional, DOP-C02, AWS DevOps certification Malaysia, AWS CodePipeline, CloudFormation, AWS CDK, DevOps training Malaysia, AWS Professional certification",
     canonical_path="/courses/aws-devops-engineer-professional",
     schema_markup=schema_markup_for_slug("aws-devops-engineer-professional"),
@@ -231,7 +231,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","Came in as a SOA holder. The depth jump to DOP is real. The supply-chain hardening sprint is what got me over the line in my exam scenarios.","rav-g","WJ","Wong Jee Heng","Senior Cloud Engineer \u00b7 Standard Chartered GBS","\u2713 Passed first attempt \u00b7 791/1000"),
         ("\u2605\u2605\u2605\u2605\u2605","CDK re-platform sprint was the labs I'll keep referencing at work. Most courses ignore CDK. This one made it the focus.","rav-a","KL","Kelvin Liew","DevOps Lead \u00b7 RHB Banking Group","\u2713 Passed first attempt \u00b7 858/1000")],
     price="RM 5,300", price_orig="RM 5,900", price_save="Save 10%",
-    price_note="Per person \u00b7 Includes multi-account sandbox, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes multi-account sandbox, courseware",
     sidebar_meta=[
         ("Duration","5 days / 40 hrs"),
         ("Next intake","26 May 2026"),
@@ -239,10 +239,10 @@ BATCH.append(dict(
         ("Level","Professional"),
         ("Language","English"),
         ("Cert body","AWS"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "AWS official courseware DOP-C02",
-        "AWS Pearson VUE / PSI exam voucher",
+        "Exam fee not included — arrange separately",
         "Multi-account AWS sandbox (Organizations + Control Tower)",
         "3 timed mock exams + scenario drill",
         "Reference CDK and pipeline templates",
@@ -271,7 +271,7 @@ BATCH.append(dict(
         ),
         (
             "Does the course include an exam voucher?",
-            "Yes. Eligible course packages include an AWS examination voucher.",
+            "No. The exam voucher / exam fee is not included in the course fee. Ask enrolment about arranging a voucher separately.",
         ),
         (
             "Which AWS services are covered?",
@@ -426,7 +426,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","IAM policy drill is the only reason I cleared this exam. The JSON questions in the real exam are brutal. Without practising under timer I'd have failed for sure.","rav-g","RT","Ramesh Thurairajah","DevSecOps Engineer \u00b7 Astro Digital","\u2713 Passed first attempt \u00b7 798/1000"),
         ("\u2605\u2605\u2605\u2605\u2605","Best AWS security course I've taken. The seeded-finding sandbox makes you actually do the work, not memorise it. Highly recommend.","rav-a","WS","Wendy Sim","Cloud Security Architect \u00b7 IHH Healthcare","\u2713 Passed first attempt \u00b7 858/1000")],
     price="RM 5,000", price_orig="RM 5,500", price_save="Save 9%",
-    price_note="Per person \u00b7 Includes multi-account sandbox, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes multi-account sandbox, courseware",
     sidebar_meta=[
         ("Duration","4 days / 32 hrs"),
         ("Next intake","19 May 2026"),
@@ -434,10 +434,10 @@ BATCH.append(dict(
         ("Level","Specialty"),
         ("Language","English"),
         ("Cert body","AWS"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "AWS official courseware SCS-C02",
-        "AWS Pearson VUE / PSI exam voucher",
+        "Exam fee not included — arrange separately",
         "Multi-account AWS sandbox with seeded findings",
         "3 timed mock exams + IAM policy drill",
         "Hardening checklist (CIS-aligned)",
@@ -585,7 +585,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","Lake Formation governance lab is what most courses skip. Nexperts puts it front and centre. We're now using LF-Tags as our governance baseline at Astro.","rav-g","TY","Theresa Yap","Data Platform Engineer \u00b7 Astro Digital","\u2713 Passed first attempt \u00b7 798/1000"),
         ("\u2605\u2605\u2605\u2605\u2605","Mock-3 simulation was harder than the real exam. Trade-off drill made the difference \u2014 I went into the exam knowing how to read those scenarios.","rav-a","BD","Balachandran Devan","Senior Cloud Engineer \u00b7 PETRONAS Digital","\u2713 Passed first attempt \u00b7 858/1000")],
     price="RM 4,300", price_orig="RM 4,800", price_save="Save 10%",
-    price_note="Per person \u00b7 Includes data sandbox, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes data sandbox, courseware",
     sidebar_meta=[
         ("Duration","4 days / 32 hrs"),
         ("Next intake","26 May 2026"),
@@ -593,10 +593,10 @@ BATCH.append(dict(
         ("Level","Associate"),
         ("Language","English"),
         ("Cert body","AWS"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "AWS official courseware DEA-C01",
-        "AWS Pearson VUE / PSI exam voucher",
+        "Exam fee not included — arrange separately",
         "Personal AWS data sandbox with seeded streams",
         "3 timed mock exams + trade-off drill",
         "Reference lakehouse templates (Iceberg)",
@@ -744,7 +744,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","SageMaker Pipelines + Model Monitor lab solved a problem we'd been struggling with for 6 months. Best ROI I've ever had on a course fee.","rav-g","BR","Brendan Robertson","ML Platform Engineer \u00b7 Standard Chartered GBS","\u2713 Passed first attempt \u00b7 802/1000"),
         ("\u2605\u2605\u2605\u2605\u2605","Mock-3 simulation was tougher than the real exam. The decision drill makes you think like AWS thinks. Career-defining course.","rav-a","NK","Nazreen Kassim","Senior Data Scientist \u00b7 PETRONAS Digital","\u2713 Passed first attempt \u00b7 858/1000")],
     price="RM 5,000", price_orig="RM 5,500", price_save="Save 9%",
-    price_note="Per person \u00b7 Includes ML sandbox + Bedrock, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes ML sandbox + Bedrock, courseware",
     sidebar_meta=[
         ("Duration","4 days / 32 hrs"),
         ("Next intake","2 Jun 2026"),
@@ -752,10 +752,10 @@ BATCH.append(dict(
         ("Level","Specialty"),
         ("Language","English"),
         ("Cert body","AWS"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "AWS official courseware MLS-C01",
-        "AWS Pearson VUE / PSI exam voucher",
+        "Exam fee not included — arrange separately",
         "Personal AWS ML sandbox with Bedrock access",
         "3 timed mock exams + decision drill",
         "Reference SageMaker Pipelines templates",
@@ -910,7 +910,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","Pod Security Standards and NetworkPolicy labs were the highlights. We hardened our cluster the week after using exactly those patterns.","rav-g","TM","Terence Ma","Platform Engineer \u00b7 Carsome","\u2713 Passed first attempt \u00b7 84%"),
         ("\u2605\u2605\u2605\u2605\u2605","Came in as a Java developer with surface-level K8s. Walked out comfortable on the cluster. The 30-day post-course access is gold for keeping the muscle memory sharp.","rav-a","RR","Rishi Ramesh","Senior Backend Eng \u00b7 PETRONAS Digital","\u2713 Passed first attempt \u00b7 89%")],
     price="RM 4,000", price_orig="RM 4,400", price_save="Save 9%",
-    price_note="Per person \u00b7 Includes live cluster, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes live cluster, courseware",
     sidebar_meta=[
         ("Duration","4 days / 32 hrs"),
         ("Next intake","19 May 2026"),
@@ -918,10 +918,10 @@ BATCH.append(dict(
         ("Level","Intermediate"),
         ("Language","English"),
         ("Cert body","Linux Foundation"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "Linux Foundation CKAD official courseware",
-        "Linux Foundation exam voucher",
+        "Exam fee not included — arrange separately",
         "Live multi-node Kubernetes cluster (per learner)",
         "30-day post-course cluster access",
         "3 timed hands-on mocks + speed drill",
@@ -1036,7 +1036,7 @@ BATCH.append(dict(
             "eyebrow": "Terraform Certification Cost & Exam Voucher",
             "paragraphs": [
                 "Many learners search for Terraform certification cost, Terraform Associate exam cost, Terraform certification voucher and HashiCorp certification cost.",
-                "At Nexperts Academy, eligible course packages include the HashiCorp Terraform Associate examination voucher, instructor support, official curriculum mapping, practice exams and cloud sandbox access.",
+                "At Nexperts Academy, the Terraform Associate programme includes instructor support, official curriculum mapping, practice exams and cloud sandbox access. The exam voucher / exam fee is not included in the course fee.",
                 "Please contact our training advisors for the latest Malaysia pricing and available promotions."],
         },
         {
@@ -1193,7 +1193,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","Sentinel policy lab was unexpected gold. We're now using policy-as-code as a release gate in our company. Best ROI lab in the course.","rav-g","NM","Nasir Mohamad","Platform Engineer \u00b7 PETRONAS Digital","\u2713 Passed first attempt"),
         ("\u2605\u2605\u2605\u2605\u2605","Multi-cloud pattern was the breakthrough. I'd been treating AWS and Azure as separate worlds. Terraform makes them one. Career-defining course.","rav-a","BL","Bryan Lim","Senior Cloud Engineer \u00b7 IHH Healthcare","\u2713 Passed first attempt")],
     price="RM 3,650", price_orig="RM 4,000", price_save="Save 9%",
-    price_note="Per person \u00b7 Includes AWS + Azure sandboxes, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes AWS + Azure sandboxes, courseware",
     sidebar_meta=[
         ("Duration","3 days / 24 hrs"),
         ("Next intake","12 May 2026"),
@@ -1201,10 +1201,10 @@ BATCH.append(dict(
         ("Level","Associate"),
         ("Language","English"),
         ("Cert body","HashiCorp"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "Terraform Associate (003) official curriculum mapping",
-        "HashiCorp PSI exam voucher",
+        "Exam fee not included — arrange separately",
         "AWS + Azure sandboxes",
         "2 timed mock exams + HCL drill",
         "Reference module library (network, IAM, K8s)",
@@ -1233,7 +1233,7 @@ BATCH.append(dict(
         ),
         (
             "Does the course include an exam voucher?",
-            "Eligible training packages include a HashiCorp Terraform Associate examination voucher.",
+            "No. The HashiCorp exam voucher / exam fee is not included in the course fee. Ask enrolment about arranging a voucher separately.",
         ),
         (
             "Which cloud platforms are used?",
@@ -1374,7 +1374,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","BigQuery walkthrough was the breakthrough. Until then it was words on slides. Running queries against a real public dataset made the whole stack make sense.","rav-g","RV","Ramaiya Vasudevan","Junior Cloud Analyst \u00b7 Sime Darby","\u2713 Passed first attempt"),
         ("\u2605\u2605\u2605\u2605\u2605","Best foundation cert prep I've taken across AZ-900, CCP and now CDL. Highly recommend if you plan ACE next.","rav-a","DT","Devika Thirumalai","Cybersecurity Trainee \u00b7 EY","\u2713 Passed first attempt")],
     price="RM 2,000", price_orig="RM 2,400", price_save="Save 17%",
-    price_note="Per person \u00b7 Includes GCP tenant, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes GCP tenant, courseware",
     sidebar_meta=[
         ("Duration","2 days / 16 hrs"),
         ("Next intake","6 May 2026"),
@@ -1382,10 +1382,10 @@ BATCH.append(dict(
         ("Level","Foundation"),
         ("Language","English \u00b7 BM available"),
         ("Cert body","Google Cloud"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "Google Cloud official courseware (CDL)",
-        "Google Cloud exam voucher",
+        "Exam fee not included — arrange separately",
         "Google Cloud free-tier tenant access",
         "2 timed mock exams + concept clinic",
         "Quick-recall flashcards (printed + digital)",
@@ -1540,7 +1540,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605","Cost cleanup sprint cut 35% off our sandbox spend during the lab itself. We're now running monthly cleanup at work using the same patterns.","rav-g","BC","Brendan Choo","DevOps Engineer \u00b7 Astro Digital","\u2713 Passed first attempt"),
         ("\u2605\u2605\u2605\u2605\u2605","Mock-3 was harder than the real exam. Walked into the exam confident and cleared it in under 90 minutes. Worth every ringgit.","rav-a","RM","Ravi Murugan","Cloud Operations Engineer \u00b7 PETRONAS Digital","\u2713 Passed first attempt")],
     price="RM 4,200", price_orig="RM 4,700", price_save="Save 11%",
-    price_note="Per person \u00b7 Includes GCP sandbox, exam voucher, courseware",
+    price_note="Per person \u00b7 Includes GCP sandbox, courseware",
     sidebar_meta=[
         ("Duration","4 days / 32 hrs"),
         ("Next intake","19 May 2026"),
@@ -1548,10 +1548,10 @@ BATCH.append(dict(
         ("Level","Associate"),
         ("Language","English"),
         ("Cert body","Google Cloud"),
-        ("Exam",'<span class="smeta-badge">Voucher included</span>')],
+        ("Exam",'<span class="smeta-badge">Not included</span>')],
     whats_included=[
         "Google Cloud official courseware (ACE)",
-        "Google Cloud exam voucher",
+        "Exam fee not included — arrange separately",
         "Personal Google Cloud sandbox project + credit",
         "3 timed mock exams + gcloud drill",
         "Reference deployment templates",

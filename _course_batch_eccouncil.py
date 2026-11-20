@@ -108,7 +108,7 @@ BATCH.append(dict(
         ("Banking","Listed in BNM RMiT incident response baselines"),
         ("Stacks with","CEH \u2192 CHFI \u2192 CCSE / CCISO"),
         ("DoD","8140 approved digital forensic role"),
-        ("Voucher","EC-Council exam voucher bundled"),
+        ("Voucher","Exam fee not included — arrange separately"),
         ("Career fit","DFIR analyst, fraud investigator, expert witness")]),
     mock_title="Our CHFI 3-Mock Programme",
     mock_programme=[
@@ -141,7 +141,7 @@ BATCH.append(dict(
         ("\u2605\u2605\u2605\u2605\u2605","Memory forensics with Volatility is now part of my weekly toolkit. Two weeks after CHFI, I caught a credential-dumping attack we'd missed for three months.","rav-g","TY","Tony Yong","SOC Manager \u00b7 KPMG MY","\u2713 Passed first attempt \u00b7 145 / 150"),
         ("\u2605\u2605\u2605\u2605","Court admissibility under the Malaysian Evidence Act was new to me \u2014 even after 8 years in security. I now sit on my company's data breach response committee.","rav-a","SP","Suresh Pillai","Information Security Officer \u00b7 Petronas","\u2713 Passed first attempt \u00b7 134 / 150")],
     price="RM 4,800", price_orig="RM 5,500", price_save="Save 13%",
-    price_note="Per person \u00b7 Includes EC-Council courseware, exam voucher, iLabs",
+    price_note="Per person \u00b7 Includes EC-Council courseware, iLabs (exam fee not included)",
     sidebar_meta=[
         ("Duration","5 days / 40 hrs"),
         ("Next intake","16 June 2026"),
@@ -152,7 +152,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "EC-Council CHFI v11 official courseware",
-        "EC-Council exam voucher (312-49)",
+        "Exam fee not included — arrange separately",
         "180-lab EC-Council iLabs access (6 months)",
         "3 full timed mock exams",
         "Mock cross-examination sessions",
@@ -315,7 +315,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "EC-Council CPENT v3 official courseware",
-        "EC-Council exam voucher",
+        "Exam fee not included — arrange separately",
         "90-day cyber range access",
         "80 structured advanced labs",
         "Full 24-hour mock engagement",

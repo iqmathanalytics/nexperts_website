@@ -107,7 +107,7 @@ BATCH.append(dict(
     exam_optional=dict(name="Cisco Career Trajectory",rows=[
         ("Stacks with","CCNA \u2192 CCNP \u2192 CCIE"),
         ("MY salary uplift","Average +RM 1,500/mo post-cert"),
-        ("Voucher","Bundled \u2014 Cisco voucher included"),
+        ("Voucher","Exam fee not included — arrange separately"),
         ("CE programme","CE points renew CCNA without re-exam"),
         ("Pre-bridge","Required for any CCNP track"),
         ("Career fit","Network engineer, NOC engineer, telco support"),
@@ -154,7 +154,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "Cisco official 200-301 courseware",
-        "Cisco exam voucher",
+        "Exam fee not included — arrange separately",
         "Rack-time access (real IOS) for 60 days",
         "3 full timed mock exams",
         "Simulator-question coaching workshop",
@@ -436,7 +436,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Bundled x2</span>')],
     whats_included=[
         "Cisco official ENCOR + concentration courseware",
-        "Cisco exam vouchers (ENCOR + 1 concentration)",
+        "Exam fee not included — arrange separately",
         "90-day rack-time + SD-WAN sim access",
         "4 full timed mock exams",
         "Concentration choice \u2014 ENARSI / ENSDWI / ENWLSI",
@@ -575,7 +575,7 @@ BATCH.append(dict(
     exam_optional=dict(name="GCP Career Trajectory",rows=[
         ("Stacks with","ACE \u2192 PCA \u2192 PCSE / PCNE / PDE"),
         ("MY salary uplift","Average +RM 2,500/mo post-cert"),
-        ("Voucher","Bundled \u2014 Google Cloud voucher included"),
+        ("Voucher","Exam fee not included — arrange separately"),
         ("Renewal","2-year cycle via re-exam"),
         ("Champion track","Pathway to Google Cloud Champion innovator"),
         ("Most-paid","Top-3 GCP credential by salary in MY"),
@@ -622,7 +622,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "Google Cloud official PCA courseware",
-        "Google Cloud exam voucher",
+        "Exam fee not included — arrange separately",
         "90-day multi-project GCP sandbox",
         "3 full timed mock exams",
         "Two MY case-study workbooks",

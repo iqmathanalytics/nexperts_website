@@ -126,7 +126,7 @@ BATCH.append(dict(
     exam_optional=dict(name="CISSP Career Path",rows=[
         ("Stacks with","CISSP \u2192 CCSP / SSCP concentrations"),
         ("MY salary uplift","Average +RM 3,500/mo post-cert"),
-        ("Voucher","Bundled \u2014 ISC2 voucher included"),
+        ("Voucher","Exam fee not included — arrange separately"),
         ("Renewal","120 CPEs over 3 years"),
         ("MY recognition","Required for most MY CISO and senior security roles"),
         ("Industry depth","Top-3 most-respected security credential globally"),
@@ -174,7 +174,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "ISC2 official CBK 2026 courseware",
-        "ISC2 exam voucher",
+        "Exam fee not included — arrange separately",
         "Daily 100-question drill packs",
         "4 full timed mock exams",
         "Three tabletop exercises (risk, IR, BCP)",
@@ -291,7 +291,7 @@ BATCH.append(dict(
     exam_optional=dict(name="CISM Career Path",rows=[
         ("Stacks with","CISA \u2192 CISM \u2192 CRISC / CGEIT"),
         ("MY salary uplift","Average +RM 2,800/mo post-cert"),
-        ("Voucher","Bundled \u2014 ISACA voucher included"),
+        ("Voucher","Exam fee not included — arrange separately"),
         ("Renewal","120 CPEs over 3 years"),
         ("MY recognition","Widely accepted for CISO roles in MY banking and GLC"),
         ("Industry depth","Top management security credential alongside CISSP"),
@@ -338,7 +338,7 @@ BATCH.append(dict(
         ("Exam",'<span class="smeta-badge">Included</span>')],
     whats_included=[
         "ISACA official CISM Job Practice 2026 courseware",
-        "ISACA exam voucher",
+        "Exam fee not included — arrange separately",
         "Daily 50-question drill packs",
         "3 full timed mock exams",
         "Three tabletop exercises",
