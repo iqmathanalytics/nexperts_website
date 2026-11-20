@@ -270,7 +270,7 @@
     visibility 0.24s ease;
   pointer-events: none;
   z-index: 50;
-  overflow: visible;
+  overflow: hidden;
   backdrop-filter: blur(16px);
 }
 
@@ -458,6 +458,11 @@
 @media (min-width: 1281px) {
   .nav-addons-panel {
     z-index: 260;
+    display: flex;
+    flex-direction: column;
+    max-height: min(78vh, calc(100dvh - 76px));
+    max-height: min(78vh, calc(100vh - 76px));
+    overflow: hidden;
   }
 
   .nav-addons-wrap.is-open .nav-addons-panel,
@@ -466,7 +471,23 @@
     visibility: visible;
     transform: translateY(0) scale(1);
     pointer-events: auto;
-    display: block;
+    display: flex;
+  }
+
+  .nav-panel-head {
+    flex-shrink: 0;
+  }
+
+  /* Keep the header pinned; scroll the menu body inside the popup */
+  .nav-panel--courses .nav-courses-stack,
+  .nav-panel--explore .nav-addons-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable;
   }
 }
 
@@ -662,11 +683,19 @@
   }
 }
 
+@media (max-width: 1280px) {
+  .nav-addons-wrap.is-open .nav-addons-panel {
+    max-height: min(58vh, 460px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 @media (max-width: 1280px) and (max-height: 700px) {
   .nav-addons-wrap.is-open .nav-addons-panel {
     max-height: 42vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
   }
 }
 
