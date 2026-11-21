@@ -216,11 +216,32 @@
 
 /* Hide empty original-price / save chips (they render as green bars) */
 .enroll-card .price-orig:empty,
-.enroll-card .price-save:empty {
+.enroll-card .price-save:empty,
+.enroll-card .price-orig[hidden],
+.enroll-card .price-save[hidden] {
   display: none !important;
 }
-.enroll-card .price-save:not(:empty) {
+.enroll-card .price-save:not(:empty):not([hidden]) {
   display: inline-block;
+}
+
+/*
+ * Avoid flash of static HTML price before overlay applies admin + regional FX.
+ * Reveals when overlay sets data-nx-price-ready. CSS animation is a failsafe
+ * if JS never marks the card ready; markPriceReady() also clears it inline.
+ */
+@keyframes nx-price-failsafe {
+  to { opacity: 1; }
+}
+.enroll-card:not([data-nx-price-ready]) .price-row,
+.enroll-card:not([data-nx-price-ready]) > .price-note {
+  opacity: 0;
+  animation: nx-price-failsafe 0s linear 2.5s forwards;
+}
+.enroll-card[data-nx-price-ready] .price-row,
+.enroll-card[data-nx-price-ready] > .price-note {
+  opacity: 1 !important;
+  animation: none !important;
 }
 
 @media (max-width: 420px) {

@@ -501,6 +501,47 @@
     return `Save ${pct}%`;
   }
 
+  /** Ensure .price-orig / .price-save exist so admin discounts can render on pages that omitted them. */
+  function ensurePriceChrome(card) {
+    if (!card) return null;
+    const priceEl = card.querySelector(".price");
+    if (!priceEl) return null;
+    let row = card.querySelector(".price-row");
+    if (!row) {
+      row = document.createElement("div");
+      row.className = "price-row";
+      priceEl.parentNode.insertBefore(row, priceEl);
+      row.appendChild(priceEl);
+    }
+    let origEl = row.querySelector(".price-orig");
+    if (!origEl) {
+      origEl = document.createElement("span");
+      origEl.className = "price-orig";
+      origEl.hidden = true;
+      row.appendChild(origEl);
+    }
+    let saveEl = row.querySelector(".price-save");
+    if (!saveEl) {
+      saveEl = document.createElement("span");
+      saveEl.className = "price-save";
+      saveEl.hidden = true;
+      row.appendChild(saveEl);
+    }
+    return { row, priceEl, origEl, saveEl };
+  }
+
+  function markPriceReady() {
+    document.querySelectorAll(".enroll-card").forEach(card => {
+      if (card.getAttribute("data-nx-price-ready") === "1") return;
+      card.setAttribute("data-nx-price-ready", "1");
+      // Force reveal immediately (avoids delayed-animation opacity sticking at 0).
+      card.querySelectorAll(".price-row, :scope > .price-note").forEach(el => {
+        el.style.opacity = "1";
+        el.style.animation = "none";
+      });
+    });
+  }
+
   function applyCatalogOverrides(state) {
     const cards = document.querySelectorAll(".cc[data-slug]");
     if (!cards.length) return;
@@ -695,13 +736,19 @@
       !!(ov.curriculum_html && String(ov.curriculum_html).trim());
     if (!isCustom && !hasCourseOv && !hasCurriculum) return;
 
-    if (ov.price) {
-      const el = document.querySelector(".price");
-      if (el) setText(el, ov.price);
-    }
-    if (ov.price_original) {
-      const el = document.querySelector(".price-orig");
-      if (el) setText(el, ov.price_original);
+    const chrome = ensurePriceChrome(document.querySelector(".enroll-card"));
+    if (chrome && ov.price) setText(chrome.priceEl, ov.price);
+    if (chrome) {
+      const orig = String(ov.price_original || "").trim();
+      if (orig) {
+        setText(chrome.origEl, orig);
+        chrome.origEl.hidden = false;
+        chrome.origEl.style.display = "";
+      } else if (Object.prototype.hasOwnProperty.call(ov, "price_original")) {
+        setText(chrome.origEl, "");
+        chrome.origEl.hidden = true;
+        chrome.origEl.style.display = "none";
+      }
     }
     if (ov.duration) replaceMetaRow("Duration", ov.duration);
     if (ov.next_intake) replaceMetaRow("Next intake", ov.next_intake);
@@ -739,28 +786,22 @@
   }
 
   function syncSaveBadge(ov) {
-    const saveEl = document.querySelector(".price-save");
-    if (!saveEl) return;
+    const chrome = ensurePriceChrome(document.querySelector(".enroll-card"));
+    if (!chrome) return;
 
-    const currentPriceEl = document.querySelector(".price");
-    const currentOrigEl = document.querySelector(".price-orig");
-    if (!currentPriceEl || !currentOrigEl) {
-      setText(saveEl, "");
-      saveEl.style.display = "none";
-      return;
-    }
-
-    const priceNum = parseCurrencyNumber(ov.price || currentPriceEl.textContent);
-    const originalNum = parseCurrencyNumber(ov.price_original || currentOrigEl.textContent);
+    const priceNum = parseCurrencyNumber(ov.price || chrome.priceEl.textContent);
+    const originalNum = parseCurrencyNumber(ov.price_original || chrome.origEl.textContent);
     const label = formatSaveLabel(priceNum, originalNum);
     if (!label) {
-      setText(saveEl, "");
-      saveEl.style.display = "none";
+      setText(chrome.saveEl, "");
+      chrome.saveEl.hidden = true;
+      chrome.saveEl.style.display = "none";
       return;
     }
 
-    setText(saveEl, label);
-    saveEl.style.display = "";
+    setText(chrome.saveEl, label);
+    chrome.saveEl.hidden = false;
+    chrome.saveEl.style.display = "";
   }
 
   function looksLikeMyr(text) {
@@ -844,17 +885,14 @@
   }
 
   function captureMyr(card) {
-    const priceEl = card.querySelector(".price");
-    if (!priceEl) return;
-    const text = (priceEl.textContent || "").trim();
+    const chrome = ensurePriceChrome(card);
+    if (!chrome) return;
+    const text = (chrome.priceEl.textContent || "").trim();
     if (looksLikeMyr(text) || !card.dataset.nxMyr) {
       const n = parseCurrencyNumber(text);
       if (n != null) card.dataset.nxMyr = String(n);
-      const origEl = card.querySelector(".price-orig");
-      if (origEl) {
-        const o = parseCurrencyNumber(origEl.textContent);
-        card.dataset.nxMyrOrig = o != null ? String(o) : "";
-      }
+      const o = parseCurrencyNumber(chrome.origEl.textContent);
+      card.dataset.nxMyrOrig = o != null ? String(o) : "";
     }
   }
 
@@ -862,9 +900,11 @@
     const regions = pricing.regions || {};
     const region = regions[regionId] || regions.my;
     const myRegion = regions.my || DEFAULT_PRICING.regions.my;
-    const priceEl = card.querySelector(".price");
-    const origEl = card.querySelector(".price-orig");
-    const saveEl = card.querySelector(".price-save");
+    const chrome = ensurePriceChrome(card);
+    if (!chrome) return;
+    const priceEl = chrome.priceEl;
+    const origEl = chrome.origEl;
+    const saveEl = chrome.saveEl;
     const myr = Number(card.dataset.nxMyr);
     const myrOrig = Number(card.dataset.nxMyrOrig);
     if (!priceEl || !Number.isFinite(myr) || myr <= 0) return;
@@ -905,26 +945,26 @@
     }
 
     if (priceText) setText(priceEl, priceText);
-    if (origEl) {
-      if (origText) {
-        setText(origEl, origText);
-        origEl.style.display = "";
-      } else {
-        setText(origEl, "");
-        origEl.style.display = "none";
-      }
+    if (origText) {
+      setText(origEl, origText);
+      origEl.hidden = false;
+      origEl.style.display = "";
+    } else {
+      setText(origEl, "");
+      origEl.hidden = true;
+      origEl.style.display = "none";
     }
-    if (saveEl) {
-      const p = parseCurrencyNumber(priceText);
-      const o = parseCurrencyNumber(origText);
-      const label = formatSaveLabel(p, o);
-      if (label) {
-        setText(saveEl, label);
-        saveEl.style.display = "";
-      } else {
-        setText(saveEl, "");
-        saveEl.style.display = "none";
-      }
+    const p = parseCurrencyNumber(priceText);
+    const o = parseCurrencyNumber(origText);
+    const label = formatSaveLabel(p, o);
+    if (label) {
+      setText(saveEl, label);
+      saveEl.hidden = false;
+      saveEl.style.display = "";
+    } else {
+      setText(saveEl, "");
+      saveEl.hidden = true;
+      saveEl.style.display = "none";
     }
     // Keep Stripe "Pay …" button in sync with the visible enroll-card price (RM / ₹ / £ / AED).
     const payBtn = card.querySelector(".course-stripe-enroll .cse-submit");
@@ -955,27 +995,34 @@
   }
 
   async function run() {
-    const [published, local] = await Promise.all([
-      loadPublished(),
-      Promise.resolve(loadLocal()),
-    ]);
-    const state = mergeState(published, local);
-    const onLanding = !!document.querySelector("#courses .cg");
-    if (onLanding) {
-      removeInjected();
-      injectCustomCatalog(state);
-      applyCatalogOverrides(state);
+    try {
+      const [published, local] = await Promise.all([
+        loadPublished(),
+        Promise.resolve(loadLocal()),
+      ]);
+      const state = mergeState(published, local);
+      const onLanding = !!document.querySelector("#courses .cg");
+      if (onLanding) {
+        removeInjected();
+        injectCustomCatalog(state);
+        applyCatalogOverrides(state);
+      }
+      applyDetailOverrides(state);
+      await applyRegionalPricing(state);
+    } finally {
+      markPriceReady();
     }
-    applyDetailOverrides(state);
-    await applyRegionalPricing(state);
   }
+
+  // Failsafe if overlay never finishes (network error / blocked fetch).
+  setTimeout(markPriceReady, 2500);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
-      run().catch(() => {});
+      run().catch(() => { markPriceReady(); });
     }, { once: true });
   } else {
-    run().catch(() => {});
+    run().catch(() => { markPriceReady(); });
   }
 
   window.addEventListener("storage", e => {
