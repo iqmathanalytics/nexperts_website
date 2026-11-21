@@ -744,14 +744,23 @@
 
     const currentPriceEl = document.querySelector(".price");
     const currentOrigEl = document.querySelector(".price-orig");
-    if (!currentPriceEl || !currentOrigEl) return;
+    if (!currentPriceEl || !currentOrigEl) {
+      setText(saveEl, "");
+      saveEl.style.display = "none";
+      return;
+    }
 
     const priceNum = parseCurrencyNumber(ov.price || currentPriceEl.textContent);
     const originalNum = parseCurrencyNumber(ov.price_original || currentOrigEl.textContent);
     const label = formatSaveLabel(priceNum, originalNum);
-    if (!label) return;
+    if (!label) {
+      setText(saveEl, "");
+      saveEl.style.display = "none";
+      return;
+    }
 
     setText(saveEl, label);
+    saveEl.style.display = "";
   }
 
   function looksLikeMyr(text) {
@@ -900,15 +909,22 @@
       if (origText) {
         setText(origEl, origText);
         origEl.style.display = "";
-      } else if (regionId !== "my") {
-        origEl.style.display = origEl.textContent ? "" : "none";
+      } else {
+        setText(origEl, "");
+        origEl.style.display = "none";
       }
     }
     if (saveEl) {
       const p = parseCurrencyNumber(priceText);
       const o = parseCurrencyNumber(origText);
       const label = formatSaveLabel(p, o);
-      if (label) setText(saveEl, label);
+      if (label) {
+        setText(saveEl, label);
+        saveEl.style.display = "";
+      } else {
+        setText(saveEl, "");
+        saveEl.style.display = "none";
+      }
     }
     // Keep Stripe "Pay …" button in sync with the visible enroll-card price (RM / ₹ / £ / AED).
     const payBtn = card.querySelector(".course-stripe-enroll .cse-submit");

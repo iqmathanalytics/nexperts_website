@@ -214,6 +214,15 @@
   margin-bottom: 14px;
 }
 
+/* Hide empty original-price / save chips (they render as green bars) */
+.enroll-card .price-orig:empty,
+.enroll-card .price-save:empty {
+  display: none !important;
+}
+.enroll-card .price-save:not(:empty) {
+  display: inline-block;
+}
+
 @media (max-width: 420px) {
   .cef-row {
     grid-template-columns: 1fr;

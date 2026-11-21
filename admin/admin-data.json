@@ -1275,11 +1275,11 @@
       "reviews": 312,
       "enrolled": 12480,
       "has_detail_page": true,
-      "duration": "5 days / 40 hrs",
-      "next_intake": "18 August 2026",
-      "price": "RM 3,200",
-      "price_original": "RM 3,800",
-      "price_save": "Save 16%"
+      "duration": "3 days / 24 hrs",
+      "next_intake": "21–23 December 2026",
+      "price": "RM 499",
+      "price_original": "RM 2,200",
+      "price_save": "Save 77%"
     },
     {
       "slug": "dp-203",
@@ -2594,11 +2594,11 @@
       "reviews": 198,
       "enrolled": 8920,
       "has_detail_page": true,
-      "duration": "4 days / 32 hrs",
-      "next_intake": "12 May 2026",
-      "price": "RM 1,750",
+      "duration": "5 days / 40 hrs",
+      "next_intake": "25–29 January 2027",
+      "price": "RM 899",
       "price_original": "RM 1,950",
-      "price_save": "Save 10%"
+      "price_save": "Save 54%"
     },
     {
       "slug": "linux-administration",
@@ -3319,10 +3319,10 @@
       "enrolled": 3560,
       "has_detail_page": true,
       "duration": "5 days / 40 hrs",
-      "next_intake": "17 Nov 2026",
-      "price": "RM 5,500",
-      "price_original": "RM 6,800",
-      "price_save": "Save 19%"
+      "next_intake": "25–29 January 2027",
+      "price": "RM 899",
+      "price_original": "RM 5,500",
+      "price_save": "Save 84%"
     },
     {
       "slug": "chatgpt-masterclass",
@@ -3366,9 +3366,9 @@
       "reviews": 28,
       "enrolled": 1340,
       "has_detail_page": true,
-      "duration": "Enquire for schedule",
-      "next_intake": "Enquire",
-      "price": "Enquire",
+      "duration": "1 day",
+      "next_intake": "28 December 2026",
+      "price": "RM 399",
       "price_original": "",
       "price_save": ""
     },
