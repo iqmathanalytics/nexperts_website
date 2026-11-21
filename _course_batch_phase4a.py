@@ -931,7 +931,7 @@ BATCH.append(dict(
         ("Evaluation","Code quality, tests, README, demo"),
         ("Passing",'<span class="pass-highlight">Meets rubric + working demo</span>'),
         ("Academic integrity","Pair-friendly labs; capstone is individual"),
-        ("Resit","One complimentary resit window within 90 days"),
+        ("Resit","Resit policy confirmed at enrolment"),
         ("Cohort success",'<span class="pass-highlight">93% pass capstone first attempt</span>')]),
     exam_optional=None,
     mock_title="Weekly checkpoints",
@@ -983,5 +983,5 @@ BATCH.append(dict(
     verify_items=[
         "Nexperts skill certificate with verification ID",
         "Portfolio Git repository artefact"],
-    guarantee_text="Finish attendance + exercises and do not pass capstone? Remediation slot within 90 days.",
+    guarantee_text="Follow our programme and clear the mock threshold before booking. Dedicated exam coaching and instructor support included.",
 ))

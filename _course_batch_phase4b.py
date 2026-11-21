@@ -659,7 +659,7 @@ BATCH.append(dict(
     sidebar_meta=[("Duration","5 days / 40 hrs"),("Next intake","9 Sept 2026"),("Format","Virtual"),("Level","Fundamentals"),("Language","English"),("Cert body","Nexperts Skill"),("Exam",'<span class="smeta-badge">Practical</span>')],
     whats_included=["Lab workbook","Quick posters","Certificate"],
     verify_items=["Nexperts verification"],
-    guarantee_text="Fail scenario exam? Complimentary coaching + second attempt.",
+    guarantee_text="Follow our programme and clear the mock threshold before booking. Dedicated exam coaching and instructor support included.",
 ))
 
 

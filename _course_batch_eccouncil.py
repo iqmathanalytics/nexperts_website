@@ -328,5 +328,5 @@ BATCH.append(dict(
         "Digital badge via Credly",
         "DoD 8140 \u2014 Advanced Pentester role",
         "Pathway to LPT Master credential"],
-    guarantee_text="Complete the 24h mock and don't pass CPENT first attempt? Range access extended; second attempt voucher subsidised.",
+    guarantee_text="Follow our programme and clear the mock threshold before booking. Dedicated exam coaching and instructor support included.",
 ))

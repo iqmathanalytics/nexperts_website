@@ -427,7 +427,7 @@ BATCH.append(dict(
     labs_footer="+ 5 micro-exercises across powerful questions, holding space and silence facilitation.",
     exam_eyebrow="Exam Information",
     exam_head=("One assessment.","Online, untimed."),
-    exam_intro="CSM assessment is a 50-question online test with 60-minute timer (most candidates finish in 25\u201335 minutes). 80% pass (40 of 50). Two attempts free within 90 days. Most candidates pass first attempt with our programme.",
+    exam_intro="CSM assessment is a 50-question online test with a 60-minute timer (most candidates finish in 25\u201335 minutes). Pass mark is 80% (40 of 50). Most candidates pass first attempt with our programme.",
     exam_main=dict(name="Scrum Alliance CSM Assessment",rows=[
         ("Questions","50 multiple choice"),
         ("Duration","60 minutes"),
@@ -452,7 +452,7 @@ BATCH.append(dict(
     pass_rate=97,
     pass_head_html='97% of our CSM candidates<br>pass <em>on first attempt.</em>',
     pass_intro="The Scrum Alliance global first-attempt rate for CSM sits around 88%. We hit 97% by reinforcing every concept through role-play in class plus a structured Scrum Guide reading programme.",
-    pass_pills=["CST-led training","Role-play heavy","97% first attempt","2-attempt free policy","2-year validity"],
+    pass_pills=["CST-led training","Role-play heavy","97% first attempt","2-year validity"],
     pass_compare=[
         ("Industry average: ~88%","Most candidates pass after some self-revision but skip role-play entirely. The cert is awarded but the work-day skills are weak."),
         ("Nexperts: 97%","We role-play every Scrum event multiple times. The CST gives feedback. By exam day, the right answers are practised, not just remembered.")],
@@ -483,10 +483,10 @@ BATCH.append(dict(
         ("Level","Foundation"),
         ("Language","English"),
         ("Cert body","Scrum Alliance"),
-        ("Exam",'<span class="smeta-badge">Two attempts free</span>')],
+        ("Exam",'<span class="smeta-badge">Exam fee not included</span>')],
     whats_included=[
         "Certified Scrum Trainer (CST)-led delivery",
-        "Scrum Alliance CSM exam (online, 2 attempts free)",
+        "Scrum Alliance CSM exam (online)",
         "2-year Scrum Alliance membership",
         "Scrum Guide 2020 + reference materials",
         "Role-play scenario library",
@@ -498,7 +498,7 @@ BATCH.append(dict(
         "Digital badge via Credly",
         "Industry-recognised CST training",
         "LinkedIn certificate integration"],
-    guarantee_text="Follow our programme and don't pass CSM? Scrum Alliance grants two attempts free. We provide additional coaching at no extra cost.",
+    guarantee_text="Follow our programme and clear the mock threshold before booking. Dedicated exam coaching and instructor support included.",
 ))
 
 
