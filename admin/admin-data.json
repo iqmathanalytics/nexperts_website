@@ -1486,11 +1486,11 @@
       "reviews": 212,
       "enrolled": 11420,
       "has_detail_page": true,
-      "duration": "Enquire for schedule",
+      "duration": "2 days / 16 hrs",
       "next_intake": "Enquire",
-      "price": "Enquire",
-      "price_original": "",
-      "price_save": ""
+      "price": "RM 1,650",
+      "price_original": "RM 1,850",
+      "price_save": "Save 11%"
     },
     {
       "slug": "dp-100",
