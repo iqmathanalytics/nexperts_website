@@ -50,7 +50,7 @@ Decisions: **1A** (AI vendor certs stay in Industry Certifications + AI & Automa
 | Deep Learning Using PyTorch | nonvendor | skill ai |
 | Generative AI Applications and Python Fundamentals | nonvendor | skill ai |
 | Prompt Engineering Certification | nonvendor | skill ai |
-| Artificial Intelligence (AI) Course Malaysia | nonvendor | skill ai |
+| Artificial Intelligence (AI) with Python Course Malaysia | nonvendor | skill ai |
 | Artificial Intelligence & Machine Learning Course Malaysia | nonvendor | skill ai |
 
 ## C. Non-AI Skill-Based remap (skill only)

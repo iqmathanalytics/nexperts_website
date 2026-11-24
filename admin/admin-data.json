@@ -334,7 +334,6 @@
       "java-programming",
       "full-stack-web-development",
       "digital-marketing",
-      "ai-ml-bootcamp",
       "generative-ai-workplace-productivity",
       "agentic-ai",
       "cyber-security-bootcamp",
@@ -2831,30 +2830,6 @@
       "price_save": "Save 10%"
     },
     {
-      "slug": "ai-ml-bootcamp",
-      "brand": "nonvendor",
-      "category": "skill",
-      "categories": [
-        "skill",
-        "ai"
-      ],
-      "is_ai": true,
-      "vendor": "Non-Vendor",
-      "badge": "AI 2026",
-      "name": "Machine Learning with Python",
-      "description": "Build predictive models, evaluate results and turn data into practical ML solutions.",
-      "level": "Beginner to Intermediate",
-      "rating": 4.8,
-      "reviews": 118,
-      "enrolled": 6420,
-      "has_detail_page": true,
-      "duration": "5 days / 40 hrs",
-      "next_intake": "9 Sep 2026",
-      "price": "RM 3,800",
-      "price_original": "RM 4,200",
-      "price_save": "Save 10%"
-    },
-    {
       "slug": "generative-ai-workplace-productivity",
       "brand": "nonvendor",
       "category": "skill",
@@ -3287,7 +3262,7 @@
       "is_ai": true,
       "vendor": "Non-Vendor",
       "badge": "AI 2026",
-      "name": "Artificial Intelligence (AI) Course Malaysia",
+      "name": "Artificial Intelligence (AI) with Python Course Malaysia",
       "description": "Instructor-led AI from fundamentals through Python, Machine Learning, Generative AI, LLMs, RAG and an introduction to AI agents.",
       "level": "Beginner to Intermediate",
       "rating": 4.9,

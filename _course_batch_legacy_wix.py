@@ -876,3 +876,6 @@ BATCH.append(dict(
     verify_items=["Workshop attendance verification"],
     guarantee_text="Miss day two? Join the next public cohort once within 90 days (seat permitting).",
 ))
+
+# Removed from public catalog — /courses/ai-ml-bootcamp redirects to AI & ML Malaysia.
+BATCH[:] = [c for c in BATCH if c.get("slug") != "ai-ml-bootcamp"]

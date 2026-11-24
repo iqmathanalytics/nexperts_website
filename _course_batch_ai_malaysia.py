@@ -14,8 +14,8 @@ BATCH.append(
     _finish(
         _course(
             slug="artificial-intelligence-ai-course-malaysia",
-            title="Artificial Intelligence (AI) Course Malaysia",
-            title_html="Artificial Intelligence (AI)<br><em>Course Malaysia</em>",
+            title="Artificial Intelligence (AI) with Python Course Malaysia",
+            title_html="Artificial Intelligence (AI) with Python<br><em>Course Malaysia</em>",
             watermark="AI Course",
             subtitle="Learn AI from fundamentals to real-world applications — Python, Machine Learning, Generative AI, LLMs, RAG, automation and an introduction to AI agents.",
             level="Beginner to Intermediate",
@@ -189,11 +189,11 @@ BATCH.append(
             salary_html='Practical AI skills support analyst, developer and junior AI roles in Malaysia, often in the <strong style="color:#86efac">RM 4,500 – RM 9,000/month</strong> range as the portfolio grows.',
             next_steps=[
                 ("Before this", "Computer literacy", "No prior AI experience required.", "Start here →"),
-                ("You are here", "AI Course Malaysia", "Fundamentals through modern AI applications.", "Currently viewing →"),
+                ("You are here", "AI with Python Course Malaysia", "Fundamentals through modern AI applications.", "Currently viewing →"),
                 ("Recommended next", "Agentic AI Engineering", "Tools, RAG, workflows and multi-step agents.", "Continue →"),
             ],
         ),
-        seo_title="Artificial Intelligence (AI) Course Malaysia | AI Training | Nexperts Academy",
+        seo_title="Artificial Intelligence (AI) with Python Course Malaysia | AI Training | Nexperts Academy",
         seo_description="Learn Artificial Intelligence in Malaysia with instructor-led, hands-on training. Cover Python, Machine Learning, Deep Learning, Generative AI, LLMs, RAG and AI applications.",
         seo_keywords="AI Course Malaysia, Artificial Intelligence Course Malaysia, AI Training Malaysia, Artificial Intelligence Training, AI Classes Malaysia, AI Course for Beginners, AI Training Course, Machine Learning, Python for AI, Deep Learning, Generative AI, Large Language Models, RAG, AI Agents",
         overview_p3="This is broader than ChatGPT and prompting. Modern AI work needs data, Machine Learning, Generative AI, Large Language Models and intelligent applications working together. HRD Corp claim support is available for eligible employers.",
@@ -584,7 +584,7 @@ BATCH.append(
             next_steps=[
                 ("Before this", "A real work task", "Bring an email, report or recurring process.", "Start here →"),
                 ("You are here", "Workplace Generative AI", "Prompts, scenarios and one workflow.", "Currently viewing →"),
-                ("Recommended next", "AI Course Malaysia", "Go deeper into models, RAG and applications.", "Continue →"),
+                ("Recommended next", "AI with Python Course Malaysia", "Go deeper into models, RAG and applications.", "Continue →"),
             ],
         ),
         seo_title="Generative AI for Workplace Productivity &amp; Business Automation | Nexperts Academy",

@@ -2381,6 +2381,9 @@ BATCH.append(dict(
 ))
 
 
+# Removed from public catalog — /courses/ai-ml-bootcamp redirects to AI & ML Malaysia.
+BATCH[:] = [c for c in BATCH if c.get("slug") != "ai-ml-bootcamp"]
+
 # Bulk PDF ingest: no schema / meta keywords on these pages (leave older courses untouched).
 for _c in BATCH:
     _c["omit_schema"] = True

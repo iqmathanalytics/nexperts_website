@@ -143,8 +143,7 @@ P1 = {
     "ServiceNow Administration Fundamentals": "servicenow-admin",
     "ServiceNow Platform Implementation": "servicenow-platform",
     # Legacy Wix bootcamps & skills (detail under /courses/{slug})
-    "AI & Machine Learning Bootcamp": "ai-ml-bootcamp",
-    "Generative AI for Workplace Productivity & Business Automation": "generative-ai-workplace-productivity",
+        "Generative AI for Workplace Productivity & Business Automation": "generative-ai-workplace-productivity",
     "Agentic AI": "agentic-ai",
     "Agentic AI Engineering": "agentic-ai",
     "Cyber Security Bootcamp": "cyber-security-bootcamp",
@@ -165,9 +164,7 @@ P1 = {
     "Prompt Engineering Masterclass": "prompt-engineering-certification",
     "Claude AI in 90 Minutes Productivity Course: Build Your AI Work Assistant": "claude-ai-productivity-90-minutes",
     "Claude AI Masterclass": "claude-ai-productivity-90-minutes",
-    "AI & Machine Learning Bootcamp": "ai-ml-bootcamp",
-    "Machine Learning with Python": "ai-ml-bootcamp",
-    "SQL for Data Professionals": "sql-for-data-professionals",
+            "SQL for Data Professionals": "sql-for-data-professionals",
     "SQL for Data Analytics": "sql-for-data-professionals",
     "Oracle PL/SQL Database Programming Course": "oracle-plsql-database-programming",
     "Tableau for Beginners": "tableau-for-beginners",
@@ -181,7 +178,7 @@ P1 = {
     "Data Science Foundation": "data-science-foundation",
     "Advanced Data Visualization Using Tableau": "advanced-data-visualization-tableau",
     "Data Visualization with Seaborn Using Python": "data-visualization-with-seaborn",
-    "Artificial Intelligence (AI) Course Malaysia": "artificial-intelligence-ai-course-malaysia",
+    "Artificial Intelligence (AI) with Python Course Malaysia": "artificial-intelligence-ai-course-malaysia",
     "Artificial Intelligence & Machine Learning Course Malaysia": "ai-machine-learning-course-malaysia",
     # AI vendor certs from New Course PDFs (2026)
     "AI Business Professional": "ai-business-professional",
@@ -377,7 +374,6 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","Salesforce Admin & Automation","Lightning admin, security model, Flow automation and release hygiene on Salesforce.","Associate\u2192Advanced",4.8,96, 4980),
     ("skill","skill","Skill-Based","Skills","ServiceNow Administration Fundamentals","Core Now Platform admin \u2014 users, ACLs, workflows and safe instance operations.","Fundamentals",4.8,84, 4360),
     ("skill","skill","Skill-Based","Skills","ServiceNow Platform Implementation","Lead greenfield programmes \u2014 CMDB, integrations and steering-ready artefacts.","Professional",4.7,58, 2140),
-    ("skill","skill","Skill-Based","AI 2026","Machine Learning with Python","Build predictive models, evaluate results and turn data into practical ML solutions.","Beginner to Intermediate",4.8,118,6420),
     ("skill","skill","Skill-Based","AI 2026","Generative AI for Workplace Productivity & Business Automation","Two-day workplace programme — professional prompts, department scenarios, AI workflows and responsible use.","All levels",4.9,94,5280),
     ("skill","skill","Skill-Based","AI 2026","Agentic AI Engineering","Live 24-session programme from Python to production multi-agent systems — LangGraph, RAG, FastAPI and a portfolio capstone.","Beginner\u2192Advanced",4.8,78,4620),
     ("skill","skill","Skill-Based","Skills","Cyber Security Bootcamp","Blue-team, ethical hacking labs and IR tabletop \u2014 security champions for Malaysian enterprises.","Foundation\u2192Intermediate",4.9,132,7180),
@@ -397,7 +393,7 @@ CARDS = [
     ("skill","skill","Skill-Based","Skills","Data Science Foundation","Data science lifecycle foundations \u2014 wrangling, EDA, light modelling and storytelling.","Beginner+",4.8,82, 3720),
     ("skill","skill","Skill-Based","Skills","Advanced Data Visualization Using Tableau","LOD, advanced calcs, interactivity and executive-ready Tableau dashboard design.","Intermediate",4.8,60, 2480),
     ("skill","skill","Skill-Based","Skills","Data Visualization with Seaborn Using Python","Statistical visuals with Seaborn \u2014 distributions, relationships and report-ready figures.","Beginner+",4.8,68, 2860),
-    ("skill","skill","Skill-Based","AI 2026","Artificial Intelligence (AI) Course Malaysia","Instructor-led AI from fundamentals through Python, Machine Learning, Generative AI, LLMs, RAG and an introduction to AI agents.","Beginner to Intermediate",4.9,48,3920),
+    ("skill","skill","Skill-Based","AI 2026","Artificial Intelligence (AI) with Python Course Malaysia","Instructor-led AI from fundamentals through Python, Machine Learning, Generative AI, LLMs, RAG and an introduction to AI agents.","Beginner to Intermediate",4.9,48,3920),
     ("skill","skill","Skill-Based","AI 2026","Artificial Intelligence & Machine Learning Course Malaysia","40-hour hands-on Machine Learning with Python — regression, classification, clustering, evaluation and neural networks.","Beginner to Intermediate",4.8,42,3560),
 
     # ---- Practical AI / data skill PDFs (2026) ----

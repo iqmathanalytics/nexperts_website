@@ -56,8 +56,6 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
     "Data Science Foundation": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     "Data Visualization with Seaborn Using Python": ("nonvendor", "Non-Vendor", ("skill",), "Skills"),
     # Non-vendor AI
-    "AI & Machine Learning Bootcamp": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
-    "Machine Learning with Python": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "Generative AI for Workplace Productivity & Business Automation": (
         "nonvendor",
         "Non-Vendor",
@@ -97,7 +95,7 @@ SKILL_REMAP: dict[str, tuple[str, str, tuple[str, ...], str | None]] = {
     "AI-Powered Workflow Automation": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "AI Fundamentals": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
     "AI-Powered Data Analytics": ("nonvendor", "Non-Vendor", ("skill", "ai"), "AI 2026"),
-    "Artificial Intelligence (AI) Course Malaysia": (
+    "Artificial Intelligence (AI) with Python Course Malaysia": (
         "nonvendor",
         "Non-Vendor",
         ("skill", "ai"),
