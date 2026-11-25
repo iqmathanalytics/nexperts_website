@@ -1275,7 +1275,7 @@
       "enrolled": 12480,
       "has_detail_page": true,
       "duration": "3 days / 24 hrs",
-      "next_intake": "21–23 December 2026",
+      "next_intake": "15–17 January 2027 · Fri–Sun",
       "price": "RM 499",
       "price_original": "RM 2,200",
       "price_save": "Save 77%"
@@ -2594,10 +2594,10 @@
       "enrolled": 8920,
       "has_detail_page": true,
       "duration": "5 days / 40 hrs",
-      "next_intake": "25–29 January 2027",
+      "next_intake": "25–29 January 2027 · Weekday · Mon–Fri",
       "price": "RM 899",
-      "price_original": "RM 1,950",
-      "price_save": "Save 54%"
+      "price_original": "RM 4,500",
+      "price_save": "Save 80%"
     },
     {
       "slug": "linux-administration",
@@ -3294,7 +3294,7 @@
       "enrolled": 3560,
       "has_detail_page": true,
       "duration": "5 days / 40 hrs",
-      "next_intake": "25–29 January 2027",
+      "next_intake": "4–8 January 2027 · Weekday · Mon–Fri",
       "price": "RM 899",
       "price_original": "RM 5,500",
       "price_save": "Save 84%"
@@ -3341,11 +3341,11 @@
       "reviews": 28,
       "enrolled": 1340,
       "has_detail_page": true,
-      "duration": "1 day",
-      "next_intake": "28 December 2026",
+      "duration": "2 days",
+      "next_intake": "13–14 January 2027 · Wed–Thu",
       "price": "RM 399",
-      "price_original": "",
-      "price_save": ""
+      "price_original": "RM 1,200",
+      "price_save": "Save 67%"
     },
     {
       "slug": "ai-powered-workflow-automation",
